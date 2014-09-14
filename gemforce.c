@@ -84,6 +84,14 @@ int gem_better(gem gem1, gem gem2)
 	return gem1.leech>=gem2.leech;
 }
 
+void table_print(gem* gems, int len)
+{
+	printf("# Gems\tLeech\n");
+	int i;
+	for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,gems[i].leech);
+	printf("\n");
+}
+
 void scheme_find(gem* gemf)
 {
 	if (gemf->father==NULL) {
@@ -100,7 +108,7 @@ void scheme_find(gem* gemf)
 	return;
 }
 
-void worker(int len, int scheme)
+void worker(int len, int scheme, int table_output)
 {
 	printf("\n");
 	int i;
@@ -150,11 +158,15 @@ void worker(int len, int scheme)
 		printf("%d combined gems:\n",i+1);
 		gem_print(gems+i);
 	}
+	
 	if (scheme) {
 		printf("Combining scheme:\n");
 		scheme_find(gems+len-1);
 		printf("\n\n");
 	}
+		
+	if (table_output) table_print(gems, len);
+	
 	for (i=0;i<len;++i) free(pool[i]);		// free
 }
 
@@ -164,9 +176,13 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int scheme;
-	while ((opt=getopt(argc,argv,"s"))!=-1) {
+	int scheme=0;
+	int table_output = 0;
+	while ((opt=getopt(argc,argv,"st"))!=-1) {
 			switch(opt) {
+				case 't':
+					table_output = 1;
+					break;
 				case 's':
 					scheme = 1;
 					break;
@@ -188,7 +204,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len,scheme);
+	else worker(len, scheme, table_output);
 	return 0;
 }
 
