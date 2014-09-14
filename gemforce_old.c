@@ -320,7 +320,7 @@ void worker(int len, int attempts, int mode, double cut_coeff)
 			i=order_seq(order_orig,len-1);
 			counter++;
 			if (counter%2000000==0) {					//2 million
-				printf("%d/%I64u attempts (%.2f%%)\n\n",counter,n_comb,(float)100*counter/n_comb);
+				printf("%d/%llu attempts (%.2f%%)\n\n",counter,n_comb,(float)100*counter/n_comb);
 				if (counter/10000000==attempts) i=1;	//10 million
 			}
 		}
