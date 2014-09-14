@@ -1,13 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <time.h>
-#include <string.h>
 #include <unistd.h>
 
 typedef struct Gem {
-	int grade;
-	double leech;
+	int grade;			//using short does NOT improve time/memory usage
+	double leech;		//note that float is faster but loses some precision after 2k in pure gems
 	struct Gem* father;
 	struct Gem* mother;
 } gem;
