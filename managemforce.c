@@ -7,8 +7,8 @@
 
 typedef struct Gem {
 	int grade;			//using short does NOT improve time/memory usage
-	double leech;		//note that float is faster but loses some precision after 2k in pure gems
-	double bbound;
+	float leech;		//float is 10% faster than double and loses nothing
+	float bbound;
 	struct Gem* father;
 	struct Gem* mother;
 } gem;
@@ -248,7 +248,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		int broken=0;
 		
 		for (grd=0;grd<grade_max-1;++grd) {		// now we work on the single pools
-			double lim_bbound=-1;				// thank you Enrico for this great algorithm
+			float lim_bbound=-1;				// thank you Enrico for this great algorithm
 			for (j=subpools_lenght[grd]-1;j>=0;--j) {
 				if (pool_big[subpools_to_big_convert(subpools_lenght,grd,j)].bbound<=lim_bbound) {
 					pool_big[subpools_to_big_convert(subpools_lenght,grd,j)].grade=0;
