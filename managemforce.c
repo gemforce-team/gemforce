@@ -194,13 +194,12 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 				}
 			}
 		}
-		gem_init(gems+i,1);
 		int grade_limsup=(int)(log2(i+1)+1);		//pool initialization (not good for more colours)
 		pool_lenght[i]=grade_limsup-1;
 		pool[i]=malloc(pool_lenght[i]*sizeof(gem));
 		
 		for (j=0;j<pool_lenght[i];++j) {			//pool fulling (not good for more colours)
-			pool[i][j]=pool_big[0];
+			gem_init(pool[i]+j,j+2);
 			for (k=1;k<comb_tot;k++) {
 				if ((pool_big[k].grade==j+2) && gem_better(pool_big[k], pool[i][j])) {
 					pool[i][j]=pool_big[k];
