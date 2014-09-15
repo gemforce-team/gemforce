@@ -291,7 +291,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	if (output_table) print_table(gems, len);
 	
 	if (output_debug) {
-		printf("Dumping whole pool of value %d\n\n",len);
+		printf("Dumping whole pool of value %d:\n\n",len);
 		for (i=0;i<pool_lenght[len-1];++i) gem_print(pool[len-1]+i);
 	}
 	
