@@ -26,7 +26,7 @@ int int_max(int a, int b)
 }
 
 void gem_print(gem *p_gem) {
-	printf("Grade: %d\nLeech: %f\n\n", p_gem->grade, p_gem->leech);
+	printf("Grade:\t%d\nLeech:\t%f\n\n", p_gem->grade, p_gem->leech);
 }
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
@@ -192,7 +192,7 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 			gems[i]=pool[i][j];
 		}
 		
-		printf("%d combined gems:\n",i+1);
+		printf("Value:\t%d\n",i+1);
 		gem_print(gems+i);
 	}
 	
