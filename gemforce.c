@@ -81,7 +81,7 @@ void gem_init(gem *p_gem, int grd)
 
 int gem_better(gem gem1, gem gem2)
 {
-	return gem1.leech>=gem2.leech;
+	return gem1.leech>gem2.leech;
 }
 
 void table_print(gem* gems, int len)
@@ -114,7 +114,7 @@ int gem_getvalue(gem* p_gem)
 	else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
 }
 
-void graph_print(gem* gemf, char* prefix)
+void tree_print(gem* gemf, char* prefix)
 {
 	if (gemf->father==NULL) {
 		printf("━ g1 orange\n");
@@ -135,16 +135,16 @@ void graph_print(gem* gemf, char* prefix)
 			gem2=gemf->father;
 			gem1=gemf->mother;
 		}
-		graph_print(gem1, string);	
+		tree_print(gem1, string);	
 		printf("%s ┗",prefix);		
 		char string2[strlen(prefix)+2];
 		strcpy(string2,prefix);
 		strcat(string2,"  ");
-		graph_print(gem2, string2);
+		tree_print(gem2, string2);
 	}
 }
 
-void worker(int len, int parens_output, int graph_output, int table_output)
+void worker(int len, int parens_output, int tree_output, int table_output)
 {
 	printf("\n");
 	int i;
@@ -163,9 +163,9 @@ void worker(int len, int parens_output, int graph_output, int table_output)
 		int eoc=(i+1)/2;		//end of combining
 		int comb_tot=0;
 		for (j=0; j<eoc; ++j) comb_tot+=pool_lenght[j]*pool_lenght[i-j-1];
-		gem pool_big[comb_tot];
+		gem* pool_big = malloc(comb_tot*sizeof(gem));		//a very big array needs to be in heap
 				
-		for (j=0;j<eoc;++j) {				// pool_big gets fulled by candidate gems
+		for (j=0;j<eoc;++j) {						// pool_big gets fulled by candidate gems
 			for (k=0; k< pool_lenght[j]; ++k) {
 				for (h=0; h< pool_lenght[i-1-j]; ++h) {
 				gem_combine(pool[j]+k, pool[i-1-j]+h, pool_big+count_big);
@@ -174,18 +174,20 @@ void worker(int len, int parens_output, int graph_output, int table_output)
 			}
 		}
 		gem_init(gems+i,1);
-		int grade_limsup=log2(i+1)+1;		//pool initialization (not good for more colours)
+		int grade_limsup=(int)(log2(i+1)+1);		//pool initialization (not good for more colours)
 		pool_lenght[i]=grade_limsup-1;
 		pool[i]=malloc(pool_lenght[i]*sizeof(gem));
 		
-		for (j=0;j<pool_lenght[i];++j) {	//pool fulling (not good for more colours)
-			gem_init(pool[i]+j,j+2);
-			for (k=0;k<comb_tot;k++) {
+		for (j=0;j<pool_lenght[i];++j) {			//pool fulling (not good for more colours)
+			pool[i][j]=pool_big[0];
+			for (k=1;k<comb_tot;k++) {
 				if ((pool_big[k].grade==j+2) && gem_better(pool_big[k], pool[i][j])) {
 					pool[i][j]=pool_big[k];
 				}
 			}
-		}	
+		}
+		free(pool_big);
+		
 		gems[i]=pool[i][0];
 		for (j=1;j<pool_lenght[i];++j) if (gem_better(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
@@ -201,9 +203,9 @@ void worker(int len, int parens_output, int graph_output, int table_output)
 		printf("\n\n");
 	}	
 	if (table_output) table_print(gems, len);
-	if (graph_output) {
-		printf("Gem graph:\n");
-		graph_print(gems+len-1, "");
+	if (tree_output) {
+		printf("Gem tree:\n");
+		tree_print(gems+len-1, "");
 		printf("\n");
 	}
 	
@@ -211,23 +213,22 @@ void worker(int len, int parens_output, int graph_output, int table_output)
 }
 
 
-
 int main(int argc, char** argv)
 {
 	int len;
 	char opt;
 	int parens_output=0;
-	int graph_output=0;
+	int tree_output=0;
 	int table_output = 0;
-	while ((opt=getopt(argc,argv,"pgt"))!=-1) {
+	while ((opt=getopt(argc,argv,"ptd"))!=-1) {
 			switch(opt) {
-				case 's':
+				case 'p':
 					parens_output = 1;
 					break;
-				case 'g':
-					graph_output = 1;
-					break;					
 				case 't':
+					tree_output = 1;
+					break;					
+				case 'd':
 					table_output = 1;
 					break;
 				case '?':
@@ -248,7 +249,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, parens_output, graph_output, table_output);
+	else worker(len, parens_output, tree_output, table_output);
 	return 0;
 }
 
