@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
+#include <string.h>
+
 
 typedef struct Gem {
 	int grade;			//using short does NOT improve time/memory usage
@@ -90,7 +92,7 @@ void table_print(gem* gems, int len)
 	printf("\n");
 }
 
-void scheme_find(gem* gemf)
+void parens_print(gem* gemf)
 {
 	if (gemf->father==NULL) {
 		printf("g");
@@ -98,15 +100,51 @@ void scheme_find(gem* gemf)
 	}
 	else {
 		printf("(");
-		scheme_find(gemf->father);
+		parens_print(gemf->father);
 		printf("+");
-		scheme_find(gemf->mother);
+		parens_print(gemf->mother);
 		printf(")");
 	}
 	return;
 }
 
-void worker(int len, int scheme, int table_output)
+int gem_getvalue(gem* p_gem)
+{
+	if(p_gem->father==NULL) return 1;
+	else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
+}
+
+void graph_print(gem* gemf, char* prefix)
+{
+	if (gemf->father==NULL) {
+		printf("━ g1 orange\n");
+	}
+	else {
+		printf("━%d\n",gem_getvalue(gemf));
+		printf("%s ┣",prefix);
+		char string[strlen(prefix)+2];
+		strcpy(string,prefix);
+		strcat(string," ┃");
+		gem* gem1;
+		gem* gem2;
+		if (gem_getvalue(gemf->father)>gem_getvalue(gemf->mother)) {
+			gem1=gemf->father;
+			gem2=gemf->mother;
+		}
+		else {
+			gem2=gemf->father;
+			gem1=gemf->mother;
+		}
+		graph_print(gem1, string);	
+		printf("%s ┗",prefix);		
+		char string2[strlen(prefix)+2];
+		strcpy(string2,prefix);
+		strcat(string2,"  ");
+		graph_print(gem2, string2);
+	}
+}
+
+void worker(int len, int parens_output, int graph_output, int table_output)
 {
 	printf("\n");
 	int i;
@@ -157,13 +195,17 @@ void worker(int len, int scheme, int table_output)
 		gem_print(gems+i);
 	}
 	
-	if (scheme) {
+	if (parens_output) {
 		printf("Combining scheme:\n");
-		scheme_find(gems+len-1);
+		parens_print(gems+len-1);
 		printf("\n\n");
-	}
-		
+	}	
 	if (table_output) table_print(gems, len);
+	if (graph_output) {
+		printf("Gem graph:\n");
+		graph_print(gems+len-1, "");
+		printf("\n");
+	}
 	
 	for (i=0;i<len;++i) free(pool[i]);		// free
 }
@@ -174,15 +216,19 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int scheme=0;
+	int parens_output=0;
+	int graph_output=0;
 	int table_output = 0;
-	while ((opt=getopt(argc,argv,"st"))!=-1) {
+	while ((opt=getopt(argc,argv,"pgt"))!=-1) {
 			switch(opt) {
+				case 's':
+					parens_output = 1;
+					break;
+				case 'g':
+					graph_output = 1;
+					break;					
 				case 't':
 					table_output = 1;
-					break;
-				case 's':
-					scheme = 1;
 					break;
 				case '?':
 					return 1;
@@ -202,7 +248,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, scheme, table_output);
+	else worker(len, parens_output, graph_output, table_output);
 	return 0;
 }
 
