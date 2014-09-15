@@ -6,7 +6,7 @@
 
 
 typedef struct Gem {
-	int grade;			//using short does NOT improve time/memory usage
+	int grade;		//using short slightly improve time, memory usage is the same
 	float leech;		//float is 10% faster than double and loses nothing
 	float bbound;
 	struct Gem* father;
