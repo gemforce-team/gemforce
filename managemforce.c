@@ -52,7 +52,7 @@ void gem_comb_gn(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
 	p_gem_combined->grade = int_max(p_gem1->grade, p_gem2->grade);
 	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = 0.9*p_gem1->leech + 0.38*p_gem2->leech;
-	else p_gem_combined->leech = 0.8*p_gem2->leech + 0.27*p_gem1->leech;
+	else p_gem_combined->leech = 0.9*p_gem2->leech + 0.38*p_gem1->leech;
 	if (p_gem1->bbound > p_gem2->bbound) p_gem_combined->bbound = 0.8*p_gem1->bbound + 0.27*p_gem2->bbound;
 	else p_gem_combined->bbound = 0.8*p_gem2->bbound + 0.27*p_gem1->bbound;	
 }
@@ -292,7 +292,11 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	
 	if (output_debug) {
 		printf("Dumping whole pool of value %d:\n\n",len);
-		for (i=0;i<pool_length[len-1];++i) gem_print(pool[len-1]+i);
+		for (i=0;i<pool_length[len-1];++i) {
+			gem_print(pool[len-1]+i);
+			print_parens(pool[len-1]+i);
+			printf("\n\n");
+		}
 	}
 	
 	for (i=0;i<len;++i) free(pool[i]);		// free
