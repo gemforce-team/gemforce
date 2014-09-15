@@ -343,7 +343,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_parens, output_tree, output_table, output_debug);		//wip vectorize
+	else worker(len, output_parens, output_tree, output_table, output_debug);
 	return 0;
 }
 
