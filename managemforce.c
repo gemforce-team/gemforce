@@ -132,11 +132,11 @@ void gem_sort(gem* gems, int len)
 	gem_sort(gems+1+pivot,len-pivot-1);
 }
 
-int subpools_to_big_convert(int* subpools_lenght, int grd, int index)
+int subpools_to_big_convert(int* subpools_length, int grd, int index)
 {
 	int result=0;
 	int i;
-	for (i=0;i<grd;++i) result+=subpools_lenght[i];
+	for (i=0;i<grd;++i) result+=subpools_length[i];
 	result+=index;
 	return result;
 }
@@ -204,12 +204,12 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	int i;
 	gem gems[len];
 	gem* pool[len];
-	int pool_lenght[len];
+	int pool_length[len];
 	pool[0]=malloc(2*sizeof(gem));
 	gem_init_orange(gems,1);
 	gem_init_orange(pool[0],1);
 	gem_init_black(pool[0]+1,1);
-	pool_lenght[0]=2;
+	pool_length[0]=2;
 	gem_print(gems);
 	
 	for (i=1; i<len; ++i) {	
@@ -217,12 +217,12 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		int count_big=0;
 		int eoc=(i+1)/2;		//end of combining
 		int comb_tot=0;
-		for (j=0; j<eoc; ++j) comb_tot+=pool_lenght[j]*pool_lenght[i-j-1];
+		for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 		gem* pool_big = malloc(comb_tot*sizeof(gem));		//a very big array needs to be in the heap
 				
 		for (j=0;j<eoc;++j) {								// pool_big gets filled of candidate gems
-			for (k=0; k< pool_lenght[j]; ++k) {
-				for (h=0; h< pool_lenght[i-1-j]; ++h) {
+			for (k=0; k< pool_length[j]; ++k) {
+				for (h=0; h< pool_length[i-1-j]; ++h) {
 				gem_combine(pool[j]+k, pool[i-1-j]+h, pool_big+count_big);
 				count_big++;
 				}
@@ -231,17 +231,17 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 
 		gem_sort(pool_big,comb_tot);		
 		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup	
-		int subpools_lenght[grade_max-1];		// let's divide in grades
+		int subpools_length[grade_max-1];		// let's divide in grades
 		
-		for (j=0;j<grade_max-1;++j) subpools_lenght[j]=0;
+		for (j=0;j<grade_max-1;++j) subpools_length[j]=0;
 
 		int grd=0;
 		
 		for (j=0;j<comb_tot;++j) {				// see how long subpools are
-			if ((pool_big+j)->grade==grd+2) subpools_lenght[grd]++;
+			if ((pool_big+j)->grade==grd+2) subpools_length[grd]++;
 			else {
 				grd++;
-				subpools_lenght[grd]++;
+				subpools_length[grd]++;
 			}
 		}
 
@@ -249,16 +249,16 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		
 		for (grd=0;grd<grade_max-1;++grd) {		// now we work on the single pools
 			float lim_bbound=-1;				// thank you Enrico for this great algorithm
-			for (j=subpools_lenght[grd]-1;j>=0;--j) {
-				if (pool_big[subpools_to_big_convert(subpools_lenght,grd,j)].bbound<=lim_bbound) {
-					pool_big[subpools_to_big_convert(subpools_lenght,grd,j)].grade=0;
+			for (j=subpools_length[grd]-1;j>=0;--j) {
+				if (pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound<=lim_bbound) {
+					pool_big[subpools_to_big_convert(subpools_length,grd,j)].grade=0;
 					broken++;
 				}
-				else lim_bbound=pool_big[subpools_to_big_convert(subpools_lenght,grd,j)].bbound;
+				else lim_bbound=pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound;
 			}
 		}										// all unnecessary gems destroyed
-		pool_lenght[i]=comb_tot-broken;		
-		pool[i]=malloc(pool_lenght[i]*sizeof(gem));			// pool init via broken
+		pool_length[i]=comb_tot-broken;		
+		pool[i]=malloc(pool_length[i]*sizeof(gem));			// pool init via broken
 		
 		int place=0;
 		for (j=0;j<comb_tot;++j) {		// copying to pool
@@ -269,12 +269,12 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		}
 		free(pool_big);		// free
 		gems[i]=pool[i][0];						// choosing gem (criteria moved to more_power def)
-		for (j=1;j<pool_lenght[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
+		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
 		
 		printf("Value:\t%d\n",i+1);
-		printf("Pool:\t%d\n",pool_lenght[i]);
+		printf("Pool:\t%d\n",pool_length[i]);
 		gem_print(gems+i);
 	}
 	
@@ -292,7 +292,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	
 	if (output_debug) {
 		printf("Dumping whole pool of value %d:\n\n",len);
-		for (i=0;i<pool_lenght[len-1];++i) gem_print(pool[len-1]+i);
+		for (i=0;i<pool_length[len-1];++i) gem_print(pool[len-1]+i);
 	}
 	
 	for (i=0;i<len;++i) free(pool[i]);		// free
