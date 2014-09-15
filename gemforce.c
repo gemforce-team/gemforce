@@ -173,7 +173,6 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 				}
 			}
 		}
-		gem_init(gems+i,1);
 		int grade_limsup=(int)(log2(i+1)+1);		//pool initialization (not good for more colours)
 		pool_lenght[i]=grade_limsup-1;
 		pool[i]=malloc(pool_lenght[i]*sizeof(gem));
