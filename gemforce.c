@@ -83,26 +83,22 @@ int gem_better(gem gem1, gem gem2)
 {
 	return gem1.leech>gem2.leech;
 }
-
-void table_print(gem* gems, int len)
+void print_table(gem* gems, int len)
 {
-	printf("# Gems\tLeech\n");
+	printf("# Gems\tPower\n");
 	int i;
 	for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,gems[i].leech);
 	printf("\n");
 }
 
-void parens_print(gem* gemf)
+void print_parens(gem* gemf)
 {
-	if (gemf->father==NULL) {
-		printf("g");
-		return;
-	}
+	if (gemf->father==NULL) printf("o");
 	else {
 		printf("(");
-		parens_print(gemf->father);
+		print_parens(gemf->father);
 		printf("+");
-		parens_print(gemf->mother);
+		print_parens(gemf->mother);
 		printf(")");
 	}
 	return;
@@ -114,10 +110,10 @@ int gem_getvalue(gem* p_gem)
 	else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
 }
 
-void tree_print(gem* gemf, char* prefix)
+void print_tree(gem* gemf, char* prefix)
 {
 	if (gemf->father==NULL) {
-		printf("━ g1 orange\n");
+		printf("━ g1 o\n");
 	}
 	else {
 		printf("━%d\n",gem_getvalue(gemf));
@@ -135,26 +131,26 @@ void tree_print(gem* gemf, char* prefix)
 			gem2=gemf->father;
 			gem1=gemf->mother;
 		}
-		tree_print(gem1, string);
-		printf("%s ┗",prefix);
+		print_tree(gem1, string);	
+		printf("%s ┗",prefix);		
 		char string2[strlen(prefix)+2];
 		strcpy(string2,prefix);
 		strcat(string2,"  ");
-		tree_print(gem2, string2);
+		print_tree(gem2, string2);
 	}
 }
 
-void worker(int len, int parens_output, int tree_output, int table_output)
+void worker(int len, int output_parens, int output_tree, int output_table, int output_debug)
 {
 	printf("\n");
 	int i;
 	gem gems[len];
 	gem* pool[len];
-	int pool_lenght[len];		// there is a limsup for every i: (int)(log2(i+1))+1
+	int pool_length[len];		// there is a limsup for every i: (int)(log2(i+1))+1
 	pool[0]=malloc(sizeof(gem));
 	gem_init(gems,1);
 	gem_init(pool[0],1);
-	pool_lenght[0]=1;
+	pool_length[0]=1;
 	gem_print(gems);
 	
 	for (i=1; i<len; ++i) {
@@ -162,22 +158,22 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 		int count_big=0;
 		int eoc=(i+1)/2;		//end of combining
 		int comb_tot=0;
-		for (j=0; j<eoc; ++j) comb_tot+=pool_lenght[j]*pool_lenght[i-j-1];
+		for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 		gem* pool_big = malloc(comb_tot*sizeof(gem));		//a very big array needs to be in heap
 				
 		for (j=0;j<eoc;++j) {						// pool_big gets fulled by candidate gems
-			for (k=0; k< pool_lenght[j]; ++k) {
-				for (h=0; h< pool_lenght[i-1-j]; ++h) {
+			for (k=0; k< pool_length[j]; ++k) {
+				for (h=0; h< pool_length[i-1-j]; ++h) {
 				gem_combine(pool[j]+k, pool[i-1-j]+h, pool_big+count_big);
 				count_big++;
 				}
 			}
 		}
 		int grade_limsup=(int)(log2(i+1)+1);		//pool initialization (not good for more colours)
-		pool_lenght[i]=grade_limsup-1;
-		pool[i]=malloc(pool_lenght[i]*sizeof(gem));
+		pool_length[i]=grade_limsup-1;
+		pool[i]=malloc(pool_length[i]*sizeof(gem));
 		
-		for (j=0;j<pool_lenght[i];++j) {			//pool fulling (not good for more colours)
+		for (j=0;j<pool_length[i];++j) {			//pool fulling (not good for more colours)
 			gem_init(pool[i]+j,j+2);
 			for (k=0;k<comb_tot;k++) {
 				if ((pool_big[k].grade==j+2) && gem_better(pool_big[k], pool[i][j])) {
@@ -188,7 +184,7 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 		free(pool_big);
 		
 		gems[i]=pool[i][0];
-		for (j=1;j<pool_lenght[i];++j) if (gem_better(pool[i][j],gems[i])) {
+		for (j=1;j<pool_length[i];++j) if (gem_better(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
 		
@@ -196,16 +192,25 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 		gem_print(gems+i);
 	}
 	
-	if (parens_output) {
+	if (output_parens) {
 		printf("Combining scheme:\n");
-		parens_print(gems+len-1);
+		print_parens(gems+len-1);
 		printf("\n\n");
-	}	
-	if (table_output) table_print(gems, len);
-	if (tree_output) {
+	}
+	if (output_tree) {
 		printf("Gem tree:\n");
-		tree_print(gems+len-1, "");
+		print_tree(gems+len-1, "");
 		printf("\n");
+	}
+	if (output_table) print_table(gems, len);
+	
+	if (output_debug) {
+		printf("Dumping whole pool of value %d:\n\n",len);
+		for (i=0;i<pool_length[len-1];++i) {
+			gem_print(pool[len-1]+i);
+			print_parens(pool[len-1]+i);
+			printf("\n\n");
+		}
 	}
 	
 	for (i=0;i<len;++i) free(pool[i]);		// free
@@ -216,19 +221,23 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int parens_output=0;
-	int tree_output=0;
-	int table_output = 0;
-	while ((opt=getopt(argc,argv,"ptd"))!=-1) {
+	int output_parens=0;
+	int output_tree=0;
+	int output_table = 0;
+	int output_debug=0;
+	while ((opt=getopt(argc,argv,"pted"))!=-1) {
 			switch(opt) {
 				case 'p':
-					parens_output = 1;
+					output_parens = 1;
 					break;
 				case 't':
-					tree_output = 1;
+					output_tree = 1;
+					break;					
+				case 'e':
+					output_table = 1;
 					break;
 				case 'd':
-					table_output = 1;
+					output_debug = 1;
 					break;
 				case '?':
 					return 1;
@@ -248,7 +257,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, parens_output, tree_output, table_output);
+	else worker(len, output_parens, output_tree, output_table, output_debug);
 	return 0;
 }
 

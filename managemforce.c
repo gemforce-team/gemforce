@@ -6,7 +6,7 @@
 
 
 typedef struct Gem {
-	int grade;			//using short does NOT improve time/memory usage
+	int grade;		//using short slightly improve time, memory usage is the same
 	float leech;		//float is 10% faster than double and loses nothing
 	float bbound;
 	struct Gem* father;
@@ -343,7 +343,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_parens, output_tree, output_table, output_debug);		//wip vectorize
+	else worker(len, output_parens, output_tree, output_table, output_debug);
 	return 0;
 }
 
