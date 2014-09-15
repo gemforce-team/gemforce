@@ -27,7 +27,7 @@ int int_max(int a, int b)
 }
 
 void gem_print(gem *p_gem) {
-	printf("Grade: %d\nLeech: %f\nBbound: %f\n\n", p_gem->grade, p_gem->leech, p_gem->bbound);
+	printf("Grade:\t%d\nLeech:\t%f\nBbound:\t%f\nPower:\t%f\n\n", p_gem->grade, p_gem->leech, p_gem->bbound, p_gem->leech*p_gem->bbound);
 }
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
@@ -99,6 +99,16 @@ void gem_init_black(gem *p_gem, int grd)
 int gem_better(gem gem1, gem gem2)
 {
 	return (gem1.leech>gem2.leech && gem1.bbound>gem2.bbound);
+}
+
+int gem_completely_better(gem gem1, gem gem2)
+{
+	return (gem1.grade==gem2.grade && gem1.leech>=gem2.leech && gem1.bbound>=gem2.bbound);
+}
+
+int gem_more_powerful(gem gem1, gem gem2)
+{
+	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);		//optimization at infinity hits (hit lv infinity)
 }
 
 char gem_colour(gem* p_gem)
@@ -174,7 +184,7 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 	pool[0]=malloc(2*sizeof(gem));
 	gem_init_orange(gems,1);
 	gem_init_orange(pool[0],1);
-	gem_init_black(pool[0],1);
+	gem_init_black(pool[0]+1,1);
 	pool_lenght[0]=2;
 	gem_print(gems);
 	
@@ -186,7 +196,7 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 		for (j=0; j<eoc; ++j) comb_tot+=pool_lenght[j]*pool_lenght[i-j-1];
 		gem* pool_big = malloc(comb_tot*sizeof(gem));		//a very big array needs to be in heap
 				
-		for (j=0;j<eoc;++j) {						// pool_big gets fulled by candidate gems
+		for (j=0;j<eoc;++j) {								// pool_big gets filled of candidate gems
 			for (k=0; k< pool_lenght[j]; ++k) {
 				for (h=0; h< pool_lenght[i-1-j]; ++h) {
 				gem_combine(pool[j]+k, pool[i-1-j]+h, pool_big+count_big);
@@ -194,26 +204,37 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 				}
 			}
 		}
-		int grade_limsup=(int)(log2(i+1)+1);		//pool initialization (not good for more colours)
-		pool_lenght[i]=grade_limsup-1;
-		pool[i]=malloc(pool_lenght[i]*sizeof(gem));
 		
-		for (j=0;j<pool_lenght[i];++j) {			//pool fulling (not good for more colours)
-			gem_init(pool[i]+j,j+2);
-			for (k=1;k<comb_tot;k++) {
-				if ((pool_big[k].grade==j+2) && gem_better(pool_big[k], pool[i][j])) {
-					pool[i][j]=pool_big[k];
+		int broken=0;
+		for(j=0;j<comb_tot-1;++j) {							// completely inferior gems in pool_big are destroyed
+			for(k=j+1;k<comb_tot;++k) {
+				if (gem_completely_better(pool_big[k],pool_big[j])) {
+					pool_big[j].grade=0;
+					broken++;
+					break;									// we know how many gems remain
 				}
+			}
+		}
+		
+		pool_lenght[i]=comb_tot-broken;		
+		pool[i]=malloc(pool_lenght[i]*sizeof(gem));			// pool init via broken
+			
+		int place=0;
+		for (j=0;j<comb_tot;++j) {							// copying to pool
+			if (pool_big[j].grade!=0) {
+				pool[i][place]=pool_big[j];
+				place++;
 			}
 		}
 		free(pool_big);
 		
-		gems[i]=pool[i][0];
-		for (j=1;j<pool_lenght[i];++j) if (gem_better(pool[i][j],gems[i])) {
+		gems[i]=pool[i][0];									// choosing gem (criteria moved to more_power def)
+		for (j=1;j<pool_lenght[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
 		
-		printf("%d combined gems:\n",i+1);
+		printf("Value:\t%d\n",i+1);
+		printf("Pool:\t%d\n",pool_lenght[i]);
 		gem_print(gems+i);
 	}
 	
