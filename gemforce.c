@@ -135,8 +135,8 @@ void tree_print(gem* gemf, char* prefix)
 			gem2=gemf->father;
 			gem1=gemf->mother;
 		}
-		tree_print(gem1, string);	
-		printf("%s ┗",prefix);		
+		tree_print(gem1, string);
+		printf("%s ┗",prefix);
 		char string2[strlen(prefix)+2];
 		strcpy(string2,prefix);
 		strcat(string2,"  ");
@@ -157,7 +157,7 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 	pool_lenght[0]=1;
 	gem_print(gems);
 	
-	for (i=1; i<len; ++i) {	
+	for (i=1; i<len; ++i) {
 		int j,k,h;
 		int count_big=0;
 		int eoc=(i+1)/2;		//end of combining
@@ -178,8 +178,8 @@ void worker(int len, int parens_output, int tree_output, int table_output)
 		pool[i]=malloc(pool_lenght[i]*sizeof(gem));
 		
 		for (j=0;j<pool_lenght[i];++j) {			//pool fulling (not good for more colours)
-			pool[i][j]=pool_big[0];
-			for (k=1;k<comb_tot;k++) {
+			gem_init(pool[i]+j,j+2);
+			for (k=0;k<comb_tot;k++) {
 				if ((pool_big[k].grade==j+2) && gem_better(pool_big[k], pool[i][j])) {
 					pool[i][j]=pool_big[k];
 				}
@@ -226,7 +226,7 @@ int main(int argc, char** argv)
 					break;
 				case 't':
 					tree_output = 1;
-					break;					
+					break;
 				case 'd':
 					table_output = 1;
 					break;
