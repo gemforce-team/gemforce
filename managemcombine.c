@@ -5,6 +5,8 @@
 #include <string.h>
 #include "gem_utils.h"
 
+// I'll use accurate and slow methods here
+
 int gem_more_powerful(gem gem1, gem gem2)
 {
   return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);       // optimization at infinity hits (hit lv infinity)
@@ -50,7 +52,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
       }
     }
     
-    gem_sort(pool_big,comb_tot);        
+    gem_sort_exact(pool_big,comb_tot);        
     int grade_max=(int)(log2(i+1)+1);       // gems with max grade cannot be destroyed, so this is a max, not a sup 
     int subpools_length[grade_max-1];       // let's divide in grades
     
@@ -71,7 +73,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
     for (grd=0;grd<grade_max-1;++grd) {     // now we work on the single pools
       double lim_bbound=-1;                // thank you Enrico for this great algorithm
       for (j=subpools_length[grd]-1;j>=0;--j) {
-        if ((int)(ACC*pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound)<=(int)(ACC*lim_bbound)) {
+        if (pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound<=ACC*lim_bbound) {
           pool_big[subpools_to_big_convert(subpools_length,grd,j)].grade=0;
           broken++;
         }
@@ -164,7 +166,7 @@ int main(int argc, char** argv)
     return 1;
   }
   if (len<1) printf("Improper gem number\n");
-  else worker(len, output_parens, output_tree, output_table, output_debug);
+  else worker(len, output_parens, output_tree, output_table, output_debug);       //wip vectorize
   return 0;
 }
 

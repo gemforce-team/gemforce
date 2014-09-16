@@ -84,6 +84,31 @@ char gem_color(gem* p_gem)
   else return 'o';
 }
 
+int gem_is_minor(gem gem1, gem gem2)
+{
+	if (gem1.grade < gem2.grade) return 1;
+	else if (gem1.grade == gem2.grade && gem1.leech < gem2.leech) return 1;
+	else return 0;
+}
+
+void gem_sort_exact(gem* gems, int len) 
+{
+  if (len<=1) return;
+  int pivot=0;
+  int i;
+  for (i=1;i<len;++i) {
+    if (gem_is_minor(gems[i],gems[pivot])) {
+      gem temp=gems[pivot];
+      gems[pivot]=gems[i];
+      gems[i]=gems[pivot+1];
+      gems[pivot+1]=temp;
+      pivot++;
+    }
+  }
+  gem_sort_exact(gems,pivot);
+  gem_sort_exact(gems+1+pivot,len-pivot-1);
+}
+
 int gem_less_equal(gem gem1, gem gem2)
 {
   if (gem1.grade != gem2.grade)
