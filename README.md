@@ -6,9 +6,9 @@ Gem combining program for GC2:CS - Written in C.
 
 HOWTO use our programs
 
-compile:
-  gcc -O2 -lm file.c -o output
-run:
+compile:  
+  gcc -O2 -lm file.c -o output  
+run:  
   ./file -pted number
 where:
   p - print best gem parens formula
