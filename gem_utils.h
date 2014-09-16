@@ -3,6 +3,12 @@
 
 const int ACC=1000;
 
+/* Info: to go from low to high accuracy: change gems_sort in gems_sort_exact and
+ * if ((int)(ACC*pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound)<=(int)(ACC*lim_bbound)) {
+ * in
+ * if (pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound<=lim_bbound) {
+ */
+
 struct Gem_OB_exact {
   int grade;
   double leech;
@@ -95,12 +101,6 @@ void gem_init(gem *p_gem, int grd, double leech, double bbound)
   p_gem->mother=NULL;
 }
 
-char gem_color(gem* p_gem)
-{
-  if (p_gem->leech==0) return 'b';
-  else return 'o';
-}
-
 int gem_is_minor(gem gem1, gem gem2)
 {
 	if (gem1.grade < gem2.grade) return 1;
@@ -159,6 +159,13 @@ void print_table(gem* gems, int len)
   int i;
   for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,gems[i].leech*gems[i].bbound);
   printf("\n");
+}
+
+char gem_color(gem* p_gem)
+{
+  if (p_gem->leech==0) return 'b';
+  if (p_gem->bbound==0) return 'o';
+  else return 'm';
 }
 
 void print_parens(gem* gemf)

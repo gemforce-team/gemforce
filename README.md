@@ -22,10 +22,12 @@ example:
 
 Roadmap:
 
-Orange - Done
+Orange combine - Done
 
-Orange/black - Done
+Orange/black spec - Done
 
-Yellow/black
+Orange/black combine - Done
+
+Yellow/black - WIP
 
 OBR and YBR

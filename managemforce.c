@@ -36,12 +36,6 @@ int gem_more_powerful(gem gem1, gem gem2)
 	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);		// optimization at infinity hits (hit lv infinity)
 }																	// the *0.7 for dual is not required because they'll all be dual
 
-char gem_colour(gem* p_gem)
-{
-	if (p_gem->leech==0) return 'b';
-	else return 'o';
-}
-
 int subpools_to_big_convert(int* subpools_length, int grd, int index)
 {
 	int result=0;
