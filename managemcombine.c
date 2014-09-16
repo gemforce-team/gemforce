@@ -3,9 +3,8 @@
 #include <math.h>
 #include <unistd.h>
 #include <string.h>
+typedef struct Gem_OB_exact gem;	// I'll use accurate and slow methods here
 #include "gem_utils.h"
-
-// I'll use accurate and slow methods here
 
 int gem_more_powerful(gem gem1, gem gem2)
 {

@@ -3,13 +3,30 @@
 
 const int ACC=1000;
 
-typedef struct Gem {
-  int grade;          //using short does NOT improve time/memory usage
-  double leech;        //float is a good 5% faster than double and loses nearly nothing
+struct Gem_OB_exact {
+  int grade;
+  double leech;
   double bbound;
-  struct Gem* father;
-  struct Gem* mother;
-} gem;
+  struct Gem_OB_exact* father;
+  struct Gem_OB_exact* mother;
+};
+
+struct Gem_OB_appr {
+  short grade;
+  float leech;
+  float bbound;
+  struct Gem_OB_appr* father;
+  struct Gem_OB_appr* mother;
+};
+
+struct Gem_O {
+  int grade;
+  double leech;
+  struct Gem_O* father;
+  struct Gem_O* mother;
+};
+
+// remember to define the right gem in your file
 
 int int_max(int a, int b) 
 {
