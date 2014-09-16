@@ -156,12 +156,12 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	for (i=1; i<len; ++i) {
 		int j,k,h;
 		int count_big=0;
-		int eoc=(i+1)/2;		//end of combining
+		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
 		for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 		gem* pool_big = malloc(comb_tot*sizeof(gem));		//a very big array needs to be in heap
 				
-		for (j=0;j<eoc;++j) {						// pool_big gets fulled by candidate gems
+		for (j=0;j<eoc;++j) {										// pool_big gets fulled by candidate gems
 			for (k=0; k< pool_length[j]; ++k) {
 				for (h=0; h< pool_length[i-1-j]; ++h) {
 				gem_combine(pool[j]+k, pool[i-1-j]+h, pool_big+count_big);
@@ -173,7 +173,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		pool_length[i]=grade_limsup-1;
 		pool[i]=malloc(pool_length[i]*sizeof(gem));
 		
-		for (j=0;j<pool_length[i];++j) {			//pool fulling (not good for more colours)
+		for (j=0;j<pool_length[i];++j) {				//pool fulling (not good for more colours)
 			gem_init(pool[i]+j,j+2);
 			for (k=0;k<comb_tot;k++) {
 				if ((pool_big[k].grade==j+2) && gem_better(pool_big[k], pool[i][j])) {

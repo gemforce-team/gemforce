@@ -5,25 +5,27 @@
 #include <string.h>
 
 struct Gem_YB {
-  int grade;
-  double crit;
-  double bbound;
-  struct Gem_YB* father;
-  struct Gem_YB* mother;
+	int grade;				// 3 stats, that's gonna be though
+	double damage;			// this is MAX damage, with the rand() part neglected
+	double crit;				// assumptions: crit chance capped
+	double bbound;			// BB hit lv >> 1
+	struct Gem_YB* father;	// maximize damage*crit*bbound
+	struct Gem_YB* mother;
 };
 
 typedef struct Gem_YB gem;
 
 int int_max(int a, int b) 
 {
-  if (a > b) return a;
-  else return b;
+	if (a > b) return a;
+	else return b;
 }
 
 void gem_print(gem *p_gem) {
-  printf("Grade:\t%d\nLeech:\t%f\nBbound:\t%f\nPower:\t%f\n\n", p_gem->grade, p_gem->leech, p_gem->bbound, p_gem->leech*p_gem->bbound);
+	printf("Grade:\t%d\nDamage:\t%f\nCrit:\t%f\nBbound:\t%f\nPower:\t%f\n\n", 
+		p_gem->grade, p_gem->damage, p_gem->crit; p_gem->bbound, p_gem->damage*p_gem->crit*p_gem->bbound);
 }
-
+// till here
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
   p_gem_combined->grade = p_gem1->grade+1;
