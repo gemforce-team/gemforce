@@ -5,8 +5,8 @@ const int ACC=1000;
 
 typedef struct Gem {
   int grade;          //using short does NOT improve time/memory usage
-  float leech;        //float is a good 5% faster than double and loses nearly nothing
-  float bbound;
+  double leech;        //float is a good 5% faster than double and loses nearly nothing
+  double bbound;
   struct Gem* father;
   struct Gem* mother;
 } gem;
