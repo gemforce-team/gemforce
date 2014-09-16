@@ -5,8 +5,8 @@ const int ACC=1000;
 
 typedef struct Gem {
   int grade;          //using short does NOT improve time/memory usage
-  double leech;        //float is 10% faster than double and loses nothing
-  double bbound;
+  float leech;        //float is a good 5% faster than double and loses nearly nothing
+  float bbound;
   struct Gem* father;
   struct Gem* mother;
 } gem;
@@ -69,11 +69,11 @@ void gem_combine (gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
   }
 }
 
-void gem_init(gem *p_gem, int grd, double o, double b)
+void gem_init(gem *p_gem, int grd, double leech, double bbound)
 {
   p_gem->grade=grd;
-  p_gem->leech=o;
-  p_gem->bbound=b;
+  p_gem->leech=leech;
+  p_gem->bbound=bbound;
   p_gem->father=NULL;
   p_gem->mother=NULL;
 }
