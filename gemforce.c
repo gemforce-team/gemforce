@@ -194,6 +194,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			printf("Pool:\t%d\n",pool_length[i]);
 		}
 		gem_print(gems+i);
+		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 	
 	if (output_parens) {

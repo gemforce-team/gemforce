@@ -5,10 +5,10 @@
 #include <string.h>
 #include "alt_interval_tree.h"
 
-#define ACC 100						// accuracy for inexact operations -> results indistinguishable from 1000 up to 32s
+#define ACC 100						// accuracy for inexact operations -> 100 results indistinguishable from 1000+ up to 32s
 
 struct Gem_YB {
-	int grade;							// 3 stats, that's gonna be though
+	int grade;							// short does NOT help
 	float damage;						// this is MAX damage, with the rand() part neglected
 	float crit;							// assumptions: crit chance capped
 	float bbound;						// BB hit lv >> 1
@@ -281,10 +281,10 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			float* tree=malloc(2*tree_length*(sizeof(float)));							// but we avoid binary search
 			for (j=1; j<2*tree_length; ++j) tree[j]=-1;
 					
-			for (j=subpools_length[grd]-1;j>=0;--j) {											// start from large z	
+			for (j=subpools_length[grd]-1;j>=0;--j) {												// start from large z	
 				gem* p_gem=pool_big+subpools_to_big_convert(subpools_length,grd,j);
-				place=(int)(p_gem->crit*ACC);																// find its place in x
-				float wall = tree_read_max(tree,tree_length,place);					// look at y
+				place=(int)(p_gem->crit*ACC);																	// find its place in x
+				float wall = tree_read_max(tree,tree_length,place);						// look at y
 				if (p_gem->bbound > wall) tree_add_element(tree,tree_length,place,p_gem->bbound);
 				else {
 					p_gem->grade=0;
@@ -317,6 +317,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			printf("Pool:\t%d\n",pool_length[i]);
 		}
 		gem_print(gems+i);
+		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 	
 	if (output_parens) {
