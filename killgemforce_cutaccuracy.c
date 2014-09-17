@@ -141,7 +141,7 @@ int gem_less_equal(gem gem1, gem gem2)
     return gem1.damage<gem2.damage;
   if ((int)(gem1.bbound*ACC) != (int)(gem2.bbound*ACC))
     return gem1.bbound<gem2.bbound;
-  return gem1.crit>gem2.crit;
+  return gem1.crit<gem2.crit;
 }
 
 void gem_sort_grade_damage_bbound(gem* gems, int len)     //exact sort
