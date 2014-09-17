@@ -125,7 +125,7 @@ int gem_less_equal(gem gem1, gem gem2)
     return gem1.grade<gem2.grade;
   if ((int)(gem1.leech*ACC) != (int)(gem2.leech*ACC))
     return gem1.leech<gem2.leech;
-  return gem1.bbound<gem2.bbound;
+  return gem1.bbound>gem2.bbound;
 }
 
 void gem_sort(gem* gems, int len) 

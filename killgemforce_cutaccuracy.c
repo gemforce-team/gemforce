@@ -5,8 +5,7 @@
 #include <string.h>
 #include "interval_tree.h"
 
-#define ACC 100						// accuracy for inexact operations -> 100 results indistinguishable from 1000+ up to 32s
-#define ACC_CUT 50				// accuracy for killgemforce_cutaccuracy
+const int ACC=100;						// accuracy for inexact operations -> 100 results indistinguishable from 1000+ up to 32s
 
 struct Gem_YB {
 	int grade;							// short does NOT help
@@ -110,19 +109,48 @@ int subpools_to_big_convert(int* subpools_length, int grd, int index)
 
 int gem_has_less_damage_bbound(gem gem1, gem gem2)
 {
-	if (gem1.grade < gem2.grade) return 1;
-	else if (gem1.grade == gem2.grade && gem1.damage < gem2.damage) return 1;
-	else if (gem1.grade == gem2.grade && gem1.damage == gem2.damage && gem1.bbound < gem2.bbound) return 1;
-	else return 0;
+  if (gem1.grade < gem2.grade) return 1;
+  else if (gem1.grade == gem2.grade && gem1.damage < gem2.damage) return 1;
+  else if (gem1.grade == gem2.grade && gem1.damage == gem2.damage && gem1.bbound < gem2.bbound) return 1;
+  else return 0;
 }
 
-void gem_sort_grade_damage_bbound(gem* gems, int len) 	//exact sort
+void gem_sort_grade_damage_bbound_exact(gem* gems, int len)     //exact sort
 {
   if (len<=1) return;
   int pivot=0;
   int i;
   for (i=1;i<len;++i) {
     if (gem_has_less_damage_bbound(gems[i],gems[pivot])) {
+      gem temp=gems[pivot];
+      gems[pivot]=gems[i];
+      gems[i]=gems[pivot+1];
+      gems[pivot+1]=temp;
+      pivot++;
+    }
+  }
+  gem_sort_grade_damage_bbound_exact(gems,pivot);
+  gem_sort_grade_damage_bbound_exact(gems+1+pivot,len-pivot-1);
+}
+
+int gem_less_equal(gem gem1, gem gem2)
+{
+  if (gem1.grade!=gem2.grade)
+    return gem1.grade<gem2.grade;
+  if ((int)(gem1.damage*ACC) != (int)(gem2.damage*ACC))
+    return gem1.damage<gem2.damage;
+  if ((int)(gem1.bbound*ACC) != (int)(gem2.bbound*ACC))
+    return gem1.bbound<gem2.bbound;
+  return gem1.crit>gem2.crit;
+}
+
+void gem_sort_grade_damage_bbound(gem* gems, int len)     //exact sort
+{
+  if (len<=1) return;
+  int pivot=0;
+  int i;
+  for (i=1;i<len;++i) {
+    if (gem_less_equal(gems[i],gems[pivot])) {
       gem temp=gems[pivot];
       gems[pivot]=gems[i];
       gems[i]=gems[pivot+1];
@@ -256,9 +284,9 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		
 		gem_sort_grade_damage_bbound(pool_big,comb_tot);
 		
-		int grade_max=(int)(log2(i+1)+1);			// gems with max grade cannot be destroyed, so this is a max, not a sup	
+		int grade_max=(int)(log2(i+1)+1);			// gems with max grade cannot be destroyed, so this is a max, not a sup
 		int subpools_length[grade_max-1];			// let's divide in grades
-		float maxcrit[grade_max-1];						// this will help me create the minimum tree	
+		float maxcrit[grade_max-1];						// this will help me create the minimum tree
 		for (j=0;j<grade_max-1;++j) {
 			subpools_length[j]=0;
 			maxcrit[j]=0;
@@ -276,17 +304,16 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			}
 		}
 		int broken=0;
-		int place;		
-		for (grd=0;grd<grade_max-1;++grd) {										// now we work on the single pools																			
+		int place;
+		for (grd=0;grd<grade_max-1;++grd) {										// now we work on the single pools
 			int tree_length=pow(2, ceil(log2((int)(maxcrit[grd]*ACC)+1)));	// this pool will be big from the beginning,
 			float* tree=malloc(2*tree_length*(sizeof(float)));							// but we avoid binary search
 			for (j=1; j<2*tree_length; ++j) tree[j]=-1;
-					
-			for (j=subpools_length[grd]-1;j>=0;--j) {												// start from large z	
+			for (j=subpools_length[grd]-1;j>=0;--j) {												// start from large z
 				gem* p_gem=pool_big+subpools_to_big_convert(subpools_length,grd,j);
 				place=(int)(p_gem->crit*ACC);																	// find its place in x
-				int wall = (int)(tree_read_max(tree,tree_length,place)*ACC_CUT);						// look at y
-				if ((int)(p_gem->bbound*ACC_CUT) > wall) tree_add_element(tree,tree_length,place,p_gem->bbound);
+				int wall = (int)(tree_read_max(tree,tree_length,place)*ACC);						// look at y
+				if ((int)(p_gem->bbound*ACC) > wall) tree_add_element(tree,tree_length,place,p_gem->bbound);
 				else {
 					p_gem->grade=0;
 					broken++;
