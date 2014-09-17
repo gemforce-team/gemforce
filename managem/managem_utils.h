@@ -25,13 +25,6 @@ struct Gem_OB_appr {
   struct Gem_OB_appr* mother;
 };
 
-struct Gem_O {
-  int grade;
-  double leech;
-  struct Gem_O* father;
-  struct Gem_O* mother;
-};
-
 // remember to define the right gem in your file
 
 int int_max(int a, int b) 
@@ -216,5 +209,58 @@ void print_tree(gem* gemf, char* prefix)
     print_tree(gem2, string2);
   }
 }
+
+void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info);
+
+int get_opts_and_call_worker(int argc, char** argv)
+{
+	int len;
+	char opt;
+	int output_parens=0;
+	int output_tree=0;
+	int output_table = 0;
+	int output_debug=0;
+	int output_info=0;
+	while ((opt=getopt(argc,argv,"ptedi"))!=-1) {
+		switch(opt) {
+			case 'p':
+				output_parens = 1;
+				break;
+			case 't':
+				output_tree = 1;
+				break;
+			case 'e':
+				output_table = 1;
+				break;
+			case 'd':
+				output_debug = 1;
+				output_info = 1;
+				break;
+			case 'i':
+				output_info = 1;
+				break;
+			case '?':
+				return 1;
+			default:
+				break;
+		}
+	}
+	if (optind+1==argc) {
+		len = atoi(argv[optind]);
+	}
+	else {
+		printf("Unknown arguments:\n");
+		while (argv[optind]!=NULL) {
+			printf("%s ", argv[optind]);
+			optind++;
+		}
+		return 1;
+	}
+	if (len<1) printf("Improper gem number\n");
+	else worker(len, output_parens, output_tree, output_table, output_debug, output_info);
+	return 0;
+}
+
+
 
 #endif // _GEM_UTILS_H

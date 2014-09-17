@@ -140,7 +140,7 @@ void print_tree(gem* gemf, char* prefix)
 	}
 }
 
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug)
+void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
 {
 	printf("\n");
 	int i;
@@ -156,12 +156,12 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	for (i=1; i<len; ++i) {
 		int j,k,h;
 		int count_big=0;
-		int eoc=(i+1)/2;		//end of combining
+		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
 		for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 		gem* pool_big = malloc(comb_tot*sizeof(gem));		//a very big array needs to be in heap
 				
-		for (j=0;j<eoc;++j) {						// pool_big gets fulled by candidate gems
+		for (j=0;j<eoc;++j) {										// pool_big gets fulled by candidate gems
 			for (k=0; k< pool_length[j]; ++k) {
 				for (h=0; h< pool_length[i-1-j]; ++h) {
 				gem_combine(pool[j]+k, pool[i-1-j]+h, pool_big+count_big);
@@ -173,7 +173,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		pool_length[i]=grade_limsup-1;
 		pool[i]=malloc(pool_length[i]*sizeof(gem));
 		
-		for (j=0;j<pool_length[i];++j) {			//pool fulling (not good for more colours)
+		for (j=0;j<pool_length[i];++j) {				//pool fulling (not good for more colours)
 			gem_init(pool[i]+j,j+2);
 			for (k=0;k<comb_tot;k++) {
 				if ((pool_big[k].grade==j+2) && gem_better(pool_big[k], pool[i][j])) {
@@ -189,7 +189,12 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		}
 		
 		printf("Value:\t%d\n",i+1);
+		if (output_info) {
+			printf("Raw:\t%d\n",comb_tot);
+			printf("Pool:\t%d\n",pool_length[i]);
+		}
 		gem_print(gems+i);
+		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 	
 	if (output_parens) {
@@ -225,25 +230,30 @@ int main(int argc, char** argv)
 	int output_tree=0;
 	int output_table = 0;
 	int output_debug=0;
-	while ((opt=getopt(argc,argv,"pted"))!=-1) {
-			switch(opt) {
-				case 'p':
-					output_parens = 1;
-					break;
-				case 't':
-					output_tree = 1;
-					break;					
-				case 'e':
-					output_table = 1;
-					break;
-				case 'd':
-					output_debug = 1;
-					break;
-				case '?':
-					return 1;
-				default:
-					break;
-			}
+	int output_info = 0;
+	while ((opt=getopt(argc,argv,"ptedi"))!=-1) {
+		switch(opt) {
+			case 'p':
+				output_parens = 1;
+				break;
+			case 't':
+				output_tree = 1;
+				break;
+			case 'e':
+				output_table = 1;
+				break;
+			case 'd':
+				output_debug = 1;
+				output_info = 1;
+				break;
+			case 'i':
+				output_info = 1;
+				break;
+			case '?':
+				return 1;
+			default:
+				break;
+		}
 	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
@@ -257,7 +267,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_parens, output_tree, output_table, output_debug);
+	else worker(len, output_parens, output_tree, output_table, output_debug, output_info);
 	return 0;
 }
 
