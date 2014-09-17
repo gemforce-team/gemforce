@@ -6,6 +6,7 @@
 #include "interval_tree.h"
 
 #define ACC 100						// accuracy for inexact operations -> 100 results indistinguishable from 1000+ up to 32s
+#define ACC_CUT 50				// accuracy for killgemforce_cutaccuracy
 
 struct Gem_YB {
 	int grade;							// short does NOT help
@@ -284,8 +285,8 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			for (j=subpools_length[grd]-1;j>=0;--j) {												// start from large z	
 				gem* p_gem=pool_big+subpools_to_big_convert(subpools_length,grd,j);
 				place=(int)(p_gem->crit*ACC);																	// find its place in x
-				float wall = tree_read_max(tree,tree_length,place);						// look at y
-				if (p_gem->bbound > wall) tree_add_element(tree,tree_length,place,p_gem->bbound);
+				int wall = (int)(tree_read_max(tree,tree_length,place)*ACC_CUT);						// look at y
+				if ((int)(p_gem->bbound*ACC_CUT) > wall) tree_add_element(tree,tree_length,place,p_gem->bbound);
 				else {
 					p_gem->grade=0;
 					broken++;
