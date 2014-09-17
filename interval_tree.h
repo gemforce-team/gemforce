@@ -22,6 +22,8 @@ void add_maximum_at_interval (int beg, int end, float val)
       tree_tab[beg+1]=max(tree_tab[beg+1], val);
     if (end&1)
       tree_tab[end-1]=max(tree_tab[end-1], val);
+    beg/=2;
+    end/=2;
   }
 }
 
