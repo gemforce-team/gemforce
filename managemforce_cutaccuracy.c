@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 typedef struct Gem_OB_appr gem;		// the strange order is so that gem_utils knows which gem type are we defining as "gem"
-#include "gem_utils.h"
+#include "managem_utils.h"
 
 int gem_more_powerful(gem gem1, gem gem2)
 {
@@ -20,7 +20,7 @@ int subpools_to_big_convert(int* subpools_length, int grd, int index)
   return result;
 }
 
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug)
+void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
 {
   printf("\n");
   int i;
@@ -95,9 +95,12 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
       gems[i]=pool[i][j];
     }
     
-    printf("Value:\t%d\n",i+1);
-    printf("Pool:\t%d\n",pool_length[i]);
-    gem_print(gems+i);
+		printf("Value:\t%d\n",i+1);
+		if (output_info) {
+			printf("Raw:\t%d\n",comb_tot);
+			printf("Pool:\t%d\n",pool_length[i]);
+		}
+		gem_print(gems+i);
   }
   
   if (output_parens) {
@@ -127,45 +130,6 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 
 int main(int argc, char** argv)
 {
-  int len;
-  char opt;
-  int output_parens=0;
-  int output_tree=0;
-  int output_table = 0;
-  int output_debug=0;
-  while ((opt=getopt(argc,argv,"pted"))!=-1) {
-    switch(opt) {
-      case 'p':
-        output_parens = 1;
-        break;
-      case 't':
-        output_tree = 1;
-        break;                  
-      case 'e':
-        output_table = 1;
-        break;
-      case 'd':
-        output_debug = 1;
-        break;
-      case '?':
-        return 1;
-      default:
-        break;
-    }
-  }
-  if (optind+1==argc) {
-    len = atoi(argv[optind]);
-  }
-  else {
-    printf("Unknown arguments:\n");
-    while (argv[optind]!=NULL) {
-      printf("%s ", argv[optind]);
-      optind++;
-    }
-    return 1;
-  }
-  if (len<1) printf("Improper gem number\n");
-  else worker(len, output_parens, output_tree, output_table, output_debug);
-  return 0;
+  return get_opts_and_call_worker(argc, argv);
 }
 

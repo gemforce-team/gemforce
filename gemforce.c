@@ -140,7 +140,7 @@ void print_tree(gem* gemf, char* prefix)
 	}
 }
 
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug)
+void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
 {
 	printf("\n");
 	int i;
@@ -189,6 +189,10 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		}
 		
 		printf("Value:\t%d\n",i+1);
+		if (output_info) {
+			printf("Raw:\t%d\n",comb_tot);
+			printf("Pool:\t%d\n",pool_length[i]);
+		}
 		gem_print(gems+i);
 	}
 	
@@ -225,7 +229,8 @@ int main(int argc, char** argv)
 	int output_tree=0;
 	int output_table = 0;
 	int output_debug=0;
-	while ((opt=getopt(argc,argv,"pted"))!=-1) {
+	int output_info = 0;
+	while ((opt=getopt(argc,argv,"ptedi"))!=-1) {
 		switch(opt) {
 			case 'p':
 				output_parens = 1;
@@ -238,6 +243,10 @@ int main(int argc, char** argv)
 				break;
 			case 'd':
 				output_debug = 1;
+				output_info = 1;
+				break;
+			case 'i':
+				output_info = 1;
 				break;
 			case '?':
 				return 1;
@@ -257,7 +266,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_parens, output_tree, output_table, output_debug);
+	else worker(len, output_parens, output_tree, output_table, output_debug, output_info);
 	return 0;
 }
 
