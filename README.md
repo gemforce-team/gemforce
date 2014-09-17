@@ -27,6 +27,6 @@ Orange combine - Done
 Orange/black spec - Done  
 Orange/black combine - Done  
 Yellow/black spec - WIP  
-Yellow/black spec - WIP  
+Yellow/black combine  
 Amplifier-oriented OB and YB  
 OBR and YBR

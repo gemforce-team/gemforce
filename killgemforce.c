@@ -252,7 +252,6 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 				}
 			}
 		}
-// here comes the specific part
 		
 		gem_sort_grade_damage_bbound(pool_big,comb_tot);
 		
@@ -295,7 +294,6 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			free(tree);									// free
 		}
 
-// from there on it will work
 		pool_length[i]=comb_tot-broken;		
 		pool[i]=malloc(pool_length[i]*sizeof(gem));			// pool init via broken
 		

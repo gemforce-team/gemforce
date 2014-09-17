@@ -25,13 +25,6 @@ struct Gem_OB_appr {
   struct Gem_OB_appr* mother;
 };
 
-struct Gem_O {
-  int grade;
-  double leech;
-  struct Gem_O* father;
-  struct Gem_O* mother;
-};
-
 // remember to define the right gem in your file
 
 int int_max(int a, int b) 
