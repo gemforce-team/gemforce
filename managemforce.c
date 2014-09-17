@@ -121,6 +121,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		}
 		
 		printf("Value:\t%d\n",i+1);
+		printf("Raw:\t%d\n",comb_tot);
 		printf("Pool:\t%d\n",pool_length[i]);
 		gem_print(gems+i);
 	}

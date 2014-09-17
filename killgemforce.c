@@ -283,8 +283,8 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			for (j=1; j<2*tree_length; ++j) tree[j]=-1;
 			
 			for (j=subpools_length[grd]-1;j>=0;--j) {											// start from large z	
-				gem* p_gem=pool_big+(subpools_to_big_convert(subpools_length,grd,j));
-				place=(int)(p_gem->crit*ACC);																// find its place in x
+				gem* p_gem=pool_big+subpools_to_big_convert(subpools_length,grd,j);
+				place=(int)(p_gem->crit*ACC)-1;																// find its place in x
 				float wall = tree_read_max(tree,tree_length,place);					// look at y
 				if (wall < p_gem->bbound) tree_add_element(tree,tree_length,place,p_gem->bbound);
 				else {
@@ -314,6 +314,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		}
 
 		printf("Value:\t%d\n",i+1);
+		printf("Raw:\t%d\n",comb_tot);
 		printf("Pool:\t%d\n",pool_length[i]);
 		gem_print(gems+i);
 	}
