@@ -226,24 +226,24 @@ int main(int argc, char** argv)
 	int output_table = 0;
 	int output_debug=0;
 	while ((opt=getopt(argc,argv,"pted"))!=-1) {
-			switch(opt) {
-				case 'p':
-					output_parens = 1;
-					break;
-				case 't':
-					output_tree = 1;
-					break;					
-				case 'e':
-					output_table = 1;
-					break;
-				case 'd':
-					output_debug = 1;
-					break;
-				case '?':
-					return 1;
-				default:
-					break;
-			}
+		switch(opt) {
+			case 'p':
+				output_parens = 1;
+				break;
+			case 't':
+				output_tree = 1;
+				break;
+			case 'e':
+				output_table = 1;
+				break;
+			case 'd':
+				output_debug = 1;
+				break;
+			case '?':
+				return 1;
+			default:
+				break;
+		}
 	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
