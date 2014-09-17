@@ -5,7 +5,7 @@
 #include <string.h>
 #include "alt_interval_tree.h"
 
-#define ACC 1000					// accuracy for inexact operations
+#define ACC 100						// accuracy for inexact operations -> results indistinguishable from 1000 up to 32s
 
 struct Gem_YB {
 	int grade;							// 3 stats, that's gonna be though
@@ -42,7 +42,7 @@ void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 
 void gem_comb_d1(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)     //bigger is always gem1
 {
-  p_gem_combined->grade = p_gem1->grade+1;
+  p_gem_combined->grade = p_gem1->grade;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = 0.86*p_gem1->damage + 0.7*p_gem2->damage;
   else p_gem_combined->damage = 0.86*p_gem2->damage + 0.7*p_gem1->damage;
   if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
@@ -107,20 +107,21 @@ int subpools_to_big_convert(int* subpools_length, int grd, int index)
 	return result;
 }
 
-int gem_has_less_damage(gem gem1, gem gem2)
+int gem_has_less_damage_bbound(gem gem1, gem gem2)
 {
 	if (gem1.grade < gem2.grade) return 1;
 	else if (gem1.grade == gem2.grade && gem1.damage < gem2.damage) return 1;
+	else if (gem1.grade == gem2.grade && gem1.damage == gem2.damage && gem1.bbound < gem2.bbound) return 1;
 	else return 0;
 }
 
-void gem_sort_grade_damage(gem* gems, int len) 	//exact sort
+void gem_sort_grade_damage_bbound(gem* gems, int len) 	//exact sort
 {
   if (len<=1) return;
   int pivot=0;
   int i;
   for (i=1;i<len;++i) {
-    if (gem_has_less_damage(gems[i],gems[pivot])) {
+    if (gem_has_less_damage_bbound(gems[i],gems[pivot])) {
       gem temp=gems[pivot];
       gems[pivot]=gems[i];
       gems[i]=gems[pivot+1];
@@ -128,8 +129,8 @@ void gem_sort_grade_damage(gem* gems, int len) 	//exact sort
       pivot++;
     }
   }
-  gem_sort_grade_damage(gems,pivot);
-  gem_sort_grade_damage(gems+1+pivot,len-pivot-1);
+  gem_sort_grade_damage_bbound(gems,pivot);
+  gem_sort_grade_damage_bbound(gems+1+pivot,len-pivot-1);
 }
 
 int gem_has_less_crit(gem gem1, gem gem2)
@@ -221,7 +222,7 @@ void print_tree(gem* gemf, char* prefix)
   }
 }
 
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug)
+void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
 {
 	printf("\n");
 	int i;
@@ -253,7 +254,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		}
 // here comes the specific part
 		
-		gem_sort_grade_damage(pool_big,comb_tot);
+		gem_sort_grade_damage_bbound(pool_big,comb_tot);
 		
 		int grade_max=(int)(log2(i+1)+1);			// gems with max grade cannot be destroyed, so this is a max, not a sup	
 		int subpools_length[grade_max-1];			// let's divide in grades
@@ -263,7 +264,6 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			maxcrit[j]=0;
 		}
 		int grd=0;
-	
 		for (j=0;j<comb_tot;++j) {						// see how long subpools are and find maxcrits
 			if ((pool_big+j)->grade==grd+2) {
 				subpools_length[grd]++;
@@ -278,15 +278,15 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		int broken=0;
 		int place;		
 		for (grd=0;grd<grade_max-1;++grd) {										// now we work on the single pools																			
-			int tree_length=pow(2, ceil(log2((int)(maxcrit[grd]*ACC))));	// this pool will be big from the beginning,
-			float* tree=malloc(2*tree_length*(sizeof(float)));						// but we avoid binary search
+			int tree_length=pow(2, ceil(log2((int)(maxcrit[grd]*ACC)+1)));	// this pool will be big from the beginning,
+			float* tree=malloc(2*tree_length*(sizeof(float)));							// but we avoid binary search
 			for (j=1; j<2*tree_length; ++j) tree[j]=-1;
-			
+					
 			for (j=subpools_length[grd]-1;j>=0;--j) {											// start from large z	
 				gem* p_gem=pool_big+subpools_to_big_convert(subpools_length,grd,j);
-				place=(int)(p_gem->crit*ACC)-1;																// find its place in x
+				place=(int)(p_gem->crit*ACC);																// find its place in x
 				float wall = tree_read_max(tree,tree_length,place);					// look at y
-				if (wall < p_gem->bbound) tree_add_element(tree,tree_length,place,p_gem->bbound);
+				if (p_gem->bbound > wall) tree_add_element(tree,tree_length,place,p_gem->bbound);
 				else {
 					p_gem->grade=0;
 					broken++;
@@ -314,8 +314,10 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		}
 
 		printf("Value:\t%d\n",i+1);
-		printf("Raw:\t%d\n",comb_tot);
-		printf("Pool:\t%d\n",pool_length[i]);
+		if (output_info) {
+			printf("Raw:\t%d\n",comb_tot);
+			printf("Pool:\t%d\n",pool_length[i]);
+		}
 		gem_print(gems+i);
 	}
 	
@@ -352,7 +354,8 @@ int main(int argc, char** argv)
 	int output_tree=0;
 	int output_table = 0;
 	int output_debug=0;
-	while ((opt=getopt(argc,argv,"pted"))!=-1) {
+	int output_info=0;
+	while ((opt=getopt(argc,argv,"ptedi"))!=-1) {
 		switch(opt) {
 			case 'p':
 				output_parens = 1;
@@ -365,6 +368,10 @@ int main(int argc, char** argv)
 				break;
 			case 'd':
 				output_debug = 1;
+				output_info = 1;
+				break;
+			case 'i':
+				output_info = 1;
 				break;
 			case '?':
 				return 1;
@@ -384,6 +391,6 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_parens, output_tree, output_table, output_debug);
+	else worker(len, output_parens, output_tree, output_table, output_debug, output_info);
 	return 0;
 }
