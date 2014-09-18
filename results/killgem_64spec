@@ -1,0 +1,772 @@
+
+Grade:	1
+Damage:	1.000000
+Crit:	1.000000
+Bbound:	0.000000
+Power:	0.000000
+
+Value:	2
+Raw:	4
+Pool:	3
+Grade:	2
+Damage:	1.580000
+Crit:	0.880000
+Bbound:	0.780000
+Power:	0.845919
+
+Value:	3
+Raw:	6
+Pool:	6
+Grade:	2
+Damage:	2.058800
+Crit:	0.774400
+Bbound:	1.016200
+Power:	1.646409
+
+Value:	4
+Raw:	21
+Pool:	15
+Grade:	2
+Damage:	2.470568
+Crit:	1.068672
+Bbound:	1.019100
+Power:	2.742047
+
+Value:	5
+Raw:	48
+Pool:	30
+Grade:	3
+Damage:	2.811940
+Crit:	1.455872
+Bbound:	0.964268
+Power:	3.806491
+
+Value:	6
+Raw:	141
+Pool:	49
+Grade:	3
+Damage:	3.252904
+Crit:	1.455872
+Bbound:	1.037536
+Power:	5.098010
+
+Value:	7
+Raw:	278
+Pool:	60
+Grade:	3
+Damage:	3.611142
+Crit:	1.668367
+Bbound:	1.037536
+Power:	6.485488
+
+Value:	8
+Raw:	672
+Pool:	100
+Grade:	4
+Damage:	3.944312
+Crit:	1.843072
+Bbound:	1.040364
+Power:	7.868360
+
+Value:	9
+Raw:	1124
+Pool:	143
+Grade:	4
+Damage:	4.306716
+Crit:	2.055567
+Bbound:	1.040364
+Power:	9.581832
+
+Value:	10
+Raw:	2581
+Pool:	203
+Grade:	4
+Damage:	4.526875
+Crit:	2.048963
+Bbound:	1.099760
+Power:	11.218340
+
+Value:	11
+Raw:	3805
+Pool:	250
+Grade:	4
+Damage:	4.914138
+Crit:	2.196099
+Bbound:	1.097477
+Power:	12.998412
+
+Value:	12
+Raw:	7668
+Pool:	298
+Grade:	4
+Damage:	5.205727
+Crit:	2.155211
+Bbound:	1.155323
+Power:	14.975374
+
+Value:	13
+Raw:	10649
+Pool:	327
+Grade:	4
+Damage:	5.501482
+Crit:	2.108747
+Bbound:	1.212436
+Power:	17.053816
+
+Value:	14
+Raw:	18883
+Pool:	332
+Grade:	4
+Damage:	5.769516
+Crit:	2.273303
+Bbound:	1.212436
+Power:	19.280317
+
+Value:	15
+Raw:	26280
+Pool:	426
+Grade:	4
+Damage:	6.010879
+Crit:	2.273303
+Bbound:	1.249609
+Power:	21.337503
+
+Value:	16
+Raw:	44307
+Pool:	526
+Grade:	4
+Damage:	6.241388
+Crit:	2.418113
+Bbound:	1.249609
+Power:	23.567095
+
+Value:	17
+Raw:	56897
+Pool:	650
+Grade:	4
+Damage:	6.495737
+Crit:	2.547593
+Bbound:	1.250310
+Power:	25.869856
+
+Value:	18
+Raw:	90575
+Pool:	706
+Grade:	4
+Damage:	6.750086
+Crit:	2.677073
+Bbound:	1.251011
+Power:	28.280817
+
+Value:	19
+Raw:	110800
+Pool:	792
+Grade:	4
+Damage:	7.000853
+Crit:	2.791015
+Bbound:	1.251722
+Power:	30.614594
+
+Value:	20
+Raw:	170919
+Pool:	924
+Grade:	4
+Damage:	7.251619
+Crit:	2.904957
+Bbound:	1.252432
+Power:	33.043255
+
+Value:	21
+Raw:	200848
+Pool:	1126
+Grade:	4
+Damage:	7.459191
+Crit:	2.904957
+Bbound:	1.281799
+Power:	35.601730
+
+Value:	22
+Raw:	294155
+Pool:	1379
+Grade:	5
+Damage:	7.761167
+Crit:	3.017808
+Bbound:	1.280012
+Power:	38.374859
+
+Value:	23
+Raw:	339107
+Pool:	1446
+Grade:	5
+Damage:	7.982628
+Crit:	3.017808
+Bbound:	1.309007
+Power:	41.278290
+
+Value:	24
+Raw:	476467
+Pool:	1488
+Grade:	5
+Damage:	8.236311
+Crit:	3.131751
+Bbound:	1.309766
+Power:	44.249424
+
+Value:	25
+Raw:	548508
+Pool:	1621
+Grade:	5
+Damage:	8.487776
+Crit:	3.088815
+Bbound:	1.341402
+Power:	47.174076
+
+Value:	26
+Raw:	746336
+Pool:	1759
+Grade:	5
+Damage:	8.658137
+Crit:	3.259183
+Bbound:	1.332673
+Power:	50.116432
+
+Value:	27
+Raw:	870103
+Pool:	1885
+Grade:	5
+Damage:	8.919045
+Crit:	3.259183
+Bbound:	1.350389
+Power:	53.008411
+
+Value:	28
+Raw:	1137352
+Pool:	1931
+Grade:	5
+Damage:	9.129031
+Crit:	3.429551
+Bbound:	1.336470
+Power:	55.921684
+
+Value:	29
+Raw:	1331762
+Pool:	2129
+Grade:	5
+Damage:	9.301497
+Crit:	3.541692
+Bbound:	1.336470
+Power:	58.841255
+
+Value:	30
+Raw:	1719584
+Pool:	2074
+Grade:	5
+Damage:	9.534080
+Crit:	3.558320
+Bbound:	1.350389
+Power:	61.864479
+
+Value:	31
+Raw:	1980004
+Pool:	2059
+Grade:	5
+Damage:	9.744064
+Crit:	3.728688
+Bbound:	1.336470
+Power:	64.895477
+
+Value:	32
+Raw:	2531399
+Pool:	2008
+Grade:	5
+Damage:	9.934369
+Crit:	3.728688
+Bbound:	1.354566
+Power:	67.966728
+
+Value:	33
+Raw:	2866875
+Pool:	2134
+Grade:	5
+Damage:	10.152536
+Crit:	3.810966
+Bbound:	1.354566
+Power:	70.992050
+
+Value:	34
+Raw:	3613772
+Pool:	2357
+Grade:	5
+Damage:	10.370704
+Crit:	3.893244
+Bbound:	1.354566
+Power:	74.083237
+
+Value:	35
+Raw:	4002339
+Pool:	2454
+Grade:	5
+Damage:	10.551291
+Crit:	3.986742
+Bbound:	1.354566
+Power:	77.183388
+
+Value:	36
+Raw:	4924051
+Pool:	2644
+Grade:	6
+Damage:	10.783517
+Crit:	4.167449
+Bbound:	1.341112
+Power:	80.827751
+
+Value:	37
+Raw:	5444999
+Pool:	2924
+Grade:	6
+Damage:	10.976033
+Crit:	4.167449
+Bbound:	1.358978
+Power:	84.477448
+
+Value:	38
+Raw:	6626024
+Pool:	3057
+Grade:	6
+Damage:	11.199890
+Crit:	4.260947
+Bbound:	1.358978
+Power:	88.134300
+
+Value:	39
+Raw:	7273428
+Pool:	3124
+Grade:	6
+Damage:	11.423747
+Crit:	4.354445
+Bbound:	1.358978
+Power:	91.868469
+
+Value:	40
+Raw:	8746382
+Pool:	3102
+Grade:	6
+Damage:	11.647604
+Crit:	4.447943
+Bbound:	1.358978
+Power:	95.679939
+
+Value:	41
+Raw:	9470132
+Pool:	3141
+Grade:	6
+Damage:	11.822076
+Crit:	4.560083
+Bbound:	1.358978
+Power:	99.561539
+
+Value:	42
+Raw:	11382992
+Pool:	3337
+Grade:	6
+Damage:	12.042780
+Crit:	4.642362
+Bbound:	1.358978
+Power:	103.250175
+
+Value:	43
+Raw:	12160702
+Pool:	3520
+Grade:	6
+Damage:	12.225468
+Crit:	4.735859
+Bbound:	1.358978
+Power:	106.927498
+
+Value:	44
+Raw:	14667263
+Pool:	3536
+Grade:	6
+Damage:	12.391032
+Crit:	4.735859
+Bbound:	1.373093
+Power:	110.638481
+
+Value:	45
+Raw:	15398157
+Pool:	3714
+Grade:	6
+Damage:	12.541079
+Crit:	4.702610
+Bbound:	1.392395
+Power:	114.340111
+
+Value:	46
+Raw:	18265347
+Pool:	3901
+Grade:	6
+Damage:	12.670245
+Crit:	4.664175
+Bbound:	1.413920
+Power:	118.143440
+
+Value:	47
+Raw:	19176090
+Pool:	4392
+Grade:	6
+Damage:	12.905232
+Crit:	4.730048
+Bbound:	1.413920
+Power:	122.034088
+
+Value:	48
+Raw:	22379360
+Pool:	4416
+Grade:	6
+Damage:	13.055279
+Crit:	4.828732
+Bbound:	1.413920
+Power:	126.028557
+
+Value:	49
+Raw:	23511187
+Pool:	4678
+Grade:	6
+Damage:	13.247795
+Crit:	4.911010
+Bbound:	1.413920
+Power:	130.066132
+
+Value:	50
+Raw:	27209750
+Pool:	4820
+Grade:	6
+Damage:	13.430483
+Crit:	4.890565
+Bbound:	1.427730
+Power:	133.888382
+
+Value:	51
+Raw:	28439213
+Pool:	5047
+Grade:	6
+Damage:	13.610597
+Crit:	4.872575
+Bbound:	1.441717
+Power:	137.846527
+
+Value:	52
+Raw:	32666138
+Pool:	5305
+Grade:	6
+Damage:	13.767709
+Crit:	4.954853
+Bbound:	1.441717
+Power:	141.792267
+
+Value:	53
+Raw:	33963168
+Pool:	5620
+Grade:	6
+Damage:	13.988001
+Crit:	5.017385
+Bbound:	1.441717
+Power:	145.879120
+
+Value:	54
+Raw:	38784199
+Pool:	5613
+Grade:	6
+Damage:	14.170689
+Crit:	4.996941
+Bbound:	1.455527
+Power:	150.015350
+
+Value:	55
+Raw:	40280901
+Pool:	5826
+Grade:	6
+Damage:	14.353376
+Crit:	4.976496
+Bbound:	1.469337
+Power:	154.212875
+
+Value:	56
+Raw:	45645097
+Pool:	6072
+Grade:	6
+Damage:	14.510488
+Crit:	5.058774
+Bbound:	1.469337
+Power:	158.478439
+
+Value:	57
+Raw:	47501705
+Pool:	5881
+Grade:	6
+Damage:	14.639527
+Crit:	5.145616
+Bbound:	1.469337
+Power:	162.632492
+
+Value:	58
+Raw:	53766380
+Pool:	6025
+Grade:	6
+Damage:	14.842841
+Crit:	5.020339
+Bbound:	1.497134
+Power:	167.021149
+
+Value:	59
+Raw:	55768594
+Pool:	5901
+Grade:	6
+Damage:	14.971881
+Crit:	5.107181
+Bbound:	1.497134
+Power:	171.387421
+
+Value:	60
+Raw:	62435292
+Pool:	6017
+Grade:	6
+Damage:	15.256263
+Crit:	5.136440
+Bbound:	1.498270
+Power:	175.910049
+
+Value:	61
+Raw:	65032779
+Pool:	5952
+Grade:	6
+Damage:	15.385302
+Crit:	5.223282
+Bbound:	1.498270
+Power:	180.397186
+
+Value:	62
+Raw:	72215379
+Pool:	6157
+Grade:	6
+Damage:	15.550866
+Crit:	5.295687
+Bbound:	1.498270
+Power:	184.866058
+
+Value:	63
+Raw:	75498444
+Pool:	6371
+Grade:	6
+Damage:	15.716431
+Crit:	5.368092
+Bbound:	1.498270
+Power:	189.388718
+
+Value:	64
+Raw:	83252283
+Pool:	6455
+Grade:	6
+Damage:	15.865520
+Crit:	5.347648
+Bbound:	1.512080
+Power:	193.984406
+
+Combining scheme:
+(((((b+b)+(b+(b+y)))+((b+b)+(b+(b+(b+(b+b))))))+(((b+b)+(b+(b+y)))+((b+(b+y))+((b+y)+(y+(y+(y+y)))))))+((((b+b)+(b+(b+y)))+((b+(b+y))+((b+y)+(y+(y+y)))))+(((b+(b+y))+((b+y)+(y+(y+y))))+(((b+y)+(y+(y+(y+y))))+((y+(y+y))+((y+y)+(y+(y+(y+(y+(y+y)))))))))))
+
+Gem tree:
+━64
+ ┣━38
+ ┃ ┣━25
+ ┃ ┃ ┣━17
+ ┃ ┃ ┃ ┣━11
+ ┃ ┃ ┃ ┃ ┣━8
+ ┃ ┃ ┃ ┃ ┃ ┣━6
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 y
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 y
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 y
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 y
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 y
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 y
+ ┃ ┃ ┃ ┃ ┃ ┗━2
+ ┃ ┃ ┃ ┃ ┃   ┣━ g1 y
+ ┃ ┃ ┃ ┃ ┃   ┗━ g1 y
+ ┃ ┃ ┃ ┃ ┗━3
+ ┃ ┃ ┃ ┃   ┣━2
+ ┃ ┃ ┃ ┃   ┃ ┣━ g1 y
+ ┃ ┃ ┃ ┃   ┃ ┗━ g1 y
+ ┃ ┃ ┃ ┃   ┗━ g1 y
+ ┃ ┃ ┃ ┗━6
+ ┃ ┃ ┃   ┣━4
+ ┃ ┃ ┃   ┃ ┣━3
+ ┃ ┃ ┃   ┃ ┃ ┣━2
+ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ g1 y
+ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 y
+ ┃ ┃ ┃   ┃ ┃ ┗━ g1 y
+ ┃ ┃ ┃   ┃ ┗━ g1 y
+ ┃ ┃ ┃   ┗━2
+ ┃ ┃ ┃     ┣━ g1 y
+ ┃ ┃ ┃     ┗━ g1 b
+ ┃ ┃ ┗━8
+ ┃ ┃   ┣━5
+ ┃ ┃   ┃ ┣━3
+ ┃ ┃   ┃ ┃ ┣━2
+ ┃ ┃   ┃ ┃ ┃ ┣━ g1 y
+ ┃ ┃   ┃ ┃ ┃ ┗━ g1 y
+ ┃ ┃   ┃ ┃ ┗━ g1 y
+ ┃ ┃   ┃ ┗━2
+ ┃ ┃   ┃   ┣━ g1 y
+ ┃ ┃   ┃   ┗━ g1 b
+ ┃ ┃   ┗━3
+ ┃ ┃     ┣━2
+ ┃ ┃     ┃ ┣━ g1 y
+ ┃ ┃     ┃ ┗━ g1 b
+ ┃ ┃     ┗━ g1 b
+ ┃ ┗━13
+ ┃   ┣━8
+ ┃   ┃ ┣━5
+ ┃   ┃ ┃ ┣━3
+ ┃   ┃ ┃ ┃ ┣━2
+ ┃   ┃ ┃ ┃ ┃ ┣━ g1 y
+ ┃   ┃ ┃ ┃ ┃ ┗━ g1 y
+ ┃   ┃ ┃ ┃ ┗━ g1 y
+ ┃   ┃ ┃ ┗━2
+ ┃   ┃ ┃   ┣━ g1 y
+ ┃   ┃ ┃   ┗━ g1 b
+ ┃   ┃ ┗━3
+ ┃   ┃   ┣━2
+ ┃   ┃   ┃ ┣━ g1 y
+ ┃   ┃   ┃ ┗━ g1 b
+ ┃   ┃   ┗━ g1 b
+ ┃   ┗━5
+ ┃     ┣━3
+ ┃     ┃ ┣━2
+ ┃     ┃ ┃ ┣━ g1 y
+ ┃     ┃ ┃ ┗━ g1 b
+ ┃     ┃ ┗━ g1 b
+ ┃     ┗━2
+ ┃       ┣━ g1 b
+ ┃       ┗━ g1 b
+ ┗━26
+   ┣━14
+   ┃ ┣━9
+   ┃ ┃ ┣━6
+   ┃ ┃ ┃ ┣━4
+   ┃ ┃ ┃ ┃ ┣━3
+   ┃ ┃ ┃ ┃ ┃ ┣━2
+   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 y
+   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 y
+   ┃ ┃ ┃ ┃ ┃ ┗━ g1 y
+   ┃ ┃ ┃ ┃ ┗━ g1 y
+   ┃ ┃ ┃ ┗━2
+   ┃ ┃ ┃   ┣━ g1 y
+   ┃ ┃ ┃   ┗━ g1 b
+   ┃ ┃ ┗━3
+   ┃ ┃   ┣━2
+   ┃ ┃   ┃ ┣━ g1 y
+   ┃ ┃   ┃ ┗━ g1 b
+   ┃ ┃   ┗━ g1 b
+   ┃ ┗━5
+   ┃   ┣━3
+   ┃   ┃ ┣━2
+   ┃   ┃ ┃ ┣━ g1 y
+   ┃   ┃ ┃ ┗━ g1 b
+   ┃   ┃ ┗━ g1 b
+   ┃   ┗━2
+   ┃     ┣━ g1 b
+   ┃     ┗━ g1 b
+   ┗━12
+     ┣━7
+     ┃ ┣━5
+     ┃ ┃ ┣━4
+     ┃ ┃ ┃ ┣━3
+     ┃ ┃ ┃ ┃ ┣━2
+     ┃ ┃ ┃ ┃ ┃ ┣━ g1 b
+     ┃ ┃ ┃ ┃ ┃ ┗━ g1 b
+     ┃ ┃ ┃ ┃ ┗━ g1 b
+     ┃ ┃ ┃ ┗━ g1 b
+     ┃ ┃ ┗━ g1 b
+     ┃ ┗━2
+     ┃   ┣━ g1 b
+     ┃   ┗━ g1 b
+     ┗━5
+       ┣━3
+       ┃ ┣━2
+       ┃ ┃ ┣━ g1 y
+       ┃ ┃ ┗━ g1 b
+       ┃ ┗━ g1 b
+       ┗━2
+         ┣━ g1 b
+         ┗━ g1 b
+
+# Gems	Power
+1	0.000000
+2	0.845919
+3	1.646409
+4	2.742047
+5	3.806491
+6	5.098010
+7	6.485488
+8	7.868360
+9	9.581832
+10	11.218340
+11	12.998412
+12	14.975374
+13	17.053816
+14	19.280317
+15	21.337503
+16	23.567095
+17	25.869856
+18	28.280817
+19	30.614594
+20	33.043255
+21	35.601730
+22	38.374859
+23	41.278290
+24	44.249424
+25	47.174076
+26	50.116432
+27	53.008411
+28	55.921684
+29	58.841255
+30	61.864479
+31	64.895477
+32	67.966728
+33	70.992050
+34	74.083237
+35	77.183388
+36	80.827751
+37	84.477448
+38	88.134300
+39	91.868469
+40	95.679939
+41	99.561539
+42	103.250175
+43	106.927498
+44	110.638481
+45	114.340111
+46	118.143440
+47	122.034088
+48	126.028557
+49	130.066132
+50	133.888382
+51	137.846527
+52	141.792267
+53	145.879120
+54	150.015350
+55	154.212875
+56	158.478439
+57	162.632492
+58	167.021149
+59	171.387421
+60	175.910049
+61	180.397186
+62	184.866058
+63	189.388718
+64	193.984406
+
