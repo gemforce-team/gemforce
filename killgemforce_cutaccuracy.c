@@ -5,7 +5,7 @@
 #include <string.h>
 #include "interval_tree.h"
 
-const int ACC=100;						// accuracy for inexact operations -> 100 results indistinguishable from 1000+ up to 32s
+const int ACC=100;				// accuracy for inexact operations -> 100 differs from exact at 32s
 
 struct Gem_YB {
 	int grade;							// short does NOT help

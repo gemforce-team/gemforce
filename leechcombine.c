@@ -5,11 +5,11 @@
 #include <string.h>
 
 
-typedef struct Gem {
+typedef struct Gem_O {
 	int grade;			//using short does NOT improve time/memory usage
 	double leech;		//note that float is faster but loses some precision after 2k in pure gems
-	struct Gem* father;
-	struct Gem* mother;
+	struct Gem_O* father;
+	struct Gem_O* mother;
 } gem;
 
 void int_swap (int *p1, int *p2)
