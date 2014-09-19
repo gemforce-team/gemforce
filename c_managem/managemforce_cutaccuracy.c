@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 typedef struct Gem_OB_appr gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
+const int ACC=1000;
 #include "managem_utils.h"
 
 int gem_more_powerful(gem gem1, gem gem2)
