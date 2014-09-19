@@ -120,6 +120,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
+			fflush(stdout);
 	  }
 	}
   printf("Gem pooling done!\n\n");
