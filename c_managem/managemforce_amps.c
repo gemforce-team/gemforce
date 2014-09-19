@@ -4,9 +4,15 @@
 #include <unistd.h>
 #include <string.h>
 typedef struct Gem_OB_appr gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
+const int ACC=100;
 #include "managem_utils.h"
 typedef struct Gem_O gemO;
 #include "leech_utils.h"
+
+void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
+{
+	// utils compatibility
+}
 
 int gem_alone_more_powerful(gem gem1, gem gem2, gemO amp2)
 {
@@ -35,7 +41,7 @@ void print_amps_table(gem* gems, gemO* amps, int len)
   printf("\n");
 }
 
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
+void worker_amps(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int managem_limit)
 {
   printf("\n");
   int i;
@@ -47,68 +53,75 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
   pool_length[0]=2;
   
   for (i=1; i<len; ++i) { 				// managem computing
-    int j,k,h;
-    int count_big=0;
-    int eoc=(i+1)/2;        //end of combining
-    int comb_tot=0;
-    for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
-    gem* pool_big = malloc(comb_tot*sizeof(gem));       //a very big array needs to be in the heap
-    
-    for (j=0;j<eoc;++j) {                               // pool_big gets filled of candidate gems
-      for (k=0; k< pool_length[j]; ++k) {
-        for (h=0; h< pool_length[i-1-j]; ++h) {
-          gem_combine(pool[j]+k, pool[i-1-j]+h, pool_big+count_big);
-          count_big++;
-        }
-      }
-    }
-    
-    gem_sort(pool_big,comb_tot);        
-    int grade_max=(int)(log2(i+1)+1);       // gems with max grade cannot be destroyed, so this is a max, not a sup 
-    int subpools_length[grade_max-1];       // let's divide in grades
-    
-    for (j=0;j<grade_max-1;++j) subpools_length[j]=0;
-    
-    int grd=0;
-    
-    for (j=0;j<comb_tot;++j) {              // see how long subpools are
-      if ((pool_big+j)->grade==grd+2) subpools_length[grd]++;
-      else {
-        grd++;
-        subpools_length[grd]++;
-      }
-    }
-    
-    int broken=0;
-    
-    for (grd=0;grd<grade_max-1;++grd) {     // now we work on the single pools
-      double lim_bbound=-1;                // thank you Enrico for this great algorithm
-      for (j=subpools_length[grd]-1;j>=0;--j) {
-        if ((int)(ACC*pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound)<=(int)(ACC*lim_bbound)) {
-          pool_big[subpools_to_big_convert(subpools_length,grd,j)].grade=0;
-          broken++;
-        }
-        else lim_bbound=pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound;
-      }
-    }                                       // all unnecessary gems destroyed
-    pool_length[i]=comb_tot-broken;     
-    pool[i]=malloc(pool_length[i]*sizeof(gem));         // pool init via broken
-    
-    int place=0;
-    for (j=0;j<comb_tot;++j) {      // copying to pool
-      if (pool_big[j].grade!=0) {
-        pool[i][place]=pool_big[j];
-        place++;
-      }   
-    }
-    free(pool_big);     // free
-    
-    printf("Managem: %d\n",i+1);
-    if (output_info) {
-			printf("Raw:\t%d\n",comb_tot);
-			printf("Pool:\t%d\n\n",pool_length[i]);
+    if (managem_limit!=0 && i+1>managem_limit) {			// null gems here
+			pool_length[i]=1;
+			pool[i]=malloc(sizeof(gem));
+			gem_init(pool[i],0,0,0);
 		}
-  }
+		else {
+	    int j,k,h;
+	    int count_big=0;
+	    int eoc=(i+1)/2;        //end of combining
+	    int comb_tot=0;
+	    for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
+	    gem* pool_big = malloc(comb_tot*sizeof(gem));       //a very big array needs to be in the heap
+	    
+	    for (j=0;j<eoc;++j) {                               // pool_big gets filled of candidate gems
+	      for (k=0; k< pool_length[j]; ++k) {
+	        for (h=0; h< pool_length[i-1-j]; ++h) {
+	          gem_combine(pool[j]+k, pool[i-1-j]+h, pool_big+count_big);
+	          count_big++;
+	        }
+	      }
+	    }
+	    
+	    gem_sort(pool_big,comb_tot);        
+	    int grade_max=(int)(log2(i+1)+1);       // gems with max grade cannot be destroyed, so this is a max, not a sup 
+	    int subpools_length[grade_max-1];       // let's divide in grades
+	    
+	    for (j=0;j<grade_max-1;++j) subpools_length[j]=0;
+	    
+	    int grd=0;
+	    
+	    for (j=0;j<comb_tot;++j) {              // see how long subpools are
+	      if ((pool_big+j)->grade==grd+2) subpools_length[grd]++;
+	      else {
+	        grd++;
+	        subpools_length[grd]++;
+	      }
+	    }
+	    
+	    int broken=0;
+	    
+	    for (grd=0;grd<grade_max-1;++grd) {     // now we work on the single pools
+	      double lim_bbound=-1;                // thank you Enrico for this great algorithm
+	      for (j=subpools_length[grd]-1;j>=0;--j) {
+	        if ((int)(ACC*pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound)<=(int)(ACC*lim_bbound)) {
+	          pool_big[subpools_to_big_convert(subpools_length,grd,j)].grade=0;
+	          broken++;
+	        }
+	        else lim_bbound=pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound;
+	      }
+	    }                                       // all unnecessary gems destroyed
+	    pool_length[i]=comb_tot-broken;     
+	    pool[i]=malloc(pool_length[i]*sizeof(gem));         // pool init via broken
+	    
+	    int place=0;
+	    for (j=0;j<comb_tot;++j) {      // copying to pool
+	      if (pool_big[j].grade!=0) {
+	        pool[i][place]=pool_big[j];
+	        place++;
+	      }   
+	    }
+	    free(pool_big);     // free
+	    
+	    printf("Managem: %d\n",i+1);
+	    if (output_info) {
+				printf("Raw:\t%d\n",comb_tot);
+				printf("Pool:\t%d\n\n",pool_length[i]);
+			}
+	  }
+	}
   printf("Gem pooling done!\n\n");
 
   gemO* poolO[len/6];
@@ -186,8 +199,9 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 				}
 			}
 		}
-		printf("Total value:\t%d\n", i+1);
+		printf("Total value:\t%d\n\n", i+1);
 		printf("Managem\n");
+		if (managem_limit!=0) printf("Managem limit:\t%d\n", managem_limit);
 		printf("Value:\t%d\n",gem_getvalue(gems+i));
 		if (output_info) printf("Pool:\t%d\n",pool_length[gem_getvalue(gems+i)-1]);
 		gem_print(gems+i);
@@ -217,7 +231,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
   }
   if (output_table) print_amps_table(gems, amps, len);
   
-  if (output_debug) {											// quite useles...
+  if (output_debug) {											// quite useless...
     printf("Dumping whole pool of value %d:\n\n",len);
     for (i=0;i<pool_length[len-1];++i) {
       gem_print(pool[len-1]+i);
@@ -233,6 +247,54 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 
 int main(int argc, char** argv)
 {
-  return get_opts_and_call_worker(argc, argv);
+	int len;
+	char opt;
+	int output_parens=0;
+	int output_tree=0;
+	int output_table = 0;
+	int output_debug=0;
+	int output_info=0;
+	int managem_limit=0;
+	while ((opt=getopt(argc,argv,"ptedil:"))!=-1) {
+		switch(opt) {
+			case 'p':
+				output_parens = 1;
+				break;
+			case 't':
+				output_tree = 1;
+				break;
+			case 'e':
+				output_table = 1;
+				break;
+			case 'd':
+				output_debug = 1;
+				output_info = 1;
+				break;
+			case 'i':
+				output_info = 1;
+				break;
+			case 'l':
+				managem_limit = atoi(optarg);
+				break;
+			case '?':
+				return 1;
+			default:
+				break;
+		}
+	}
+	if (optind+1==argc) {
+		len = atoi(argv[optind]);
+	}
+	else {
+		printf("Unknown arguments:\n");
+		while (argv[optind]!=NULL) {
+			printf("%s ", argv[optind]);
+			optind++;
+		}
+		return 1;
+	}
+	if (len<1) printf("Improper gem number\n");
+	else worker_amps(len, output_parens, output_tree, output_table, output_debug, output_info, managem_limit);
+	return 0;
 }
 

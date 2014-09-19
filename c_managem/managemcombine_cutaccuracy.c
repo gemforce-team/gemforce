@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 typedef struct Gem_OB_exact gem;		// the strange order is so that gem_utils knows which gem type are we defining as "gem"
+const int ACC=1000;
 #include "managem_utils.h"
 
 void int_swap (int *p1, int *p2)
