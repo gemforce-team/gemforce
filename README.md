@@ -48,9 +48,6 @@ Orange/black spec - Done
 Orange/black combine - Done  
 Yellow/black spec - Done  
 Yellow/black combine - Done  
-<<<<<<< HEAD
-Amplifier-oriented OB and YB - Done  
-=======
 Amplifier-oriented OB - Done  
 Amplifier-oriented YB - WIP  
 OBR and YBR
