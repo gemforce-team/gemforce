@@ -67,14 +67,6 @@ int gem_better(gemO gem1, gemO gem2)
 	return gem1.leech>=gem2.leech;
 }
 
-void print_table_O(gemO* gems, int len)
-{
-	printf("# Gems\tPower\n");
-	int i;
-	for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,gems[i].leech);
-	printf("\n");
-}
-
 void print_parens_O(gemO* gemf)
 {
 	if (gemf->father==NULL) printf("o");

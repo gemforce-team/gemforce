@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <string.h>
 
-
 typedef struct Gem_Y {
 	int grade;				//using short does NOT improve time/memory usage
 	double damage;		//note that float is faster but loses some precision after 2k in pure gems

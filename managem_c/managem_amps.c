@@ -29,15 +29,6 @@ int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 	return gem_amp_global_power(gem1, amp1) > gem_amp_global_power(gem2, amp2);
 }
 
-int subpools_to_big_convert(int* subpools_length, int grd, int index)
-{
-  int result=0;
-  int i;
-  for (i=0;i<grd;++i) result+=subpools_length[i];
-  result+=index;
-  return result;
-}
-
 void print_amps_table(gem* gems, gemO* amps, int len)
 {
   printf("# Gems\tManagem\tAmps\tPower (rescaled)\n");
@@ -53,7 +44,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
   gem* pool[len];
   int pool_length[len];
   pool[0]=malloc(2*sizeof(gem));
-  gem_init(pool[0],1, 1, 0);
+  gem_init(pool[0],  1, 1, 0);
   gem_init(pool[0]+1,1, 0, 1);
   pool_length[0]=2;
   
