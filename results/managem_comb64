@@ -390,57 +390,57 @@ End of iteration 64
 ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
 ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
 ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
 ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
-┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 orange)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 managem)
 ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
-┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 orange)
+┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 managem)
 ┃ ┃ ┃ ┃ ┃ ┗━3
 ┃ ┃ ┃ ┃ ┃   ┣━2
-┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 orange)
-┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃ ┃   ┗━ (g1 orange)
+┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 managem)
+┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃ ┃   ┗━ (g1 managem)
 ┃ ┃ ┃ ┃ ┗━5
 ┃ ┃ ┃ ┃   ┣━4
 ┃ ┃ ┃ ┃   ┃ ┣━3
 ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
-┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 orange)
-┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃   ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃   ┗━ (g1 orange)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 managem)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃   ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃   ┗━ (g1 managem)
 ┃ ┃ ┃ ┗━5
 ┃ ┃ ┃   ┣━4
 ┃ ┃ ┃   ┃ ┣━3
 ┃ ┃ ┃   ┃ ┃ ┣━2
-┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 orange)
-┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃   ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃   ┃ ┗━ (g1 orange)
-┃ ┃ ┃   ┗━ (g1 orange)
+┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 managem)
+┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃   ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃   ┃ ┗━ (g1 managem)
+┃ ┃ ┃   ┗━ (g1 managem)
 ┃ ┃ ┗━8
 ┃ ┃   ┣━6
 ┃ ┃   ┃ ┣━5
 ┃ ┃   ┃ ┃ ┣━4
 ┃ ┃   ┃ ┃ ┃ ┣━3
 ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
-┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 orange)
-┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃   ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃   ┃ ┃ ┗━ (g1 orange)
-┃ ┃   ┃ ┗━ (g1 orange)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 managem)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃   ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃   ┃ ┃ ┗━ (g1 managem)
+┃ ┃   ┃ ┗━ (g1 managem)
 ┃ ┃   ┗━2
-┃ ┃     ┣━ (g1 orange)
-┃ ┃     ┗━ (g1 orange)
+┃ ┃     ┣━ (g1 managem)
+┃ ┃     ┗━ (g1 managem)
 ┃ ┗━12
 ┃   ┣━8
 ┃   ┃ ┣━6
@@ -448,22 +448,22 @@ End of iteration 64
 ┃   ┃ ┃ ┃ ┣━4
 ┃   ┃ ┃ ┃ ┃ ┣━3
 ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
-┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 orange)
-┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃   ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃   ┃ ┃ ┃ ┗━ (g1 orange)
-┃   ┃ ┃ ┗━ (g1 orange)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 managem)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃   ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃   ┃ ┃ ┃ ┗━ (g1 managem)
+┃   ┃ ┃ ┗━ (g1 managem)
 ┃   ┃ ┗━2
-┃   ┃   ┣━ (g1 orange)
-┃   ┃   ┗━ (g1 orange)
+┃   ┃   ┣━ (g1 managem)
+┃   ┃   ┗━ (g1 managem)
 ┃   ┗━4
 ┃     ┣━2
-┃     ┃ ┣━ (g1 orange)
-┃     ┃ ┗━ (g1 orange)
+┃     ┃ ┣━ (g1 managem)
+┃     ┃ ┗━ (g1 managem)
 ┃     ┗━2
-┃       ┣━ (g1 orange)
-┃       ┗━ (g1 orange)
+┃       ┣━ (g1 managem)
+┃       ┗━ (g1 managem)
 ┗━20
   ┣━12
   ┃ ┣━8
@@ -472,37 +472,37 @@ End of iteration 64
   ┃ ┃ ┃ ┃ ┣━4
   ┃ ┃ ┃ ┃ ┃ ┣━3
   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 orange)
-  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-  ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-  ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-  ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-  ┃ ┃ ┃ ┗━ (g1 orange)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 managem)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+  ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+  ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+  ┃ ┃ ┃ ┗━ (g1 managem)
   ┃ ┃ ┗━2
-  ┃ ┃   ┣━ (g1 orange)
-  ┃ ┃   ┗━ (g1 orange)
+  ┃ ┃   ┣━ (g1 managem)
+  ┃ ┃   ┗━ (g1 managem)
   ┃ ┗━4
   ┃   ┣━2
-  ┃   ┃ ┣━ (g1 orange)
-  ┃   ┃ ┗━ (g1 orange)
+  ┃   ┃ ┣━ (g1 managem)
+  ┃   ┃ ┗━ (g1 managem)
   ┃   ┗━2
-  ┃     ┣━ (g1 orange)
-  ┃     ┗━ (g1 orange)
+  ┃     ┣━ (g1 managem)
+  ┃     ┗━ (g1 managem)
   ┗━8
     ┣━4
     ┃ ┣━2
-    ┃ ┃ ┣━ (g1 orange)
-    ┃ ┃ ┗━ (g1 orange)
+    ┃ ┃ ┣━ (g1 managem)
+    ┃ ┃ ┗━ (g1 managem)
     ┃ ┗━2
-    ┃   ┣━ (g1 orange)
-    ┃   ┗━ (g1 orange)
+    ┃   ┣━ (g1 managem)
+    ┃   ┗━ (g1 managem)
     ┗━4
       ┣━2
-      ┃ ┣━ (g1 orange)
-      ┃ ┗━ (g1 orange)
+      ┃ ┣━ (g1 managem)
+      ┃ ┗━ (g1 managem)
       ┗━2
-        ┣━ (g1 orange)
-        ┗━ (g1 orange)
+        ┣━ (g1 managem)
+        ┗━ (g1 managem)
 Value: 64
 Grade: 6
 Crit: 0

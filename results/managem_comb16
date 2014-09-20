@@ -97,28 +97,28 @@ End of iteration 16
 ┃ ┃ ┃ ┃ ┃ ┣━4
 ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
 ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┃ ┗━ (g1 orange)
-┃ ┃ ┃ ┗━ (g1 orange)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┃ ┗━ (g1 managem)
+┃ ┃ ┃ ┗━ (g1 managem)
 ┃ ┃ ┗━2
-┃ ┃   ┣━ (g1 orange)
-┃ ┃   ┗━ (g1 orange)
+┃ ┃   ┣━ (g1 managem)
+┃ ┃   ┗━ (g1 managem)
 ┃ ┗━2
-┃   ┣━ (g1 orange)
-┃   ┗━ (g1 orange)
+┃   ┣━ (g1 managem)
+┃   ┗━ (g1 managem)
 ┗━5
   ┣━3
   ┃ ┣━2
-  ┃ ┃ ┣━ (g1 orange)
-  ┃ ┃ ┗━ (g1 orange)
-  ┃ ┗━ (g1 orange)
+  ┃ ┃ ┣━ (g1 managem)
+  ┃ ┃ ┗━ (g1 managem)
+  ┃ ┗━ (g1 managem)
   ┗━2
-    ┣━ (g1 orange)
-    ┗━ (g1 orange)
+    ┣━ (g1 managem)
+    ┗━ (g1 managem)
 Value: 16
 Grade: 4
 Crit: 0

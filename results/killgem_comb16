@@ -96,29 +96,29 @@ End of iteration 16
 ┃ ┃ ┃ ┃ ┣━4
 ┃ ┃ ┃ ┃ ┃ ┣━3
 ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┗━ (g1 killgem)
 ┃ ┃ ┗━2
-┃ ┃   ┣━ (g1 yellow)
-┃ ┃   ┗━ (g1 yellow)
+┃ ┃   ┣━ (g1 killgem)
+┃ ┃   ┗━ (g1 killgem)
 ┃ ┗━3
 ┃   ┣━2
-┃   ┃ ┣━ (g1 yellow)
-┃   ┃ ┗━ (g1 yellow)
-┃   ┗━ (g1 yellow)
+┃   ┃ ┣━ (g1 killgem)
+┃   ┃ ┗━ (g1 killgem)
+┃   ┗━ (g1 killgem)
 ┗━5
   ┣━3
   ┃ ┣━2
-  ┃ ┃ ┣━ (g1 yellow)
-  ┃ ┃ ┗━ (g1 yellow)
-  ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┣━ (g1 killgem)
+  ┃ ┃ ┗━ (g1 killgem)
+  ┃ ┗━ (g1 killgem)
   ┗━2
-    ┣━ (g1 yellow)
-    ┗━ (g1 yellow)
+    ┣━ (g1 killgem)
+    ┗━ (g1 killgem)
 Value: 16
 Grade: 4
 Crit: 3.81208

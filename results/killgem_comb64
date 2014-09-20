@@ -388,51 +388,51 @@ End of iteration 64
 ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
 ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
 ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
 ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
-┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 killgem)
 ┃ ┃ ┃ ┃ ┃ ┗━3
 ┃ ┃ ┃ ┃ ┃   ┣━2
-┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┃ ┃   ┗━ (g1 killgem)
 ┃ ┃ ┃ ┃ ┗━4
 ┃ ┃ ┃ ┃   ┣━3
 ┃ ┃ ┃ ┃   ┃ ┣━2
-┃ ┃ ┃ ┃   ┃ ┃ ┣━ (g1 yellow)
-┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
-┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┣━ (g1 killgem)
+┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┃   ┃ ┗━ (g1 killgem)
+┃ ┃ ┃ ┃   ┗━ (g1 killgem)
 ┃ ┃ ┃ ┗━5
 ┃ ┃ ┃   ┣━4
 ┃ ┃ ┃   ┃ ┣━3
 ┃ ┃ ┃   ┃ ┃ ┣━2
-┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
-┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
-┃ ┃ ┃   ┃ ┗━ (g1 yellow)
-┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 killgem)
+┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃   ┃ ┃ ┗━ (g1 killgem)
+┃ ┃ ┃   ┃ ┗━ (g1 killgem)
+┃ ┃ ┃   ┗━ (g1 killgem)
 ┃ ┃ ┗━8
 ┃ ┃   ┣━6
 ┃ ┃   ┃ ┣━4
 ┃ ┃   ┃ ┃ ┣━3
 ┃ ┃   ┃ ┃ ┃ ┣━2
-┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
-┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
-┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 killgem)
+┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃   ┃ ┃ ┃ ┗━ (g1 killgem)
+┃ ┃   ┃ ┃ ┗━ (g1 killgem)
 ┃ ┃   ┃ ┗━2
-┃ ┃   ┃   ┣━ (g1 yellow)
-┃ ┃   ┃   ┗━ (g1 yellow)
+┃ ┃   ┃   ┣━ (g1 killgem)
+┃ ┃   ┃   ┗━ (g1 killgem)
 ┃ ┃   ┗━2
-┃ ┃     ┣━ (g1 yellow)
-┃ ┃     ┗━ (g1 yellow)
+┃ ┃     ┣━ (g1 killgem)
+┃ ┃     ┗━ (g1 killgem)
 ┃ ┗━14
 ┃   ┣━9
 ┃   ┃ ┣━7
@@ -440,26 +440,26 @@ End of iteration 64
 ┃   ┃ ┃ ┃ ┣━4
 ┃   ┃ ┃ ┃ ┃ ┣━3
 ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
-┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
-┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 killgem)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃   ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+┃   ┃ ┃ ┃ ┗━ (g1 killgem)
 ┃   ┃ ┃ ┗━2
-┃   ┃ ┃   ┣━ (g1 yellow)
-┃   ┃ ┃   ┗━ (g1 yellow)
+┃   ┃ ┃   ┣━ (g1 killgem)
+┃   ┃ ┃   ┗━ (g1 killgem)
 ┃   ┃ ┗━2
-┃   ┃   ┣━ (g1 yellow)
-┃   ┃   ┗━ (g1 yellow)
+┃   ┃   ┣━ (g1 killgem)
+┃   ┃   ┗━ (g1 killgem)
 ┃   ┗━5
 ┃     ┣━3
 ┃     ┃ ┣━2
-┃     ┃ ┃ ┣━ (g1 yellow)
-┃     ┃ ┃ ┗━ (g1 yellow)
-┃     ┃ ┗━ (g1 yellow)
+┃     ┃ ┃ ┣━ (g1 killgem)
+┃     ┃ ┃ ┗━ (g1 killgem)
+┃     ┃ ┗━ (g1 killgem)
 ┃     ┗━2
-┃       ┣━ (g1 yellow)
-┃       ┗━ (g1 yellow)
+┃       ┣━ (g1 killgem)
+┃       ┗━ (g1 killgem)
 ┗━22
   ┣━13
   ┃ ┣━8
@@ -467,42 +467,42 @@ End of iteration 64
   ┃ ┃ ┃ ┣━4
   ┃ ┃ ┃ ┃ ┣━3
   ┃ ┃ ┃ ┃ ┃ ┣━2
-  ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
-  ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-  ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
-  ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 killgem)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+  ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
+  ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
   ┃ ┃ ┃ ┗━2
-  ┃ ┃ ┃   ┣━ (g1 yellow)
-  ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┣━ (g1 killgem)
+  ┃ ┃ ┃   ┗━ (g1 killgem)
   ┃ ┃ ┗━2
-  ┃ ┃   ┣━ (g1 yellow)
-  ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃   ┣━ (g1 killgem)
+  ┃ ┃   ┗━ (g1 killgem)
   ┃ ┗━5
   ┃   ┣━3
   ┃   ┃ ┣━2
-  ┃   ┃ ┃ ┣━ (g1 yellow)
-  ┃   ┃ ┃ ┗━ (g1 yellow)
-  ┃   ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┣━ (g1 killgem)
+  ┃   ┃ ┃ ┗━ (g1 killgem)
+  ┃   ┃ ┗━ (g1 killgem)
   ┃   ┗━2
-  ┃     ┣━ (g1 yellow)
-  ┃     ┗━ (g1 yellow)
+  ┃     ┣━ (g1 killgem)
+  ┃     ┗━ (g1 killgem)
   ┗━9
     ┣━5
     ┃ ┣━3
     ┃ ┃ ┣━2
-    ┃ ┃ ┃ ┣━ (g1 yellow)
-    ┃ ┃ ┃ ┗━ (g1 yellow)
-    ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┣━ (g1 killgem)
+    ┃ ┃ ┃ ┗━ (g1 killgem)
+    ┃ ┃ ┗━ (g1 killgem)
     ┃ ┗━2
-    ┃   ┣━ (g1 yellow)
-    ┃   ┗━ (g1 yellow)
+    ┃   ┣━ (g1 killgem)
+    ┃   ┗━ (g1 killgem)
     ┗━4
       ┣━2
-      ┃ ┣━ (g1 yellow)
-      ┃ ┗━ (g1 yellow)
+      ┃ ┣━ (g1 killgem)
+      ┃ ┗━ (g1 killgem)
       ┗━2
-        ┣━ (g1 yellow)
-        ┗━ (g1 yellow)
+        ┣━ (g1 killgem)
+        ┗━ (g1 killgem)
 Value: 64
 Grade: 6
 Crit: 7.60921
