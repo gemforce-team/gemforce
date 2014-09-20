@@ -9,8 +9,8 @@ const int ACC=1000;
 
 int gem_more_powerful(gem gem1, gem gem2)
 {
-  return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);       // optimization at infinity hits (hit lv infinity)
-}                                                                   // the *0.7 for dual is not required because they'll all be dual
+  return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);   // optimization at infinity hits (hit lv infinity)
+}                                                             // the *0.7 for dual is not required because they'll all be dual
 
 int subpools_to_big_convert(int* subpools_length, int grd, int index)
 {
@@ -71,7 +71,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
     int broken=0;
     
     for (grd=0;grd<grade_max-1;++grd) {     // now we work on the single pools
-      double lim_bbound=-1;                // thank you Enrico for this great algorithm
+      double lim_bbound=-1;
       for (j=subpools_length[grd]-1;j>=0;--j) {
         if ((int)(ACC*pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound)<=(int)(ACC*lim_bbound)) {
           pool_big[subpools_to_big_convert(subpools_length,grd,j)].grade=0;

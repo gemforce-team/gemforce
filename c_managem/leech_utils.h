@@ -115,8 +115,8 @@ void print_tree_O(gemO* gemf, char* prefix)
 			gem2=gemf->father;
 			gem1=gemf->mother;
 		}
-		print_tree_O(gem1, string);	
-		printf("%s ┗",prefix);		
+		print_tree_O(gem1, string);
+		printf("%s ┗",prefix);
 		char string2[strlen(prefix)+2];
 		strcpy(string2,prefix);
 		strcat(string2,"  ");

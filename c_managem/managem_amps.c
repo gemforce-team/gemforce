@@ -14,14 +14,19 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	// utils compatibility
 }
 
+float gem_amp_global_power(gem gem1, gemO amp1)
+{
+  return (gem1.leech*1.5+6*0.23*2.8*amp1.leech)*gem1.bbound;
+}
+
 int gem_alone_more_powerful(gem gem1, gem gem2, gemO amp2)
 {
-  return (gem1.leech*1.5*gem1.bbound > (gem2.leech*1.5+6*0.23*2.8*amp2.leech)*gem2.bbound);
+  return gem1.leech*1.5*gem1.bbound > gem_amp_global_power(gem2, amp2);
 }
 
 int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 {
-	return ((gem1.leech*1.5+6*0.23*2.8*amp1.leech)*gem1.bbound > (gem2.leech*1.5+6*0.23*2.8*amp2.leech)*gem2.bbound);
+	return gem_amp_global_power(gem1, amp1) > gem_amp_global_power(gem2, amp2);
 }
 
 int subpools_to_big_convert(int* subpools_length, int grd, int index)
@@ -37,7 +42,7 @@ void print_amps_table(gem* gems, gemO* amps, int len)
 {
   printf("# Gems\tPower (rescaled)\n");
   int i;
-  for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,(gems[i].leech*1.5+6*0.23*2.8*amps[i].leech)*gems[i].bbound/1.5);
+  for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,gem_amp_global_power(gems[i], amps[i])/1.5);
   printf("\n");
 }
 
@@ -52,7 +57,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
   gem_init(pool[0]+1,1, 0, 1);
   pool_length[0]=2;
   
-  for (i=1; i<len; ++i) { 				// managem computing
+  for (i=1; i<len; ++i) {						// managem computing
     if (managem_limit!=0 && i+1>managem_limit) {			// null gems here
 			pool_length[i]=1;
 			pool[i]=malloc(sizeof(gem));
@@ -94,7 +99,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 	    int broken=0;
 	    
 	    for (grd=0;grd<grade_max-1;++grd) {     // now we work on the single pools
-	      double lim_bbound=-1;                // thank you Enrico for this great algorithm
+	      double lim_bbound=-1;
 	      for (j=subpools_length[grd]-1;j>=0;--j) {
 	        if ((int)(ACC*pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound)<=(int)(ACC*lim_bbound)) {
 	          pool_big[subpools_to_big_convert(subpools_length,grd,j)].grade=0;
@@ -102,7 +107,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 	        }
 	        else lim_bbound=pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound;
 	      }
-	    }                                       // all unnecessary gems destroyed
+	    }																// all unnecessary gems destroyed
 	    pool_length[i]=comb_tot-broken;     
 	    pool[i]=malloc(pool_length[i]*sizeof(gem));         // pool init via broken
 	    
@@ -130,7 +135,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
   poolO[0]=malloc(sizeof(gemO));
   gem_init_O(poolO[0],1,1);
   poolO_length[0]=1;
-    
+  
   for (i=1; i<len/6; ++i) {			// amps computing
 		int j,k,h;
 		int count_big=0;
@@ -211,7 +216,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 		if (output_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
 		gem_print_O(amps+i);
 		printf("Global power (rescaled):\t%f\n\n", (gems[i].leech*1.5+6*0.23*2.8*amps[i].leech)*gems[i].bbound/1.5);
-		fflush(stdout);								// forces buffer write, so redirection works well	
+		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 
   if (output_parens) {
