@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 typedef struct Gem_OB_appr gem;		// the strange order is so that gem_utils knows which gem type are we defining as "gem"
+const int ACC=1000;								// compatibility
 #include "managem_utils.h"
 
 void int_swap (int *p1, int *p2)
@@ -29,20 +30,6 @@ void gem_init_black(gem *p_gem, int grd)
 	p_gem->bbound=pow(1.09, (double)(grd-1));
 	p_gem->father=NULL;
 	p_gem->mother=NULL;
-}
-
-int gem_more_powerful(gem gem1, gem gem2)
-{
-	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);			// optimization at infinity hits (hit lv infinity)
-}																			// the *0.7 for dual is not required because they'll all be dual
-
-int subpools_to_big_convert(int* subpools_length, int grd, int index)
-{
-	int result=0;
-	int i;
-	for (i=0;i<grd;++i) result+=subpools_length[i];
-	result+=index;
-	return result;
 }
 
 void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
