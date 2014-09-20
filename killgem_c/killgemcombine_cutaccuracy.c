@@ -12,12 +12,12 @@ const int ACC_CUT=250;				// ACC_CUT is accuracy for other inexact operations ->
 															// while 250 is ok even for 40s+, but takes 2x time
 															// Note: (60,250) is as fast as (100,100) but more precise
 
-void gem_init_killgem(gem *p_gem)	//64 spec
+void gem_init_killgem(gem *p_gem)	//32 spec unamped
 {
-	p_gem->grade=6;
-	p_gem->damage=15.865520;
-	p_gem->crit=5.347648;
-	p_gem->bbound=1.512080;
+	p_gem->grade=5;
+	p_gem->damage=10.754962;
+	p_gem->crit=3.728688;
+	p_gem->bbound=1.354566;
 	p_gem->father=NULL;
 	p_gem->mother=NULL;
 }
@@ -92,7 +92,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		}
 		int grd=0;
 		for (j=0;j<comb_tot;++j) {						// see how long subpools are and find maxcrits
-			if ((pool_big+j)->grade==grd+7) {
+			if ((pool_big+j)->grade==grd+6) {		// careful, the number must be grade of starting gem + 1
 				subpools_length[grd]++;
 				maxcrit[grd]=max(maxcrit[grd], (pool_big+j)->crit);
 			}

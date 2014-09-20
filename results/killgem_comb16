@@ -1,131 +1,195 @@
-Iteration: 2
-Pool size (before limiting): 1
-Pool size (after limiting): 1
-End of iteration 2
 
+Grade:	5
+Damage:	10.754962
+Crit:	3.728688
+Bbound:	1.354566
+Power:	73.580925
 
-Iteration: 3
-Pool size (before limiting): 1
-Pool size (after limiting): 1
-End of iteration 3
+Value:	2
+Raw:	1
+Pool:	1
+Grade:	6
+Damage:	16.992840
+Crit:	5.145589
+Bbound:	1.476477
+Power:	190.613831
 
+Value:	3
+Raw:	1
+Pool:	1
+Grade:	6
+Damage:	22.142315
+Crit:	6.168741
+Bbound:	1.559241
+Power:	332.082550
 
-Iteration: 4
-Pool size (before limiting): 2
-Pool size (after limiting): 2
-End of iteration 4
+Value:	4
+Raw:	2
+Pool:	2
+Grade:	6
+Damage:	26.570864
+Crit:	7.069115
+Bbound:	1.624624
+Power:	495.765961
 
+Value:	5
+Raw:	3
+Pool:	2
+Grade:	7
+Damage:	31.328730
+Crit:	8.001287
+Bbound:	1.673916
+Power:	702.376221
 
-Iteration: 5
-Pool size (before limiting): 3
-Pool size (after limiting): 2
-End of iteration 5
+Value:	6
+Raw:	5
+Pool:	2
+Grade:	7
+Damage:	35.181568
+Crit:	8.793616
+Bbound:	1.724915
+Power:	920.487854
 
+Value:	7
+Raw:	6
+Pool:	3
+Grade:	7
+Damage:	38.495007
+Crit:	9.490866
+Bbound:	1.765204
+Power:	1138.413940
 
-Iteration: 6
-Pool size (before limiting): 5
-Pool size (after limiting): 2
-End of iteration 6
+Value:	8
+Raw:	11
+Pool:	5
+Grade:	7
+Damage:	42.151134
+Crit:	10.002441
+Bbound:	1.790861
+Power:	1352.194336
 
+Value:	9
+Raw:	14
+Pool:	5
+Grade:	8
+Damage:	46.318562
+Crit:	10.591589
+Bbound:	1.804556
+Power:	1597.558838
 
-Iteration: 7
-Pool size (before limiting): 6
-Pool size (after limiting): 3
-End of iteration 7
+Value:	10
+Raw:	21
+Pool:	5
+Grade:	8
+Damage:	49.670532
+Crit:	11.288839
+Bbound:	1.844335
+Power:	1907.338623
 
+Value:	11
+Raw:	25
+Pool:	7
+Grade:	8
+Damage:	52.553223
+Crit:	11.902418
+Bbound:	1.875761
+Power:	2200.845215
 
-Iteration: 8
-Pool size (before limiting): 11
-Pool size (after limiting): 5
-End of iteration 8
+Value:	12
+Raw:	37
+Pool:	8
+Grade:	8
+Damage:	55.734055
+Crit:	12.352605
+Bbound:	1.895773
+Power:	2474.297852
 
+Value:	13
+Raw:	46
+Pool:	8
+Grade:	8
+Damage:	58.213173
+Crit:	12.892555
+Bbound:	1.920599
+Power:	2768.432373
 
-Iteration: 9
-Pool size (before limiting): 14
-Pool size (after limiting): 5
-End of iteration 9
+Value:	14
+Raw:	62
+Pool:	8
+Grade:	8
+Damage:	61.394001
+Crit:	13.342742
+Bbound:	1.940612
+Power:	3084.951660
 
+Value:	15
+Raw:	73
+Pool:	8
+Grade:	8
+Damage:	64.530029
+Crit:	13.738906
+Bbound:	1.959333
+Power:	3403.537598
 
-Iteration: 10
-Pool size (before limiting): 21
-Pool size (after limiting): 5
-End of iteration 10
+Value:	16
+Raw:	104
+Pool:	10
+Grade:	8
+Damage:	66.662071
+Crit:	14.214063
+Bbound:	1.978946
+Power:	3710.776855
 
+Combining scheme:
+(((k+k)+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+(k+k))))))))
 
-Iteration: 11
-Pool size (before limiting): 25
-Pool size (after limiting): 7
-End of iteration 11
-
-
-Iteration: 12
-Pool size (before limiting): 37
-Pool size (after limiting): 8
-End of iteration 12
-
-
-Iteration: 13
-Pool size (before limiting): 46
-Pool size (after limiting): 8
-End of iteration 13
-
-
-Iteration: 14
-Pool size (before limiting): 62
-Pool size (after limiting): 8
-End of iteration 14
-
-
-Iteration: 15
-Pool size (before limiting): 73
-Pool size (after limiting): 8
-End of iteration 15
-
-
-Iteration: 16
-Pool size (before limiting): 104
-Pool size (after limiting): 10
-End of iteration 16
-
-
+Gem tree:
 ━16
-┣━11
-┃ ┣━8
-┃ ┃ ┣━6
-┃ ┃ ┃ ┣━5
-┃ ┃ ┃ ┃ ┣━4
-┃ ┃ ┃ ┃ ┃ ┣━3
-┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┗━2
-┃ ┃   ┣━ (g1 killgem)
-┃ ┃   ┗━ (g1 killgem)
-┃ ┗━3
-┃   ┣━2
-┃   ┃ ┣━ (g1 killgem)
-┃   ┃ ┗━ (g1 killgem)
-┃   ┗━ (g1 killgem)
-┗━5
-  ┣━3
-  ┃ ┣━2
-  ┃ ┃ ┣━ (g1 killgem)
-  ┃ ┃ ┗━ (g1 killgem)
-  ┃ ┗━ (g1 killgem)
-  ┗━2
-    ┣━ (g1 killgem)
-    ┗━ (g1 killgem)
-Value: 16
-Grade: 4
-Crit: 3.81208
-Leech: 0
-Bloodbound: 1.46094
-Damage: 6.19826
-Mana power: 0
-Mana power growth: -inf
-Damage power: 50.4312
-Damage power growth: 1.41406
+ ┣━11
+ ┃ ┣━8
+ ┃ ┃ ┣━6
+ ┃ ┃ ┃ ┣━5
+ ┃ ┃ ┃ ┃ ┣━4
+ ┃ ┃ ┃ ┃ ┃ ┣━3
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┗━2
+ ┃ ┃   ┣━ g1 k
+ ┃ ┃   ┗━ g1 k
+ ┃ ┗━3
+ ┃   ┣━2
+ ┃   ┃ ┣━ g1 k
+ ┃   ┃ ┗━ g1 k
+ ┃   ┗━ g1 k
+ ┗━5
+   ┣━3
+   ┃ ┣━2
+   ┃ ┃ ┣━ g1 k
+   ┃ ┃ ┗━ g1 k
+   ┃ ┗━ g1 k
+   ┗━2
+     ┣━ g1 k
+     ┗━ g1 k
+
+# Gems	Power
+1	73.580925
+2	190.613831
+3	332.082550
+4	495.765961
+5	702.376221
+6	920.487854
+7	1138.413940
+8	1352.194336
+9	1597.558838
+10	1907.338623
+11	2200.845215
+12	2474.297852
+13	2768.432373
+14	3084.951660
+15	3403.537598
+16	3710.776855

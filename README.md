@@ -40,7 +40,7 @@ Name convention:
   Third part - number(s):  
     numbers in the last part specify how many base gems go into specific recipe.
     Lower numbers are faster to perform, but higher gain bigger growth. It's
-    recommended to use highest spec aviable (you do that only once) and highest
+    recommended to use highest spec available (you do that only once) and highest
     comb you've got patience to perform (have in mind that you have to perform
     combines tens of times each game)  
 

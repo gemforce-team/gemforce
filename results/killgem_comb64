@@ -1,515 +1,772 @@
-Iteration: 2
-Pool size (before limiting): 1
-Pool size (after limiting): 1
-End of iteration 2
 
-
-Iteration: 3
-Pool size (before limiting): 1
-Pool size (after limiting): 1
-End of iteration 3
-
-
-Iteration: 4
-Pool size (before limiting): 2
-Pool size (after limiting): 2
-End of iteration 4
-
-
-Iteration: 5
-Pool size (before limiting): 3
-Pool size (after limiting): 2
-End of iteration 5
-
-
-Iteration: 6
-Pool size (before limiting): 5
-Pool size (after limiting): 2
-End of iteration 6
-
-
-Iteration: 7
-Pool size (before limiting): 6
-Pool size (after limiting): 3
-End of iteration 7
-
-
-Iteration: 8
-Pool size (before limiting): 11
-Pool size (after limiting): 5
-End of iteration 8
-
-
-Iteration: 9
-Pool size (before limiting): 14
-Pool size (after limiting): 5
-End of iteration 9
-
-
-Iteration: 10
-Pool size (before limiting): 21
-Pool size (after limiting): 5
-End of iteration 10
-
-
-Iteration: 11
-Pool size (before limiting): 25
-Pool size (after limiting): 7
-End of iteration 11
-
-
-Iteration: 12
-Pool size (before limiting): 37
-Pool size (after limiting): 8
-End of iteration 12
-
-
-Iteration: 13
-Pool size (before limiting): 46
-Pool size (after limiting): 8
-End of iteration 13
-
-
-Iteration: 14
-Pool size (before limiting): 62
-Pool size (after limiting): 8
-End of iteration 14
-
-
-Iteration: 15
-Pool size (before limiting): 73
-Pool size (after limiting): 8
-End of iteration 15
-
-
-Iteration: 16
-Pool size (before limiting): 104
-Pool size (after limiting): 10
-End of iteration 16
-
-
-Iteration: 17
-Pool size (before limiting): 112
-Pool size (after limiting): 10
-End of iteration 17
-
-
-Iteration: 18
-Pool size (before limiting): 147
-Pool size (after limiting): 10
-End of iteration 18
-
-
-Iteration: 19
-Pool size (before limiting): 162
-Pool size (after limiting): 11
-End of iteration 19
-
-
-Iteration: 20
-Pool size (before limiting): 207
-Pool size (after limiting): 14
-End of iteration 20
-
-
-Iteration: 21
-Pool size (before limiting): 230
-Pool size (after limiting): 16
-End of iteration 21
-
-
-Iteration: 22
-Pool size (before limiting): 294
-Pool size (after limiting): 16
-End of iteration 22
-
-
-Iteration: 23
-Pool size (before limiting): 314
-Pool size (after limiting): 17
-End of iteration 23
-
-
-Iteration: 24
-Pool size (before limiting): 399
-Pool size (after limiting): 16
-End of iteration 24
-
-
-Iteration: 25
-Pool size (before limiting): 421
-Pool size (after limiting): 19
-End of iteration 25
-
-
-Iteration: 26
-Pool size (before limiting): 511
-Pool size (after limiting): 19
-End of iteration 26
-
-
-Iteration: 27
-Pool size (before limiting): 547
-Pool size (after limiting): 19
-End of iteration 27
-
-
-Iteration: 28
-Pool size (before limiting): 656
-Pool size (after limiting): 18
-End of iteration 28
-
-
-Iteration: 29
-Pool size (before limiting): 707
-Pool size (after limiting): 20
-End of iteration 29
-
-
-Iteration: 30
-Pool size (before limiting): 827
-Pool size (after limiting): 24
-End of iteration 30
-
-
-Iteration: 31
-Pool size (before limiting): 895
-Pool size (after limiting): 26
-End of iteration 31
-
-
-Iteration: 32
-Pool size (before limiting): 1056
-Pool size (after limiting): 30
-End of iteration 32
-
-
-Iteration: 33
-Pool size (before limiting): 1131
-Pool size (after limiting): 33
-End of iteration 33
-
-
-Iteration: 34
-Pool size (before limiting): 1315
-Pool size (after limiting): 35
-End of iteration 34
-
-
-Iteration: 35
-Pool size (before limiting): 1403
-Pool size (after limiting): 34
-End of iteration 35
-
-
-Iteration: 36
-Pool size (before limiting): 1605
-Pool size (after limiting): 37
-End of iteration 36
-
-
-Iteration: 37
-Pool size (before limiting): 1728
-Pool size (after limiting): 41
-End of iteration 37
-
-
-Iteration: 38
-Pool size (before limiting): 1978
-Pool size (after limiting): 39
-End of iteration 38
-
-
-Iteration: 39
-Pool size (before limiting): 2115
-Pool size (after limiting): 38
-End of iteration 39
-
-
-Iteration: 40
-Pool size (before limiting): 2431
-Pool size (after limiting): 38
-End of iteration 40
-
-
-Iteration: 41
-Pool size (before limiting): 2585
-Pool size (after limiting): 36
-End of iteration 41
-
-
-Iteration: 42
-Pool size (before limiting): 2975
-Pool size (after limiting): 43
-End of iteration 42
-
-
-Iteration: 43
-Pool size (before limiting): 3128
-Pool size (after limiting): 46
-End of iteration 43
-
-
-Iteration: 44
-Pool size (before limiting): 3560
-Pool size (after limiting): 50
-End of iteration 44
-
-
-Iteration: 45
-Pool size (before limiting): 3762
-Pool size (after limiting): 49
-End of iteration 45
-
-
-Iteration: 46
-Pool size (before limiting): 4252
-Pool size (after limiting): 50
-End of iteration 46
-
-
-Iteration: 47
-Pool size (before limiting): 4462
-Pool size (after limiting): 53
-End of iteration 47
-
-
-Iteration: 48
-Pool size (before limiting): 4971
-Pool size (after limiting): 55
-End of iteration 48
-
-
-Iteration: 49
-Pool size (before limiting): 5239
-Pool size (after limiting): 59
-End of iteration 49
-
-
-Iteration: 50
-Pool size (before limiting): 5860
-Pool size (after limiting): 61
-End of iteration 50
-
-
-Iteration: 51
-Pool size (before limiting): 6149
-Pool size (after limiting): 61
-End of iteration 51
-
-
-Iteration: 52
-Pool size (before limiting): 6832
-Pool size (after limiting): 66
-End of iteration 52
-
-
-Iteration: 53
-Pool size (before limiting): 7200
-Pool size (after limiting): 66
-End of iteration 53
-
-
-Iteration: 54
-Pool size (before limiting): 7960
-Pool size (after limiting): 66
-End of iteration 54
-
-
-Iteration: 55
-Pool size (before limiting): 8394
-Pool size (after limiting): 73
-End of iteration 55
-
-
-Iteration: 56
-Pool size (before limiting): 9209
-Pool size (after limiting): 71
-End of iteration 56
-
-
-Iteration: 57
-Pool size (before limiting): 9730
-Pool size (after limiting): 73
-End of iteration 57
-
-
-Iteration: 58
-Pool size (before limiting): 10645
-Pool size (after limiting): 76
-End of iteration 58
-
-
-Iteration: 59
-Pool size (before limiting): 11197
-Pool size (after limiting): 82
-End of iteration 59
-
-
-Iteration: 60
-Pool size (before limiting): 12271
-Pool size (after limiting): 80
-End of iteration 60
-
-
-Iteration: 61
-Pool size (before limiting): 12792
-Pool size (after limiting): 76
-End of iteration 61
-
-
-Iteration: 62
-Pool size (before limiting): 14004
-Pool size (after limiting): 79
-End of iteration 62
-
-
-Iteration: 63
-Pool size (before limiting): 14624
-Pool size (after limiting): 84
-End of iteration 63
-
-
-Iteration: 64
-Pool size (before limiting): 16071
-Pool size (after limiting): 80
-End of iteration 64
-
-
+Grade:	5
+Damage:	10.754962
+Crit:	3.728688
+Bbound:	1.354566
+Power:	73.580925
+
+Value:	2
+Raw:	1
+Pool:	1
+Grade:	6
+Damage:	16.992840
+Crit:	5.145589
+Bbound:	1.476477
+Power:	190.613831
+
+Value:	3
+Raw:	1
+Pool:	1
+Grade:	6
+Damage:	22.142315
+Crit:	6.168741
+Bbound:	1.559241
+Power:	332.082550
+
+Value:	4
+Raw:	2
+Pool:	2
+Grade:	6
+Damage:	26.570864
+Crit:	7.069115
+Bbound:	1.624624
+Power:	495.765961
+
+Value:	5
+Raw:	3
+Pool:	2
+Grade:	7
+Damage:	31.328730
+Crit:	8.001287
+Bbound:	1.673916
+Power:	702.376221
+
+Value:	6
+Raw:	5
+Pool:	2
+Grade:	7
+Damage:	35.181568
+Crit:	8.793616
+Bbound:	1.724915
+Power:	920.487854
+
+Value:	7
+Raw:	6
+Pool:	3
+Grade:	7
+Damage:	38.495007
+Crit:	9.490866
+Bbound:	1.765204
+Power:	1138.413940
+
+Value:	8
+Raw:	11
+Pool:	5
+Grade:	7
+Damage:	42.151134
+Crit:	10.002441
+Bbound:	1.790861
+Power:	1352.194336
+
+Value:	9
+Raw:	14
+Pool:	5
+Grade:	8
+Damage:	46.318562
+Crit:	10.591589
+Bbound:	1.804556
+Power:	1597.558838
+
+Value:	10
+Raw:	21
+Pool:	5
+Grade:	8
+Damage:	49.670532
+Crit:	11.288839
+Bbound:	1.844335
+Power:	1907.338623
+
+Value:	11
+Raw:	25
+Pool:	7
+Grade:	8
+Damage:	52.553223
+Crit:	11.902418
+Bbound:	1.875761
+Power:	2200.845215
+
+Value:	12
+Raw:	37
+Pool:	8
+Grade:	8
+Damage:	55.734055
+Crit:	12.352605
+Bbound:	1.895773
+Power:	2474.297852
+
+Value:	13
+Raw:	46
+Pool:	8
+Grade:	8
+Damage:	58.213173
+Crit:	12.892555
+Bbound:	1.920599
+Power:	2768.432373
+
+Value:	14
+Raw:	62
+Pool:	8
+Grade:	8
+Damage:	61.394001
+Crit:	13.342742
+Bbound:	1.940612
+Power:	3084.951660
+
+Value:	15
+Raw:	73
+Pool:	8
+Grade:	8
+Damage:	64.530029
+Crit:	13.738906
+Bbound:	1.959333
+Power:	3403.537598
+
+Value:	16
+Raw:	104
+Pool:	10
+Grade:	8
+Damage:	66.662071
+Crit:	14.214063
+Bbound:	1.978946
+Power:	3710.776855
+
+Value:	17
+Raw:	112
+Pool:	10
+Grade:	8
+Damage:	69.397583
+Crit:	14.610228
+Bbound:	1.994756
+Power:	4034.416260
+
+Value:	18
+Raw:	147
+Pool:	10
+Grade:	8
+Damage:	72.133102
+Crit:	15.006392
+Bbound:	2.010565
+Power:	4375.696777
+
+Value:	19
+Raw:	162
+Pool:	11
+Grade:	8
+Damage:	74.830086
+Crit:	15.355016
+Bbound:	2.025355
+Power:	4713.340820
+
+Value:	20
+Raw:	207
+Pool:	14
+Grade:	9
+Damage:	77.996994
+Crit:	15.848915
+Bbound:	2.026261
+Power:	5075.373535
+
+Value:	21
+Raw:	230
+Pool:	16
+Grade:	9
+Damage:	80.764313
+Crit:	16.245079
+Bbound:	2.041870
+Power:	5470.130371
+
+Value:	22
+Raw:	294
+Pool:	17
+Grade:	9
+Damage:	83.531639
+Crit:	16.641243
+Bbound:	2.057480
+Power:	5884.478516
+
+Value:	23
+Raw:	315
+Pool:	17
+Grade:	9
+Damage:	86.298958
+Crit:	17.037407
+Bbound:	2.073090
+Power:	6318.953613
+
+Value:	24
+Raw:	400
+Pool:	17
+Grade:	9
+Damage:	89.027306
+Crit:	17.386032
+Bbound:	2.087692
+Power:	6746.159180
+
+Value:	25
+Raw:	423
+Pool:	20
+Grade:	9
+Damage:	90.882179
+Crit:	17.804169
+Bbound:	2.102990
+Power:	7156.075684
+
+Value:	26
+Raw:	515
+Pool:	18
+Grade:	9
+Damage:	93.262077
+Crit:	18.152794
+Bbound:	2.115322
+Power:	7575.327148
+
+Value:	27
+Raw:	550
+Pool:	18
+Grade:	9
+Damage:	95.641975
+Crit:	18.501419
+Bbound:	2.127653
+Power:	8010.420410
+
+Value:	28
+Raw:	659
+Pool:	18
+Grade:	9
+Damage:	98.021873
+Crit:	18.850044
+Bbound:	2.139985
+Power:	8461.682617
+
+Value:	29
+Raw:	712
+Pool:	21
+Grade:	9
+Damage:	100.368256
+Crit:	19.156834
+Bbound:	2.151521
+Power:	8900.435547
+
+Value:	30
+Raw:	834
+Pool:	24
+Grade:	9
+Damage:	102.714638
+Crit:	19.463623
+Bbound:	2.163057
+Power:	9353.881836
+
+Value:	31
+Raw:	902
+Pool:	26
+Grade:	9
+Damage:	104.309822
+Crit:	19.831585
+Bbound:	2.175142
+Power:	9787.188477
+
+Value:	32
+Raw:	1066
+Pool:	28
+Grade:	9
+Damage:	106.356529
+Crit:	20.138374
+Bbound:	2.184884
+Power:	10224.579102
+
+Value:	33
+Raw:	1143
+Pool:	33
+Grade:	9
+Damage:	108.403244
+Crit:	20.445166
+Bbound:	2.194626
+Power:	10674.661133
+
+Value:	34
+Raw:	1325
+Pool:	36
+Grade:	9
+Damage:	110.449959
+Crit:	20.751955
+Bbound:	2.204368
+Power:	11137.630859
+
+Value:	35
+Raw:	1414
+Pool:	40
+Grade:	9
+Damage:	112.467850
+Crit:	21.021929
+Bbound:	2.213482
+Power:	11583.846680
+
+Value:	36
+Raw:	1624
+Pool:	39
+Grade:	9
+Damage:	114.485725
+Crit:	21.291904
+Bbound:	2.222595
+Power:	12041.666992
+
+Value:	37
+Raw:	1750
+Pool:	43
+Grade:	9
+Damage:	116.503609
+Crit:	21.561878
+Bbound:	2.231709
+Power:	12511.256836
+
+Value:	38
+Raw:	2002
+Pool:	42
+Grade:	9
+Damage:	117.875481
+Crit:	21.885683
+Bbound:	2.241256
+Power:	12958.851562
+
+Value:	39
+Raw:	2145
+Pool:	40
+Grade:	9
+Damage:	120.133865
+Crit:	22.110777
+Bbound:	2.247460
+Power:	13416.936523
+
+Value:	40
+Raw:	2465
+Pool:	37
+Grade:	9
+Damage:	122.392258
+Crit:	22.335871
+Bbound:	2.253664
+Power:	13884.651367
+
+Value:	41
+Raw:	2625
+Pool:	37
+Grade:	9
+Damage:	124.650650
+Crit:	22.560965
+Bbound:	2.259867
+Power:	14362.106445
+
+Value:	42
+Raw:	3028
+Pool:	45
+Grade:	9
+Damage:	126.410820
+Crit:	22.830940
+Bbound:	2.267564
+Power:	14839.762695
+
+Value:	43
+Raw:	3196
+Pool:	49
+Grade:	10
+Damage:	131.133377
+Crit:	23.084574
+Bbound:	2.254871
+Power:	15391.419922
+
+Value:	44
+Raw:	3655
+Pool:	51
+Grade:	10
+Damage:	133.203888
+Crit:	23.391363
+Bbound:	2.264490
+Power:	15977.664062
+
+Value:	45
+Raw:	3858
+Pool:	53
+Grade:	10
+Damage:	135.274399
+Crit:	23.698154
+Bbound:	2.274109
+Power:	16578.781250
+
+Value:	46
+Raw:	4373
+Pool:	54
+Grade:	10
+Damage:	137.344910
+Crit:	24.004944
+Bbound:	2.283727
+Power:	17194.980469
+
+Value:	47
+Raw:	4602
+Pool:	55
+Grade:	10
+Damage:	139.386261
+Crit:	24.274918
+Bbound:	2.292726
+Power:	17786.146484
+
+Value:	48
+Raw:	5129
+Pool:	60
+Grade:	10
+Damage:	141.427612
+Crit:	24.544893
+Bbound:	2.301723
+Power:	18390.843750
+
+Value:	49
+Raw:	5406
+Pool:	63
+Grade:	10
+Damage:	142.815430
+Crit:	24.868700
+Bbound:	2.311150
+Power:	18970.750000
+
+Value:	50
+Raw:	6074
+Pool:	63
+Grade:	10
+Damage:	144.596054
+Crit:	25.138674
+Bbound:	2.318749
+Power:	19543.677734
+
+Value:	51
+Raw:	6364
+Pool:	71
+Grade:	10
+Damage:	146.376694
+Crit:	25.408649
+Bbound:	2.326348
+Power:	20128.097656
+
+Value:	52
+Raw:	7050
+Pool:	68
+Grade:	10
+Damage:	148.157349
+Crit:	25.678625
+Bbound:	2.333946
+Power:	20724.148438
+
+Value:	53
+Raw:	7465
+Pool:	70
+Grade:	10
+Damage:	149.937988
+Crit:	25.948599
+Bbound:	2.341545
+Power:	21331.949219
+
+Value:	54
+Raw:	8257
+Pool:	72
+Grade:	10
+Damage:	151.693542
+Crit:	26.186176
+Bbound:	2.348654
+Power:	21911.751953
+
+Value:	55
+Raw:	8771
+Pool:	72
+Grade:	10
+Damage:	153.449097
+Crit:	26.423756
+Bbound:	2.355762
+Power:	22502.031250
+
+Value:	56
+Raw:	9631
+Pool:	79
+Grade:	10
+Damage:	155.204651
+Crit:	26.661331
+Bbound:	2.362870
+Power:	23102.894531
+
+Value:	57
+Raw:	10201
+Pool:	80
+Grade:	10
+Damage:	156.398178
+Crit:	26.946280
+Bbound:	2.370317
+Power:	23677.917969
+
+Value:	58
+Raw:	11201
+Pool:	79
+Grade:	10
+Damage:	158.362976
+Crit:	27.144363
+Bbound:	2.375157
+Power:	24250.339844
+
+Value:	59
+Raw:	11792
+Pool:	87
+Grade:	10
+Damage:	160.327774
+Crit:	27.342445
+Bbound:	2.379995
+Power:	24831.234375
+
+Value:	60
+Raw:	12920
+Pool:	82
+Grade:	10
+Damage:	162.292587
+Crit:	27.540527
+Bbound:	2.384835
+Power:	25420.693359
+
+Value:	61
+Raw:	13482
+Pool:	85
+Grade:	10
+Damage:	164.257385
+Crit:	27.738611
+Bbound:	2.389673
+Power:	26018.769531
+
+Value:	62
+Raw:	14756
+Pool:	83
+Grade:	10
+Damage:	166.222183
+Crit:	27.936693
+Bbound:	2.394512
+Power:	26625.523438
+
+Value:	63
+Raw:	15418
+Pool:	81
+Grade:	10
+Damage:	168.186981
+Crit:	28.134775
+Bbound:	2.399351
+Power:	27241.031250
+
+Value:	64
+Raw:	16882
+Pool:	85
+Grade:	10
+Damage:	169.718323
+Crit:	28.372353
+Bbound:	2.405354
+Power:	27860.070312
+
+Combining scheme:
+(((((k+k)+(k+k))+((k+k)+(k+(k+k))))+(((k+k)+(k+(k+k)))+((k+(k+k))+(k+(k+(k+(k+k)))))))+((((k+k)+(k+(k+k)))+((k+(k+k))+(k+(k+(k+(k+(k+k)))))))+(((k+k)+(k+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+(k+k))))))))))))
+
+Gem tree:
 ━64
-┣━42
-┃ ┣━28
-┃ ┃ ┣━20
-┃ ┃ ┃ ┣━15
-┃ ┃ ┃ ┃ ┣━11
-┃ ┃ ┃ ┃ ┃ ┣━8
-┃ ┃ ┃ ┃ ┃ ┃ ┣━6
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┃ ┗━2
-┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃ ┗━3
-┃ ┃ ┃ ┃ ┃   ┣━2
-┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┃   ┗━ (g1 killgem)
-┃ ┃ ┃ ┃ ┗━4
-┃ ┃ ┃ ┃   ┣━3
-┃ ┃ ┃ ┃   ┃ ┣━2
-┃ ┃ ┃ ┃   ┃ ┃ ┣━ (g1 killgem)
-┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃   ┃ ┗━ (g1 killgem)
-┃ ┃ ┃ ┃   ┗━ (g1 killgem)
-┃ ┃ ┃ ┗━5
-┃ ┃ ┃   ┣━4
-┃ ┃ ┃   ┃ ┣━3
-┃ ┃ ┃   ┃ ┃ ┣━2
-┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 killgem)
-┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃   ┃ ┃ ┗━ (g1 killgem)
-┃ ┃ ┃   ┃ ┗━ (g1 killgem)
-┃ ┃ ┃   ┗━ (g1 killgem)
-┃ ┃ ┗━8
-┃ ┃   ┣━6
-┃ ┃   ┃ ┣━4
-┃ ┃   ┃ ┃ ┣━3
-┃ ┃   ┃ ┃ ┃ ┣━2
-┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 killgem)
-┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃   ┃ ┃ ┃ ┗━ (g1 killgem)
-┃ ┃   ┃ ┃ ┗━ (g1 killgem)
-┃ ┃   ┃ ┗━2
-┃ ┃   ┃   ┣━ (g1 killgem)
-┃ ┃   ┃   ┗━ (g1 killgem)
-┃ ┃   ┗━2
-┃ ┃     ┣━ (g1 killgem)
-┃ ┃     ┗━ (g1 killgem)
-┃ ┗━14
-┃   ┣━9
-┃   ┃ ┣━7
-┃   ┃ ┃ ┣━5
-┃   ┃ ┃ ┃ ┣━4
-┃   ┃ ┃ ┃ ┃ ┣━3
-┃   ┃ ┃ ┃ ┃ ┃ ┣━2
-┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 killgem)
-┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃   ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-┃   ┃ ┃ ┃ ┗━ (g1 killgem)
-┃   ┃ ┃ ┗━2
-┃   ┃ ┃   ┣━ (g1 killgem)
-┃   ┃ ┃   ┗━ (g1 killgem)
-┃   ┃ ┗━2
-┃   ┃   ┣━ (g1 killgem)
-┃   ┃   ┗━ (g1 killgem)
-┃   ┗━5
-┃     ┣━3
-┃     ┃ ┣━2
-┃     ┃ ┃ ┣━ (g1 killgem)
-┃     ┃ ┃ ┗━ (g1 killgem)
-┃     ┃ ┗━ (g1 killgem)
-┃     ┗━2
-┃       ┣━ (g1 killgem)
-┃       ┗━ (g1 killgem)
-┗━22
-  ┣━13
-  ┃ ┣━8
-  ┃ ┃ ┣━6
-  ┃ ┃ ┃ ┣━4
-  ┃ ┃ ┃ ┃ ┣━3
-  ┃ ┃ ┃ ┃ ┃ ┣━2
-  ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 killgem)
-  ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-  ┃ ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-  ┃ ┃ ┃ ┃ ┗━ (g1 killgem)
-  ┃ ┃ ┃ ┗━2
-  ┃ ┃ ┃   ┣━ (g1 killgem)
-  ┃ ┃ ┃   ┗━ (g1 killgem)
-  ┃ ┃ ┗━2
-  ┃ ┃   ┣━ (g1 killgem)
-  ┃ ┃   ┗━ (g1 killgem)
-  ┃ ┗━5
-  ┃   ┣━3
-  ┃   ┃ ┣━2
-  ┃   ┃ ┃ ┣━ (g1 killgem)
-  ┃   ┃ ┃ ┗━ (g1 killgem)
-  ┃   ┃ ┗━ (g1 killgem)
-  ┃   ┗━2
-  ┃     ┣━ (g1 killgem)
-  ┃     ┗━ (g1 killgem)
-  ┗━9
-    ┣━5
-    ┃ ┣━3
-    ┃ ┃ ┣━2
-    ┃ ┃ ┃ ┣━ (g1 killgem)
-    ┃ ┃ ┃ ┗━ (g1 killgem)
-    ┃ ┃ ┗━ (g1 killgem)
-    ┃ ┗━2
-    ┃   ┣━ (g1 killgem)
-    ┃   ┗━ (g1 killgem)
-    ┗━4
-      ┣━2
-      ┃ ┣━ (g1 killgem)
-      ┃ ┗━ (g1 killgem)
-      ┗━2
-        ┣━ (g1 killgem)
-        ┗━ (g1 killgem)
-Value: 64
-Grade: 6
-Crit: 7.60921
-Leech: 0
-Bloodbound: 1.77574
-Damage: 15.7805
-Mana power: 0
-Mana power growth: -inf
-Damage power: 378.632
-Damage power growth: 1.42744
+ ┣━42
+ ┃ ┣━28
+ ┃ ┃ ┣━21
+ ┃ ┃ ┃ ┣━15
+ ┃ ┃ ┃ ┃ ┣━11
+ ┃ ┃ ┃ ┃ ┃ ┣━8
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┃ ┗━3
+ ┃ ┃ ┃ ┃ ┃   ┣━2
+ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
+ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
+ ┃ ┃ ┃ ┃ ┗━4
+ ┃ ┃ ┃ ┃   ┣━3
+ ┃ ┃ ┃ ┃   ┃ ┣━2
+ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
+ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
+ ┃ ┃ ┃ ┃   ┗━ g1 k
+ ┃ ┃ ┃ ┗━6
+ ┃ ┃ ┃   ┣━4
+ ┃ ┃ ┃   ┃ ┣━3
+ ┃ ┃ ┃   ┃ ┃ ┣━2
+ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ g1 k
+ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
+ ┃ ┃ ┃   ┃ ┗━ g1 k
+ ┃ ┃ ┃   ┗━2
+ ┃ ┃ ┃     ┣━ g1 k
+ ┃ ┃ ┃     ┗━ g1 k
+ ┃ ┃ ┗━7
+ ┃ ┃   ┣━5
+ ┃ ┃   ┃ ┣━4
+ ┃ ┃   ┃ ┃ ┣━3
+ ┃ ┃   ┃ ┃ ┃ ┣━2
+ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
+ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
+ ┃ ┃   ┃ ┃ ┗━ g1 k
+ ┃ ┃   ┃ ┗━ g1 k
+ ┃ ┃   ┗━2
+ ┃ ┃     ┣━ g1 k
+ ┃ ┃     ┗━ g1 k
+ ┃ ┗━14
+ ┃   ┣━9
+ ┃   ┃ ┣━6
+ ┃   ┃ ┃ ┣━5
+ ┃   ┃ ┃ ┃ ┣━4
+ ┃   ┃ ┃ ┃ ┃ ┣━3
+ ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
+ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
+ ┃   ┃ ┃ ┃ ┗━ g1 k
+ ┃   ┃ ┃ ┗━ g1 k
+ ┃   ┃ ┗━3
+ ┃   ┃   ┣━2
+ ┃   ┃   ┃ ┣━ g1 k
+ ┃   ┃   ┃ ┗━ g1 k
+ ┃   ┃   ┗━ g1 k
+ ┃   ┗━5
+ ┃     ┣━3
+ ┃     ┃ ┣━2
+ ┃     ┃ ┃ ┣━ g1 k
+ ┃     ┃ ┃ ┗━ g1 k
+ ┃     ┃ ┗━ g1 k
+ ┃     ┗━2
+ ┃       ┣━ g1 k
+ ┃       ┗━ g1 k
+ ┗━22
+   ┣━13
+   ┃ ┣━8
+   ┃ ┃ ┣━5
+   ┃ ┃ ┃ ┣━4
+   ┃ ┃ ┃ ┃ ┣━3
+   ┃ ┃ ┃ ┃ ┃ ┣━2
+   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
+   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
+   ┃ ┃ ┃ ┃ ┗━ g1 k
+   ┃ ┃ ┃ ┗━ g1 k
+   ┃ ┃ ┗━3
+   ┃ ┃   ┣━2
+   ┃ ┃   ┃ ┣━ g1 k
+   ┃ ┃   ┃ ┗━ g1 k
+   ┃ ┃   ┗━ g1 k
+   ┃ ┗━5
+   ┃   ┣━3
+   ┃   ┃ ┣━2
+   ┃   ┃ ┃ ┣━ g1 k
+   ┃   ┃ ┃ ┗━ g1 k
+   ┃   ┃ ┗━ g1 k
+   ┃   ┗━2
+   ┃     ┣━ g1 k
+   ┃     ┗━ g1 k
+   ┗━9
+     ┣━5
+     ┃ ┣━3
+     ┃ ┃ ┣━2
+     ┃ ┃ ┃ ┣━ g1 k
+     ┃ ┃ ┃ ┗━ g1 k
+     ┃ ┃ ┗━ g1 k
+     ┃ ┗━2
+     ┃   ┣━ g1 k
+     ┃   ┗━ g1 k
+     ┗━4
+       ┣━2
+       ┃ ┣━ g1 k
+       ┃ ┗━ g1 k
+       ┗━2
+         ┣━ g1 k
+         ┗━ g1 k
+
+# Gems	Power
+1	73.580925
+2	190.613831
+3	332.082550
+4	495.765961
+5	702.376221
+6	920.487854
+7	1138.413940
+8	1352.194336
+9	1597.558838
+10	1907.338623
+11	2200.845215
+12	2474.297852
+13	2768.432373
+14	3084.951660
+15	3403.537598
+16	3710.776855
+17	4034.416260
+18	4375.696777
+19	4713.340820
+20	5075.373535
+21	5470.130371
+22	5884.478516
+23	6318.953613
+24	6746.159180
+25	7156.075684
+26	7575.327148
+27	8010.420410
+28	8461.682617
+29	8900.435547
+30	9353.881836
+31	9787.188477
+32	10224.579102
+33	10674.661133
+34	11137.630859
+35	11583.846680
+36	12041.666992
+37	12511.256836
+38	12958.851562
+39	13416.936523
+40	13884.651367
+41	14362.106445
+42	14839.762695
+43	15391.419922
+44	15977.664062
+45	16578.781250
+46	17194.980469
+47	17786.146484
+48	18390.843750
+49	18970.750000
+50	19543.677734
+51	20128.097656
+52	20724.148438
+53	21331.949219
+54	21911.751953
+55	22502.031250
+56	23102.894531
+57	23677.917969
+58	24250.339844
+59	24831.234375
+60	25420.693359
+61	26018.769531
+62	26625.523438
+63	27241.031250
+64	27860.070312
+

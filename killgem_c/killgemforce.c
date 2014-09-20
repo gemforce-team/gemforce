@@ -44,8 +44,8 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	int pool_length[len];
 	pool[0]=malloc(2*sizeof(gem));
 	gem_init(gems,1,1,1,0);
-	gem_init(pool[0]  ,1,1,1,0);
-	gem_init(pool[0]+1,1,1,0,1);
+	gem_init(pool[0]	,1,1			 ,1,0);
+	gem_init(pool[0]+1,1,1.186168,0,1);		// BB has mor dmg
 	pool_length[0]=2;
 	gem_print(gems);
 
