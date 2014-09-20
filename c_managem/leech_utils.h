@@ -90,7 +90,8 @@ void print_parens_O(gemO* gemf)
 
 int gem_getvalue_O(gemO* p_gem)
 {
-	if(p_gem->father==NULL) return 1;
+	if (p_gem->grade==0) return 0;
+	if (p_gem->father==NULL) return 1;
 	else return gem_getvalue_O(p_gem->father)+gem_getvalue_O(p_gem->mother);
 }
 

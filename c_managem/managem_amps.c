@@ -40,9 +40,9 @@ int subpools_to_big_convert(int* subpools_length, int grd, int index)
 
 void print_amps_table(gem* gems, gemO* amps, int len)
 {
-  printf("# Gems\tPower (rescaled)\n");
+  printf("# Gems\tManagem\tAmps\tPower (rescaled)\n");
   int i;
-  for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,gem_amp_global_power(gems[i], amps[i])/1.5);
+  for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_global_power(gems[i], amps[i])/1.5);
   printf("\n");
 }
 
@@ -193,7 +193,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 			for (k=0;k<pool_length[value];++k) {							// we search in that pool
 				if (j!=0) {																			// and if we need an amp
 					for (h=0;h<poolO_length[j-1];++h) {						// we look in the amp pool
-						if (gem_amp_more_powerful(pool[value][k],poolO[j-1][h],gems[i],amps[i])) {
+						if (pool[value][k].leech!=0 && gem_amp_more_powerful(pool[value][k],poolO[j-1][h],gems[i],amps[i])) {
 							gems[i]=pool[value][k];
 							amps[i]=poolO[j-1][h];
 						}
@@ -215,7 +215,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 		printf("Value:\t%d\n",gem_getvalue_O(amps+i));
 		if (output_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
 		gem_print_O(amps+i);
-		printf("Global power (rescaled):\t%f\n\n", (gems[i].leech*1.5+6*0.23*2.8*amps[i].leech)*gems[i].bbound/1.5);
+		printf("Global power (rescaled):\t%f\n\n", (gem_amp_global_power(gems[i], amps[i])/1.5));
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 

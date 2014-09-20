@@ -1,0 +1,4404 @@
+Total value: 1
+Gem:
+Grade:	1
+Leech:	1.000000
+Bbound:	0.000000
+Power:	0.000000
+
+Amplifier:
+Grade:	0
+Leech:	0.000000
+
+Total value:	2
+
+Managem
+Managem limit:	128
+Value:	2
+Pool:	4
+Grade:	2
+Leech:	0.880000
+Bbound:	0.780000
+Power:	0.686400
+
+Amplifier
+Value:	0
+Pool:	0
+Grade:	0
+Leech:	0.000000
+
+Global power (rescaled):	0.686400
+
+Total value: 3
+
+Managem
+Managem limit:	128
+Value:	3
+Pool:	6
+Grade:	2
+Leech:	1.228200
+Bbound:	0.790000
+Power:	0.970278
+
+Amplifier
+Value:	0
+Pool:	0
+Grade:	0
+Leech:	0.000000
+
+Global power (rescaled):	0.970278
+
+Total value: 4
+
+Managem
+Managem limit:	128
+Value:	4
+Pool:	15
+Grade:	2
+Leech:	1.484698
+Bbound:	0.790000
+Power:	1.172912
+
+Amplifier
+Value:	0
+Pool:	0
+Grade:	0
+Leech:	0.000000
+
+Global power (rescaled):	1.172911
+
+Total value: 5
+
+Managem
+Managem limit:	128
+Value:	5
+Pool:	29
+Grade:	3
+Leech:	1.488960
+Bbound:	0.964268
+Power:	1.435756
+
+Amplifier
+Value:	0
+Pool:	0
+Grade:	0
+Leech:	0.000000
+
+Global power (rescaled):	1.435757
+
+Total value: 6
+
+Managem
+Managem limit:	128
+Value:	6
+Pool:	40
+Grade:	3
+Leech:	1.717214
+Bbound:	0.964268
+Power:	1.655855
+
+Amplifier
+Value:	0
+Pool:	0
+Grade:	0
+Leech:	0.000000
+
+Global power (rescaled):	1.655855
+
+Total value: 7
+
+Managem
+Managem limit:	128
+Value:	7
+Pool:	57
+Grade:	3
+Leech:	1.920361
+Bbound:	0.964268
+Power:	1.851742
+
+Amplifier
+Value:	0
+Pool:	0
+Grade:	0
+Leech:	0.000000
+
+Global power (rescaled):	1.851742
+
+Total value: 8
+
+Managem
+Managem limit:	128
+Value:	2
+Pool:	4
+Grade:	2
+Leech:	0.880000
+Bbound:	0.780000
+Power:	0.686400
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	2.695680
+
+Total value: 9
+
+Managem
+Managem limit:	128
+Value:	3
+Pool:	6
+Grade:	2
+Leech:	0.783200
+Bbound:	1.016200
+Power:	0.795888
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	3.413619
+
+Total value: 10
+
+Managem
+Managem limit:	128
+Value:	4
+Pool:	15
+Grade:	2
+Leech:	1.093098
+Bbound:	1.019100
+Power:	1.113976
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	3.739177
+
+Total value: 11
+
+Managem
+Managem limit:	128
+Value:	5
+Pool:	29
+Grade:	3
+Leech:	1.080816
+Bbound:	1.095100
+Power:	1.183601
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	4.004579
+
+Total value: 12
+
+Managem
+Managem limit:	128
+Value:	6
+Pool:	40
+Grade:	3
+Leech:	1.306534
+Bbound:	1.095100
+Power:	1.430786
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	4.251763
+
+Total value: 13
+
+Managem
+Managem limit:	128
+Value:	7
+Pool:	57
+Grade:	3
+Leech:	1.525424
+Bbound:	1.093100
+Power:	1.667441
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	4.483267
+
+Total value: 14
+
+Managem
+Managem limit:	128
+Value:	8
+Pool:	82
+Grade:	3
+Leech:	1.728571
+Bbound:	1.093100
+Power:	1.889501
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	4.705327
+
+Total value: 15
+
+Managem
+Managem limit:	128
+Value:	9
+Pool:	113
+Grade:	4
+Leech:	1.895485
+Bbound:	1.099760
+Power:	2.084578
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	4.917560
+
+Total value: 16
+
+Managem
+Managem limit:	128
+Value:	10
+Pool:	138
+Grade:	4
+Leech:	1.898349
+Bbound:	1.150683
+Power:	2.184397
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	5.148557
+
+Total value: 17
+
+Managem
+Managem limit:	128
+Value:	11
+Pool:	168
+Grade:	4
+Leech:	2.053757
+Bbound:	1.156873
+Power:	2.375936
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	5.356042
+
+Total value: 18
+
+Managem
+Managem limit:	128
+Value:	12
+Pool:	200
+Grade:	4
+Leech:	2.034526
+Bbound:	1.207796
+Power:	2.457292
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	5.568576
+
+Total value: 19
+
+Managem
+Managem limit:	128
+Value:	13
+Pool:	234
+Grade:	4
+Leech:	2.193630
+Bbound:	1.207796
+Power:	2.649458
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	5.760741
+
+Total value: 20
+
+Managem
+Managem limit:	128
+Value:	14
+Pool:	247
+Grade:	4
+Leech:	2.193630
+Bbound:	1.244969
+Power:	2.731002
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	5.938044
+
+Total value: 21
+
+Managem
+Managem limit:	128
+Value:	15
+Pool:	264
+Grade:	4
+Leech:	2.476340
+Bbound:	1.212436
+Power:	3.002403
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	6.125638
+
+Total value: 22
+
+Managem
+Managem limit:	128
+Value:	16
+Pool:	301
+Grade:	4
+Leech:	2.476340
+Bbound:	1.249609
+Power:	3.094457
+
+Amplifier
+Value:	1
+Pool:	1
+Grade:	1
+Leech:	1.000000
+
+Global power (rescaled):	6.313450
+
+Total value: 23
+
+Managem
+Managem limit:	128
+Value:	11
+Pool:	168
+Grade:	4
+Leech:	1.855757
+Bbound:	1.207796
+Power:	2.241376
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	6.534946
+
+Total value: 24
+
+Managem
+Managem limit:	128
+Value:	12
+Pool:	200
+Grade:	4
+Leech:	2.034526
+Bbound:	1.207796
+Power:	2.457292
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	6.750863
+
+Total value: 25
+
+Managem
+Managem limit:	128
+Value:	13
+Pool:	234
+Grade:	4
+Leech:	2.034526
+Bbound:	1.244969
+Power:	2.532922
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	6.958639
+
+Total value: 26
+
+Managem
+Managem limit:	128
+Value:	14
+Pool:	247
+Grade:	4
+Leech:	2.193630
+Bbound:	1.244969
+Power:	2.731002
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	7.156719
+
+Total value: 27
+
+Managem
+Managem limit:	128
+Value:	15
+Pool:	264
+Grade:	4
+Leech:	2.319004
+Bbound:	1.249609
+Power:	2.897848
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	7.340058
+
+Total value: 28
+
+Managem
+Managem limit:	128
+Value:	16
+Pool:	301
+Grade:	4
+Leech:	2.476340
+Bbound:	1.249609
+Power:	3.094457
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	7.536667
+
+Total value: 29
+
+Managem
+Managem limit:	128
+Value:	17
+Pool:	350
+Grade:	4
+Leech:	2.476340
+Bbound:	1.278976
+Power:	3.167179
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	7.713785
+
+Total value: 30
+
+Managem
+Managem limit:	128
+Value:	18
+Pool:	390
+Grade:	4
+Leech:	2.616369
+Bbound:	1.278976
+Power:	3.346273
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	7.892879
+
+Total value: 31
+
+Managem
+Managem limit:	128
+Value:	19
+Pool:	418
+Grade:	4
+Leech:	2.752725
+Bbound:	1.279677
+Power:	3.522599
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	8.071697
+
+Total value: 32
+
+Managem
+Managem limit:	128
+Value:	20
+Pool:	444
+Grade:	4
+Leech:	2.889080
+Bbound:	1.280378
+Power:	3.699115
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	8.250706
+
+Total value: 33
+
+Managem
+Managem limit:	128
+Value:	21
+Pool:	468
+Grade:	4
+Leech:	3.013706
+Bbound:	1.280378
+Power:	3.858684
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	8.410275
+
+Total value: 34
+
+Managem
+Managem limit:	128
+Value:	22
+Pool:	501
+Grade:	4
+Leech:	3.133698
+Bbound:	1.281088
+Power:	4.014545
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	8.568661
+
+Total value: 35
+
+Managem
+Managem limit:	128
+Value:	23
+Pool:	528
+Grade:	4
+Leech:	3.253691
+Bbound:	1.281799
+Power:	4.170577
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	8.727217
+
+Total value: 36
+
+Managem
+Managem limit:	128
+Value:	24
+Pool:	537
+Grade:	4
+Leech:	3.253691
+Bbound:	1.304999
+Power:	4.246062
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	8.885175
+
+Total value: 37
+
+Managem
+Managem limit:	128
+Value:	25
+Pool:	572
+Grade:	5
+Leech:	3.391496
+Bbound:	1.300278
+Power:	4.409888
+
+Amplifier
+Value:	2
+Pool:	1
+Grade:	2
+Leech:	1.380000
+
+Global power (rescaled):	9.032221
+
+Total value: 38
+
+Managem
+Managem limit:	128
+Value:	20
+Pool:	444
+Grade:	4
+Leech:	2.889080
+Bbound:	1.280378
+Power:	3.699115
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	9.201263
+
+Total value: 39
+
+Managem
+Managem limit:	128
+Value:	21
+Pool:	468
+Grade:	4
+Leech:	2.889080
+Bbound:	1.303578
+Power:	3.766141
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	9.367986
+
+Total value: 40
+
+Managem
+Managem limit:	128
+Value:	22
+Pool:	501
+Grade:	4
+Leech:	3.013706
+Bbound:	1.303578
+Power:	3.928601
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	9.530446
+
+Total value: 41
+
+Managem
+Managem limit:	128
+Value:	23
+Pool:	528
+Grade:	4
+Leech:	3.133698
+Bbound:	1.304288
+Power:	4.087246
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	9.692142
+
+Total value: 42
+
+Managem
+Managem limit:	128
+Value:	24
+Pool:	537
+Grade:	4
+Leech:	3.253691
+Bbound:	1.304999
+Power:	4.246062
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	9.854010
+
+Total value: 43
+
+Managem
+Managem limit:	128
+Value:	25
+Pool:	572
+Grade:	5
+Leech:	3.211913
+Bbound:	1.331913
+Power:	4.277990
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	10.001600
+
+Total value: 44
+
+Managem
+Managem limit:	128
+Value:	26
+Pool:	577
+Grade:	5
+Leech:	3.335139
+Bbound:	1.331913
+Power:	4.442116
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	10.165726
+
+Total value: 45
+
+Managem
+Managem limit:	128
+Value:	27
+Pool:	596
+Grade:	5
+Leech:	3.274200
+Bbound:	1.364308
+Power:	4.467016
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	10.329833
+
+Total value: 46
+
+Managem
+Managem limit:	128
+Value:	28
+Pool:	611
+Grade:	5
+Leech:	3.383871
+Bbound:	1.364308
+Power:	4.616641
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	10.479458
+
+Total value: 47
+
+Managem
+Managem limit:	128
+Value:	29
+Pool:	631
+Grade:	5
+Leech:	3.383871
+Bbound:	1.382404
+Power:	4.677875
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	10.618455
+
+Total value: 48
+
+Managem
+Managem limit:	128
+Value:	30
+Pool:	639
+Grade:	5
+Leech:	3.483187
+Bbound:	1.382404
+Power:	4.815170
+
+Amplifier
+Value:	3
+Pool:	1
+Grade:	2
+Leech:	1.668200
+
+Global power (rescaled):	10.755750
+
+Total value: 49
+
+Managem
+Managem limit:	128
+Value:	25
+Pool:	572
+Grade:	5
+Leech:	3.032330
+Bbound:	1.363549
+Power:	4.134729
+
+Amplifier
+Value:	4
+Pool:	2
+Grade:	2
+Leech:	1.924698
+
+Global power (rescaled):	10.895233
+
+Total value: 50
+
+Managem
+Managem limit:	128
+Value:	26
+Pool:	577
+Grade:	5
+Leech:	3.155555
+Bbound:	1.363549
+Power:	4.302753
+
+Amplifier
+Value:	4
+Pool:	2
+Grade:	2
+Leech:	1.924698
+
+Global power (rescaled):	11.063258
+
+Total value: 51
+
+Managem
+Managem limit:	128
+Value:	27
+Pool:	596
+Grade:	5
+Leech:	3.274200
+Bbound:	1.364308
+Power:	4.467016
+
+Amplifier
+Value:	4
+Pool:	2
+Grade:	2
+Leech:	1.924698
+
+Global power (rescaled):	11.231284
+
+Total value: 52
+
+Managem
+Managem limit:	128
+Value:	28
+Pool:	611
+Grade:	5
+Leech:	3.383871
+Bbound:	1.364308
+Power:	4.616641
+
+Amplifier
+Value:	4
+Pool:	2
+Grade:	2
+Leech:	1.924698
+
+Global power (rescaled):	11.380909
+
+Total value: 53
+
+Managem
+Managem limit:	128
+Value:	29
+Pool:	631
+Grade:	5
+Leech:	3.383871
+Bbound:	1.382404
+Power:	4.677875
+
+Amplifier
+Value:	4
+Pool:	2
+Grade:	2
+Leech:	1.924698
+
+Global power (rescaled):	11.531863
+
+Total value: 54
+
+Managem
+Managem limit:	128
+Value:	30
+Pool:	639
+Grade:	5
+Leech:	3.483187
+Bbound:	1.382404
+Power:	4.815170
+
+Amplifier
+Value:	4
+Pool:	2
+Grade:	2
+Leech:	1.924698
+
+Global power (rescaled):	11.669158
+
+Total value: 55
+
+Managem
+Managem limit:	128
+Value:	31
+Pool:	662
+Grade:	5
+Leech:	3.582503
+Bbound:	1.382404
+Power:	4.952465
+
+Amplifier
+Value:	4
+Pool:	2
+Grade:	2
+Leech:	1.924698
+
+Global power (rescaled):	11.806452
+
+Total value: 56
+
+Managem
+Managem limit:	128
+Value:	32
+Pool:	724
+Grade:	5
+Leech:	3.681819
+Bbound:	1.382404
+Power:	5.089760
+
+Amplifier
+Value:	4
+Pool:	2
+Grade:	2
+Leech:	1.924698
+
+Global power (rescaled):	11.943747
+
+Total value: 57
+
+Managem
+Managem limit:	128
+Value:	33
+Pool:	793
+Grade:	5
+Leech:	3.779426
+Bbound:	1.382404
+Power:	5.224692
+
+Amplifier
+Value:	4
+Pool:	2
+Grade:	2
+Leech:	1.924698
+
+Global power (rescaled):	12.078679
+
+Total value: 58
+
+Managem
+Managem limit:	128
+Value:	28
+Pool:	611
+Grade:	5
+Leech:	3.274200
+Bbound:	1.382404
+Power:	4.526266
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	12.211116
+
+Total value: 59
+
+Managem
+Managem limit:	128
+Value:	29
+Pool:	631
+Grade:	5
+Leech:	3.383871
+Bbound:	1.382404
+Power:	4.677875
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	12.362724
+
+Total value: 60
+
+Managem
+Managem limit:	128
+Value:	30
+Pool:	639
+Grade:	5
+Leech:	3.483187
+Bbound:	1.382404
+Power:	4.815170
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	12.500019
+
+Total value: 61
+
+Managem
+Managem limit:	128
+Value:	31
+Pool:	662
+Grade:	5
+Leech:	3.582503
+Bbound:	1.382404
+Power:	4.952465
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	12.637314
+
+Total value: 62
+
+Managem
+Managem limit:	128
+Value:	32
+Pool:	724
+Grade:	5
+Leech:	3.681819
+Bbound:	1.382404
+Power:	5.089760
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	12.774610
+
+Total value: 63
+
+Managem
+Managem limit:	128
+Value:	33
+Pool:	793
+Grade:	5
+Leech:	3.779426
+Bbound:	1.382404
+Power:	5.224692
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	12.909542
+
+Total value: 64
+
+Managem
+Managem limit:	128
+Value:	34
+Pool:	822
+Grade:	5
+Leech:	3.779426
+Bbound:	1.396699
+Power:	5.278721
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	13.043041
+
+Total value: 65
+
+Managem
+Managem limit:	128
+Value:	35
+Pool:	850
+Grade:	5
+Leech:	3.875738
+Bbound:	1.396216
+Power:	5.411366
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	13.172998
+
+Total value: 66
+
+Managem
+Managem limit:	128
+Value:	30
+Pool:	639
+Grade:	5
+Leech:	3.483187
+Bbound:	1.382404
+Power:	4.815170
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	13.303819
+
+Total value: 67
+
+Managem
+Managem limit:	128
+Value:	31
+Pool:	662
+Grade:	5
+Leech:	3.483187
+Bbound:	1.396699
+Power:	4.864965
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	13.441396
+
+Total value: 68
+
+Managem
+Managem limit:	128
+Value:	32
+Pool:	724
+Grade:	5
+Leech:	3.582503
+Bbound:	1.396699
+Power:	5.003679
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	13.580110
+
+Total value: 69
+
+Managem
+Managem limit:	128
+Value:	33
+Pool:	793
+Grade:	5
+Leech:	3.681819
+Bbound:	1.396699
+Power:	5.142394
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	13.718825
+
+Total value: 70
+
+Managem
+Managem limit:	128
+Value:	34
+Pool:	822
+Grade:	5
+Leech:	3.779426
+Bbound:	1.396699
+Power:	5.278721
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	13.855152
+
+Total value: 71
+
+Managem
+Managem limit:	128
+Value:	35
+Pool:	850
+Grade:	5
+Leech:	3.875738
+Bbound:	1.396216
+Power:	5.411366
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	13.984829
+
+Total value: 72
+
+Managem
+Managem limit:	128
+Value:	36
+Pool:	883
+Grade:	5
+Leech:	3.972049
+Bbound:	1.395732
+Power:	5.543917
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	14.114409
+
+Total value: 73
+
+Managem
+Managem limit:	128
+Value:	37
+Pool:	907
+Grade:	5
+Leech:	4.061434
+Bbound:	1.395732
+Power:	5.668674
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	14.239166
+
+Total value: 74
+
+Managem
+Managem limit:	128
+Value:	44
+Pool:	1065
+Grade:	6
+Leech:	4.591869
+Bbound:	1.416179
+Power:	6.502908
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	14.375516
+
+Total value: 75
+
+Managem
+Managem limit:	128
+Value:	45
+Pool:	1066
+Grade:	6
+Leech:	4.514139
+Bbound:	1.440805
+Power:	6.503996
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	14.513503
+
+Total value: 76
+
+Managem
+Managem limit:	128
+Value:	46
+Pool:	1075
+Grade:	6
+Leech:	4.591895
+Bbound:	1.442644
+Power:	6.624470
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	14.644199
+
+Total value: 77
+
+Managem
+Managem limit:	128
+Value:	47
+Pool:	1105
+Grade:	6
+Leech:	4.688406
+Bbound:	1.442644
+Power:	6.763700
+
+Amplifier
+Value:	5
+Pool:	2
+Grade:	3
+Leech:	2.158016
+
+Global power (rescaled):	14.783431
+
+Total value: 78
+
+Managem
+Managem limit:	128
+Value:	42
+Pool:	1015
+Grade:	6
+Leech:	4.232308
+Bbound:	1.439004
+Power:	6.090308
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	14.926510
+
+Total value: 79
+
+Managem
+Managem limit:	128
+Value:	43
+Pool:	1045
+Grade:	6
+Leech:	4.232308
+Bbound:	1.453119
+Power:	6.150046
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	15.072919
+
+Total value: 80
+
+Managem
+Managem limit:	128
+Value:	44
+Pool:	1065
+Grade:	6
+Leech:	4.330509
+Bbound:	1.453119
+Power:	6.292743
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	15.215616
+
+Total value: 81
+
+Managem
+Managem limit:	128
+Value:	45
+Pool:	1066
+Grade:	6
+Leech:	4.427019
+Bbound:	1.453119
+Power:	6.432984
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	15.355858
+
+Total value: 82
+
+Managem
+Managem limit:	128
+Value:	46
+Pool:	1075
+Grade:	6
+Leech:	4.417655
+Bbound:	1.467270
+Power:	6.481895
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	15.491669
+
+Total value: 83
+
+Managem
+Managem limit:	128
+Value:	47
+Pool:	1105
+Grade:	6
+Leech:	4.514166
+Bbound:	1.467270
+Power:	6.623502
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	15.633275
+
+Total value: 84
+
+Managem
+Managem limit:	128
+Value:	48
+Pool:	1125
+Grade:	6
+Leech:	4.602546
+Bbound:	1.467270
+Power:	6.753180
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	15.762953
+
+Total value: 85
+
+Managem
+Managem limit:	128
+Value:	49
+Pool:	1152
+Grade:	6
+Leech:	4.689944
+Bbound:	1.467270
+Power:	6.881417
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	15.891191
+
+Total value: 86
+
+Managem
+Managem limit:	128
+Value:	50
+Pool:	1168
+Grade:	6
+Leech:	4.778324
+Bbound:	1.467270
+Power:	7.011094
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	16.020868
+
+Total value: 87
+
+Managem
+Managem limit:	128
+Value:	51
+Pool:	1176
+Grade:	6
+Leech:	4.865722
+Bbound:	1.467270
+Power:	7.139330
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	16.149104
+
+Total value: 88
+
+Managem
+Managem limit:	128
+Value:	52
+Pool:	1184
+Grade:	6
+Leech:	4.951616
+Bbound:	1.467270
+Power:	7.265360
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	16.275134
+
+Total value: 89
+
+Managem
+Managem limit:	128
+Value:	53
+Pool:	1216
+Grade:	6
+Leech:	4.932876
+Bbound:	1.481081
+Power:	7.305987
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	16.400561
+
+Total value: 90
+
+Managem
+Managem limit:	128
+Value:	54
+Pool:	1219
+Grade:	6
+Leech:	4.914135
+Bbound:	1.494890
+Power:	7.346094
+
+Amplifier
+Value:	6
+Pool:	2
+Grade:	3
+Leech:	2.383734
+
+Global power (rescaled):	16.525468
+
+Total value: 91
+
+Managem
+Managem limit:	128
+Value:	49
+Pool:	1152
+Grade:	6
+Leech:	4.689944
+Bbound:	1.467270
+Power:	6.881417
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	16.650490
+
+Total value: 92
+
+Managem
+Managem limit:	128
+Value:	50
+Pool:	1168
+Grade:	6
+Leech:	4.778324
+Bbound:	1.467270
+Power:	7.011094
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	16.780167
+
+Total value: 93
+
+Managem
+Managem limit:	128
+Value:	51
+Pool:	1176
+Grade:	6
+Leech:	4.653445
+Bbound:	1.494890
+Power:	6.956390
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	16.909356
+
+Total value: 94
+
+Managem
+Managem limit:	128
+Value:	52
+Pool:	1184
+Grade:	6
+Leech:	4.740843
+Bbound:	1.494890
+Power:	7.087041
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	17.040007
+
+Total value: 95
+
+Managem
+Managem limit:	128
+Value:	53
+Pool:	1216
+Grade:	6
+Leech:	4.828241
+Bbound:	1.494890
+Power:	7.217692
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	17.170658
+
+Total value: 96
+
+Managem
+Managem limit:	128
+Value:	54
+Pool:	1219
+Grade:	6
+Leech:	4.809501
+Bbound:	1.508700
+Power:	7.256095
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	17.301008
+
+Total value: 97
+
+Managem
+Managem limit:	128
+Value:	55
+Pool:	1228
+Grade:	6
+Leech:	4.809501
+Bbound:	1.519851
+Power:	7.309725
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	17.428879
+
+Total value: 98
+
+Managem
+Managem limit:	128
+Value:	56
+Pool:	1257
+Grade:	6
+Leech:	4.895395
+Bbound:	1.519851
+Power:	7.440272
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	17.559425
+
+Total value: 99
+
+Managem
+Managem limit:	128
+Value:	57
+Pool:	1249
+Grade:	6
+Leech:	4.974053
+Bbound:	1.519851
+Power:	7.559821
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	17.678974
+
+Total value: 100
+
+Managem
+Managem limit:	128
+Value:	58
+Pool:	1230
+Grade:	6
+Leech:	5.051828
+Bbound:	1.519851
+Power:	7.678027
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	17.797180
+
+Total value: 101
+
+Managem
+Managem limit:	128
+Value:	59
+Pool:	1247
+Grade:	6
+Leech:	5.130486
+Bbound:	1.519851
+Power:	7.797575
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	17.916729
+
+Total value: 102
+
+Managem
+Managem limit:	128
+Value:	60
+Pool:	1257
+Grade:	6
+Leech:	5.207397
+Bbound:	1.519851
+Power:	7.914467
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	18.033621
+
+Total value: 103
+
+Managem
+Managem limit:	128
+Value:	61
+Pool:	1262
+Grade:	6
+Leech:	5.286055
+Bbound:	1.519851
+Power:	8.034017
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	18.153170
+
+Total value: 104
+
+Managem
+Managem limit:	128
+Value:	62
+Pool:	1271
+Grade:	6
+Leech:	5.360754
+Bbound:	1.519851
+Power:	8.147547
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	18.266701
+
+Total value: 105
+
+Managem
+Managem limit:	128
+Value:	63
+Pool:	1279
+Grade:	6
+Leech:	5.439412
+Bbound:	1.519851
+Power:	8.267096
+
+Amplifier
+Value:	7
+Pool:	2
+Grade:	3
+Leech:	2.584624
+
+Global power (rescaled):	18.386250
+
+Total value: 106
+
+Managem
+Managem limit:	128
+Value:	58
+Pool:	1230
+Grade:	6
+Leech:	5.051828
+Bbound:	1.519851
+Power:	7.678027
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	18.497173
+
+Total value: 107
+
+Managem
+Managem limit:	128
+Value:	59
+Pool:	1247
+Grade:	6
+Leech:	5.130486
+Bbound:	1.519851
+Power:	7.797575
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	18.616722
+
+Total value: 108
+
+Managem
+Managem limit:	128
+Value:	60
+Pool:	1257
+Grade:	6
+Leech:	5.207397
+Bbound:	1.519851
+Power:	7.914467
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	18.733613
+
+Total value: 109
+
+Managem
+Managem limit:	128
+Value:	61
+Pool:	1262
+Grade:	6
+Leech:	5.286055
+Bbound:	1.519851
+Power:	8.034017
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	18.853162
+
+Total value: 110
+
+Managem
+Managem limit:	128
+Value:	62
+Pool:	1271
+Grade:	6
+Leech:	5.360754
+Bbound:	1.519851
+Power:	8.147547
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	18.966693
+
+Total value: 111
+
+Managem
+Managem limit:	128
+Value:	63
+Pool:	1279
+Grade:	6
+Leech:	5.439412
+Bbound:	1.519851
+Power:	8.267096
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	19.086241
+
+Total value: 112
+
+Managem
+Managem limit:	128
+Value:	64
+Pool:	1344
+Grade:	6
+Leech:	5.439412
+Bbound:	1.528840
+Power:	8.315988
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	19.199120
+
+Total value: 113
+
+Managem
+Managem limit:	128
+Value:	65
+Pool:	1397
+Grade:	6
+Leech:	5.439412
+Bbound:	1.537828
+Power:	8.364880
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	19.311996
+
+Total value: 114
+
+Managem
+Managem limit:	128
+Value:	66
+Pool:	1417
+Grade:	6
+Leech:	5.439412
+Bbound:	1.546817
+Power:	8.413773
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	19.424873
+
+Total value: 115
+
+Managem
+Managem limit:	128
+Value:	67
+Pool:	1428
+Grade:	6
+Leech:	5.439412
+Bbound:	1.555805
+Power:	8.462664
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	19.537749
+
+Total value: 116
+
+Managem
+Managem limit:	128
+Value:	68
+Pool:	1490
+Grade:	6
+Leech:	5.439412
+Bbound:	1.564614
+Power:	8.510580
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	19.648374
+
+Total value: 117
+
+Managem
+Managem limit:	128
+Value:	69
+Pool:	1514
+Grade:	6
+Leech:	5.509418
+Bbound:	1.564614
+Power:	8.620112
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	19.757907
+
+Total value: 118
+
+Managem
+Managem limit:	128
+Value:	70
+Pool:	1534
+Grade:	6
+Leech:	5.578645
+Bbound:	1.564614
+Power:	8.728427
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	19.866221
+
+Total value: 119
+
+Managem
+Managem limit:	128
+Value:	71
+Pool:	1549
+Grade:	6
+Leech:	5.578645
+Bbound:	1.573023
+Power:	8.775335
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	19.972986
+
+Total value: 120
+
+Managem
+Managem limit:	128
+Value:	72
+Pool:	1560
+Grade:	6
+Leech:	5.648651
+Bbound:	1.573023
+Power:	8.885456
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	20.083107
+
+Total value: 121
+
+Managem
+Managem limit:	128
+Value:	73
+Pool:	1573
+Grade:	6
+Leech:	5.716688
+Bbound:	1.573023
+Power:	8.992479
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	20.190131
+
+Total value: 122
+
+Managem
+Managem limit:	128
+Value:	74
+Pool:	1577
+Grade:	6
+Leech:	5.785908
+Bbound:	1.573023
+Power:	9.101364
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	20.299014
+
+Total value: 123
+
+Managem
+Managem limit:	128
+Value:	75
+Pool:	1590
+Grade:	6
+Leech:	5.855135
+Bbound:	1.573023
+Power:	9.210260
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	20.407911
+
+Total value: 124
+
+Managem
+Managem limit:	128
+Value:	76
+Pool:	1607
+Grade:	6
+Leech:	5.923585
+Bbound:	1.573023
+Power:	9.317934
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	20.515584
+
+Total value: 125
+
+Managem
+Managem limit:	128
+Value:	77
+Pool:	1627
+Grade:	6
+Leech:	5.992036
+Bbound:	1.573023
+Power:	9.425608
+
+Amplifier
+Value:	8
+Pool:	3
+Grade:	3
+Leech:	2.763415
+
+Global power (rescaled):	20.623258
+
+Total value: 126
+
+Managem
+Managem limit:	128
+Value:	72
+Pool:	1560
+Grade:	6
+Leech:	5.648651
+Bbound:	1.573023
+Power:	8.885456
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	20.727895
+
+Total value: 127
+
+Managem
+Managem limit:	128
+Value:	73
+Pool:	1573
+Grade:	6
+Leech:	5.716688
+Bbound:	1.573023
+Power:	8.992479
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	20.834919
+
+Total value: 128
+
+Managem
+Managem limit:	128
+Value:	74
+Pool:	1577
+Grade:	6
+Leech:	5.785908
+Bbound:	1.573023
+Power:	9.101364
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	20.943803
+
+Total value: 129
+
+Managem
+Managem limit:	128
+Value:	75
+Pool:	1590
+Grade:	6
+Leech:	5.855135
+Bbound:	1.573023
+Power:	9.210260
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	21.052700
+
+Total value: 130
+
+Managem
+Managem limit:	128
+Value:	76
+Pool:	1607
+Grade:	6
+Leech:	5.923585
+Bbound:	1.573023
+Power:	9.317934
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	21.160374
+
+Total value: 131
+
+Managem
+Managem limit:	128
+Value:	77
+Pool:	1627
+Grade:	6
+Leech:	5.992036
+Bbound:	1.573023
+Power:	9.425608
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	21.268047
+
+Total value: 132
+
+Managem
+Managem limit:	128
+Value:	78
+Pool:	1647
+Grade:	6
+Leech:	6.047978
+Bbound:	1.574144
+Power:	9.520391
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	21.371277
+
+Total value: 133
+
+Managem
+Managem limit:	128
+Value:	79
+Pool:	1672
+Grade:	6
+Leech:	6.116428
+Bbound:	1.574144
+Power:	9.628142
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	21.479027
+
+Total value: 134
+
+Managem
+Managem limit:	128
+Value:	80
+Pool:	1680
+Grade:	6
+Leech:	6.178041
+Bbound:	1.574144
+Power:	9.725130
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	21.576014
+
+Total value: 135
+
+Managem
+Managem limit:	128
+Value:	81
+Pool:	1699
+Grade:	6
+Leech:	6.240821
+Bbound:	1.575266
+Power:	9.830955
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	21.690285
+
+Total value: 136
+
+Managem
+Managem limit:	128
+Value:	82
+Pool:	1713
+Grade:	6
+Leech:	6.240821
+Bbound:	1.582367
+Power:	9.875270
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	21.788061
+
+Total value: 137
+
+Managem
+Managem limit:	128
+Value:	83
+Pool:	1722
+Grade:	6
+Leech:	6.240821
+Bbound:	1.589468
+Power:	9.919586
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	21.885834
+
+Total value: 138
+
+Managem
+Managem limit:	128
+Value:	84
+Pool:	1732
+Grade:	6
+Leech:	6.302434
+Bbound:	1.589468
+Power:	10.017518
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	21.983767
+
+Total value: 139
+
+Managem
+Managem limit:	128
+Value:	85
+Pool:	1746
+Grade:	6
+Leech:	6.302434
+Bbound:	1.596569
+Power:	10.062271
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	22.081978
+
+Total value: 140
+
+Managem
+Managem limit:	128
+Value:	86
+Pool:	1745
+Grade:	6
+Leech:	6.302434
+Bbound:	1.603670
+Power:	10.107024
+
+Amplifier
+Value:	9
+Pool:	3
+Grade:	3
+Leech:	2.922539
+
+Global power (rescaled):	22.180191
+
+Total value: 141
+
+Managem
+Managem limit:	128
+Value:	75
+Pool:	1590
+Grade:	6
+Leech:	5.855135
+Bbound:	1.573023
+Power:	9.210260
+
+Amplifier
+Value:	11
+Pool:	3
+Grade:	4
+Leech:	3.226669
+
+Global power (rescaled):	22.285065
+
+Total value: 142
+
+Managem
+Managem limit:	128
+Value:	76
+Pool:	1607
+Grade:	6
+Leech:	5.923585
+Bbound:	1.573023
+Power:	9.317934
+
+Amplifier
+Value:	11
+Pool:	3
+Grade:	4
+Leech:	3.226669
+
+Global power (rescaled):	22.392738
+
+Total value: 143
+
+Managem
+Managem limit:	128
+Value:	77
+Pool:	1627
+Grade:	6
+Leech:	5.992036
+Bbound:	1.573023
+Power:	9.425608
+
+Amplifier
+Value:	11
+Pool:	3
+Grade:	4
+Leech:	3.226669
+
+Global power (rescaled):	22.500412
+
+Total value: 144
+
+Managem
+Managem limit:	128
+Value:	78
+Pool:	1647
+Grade:	6
+Leech:	6.047978
+Bbound:	1.574144
+Power:	9.520391
+
+Amplifier
+Value:	11
+Pool:	3
+Grade:	4
+Leech:	3.226669
+
+Global power (rescaled):	22.604520
+
+Total value: 145
+
+Managem
+Managem limit:	128
+Value:	79
+Pool:	1672
+Grade:	6
+Leech:	6.116428
+Bbound:	1.574144
+Power:	9.628142
+
+Amplifier
+Value:	11
+Pool:	3
+Grade:	4
+Leech:	3.226669
+
+Global power (rescaled):	22.712273
+
+Total value: 146
+
+Managem
+Managem limit:	128
+Value:	80
+Pool:	1680
+Grade:	6
+Leech:	6.116428
+Bbound:	1.581245
+Power:	9.671575
+
+Amplifier
+Value:	11
+Pool:	3
+Grade:	4
+Leech:	3.226669
+
+Global power (rescaled):	22.814725
+
+Total value: 147
+
+Managem
+Managem limit:	128
+Value:	81
+Pool:	1699
+Grade:	6
+Leech:	6.240821
+Bbound:	1.575266
+Power:	9.830955
+
+Amplifier
+Value:	11
+Pool:	3
+Grade:	4
+Leech:	3.226669
+
+Global power (rescaled):	22.924408
+
+Total value: 148
+
+Managem
+Managem limit:	128
+Value:	76
+Pool:	1607
+Grade:	6
+Leech:	5.923585
+Bbound:	1.573023
+Power:	9.317934
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	23.030281
+
+Total value: 149
+
+Managem
+Managem limit:	128
+Value:	77
+Pool:	1627
+Grade:	6
+Leech:	5.992036
+Bbound:	1.573023
+Power:	9.425608
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	23.137955
+
+Total value: 150
+
+Managem
+Managem limit:	128
+Value:	78
+Pool:	1647
+Grade:	6
+Leech:	6.047978
+Bbound:	1.574144
+Power:	9.520391
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	23.242518
+
+Total value: 151
+
+Managem
+Managem limit:	128
+Value:	79
+Pool:	1672
+Grade:	6
+Leech:	6.116428
+Bbound:	1.574144
+Power:	9.628142
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	23.350271
+
+Total value: 152
+
+Managem
+Managem limit:	128
+Value:	80
+Pool:	1680
+Grade:	6
+Leech:	6.116428
+Bbound:	1.581245
+Power:	9.671575
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	23.455602
+
+Total value: 153
+
+Managem
+Managem limit:	128
+Value:	81
+Pool:	1699
+Grade:	6
+Leech:	6.240821
+Bbound:	1.575266
+Power:	9.830955
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	23.562861
+
+Total value: 154
+
+Managem
+Managem limit:	128
+Value:	82
+Pool:	1713
+Grade:	6
+Leech:	6.240821
+Bbound:	1.582367
+Power:	9.875270
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	23.669078
+
+Total value: 155
+
+Managem
+Managem limit:	128
+Value:	83
+Pool:	1722
+Grade:	6
+Leech:	6.240821
+Bbound:	1.589468
+Power:	9.919586
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	23.775291
+
+Total value: 156
+
+Managem
+Managem limit:	128
+Value:	84
+Pool:	1732
+Grade:	6
+Leech:	6.240821
+Bbound:	1.596569
+Power:	9.963902
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	23.881508
+
+Total value: 157
+
+Managem
+Managem limit:	128
+Value:	85
+Pool:	1746
+Grade:	6
+Leech:	6.240821
+Bbound:	1.603670
+Power:	10.008217
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	23.987724
+
+Total value: 158
+
+Managem
+Managem limit:	128
+Value:	86
+Pool:	1745
+Grade:	6
+Leech:	6.240821
+Bbound:	1.610629
+Power:	10.051647
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	24.091820
+
+Total value: 159
+
+Managem
+Managem limit:	128
+Value:	87
+Pool:	1761
+Grade:	6
+Leech:	6.240821
+Bbound:	1.617272
+Power:	10.093104
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	24.191182
+
+Total value: 160
+
+Managem
+Managem limit:	128
+Value:	88
+Pool:	1758
+Grade:	6
+Leech:	6.302434
+Bbound:	1.617272
+Power:	10.192749
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	24.290827
+
+Total value: 161
+
+Managem
+Managem limit:	128
+Value:	89
+Pool:	1774
+Grade:	6
+Leech:	6.302434
+Bbound:	1.623915
+Power:	10.234615
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	24.390600
+
+Total value: 162
+
+Managem
+Managem limit:	128
+Value:	90
+Pool:	1786
+Grade:	6
+Leech:	6.362430
+Bbound:	1.624084
+Power:	10.333122
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	24.490585
+
+Total value: 163
+
+Managem
+Managem limit:	128
+Value:	91
+Pool:	1811
+Grade:	6
+Leech:	6.425660
+Bbound:	1.623915
+Power:	10.434723
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	24.590708
+
+Total value: 164
+
+Managem
+Managem limit:	128
+Value:	92
+Pool:	1828
+Grade:	6
+Leech:	6.487265
+Bbound:	1.623915
+Power:	10.534765
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	24.690750
+
+Total value: 165
+
+Managem
+Managem limit:	128
+Value:	93
+Pool:	1837
+Grade:	6
+Leech:	6.547261
+Bbound:	1.624084
+Power:	10.633304
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	24.790766
+
+Total value: 166
+
+Managem
+Managem limit:	128
+Value:	94
+Pool:	1836
+Grade:	6
+Leech:	6.607257
+Bbound:	1.624254
+Power:	10.731863
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	24.890803
+
+Total value: 167
+
+Managem
+Managem limit:	128
+Value:	95
+Pool:	1836
+Grade:	6
+Leech:	6.665645
+Bbound:	1.624593
+Power:	10.828959
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	24.990852
+
+Total value: 168
+
+Managem
+Managem limit:	128
+Value:	96
+Pool:	1839
+Grade:	6
+Leech:	6.727250
+Bbound:	1.624593
+Power:	10.929042
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	25.090937
+
+Total value: 169
+
+Managem
+Managem limit:	128
+Value:	97
+Pool:	1844
+Grade:	6
+Leech:	6.787246
+Bbound:	1.624762
+Power:	11.027662
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	25.191037
+
+Total value: 170
+
+Managem
+Managem limit:	128
+Value:	98
+Pool:	1854
+Grade:	6
+Leech:	6.847242
+Bbound:	1.624932
+Power:	11.126303
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	25.291155
+
+Total value: 171
+
+Managem
+Managem limit:	128
+Value:	99
+Pool:	1863
+Grade:	6
+Leech:	6.909644
+Bbound:	1.624593
+Power:	11.225358
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	25.387253
+
+Total value: 172
+
+Managem
+Managem limit:	128
+Value:	100
+Pool:	1877
+Grade:	6
+Leech:	6.971257
+Bbound:	1.624593
+Power:	11.325454
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	25.487350
+
+Total value: 173
+
+Managem
+Managem limit:	128
+Value:	101
+Pool:	1893
+Grade:	6
+Leech:	7.031253
+Bbound:	1.624762
+Power:	11.424115
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	25.587489
+
+Total value: 174
+
+Managem
+Managem limit:	128
+Value:	102
+Pool:	1899
+Grade:	6
+Leech:	7.092174
+Bbound:	1.624762
+Power:	11.523098
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	25.686473
+
+Total value: 175
+
+Managem
+Managem limit:	128
+Value:	103
+Pool:	1911
+Grade:	7
+Leech:	6.920128
+Bbound:	1.649339
+Power:	11.413638
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	25.791252
+
+Total value: 176
+
+Managem
+Managem limit:	128
+Value:	104
+Pool:	1931
+Grade:	7
+Leech:	7.267463
+Bbound:	1.620064
+Power:	11.773753
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	25.896166
+
+Total value: 177
+
+Managem
+Managem limit:	128
+Value:	105
+Pool:	1923
+Grade:	7
+Leech:	7.267463
+Bbound:	1.626935
+Power:	11.823689
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	26.005999
+
+Total value: 178
+
+Managem
+Managem limit:	128
+Value:	106
+Pool:	1934
+Grade:	7
+Leech:	7.335144
+Bbound:	1.626935
+Power:	11.933801
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	26.116112
+
+Total value: 179
+
+Managem
+Managem limit:	128
+Value:	107
+Pool:	1939
+Grade:	7
+Leech:	7.335144
+Bbound:	1.633493
+Power:	11.981910
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	26.221395
+
+Total value: 180
+
+Managem
+Managem limit:	128
+Value:	108
+Pool:	1946
+Grade:	7
+Leech:	7.396065
+Bbound:	1.633493
+Power:	12.081423
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	26.320908
+
+Total value: 181
+
+Managem
+Managem limit:	128
+Value:	109
+Pool:	1968
+Grade:	7
+Leech:	7.456985
+Bbound:	1.633493
+Power:	12.180937
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	26.420420
+
+Total value: 182
+
+Managem
+Managem limit:	128
+Value:	110
+Pool:	1979
+Grade:	7
+Leech:	7.517906
+Bbound:	1.633493
+Power:	12.280450
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	26.519936
+
+Total value: 183
+
+Managem
+Managem limit:	128
+Value:	111
+Pool:	1975
+Grade:	7
+Leech:	7.578827
+Bbound:	1.633493
+Power:	12.379964
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	26.619448
+
+Total value: 184
+
+Managem
+Managem limit:	128
+Value:	112
+Pool:	1982
+Grade:	7
+Leech:	7.638149
+Bbound:	1.633675
+Power:	12.478251
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	26.719315
+
+Total value: 185
+
+Managem
+Managem limit:	128
+Value:	113
+Pool:	1995
+Grade:	7
+Leech:	7.699070
+Bbound:	1.633675
+Power:	12.577776
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	26.818840
+
+Total value: 186
+
+Managem
+Managem limit:	128
+Value:	114
+Pool:	1998
+Grade:	7
+Leech:	7.758392
+Bbound:	1.633856
+Power:	12.676096
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	26.918742
+
+Total value: 187
+
+Managem
+Managem limit:	128
+Value:	115
+Pool:	2012
+Grade:	7
+Leech:	7.818628
+Bbound:	1.633856
+Power:	12.774512
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	27.017159
+
+Total value: 188
+
+Managem
+Managem limit:	128
+Value:	116
+Pool:	2029
+Grade:	7
+Leech:	7.877950
+Bbound:	1.634037
+Power:	12.872864
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	27.117088
+
+Total value: 189
+
+Managem
+Managem limit:	128
+Value:	117
+Pool:	2034
+Grade:	7
+Leech:	7.938052
+Bbound:	1.633856
+Power:	12.969635
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	27.212280
+
+Total value: 190
+
+Managem
+Managem limit:	128
+Value:	118
+Pool:	2034
+Grade:	7
+Leech:	7.998973
+Bbound:	1.633856
+Power:	13.069170
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	27.311816
+
+Total value: 191
+
+Managem
+Managem limit:	128
+Value:	119
+Pool:	2049
+Grade:	7
+Leech:	8.058295
+Bbound:	1.634037
+Power:	13.167555
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	27.411779
+
+Total value: 192
+
+Managem
+Managem limit:	128
+Value:	120
+Pool:	2045
+Grade:	7
+Leech:	8.117617
+Bbound:	1.634218
+Power:	13.265959
+
+Amplifier
+Value:	12
+Pool:	3
+Grade:	4
+Leech:	3.384005
+
+Global power (rescaled):	27.511762
+
+Total value: 193
+
+Managem
+Managem limit:	128
+Value:	115
+Pool:	2012
+Grade:	7
+Leech:	7.818628
+Bbound:	1.633856
+Power:	12.774512
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	27.606517
+
+Total value: 194
+
+Managem
+Managem limit:	128
+Value:	116
+Pool:	2029
+Grade:	7
+Leech:	7.877950
+Bbound:	1.634037
+Power:	12.872864
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	27.706510
+
+Total value: 195
+
+Managem
+Managem limit:	128
+Value:	117
+Pool:	2034
+Grade:	7
+Leech:	7.780703
+Bbound:	1.649155
+Power:	12.831584
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	27.802467
+
+Total value: 196
+
+Managem
+Managem limit:	128
+Value:	118
+Pool:	2034
+Grade:	7
+Leech:	7.760094
+Bbound:	1.657167
+Power:	12.859769
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	27.903384
+
+Total value: 197
+
+Managem
+Managem limit:	128
+Value:	119
+Pool:	2049
+Grade:	7
+Leech:	7.900261
+Bbound:	1.649336
+Power:	13.030187
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	28.002716
+
+Total value: 198
+
+Managem
+Managem limit:	128
+Value:	120
+Pool:	2045
+Grade:	7
+Leech:	7.959584
+Bbound:	1.649517
+Power:	13.129471
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	28.103645
+
+Total value: 199
+
+Managem
+Managem limit:	128
+Value:	121
+Pool:	2052
+Grade:	7
+Leech:	7.959583
+Bbound:	1.655056
+Power:	13.173557
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	28.198013
+
+Total value: 200
+
+Managem
+Managem limit:	128
+Value:	122
+Pool:	2076
+Grade:	7
+Leech:	8.038600
+Bbound:	1.652945
+Power:	13.287367
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	28.292661
+
+Total value: 201
+
+Managem
+Managem limit:	128
+Value:	123
+Pool:	2076
+Grade:	7
+Leech:	8.038600
+Bbound:	1.658484
+Power:	13.331890
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	28.387464
+
+Total value: 202
+
+Managem
+Managem limit:	128
+Value:	124
+Pool:	2087
+Grade:	7
+Leech:	8.117617
+Bbound:	1.656373
+Power:	13.445805
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	28.482218
+
+Total value: 203
+
+Managem
+Managem limit:	128
+Value:	125
+Pool:	2078
+Grade:	7
+Leech:	8.038600
+Bbound:	1.669561
+Power:	13.420936
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	28.577070
+
+Total value: 204
+
+Managem
+Managem limit:	128
+Value:	126
+Pool:	2098
+Grade:	7
+Leech:	8.117617
+Bbound:	1.667340
+Power:	13.534828
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	28.670797
+
+Total value: 205
+
+Managem
+Managem limit:	128
+Value:	127
+Pool:	2095
+Grade:	7
+Leech:	8.171836
+Bbound:	1.667340
+Power:	13.625230
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	28.761200
+
+Total value: 206
+
+Managem
+Managem limit:	128
+Value:	128
+Pool:	2218
+Grade:	7
+Leech:	8.226055
+Bbound:	1.667340
+Power:	13.715632
+
+Amplifier
+Value:	13
+Pool:	3
+Grade:	4
+Leech:	3.524035
+
+Global power (rescaled):	28.851601
+
+Managem combining scheme:
+(((((b+((o+o)+(b+o)))+((b+b)+(b+(b+(b+b)))))+((b+((o+o)+(b+o)))+((b+(o+o))+(o+(o+(o+(o+(o+(o+o)))))))))+(((b+((o+o)+(b+o)))+((b+b)+(b+(b+(b+b)))))+(((b+b)+(b+(b+(b+b))))+((b+(b+b))+((b+(b+b))+(b+(b+(b+(b+(b+(b+b)))))))))))+((((b+((o+o)+(b+o)))+((b+b)+(b+(b+(b+b)))))+((b+((o+o)+(b+o)))+((b+(o+o))+(o+(o+(o+(o+(o+(o+o)))))))))+(((b+((o+o)+(b+o)))+((b+(o+o))+(o+(o+(o+(o+(o+o)))))))+(((b+(o+o))+(o+(o+(o+(o+(o+o))))))+((o+(o+(o+(o+o))))+((o+(o+(o+o)))+((o+(o+o))+((o+o)+((o+o)+(o+(o+(o+(o+(o+(o+o)))))))))))))))
+
+Amplifier combining scheme:
+(((o+o)+(o+o))+((o+o)+(o+(o+(o+(o+(o+(o+o))))))))
+
+Managem tree:
+━128
+ ┣━72
+ ┃ ┣━46
+ ┃ ┃ ┣━32
+ ┃ ┃ ┃ ┣━23
+ ┃ ┃ ┃ ┃ ┣━18
+ ┃ ┃ ┃ ┃ ┃ ┣━14
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣━11
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━9
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━7
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
+ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┗━4
+ ┃ ┃ ┃ ┃ ┃   ┣━3
+ ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 o
+ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃   ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┗━5
+ ┃ ┃ ┃ ┃   ┣━4
+ ┃ ┃ ┃ ┃   ┃ ┣━3
+ ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
+ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ g1 o
+ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃   ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃   ┗━ g1 o
+ ┃ ┃ ┃ ┗━9
+ ┃ ┃ ┃   ┣━6
+ ┃ ┃ ┃   ┃ ┣━5
+ ┃ ┃ ┃   ┃ ┃ ┣━4
+ ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
+ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 o
+ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃   ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃   ┃ ┗━ g1 o
+ ┃ ┃ ┃   ┗━3
+ ┃ ┃ ┃     ┣━2
+ ┃ ┃ ┃     ┃ ┣━ g1 o
+ ┃ ┃ ┃     ┃ ┗━ g1 o
+ ┃ ┃ ┃     ┗━ g1 b
+ ┃ ┃ ┗━14
+ ┃ ┃   ┣━9
+ ┃ ┃   ┃ ┣━6
+ ┃ ┃   ┃ ┃ ┣━5
+ ┃ ┃   ┃ ┃ ┃ ┣━4
+ ┃ ┃   ┃ ┃ ┃ ┃ ┣━3
+ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 o
+ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃   ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃   ┃ ┃ ┗━ g1 o
+ ┃ ┃   ┃ ┗━3
+ ┃ ┃   ┃   ┣━2
+ ┃ ┃   ┃   ┃ ┣━ g1 o
+ ┃ ┃   ┃   ┃ ┗━ g1 o
+ ┃ ┃   ┃   ┗━ g1 b
+ ┃ ┃   ┗━5
+ ┃ ┃     ┣━4
+ ┃ ┃     ┃ ┣━2
+ ┃ ┃     ┃ ┃ ┣━ g1 o
+ ┃ ┃     ┃ ┃ ┗━ g1 b
+ ┃ ┃     ┃ ┗━2
+ ┃ ┃     ┃   ┣━ g1 o
+ ┃ ┃     ┃   ┗━ g1 o
+ ┃ ┃     ┗━ g1 b
+ ┃ ┗━26
+ ┃   ┣━15
+ ┃   ┃ ┣━10
+ ┃   ┃ ┃ ┣━7
+ ┃   ┃ ┃ ┃ ┣━6
+ ┃   ┃ ┃ ┃ ┃ ┣━5
+ ┃   ┃ ┃ ┃ ┃ ┃ ┣━4
+ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 o
+ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃   ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃   ┃ ┃ ┃ ┗━ g1 o
+ ┃   ┃ ┃ ┗━3
+ ┃   ┃ ┃   ┣━2
+ ┃   ┃ ┃   ┃ ┣━ g1 o
+ ┃   ┃ ┃   ┃ ┗━ g1 o
+ ┃   ┃ ┃   ┗━ g1 b
+ ┃   ┃ ┗━5
+ ┃   ┃   ┣━4
+ ┃   ┃   ┃ ┣━2
+ ┃   ┃   ┃ ┃ ┣━ g1 o
+ ┃   ┃   ┃ ┃ ┗━ g1 b
+ ┃   ┃   ┃ ┗━2
+ ┃   ┃   ┃   ┣━ g1 o
+ ┃   ┃   ┃   ┗━ g1 o
+ ┃   ┃   ┗━ g1 b
+ ┃   ┗━11
+ ┃     ┣━6
+ ┃     ┃ ┣━4
+ ┃     ┃ ┃ ┣━3
+ ┃     ┃ ┃ ┃ ┣━2
+ ┃     ┃ ┃ ┃ ┃ ┣━ g1 b
+ ┃     ┃ ┃ ┃ ┃ ┗━ g1 b
+ ┃     ┃ ┃ ┃ ┗━ g1 b
+ ┃     ┃ ┃ ┗━ g1 b
+ ┃     ┃ ┗━2
+ ┃     ┃   ┣━ g1 b
+ ┃     ┃   ┗━ g1 b
+ ┃     ┗━5
+ ┃       ┣━4
+ ┃       ┃ ┣━2
+ ┃       ┃ ┃ ┣━ g1 o
+ ┃       ┃ ┃ ┗━ g1 b
+ ┃       ┃ ┗━2
+ ┃       ┃   ┣━ g1 o
+ ┃       ┃   ┗━ g1 o
+ ┃       ┗━ g1 b
+ ┗━56
+   ┣━30
+   ┃ ┣━19
+   ┃ ┃ ┣━13
+   ┃ ┃ ┃ ┣━10
+   ┃ ┃ ┃ ┃ ┣━7
+   ┃ ┃ ┃ ┃ ┃ ┣━6
+   ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 b
+   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 b
+   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 b
+   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 b
+   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 b
+   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 b
+   ┃ ┃ ┃ ┃ ┃ ┗━ g1 b
+   ┃ ┃ ┃ ┃ ┗━3
+   ┃ ┃ ┃ ┃   ┣━2
+   ┃ ┃ ┃ ┃   ┃ ┣━ g1 b
+   ┃ ┃ ┃ ┃   ┃ ┗━ g1 b
+   ┃ ┃ ┃ ┃   ┗━ g1 b
+   ┃ ┃ ┃ ┗━3
+   ┃ ┃ ┃   ┣━2
+   ┃ ┃ ┃   ┃ ┣━ g1 b
+   ┃ ┃ ┃   ┃ ┗━ g1 b
+   ┃ ┃ ┃   ┗━ g1 b
+   ┃ ┃ ┗━6
+   ┃ ┃   ┣━4
+   ┃ ┃   ┃ ┣━3
+   ┃ ┃   ┃ ┃ ┣━2
+   ┃ ┃   ┃ ┃ ┃ ┣━ g1 b
+   ┃ ┃   ┃ ┃ ┃ ┗━ g1 b
+   ┃ ┃   ┃ ┃ ┗━ g1 b
+   ┃ ┃   ┃ ┗━ g1 b
+   ┃ ┃   ┗━2
+   ┃ ┃     ┣━ g1 b
+   ┃ ┃     ┗━ g1 b
+   ┃ ┗━11
+   ┃   ┣━6
+   ┃   ┃ ┣━4
+   ┃   ┃ ┃ ┣━3
+   ┃   ┃ ┃ ┃ ┣━2
+   ┃   ┃ ┃ ┃ ┃ ┣━ g1 b
+   ┃   ┃ ┃ ┃ ┃ ┗━ g1 b
+   ┃   ┃ ┃ ┃ ┗━ g1 b
+   ┃   ┃ ┃ ┗━ g1 b
+   ┃   ┃ ┗━2
+   ┃   ┃   ┣━ g1 b
+   ┃   ┃   ┗━ g1 b
+   ┃   ┗━5
+   ┃     ┣━4
+   ┃     ┃ ┣━2
+   ┃     ┃ ┃ ┣━ g1 o
+   ┃     ┃ ┃ ┗━ g1 b
+   ┃     ┃ ┗━2
+   ┃     ┃   ┣━ g1 o
+   ┃     ┃   ┗━ g1 o
+   ┃     ┗━ g1 b
+   ┗━26
+     ┣━15
+     ┃ ┣━10
+     ┃ ┃ ┣━7
+     ┃ ┃ ┃ ┣━6
+     ┃ ┃ ┃ ┃ ┣━5
+     ┃ ┃ ┃ ┃ ┃ ┣━4
+     ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 o
+     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+     ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+     ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+     ┃ ┃ ┃ ┃ ┗━ g1 o
+     ┃ ┃ ┃ ┗━ g1 o
+     ┃ ┃ ┗━3
+     ┃ ┃   ┣━2
+     ┃ ┃   ┃ ┣━ g1 o
+     ┃ ┃   ┃ ┗━ g1 o
+     ┃ ┃   ┗━ g1 b
+     ┃ ┗━5
+     ┃   ┣━4
+     ┃   ┃ ┣━2
+     ┃   ┃ ┃ ┣━ g1 o
+     ┃   ┃ ┃ ┗━ g1 b
+     ┃   ┃ ┗━2
+     ┃   ┃   ┣━ g1 o
+     ┃   ┃   ┗━ g1 o
+     ┃   ┗━ g1 b
+     ┗━11
+       ┣━6
+       ┃ ┣━4
+       ┃ ┃ ┣━3
+       ┃ ┃ ┃ ┣━2
+       ┃ ┃ ┃ ┃ ┣━ g1 b
+       ┃ ┃ ┃ ┃ ┗━ g1 b
+       ┃ ┃ ┃ ┗━ g1 b
+       ┃ ┃ ┗━ g1 b
+       ┃ ┗━2
+       ┃   ┣━ g1 b
+       ┃   ┗━ g1 b
+       ┗━5
+         ┣━4
+         ┃ ┣━2
+         ┃ ┃ ┣━ g1 o
+         ┃ ┃ ┗━ g1 b
+         ┃ ┗━2
+         ┃   ┣━ g1 o
+         ┃   ┗━ g1 o
+         ┗━ g1 b
+
+Amplifier tree:
+━13
+ ┣━9
+ ┃ ┣━7
+ ┃ ┃ ┣━6
+ ┃ ┃ ┃ ┣━5
+ ┃ ┃ ┃ ┃ ┣━4
+ ┃ ┃ ┃ ┃ ┃ ┣━3
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┗━ g1 o
+ ┃ ┗━2
+ ┃   ┣━ g1 o
+ ┃   ┗━ g1 o
+ ┗━4
+   ┣━2
+   ┃ ┣━ g1 o
+   ┃ ┗━ g1 o
+   ┗━2
+     ┣━ g1 o
+     ┗━ g1 o
+
+# Gems	Managem	Amps	Power (rescaled)
+1 1	0	0.000000
+2 2	0	0.686400
+3 3	0	0.970278
+4 4	0	1.172911
+5 5	0	1.435757
+6 6	0	1.655855
+7 7	0	1.851742
+8 2	1	2.695680
+9 3	1	3.413619
+10	4	1	3.739177
+11	5	1	4.004579
+12	6	1	4.251763
+13	7	1	4.483267
+14	8	1	4.705327
+15	9	1	4.917560
+16	10	1	5.148557
+17	11	1	5.356042
+18	12	1	5.568576
+19	13	1	5.760741
+20	14	1	5.938044
+21	15	1	6.125638
+22	16	1	6.313450
+23	11	2	6.534946
+24	12	2	6.750863
+25	13	2	6.958639
+26	14	2	7.156719
+27	15	2	7.340058
+28	16	2	7.536667
+29	17	2	7.713785
+30	18	2	7.892879
+31	19	2	8.071697
+32	20	2	8.250706
+33	21	2	8.410275
+34	22	2	8.568661
+35	23	2	8.727217
+36	24	2	8.885175
+37	25	2	9.032221
+38	20	3	9.201263
+39	21	3	9.367986
+40	22	3	9.530446
+41	23	3	9.692142
+42	24	3	9.854010
+43	25	3	10.001600
+44	26	3	10.165726
+45	27	3	10.329833
+46	28	3	10.479458
+47	29	3	10.618455
+48	30	3	10.755750
+49	25	4	10.895233
+50	26	4	11.063258
+51	27	4	11.231284
+52	28	4	11.380909
+53	29	4	11.531863
+54	30	4	11.669158
+55	31	4	11.806452
+56	32	4	11.943747
+57	33	4	12.078679
+58	28	5	12.211116
+59	29	5	12.362724
+60	30	5	12.500019
+61	31	5	12.637314
+62	32	5	12.774610
+63	33	5	12.909542
+64	34	5	13.043041
+65	35	5	13.172998
+66	30	6	13.303819
+67	31	6	13.441396
+68	32	6	13.580110
+69	33	6	13.718825
+70	34	6	13.855152
+71	35	6	13.984829
+72	36	6	14.114409
+73	37	6	14.239166
+74	44	5	14.375516
+75	45	5	14.513503
+76	46	5	14.644199
+77	47	5	14.783431
+78	42	6	14.926510
+79	43	6	15.072919
+80	44	6	15.215616
+81	45	6	15.355858
+82	46	6	15.491669
+83	47	6	15.633275
+84	48	6	15.762953
+85	49	6	15.891191
+86	50	6	16.020868
+87	51	6	16.149104
+88	52	6	16.275134
+89	53	6	16.400561
+90	54	6	16.525468
+91	49	7	16.650490
+92	50	7	16.780167
+93	51	7	16.909356
+94	52	7	17.040007
+95	53	7	17.170658
+96	54	7	17.301008
+97	55	7	17.428879
+98	56	7	17.559425
+99	57	7	17.678974
+100	58	7	17.797180
+101	59	7	17.916729
+102	60	7	18.033621
+103	61	7	18.153170
+104	62	7	18.266701
+105	63	7	18.386250
+106	58	8	18.497173
+107	59	8	18.616722
+108	60	8	18.733613
+109	61	8	18.853162
+110	62	8	18.966693
+111	63	8	19.086241
+112	64	8	19.199120
+113	65	8	19.311996
+114	66	8	19.424873
+115	67	8	19.537749
+116	68	8	19.648374
+117	69	8	19.757907
+118	70	8	19.866221
+119	71	8	19.972986
+120	72	8	20.083107
+121	73	8	20.190131
+122	74	8	20.299014
+123	75	8	20.407911
+124	76	8	20.515584
+125	77	8	20.623258
+126	72	9	20.727895
+127	73	9	20.834919
+128	74	9	20.943803
+129	75	9	21.052700
+130	76	9	21.160374
+131	77	9	21.268047
+132	78	9	21.371277
+133	79	9	21.479027
+134	80	9	21.576014
+135	81	9	21.690285
+136	82	9	21.788061
+137	83	9	21.885834
+138	84	9	21.983767
+139	85	9	22.081978
+140	86	9	22.180191
+141	75	11	22.285065
+142	76	11	22.392738
+143	77	11	22.500412
+144	78	11	22.604520
+145	79	11	22.712273
+146	80	11	22.814725
+147	81	11	22.924408
+148	76	12	23.030281
+149	77	12	23.137955
+150	78	12	23.242518
+151	79	12	23.350271
+152	80	12	23.455602
+153	81	12	23.562861
+154	82	12	23.669078
+155	83	12	23.775291
+156	84	12	23.881508
+157	85	12	23.987724
+158	86	12	24.091820
+159	87	12	24.191182
+160	88	12	24.290827
+161	89	12	24.390600
+162	90	12	24.490585
+163	91	12	24.590708
+164	92	12	24.690750
+165	93	12	24.790766
+166	94	12	24.890803
+167	95	12	24.990852
+168	96	12	25.090937
+169	97	12	25.191037
+170	98	12	25.291155
+171	99	12	25.387253
+172	100	12	25.487350
+173	101	12	25.587489
+174	102	12	25.686473
+175	103	12	25.791252
+176	104	12	25.896166
+177	105	12	26.005999
+178	106	12	26.116112
+179	107	12	26.221395
+180	108	12	26.320908
+181	109	12	26.420420
+182	110	12	26.519936
+183	111	12	26.619448
+184	112	12	26.719315
+185	113	12	26.818840
+186	114	12	26.918742
+187	115	12	27.017159
+188	116	12	27.117088
+189	117	12	27.212280
+190	118	12	27.311816
+191	119	12	27.411779
+192	120	12	27.511762
+193	115	13	27.606517
+194	116	13	27.706510
+195	117	13	27.802467
+196	118	13	27.903384
+197	119	13	28.002716
+198	120	13	28.103645
+199	121	13	28.198013
+200	122	13	28.292661
+201	123	13	28.387464
+202	124	13	28.482218
+203	125	13	28.577070
+204	126	13	28.670797
+205	127	13	28.761200
+206	128	13	28.851601
+
