@@ -6,7 +6,7 @@
 #include <algorithm>
 using namespace std;
 
-int ACC=1000;
+int ACC=200;
 
 class Gem;
 typedef pair<const Gem*, const Gem*> gem_pair;
@@ -109,8 +109,12 @@ void print_stats (const Gem* g)
   cout<<"Leech: "<<g->orange<<"\n";
   cout<<"Bloodbound: "<<g->black<<"\n";
   cout<<"Damage: "<<g->damage<<"\n";
-  cout<<"Mana power: "<<g->orange*g->black<<"\n";
-  cout<<"Damage power: "<<g->yellow*g->black*g->damage*g->black<<"\n";
+  float mp=g->orange*g->black;
+  float dp=g->yellow*g->black*g->damage*g->black;
+  cout<<"Mana power: "<<mp<<"\n";
+  cout<<"Mana power growth: "<<log(mp)/log(g->value)<<"\n";
+  cout<<"Damage power: "<<dp<<"\n";
+  cout<<"Damage power growth: "<<log(dp)/log(g->value)<<"\n";
 }
 
 vector<Gem*>** generate_gemset (

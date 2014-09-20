@@ -8,7 +8,6 @@ using namespace std;
 const int MANAGEM_VALUE=64;
 const int AMP_MAX_VALUE=32;
 const float GROWTH = 0.6343;
-const float MANA_GROWTH = 0.4958;
 
 bool better_orange (const Gem* a, const Gem* b)
 {
@@ -37,7 +36,6 @@ int main ()
   
   vector<Gem*>* amplifiers = new vector<Gem*>;
   for (int i=1; i<=AMP_MAX_VALUE; i++)
-//     amplifiers->push_back(new Gem(0, pow(i, MANA_GROWTH), 0, 0, 1, i));
     amplifiers->push_back(best_from(gemset_amplifier[i], better_orange));
   
   Gem* best_managem = (*managems)[0];
