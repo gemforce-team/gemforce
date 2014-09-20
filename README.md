@@ -5,7 +5,7 @@ Gem combining program for GC2:CS - Written in C.
 
 
 !!! ATTENTION !!!  
-Due to a vicious killgem recipes are incorrect right now, they are being recomputed, please don't use them till you see this.  
+Due to a vicious bug killgem recipes are incorrect right now, they are being recomputed, please don't use them till you see this.  
 !!! ATTENTION !!!
 
 HOWTO use our programs:
