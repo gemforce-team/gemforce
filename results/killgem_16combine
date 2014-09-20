@@ -1,0 +1,131 @@
+Iteration: 2
+Pool size (before limiting): 1
+Pool size (after limiting): 1
+End of iteration 2
+
+
+Iteration: 3
+Pool size (before limiting): 1
+Pool size (after limiting): 1
+End of iteration 3
+
+
+Iteration: 4
+Pool size (before limiting): 2
+Pool size (after limiting): 2
+End of iteration 4
+
+
+Iteration: 5
+Pool size (before limiting): 3
+Pool size (after limiting): 2
+End of iteration 5
+
+
+Iteration: 6
+Pool size (before limiting): 5
+Pool size (after limiting): 2
+End of iteration 6
+
+
+Iteration: 7
+Pool size (before limiting): 6
+Pool size (after limiting): 3
+End of iteration 7
+
+
+Iteration: 8
+Pool size (before limiting): 11
+Pool size (after limiting): 5
+End of iteration 8
+
+
+Iteration: 9
+Pool size (before limiting): 14
+Pool size (after limiting): 5
+End of iteration 9
+
+
+Iteration: 10
+Pool size (before limiting): 21
+Pool size (after limiting): 5
+End of iteration 10
+
+
+Iteration: 11
+Pool size (before limiting): 25
+Pool size (after limiting): 7
+End of iteration 11
+
+
+Iteration: 12
+Pool size (before limiting): 37
+Pool size (after limiting): 8
+End of iteration 12
+
+
+Iteration: 13
+Pool size (before limiting): 46
+Pool size (after limiting): 8
+End of iteration 13
+
+
+Iteration: 14
+Pool size (before limiting): 62
+Pool size (after limiting): 8
+End of iteration 14
+
+
+Iteration: 15
+Pool size (before limiting): 73
+Pool size (after limiting): 8
+End of iteration 15
+
+
+Iteration: 16
+Pool size (before limiting): 104
+Pool size (after limiting): 10
+End of iteration 16
+
+
+━16
+┣━11
+┃ ┣━8
+┃ ┃ ┣━6
+┃ ┃ ┃ ┣━5
+┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┗━2
+┃ ┃   ┣━ (g1 yellow)
+┃ ┃   ┗━ (g1 yellow)
+┃ ┗━3
+┃   ┣━2
+┃   ┃ ┣━ (g1 yellow)
+┃   ┃ ┗━ (g1 yellow)
+┃   ┗━ (g1 yellow)
+┗━5
+  ┣━3
+  ┃ ┣━2
+  ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┗━ (g1 yellow)
+  ┗━2
+    ┣━ (g1 yellow)
+    ┗━ (g1 yellow)
+Value: 16
+Grade: 4
+Crit: 3.81208
+Leech: 0
+Bloodbound: 1.46094
+Damage: 6.19826
+Mana power: 0
+Mana power growth: -inf
+Damage power: 50.4312
+Damage power growth: 1.41406

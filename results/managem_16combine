@@ -1,0 +1,131 @@
+Iteration: 2
+Pool size (before limiting): 1
+Pool size (after limiting): 1
+End of iteration 2
+
+
+Iteration: 3
+Pool size (before limiting): 1
+Pool size (after limiting): 1
+End of iteration 3
+
+
+Iteration: 4
+Pool size (before limiting): 2
+Pool size (after limiting): 2
+End of iteration 4
+
+
+Iteration: 5
+Pool size (before limiting): 3
+Pool size (after limiting): 2
+End of iteration 5
+
+
+Iteration: 6
+Pool size (before limiting): 5
+Pool size (after limiting): 2
+End of iteration 6
+
+
+Iteration: 7
+Pool size (before limiting): 6
+Pool size (after limiting): 2
+End of iteration 7
+
+
+Iteration: 8
+Pool size (before limiting): 10
+Pool size (after limiting): 3
+End of iteration 8
+
+
+Iteration: 9
+Pool size (before limiting): 11
+Pool size (after limiting): 3
+End of iteration 9
+
+
+Iteration: 10
+Pool size (before limiting): 16
+Pool size (after limiting): 3
+End of iteration 10
+
+
+Iteration: 11
+Pool size (before limiting): 17
+Pool size (after limiting): 4
+End of iteration 11
+
+
+Iteration: 12
+Pool size (before limiting): 24
+Pool size (after limiting): 3
+End of iteration 12
+
+
+Iteration: 13
+Pool size (before limiting): 26
+Pool size (after limiting): 3
+End of iteration 13
+
+
+Iteration: 14
+Pool size (before limiting): 32
+Pool size (after limiting): 4
+End of iteration 14
+
+
+Iteration: 15
+Pool size (before limiting): 36
+Pool size (after limiting): 3
+End of iteration 15
+
+
+Iteration: 16
+Pool size (before limiting): 45
+Pool size (after limiting): 5
+End of iteration 16
+
+
+━16
+┣━11
+┃ ┣━9
+┃ ┃ ┣━7
+┃ ┃ ┃ ┣━6
+┃ ┃ ┃ ┃ ┣━5
+┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 orange)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
+┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
+┃ ┃ ┃ ┃ ┃ ┗━ (g1 orange)
+┃ ┃ ┃ ┃ ┗━ (g1 orange)
+┃ ┃ ┃ ┗━ (g1 orange)
+┃ ┃ ┗━2
+┃ ┃   ┣━ (g1 orange)
+┃ ┃   ┗━ (g1 orange)
+┃ ┗━2
+┃   ┣━ (g1 orange)
+┃   ┗━ (g1 orange)
+┗━5
+  ┣━3
+  ┃ ┣━2
+  ┃ ┃ ┣━ (g1 orange)
+  ┃ ┃ ┗━ (g1 orange)
+  ┃ ┗━ (g1 orange)
+  ┗━2
+    ┣━ (g1 orange)
+    ┗━ (g1 orange)
+Value: 16
+Grade: 4
+Crit: 0
+Leech: 3.90228
+Bloodbound: 1.45856
+Damage: 0
+Mana power: 5.69171
+Mana power growth: 0.627216
+Damage power: 0
+Damage power growth: -inf
