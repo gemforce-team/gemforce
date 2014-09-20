@@ -3,15 +3,9 @@
 #include <math.h>
 #include <unistd.h>
 #include <string.h>
-typedef struct Gem_OB_exact gem;		// the strange order is so that gem_utils knows which gem type are we defining as "gem"
+typedef struct Gem_OB_appr gem;		// the strange order is so that gem_utils knows which gem type are we defining as "gem"
+const int ACC=1000;
 #include "managem_utils.h"
-
-void int_swap (int *p1, int *p2)
-{
-	int t=*p1;
-	*p1=*p2;
-	*p2=t;
-}
 
 void gem_init_managem(gem *p_gem)	//32 spec
 {
@@ -20,20 +14,6 @@ void gem_init_managem(gem *p_gem)	//32 spec
 	p_gem->bbound=1.249888;
 	p_gem->father=NULL;
 	p_gem->mother=NULL;
-}
-
-int gem_more_powerful(gem gem1, gem gem2)
-{
-	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);		// optimization at infinity hits (hit lv infinity)
-}																	// the *0.7 for dual is not required because they'll all be dual
-
-int subpools_to_big_convert(int* subpools_length, int grd, int index)
-{
-	int result=0;
-	int i;
-	for (i=0;i<grd;++i) result+=subpools_length[i];
-	result+=index;
-	return result;
 }
 
 void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
@@ -66,7 +46,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			}
 		}
 
-		gem_sort_exact(pool_big,comb_tot);		
+		gem_sort(pool_big,comb_tot);		
 		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup	
 		int subpools_length[grade_max-1];		// let's divide in grades
 		
@@ -87,7 +67,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		for (grd=0;grd<grade_max-1;++grd) {		// now we work on the single pools
 			float lim_bbound=-1;				// thank you Enrico for this great algorithm
 			for (j=subpools_length[grd]-1;j>=0;--j) {
-				if (pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound<=lim_bbound) {
+				if ((int)(ACC*pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound)<=(int)(ACC*lim_bbound)) {
 					pool_big[subpools_to_big_convert(subpools_length,grd,j)].grade=0;
 					broken++;
 				}

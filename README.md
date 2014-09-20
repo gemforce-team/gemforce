@@ -16,6 +16,7 @@ where:
   e - print best gems table (for each value best gem stats)  
   d - debug + info  
   i - info  
+  l (num) - limit hard gem computation to num (amps only)  
   number - value of gem to be computed  
 example:  
   ./file -pte 32  
@@ -47,5 +48,9 @@ Orange/black spec - Done
 Orange/black combine - Done  
 Yellow/black spec - Done  
 Yellow/black combine - Done  
+<<<<<<< HEAD
 Amplifier-oriented OB and YB - Done  
+=======
+Amplifier-oriented OB - Done  
+Amplifier-oriented YB - WIP  
 OBR and YBR
