@@ -190,7 +190,8 @@ void print_parens(gem* gemf)
 
 int gem_getvalue(gem* p_gem)
 {
-  if(p_gem->father==NULL) return 1;
+  if (p_gem->grade==0) return 0;
+  if (p_gem->father==NULL) return 1;
   else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
 }
 

@@ -1,515 +1,205 @@
-Iteration: 2
-Pool size (before limiting): 1
-Pool size (after limiting): 1
-End of iteration 2
-
-
-Iteration: 3
-Pool size (before limiting): 1
-Pool size (after limiting): 1
-End of iteration 3
-
-
-Iteration: 4
-Pool size (before limiting): 2
-Pool size (after limiting): 2
-End of iteration 4
-
-
-Iteration: 5
-Pool size (before limiting): 3
-Pool size (after limiting): 2
-End of iteration 5
-
-
-Iteration: 6
-Pool size (before limiting): 5
-Pool size (after limiting): 2
-End of iteration 6
-
-
-Iteration: 7
-Pool size (before limiting): 6
-Pool size (after limiting): 2
-End of iteration 7
-
-
-Iteration: 8
-Pool size (before limiting): 10
-Pool size (after limiting): 3
-End of iteration 8
-
-
-Iteration: 9
-Pool size (before limiting): 11
-Pool size (after limiting): 3
-End of iteration 9
-
-
-Iteration: 10
-Pool size (before limiting): 16
-Pool size (after limiting): 3
-End of iteration 10
-
-
-Iteration: 11
-Pool size (before limiting): 17
-Pool size (after limiting): 4
-End of iteration 11
-
-
-Iteration: 12
-Pool size (before limiting): 24
-Pool size (after limiting): 3
-End of iteration 12
-
-
-Iteration: 13
-Pool size (before limiting): 26
-Pool size (after limiting): 3
-End of iteration 13
-
-
-Iteration: 14
-Pool size (before limiting): 32
-Pool size (after limiting): 4
-End of iteration 14
-
-
-Iteration: 15
-Pool size (before limiting): 36
-Pool size (after limiting): 3
-End of iteration 15
-
-
-Iteration: 16
-Pool size (before limiting): 45
-Pool size (after limiting): 5
-End of iteration 16
-
-
-Iteration: 17
-Pool size (before limiting): 47
-Pool size (after limiting): 4
-End of iteration 17
-
-
-Iteration: 18
-Pool size (before limiting): 58
-Pool size (after limiting): 4
-End of iteration 18
-
-
-Iteration: 19
-Pool size (before limiting): 60
-Pool size (after limiting): 5
-End of iteration 19
-
-
-Iteration: 20
-Pool size (before limiting): 73
-Pool size (after limiting): 5
-End of iteration 20
-
-
-Iteration: 21
-Pool size (before limiting): 76
-Pool size (after limiting): 5
-End of iteration 21
-
-
-Iteration: 22
-Pool size (before limiting): 93
-Pool size (after limiting): 5
-End of iteration 22
-
-
-Iteration: 23
-Pool size (before limiting): 93
-Pool size (after limiting): 4
-End of iteration 23
-
-
-Iteration: 24
-Pool size (before limiting): 107
-Pool size (after limiting): 4
-End of iteration 24
-
-
-Iteration: 25
-Pool size (before limiting): 112
-Pool size (after limiting): 5
-End of iteration 25
-
-
-Iteration: 26
-Pool size (before limiting): 125
-Pool size (after limiting): 5
-End of iteration 26
-
-
-Iteration: 27
-Pool size (before limiting): 132
-Pool size (after limiting): 4
-End of iteration 27
-
-
-Iteration: 28
-Pool size (before limiting): 148
-Pool size (after limiting): 4
-End of iteration 28
-
-
-Iteration: 29
-Pool size (before limiting): 149
-Pool size (after limiting): 5
-End of iteration 29
-
-
-Iteration: 30
-Pool size (before limiting): 167
-Pool size (after limiting): 4
-End of iteration 30
-
-
-Iteration: 31
-Pool size (before limiting): 169
-Pool size (after limiting): 4
-End of iteration 31
-
-
-Iteration: 32
-Pool size (before limiting): 191
-Pool size (after limiting): 6
-End of iteration 32
-
-
-Iteration: 33
-Pool size (before limiting): 191
-Pool size (after limiting): 5
-End of iteration 33
-
-
-Iteration: 34
-Pool size (before limiting): 208
-Pool size (after limiting): 5
-End of iteration 34
-
-
-Iteration: 35
-Pool size (before limiting): 211
-Pool size (after limiting): 5
-End of iteration 35
-
-
-Iteration: 36
-Pool size (before limiting): 232
-Pool size (after limiting): 7
-End of iteration 36
-
-
-Iteration: 37
-Pool size (before limiting): 237
-Pool size (after limiting): 5
-End of iteration 37
-
-
-Iteration: 38
-Pool size (before limiting): 260
-Pool size (after limiting): 5
-End of iteration 38
-
-
-Iteration: 39
-Pool size (before limiting): 258
-Pool size (after limiting): 5
-End of iteration 39
-
-
-Iteration: 40
-Pool size (before limiting): 286
-Pool size (after limiting): 5
-End of iteration 40
-
-
-Iteration: 41
-Pool size (before limiting): 285
-Pool size (after limiting): 5
-End of iteration 41
-
-
-Iteration: 42
-Pool size (before limiting): 309
-Pool size (after limiting): 5
-End of iteration 42
-
-
-Iteration: 43
-Pool size (before limiting): 309
-Pool size (after limiting): 5
-End of iteration 43
-
-
-Iteration: 44
-Pool size (before limiting): 333
-Pool size (after limiting): 5
-End of iteration 44
-
-
-Iteration: 45
-Pool size (before limiting): 334
-Pool size (after limiting): 6
-End of iteration 45
-
-
-Iteration: 46
-Pool size (before limiting): 355
-Pool size (after limiting): 5
-End of iteration 46
-
-
-Iteration: 47
-Pool size (before limiting): 359
-Pool size (after limiting): 5
-End of iteration 47
-
-
-Iteration: 48
-Pool size (before limiting): 380
-Pool size (after limiting): 5
-End of iteration 48
-
-
-Iteration: 49
-Pool size (before limiting): 383
-Pool size (after limiting): 5
-End of iteration 49
-
-
-Iteration: 50
-Pool size (before limiting): 410
-Pool size (after limiting): 6
-End of iteration 50
-
-
-Iteration: 51
-Pool size (before limiting): 411
-Pool size (after limiting): 6
-End of iteration 51
-
-
-Iteration: 52
-Pool size (before limiting): 440
-Pool size (after limiting): 7
-End of iteration 52
-
-
-Iteration: 53
-Pool size (before limiting): 441
-Pool size (after limiting): 5
-End of iteration 53
-
-
-Iteration: 54
-Pool size (before limiting): 464
-Pool size (after limiting): 5
-End of iteration 54
-
-
-Iteration: 55
-Pool size (before limiting): 470
-Pool size (after limiting): 5
-End of iteration 55
-
-
-Iteration: 56
-Pool size (before limiting): 492
-Pool size (after limiting): 5
-End of iteration 56
-
-
-Iteration: 57
-Pool size (before limiting): 497
-Pool size (after limiting): 6
-End of iteration 57
-
-
-Iteration: 58
-Pool size (before limiting): 525
-Pool size (after limiting): 6
-End of iteration 58
-
-
-Iteration: 59
-Pool size (before limiting): 524
-Pool size (after limiting): 5
-End of iteration 59
-
-
-Iteration: 60
-Pool size (before limiting): 545
-Pool size (after limiting): 5
-End of iteration 60
-
-
-Iteration: 61
-Pool size (before limiting): 557
-Pool size (after limiting): 6
-End of iteration 61
-
-
-Iteration: 62
-Pool size (before limiting): 577
-Pool size (after limiting): 6
-End of iteration 62
-
-
-Iteration: 63
-Pool size (before limiting): 581
-Pool size (after limiting): 5
-End of iteration 63
-
-
-Iteration: 64
-Pool size (before limiting): 613
-Pool size (after limiting): 6
-End of iteration 64
-
-
+Value:	64
+Raw:	13286
+Pool:	113
+Grade:	10
+Leech:	34.321384
+Bbound:	2.224200
+Power:	76.337605
+
+Combining scheme:
+(((((m+m)+(m+m))+((m+m)+(m+m)))+(((m+m)+(m+m))+((m+m)+(m+(m+(m+(m+(m+m))))))))+((((m+m)+(m+m))+((m+m)+(m+(m+(m+(m+(m+m)))))))+(((m+m)+(m+(m+(m+(m+(m+m))))))+((m+(m+(m+(m+m))))+((m+(m+(m+m)))+((m+(m+(m+m)))+((m+(m+m))+(m+(m+(m+(m+(m+(m+(m+m))))))))))))))
+
+Gem tree:
 ━64
-┣━44
-┃ ┣━32
-┃ ┃ ┣━24
-┃ ┃ ┃ ┣━19
-┃ ┃ ┃ ┃ ┣━14
-┃ ┃ ┃ ┃ ┃ ┣━11
-┃ ┃ ┃ ┃ ┃ ┃ ┣━9
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━7
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
-┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┃ ┗━2
-┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 managem)
-┃ ┃ ┃ ┃ ┃ ┗━3
-┃ ┃ ┃ ┃ ┃   ┣━2
-┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 managem)
-┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 managem)
-┃ ┃ ┃ ┃ ┃   ┗━ (g1 managem)
-┃ ┃ ┃ ┃ ┗━5
-┃ ┃ ┃ ┃   ┣━4
-┃ ┃ ┃ ┃   ┃ ┣━3
-┃ ┃ ┃ ┃   ┃ ┃ ┣━2
-┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 managem)
-┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 managem)
-┃ ┃ ┃ ┃   ┃ ┗━ (g1 managem)
-┃ ┃ ┃ ┃   ┗━ (g1 managem)
-┃ ┃ ┃ ┗━5
-┃ ┃ ┃   ┣━4
-┃ ┃ ┃   ┃ ┣━3
-┃ ┃ ┃   ┃ ┃ ┣━2
-┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 managem)
-┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃ ┃   ┃ ┃ ┗━ (g1 managem)
-┃ ┃ ┃   ┃ ┗━ (g1 managem)
-┃ ┃ ┃   ┗━ (g1 managem)
-┃ ┃ ┗━8
-┃ ┃   ┣━6
-┃ ┃   ┃ ┣━5
-┃ ┃   ┃ ┃ ┣━4
-┃ ┃   ┃ ┃ ┃ ┣━3
-┃ ┃   ┃ ┃ ┃ ┃ ┣━2
-┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 managem)
-┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃   ┃ ┃ ┃ ┗━ (g1 managem)
-┃ ┃   ┃ ┃ ┗━ (g1 managem)
-┃ ┃   ┃ ┗━ (g1 managem)
-┃ ┃   ┗━2
-┃ ┃     ┣━ (g1 managem)
-┃ ┃     ┗━ (g1 managem)
-┃ ┗━12
-┃   ┣━8
-┃   ┃ ┣━6
-┃   ┃ ┃ ┣━5
-┃   ┃ ┃ ┃ ┣━4
-┃   ┃ ┃ ┃ ┃ ┣━3
-┃   ┃ ┃ ┃ ┃ ┃ ┣━2
-┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 managem)
-┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃   ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-┃   ┃ ┃ ┃ ┗━ (g1 managem)
-┃   ┃ ┃ ┗━ (g1 managem)
-┃   ┃ ┗━2
-┃   ┃   ┣━ (g1 managem)
-┃   ┃   ┗━ (g1 managem)
-┃   ┗━4
-┃     ┣━2
-┃     ┃ ┣━ (g1 managem)
-┃     ┃ ┗━ (g1 managem)
-┃     ┗━2
-┃       ┣━ (g1 managem)
-┃       ┗━ (g1 managem)
-┗━20
-  ┣━12
-  ┃ ┣━8
-  ┃ ┃ ┣━6
-  ┃ ┃ ┃ ┣━5
-  ┃ ┃ ┃ ┃ ┣━4
-  ┃ ┃ ┃ ┃ ┃ ┣━3
-  ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 managem)
-  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-  ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-  ┃ ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-  ┃ ┃ ┃ ┃ ┗━ (g1 managem)
-  ┃ ┃ ┃ ┗━ (g1 managem)
-  ┃ ┃ ┗━2
-  ┃ ┃   ┣━ (g1 managem)
-  ┃ ┃   ┗━ (g1 managem)
-  ┃ ┗━4
-  ┃   ┣━2
-  ┃   ┃ ┣━ (g1 managem)
-  ┃   ┃ ┗━ (g1 managem)
-  ┃   ┗━2
-  ┃     ┣━ (g1 managem)
-  ┃     ┗━ (g1 managem)
-  ┗━8
-    ┣━4
-    ┃ ┣━2
-    ┃ ┃ ┣━ (g1 managem)
-    ┃ ┃ ┗━ (g1 managem)
-    ┃ ┗━2
-    ┃   ┣━ (g1 managem)
-    ┃   ┗━ (g1 managem)
-    ┗━4
-      ┣━2
-      ┃ ┣━ (g1 managem)
-      ┃ ┗━ (g1 managem)
-      ┗━2
-        ┣━ (g1 managem)
-        ┗━ (g1 managem)
-Value: 64
-Grade: 6
-Crit: 0
-Leech: 7.86257
-Bloodbound: 1.77952
-Damage: 0
-Mana power: 13.9916
-Mana power growth: 0.634415
-Damage power: 0
-Damage power growth: -inf
+ ┣━44
+ ┃ ┣━32
+ ┃ ┃ ┣━24
+ ┃ ┃ ┃ ┣━19
+ ┃ ┃ ┃ ┃ ┣━15
+ ┃ ┃ ┃ ┃ ┃ ┣━11
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣━8
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━7
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
+ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┗━4
+ ┃ ┃ ┃ ┃ ┃   ┣━3
+ ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 m
+ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┃   ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┗━4
+ ┃ ┃ ┃ ┃   ┣━3
+ ┃ ┃ ┃ ┃   ┃ ┣━2
+ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 m
+ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃   ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃   ┗━ g1 m
+ ┃ ┃ ┃ ┗━5
+ ┃ ┃ ┃   ┣━4
+ ┃ ┃ ┃   ┃ ┣━3
+ ┃ ┃ ┃   ┃ ┃ ┣━2
+ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ g1 m
+ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃   ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃   ┃ ┗━ g1 m
+ ┃ ┃ ┃   ┗━ g1 m
+ ┃ ┃ ┗━8
+ ┃ ┃   ┣━6
+ ┃ ┃   ┃ ┣━5
+ ┃ ┃   ┃ ┃ ┣━4
+ ┃ ┃   ┃ ┃ ┃ ┣━3
+ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 m
+ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃   ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃   ┃ ┃ ┗━ g1 m
+ ┃ ┃   ┃ ┗━ g1 m
+ ┃ ┃   ┗━2
+ ┃ ┃     ┣━ g1 m
+ ┃ ┃     ┗━ g1 m
+ ┃ ┗━12
+ ┃   ┣━8
+ ┃   ┃ ┣━6
+ ┃   ┃ ┃ ┣━5
+ ┃   ┃ ┃ ┃ ┣━4
+ ┃   ┃ ┃ ┃ ┃ ┣━3
+ ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 m
+ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃   ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃   ┃ ┃ ┃ ┗━ g1 m
+ ┃   ┃ ┃ ┗━ g1 m
+ ┃   ┃ ┗━2
+ ┃   ┃   ┣━ g1 m
+ ┃   ┃   ┗━ g1 m
+ ┃   ┗━4
+ ┃     ┣━2
+ ┃     ┃ ┣━ g1 m
+ ┃     ┃ ┗━ g1 m
+ ┃     ┗━2
+ ┃       ┣━ g1 m
+ ┃       ┗━ g1 m
+ ┗━20
+   ┣━12
+   ┃ ┣━8
+   ┃ ┃ ┣━6
+   ┃ ┃ ┃ ┣━5
+   ┃ ┃ ┃ ┃ ┣━4
+   ┃ ┃ ┃ ┃ ┃ ┣━3
+   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 m
+   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+   ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+   ┃ ┃ ┃ ┃ ┗━ g1 m
+   ┃ ┃ ┃ ┗━ g1 m
+   ┃ ┃ ┗━2
+   ┃ ┃   ┣━ g1 m
+   ┃ ┃   ┗━ g1 m
+   ┃ ┗━4
+   ┃   ┣━2
+   ┃   ┃ ┣━ g1 m
+   ┃   ┃ ┗━ g1 m
+   ┃   ┗━2
+   ┃     ┣━ g1 m
+   ┃     ┗━ g1 m
+   ┗━8
+     ┣━4
+     ┃ ┣━2
+     ┃ ┃ ┣━ g1 m
+     ┃ ┃ ┗━ g1 m
+     ┃ ┗━2
+     ┃   ┣━ g1 m
+     ┃   ┗━ g1 m
+     ┗━4
+       ┣━2
+       ┃ ┣━ g1 m
+       ┃ ┗━ g1 m
+       ┗━2
+         ┣━ g1 m
+         ┗━ g1 m
+
+# Gems	Power
+1	5.455961
+2	8.206857
+3	10.476891
+4	12.594667
+5	14.549878
+6	16.561383
+7	18.376523
+8	20.001990
+9	21.449744
+10	22.824265
+11	24.378273
+12	25.905376
+13	27.255723
+14	28.530767
+15	29.826254
+16	31.053766
+17	32.244461
+18	33.413873
+19	34.597660
+20	35.717302
+21	36.797758
+22	37.890046
+23	38.960559
+24	40.041179
+25	41.114161
+26	42.236571
+27	43.333847
+28	44.440989
+29	45.557996
+30	46.609940
+31	47.623689
+32	48.645560
+33	49.643753
+34	50.648882
+35	51.660948
+36	52.614237
+37	53.528927
+38	54.449328
+39	55.375439
+40	56.279951
+41	57.189339
+42	58.103605
+43	58.965341
+44	59.788872
+45	60.616419
+46	61.447981
+47	62.283558
+48	63.099934
+49	63.919738
+50	64.742971
+51	65.519717
+52	66.290716
+53	67.064883
+54	67.884218
+55	68.779329
+56	69.638161
+57	70.500912
+58	71.367583
+59	72.212130
+60	73.060024
+61	73.911266
+62	74.765856
+63	75.569661
+64	76.337605

@@ -177,7 +177,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
   gem_print_O(amps);
   
   for (i=1;i<len;++i) {																	// for every total value
-		gem_init(gems+i,1,0,0);															// we init the gems 
+		gem_init(gems+i,0,0,0);															// we init the gems 
 		gem_init_O(amps+i,0,0);															// to extremely weak ones
 		for (j=0;j<=i/6;++j) {															// for every amount of amps we can fit in
 			int value = i-6*j;																// this is the amount of gems we have left
