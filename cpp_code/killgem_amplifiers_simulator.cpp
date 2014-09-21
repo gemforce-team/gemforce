@@ -21,7 +21,7 @@ int main ()
 {
   vector<Gem*>* basegems_killgem = new vector<Gem*>;
   basegems_killgem->push_back(new Gem(1, 0, 0, 1));
-  basegems_killgem->push_back(new Gem(0, 0, 1, 1));
+  basegems_killgem->push_back(new Gem(0, 0, 1, 1.1861));
   vector<Gem*>** gemset_killgem=generate_gemset(basegems_killgem, KILLGEM_VALUE, limit_killgem);
 
   vector<Gem*>* basegems_amplifier = new vector<Gem*>;
