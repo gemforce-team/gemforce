@@ -4,11 +4,6 @@ gemforce
 Gem combining program for GC2:CS - Written in C.
 
 
-!!! ATTENTION !!!  
-Due to a vicious bug, some killgem recipes are incorrect right now and have been marked as WRONG.  
-They are being recomputed, please don't use them until we take this banner out.  
-!!! ATTENTION !!!
-
 HOWTO use our programs:
 
 compile:  
@@ -54,5 +49,5 @@ Orange/black combine - Done
 Yellow/black spec - Done  
 Yellow/black combine - Done  
 Amplifier-oriented OB - Done  
-Amplifier-oriented YB - CIP  
+Amplifier-oriented YB - Done  
 OBR and YBR
