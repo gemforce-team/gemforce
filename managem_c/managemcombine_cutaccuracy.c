@@ -7,11 +7,11 @@ typedef struct Gem_OB_appr gem;		// the strange order is so that gem_utils knows
 const int ACC=1000;
 #include "managem_utils.h"
 
-void gem_init_managem(gem *p_gem)	//32 spec
+void gem_init_managem(gem *p_gem)	// start gem does not matter
 {
-	p_gem->grade=5;
-	p_gem->leech= 4.365160;
-	p_gem->bbound=1.249888;
+	p_gem->grade=1;
+	p_gem->leech=1;
+	p_gem->bbound=1;
 	p_gem->father=NULL;
 	p_gem->mother=NULL;
 }
@@ -55,7 +55,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		int grd=0;
 		
 		for (j=0;j<comb_tot;++j) {				// see how long subpools are
-			if ((pool_big+j)->grade==grd+6) subpools_length[grd]++;
+			if ((pool_big+j)->grade==grd+2) subpools_length[grd]++;
 			else {
 				grd++;
 				subpools_length[grd]++;

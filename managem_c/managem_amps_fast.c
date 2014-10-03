@@ -29,6 +29,31 @@ int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 	return gem_amp_global_power(gem1, amp1) > gem_amp_global_power(gem2, amp2);
 }
 
+int gem_weaker(gem gem1, gem gem2)
+{
+  if ((int)(gem1.leech*ACC) != (int)(gem2.leech*ACC))
+    return gem1.leech<gem2.leech;
+  return gem1.bbound<gem2.bbound;
+}
+
+void gem_fastsort(gem* gems, int len) 
+{
+  if (len<=1) return;
+  int pivot=0;
+  int i;
+  for (i=1;i<len;++i) {
+    if (gem_weaker(gems[i],gems[pivot])) {
+      gem temp=gems[pivot];
+      gems[pivot]=gems[i];
+      gems[i]=gems[pivot+1];
+      gems[pivot+1]=temp;
+      pivot++;
+    }
+  }
+  gem_fastsort(gems,pivot);
+  gem_fastsort(gems+1+pivot,len-pivot-1);
+}
+
 void print_amps_table(gem* gems, gemO* amps, int len)
 {
   printf("# Gems\tManagem\tAmps\tPower (rescaled)\n");
