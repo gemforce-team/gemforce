@@ -71,10 +71,10 @@ void gem_combine (gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 	}
 }
 
-void gem_init(gem *p_gem, int grd)
+void gem_init(gem *p_gem, int grd, double leech)
 {
 	p_gem->grade=grd;
-	p_gem->leech= pow(1.38, (double)(grd-1));
+	p_gem->leech=leech;
 	p_gem->father=NULL;
 	p_gem->mother=NULL;
 }
@@ -146,42 +146,35 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	int i;
 	gem gems[len];
 	gem* pool[len];
-	int pool_length[len];		// there is a limsup for every i: (int)(log2(i+1))+1
+	int pool_length[len];
 	pool[0]=malloc(sizeof(gem));
-	gem_init(gems,1);
-	gem_init(pool[0],1);
+	gem_init(gems,1,1);
+	gem_init(pool[0],1,1);
 	pool_length[0]=1;
 	gem_print(gems);
 	
 	for (i=1; i<len; ++i) {
 		int j,k,h;
-		int count_big=0;
+		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
+		pool_length[i]=grade_max-1;
+		pool[i]=malloc(pool_length[i]*sizeof(gem));
+		for (j=0; j<pool_length[i]; ++j) gem_init(pool[i]+j,j+2,1);
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
 		for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
-		gem* pool_big = malloc(comb_tot*sizeof(gem));		//a very big array needs to be in heap
-				
-		for (j=0;j<eoc;++j) {										// pool_big gets fulled by candidate gems
+		
+		for (j=0;j<eoc;++j) {										// combine and put istantly in right pool
 			for (k=0; k< pool_length[j]; ++k) {
 				for (h=0; h< pool_length[i-1-j]; ++h) {
-				gem_combine(pool[j]+k, pool[i-1-j]+h, pool_big+count_big);
-				count_big++;
+					gem temp;
+					gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
+					int grd=temp.grade-2;
+					if (gem_better(temp, pool[i][grd])) {
+						pool[i][grd]=temp;
+					}
 				}
 			}
 		}
-		int grade_limsup=(int)(log2(i+1)+1);		//pool initialization (not good for more colours)
-		pool_length[i]=grade_limsup-1;
-		pool[i]=malloc(pool_length[i]*sizeof(gem));
-		
-		for (j=0;j<pool_length[i];++j) {				//pool fulling (not good for more colours)
-			gem_init(pool[i]+j,j+2);
-			for (k=0;k<comb_tot;k++) {
-				if ((pool_big[k].grade==j+2) && gem_better(pool_big[k], pool[i][j])) {
-					pool[i][j]=pool_big[k];
-				}
-			}
-		}
-		free(pool_big);
 		
 		gems[i]=pool[i][0];
 		for (j=1;j<pool_length[i];++j) if (gem_better(pool[i][j],gems[i])) {
