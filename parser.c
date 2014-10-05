@@ -20,6 +20,16 @@ int int_max(int a, int b)
 	else return b;
 }
 
+double gem_amp_global_mana_power(gem gem1, gem amp1)
+{
+  return (gem1.leech*1.5+6*0.23*2.8*amp1.leech)*gem1.bbound;
+}
+
+double gem_amp_global_kill_power(gem gem1, gem amp1)		// should be ok...
+{
+  return (gem1.damage*3.2+6*0.28*2.8*amp1.damage)*gem1.bbound*(gem1.crit*1.5+6*0.23*2.8*amp1.crit)*gem1.bbound;
+}
+
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
   p_gem_combined->grade = p_gem1->grade+1;
@@ -125,49 +135,49 @@ char gem_color(gem* p_gem)
 	}
 }
 
-void gem_print(gem* p_gem) {
-	switch (gem_color(p_gem)) {
-		case 'y':
-		printf("Yellow gem\n");
-		printf("Grade:\t%d\n", p_gem->grade);
-		printf("Damage:\t%f\nCrit:\t%f\n\n", p_gem->damage, p_gem->crit);
-		break;
-		case 'o':
-		printf("Orange gem\n");
-		printf("Grade:\t%d\n", p_gem->grade);
-		printf("Leech:\t%f\n\n", p_gem->leech);
-		break;
-		case 'b':
-		printf("Black gem\n");
-		printf("Grade:\t%d\n", p_gem->grade);
-		printf("Damage:\t%f\nBbound:\t%f\n\n", p_gem->damage, p_gem->bbound);
-		break;
-		case 'm':
-		printf("Managem\n");
-		printf("Grade:\t%d\n", p_gem->grade);
-		printf("Leech:\t%f\nBbound:\t%f\n", p_gem->leech, p_gem->bbound);
-		printf("Mana power:\t%f\n\n", p_gem->leech*p_gem->bbound);
-		break;
-		case 'k':
-		printf("Killgem\n");
-		printf("Grade:\t%d\n", p_gem->grade);
-		printf("Damage:\t%f\nCrit:\t%f\nBbound:\t%f\n", p_gem->damage, p_gem->crit, p_gem->bbound);
-		printf("Kill power:\t%f\n\n", p_gem->damage*p_gem->bbound*p_gem->crit*p_gem->bbound);
-		break;
-		default:
-		printf("Strange gem\n");
-		printf("Grade:\t%d\n", p_gem->grade);
-		printf("Damage:\t%f\nCrit:\t%f\nLeech:\t%f\nBbound:\t%f\n", p_gem->damage, p_gem->crit, p_gem->leech, p_gem->bbound);
-		printf("Mana power:\t%f\n", p_gem->leech*p_gem->bbound);
-		printf("Kill power:\t%f\n\n", p_gem->damage*p_gem->bbound*p_gem->crit*p_gem->bbound);
-	}
-}
-
 int gem_getvalue(gem* p_gem)
 {
   if (p_gem->grade==0) return 0;
   if (p_gem->father==NULL) return 1;
   else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
+}
+
+void gem_print(gem* p_gem) {
+	switch (gem_color(p_gem)) {
+		case 'y':
+		printf("Yellow gem\n");
+		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
+		printf("Damage:\t%f\nCrit:\t%f\n\n", p_gem->damage, p_gem->crit);
+		break;
+		case 'o':
+		printf("Orange gem\n");
+		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
+		printf("Leech:\t%f\n\n", p_gem->leech);
+		break;
+		case 'b':
+		printf("Black gem\n");
+		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
+		printf("Damage:\t%f\nBbound:\t%f\n\n", p_gem->damage, p_gem->bbound);
+		break;
+		case 'm':
+		printf("Managem\n");
+		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
+		printf("Leech:\t%f\nBbound:\t%f\n", p_gem->leech, p_gem->bbound);
+		printf("Mana power:\t%f\n\n", p_gem->leech*p_gem->bbound);
+		break;
+		case 'k':
+		printf("Killgem\n");
+		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
+		printf("Damage:\t%f\nCrit:\t%f\nBbound:\t%f\n", p_gem->damage, p_gem->crit, p_gem->bbound);
+		printf("Kill power:\t%f\n\n", p_gem->damage*p_gem->bbound*p_gem->crit*p_gem->bbound);
+		break;
+		default:
+		printf("Strange gem\n");
+		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
+		printf("Damage:\t%f\nCrit:\t%f\nLeech:\t%f\nBbound:\t%f\n", p_gem->damage, p_gem->crit, p_gem->leech, p_gem->bbound);
+		printf("Mana power:\t%f\n", p_gem->leech*p_gem->bbound);
+		printf("Kill power:\t%f\n\n", p_gem->damage*p_gem->bbound*p_gem->crit*p_gem->bbound);
+	}
 }
 
 void print_tree(gem* gemf, char* prefix)
@@ -200,12 +210,11 @@ void print_tree(gem* gemf, char* prefix)
   }
 }
 
-gem gem_build(char* parens, int len)
+int gem_build(char* parens, int len, gem* gems, int place)
 {
 	if (len==1) {
-		gem temp;
-		gem_color_init(&temp, parens[0]);
-		return temp;
+		gem_color_init(gems+place+1, parens[0]);
+		return place+1;
 	}
 	int open_parens=0;
 	int i=0;
@@ -214,26 +223,32 @@ gem gem_build(char* parens, int len)
 		if (parens[i]==')') open_parens--;
 		if (open_parens==0) break;
 	}
-	gem father=gem_build(parens+1, i);
-	gem mother=gem_build(parens+i+2, len-i-3);
-	gem temp;
-	gem_combine(&father, &mother, &temp);
-	return temp;
+	int father_chain=gem_build(parens+1, i, gems, place);
+	int mother_chain=gem_build(parens+i+2, len-i-3, gems, father_chain);
+	gem_combine(gems+father_chain, gems+mother_chain, gems+mother_chain+1);
+	return mother_chain+1;
 }
 
 int main(int argc, char** argv)
 {
 	char opt;
 	int output_tree=0;
-	while ((opt=getopt(argc,argv,"t"))!=-1) {
+	char* parens_amps=NULL;
+	int len_amps=0;
+	while ((opt=getopt(argc,argv,"ta:"))!=-1) {
 		switch(opt) {
 			case 't':
 				output_tree = 1;
-				break;
+			break;
+			case 'a':
+				while (optarg[len_amps] != '\0') len_amps++;
+				parens_amps=malloc((len_amps+1)*sizeof(char));
+				strcpy(parens_amps, optarg);
+			break;
 			case '?':
 				return 1;
 			default:
-				break;
+			break;
 		}
 	}
 	char* parens;
@@ -253,12 +268,29 @@ int main(int argc, char** argv)
 	}
 	if (len<1) printf("Improper gem recipe\n");
 	else {
-		gem result=gem_build(parens, len);
-		gem_print(&result);
+		int value=(len+3)/4;			// gem
+		gem gems[2*value-1];
+		int place=gem_build(parens, len, gems, -1);
+		printf("\nMain gem:\n");
+		gem_print(gems+place);
 		if (output_tree) {
 			printf("Tree:\n");
-			print_tree(&result, "");
+			print_tree(gems+place, "");
 			printf("\n");
+		}
+		if (len_amps>0) {
+			value=(len_amps+3)/4;			// amps
+			gem amps[2*value-1];
+			int place_amps=gem_build(parens_amps, len_amps, amps, -1);
+			printf("Amplifier:\n");
+			gem_print(amps+place_amps);
+			if (output_tree) {
+				printf("Tree:\n");
+				print_tree(amps+place_amps, "");
+				printf("\n");
+			}
+			printf("Global mana power (rescaled):\t%f\n", (gem_amp_global_mana_power(gems[place], amps[place])/1.5));
+			printf("Global kill power (rescaled):\t%f\n\n", (gem_amp_global_kill_power(gems[place], amps[place])/(3.2*1.5)));
 		}
 	}
 	return 0;
