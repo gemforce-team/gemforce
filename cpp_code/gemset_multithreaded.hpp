@@ -10,7 +10,7 @@
 using namespace std;
 
 const int BLOCK_SIZE=10000;
-const int THREADS_N=8;
+const int THREADS_N=4;
 sem_t sema;
 
 vector<Gem*>** generate_gemset_multithreaded (
@@ -46,6 +46,7 @@ vector<Gem*>** generate_gemset_multithreaded (
             [&m, &current_pool, p1, p2, limiter] ()
             {
               vector<Gem*> *tmp = new vector<Gem*>;
+              tmp->reserve(p1->size()*p2->size());
               for (Gem* g1 : *p1)
                 for (Gem* g2 : *p2)
                   tmp->push_back(combine(g1, g2));
@@ -58,6 +59,7 @@ vector<Gem*>** generate_gemset_multithreaded (
               {
                 cout<<"overflow: "<<current_pool->size()<<" ";
                 limiter(current_pool);
+                current_pool->reserve(1000*1000);
                 cout<<current_pool->size()<<"\n";
               }
               m.unlock();

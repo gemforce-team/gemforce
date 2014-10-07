@@ -1,7 +1,7 @@
 #include <vector>
 #include <iostream>
 #include "gem_utils.hpp"
-#include "gemset.hpp"
+#include "gemset_multithreaded.hpp"
 #include "killgem_limiter.hpp"
 using namespace std;
 
@@ -17,8 +17,8 @@ int main ()
   base_gems->push_back(new Gem(1, 0, 1, 1));
 //   base_gems->push_back(new Gem(1, 0, 0, 1));
 //   base_gems->push_back(new Gem(0, 0, 1, 1));
-  vector<Gem*>** gemset=generate_gemset(base_gems, 64, limit_killgem);
-  Gem* g=best_from(gemset[64], better_killgem);
+  vector<Gem*>** gemset=generate_gemset_multithreaded(base_gems, 1024, limit_killgem);
+  Gem* g=best_from(gemset[1024], better_killgem);
   print_tree(g);
   print_stats(g);
   return 0;
