@@ -81,7 +81,7 @@ void gem_init(gem *p_gem, int grd, double leech)
 
 int gem_better(gem gem1, gem gem2)
 {
-	return gem1.leech>=gem2.leech;
+	return gem1.leech>gem2.leech;
 }
 void print_table(gem* gems, int len)
 {
