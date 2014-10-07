@@ -41,8 +41,8 @@ vector<Gem*>** generate_gemset_multithreaded (
       for (vector<Gem*>* p1 : pools[first_val])
         for (vector<Gem*>* p2 : pools[second_val])
         {
-//           sem_wait(&sema);
-//           threads.push_back(new thread(
+          sem_wait(&sema);
+          threads.push_back(new thread(
             [&m, &current_pool, p1, p2, limiter] ()
             {
               vector<Gem*> *tmp = new vector<Gem*>;
@@ -51,7 +51,7 @@ vector<Gem*>** generate_gemset_multithreaded (
                 for (Gem* g2 : *p2)
                   tmp->push_back(combine(g1, g2));
               limiter(tmp);
-//               sem_post(&sema);
+              sem_post(&sema);
               m.lock();
               for (Gem* a : *tmp)
                 current_pool->push_back(a);
@@ -64,8 +64,8 @@ vector<Gem*>** generate_gemset_multithreaded (
               }
               m.unlock();
               delete tmp;
-            }();
-//           ));
+            }
+          ));
         }
     }
     
