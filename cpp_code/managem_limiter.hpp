@@ -9,7 +9,7 @@ bool limit_managem_cmp (const Gem* a, const Gem* b)
 {
   if (a->grade!=b->grade)
     return a->grade>b->grade;
-  if (int(a->orange*ACC)!=int(b->orange*ACC))
+  if (int(a->orange*ORANGE_ACC)!=int(b->orange*ORANGE_ACC))
     return a->orange>b->orange;
   return a->black>b->black;
 }
@@ -27,9 +27,9 @@ void limit_managem (vector<Gem*>*& gems)
       current_grade=g->grade;
       boundary=-1;
     }
-    if (int(g->black*ACC)>boundary)
+    if (int(g->black*BLACK_ACC)>boundary)
     {
-      boundary=int(g->black*ACC);
+      boundary=int(g->black*BLACK_ACC);
       tmp->push_back(g);
     }
     else

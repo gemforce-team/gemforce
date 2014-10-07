@@ -9,9 +9,9 @@ bool limit_killgem_cmp (const Gem* a, const Gem* b)
 {
   if (a->grade!=b->grade)
     return a->grade>b->grade;
-  if (int(a->damage*ACC)!=int(b->damage*ACC))
+  if (int(a->damage*DAMAGE_ACC)!=int(b->damage*DAMAGE_ACC))
     return a->damage>b->damage;
-  if (int(a->yellow*ACC)!=int(b->yellow*ACC))
+  if (int(a->yellow*YELLOW_ACC)!=int(b->yellow*YELLOW_ACC))
     return a->yellow>b->yellow;
   return a->black>b->black;
 }
@@ -29,9 +29,9 @@ void limit_killgem (vector<Gem*>*& gems)
       current_grade=g->grade;
       tree.clear();
     }
-    if (tree.read_max(int(g->yellow*ACC))<int(g->black*ACC))
+    if (tree.read_max(int(g->yellow*YELLOW_ACC))<int(g->black*BLACK_ACC))
     {
-      tree.add_element(int(g->yellow*ACC), int(g->black*ACC));
+      tree.add_element(int(g->yellow*YELLOW_ACC), int(g->black*BLACK_ACC));
       tmp->push_back(g);
     }
     else

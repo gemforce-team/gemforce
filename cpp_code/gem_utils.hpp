@@ -6,7 +6,10 @@
 #include <algorithm>
 using namespace std;
 
-int ACC=150;
+int ORANGE_ACC=150;
+int YELLOW_ACC=150;
+int  BLACK_ACC=150;
+int DAMAGE_ACC=150;
 
 class Gem;
 typedef pair<const Gem*, const Gem*> gem_pair;

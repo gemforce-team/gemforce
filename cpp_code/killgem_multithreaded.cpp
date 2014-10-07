@@ -14,7 +14,7 @@ float amp_killgem_power (const Gem* killgem, const Gem* amplifier)
 {
   int value = killgem->value+8*amplifier->value;
   float power = (killgem->yellow*1.5+6*0.23*2.8*amplifier->yellow)*killgem->black*
-                (killgem->damage*3.2+0.28*8*2.8*amplifier->damage)*killgem->black;
+                (killgem->damage*3.2+0.28*6*2.8*amplifier->damage)*killgem->black;
   return power/pow(value, GROWTH);
 }
 
