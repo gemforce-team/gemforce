@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include "gem_utils.hpp"
+#include "gemset.hpp"
 #include "managem_limiter.hpp"
 using namespace std;
 

@@ -2,11 +2,11 @@
 #include <iostream>
 #include <cmath>
 #include "gem_utils.hpp"
-#include "gemset.hpp"
+#include "gemset_multithreaded.hpp"
 #include "managem_limiter.hpp"
 using namespace std;
 
-const int MANAGEM_VALUE=64;
+const int MANAGEM_VALUE=128;
 const int AMP_MAX_VALUE=32;
 const float GROWTH = 0.6343;
 
@@ -27,11 +27,11 @@ int main ()
   vector<Gem*>* basegems_managem = new vector<Gem*>;
   basegems_managem->push_back(new Gem(0, 1, 0));
   basegems_managem->push_back(new Gem(0, 0, 1));
-  vector<Gem*>** gemset_managem=generate_gemset(basegems_managem, MANAGEM_VALUE, limit_managem);
+  vector<Gem*>** gemset_managem=generate_gemset_multithreaded(basegems_managem, MANAGEM_VALUE, limit_managem);
 
   vector<Gem*>* basegems_amplifier = new vector<Gem*>;
   basegems_amplifier->push_back(new Gem(0, 1, 0));
-  vector<Gem*>** gemset_amplifier=generate_gemset(basegems_amplifier, AMP_MAX_VALUE, limit_managem);
+  vector<Gem*>** gemset_amplifier=generate_gemset_multithreaded(basegems_amplifier, AMP_MAX_VALUE, limit_managem);
 
   vector<Gem*>* managems = gemset_managem[MANAGEM_VALUE];
   

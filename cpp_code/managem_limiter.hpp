@@ -2,6 +2,7 @@
 #define _MANAGEM_LIMITER_HPP
 
 #include <vector>
+#include "gem_utils.hpp"
 using namespace std;
 
 bool limit_managem_cmp (const Gem* a, const Gem* b)

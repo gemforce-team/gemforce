@@ -2,11 +2,11 @@
 #include <iostream>
 #include <cmath>
 #include "gem_utils.hpp"
-#include "gemset.hpp"
+#include "gemset_multithreaded.hpp"
 #include "killgem_limiter.hpp"
 using namespace std;
 
-const int KILLGEM_VALUE=32;
+const int KILLGEM_VALUE=64;
 const int AMP_MAX_VALUE=32;
 const float GROWTH = 1.4274;
 
@@ -23,11 +23,11 @@ int main ()
   vector<Gem*>* basegems_killgem = new vector<Gem*>;
   basegems_killgem->push_back(new Gem(1, 0, 0, 1));
   basegems_killgem->push_back(new Gem(0, 0, 1, 1.1861));
-  vector<Gem*>** gemset_killgem=generate_gemset(basegems_killgem, KILLGEM_VALUE, limit_killgem);
+  vector<Gem*>** gemset_killgem=generate_gemset_multithreaded(basegems_killgem, KILLGEM_VALUE, limit_killgem);
 
   vector<Gem*>* basegems_amplifier = new vector<Gem*>;
   basegems_amplifier->push_back(new Gem(1, 0, 0, 1));
-  vector<Gem*>** gemset_amplifier=generate_gemset(basegems_amplifier, AMP_MAX_VALUE, limit_killgem);
+  vector<Gem*>** gemset_amplifier=generate_gemset_multithreaded(basegems_amplifier, AMP_MAX_VALUE, limit_killgem);
 
   vector<Gem*>* killgems = gemset_killgem[KILLGEM_VALUE];
   

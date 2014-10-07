@@ -2,6 +2,7 @@
 #define _KILLGEM_LIMITER_HPP
 
 #include <vector>
+#include "gem_utils.hpp"
 #include "interval_tree.hpp"
 using namespace std;
 bool limit_killgem_cmp (const Gem* a, const Gem* b)
