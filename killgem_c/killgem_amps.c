@@ -67,7 +67,7 @@ void print_amps_table(gem* gems, gemY* amps, int len)
 {
   printf("# Gems\tKillgem\tAmps\tPower (rescaled)\n");
   int i;
-  for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), gem_amp_global_power(gems[i], amps[i])/1.5);
+  for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), gem_amp_global_power(gems[i], amps[i])/(1.5*3.2));
   printf("\n");
 }
 
