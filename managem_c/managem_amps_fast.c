@@ -85,7 +85,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 	    int comb_tot=0;
 	    for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 	    
-	    int grade_max=(int)(log2(i+1)+1);       		// gems with max grade cannot be destroyed, so this is a max, not a sup
+	    int grade_max=(int)(log2(i+1)+1);						// gems with max grade cannot be destroyed, so this is a max, not a sup
 	    gem* temp_pools[grade_max-1];								// get the temp pools for every grade
 	    int  temp_index[grade_max-1];								// index of work point in temp pools
 	    gem* subpools[grade_max-1];									// get subpools for every grade
@@ -315,12 +315,16 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
   }
   if (output_table) print_amps_table(gems, amps, len);
   
-  if (output_debug) {											// quite useless...
-    printf("Dumping whole pool of value %d:\n\n",len);
-    for (i=0;i<pool_length[len-1];++i) {
-      gem_print(pool[len-1]+i);
-      print_parens(pool[len-1]+i);
-      printf("\n\n");
+  if (output_debug) {
+    printf("Printing all parens for every best setup:\n\n");
+    for (i=2;i<len;++i) {
+			printf("Total value:\t%d\n\n",i+1);
+			printf("Managem combining scheme:\n");
+			print_parens(gems+i-1);
+			printf("\n\n");
+			printf("Amplifier combining scheme:\n");
+			print_parens_O(amps+i-1);
+			printf("\n\n\n");
     }
   }
   
