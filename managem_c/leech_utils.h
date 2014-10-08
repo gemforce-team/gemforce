@@ -48,7 +48,7 @@ void gem_combine_O (gemO *p_gem1, gemO *p_gem2, gemO *p_gem_combined)
 		case -1:
 			gem_comb_d1_O(p_gem2, p_gem1, p_gem_combined);
 			break;
-		default: 
+		default:
 			gem_comb_gn_O(p_gem1, p_gem2, p_gem_combined);
 			break;
 	}
@@ -64,7 +64,7 @@ void gem_init_O(gemO *p_gem, int grd, float leech)
 
 int gem_better(gemO gem1, gemO gem2)
 {
-	return gem1.leech>=gem2.leech;
+	return gem1.leech>gem2.leech;
 }
 
 void print_parens_O(gemO* gemf)

@@ -24,29 +24,29 @@ void gem_init_killgem(gem *p_gem)	//start gem does not matter
 
 int gem_less_equal(gem gem1, gem gem2)
 {
-  if ((int)(gem1.damage*ACC) != (int)(gem2.damage*ACC))
-    return gem1.damage<gem2.damage;
-  if ((int)(gem1.bbound*ACC) != (int)(gem2.bbound*ACC))
-    return gem1.bbound<gem2.bbound;
-  return gem1.crit<gem2.crit;
+	if ((int)(gem1.damage*ACC) != (int)(gem2.damage*ACC))
+		return gem1.damage<gem2.damage;
+	if ((int)(gem1.bbound*ACC) != (int)(gem2.bbound*ACC))
+		return gem1.bbound<gem2.bbound;
+	return gem1.crit<gem2.crit;
 }
 
 void gem_sort_damage_bbound(gem* gems, int len)
 {
-  if (len<=1) return;
-  int pivot=0;
-  int i;
-  for (i=1;i<len;++i) {
-    if (gem_less_equal(gems[i],gems[pivot])) {
-      gem temp=gems[pivot];
-      gems[pivot]=gems[i];
-      gems[i]=gems[pivot+1];
-      gems[pivot+1]=temp;
-      pivot++;
-    }
-  }
-  gem_sort_damage_bbound(gems,pivot);
-  gem_sort_damage_bbound(gems+1+pivot,len-pivot-1);
+	if (len<=1) return;
+	int pivot=0;
+	int i;
+	for (i=1;i<len;++i) {
+		if (gem_less_equal(gems[i],gems[pivot])) {
+			gem temp=gems[pivot];
+			gems[pivot]=gems[i];
+			gems[i]=gems[pivot+1];
+			gems[pivot+1]=temp;
+			pivot++;
+		}
+	}
+	gem_sort_damage_bbound(gems,pivot);
+	gem_sort_damage_bbound(gems+1+pivot,len-pivot-1);
 }
 
 void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
@@ -65,29 +65,29 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 
 	for (i=1; i<len; ++i) {
 		int j,k,h,l;
-    int eoc=(i+1)/2;        //end of combining
-    int comb_tot=0;
-    for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
-    
-    int grade_max=(int)(log2(i+1)+1);       		// gems with max grade cannot be destroyed, so this is a max, not a sup
-    gem* temp_pools[grade_max-1];								// get the temp pools for every grade
-    int  temp_index[grade_max-1];								// index of work point in temp pools
-    gem* subpools[grade_max-1];									// get subpools for every grade
-    int  subpools_length[grade_max-1];
-    for (j=0; j<grade_max-1; ++j) {							// init everything
+		int eoc=(i+1)/2;        //end of combining
+		int comb_tot=0;
+		for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
+		
+		int grade_max=(int)(log2(i+1)+1);       		// gems with max grade cannot be destroyed, so this is a max, not a sup
+		gem* temp_pools[grade_max-1];								// get the temp pools for every grade
+		int  temp_index[grade_max-1];								// index of work point in temp pools
+		gem* subpools[grade_max-1];									// get subpools for every grade
+		int  subpools_length[grade_max-1];
+		for (j=0; j<grade_max-1; ++j) {							// init everything
 			temp_pools[j]=malloc(size*sizeof(gem));
 			temp_index[j]=0;
 			subpools_length[j]=0;
 		}
-    for (j=0;j<eoc;++j) {                               // combine gems and put them in temp pools
-      for (k=0; k< pool_length[j]; ++k) {
-        for (h=0; h< pool_length[i-1-j]; ++h) {
-          gem temp;
-          gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
-          int grd=temp.grade-2;
-          temp_pools[grd][temp_index[grd]]=temp;
-          temp_index[grd]++;
-          if (temp_index[grd]==size) {									// let's skim a pool
+		for (j=0;j<eoc;++j) {                               // combine gems and put them in temp pools
+			for (k=0; k< pool_length[j]; ++k) {
+				for (h=0; h< pool_length[i-1-j]; ++h) {
+					gem temp;
+					gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
+					int grd=temp.grade-2;
+					temp_pools[grd][temp_index[grd]]=temp;
+					temp_index[grd]++;
+					if (temp_index[grd]==size) {									// let's skim a pool
 						int length=size+subpools_length[grd];
 						gem* temp_array=malloc(length*sizeof(gem));
 						int index=0;
@@ -122,23 +122,23 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 							}
 						}														// all unnecessary gems destroyed
 						free(tree);									// free
-			    
+					
 						subpools_length[grd]=length-broken;
 						subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
 						
 						index=0;
-				    for (l=0; l<length; ++l) {      // copying to subpool
-				      if (temp_array[l].grade!=0) {
-				        subpools[grd][index]=temp_array[l];
-				        index++;
-				      }   
-				    }
-				    free(temp_array);     // free
+						for (l=0; l<length; ++l) {      // copying to subpool
+							if (temp_array[l].grade!=0) {
+								subpools[grd][index]=temp_array[l];
+								index++;
+							}   
+						}
+						free(temp_array);     // free
 					}												// rebuilt subpool[grd], work restarts
-        }
-      }
-    }
-    int grd;
+				}
+			}
+		}
+		int grd;
 		for (grd=0; grd<grade_max-1; ++grd)  {									// let's put remaining gems on
 			if (temp_index[grd] != 0) {
 				int length=temp_index[grd]+subpools_length[grd];
@@ -174,35 +174,35 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 							}
 						}														// all unnecessary gems destroyed
 						free(tree);									// free
-			    
+					
 						subpools_length[grd]=length-broken;
 						subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
 				index=0;
-		    for (l=0; l<length; ++l) {      // copying to subpool
-		      if (temp_array[l].grade!=0) {
-		        subpools[grd][index]=temp_array[l];
-		        index++;
-		      }   
-		    }
-		    free(temp_array);     // free
+				for (l=0; l<length; ++l) {      // copying to subpool
+					if (temp_array[l].grade!=0) {
+						subpools[grd][index]=temp_array[l];
+						index++;
+					}   
+				}
+				free(temp_array);     // free
 			}												// subpool[grd] is now full
 		}
 		pool_length[i]=0;
 		for (grd=0; grd<grade_max-1; ++grd) pool_length[i]+=subpools_length[grd];
 		pool[i]=malloc(pool_length[i]*sizeof(gem));
 		
-    int place=0;
-    for (grd=0;grd<grade_max-1;++grd) {      // copying to pool
+		int place=0;
+		for (grd=0;grd<grade_max-1;++grd) {      // copying to pool
 			for (j=0; j<subpools_length[grd]; ++j) {
-        pool[i][place]=subpools[grd][j];
-        place++;
-      }   
-    }
-    for (grd=0;grd<grade_max-1;++grd) {     // free
+				pool[i][place]=subpools[grd][j];
+				place++;
+			}   
+		}
+		for (grd=0;grd<grade_max-1;++grd) {     // free
 			free(temp_pools[grd]);
 			free(subpools[grd]);
-    }
-    gems[i]=pool[i][0];						// choosing gem (criteria moved to more_power def)
+		}
+		gems[i]=pool[i][0];						// choosing gem (criteria moved to more_power def)
 		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
@@ -236,7 +236,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			printf("\n\n");
 		}
 	}
-  
+	
 	for (i=0;i<len;++i) free(pool[i]);		// free
 }
 

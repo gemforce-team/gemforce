@@ -19,7 +19,7 @@ void int_swap (int *p1, int *p2)
 	*p2=t;
 }
 
-int int_max(int a, int b) 
+int int_max(int a, int b)
 {
 	if (a > b) return a;
 	else return b;
@@ -65,7 +65,7 @@ void gem_combine (gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 		case -1:
 			gem_comb_d1(p_gem2, p_gem1, p_gem_combined);
 			break;
-		default: 
+		default:
 			gem_comb_gn(p_gem1, p_gem2, p_gem_combined);
 			break;
 	}
@@ -131,8 +131,8 @@ void print_tree(gem* gemf, char* prefix)
 			gem2=gemf->father;
 			gem1=gemf->mother;
 		}
-		print_tree(gem1, string);	
-		printf("%s ┗",prefix);		
+		print_tree(gem1, string);
+		printf("%s ┗",prefix);
 		char string2[strlen(prefix)+2];
 		strcpy(string2,prefix);
 		strcat(string2,"  ");
@@ -152,7 +152,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	gem_init(pool[0],1,1);
 	pool_length[0]=1;
 	gem_print(gems);
-	
+
 	for (i=1; i<len; ++i) {
 		int j,k,h;
 		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
@@ -162,7 +162,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
 		for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
-		
+
 		for (j=0;j<eoc;++j) {										// combine and put istantly in right pool
 			for (k=0; k< pool_length[j]; ++k) {
 				for (h=0; h< pool_length[i-1-j]; ++h) {
@@ -175,12 +175,12 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 				}
 			}
 		}
-		
+
 		gems[i]=pool[i][0];
 		for (j=1;j<pool_length[i];++j) if (gem_better(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
-		
+
 		printf("Value:\t%d\n",i+1);
 		if (output_info) {
 			printf("Raw:\t%d\n",comb_tot);
@@ -189,7 +189,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		gem_print(gems+i);
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
-	
+
 	if (output_parens) {
 		printf("Combining scheme:\n");
 		print_parens(gems+len-1);
@@ -201,7 +201,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		printf("\n");
 	}
 	if (output_table) print_table(gems, len);
-	
+
 	if (output_debug) {
 		printf("Dumping whole pool of value %d:\n\n",len);
 		for (i=0;i<pool_length[len-1];++i) {
@@ -210,7 +210,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			printf("\n\n");
 		}
 	}
-	
+
 	for (i=0;i<len;++i) free(pool[i]);		// free
 }
 

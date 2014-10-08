@@ -10,35 +10,35 @@ struct Gem_Y {
 };
 
 void gem_print_Y(gemY *p_gem) {
-	printf("Grade:\t%d\nDamage:\t%f\nCrit:\t%f\nPower:\t%f\n\n", 
+	printf("Grade:\t%d\nDamage:\t%f\nCrit:\t%f\nPower:\t%f\n\n",
 		p_gem->grade, p_gem->damage, p_gem->crit, p_gem->damage*p_gem->crit);
 }
 
 void gem_comb_eq_Y(gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
 {
-  p_gem_combined->grade = p_gem1->grade+1;
+	p_gem_combined->grade = p_gem1->grade+1;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = 0.87*p_gem1->damage + 0.71*p_gem2->damage;
-  else p_gem_combined->damage = 0.87*p_gem2->damage + 0.71*p_gem1->damage;
-  if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.5*p_gem2->crit;
-  else p_gem_combined->crit = 0.88*p_gem2->crit + 0.5*p_gem1->crit;
+	else p_gem_combined->damage = 0.87*p_gem2->damage + 0.71*p_gem1->damage;
+	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.5*p_gem2->crit;
+	else p_gem_combined->crit = 0.88*p_gem2->crit + 0.5*p_gem1->crit;
 }
 
 void gem_comb_d1_Y(gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)     //bigger is always gem1
 {
-  p_gem_combined->grade = p_gem1->grade;
+	p_gem_combined->grade = p_gem1->grade;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = 0.86*p_gem1->damage + 0.7*p_gem2->damage;
-  else p_gem_combined->damage = 0.86*p_gem2->damage + 0.7*p_gem1->damage;
-  if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
-  else p_gem_combined->crit = 0.88*p_gem2->crit + 0.44*p_gem1->crit;
+	else p_gem_combined->damage = 0.86*p_gem2->damage + 0.7*p_gem1->damage;
+	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
+	else p_gem_combined->crit = 0.88*p_gem2->crit + 0.44*p_gem1->crit;
 }
 
 void gem_comb_gn_Y(gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
 {
-  p_gem_combined->grade = int_max(p_gem1->grade, p_gem2->grade);
+	p_gem_combined->grade = int_max(p_gem1->grade, p_gem2->grade);
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = 0.85*p_gem1->damage + 0.69*p_gem2->damage;
-  else p_gem_combined->damage = 0.85*p_gem2->damage + 0.69*p_gem1->damage;
-  if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
-  else p_gem_combined->crit = 0.88*p_gem2->crit + 0.44*p_gem1->crit;
+	else p_gem_combined->damage = 0.85*p_gem2->damage + 0.69*p_gem1->damage;
+	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
+	else p_gem_combined->crit = 0.88*p_gem2->crit + 0.44*p_gem1->crit;
 }
 
 void gem_combine_Y (gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
@@ -56,7 +56,7 @@ void gem_combine_Y (gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
 		case -1:
 			gem_comb_d1_Y(p_gem2, p_gem1, p_gem_combined);
 			break;
-		default: 
+		default:
 			gem_comb_gn_Y(p_gem1, p_gem2, p_gem_combined);
 			break;
 	}
@@ -64,11 +64,11 @@ void gem_combine_Y (gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
 
 void gem_init_Y(gemY *p_gem, int grd, float damage, float crit)
 {
-  p_gem->grade =grd;
-  p_gem->damage=damage;
-  p_gem->crit=crit;
-  p_gem->father=NULL;
-  p_gem->mother=NULL;
+	p_gem->grade =grd;
+	p_gem->damage=damage;
+	p_gem->crit=crit;
+	p_gem->father=NULL;
+	p_gem->mother=NULL;
 }
 
 //int gem_better(gemO gem1, gemO gem2)
@@ -84,22 +84,22 @@ int gem_has_less_grade_damage(gemY gem1, gemY gem2)
 	else return 0;
 }
 
-void gem_sort(gemY* gems, int len) 
+void gem_sort(gemY* gems, int len)
 {
-  if (len<=1) return;
-  int pivot=0;
-  int i;
-  for (i=1;i<len;++i) {
-    if (gem_has_less_grade_damage(gems[i],gems[pivot])) {
-      gemY temp=gems[pivot];
-      gems[pivot]=gems[i];
-      gems[i]=gems[pivot+1];
-      gems[pivot+1]=temp;
-      pivot++;
-    }
-  }
-  gem_sort(gems,pivot);
-  gem_sort(gems+1+pivot,len-pivot-1);
+	if (len<=1) return;
+	int pivot=0;
+	int i;
+	for (i=1;i<len;++i) {
+		if (gem_has_less_grade_damage(gems[i],gems[pivot])) {
+			gemY temp=gems[pivot];
+			gems[pivot]=gems[i];
+			gems[i]=gems[pivot+1];
+			gems[pivot+1]=temp;
+			pivot++;
+		}
+	}
+	gem_sort(gems,pivot);
+	gem_sort(gems+1+pivot,len-pivot-1);
 }
 
 void print_parens_Y(gemY* gemf)
@@ -143,8 +143,8 @@ void print_tree_Y(gemY* gemf, char* prefix)
 			gem2=gemf->father;
 			gem1=gemf->mother;
 		}
-		print_tree_Y(gem1, string);	
-		printf("%s ┗",prefix);		
+		print_tree_Y(gem1, string);
+		printf("%s ┗",prefix);
 		char string2[strlen(prefix)+2];
 		strcpy(string2,prefix);
 		strcat(string2,"  ");

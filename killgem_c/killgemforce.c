@@ -19,20 +19,20 @@ int gem_has_less_damage_bbound(gem gem1, gem gem2)
 
 void gem_sort_grade_damage_bbound_exact(gem* gems, int len) 	//exact sort
 {
-  if (len<=1) return;
-  int pivot=0;
-  int i;
-  for (i=1;i<len;++i) {
-    if (gem_has_less_damage_bbound(gems[i],gems[pivot])) {
-      gem temp=gems[pivot];
-      gems[pivot]=gems[i];
-      gems[i]=gems[pivot+1];
-      gems[pivot+1]=temp;
-      pivot++;
-    }
-  }
-  gem_sort_grade_damage_bbound_exact(gems,pivot);
-  gem_sort_grade_damage_bbound_exact(gems+1+pivot,len-pivot-1);
+	if (len<=1) return;
+	int pivot=0;
+	int i;
+	for (i=1;i<len;++i) {
+		if (gem_has_less_damage_bbound(gems[i],gems[pivot])) {
+			gem temp=gems[pivot];
+			gems[pivot]=gems[i];
+			gems[i]=gems[pivot+1];
+			gems[pivot+1]=temp;
+			pivot++;
+		}
+	}
+	gem_sort_grade_damage_bbound_exact(gems,pivot);
+	gem_sort_grade_damage_bbound_exact(gems+1+pivot,len-pivot-1);
 }
 
 void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
@@ -154,7 +154,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			printf("\n\n");
 		}
 	}
-  
+	
 	for (i=0;i<len;++i) free(pool[i]);		// free
 }
 

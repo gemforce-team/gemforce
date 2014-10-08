@@ -3,7 +3,7 @@
 
 float max (float a, float b)
 {
-  return a>b ? a : b;
+	return a>b ? a : b;
 }
 // place is always 0..N-1
 void tree_add_element(float* tree, int N, int place, float val)

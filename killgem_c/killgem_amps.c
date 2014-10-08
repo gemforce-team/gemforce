@@ -92,10 +92,10 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 			int j,k,h;
 			int count_big=0;
 			int eoc=(i+1)/2;		//end of combining
-			int comb_tot=0;	
+			int comb_tot=0;
 			for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 			gem* pool_big = malloc(comb_tot*sizeof(gem));			//a very big array needs to be in the heap
-	
+
 			for (j=0;j<eoc;++j) {									// pool_big gets filled of candidate gems
 				for (k=0; k< pool_length[j]; ++k) {
 					for (h=0; h< pool_length[i-1-j]; ++h) {
@@ -104,9 +104,9 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 					}
 				}
 			}
-			
+
 			gem_sort_grade_damage_bbound(pool_big,comb_tot);
-			
+
 			int grade_max=(int)(log2(i+1)+1);			// gems with max grade cannot be destroyed, so this is a max, not a sup
 			int subpools_length[grade_max-1];			// let's divide in grades
 			float maxcrit[grade_max-1];						// this will help me create the minimum tree
@@ -131,7 +131,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 			for (grd=0;grd<grade_max-1;++grd) {												// now we work on the single pools
 				int crit_cells=(int)(maxcrit[grd]*ACC)+1;								// this pool will be big from the beginning,
 				int tree_length=pow(2, ceil(log2(crit_cells)));					// but we avoid binary search
-				float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed	
+				float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed
 				for (j=1; j<tree_length+crit_cells+1; ++j) tree[j]=-1;
 				for (j=subpools_length[grd]-1;j>=0;--j) {																// start from large z
 					gem* p_gem=pool_big+subpools_to_big_convert(subpools_length,grd,j);
@@ -145,17 +145,17 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 				}														// all unnecessary gems destroyed
 				free(tree);									// free
 			}
-	
-			pool_length[i]=comb_tot-broken;		
+
+			pool_length[i]=comb_tot-broken;
 			pool[i]=malloc(pool_length[i]*sizeof(gem));			// pool init via broken
-			
+
 			place=0;
 			for (j=0;j<comb_tot;++j) {				// copying to pool
 				if (pool_big[j].grade!=0) {
 					pool[i][place]=pool_big[j];
 					place++;
 				}
-			}		
+			}
 			free(pool_big);			// free
 
 	    printf("Killgem: %d\n",i+1);
@@ -173,7 +173,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
   poolY[0]=malloc(sizeof(gemY));
   gem_init_Y(poolY[0],1,1,1);
   poolY_length[0]=1;
-  
+
  for (i=1; i<len/6; ++i) {			//amplifier computing
 		int j,k,h;
 		int count_big=0;
@@ -181,7 +181,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 		int comb_tot=0;
 		for (j=0; j<eoc; ++j) comb_tot+=poolY_length[j]*poolY_length[i-j-1];
 		gemY* pool_big = malloc(comb_tot*sizeof(gemY));		//a very big array needs to be in the heap
-				
+
 		for (j=0;j<eoc;++j) {								// pool_big gets filled of candidate gems
 			for (k=0; k< poolY_length[j]; ++k) {
 				for (h=0; h< poolY_length[i-1-j]; ++h) {
@@ -192,13 +192,13 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 		}
 
 		gem_sort(pool_big,comb_tot);
-		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup	
+		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
 		int subpools_length[grade_max-1];		// let's divide in grades
-		
+
 		for (j=0;j<grade_max-1;++j) subpools_length[j]=0;
 
 		int grd=0;
-		
+
 		for (j=0;j<comb_tot;++j) {				// see how long subpools are
 			if ((pool_big+j)->grade==grd+2) subpools_length[grd]++;
 			else {
@@ -208,7 +208,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 		}
 
 		int broken=0;
-		
+
 		for (grd=0;grd<grade_max-1;++grd) {		// now we work on the single pools
 			float lim_crit=-1;
 			for (j=subpools_length[grd]-1;j>=0;--j) {
@@ -219,18 +219,18 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 				else lim_crit=pool_big[subpools_to_big_convert(subpools_length,grd,j)].crit;
 			}
 		}										// all unnecessary gems destroyed
-		poolY_length[i]=comb_tot-broken;		
+		poolY_length[i]=comb_tot-broken;
 		poolY[i]=malloc(poolY_length[i]*sizeof(gem));			// pool init via broken
-		
+
 		int place=0;
 		for (j=0;j<comb_tot;++j) {		// copying to pool
 			if (pool_big[j].grade!=0) {
 				poolY[i][place]=pool_big[j];
 				place++;
-			}	
+			}
 		}
 		free(pool_big);		// free
-		
+
 		printf("Amplifier: %d\n",i+1);
     if (output_info) {
 			printf("Raw:\t%d\n",comb_tot);
@@ -238,7 +238,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 		}
   }
   printf("Amplifier pooling done!\n\n");
-  	
+
   int j,k,h;											// let's choose the right gem-amp combo
   gemY amps[len];
   gem gems[len];
@@ -249,9 +249,9 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
   gem_print(gems);
   printf("Amplifier:\n");
   gem_print_Y(amps);
-  
+
   for (i=1;i<len;++i) {																	// for every total value
-		gem_init(gems+i,0,0,0,0);														// we init the gems 
+		gem_init(gems+i,0,0,0,0);														// we init the gems
 		gem_init_Y(amps+i,0,0,0);														// to extremely weak ones
 		for (j=0;j<=i/6;++j) {															// for every amount of amps we can fit in
 			int value = i-6*j;																// this is the amount of gems we have left
@@ -291,7 +291,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
     printf("Amplifier combining scheme:\n");
     print_parens_Y(amps+len-1);
     printf("\n\n");
-  }   
+  }
   if (output_tree) {
     printf("Killgem tree:\n");
     print_tree(gems+len-1, "");
@@ -301,7 +301,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
     printf("\n");
   }
   if (output_table) print_amps_table(gems, amps, len);
-  
+
   if (output_debug) {											// quite useless...
     printf("Dumping whole pool of value %d:\n\n",len);
     for (i=0;i<pool_length[len-1];++i) {
@@ -310,7 +310,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
       printf("\n\n");
     }
   }
-  
+
   for (i=0;i<len;++i) free(pool[i]);      // free gems
   for (i=0;i<len/6;++i) free(poolY[i]);   // free amps
 }

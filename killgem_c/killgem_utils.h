@@ -28,66 +28,66 @@ void gem_print(gem* p_gem) {
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
-  p_gem_combined->grade = p_gem1->grade+1;
+	p_gem_combined->grade = p_gem1->grade+1;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = 0.87*p_gem1->damage + 0.71*p_gem2->damage;
-  else p_gem_combined->damage = 0.87*p_gem2->damage + 0.71*p_gem1->damage;
-  if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.5*p_gem2->crit;
-  else p_gem_combined->crit = 0.88*p_gem2->crit + 0.5*p_gem1->crit;
-  if (p_gem1->bbound > p_gem2->bbound) p_gem_combined->bbound = 0.78*p_gem1->bbound + 0.31*p_gem2->bbound;
-  else p_gem_combined->bbound = 0.78*p_gem2->bbound + 0.31*p_gem1->bbound;
+	else p_gem_combined->damage = 0.87*p_gem2->damage + 0.71*p_gem1->damage;
+	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.5*p_gem2->crit;
+	else p_gem_combined->crit = 0.88*p_gem2->crit + 0.5*p_gem1->crit;
+	if (p_gem1->bbound > p_gem2->bbound) p_gem_combined->bbound = 0.78*p_gem1->bbound + 0.31*p_gem2->bbound;
+	else p_gem_combined->bbound = 0.78*p_gem2->bbound + 0.31*p_gem1->bbound;
 }
 
 void gem_comb_d1(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)     //bigger is always gem1
 {
-  p_gem_combined->grade = p_gem1->grade;
+	p_gem_combined->grade = p_gem1->grade;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = 0.86*p_gem1->damage + 0.7*p_gem2->damage;
-  else p_gem_combined->damage = 0.86*p_gem2->damage + 0.7*p_gem1->damage;
-  if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
-  else p_gem_combined->crit = 0.88*p_gem2->crit + 0.44*p_gem1->crit;
-  if (p_gem1->bbound > p_gem2->bbound) p_gem_combined->bbound = 0.79*p_gem1->bbound + 0.29*p_gem2->bbound;
-  else p_gem_combined->bbound = 0.79*p_gem2->bbound + 0.29*p_gem1->bbound;
+	else p_gem_combined->damage = 0.86*p_gem2->damage + 0.7*p_gem1->damage;
+	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
+	else p_gem_combined->crit = 0.88*p_gem2->crit + 0.44*p_gem1->crit;
+	if (p_gem1->bbound > p_gem2->bbound) p_gem_combined->bbound = 0.79*p_gem1->bbound + 0.29*p_gem2->bbound;
+	else p_gem_combined->bbound = 0.79*p_gem2->bbound + 0.29*p_gem1->bbound;
 }
 
 void gem_comb_gn(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
-  p_gem_combined->grade = int_max(p_gem1->grade, p_gem2->grade);
+	p_gem_combined->grade = int_max(p_gem1->grade, p_gem2->grade);
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = 0.85*p_gem1->damage + 0.69*p_gem2->damage;
-  else p_gem_combined->damage = 0.85*p_gem2->damage + 0.69*p_gem1->damage;
-  if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
-  else p_gem_combined->crit = 0.88*p_gem2->crit + 0.44*p_gem1->crit;
-  if (p_gem1->bbound > p_gem2->bbound) p_gem_combined->bbound = 0.8*p_gem1->bbound + 0.27*p_gem2->bbound;
-  else p_gem_combined->bbound = 0.8*p_gem2->bbound + 0.27*p_gem1->bbound; 
+	else p_gem_combined->damage = 0.85*p_gem2->damage + 0.69*p_gem1->damage;
+	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
+	else p_gem_combined->crit = 0.88*p_gem2->crit + 0.44*p_gem1->crit;
+	if (p_gem1->bbound > p_gem2->bbound) p_gem_combined->bbound = 0.8*p_gem1->bbound + 0.27*p_gem2->bbound;
+	else p_gem_combined->bbound = 0.8*p_gem2->bbound + 0.27*p_gem1->bbound; 
 }
 
 void gem_combine (gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
-  p_gem_combined->father=p_gem1;
-  p_gem_combined->mother=p_gem2;
-  int delta = p_gem1->grade - p_gem2->grade;
-  switch (delta){
-    case 0:
-      gem_comb_eq(p_gem1, p_gem2, p_gem_combined);
-      break;
-    case 1:
-      gem_comb_d1(p_gem1, p_gem2, p_gem_combined);
-      break;
-    case -1:
-      gem_comb_d1(p_gem2, p_gem1, p_gem_combined);
-      break;
-    default: 
-      gem_comb_gn(p_gem1, p_gem2, p_gem_combined);
-      break;
-  }
+	p_gem_combined->father=p_gem1;
+	p_gem_combined->mother=p_gem2;
+	int delta = p_gem1->grade - p_gem2->grade;
+	switch (delta){
+		case 0:
+			gem_comb_eq(p_gem1, p_gem2, p_gem_combined);
+			break;
+		case 1:
+			gem_comb_d1(p_gem1, p_gem2, p_gem_combined);
+			break;
+		case -1:
+			gem_comb_d1(p_gem2, p_gem1, p_gem_combined);
+			break;
+		default: 
+			gem_comb_gn(p_gem1, p_gem2, p_gem_combined);
+			break;
+	}
 }
 
 void gem_init(gem *p_gem, int grd, double damage, double crit, double bbound)
 {
-  p_gem->grade =grd;
-  p_gem->damage=damage;
-  p_gem->crit  =crit;
-  p_gem->bbound=bbound;
-  p_gem->father=NULL;
-  p_gem->mother=NULL;
+	p_gem->grade =grd;
+	p_gem->damage=damage;
+	p_gem->crit  =crit;
+	p_gem->bbound=bbound;
+	p_gem->father=NULL;
+	p_gem->mother=NULL;
 }
 
 int gem_more_powerful(gem gem1, gem gem2)
@@ -106,92 +106,92 @@ int subpools_to_big_convert(int* subpools_length, int grd, int index)
 
 void print_table(gem* gems, int len)
 {
-  printf("# Gems\tPower\n");
-  int i;
-  for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,gem_power(gems[i]));
-  printf("\n");
+	printf("# Gems\tPower\n");
+	int i;
+	for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,gem_power(gems[i]));
+	printf("\n");
 }
 
 char gem_color(gem* p_gem)
 {
-  if (p_gem->crit==0) return 'b';
-  if (p_gem->bbound==0) return 'y';
-  else return 'k';
+	if (p_gem->crit==0) return 'b';
+	if (p_gem->bbound==0) return 'y';
+	else return 'k';
 }
 
 void print_parens(gem* gemf)
 {
-  if (gemf->father==NULL) printf("%c",gem_color(gemf));
-  else {
-    printf("(");
-    print_parens(gemf->father);
-    printf("+");
-    print_parens(gemf->mother);
-    printf(")");
-  }
-  return;
+	if (gemf->father==NULL) printf("%c",gem_color(gemf));
+	else {
+		printf("(");
+		print_parens(gemf->father);
+		printf("+");
+		print_parens(gemf->mother);
+		printf(")");
+	}
+	return;
 }
 
 int gem_getvalue(gem* p_gem)
 {
-  if (p_gem->grade==0) return 0;
-  if (p_gem->father==NULL) return 1;
-  else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
+	if (p_gem->grade==0) return 0;
+	if (p_gem->father==NULL) return 1;
+	else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
 }
 
 void print_tree(gem* gemf, char* prefix)
 {
-  if (gemf->father==NULL) {
-    printf("━ g1 %c\n",gem_color(gemf));
-  }
-  else {
-    printf("━%d\n",gem_getvalue(gemf));
-    printf("%s ┣",prefix);
-    char string[strlen(prefix)+2];
-    strcpy(string,prefix);
-    strcat(string," ┃");
-    gem* gem1;
-    gem* gem2;
-    if (gem_getvalue(gemf->father)>gem_getvalue(gemf->mother)) {
-      gem1=gemf->father;
-      gem2=gemf->mother;
-    }
-    else {
-      gem2=gemf->father;
-      gem1=gemf->mother;
-    }
-    print_tree(gem1, string);
-    printf("%s ┗",prefix);
-    char string2[strlen(prefix)+2];
-    strcpy(string2,prefix);
-    strcat(string2,"  ");
-    print_tree(gem2, string2);
-  }
+	if (gemf->father==NULL) {
+		printf("━ g1 %c\n",gem_color(gemf));
+	}
+	else {
+		printf("━%d\n",gem_getvalue(gemf));
+		printf("%s ┣",prefix);
+		char string[strlen(prefix)+2];
+		strcpy(string,prefix);
+		strcat(string," ┃");
+		gem* gem1;
+		gem* gem2;
+		if (gem_getvalue(gemf->father)>gem_getvalue(gemf->mother)) {
+			gem1=gemf->father;
+			gem2=gemf->mother;
+		}
+		else {
+			gem2=gemf->father;
+			gem1=gemf->mother;
+		}
+		print_tree(gem1, string);
+		printf("%s ┗",prefix);
+		char string2[strlen(prefix)+2];
+		strcpy(string2,prefix);
+		strcat(string2,"  ");
+		print_tree(gem2, string2);
+	}
 }
 
 int gem_has_less_crit(gem gem1, gem gem2)
 {
-  if (gem1.crit < gem2.crit) return 1;
-  else if (gem1.crit == gem2.crit && gem1.bbound < gem2.bbound) return 1;
-  else return 0;
+	if (gem1.crit < gem2.crit) return 1;
+	else if (gem1.crit == gem2.crit && gem1.bbound < gem2.bbound) return 1;
+	else return 0;
 }
 
 void gem_sort_crit(gem* gems, int len)    // it assumes all gems are at the same grade
 {
-  if (len<=1) return;											
-  int pivot=0;
-  int i;
-  for (i=1;i<len;++i) {
-    if (gem_has_less_crit(gems[i],gems[pivot])) {
-      gem temp=gems[pivot];
-      gems[pivot]=gems[i];
-      gems[i]=gems[pivot+1];
-      gems[pivot+1]=temp;
-      pivot++;
-    }
-  }
-  gem_sort_crit(gems,pivot);
-  gem_sort_crit(gems+1+pivot,len-pivot-1);
+	if (len<=1) return;											
+	int pivot=0;
+	int i;
+	for (i=1;i<len;++i) {
+		if (gem_has_less_crit(gems[i],gems[pivot])) {
+			gem temp=gems[pivot];
+			gems[pivot]=gems[i];
+			gems[i]=gems[pivot+1];
+			gems[pivot+1]=temp;
+			pivot++;
+		}
+	}
+	gem_sort_crit(gems,pivot);
+	gem_sort_crit(gems+1+pivot,len-pivot-1);
 }
 
 void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info);
