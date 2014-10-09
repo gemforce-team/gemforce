@@ -1,3086 +1,7260 @@
-Value:	1024
-Raw:	53305339
-Pool:	733
-Grade:	10
-Damage:	101.084534
-Crit:	30.387682
-Bbound:	2.628714
-Power:	21226.042969
+Iteration: 2
+Pool size after limiting: 1
+End of iteration 2
 
-Combining scheme:
-(((((((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+k))))+((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+k)))))+(((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+k))))+((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+(k+(k+k))))))))+((((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+k))))+((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))))+(((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+(k+(k+k))))))+((((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+(k+(k+(k+(k+(k+k))))))))))))+(((((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+k))))+((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))))+(((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+(k+(k+k))))))+((((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k)))))))))))+((((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+(k+(k+k))))))+((((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+(k+(k+(k+(k+(k+k))))))))))+(((((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+k)))))))))+((((k+k)+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+k))))))))+(((k+(k+k))+((k+k)+(k+(k+(k+(k+k))))))+(((k+(k+k))+(k+(k+(k+(k+(k+k))))))+(((k+k)+(k+(k+(k+(k+k)))))+((k+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+k))))))))))))))))+((((((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+k))))+((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))))+(((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+(k+(k+k))))))+((((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k)))))))))))+((((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+(k+(k+k))))))+((((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+k))))))))))+(((((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+k)))))))))+((((k+k)+(k+(k+(k+k))))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k))))))))+(((k+(k+k))+((k+k)+(k+(k+(k+(k+(k+k)))))))+(((k+(k+k))+(k+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+(k+k)))))+((k+(k+(k+k)))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k)))))))))))))))+(((((((k+k)+(k+k))+((k+k)+(k+k)))+(((k+k)+(k+k))+((k+k)+(k+(k+(k+k))))))+((((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k))))))))))+(((((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k)))))))))+((((k+k)+(k+(k+(k+k))))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k))))))))+(((k+(k+k))+((k+k)+(k+(k+(k+(k+k))))))+(((k+k)+(k+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+(k+k)))))+((k+(k+(k+k)))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k))))))))))))))+((((((k+k)+(k+k))+((k+k)+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+k)))))))))+((((k+k)+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+k))))))))+(((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+k))))))+(((k+(k+k))+(k+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+(k+k)))))+((k+(k+(k+k)))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k)))))))))))))+(((((k+k)+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+k))))))))+(((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+k))))))+(((k+(k+k))+(k+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+(k+k)))))+((k+(k+(k+k)))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k))))))))))))+((((k+(k+k))+((k+k)+(k+(k+(k+(k+k))))))+(((k+(k+k))+(k+(k+(k+(k+(k+k))))))+((k+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+(k+k)))))))))))+((((k+(k+k))+(k+(k+(k+(k+k)))))+(((k+k)+(k+(k+(k+(k+k)))))+((k+(k+(k+k)))+((k+(k+k))+((k+(k+k))+(k+(k+(k+(k+(k+k))))))))))+(((k+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+(k+k)))))))))+(((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+(k+k))))))))+(((k+(k+k))+((k+k)+(k+(k+(k+(k+k))))))+(((k+(k+k))+((k+k)+(k+(k+(k+(k+k))))))+((k+(k+(k+(k+(k+k)))))+((k+(k+(k+(k+k))))+((k+(k+(k+k)))+((k+(k+k))+((k+k)+(k+(k+(k+(k+(k+k)))))))))))))))))))))
 
-Gem tree:
+Iteration: 3
+Pool size after limiting: 1
+End of iteration 3
+
+
+Iteration: 4
+Pool size after limiting: 2
+End of iteration 4
+
+
+Iteration: 5
+Pool size after limiting: 2
+End of iteration 5
+
+
+Iteration: 6
+Pool size after limiting: 2
+End of iteration 6
+
+
+Iteration: 7
+Pool size after limiting: 3
+End of iteration 7
+
+
+Iteration: 8
+Pool size after limiting: 5
+End of iteration 8
+
+
+Iteration: 9
+Pool size after limiting: 4
+End of iteration 9
+
+
+Iteration: 10
+Pool size after limiting: 5
+End of iteration 10
+
+
+Iteration: 11
+Pool size after limiting: 6
+End of iteration 11
+
+
+Iteration: 12
+Pool size after limiting: 8
+End of iteration 12
+
+
+Iteration: 13
+Pool size after limiting: 7
+End of iteration 13
+
+
+Iteration: 14
+Pool size after limiting: 7
+End of iteration 14
+
+
+Iteration: 15
+Pool size after limiting: 7
+End of iteration 15
+
+
+Iteration: 16
+Pool size after limiting: 9
+End of iteration 16
+
+
+Iteration: 17
+Pool size after limiting: 10
+End of iteration 17
+
+
+Iteration: 18
+Pool size after limiting: 8
+End of iteration 18
+
+
+Iteration: 19
+Pool size after limiting: 9
+End of iteration 19
+
+
+Iteration: 20
+Pool size after limiting: 11
+End of iteration 20
+
+
+Iteration: 21
+Pool size after limiting: 12
+End of iteration 21
+
+
+Iteration: 22
+Pool size after limiting: 15
+End of iteration 22
+
+
+Iteration: 23
+Pool size after limiting: 13
+End of iteration 23
+
+
+Iteration: 24
+Pool size after limiting: 14
+End of iteration 24
+
+
+Iteration: 25
+Pool size after limiting: 13
+End of iteration 25
+
+
+Iteration: 26
+Pool size after limiting: 16
+End of iteration 26
+
+
+Iteration: 27
+Pool size after limiting: 14
+End of iteration 27
+
+
+Iteration: 28
+Pool size after limiting: 14
+End of iteration 28
+
+
+Iteration: 29
+Pool size after limiting: 16
+End of iteration 29
+
+
+Iteration: 30
+Pool size after limiting: 17
+End of iteration 30
+
+
+Iteration: 31
+Pool size after limiting: 16
+End of iteration 31
+
+
+Iteration: 32
+Pool size after limiting: 18
+End of iteration 32
+
+
+Iteration: 33
+Pool size after limiting: 22
+End of iteration 33
+
+
+Iteration: 34
+Pool size after limiting: 25
+End of iteration 34
+
+
+Iteration: 35
+Pool size after limiting: 29
+End of iteration 35
+
+
+Iteration: 36
+Pool size after limiting: 26
+End of iteration 36
+
+
+Iteration: 37
+Pool size after limiting: 28
+End of iteration 37
+
+
+Iteration: 38
+Pool size after limiting: 26
+End of iteration 38
+
+
+Iteration: 39
+Pool size after limiting: 27
+End of iteration 39
+
+
+Iteration: 40
+Pool size after limiting: 23
+End of iteration 40
+
+
+Iteration: 41
+Pool size after limiting: 22
+End of iteration 41
+
+
+Iteration: 42
+Pool size after limiting: 29
+End of iteration 42
+
+
+Iteration: 43
+Pool size after limiting: 27
+End of iteration 43
+
+
+Iteration: 44
+Pool size after limiting: 28
+End of iteration 44
+
+
+Iteration: 45
+Pool size after limiting: 26
+End of iteration 45
+
+
+Iteration: 46
+Pool size after limiting: 31
+End of iteration 46
+
+
+Iteration: 47
+Pool size after limiting: 31
+End of iteration 47
+
+
+Iteration: 48
+Pool size after limiting: 33
+End of iteration 48
+
+
+Iteration: 49
+Pool size after limiting: 35
+End of iteration 49
+
+
+Iteration: 50
+Pool size after limiting: 35
+End of iteration 50
+
+
+Iteration: 51
+Pool size after limiting: 36
+End of iteration 51
+
+
+Iteration: 52
+Pool size after limiting: 39
+End of iteration 52
+
+
+Iteration: 53
+Pool size after limiting: 43
+End of iteration 53
+
+
+Iteration: 54
+Pool size after limiting: 39
+End of iteration 54
+
+
+Iteration: 55
+Pool size after limiting: 39
+End of iteration 55
+
+
+Iteration: 56
+Pool size after limiting: 42
+End of iteration 56
+
+
+Iteration: 57
+Pool size after limiting: 39
+End of iteration 57
+
+
+Iteration: 58
+Pool size after limiting: 43
+End of iteration 58
+
+
+Iteration: 59
+Pool size after limiting: 43
+End of iteration 59
+
+
+Iteration: 60
+Pool size after limiting: 40
+End of iteration 60
+
+
+Iteration: 61
+Pool size after limiting: 42
+End of iteration 61
+
+
+Iteration: 62
+Pool size after limiting: 42
+End of iteration 62
+
+
+Iteration: 63
+Pool size after limiting: 42
+End of iteration 63
+
+
+Iteration: 64
+Pool size after limiting: 42
+End of iteration 64
+
+
+Iteration: 65
+Pool size after limiting: 42
+End of iteration 65
+
+
+Iteration: 66
+Pool size after limiting: 42
+End of iteration 66
+
+
+Iteration: 67
+Pool size after limiting: 42
+End of iteration 67
+
+
+Iteration: 68
+Pool size after limiting: 46
+End of iteration 68
+
+
+Iteration: 69
+Pool size after limiting: 47
+End of iteration 69
+
+
+Iteration: 70
+Pool size after limiting: 46
+End of iteration 70
+
+
+Iteration: 71
+Pool size after limiting: 46
+End of iteration 71
+
+
+Iteration: 72
+Pool size after limiting: 45
+End of iteration 72
+
+
+Iteration: 73
+Pool size after limiting: 48
+End of iteration 73
+
+
+Iteration: 74
+Pool size after limiting: 51
+End of iteration 74
+
+
+Iteration: 75
+Pool size after limiting: 52
+End of iteration 75
+
+
+Iteration: 76
+Pool size after limiting: 51
+End of iteration 76
+
+
+Iteration: 77
+Pool size after limiting: 50
+End of iteration 77
+
+
+Iteration: 78
+Pool size after limiting: 57
+End of iteration 78
+
+
+Iteration: 79
+Pool size after limiting: 53
+End of iteration 79
+
+
+Iteration: 80
+Pool size after limiting: 53
+End of iteration 80
+
+
+Iteration: 81
+Pool size after limiting: 56
+End of iteration 81
+
+
+Iteration: 82
+Pool size after limiting: 52
+End of iteration 82
+
+
+Iteration: 83
+Pool size after limiting: 59
+End of iteration 83
+
+
+Iteration: 84
+Pool size after limiting: 55
+End of iteration 84
+
+
+Iteration: 85
+Pool size after limiting: 60
+End of iteration 85
+
+
+Iteration: 86
+Pool size after limiting: 56
+End of iteration 86
+
+
+Iteration: 87
+Pool size after limiting: 60
+End of iteration 87
+
+
+Iteration: 88
+Pool size after limiting: 64
+End of iteration 88
+
+
+Iteration: 89
+Pool size after limiting: 63
+End of iteration 89
+
+
+Iteration: 90
+Pool size after limiting: 63
+End of iteration 90
+
+
+Iteration: 91
+Pool size after limiting: 65
+End of iteration 91
+
+
+Iteration: 92
+Pool size after limiting: 67
+End of iteration 92
+
+
+Iteration: 93
+Pool size after limiting: 62
+End of iteration 93
+
+
+Iteration: 94
+Pool size after limiting: 68
+End of iteration 94
+
+
+Iteration: 95
+Pool size after limiting: 66
+End of iteration 95
+
+
+Iteration: 96
+Pool size after limiting: 70
+End of iteration 96
+
+
+Iteration: 97
+Pool size after limiting: 68
+End of iteration 97
+
+
+Iteration: 98
+Pool size after limiting: 71
+End of iteration 98
+
+
+Iteration: 99
+Pool size after limiting: 70
+End of iteration 99
+
+
+Iteration: 100
+Pool size after limiting: 73
+End of iteration 100
+
+
+Iteration: 101
+Pool size after limiting: 68
+End of iteration 101
+
+
+Iteration: 102
+Pool size after limiting: 78
+End of iteration 102
+
+
+Iteration: 103
+Pool size after limiting: 71
+End of iteration 103
+
+
+Iteration: 104
+Pool size after limiting: 71
+End of iteration 104
+
+
+Iteration: 105
+Pool size after limiting: 69
+End of iteration 105
+
+
+Iteration: 106
+Pool size after limiting: 75
+End of iteration 106
+
+
+Iteration: 107
+Pool size after limiting: 70
+End of iteration 107
+
+
+Iteration: 108
+Pool size after limiting: 72
+End of iteration 108
+
+
+Iteration: 109
+Pool size after limiting: 73
+End of iteration 109
+
+
+Iteration: 110
+Pool size after limiting: 81
+End of iteration 110
+
+
+Iteration: 111
+Pool size after limiting: 74
+End of iteration 111
+
+
+Iteration: 112
+Pool size after limiting: 72
+End of iteration 112
+
+
+Iteration: 113
+Pool size after limiting: 75
+End of iteration 113
+
+
+Iteration: 114
+Pool size after limiting: 76
+End of iteration 114
+
+
+Iteration: 115
+Pool size after limiting: 76
+End of iteration 115
+
+
+Iteration: 116
+Pool size after limiting: 79
+End of iteration 116
+
+
+Iteration: 117
+Pool size after limiting: 79
+End of iteration 117
+
+
+Iteration: 118
+Pool size after limiting: 77
+End of iteration 118
+
+
+Iteration: 119
+Pool size after limiting: 79
+End of iteration 119
+
+
+Iteration: 120
+Pool size after limiting: 78
+End of iteration 120
+
+
+Iteration: 121
+Pool size after limiting: 80
+End of iteration 121
+
+
+Iteration: 122
+Pool size after limiting: 78
+End of iteration 122
+
+
+Iteration: 123
+Pool size after limiting: 80
+End of iteration 123
+
+
+Iteration: 124
+Pool size after limiting: 81
+End of iteration 124
+
+
+Iteration: 125
+Pool size after limiting: 85
+End of iteration 125
+
+
+Iteration: 126
+Pool size after limiting: 80
+End of iteration 126
+
+
+Iteration: 127
+Pool size after limiting: 76
+End of iteration 127
+
+
+Iteration: 128
+Pool size after limiting: 83
+End of iteration 128
+
+
+Iteration: 129
+Pool size after limiting: 87
+End of iteration 129
+
+
+Iteration: 130
+Pool size after limiting: 81
+End of iteration 130
+
+
+Iteration: 131
+Pool size after limiting: 90
+End of iteration 131
+
+
+Iteration: 132
+Pool size after limiting: 88
+End of iteration 132
+
+
+Iteration: 133
+Pool size after limiting: 90
+End of iteration 133
+
+
+Iteration: 134
+Pool size after limiting: 89
+End of iteration 134
+
+
+Iteration: 135
+Pool size after limiting: 94
+End of iteration 135
+
+
+Iteration: 136
+Pool size after limiting: 95
+End of iteration 136
+
+
+Iteration: 137
+Pool size after limiting: 87
+End of iteration 137
+
+
+Iteration: 138
+Pool size after limiting: 91
+End of iteration 138
+
+
+Iteration: 139
+Pool size after limiting: 91
+End of iteration 139
+
+
+Iteration: 140
+Pool size after limiting: 98
+End of iteration 140
+
+
+Iteration: 141
+Pool size after limiting: 95
+End of iteration 141
+
+
+Iteration: 142
+Pool size after limiting: 91
+End of iteration 142
+
+
+Iteration: 143
+Pool size after limiting: 97
+End of iteration 143
+
+
+Iteration: 144
+Pool size after limiting: 96
+End of iteration 144
+
+
+Iteration: 145
+Pool size after limiting: 101
+End of iteration 145
+
+
+Iteration: 146
+Pool size after limiting: 102
+End of iteration 146
+
+
+Iteration: 147
+Pool size after limiting: 99
+End of iteration 147
+
+
+Iteration: 148
+Pool size after limiting: 101
+End of iteration 148
+
+
+Iteration: 149
+Pool size after limiting: 106
+End of iteration 149
+
+
+Iteration: 150
+Pool size after limiting: 109
+End of iteration 150
+
+
+Iteration: 151
+Pool size after limiting: 103
+End of iteration 151
+
+
+Iteration: 152
+Pool size after limiting: 106
+End of iteration 152
+
+
+Iteration: 153
+Pool size after limiting: 107
+End of iteration 153
+
+
+Iteration: 154
+Pool size after limiting: 116
+End of iteration 154
+
+
+Iteration: 155
+Pool size after limiting: 105
+End of iteration 155
+
+
+Iteration: 156
+Pool size after limiting: 111
+End of iteration 156
+
+
+Iteration: 157
+Pool size after limiting: 106
+End of iteration 157
+
+
+Iteration: 158
+Pool size after limiting: 112
+End of iteration 158
+
+
+Iteration: 159
+Pool size after limiting: 113
+End of iteration 159
+
+
+Iteration: 160
+Pool size after limiting: 118
+End of iteration 160
+
+
+Iteration: 161
+Pool size after limiting: 119
+End of iteration 161
+
+
+Iteration: 162
+Pool size after limiting: 116
+End of iteration 162
+
+
+Iteration: 163
+Pool size after limiting: 115
+End of iteration 163
+
+
+Iteration: 164
+Pool size after limiting: 122
+End of iteration 164
+
+
+Iteration: 165
+Pool size after limiting: 121
+End of iteration 165
+
+
+Iteration: 166
+Pool size after limiting: 120
+End of iteration 166
+
+
+Iteration: 167
+Pool size after limiting: 123
+End of iteration 167
+
+
+Iteration: 168
+Pool size after limiting: 120
+End of iteration 168
+
+
+Iteration: 169
+Pool size after limiting: 120
+End of iteration 169
+
+
+Iteration: 170
+Pool size after limiting: 122
+End of iteration 170
+
+
+Iteration: 171
+Pool size after limiting: 122
+End of iteration 171
+
+
+Iteration: 172
+Pool size after limiting: 127
+End of iteration 172
+
+
+Iteration: 173
+Pool size after limiting: 126
+End of iteration 173
+
+
+Iteration: 174
+Pool size after limiting: 125
+End of iteration 174
+
+
+Iteration: 175
+Pool size after limiting: 128
+End of iteration 175
+
+
+Iteration: 176
+Pool size after limiting: 125
+End of iteration 176
+
+
+Iteration: 177
+Pool size after limiting: 129
+End of iteration 177
+
+
+Iteration: 178
+Pool size after limiting: 127
+End of iteration 178
+
+
+Iteration: 179
+Pool size after limiting: 127
+End of iteration 179
+
+
+Iteration: 180
+Pool size after limiting: 127
+End of iteration 180
+
+
+Iteration: 181
+Pool size after limiting: 125
+End of iteration 181
+
+
+Iteration: 182
+Pool size after limiting: 127
+End of iteration 182
+
+
+Iteration: 183
+Pool size after limiting: 128
+End of iteration 183
+
+
+Iteration: 184
+Pool size after limiting: 130
+End of iteration 184
+
+
+Iteration: 185
+Pool size after limiting: 129
+End of iteration 185
+
+
+Iteration: 186
+Pool size after limiting: 126
+End of iteration 186
+
+
+Iteration: 187
+Pool size after limiting: 130
+End of iteration 187
+
+
+Iteration: 188
+Pool size after limiting: 130
+End of iteration 188
+
+
+Iteration: 189
+Pool size after limiting: 123
+End of iteration 189
+
+
+Iteration: 190
+Pool size after limiting: 132
+End of iteration 190
+
+
+Iteration: 191
+Pool size after limiting: 126
+End of iteration 191
+
+
+Iteration: 192
+Pool size after limiting: 128
+End of iteration 192
+
+
+Iteration: 193
+Pool size after limiting: 127
+End of iteration 193
+
+
+Iteration: 194
+Pool size after limiting: 129
+End of iteration 194
+
+
+Iteration: 195
+Pool size after limiting: 135
+End of iteration 195
+
+
+Iteration: 196
+Pool size after limiting: 122
+End of iteration 196
+
+
+Iteration: 197
+Pool size after limiting: 128
+End of iteration 197
+
+
+Iteration: 198
+Pool size after limiting: 129
+End of iteration 198
+
+
+Iteration: 199
+Pool size after limiting: 132
+End of iteration 199
+
+
+Iteration: 200
+Pool size after limiting: 126
+End of iteration 200
+
+
+Iteration: 201
+Pool size after limiting: 134
+End of iteration 201
+
+
+Iteration: 202
+Pool size after limiting: 129
+End of iteration 202
+
+
+Iteration: 203
+Pool size after limiting: 132
+End of iteration 203
+
+
+Iteration: 204
+Pool size after limiting: 131
+End of iteration 204
+
+
+Iteration: 205
+Pool size after limiting: 131
+End of iteration 205
+
+
+Iteration: 206
+Pool size after limiting: 138
+End of iteration 206
+
+
+Iteration: 207
+Pool size after limiting: 134
+End of iteration 207
+
+
+Iteration: 208
+Pool size after limiting: 131
+End of iteration 208
+
+
+Iteration: 209
+Pool size after limiting: 143
+End of iteration 209
+
+
+Iteration: 210
+Pool size after limiting: 135
+End of iteration 210
+
+
+Iteration: 211
+Pool size after limiting: 135
+End of iteration 211
+
+
+Iteration: 212
+Pool size after limiting: 140
+End of iteration 212
+
+
+Iteration: 213
+Pool size after limiting: 139
+End of iteration 213
+
+
+Iteration: 214
+Pool size after limiting: 139
+End of iteration 214
+
+
+Iteration: 215
+Pool size after limiting: 135
+End of iteration 215
+
+
+Iteration: 216
+Pool size after limiting: 143
+End of iteration 216
+
+
+Iteration: 217
+Pool size after limiting: 146
+End of iteration 217
+
+
+Iteration: 218
+Pool size after limiting: 141
+End of iteration 218
+
+
+Iteration: 219
+Pool size after limiting: 144
+End of iteration 219
+
+
+Iteration: 220
+Pool size after limiting: 146
+End of iteration 220
+
+
+Iteration: 221
+Pool size after limiting: 150
+End of iteration 221
+
+
+Iteration: 222
+Pool size after limiting: 150
+End of iteration 222
+
+
+Iteration: 223
+Pool size after limiting: 146
+End of iteration 223
+
+
+Iteration: 224
+Pool size after limiting: 153
+End of iteration 224
+
+
+Iteration: 225
+Pool size after limiting: 155
+End of iteration 225
+
+
+Iteration: 226
+Pool size after limiting: 155
+End of iteration 226
+
+
+Iteration: 227
+Pool size after limiting: 156
+End of iteration 227
+
+
+Iteration: 228
+Pool size after limiting: 150
+End of iteration 228
+
+
+Iteration: 229
+Pool size after limiting: 163
+End of iteration 229
+
+
+Iteration: 230
+Pool size after limiting: 164
+End of iteration 230
+
+
+Iteration: 231
+Pool size after limiting: 160
+End of iteration 231
+
+
+Iteration: 232
+Pool size after limiting: 165
+End of iteration 232
+
+
+Iteration: 233
+Pool size after limiting: 160
+End of iteration 233
+
+
+Iteration: 234
+Pool size after limiting: 165
+End of iteration 234
+
+
+Iteration: 235
+Pool size after limiting: 169
+End of iteration 235
+
+
+Iteration: 236
+Pool size after limiting: 166
+End of iteration 236
+
+
+Iteration: 237
+Pool size after limiting: 170
+End of iteration 237
+
+
+Iteration: 238
+Pool size after limiting: 178
+End of iteration 238
+
+
+Iteration: 239
+Pool size after limiting: 173
+End of iteration 239
+
+
+Iteration: 240
+Pool size after limiting: 169
+End of iteration 240
+
+
+Iteration: 241
+Pool size after limiting: 170
+End of iteration 241
+
+
+Iteration: 242
+Pool size after limiting: 172
+End of iteration 242
+
+
+Iteration: 243
+Pool size after limiting: 170
+End of iteration 243
+
+
+Iteration: 244
+Pool size after limiting: 172
+End of iteration 244
+
+
+Iteration: 245
+Pool size after limiting: 173
+End of iteration 245
+
+
+Iteration: 246
+Pool size after limiting: 176
+End of iteration 246
+
+
+Iteration: 247
+Pool size after limiting: 173
+End of iteration 247
+
+
+Iteration: 248
+Pool size after limiting: 177
+End of iteration 248
+
+
+Iteration: 249
+Pool size after limiting: 174
+End of iteration 249
+
+
+Iteration: 250
+Pool size after limiting: 177
+End of iteration 250
+
+
+Iteration: 251
+Pool size after limiting: 176
+End of iteration 251
+
+
+Iteration: 252
+Pool size after limiting: 170
+End of iteration 252
+
+
+Iteration: 253
+Pool size after limiting: 175
+End of iteration 253
+
+
+Iteration: 254
+Pool size after limiting: 176
+End of iteration 254
+
+
+Iteration: 255
+Pool size after limiting: 178
+End of iteration 255
+
+
+Iteration: 256
+Pool size after limiting: 182
+End of iteration 256
+
+
+Iteration: 257
+Pool size after limiting: 179
+End of iteration 257
+
+
+Iteration: 258
+Pool size after limiting: 179
+End of iteration 258
+
+
+Iteration: 259
+Pool size after limiting: 178
+End of iteration 259
+
+
+Iteration: 260
+Pool size after limiting: 183
+End of iteration 260
+
+
+Iteration: 261
+Pool size after limiting: 181
+End of iteration 261
+
+
+Iteration: 262
+Pool size after limiting: 185
+End of iteration 262
+
+
+Iteration: 263
+Pool size after limiting: 176
+End of iteration 263
+
+
+Iteration: 264
+Pool size after limiting: 176
+End of iteration 264
+
+
+Iteration: 265
+Pool size after limiting: 184
+End of iteration 265
+
+
+Iteration: 266
+Pool size after limiting: 177
+End of iteration 266
+
+
+Iteration: 267
+Pool size after limiting: 175
+End of iteration 267
+
+
+Iteration: 268
+Pool size after limiting: 175
+End of iteration 268
+
+
+Iteration: 269
+Pool size after limiting: 175
+End of iteration 269
+
+
+Iteration: 270
+Pool size after limiting: 173
+End of iteration 270
+
+
+Iteration: 271
+Pool size after limiting: 179
+End of iteration 271
+
+
+Iteration: 272
+Pool size after limiting: 168
+End of iteration 272
+
+
+Iteration: 273
+Pool size after limiting: 174
+End of iteration 273
+
+
+Iteration: 274
+Pool size after limiting: 176
+End of iteration 274
+
+
+Iteration: 275
+Pool size after limiting: 170
+End of iteration 275
+
+
+Iteration: 276
+Pool size after limiting: 173
+End of iteration 276
+
+
+Iteration: 277
+Pool size after limiting: 170
+End of iteration 277
+
+
+Iteration: 278
+Pool size after limiting: 178
+End of iteration 278
+
+
+Iteration: 279
+Pool size after limiting: 172
+End of iteration 279
+
+
+Iteration: 280
+Pool size after limiting: 176
+End of iteration 280
+
+
+Iteration: 281
+Pool size after limiting: 175
+End of iteration 281
+
+
+Iteration: 282
+Pool size after limiting: 175
+End of iteration 282
+
+
+Iteration: 283
+Pool size after limiting: 177
+End of iteration 283
+
+
+Iteration: 284
+Pool size after limiting: 186
+End of iteration 284
+
+
+Iteration: 285
+Pool size after limiting: 186
+End of iteration 285
+
+
+Iteration: 286
+Pool size after limiting: 180
+End of iteration 286
+
+
+Iteration: 287
+Pool size after limiting: 187
+End of iteration 287
+
+
+Iteration: 288
+Pool size after limiting: 190
+End of iteration 288
+
+
+Iteration: 289
+Pool size after limiting: 186
+End of iteration 289
+
+
+Iteration: 290
+Pool size after limiting: 190
+End of iteration 290
+
+
+Iteration: 291
+Pool size after limiting: 195
+End of iteration 291
+
+
+Iteration: 292
+Pool size after limiting: 186
+End of iteration 292
+
+
+Iteration: 293
+Pool size after limiting: 193
+End of iteration 293
+
+
+Iteration: 294
+Pool size after limiting: 195
+End of iteration 294
+
+
+Iteration: 295
+Pool size after limiting: 198
+End of iteration 295
+
+
+Iteration: 296
+Pool size after limiting: 195
+End of iteration 296
+
+
+Iteration: 297
+Pool size after limiting: 199
+End of iteration 297
+
+
+Iteration: 298
+Pool size after limiting: 201
+End of iteration 298
+
+
+Iteration: 299
+Pool size after limiting: 198
+End of iteration 299
+
+
+Iteration: 300
+Pool size after limiting: 199
+End of iteration 300
+
+
+Iteration: 301
+Pool size after limiting: 206
+End of iteration 301
+
+
+Iteration: 302
+Pool size after limiting: 202
+End of iteration 302
+
+
+Iteration: 303
+Pool size after limiting: 202
+End of iteration 303
+
+
+Iteration: 304
+Pool size after limiting: 200
+End of iteration 304
+
+
+Iteration: 305
+Pool size after limiting: 204
+End of iteration 305
+
+
+Iteration: 306
+Pool size after limiting: 206
+End of iteration 306
+
+
+Iteration: 307
+Pool size after limiting: 200
+End of iteration 307
+
+
+Iteration: 308
+Pool size after limiting: 206
+End of iteration 308
+
+
+Iteration: 309
+Pool size after limiting: 207
+End of iteration 309
+
+
+Iteration: 310
+Pool size after limiting: 211
+End of iteration 310
+
+
+Iteration: 311
+Pool size after limiting: 208
+End of iteration 311
+
+
+Iteration: 312
+Pool size after limiting: 212
+End of iteration 312
+
+
+Iteration: 313
+Pool size after limiting: 208
+End of iteration 313
+
+
+Iteration: 314
+Pool size after limiting: 200
+End of iteration 314
+
+
+Iteration: 315
+Pool size after limiting: 209
+End of iteration 315
+
+
+Iteration: 316
+Pool size after limiting: 210
+End of iteration 316
+
+
+Iteration: 317
+Pool size after limiting: 209
+End of iteration 317
+
+
+Iteration: 318
+Pool size after limiting: 216
+End of iteration 318
+
+
+Iteration: 319
+Pool size after limiting: 218
+End of iteration 319
+
+
+Iteration: 320
+Pool size after limiting: 210
+End of iteration 320
+
+
+Iteration: 321
+Pool size after limiting: 214
+End of iteration 321
+
+
+Iteration: 322
+Pool size after limiting: 225
+End of iteration 322
+
+
+Iteration: 323
+Pool size after limiting: 217
+End of iteration 323
+
+
+Iteration: 324
+Pool size after limiting: 216
+End of iteration 324
+
+
+Iteration: 325
+Pool size after limiting: 217
+End of iteration 325
+
+
+Iteration: 326
+Pool size after limiting: 223
+End of iteration 326
+
+
+Iteration: 327
+Pool size after limiting: 227
+End of iteration 327
+
+
+Iteration: 328
+Pool size after limiting: 223
+End of iteration 328
+
+
+Iteration: 329
+Pool size after limiting: 224
+End of iteration 329
+
+
+Iteration: 330
+Pool size after limiting: 226
+End of iteration 330
+
+
+Iteration: 331
+Pool size after limiting: 228
+End of iteration 331
+
+
+Iteration: 332
+Pool size after limiting: 225
+End of iteration 332
+
+
+Iteration: 333
+Pool size after limiting: 231
+End of iteration 333
+
+
+Iteration: 334
+Pool size after limiting: 226
+End of iteration 334
+
+
+Iteration: 335
+Pool size after limiting: 229
+End of iteration 335
+
+
+Iteration: 336
+Pool size after limiting: 227
+End of iteration 336
+
+
+Iteration: 337
+Pool size after limiting: 235
+End of iteration 337
+
+
+Iteration: 338
+Pool size after limiting: 230
+End of iteration 338
+
+
+Iteration: 339
+Pool size after limiting: 224
+End of iteration 339
+
+
+Iteration: 340
+Pool size after limiting: 228
+End of iteration 340
+
+
+Iteration: 341
+Pool size after limiting: 235
+End of iteration 341
+
+
+Iteration: 342
+Pool size after limiting: 226
+End of iteration 342
+
+
+Iteration: 343
+Pool size after limiting: 228
+End of iteration 343
+
+
+Iteration: 344
+Pool size after limiting: 232
+End of iteration 344
+
+
+Iteration: 345
+Pool size after limiting: 241
+End of iteration 345
+
+
+Iteration: 346
+Pool size after limiting: 232
+End of iteration 346
+
+
+Iteration: 347
+Pool size after limiting: 239
+End of iteration 347
+
+
+Iteration: 348
+Pool size after limiting: 238
+End of iteration 348
+
+
+Iteration: 349
+Pool size after limiting: 239
+End of iteration 349
+
+
+Iteration: 350
+Pool size after limiting: 236
+End of iteration 350
+
+
+Iteration: 351
+Pool size after limiting: 235
+End of iteration 351
+
+
+Iteration: 352
+Pool size after limiting: 239
+End of iteration 352
+
+
+Iteration: 353
+Pool size after limiting: 241
+End of iteration 353
+
+
+Iteration: 354
+Pool size after limiting: 241
+End of iteration 354
+
+
+Iteration: 355
+Pool size after limiting: 231
+End of iteration 355
+
+
+Iteration: 356
+Pool size after limiting: 227
+End of iteration 356
+
+
+Iteration: 357
+Pool size after limiting: 237
+End of iteration 357
+
+
+Iteration: 358
+Pool size after limiting: 228
+End of iteration 358
+
+
+Iteration: 359
+Pool size after limiting: 240
+End of iteration 359
+
+
+Iteration: 360
+Pool size after limiting: 229
+End of iteration 360
+
+
+Iteration: 361
+Pool size after limiting: 241
+End of iteration 361
+
+
+Iteration: 362
+Pool size after limiting: 238
+End of iteration 362
+
+
+Iteration: 363
+Pool size after limiting: 242
+End of iteration 363
+
+
+Iteration: 364
+Pool size after limiting: 233
+End of iteration 364
+
+
+Iteration: 365
+Pool size after limiting: 235
+End of iteration 365
+
+
+Iteration: 366
+Pool size after limiting: 243
+End of iteration 366
+
+
+Iteration: 367
+Pool size after limiting: 231
+End of iteration 367
+
+
+Iteration: 368
+Pool size after limiting: 237
+End of iteration 368
+
+
+Iteration: 369
+Pool size after limiting: 244
+End of iteration 369
+
+
+Iteration: 370
+Pool size after limiting: 247
+End of iteration 370
+
+
+Iteration: 371
+Pool size after limiting: 236
+End of iteration 371
+
+
+Iteration: 372
+Pool size after limiting: 237
+End of iteration 372
+
+
+Iteration: 373
+Pool size after limiting: 240
+End of iteration 373
+
+
+Iteration: 374
+Pool size after limiting: 253
+End of iteration 374
+
+
+Iteration: 375
+Pool size after limiting: 251
+End of iteration 375
+
+
+Iteration: 376
+Pool size after limiting: 243
+End of iteration 376
+
+
+Iteration: 377
+Pool size after limiting: 245
+End of iteration 377
+
+
+Iteration: 378
+Pool size after limiting: 252
+End of iteration 378
+
+
+Iteration: 379
+Pool size after limiting: 252
+End of iteration 379
+
+
+Iteration: 380
+Pool size after limiting: 243
+End of iteration 380
+
+
+Iteration: 381
+Pool size after limiting: 245
+End of iteration 381
+
+
+Iteration: 382
+Pool size after limiting: 247
+End of iteration 382
+
+
+Iteration: 383
+Pool size after limiting: 257
+End of iteration 383
+
+
+Iteration: 384
+Pool size after limiting: 250
+End of iteration 384
+
+
+Iteration: 385
+Pool size after limiting: 256
+End of iteration 385
+
+
+Iteration: 386
+Pool size after limiting: 243
+End of iteration 386
+
+
+Iteration: 387
+Pool size after limiting: 250
+End of iteration 387
+
+
+Iteration: 388
+Pool size after limiting: 248
+End of iteration 388
+
+
+Iteration: 389
+Pool size after limiting: 252
+End of iteration 389
+
+
+Iteration: 390
+Pool size after limiting: 257
+End of iteration 390
+
+
+Iteration: 391
+Pool size after limiting: 260
+End of iteration 391
+
+
+Iteration: 392
+Pool size after limiting: 248
+End of iteration 392
+
+
+Iteration: 393
+Pool size after limiting: 247
+End of iteration 393
+
+
+Iteration: 394
+Pool size after limiting: 248
+End of iteration 394
+
+
+Iteration: 395
+Pool size after limiting: 256
+End of iteration 395
+
+
+Iteration: 396
+Pool size after limiting: 263
+End of iteration 396
+
+
+Iteration: 397
+Pool size after limiting: 254
+End of iteration 397
+
+
+Iteration: 398
+Pool size after limiting: 253
+End of iteration 398
+
+
+Iteration: 399
+Pool size after limiting: 255
+End of iteration 399
+
+
+Iteration: 400
+Pool size after limiting: 257
+End of iteration 400
+
+
+Iteration: 401
+Pool size after limiting: 252
+End of iteration 401
+
+
+Iteration: 402
+Pool size after limiting: 250
+End of iteration 402
+
+
+Iteration: 403
+Pool size after limiting: 258
+End of iteration 403
+
+
+Iteration: 404
+Pool size after limiting: 257
+End of iteration 404
+
+
+Iteration: 405
+Pool size after limiting: 258
+End of iteration 405
+
+
+Iteration: 406
+Pool size after limiting: 252
+End of iteration 406
+
+
+Iteration: 407
+Pool size after limiting: 249
+End of iteration 407
+
+
+Iteration: 408
+Pool size after limiting: 259
+End of iteration 408
+
+
+Iteration: 409
+Pool size after limiting: 257
+End of iteration 409
+
+
+Iteration: 410
+Pool size after limiting: 258
+End of iteration 410
+
+
+Iteration: 411
+Pool size after limiting: 249
+End of iteration 411
+
+
+Iteration: 412
+Pool size after limiting: 258
+End of iteration 412
+
+
+Iteration: 413
+Pool size after limiting: 266
+End of iteration 413
+
+
+Iteration: 414
+Pool size after limiting: 263
+End of iteration 414
+
+
+Iteration: 415
+Pool size after limiting: 255
+End of iteration 415
+
+
+Iteration: 416
+Pool size after limiting: 261
+End of iteration 416
+
+
+Iteration: 417
+Pool size after limiting: 271
+End of iteration 417
+
+
+Iteration: 418
+Pool size after limiting: 277
+End of iteration 418
+
+
+Iteration: 419
+Pool size after limiting: 264
+End of iteration 419
+
+
+Iteration: 420
+Pool size after limiting: 264
+End of iteration 420
+
+
+Iteration: 421
+Pool size after limiting: 267
+End of iteration 421
+
+
+Iteration: 422
+Pool size after limiting: 271
+End of iteration 422
+
+
+Iteration: 423
+Pool size after limiting: 269
+End of iteration 423
+
+
+Iteration: 424
+Pool size after limiting: 268
+End of iteration 424
+
+
+Iteration: 425
+Pool size after limiting: 270
+End of iteration 425
+
+
+Iteration: 426
+Pool size after limiting: 266
+End of iteration 426
+
+
+Iteration: 427
+Pool size after limiting: 276
+End of iteration 427
+
+
+Iteration: 428
+Pool size after limiting: 276
+End of iteration 428
+
+
+Iteration: 429
+Pool size after limiting: 276
+End of iteration 429
+
+
+Iteration: 430
+Pool size after limiting: 269
+End of iteration 430
+
+
+Iteration: 431
+Pool size after limiting: 281
+End of iteration 431
+
+
+Iteration: 432
+Pool size after limiting: 273
+End of iteration 432
+
+
+Iteration: 433
+Pool size after limiting: 275
+End of iteration 433
+
+
+Iteration: 434
+Pool size after limiting: 267
+End of iteration 434
+
+
+Iteration: 435
+Pool size after limiting: 283
+End of iteration 435
+
+
+Iteration: 436
+Pool size after limiting: 285
+End of iteration 436
+
+
+Iteration: 437
+Pool size after limiting: 285
+End of iteration 437
+
+
+Iteration: 438
+Pool size after limiting: 287
+End of iteration 438
+
+
+Iteration: 439
+Pool size after limiting: 280
+End of iteration 439
+
+
+Iteration: 440
+Pool size after limiting: 293
+End of iteration 440
+
+
+Iteration: 441
+Pool size after limiting: 290
+End of iteration 441
+
+
+Iteration: 442
+Pool size after limiting: 282
+End of iteration 442
+
+
+Iteration: 443
+Pool size after limiting: 291
+End of iteration 443
+
+
+Iteration: 444
+Pool size after limiting: 292
+End of iteration 444
+
+
+Iteration: 445
+Pool size after limiting: 300
+End of iteration 445
+
+
+Iteration: 446
+Pool size after limiting: 300
+End of iteration 446
+
+
+Iteration: 447
+Pool size after limiting: 292
+End of iteration 447
+
+
+Iteration: 448
+Pool size after limiting: 287
+End of iteration 448
+
+
+Iteration: 449
+Pool size after limiting: 297
+End of iteration 449
+
+
+Iteration: 450
+Pool size after limiting: 309
+End of iteration 450
+
+
+Iteration: 451
+Pool size after limiting: 301
+End of iteration 451
+
+
+Iteration: 452
+Pool size after limiting: 297
+End of iteration 452
+
+
+Iteration: 453
+Pool size after limiting: 297
+End of iteration 453
+
+
+Iteration: 454
+Pool size after limiting: 312
+End of iteration 454
+
+
+Iteration: 455
+Pool size after limiting: 305
+End of iteration 455
+
+
+Iteration: 456
+Pool size after limiting: 298
+End of iteration 456
+
+
+Iteration: 457
+Pool size after limiting: 305
+End of iteration 457
+
+
+Iteration: 458
+Pool size after limiting: 305
+End of iteration 458
+
+
+Iteration: 459
+Pool size after limiting: 303
+End of iteration 459
+
+
+Iteration: 460
+Pool size after limiting: 309
+End of iteration 460
+
+
+Iteration: 461
+Pool size after limiting: 314
+End of iteration 461
+
+
+Iteration: 462
+Pool size after limiting: 305
+End of iteration 462
+
+
+Iteration: 463
+Pool size after limiting: 310
+End of iteration 463
+
+
+Iteration: 464
+Pool size after limiting: 314
+End of iteration 464
+
+
+Iteration: 465
+Pool size after limiting: 314
+End of iteration 465
+
+
+Iteration: 466
+Pool size after limiting: 305
+End of iteration 466
+
+
+Iteration: 467
+Pool size after limiting: 309
+End of iteration 467
+
+
+Iteration: 468
+Pool size after limiting: 311
+End of iteration 468
+
+
+Iteration: 469
+Pool size after limiting: 310
+End of iteration 469
+
+
+Iteration: 470
+Pool size after limiting: 320
+End of iteration 470
+
+
+Iteration: 471
+Pool size after limiting: 310
+End of iteration 471
+
+
+Iteration: 472
+Pool size after limiting: 311
+End of iteration 472
+
+
+Iteration: 473
+Pool size after limiting: 319
+End of iteration 473
+
+
+Iteration: 474
+Pool size after limiting: 319
+End of iteration 474
+
+
+Iteration: 475
+Pool size after limiting: 318
+End of iteration 475
+
+
+Iteration: 476
+Pool size after limiting: 317
+End of iteration 476
+
+
+Iteration: 477
+Pool size after limiting: 319
+End of iteration 477
+
+
+Iteration: 478
+Pool size after limiting: 313
+End of iteration 478
+
+
+Iteration: 479
+Pool size after limiting: 319
+End of iteration 479
+
+
+Iteration: 480
+Pool size after limiting: 319
+End of iteration 480
+
+
+Iteration: 481
+Pool size after limiting: 321
+End of iteration 481
+
+
+Iteration: 482
+Pool size after limiting: 321
+End of iteration 482
+
+
+Iteration: 483
+Pool size after limiting: 321
+End of iteration 483
+
+
+Iteration: 484
+Pool size after limiting: 311
+End of iteration 484
+
+
+Iteration: 485
+Pool size after limiting: 321
+End of iteration 485
+
+
+Iteration: 486
+Pool size after limiting: 314
+End of iteration 486
+
+
+Iteration: 487
+Pool size after limiting: 320
+End of iteration 487
+
+
+Iteration: 488
+Pool size after limiting: 319
+End of iteration 488
+
+
+Iteration: 489
+Pool size after limiting: 312
+End of iteration 489
+
+
+Iteration: 490
+Pool size after limiting: 323
+End of iteration 490
+
+
+Iteration: 491
+Pool size after limiting: 320
+End of iteration 491
+
+
+Iteration: 492
+Pool size after limiting: 324
+End of iteration 492
+
+
+Iteration: 493
+Pool size after limiting: 331
+End of iteration 493
+
+
+Iteration: 494
+Pool size after limiting: 322
+End of iteration 494
+
+
+Iteration: 495
+Pool size after limiting: 323
+End of iteration 495
+
+
+Iteration: 496
+Pool size after limiting: 319
+End of iteration 496
+
+
+Iteration: 497
+Pool size after limiting: 315
+End of iteration 497
+
+
+Iteration: 498
+Pool size after limiting: 323
+End of iteration 498
+
+
+Iteration: 499
+Pool size after limiting: 317
+End of iteration 499
+
+
+Iteration: 500
+Pool size after limiting: 323
+End of iteration 500
+
+
+Iteration: 501
+Pool size after limiting: 314
+End of iteration 501
+
+
+Iteration: 502
+Pool size after limiting: 325
+End of iteration 502
+
+
+Iteration: 503
+Pool size after limiting: 324
+End of iteration 503
+
+
+Iteration: 504
+Pool size after limiting: 324
+End of iteration 504
+
+
+Iteration: 505
+Pool size after limiting: 327
+End of iteration 505
+
+
+Iteration: 506
+Pool size after limiting: 324
+End of iteration 506
+
+
+Iteration: 507
+Pool size after limiting: 314
+End of iteration 507
+
+
+Iteration: 508
+Pool size after limiting: 325
+End of iteration 508
+
+
+Iteration: 509
+Pool size after limiting: 318
+End of iteration 509
+
+
+Iteration: 510
+Pool size after limiting: 325
+End of iteration 510
+
+
+Iteration: 511
+Pool size after limiting: 326
+End of iteration 511
+
+
+Iteration: 512
+Pool size after limiting: 326
+End of iteration 512
+
+
+Iteration: 513
+Pool size after limiting: 328
+End of iteration 513
+
+
+Iteration: 514
+Pool size after limiting: 325
+End of iteration 514
+
+
+Iteration: 515
+Pool size after limiting: 321
+End of iteration 515
+
+
+Iteration: 516
+Pool size after limiting: 322
+End of iteration 516
+
+
+Iteration: 517
+Pool size after limiting: 325
+End of iteration 517
+
+
+Iteration: 518
+Pool size after limiting: 329
+End of iteration 518
+
+
+Iteration: 519
+Pool size after limiting: 324
+End of iteration 519
+
+
+Iteration: 520
+Pool size after limiting: 331
+End of iteration 520
+
+
+Iteration: 521
+Pool size after limiting: 322
+End of iteration 521
+
+
+Iteration: 522
+Pool size after limiting: 322
+End of iteration 522
+
+
+Iteration: 523
+Pool size after limiting: 323
+End of iteration 523
+
+
+Iteration: 524
+Pool size after limiting: 329
+End of iteration 524
+
+
+Iteration: 525
+Pool size after limiting: 322
+End of iteration 525
+
+
+Iteration: 526
+Pool size after limiting: 328
+End of iteration 526
+
+
+Iteration: 527
+Pool size after limiting: 318
+End of iteration 527
+
+
+Iteration: 528
+Pool size after limiting: 328
+End of iteration 528
+
+
+Iteration: 529
+Pool size after limiting: 323
+End of iteration 529
+
+
+Iteration: 530
+Pool size after limiting: 326
+End of iteration 530
+
+
+Iteration: 531
+Pool size after limiting: 323
+End of iteration 531
+
+
+Iteration: 532
+Pool size after limiting: 316
+End of iteration 532
+
+
+Iteration: 533
+Pool size after limiting: 322
+End of iteration 533
+
+
+Iteration: 534
+Pool size after limiting: 330
+End of iteration 534
+
+
+Iteration: 535
+Pool size after limiting: 328
+End of iteration 535
+
+
+Iteration: 536
+Pool size after limiting: 333
+End of iteration 536
+
+
+Iteration: 537
+Pool size after limiting: 325
+End of iteration 537
+
+
+Iteration: 538
+Pool size after limiting: 327
+End of iteration 538
+
+
+Iteration: 539
+Pool size after limiting: 329
+End of iteration 539
+
+
+Iteration: 540
+Pool size after limiting: 336
+End of iteration 540
+
+
+Iteration: 541
+Pool size after limiting: 332
+End of iteration 541
+
+
+Iteration: 542
+Pool size after limiting: 329
+End of iteration 542
+
+
+Iteration: 543
+Pool size after limiting: 333
+End of iteration 543
+
+
+Iteration: 544
+Pool size after limiting: 330
+End of iteration 544
+
+
+Iteration: 545
+Pool size after limiting: 329
+End of iteration 545
+
+
+Iteration: 546
+Pool size after limiting: 334
+End of iteration 546
+
+
+Iteration: 547
+Pool size after limiting: 337
+End of iteration 547
+
+
+Iteration: 548
+Pool size after limiting: 329
+End of iteration 548
+
+
+Iteration: 549
+Pool size after limiting: 338
+End of iteration 549
+
+
+Iteration: 550
+Pool size after limiting: 342
+End of iteration 550
+
+
+Iteration: 551
+Pool size after limiting: 337
+End of iteration 551
+
+
+Iteration: 552
+Pool size after limiting: 331
+End of iteration 552
+
+
+Iteration: 553
+Pool size after limiting: 340
+End of iteration 553
+
+
+Iteration: 554
+Pool size after limiting: 339
+End of iteration 554
+
+
+Iteration: 555
+Pool size after limiting: 349
+End of iteration 555
+
+
+Iteration: 556
+Pool size after limiting: 347
+End of iteration 556
+
+
+Iteration: 557
+Pool size after limiting: 348
+End of iteration 557
+
+
+Iteration: 558
+Pool size after limiting: 345
+End of iteration 558
+
+
+Iteration: 559
+Pool size after limiting: 344
+End of iteration 559
+
+
+Iteration: 560
+Pool size after limiting: 339
+End of iteration 560
+
+
+Iteration: 561
+Pool size after limiting: 344
+End of iteration 561
+
+
+Iteration: 562
+Pool size after limiting: 347
+End of iteration 562
+
+
+Iteration: 563
+Pool size after limiting: 341
+End of iteration 563
+
+
+Iteration: 564
+Pool size after limiting: 354
+End of iteration 564
+
+
+Iteration: 565
+Pool size after limiting: 352
+End of iteration 565
+
+
+Iteration: 566
+Pool size after limiting: 348
+End of iteration 566
+
+
+Iteration: 567
+Pool size after limiting: 344
+End of iteration 567
+
+
+Iteration: 568
+Pool size after limiting: 348
+End of iteration 568
+
+
+Iteration: 569
+Pool size after limiting: 353
+End of iteration 569
+
+
+Iteration: 570
+Pool size after limiting: 357
+End of iteration 570
+
+
+Iteration: 571
+Pool size after limiting: 346
+End of iteration 571
+
+
+Iteration: 572
+Pool size after limiting: 345
+End of iteration 572
+
+
+Iteration: 573
+Pool size after limiting: 353
+End of iteration 573
+
+
+Iteration: 574
+Pool size after limiting: 351
+End of iteration 574
+
+
+Iteration: 575
+Pool size after limiting: 350
+End of iteration 575
+
+
+Iteration: 576
+Pool size after limiting: 349
+End of iteration 576
+
+
+Iteration: 577
+Pool size after limiting: 347
+End of iteration 577
+
+
+Iteration: 578
+Pool size after limiting: 343
+End of iteration 578
+
+
+Iteration: 579
+Pool size after limiting: 364
+End of iteration 579
+
+
+Iteration: 580
+Pool size after limiting: 353
+End of iteration 580
+
+
+Iteration: 581
+Pool size after limiting: 352
+End of iteration 581
+
+
+Iteration: 582
+Pool size after limiting: 361
+End of iteration 582
+
+
+Iteration: 583
+Pool size after limiting: 349
+End of iteration 583
+
+
+Iteration: 584
+Pool size after limiting: 352
+End of iteration 584
+
+
+Iteration: 585
+Pool size after limiting: 359
+End of iteration 585
+
+
+Iteration: 586
+Pool size after limiting: 358
+End of iteration 586
+
+
+Iteration: 587
+Pool size after limiting: 358
+End of iteration 587
+
+
+Iteration: 588
+Pool size after limiting: 362
+End of iteration 588
+
+
+Iteration: 589
+Pool size after limiting: 365
+End of iteration 589
+
+
+Iteration: 590
+Pool size after limiting: 358
+End of iteration 590
+
+
+Iteration: 591
+Pool size after limiting: 365
+End of iteration 591
+
+
+Iteration: 592
+Pool size after limiting: 363
+End of iteration 592
+
+
+Iteration: 593
+Pool size after limiting: 355
+End of iteration 593
+
+
+Iteration: 594
+Pool size after limiting: 365
+End of iteration 594
+
+
+Iteration: 595
+Pool size after limiting: 362
+End of iteration 595
+
+
+Iteration: 596
+Pool size after limiting: 360
+End of iteration 596
+
+
+Iteration: 597
+Pool size after limiting: 357
+End of iteration 597
+
+
+Iteration: 598
+Pool size after limiting: 364
+End of iteration 598
+
+
+Iteration: 599
+Pool size after limiting: 366
+End of iteration 599
+
+
+Iteration: 600
+Pool size after limiting: 369
+End of iteration 600
+
+
+Iteration: 601
+Pool size after limiting: 369
+End of iteration 601
+
+
+Iteration: 602
+Pool size after limiting: 366
+End of iteration 602
+
+
+Iteration: 603
+Pool size after limiting: 360
+End of iteration 603
+
+
+Iteration: 604
+Pool size after limiting: 363
+End of iteration 604
+
+
+Iteration: 605
+Pool size after limiting: 369
+End of iteration 605
+
+
+Iteration: 606
+Pool size after limiting: 374
+End of iteration 606
+
+
+Iteration: 607
+Pool size after limiting: 369
+End of iteration 607
+
+
+Iteration: 608
+Pool size after limiting: 363
+End of iteration 608
+
+
+Iteration: 609
+Pool size after limiting: 364
+End of iteration 609
+
+
+Iteration: 610
+Pool size after limiting: 366
+End of iteration 610
+
+
+Iteration: 611
+Pool size after limiting: 376
+End of iteration 611
+
+
+Iteration: 612
+Pool size after limiting: 369
+End of iteration 612
+
+
+Iteration: 613
+Pool size after limiting: 373
+End of iteration 613
+
+
+Iteration: 614
+Pool size after limiting: 369
+End of iteration 614
+
+
+Iteration: 615
+Pool size after limiting: 366
+End of iteration 615
+
+
+Iteration: 616
+Pool size after limiting: 369
+End of iteration 616
+
+
+Iteration: 617
+Pool size after limiting: 364
+End of iteration 617
+
+
+Iteration: 618
+Pool size after limiting: 365
+End of iteration 618
+
+
+Iteration: 619
+Pool size after limiting: 372
+End of iteration 619
+
+
+Iteration: 620
+Pool size after limiting: 377
+End of iteration 620
+
+
+Iteration: 621
+Pool size after limiting: 378
+End of iteration 621
+
+
+Iteration: 622
+Pool size after limiting: 370
+End of iteration 622
+
+
+Iteration: 623
+Pool size after limiting: 384
+End of iteration 623
+
+
+Iteration: 624
+Pool size after limiting: 370
+End of iteration 624
+
+
+Iteration: 625
+Pool size after limiting: 373
+End of iteration 625
+
+
+Iteration: 626
+Pool size after limiting: 387
+End of iteration 626
+
+
+Iteration: 627
+Pool size after limiting: 377
+End of iteration 627
+
+
+Iteration: 628
+Pool size after limiting: 376
+End of iteration 628
+
+
+Iteration: 629
+Pool size after limiting: 385
+End of iteration 629
+
+
+Iteration: 630
+Pool size after limiting: 385
+End of iteration 630
+
+
+Iteration: 631
+Pool size after limiting: 385
+End of iteration 631
+
+
+Iteration: 632
+Pool size after limiting: 392
+End of iteration 632
+
+
+Iteration: 633
+Pool size after limiting: 389
+End of iteration 633
+
+
+Iteration: 634
+Pool size after limiting: 397
+End of iteration 634
+
+
+Iteration: 635
+Pool size after limiting: 386
+End of iteration 635
+
+
+Iteration: 636
+Pool size after limiting: 382
+End of iteration 636
+
+
+Iteration: 637
+Pool size after limiting: 392
+End of iteration 637
+
+
+Iteration: 638
+Pool size after limiting: 395
+End of iteration 638
+
+
+Iteration: 639
+Pool size after limiting: 397
+End of iteration 639
+
+
+Iteration: 640
+Pool size after limiting: 398
+End of iteration 640
+
+
+Iteration: 641
+Pool size after limiting: 394
+End of iteration 641
+
+
+Iteration: 642
+Pool size after limiting: 392
+End of iteration 642
+
+
+Iteration: 643
+Pool size after limiting: 396
+End of iteration 643
+
+
+Iteration: 644
+Pool size after limiting: 404
+End of iteration 644
+
+
+Iteration: 645
+Pool size after limiting: 408
+End of iteration 645
+
+
+Iteration: 646
+Pool size after limiting: 410
+End of iteration 646
+
+
+Iteration: 647
+Pool size after limiting: 403
+End of iteration 647
+
+
+Iteration: 648
+Pool size after limiting: 408
+End of iteration 648
+
+
+Iteration: 649
+Pool size after limiting: 403
+End of iteration 649
+
+
+Iteration: 650
+Pool size after limiting: 414
+End of iteration 650
+
+
+Iteration: 651
+Pool size after limiting: 413
+End of iteration 651
+
+
+Iteration: 652
+Pool size after limiting: 413
+End of iteration 652
+
+
+Iteration: 653
+Pool size after limiting: 408
+End of iteration 653
+
+
+Iteration: 654
+Pool size after limiting: 409
+End of iteration 654
+
+
+Iteration: 655
+Pool size after limiting: 423
+End of iteration 655
+
+
+Iteration: 656
+Pool size after limiting: 420
+End of iteration 656
+
+
+Iteration: 657
+Pool size after limiting: 426
+End of iteration 657
+
+
+Iteration: 658
+Pool size after limiting: 428
+End of iteration 658
+
+
+Iteration: 659
+Pool size after limiting: 415
+End of iteration 659
+
+
+Iteration: 660
+Pool size after limiting: 418
+End of iteration 660
+
+
+Iteration: 661
+Pool size after limiting: 428
+End of iteration 661
+
+
+Iteration: 662
+Pool size after limiting: 419
+End of iteration 662
+
+
+Iteration: 663
+Pool size after limiting: 430
+End of iteration 663
+
+
+Iteration: 664
+Pool size after limiting: 430
+End of iteration 664
+
+
+Iteration: 665
+Pool size after limiting: 426
+End of iteration 665
+
+
+Iteration: 666
+Pool size after limiting: 419
+End of iteration 666
+
+
+Iteration: 667
+Pool size after limiting: 428
+End of iteration 667
+
+
+Iteration: 668
+Pool size after limiting: 424
+End of iteration 668
+
+
+Iteration: 669
+Pool size after limiting: 419
+End of iteration 669
+
+
+Iteration: 670
+Pool size after limiting: 448
+End of iteration 670
+
+
+Iteration: 671
+Pool size after limiting: 430
+End of iteration 671
+
+
+Iteration: 672
+Pool size after limiting: 429
+End of iteration 672
+
+
+Iteration: 673
+Pool size after limiting: 429
+End of iteration 673
+
+
+Iteration: 674
+Pool size after limiting: 431
+End of iteration 674
+
+
+Iteration: 675
+Pool size after limiting: 437
+End of iteration 675
+
+
+Iteration: 676
+Pool size after limiting: 430
+End of iteration 676
+
+
+Iteration: 677
+Pool size after limiting: 444
+End of iteration 677
+
+
+Iteration: 678
+Pool size after limiting: 442
+End of iteration 678
+
+
+Iteration: 679
+Pool size after limiting: 441
+End of iteration 679
+
+
+Iteration: 680
+Pool size after limiting: 446
+End of iteration 680
+
+
+Iteration: 681
+Pool size after limiting: 440
+End of iteration 681
+
+
+Iteration: 682
+Pool size after limiting: 441
+End of iteration 682
+
+
+Iteration: 683
+Pool size after limiting: 455
+End of iteration 683
+
+
+Iteration: 684
+Pool size after limiting: 436
+End of iteration 684
+
+
+Iteration: 685
+Pool size after limiting: 447
+End of iteration 685
+
+
+Iteration: 686
+Pool size after limiting: 447
+End of iteration 686
+
+
+Iteration: 687
+Pool size after limiting: 444
+End of iteration 687
+
+
+Iteration: 688
+Pool size after limiting: 453
+End of iteration 688
+
+
+Iteration: 689
+Pool size after limiting: 448
+End of iteration 689
+
+
+Iteration: 690
+Pool size after limiting: 459
+End of iteration 690
+
+
+Iteration: 691
+Pool size after limiting: 457
+End of iteration 691
+
+
+Iteration: 692
+Pool size after limiting: 460
+End of iteration 692
+
+
+Iteration: 693
+Pool size after limiting: 455
+End of iteration 693
+
+
+Iteration: 694
+Pool size after limiting: 457
+End of iteration 694
+
+
+Iteration: 695
+Pool size after limiting: 450
+End of iteration 695
+
+
+Iteration: 696
+Pool size after limiting: 456
+End of iteration 696
+
+
+Iteration: 697
+Pool size after limiting: 451
+End of iteration 697
+
+
+Iteration: 698
+Pool size after limiting: 459
+End of iteration 698
+
+
+Iteration: 699
+Pool size after limiting: 454
+End of iteration 699
+
+
+Iteration: 700
+Pool size after limiting: 449
+End of iteration 700
+
+
+Iteration: 701
+Pool size after limiting: 453
+End of iteration 701
+
+
+Iteration: 702
+Pool size after limiting: 453
+End of iteration 702
+
+
+Iteration: 703
+Pool size after limiting: 460
+End of iteration 703
+
+
+Iteration: 704
+Pool size after limiting: 460
+End of iteration 704
+
+
+Iteration: 705
+Pool size after limiting: 466
+End of iteration 705
+
+
+Iteration: 706
+Pool size after limiting: 460
+End of iteration 706
+
+
+Iteration: 707
+Pool size after limiting: 461
+End of iteration 707
+
+
+Iteration: 708
+Pool size after limiting: 463
+End of iteration 708
+
+
+Iteration: 709
+Pool size after limiting: 458
+End of iteration 709
+
+
+Iteration: 710
+Pool size after limiting: 456
+End of iteration 710
+
+
+Iteration: 711
+Pool size after limiting: 460
+End of iteration 711
+
+
+Iteration: 712
+Pool size after limiting: 465
+End of iteration 712
+
+
+Iteration: 713
+Pool size after limiting: 446
+End of iteration 713
+
+
+Iteration: 714
+Pool size after limiting: 460
+End of iteration 714
+
+
+Iteration: 715
+Pool size after limiting: 464
+End of iteration 715
+
+
+Iteration: 716
+Pool size after limiting: 452
+End of iteration 716
+
+
+Iteration: 717
+Pool size after limiting: 460
+End of iteration 717
+
+
+Iteration: 718
+Pool size after limiting: 471
+End of iteration 718
+
+
+Iteration: 719
+Pool size after limiting: 469
+End of iteration 719
+
+
+Iteration: 720
+Pool size after limiting: 467
+End of iteration 720
+
+
+Iteration: 721
+Pool size after limiting: 457
+End of iteration 721
+
+
+Iteration: 722
+Pool size after limiting: 461
+End of iteration 722
+
+
+Iteration: 723
+Pool size after limiting: 461
+End of iteration 723
+
+
+Iteration: 724
+Pool size after limiting: 471
+End of iteration 724
+
+
+Iteration: 725
+Pool size after limiting: 472
+End of iteration 725
+
+
+Iteration: 726
+Pool size after limiting: 473
+End of iteration 726
+
+
+Iteration: 727
+Pool size after limiting: 466
+End of iteration 727
+
+
+Iteration: 728
+Pool size after limiting: 457
+End of iteration 728
+
+
+Iteration: 729
+Pool size after limiting: 457
+End of iteration 729
+
+
+Iteration: 730
+Pool size after limiting: 462
+End of iteration 730
+
+
+Iteration: 731
+Pool size after limiting: 462
+End of iteration 731
+
+
+Iteration: 732
+Pool size after limiting: 462
+End of iteration 732
+
+
+Iteration: 733
+Pool size after limiting: 473
+End of iteration 733
+
+
+Iteration: 734
+Pool size after limiting: 471
+End of iteration 734
+
+
+Iteration: 735
+Pool size after limiting: 472
+End of iteration 735
+
+
+Iteration: 736
+Pool size after limiting: 457
+End of iteration 736
+
+
+Iteration: 737
+Pool size after limiting: 466
+End of iteration 737
+
+
+Iteration: 738
+Pool size after limiting: 461
+End of iteration 738
+
+
+Iteration: 739
+Pool size after limiting: 471
+End of iteration 739
+
+
+Iteration: 740
+Pool size after limiting: 463
+End of iteration 740
+
+
+Iteration: 741
+Pool size after limiting: 477
+End of iteration 741
+
+
+Iteration: 742
+Pool size after limiting: 464
+End of iteration 742
+
+
+Iteration: 743
+Pool size after limiting: 472
+End of iteration 743
+
+
+Iteration: 744
+Pool size after limiting: 465
+End of iteration 744
+
+
+Iteration: 745
+Pool size after limiting: 465
+End of iteration 745
+
+
+Iteration: 746
+Pool size after limiting: 466
+End of iteration 746
+
+
+Iteration: 747
+Pool size after limiting: 470
+End of iteration 747
+
+
+Iteration: 748
+Pool size after limiting: 472
+End of iteration 748
+
+
+Iteration: 749
+Pool size after limiting: 467
+End of iteration 749
+
+
+Iteration: 750
+Pool size after limiting: 475
+End of iteration 750
+
+
+Iteration: 751
+Pool size after limiting: 472
+End of iteration 751
+
+
+Iteration: 752
+Pool size after limiting: 465
+End of iteration 752
+
+
+Iteration: 753
+Pool size after limiting: 456
+End of iteration 753
+
+
+Iteration: 754
+Pool size after limiting: 462
+End of iteration 754
+
+
+Iteration: 755
+Pool size after limiting: 471
+End of iteration 755
+
+
+Iteration: 756
+Pool size after limiting: 471
+End of iteration 756
+
+
+Iteration: 757
+Pool size after limiting: 466
+End of iteration 757
+
+
+Iteration: 758
+Pool size after limiting: 467
+End of iteration 758
+
+
+Iteration: 759
+Pool size after limiting: 459
+End of iteration 759
+
+
+Iteration: 760
+Pool size after limiting: 469
+End of iteration 760
+
+
+Iteration: 761
+Pool size after limiting: 461
+End of iteration 761
+
+
+Iteration: 762
+Pool size after limiting: 483
+End of iteration 762
+
+
+Iteration: 763
+Pool size after limiting: 476
+End of iteration 763
+
+
+Iteration: 764
+Pool size after limiting: 469
+End of iteration 764
+
+
+Iteration: 765
+Pool size after limiting: 465
+End of iteration 765
+
+
+Iteration: 766
+Pool size after limiting: 461
+End of iteration 766
+
+
+Iteration: 767
+Pool size after limiting: 462
+End of iteration 767
+
+
+Iteration: 768
+Pool size after limiting: 459
+End of iteration 768
+
+
+Iteration: 769
+Pool size after limiting: 469
+End of iteration 769
+
+
+Iteration: 770
+Pool size after limiting: 474
+End of iteration 770
+
+
+Iteration: 771
+Pool size after limiting: 476
+End of iteration 771
+
+
+Iteration: 772
+Pool size after limiting: 469
+End of iteration 772
+
+
+Iteration: 773
+Pool size after limiting: 472
+End of iteration 773
+
+
+Iteration: 774
+Pool size after limiting: 463
+End of iteration 774
+
+
+Iteration: 775
+Pool size after limiting: 472
+End of iteration 775
+
+
+Iteration: 776
+Pool size after limiting: 468
+End of iteration 776
+
+
+Iteration: 777
+Pool size after limiting: 464
+End of iteration 777
+
+
+Iteration: 778
+Pool size after limiting: 467
+End of iteration 778
+
+
+Iteration: 779
+Pool size after limiting: 480
+End of iteration 779
+
+
+Iteration: 780
+Pool size after limiting: 471
+End of iteration 780
+
+
+Iteration: 781
+Pool size after limiting: 468
+End of iteration 781
+
+
+Iteration: 782
+Pool size after limiting: 464
+End of iteration 782
+
+
+Iteration: 783
+Pool size after limiting: 466
+End of iteration 783
+
+
+Iteration: 784
+Pool size after limiting: 468
+End of iteration 784
+
+
+Iteration: 785
+Pool size after limiting: 468
+End of iteration 785
+
+
+Iteration: 786
+Pool size after limiting: 468
+End of iteration 786
+
+
+Iteration: 787
+Pool size after limiting: 476
+End of iteration 787
+
+
+Iteration: 788
+Pool size after limiting: 472
+End of iteration 788
+
+
+Iteration: 789
+Pool size after limiting: 464
+End of iteration 789
+
+
+Iteration: 790
+Pool size after limiting: 477
+End of iteration 790
+
+
+Iteration: 791
+Pool size after limiting: 467
+End of iteration 791
+
+
+Iteration: 792
+Pool size after limiting: 473
+End of iteration 792
+
+
+Iteration: 793
+Pool size after limiting: 479
+End of iteration 793
+
+
+Iteration: 794
+Pool size after limiting: 479
+End of iteration 794
+
+
+Iteration: 795
+Pool size after limiting: 476
+End of iteration 795
+
+
+Iteration: 796
+Pool size after limiting: 479
+End of iteration 796
+
+
+Iteration: 797
+Pool size after limiting: 472
+End of iteration 797
+
+
+Iteration: 798
+Pool size after limiting: 470
+End of iteration 798
+
+
+Iteration: 799
+Pool size after limiting: 464
+End of iteration 799
+
+
+Iteration: 800
+Pool size after limiting: 482
+End of iteration 800
+
+
+Iteration: 801
+Pool size after limiting: 482
+End of iteration 801
+
+
+Iteration: 802
+Pool size after limiting: 489
+End of iteration 802
+
+
+Iteration: 803
+Pool size after limiting: 486
+End of iteration 803
+
+
+Iteration: 804
+Pool size after limiting: 490
+End of iteration 804
+
+
+Iteration: 805
+Pool size after limiting: 476
+End of iteration 805
+
+
+Iteration: 806
+Pool size after limiting: 483
+End of iteration 806
+
+
+Iteration: 807
+Pool size after limiting: 486
+End of iteration 807
+
+
+Iteration: 808
+Pool size after limiting: 481
+End of iteration 808
+
+
+Iteration: 809
+Pool size after limiting: 485
+End of iteration 809
+
+
+Iteration: 810
+Pool size after limiting: 489
+End of iteration 810
+
+
+Iteration: 811
+Pool size after limiting: 491
+End of iteration 811
+
+
+Iteration: 812
+Pool size after limiting: 488
+End of iteration 812
+
+
+Iteration: 813
+Pool size after limiting: 488
+End of iteration 813
+
+
+Iteration: 814
+Pool size after limiting: 478
+End of iteration 814
+
+
+Iteration: 815
+Pool size after limiting: 489
+End of iteration 815
+
+
+Iteration: 816
+Pool size after limiting: 481
+End of iteration 816
+
+
+Iteration: 817
+Pool size after limiting: 489
+End of iteration 817
+
+
+Iteration: 818
+Pool size after limiting: 483
+End of iteration 818
+
+
+Iteration: 819
+Pool size after limiting: 488
+End of iteration 819
+
+
+Iteration: 820
+Pool size after limiting: 483
+End of iteration 820
+
+
+Iteration: 821
+Pool size after limiting: 491
+End of iteration 821
+
+
+Iteration: 822
+Pool size after limiting: 485
+End of iteration 822
+
+
+Iteration: 823
+Pool size after limiting: 479
+End of iteration 823
+
+
+Iteration: 824
+Pool size after limiting: 491
+End of iteration 824
+
+
+Iteration: 825
+Pool size after limiting: 492
+End of iteration 825
+
+
+Iteration: 826
+Pool size after limiting: 497
+End of iteration 826
+
+
+Iteration: 827
+Pool size after limiting: 496
+End of iteration 827
+
+
+Iteration: 828
+Pool size after limiting: 498
+End of iteration 828
+
+
+Iteration: 829
+Pool size after limiting: 492
+End of iteration 829
+
+
+Iteration: 830
+Pool size after limiting: 493
+End of iteration 830
+
+
+Iteration: 831
+Pool size after limiting: 485
+End of iteration 831
+
+
+Iteration: 832
+Pool size after limiting: 485
+End of iteration 832
+
+
+Iteration: 833
+Pool size after limiting: 490
+End of iteration 833
+
+
+Iteration: 834
+Pool size after limiting: 500
+End of iteration 834
+
+
+Iteration: 835
+Pool size after limiting: 491
+End of iteration 835
+
+
+Iteration: 836
+Pool size after limiting: 506
+End of iteration 836
+
+
+Iteration: 837
+Pool size after limiting: 499
+End of iteration 837
+
+
+Iteration: 838
+Pool size after limiting: 494
+End of iteration 838
+
+
+Iteration: 839
+Pool size after limiting: 498
+End of iteration 839
+
+
+Iteration: 840
+Pool size after limiting: 499
+End of iteration 840
+
+
+Iteration: 841
+Pool size after limiting: 496
+End of iteration 841
+
+
+Iteration: 842
+Pool size after limiting: 500
+End of iteration 842
+
+
+Iteration: 843
+Pool size after limiting: 503
+End of iteration 843
+
+
+Iteration: 844
+Pool size after limiting: 499
+End of iteration 844
+
+
+Iteration: 845
+Pool size after limiting: 500
+End of iteration 845
+
+
+Iteration: 846
+Pool size after limiting: 500
+End of iteration 846
+
+
+Iteration: 847
+Pool size after limiting: 494
+End of iteration 847
+
+
+Iteration: 848
+Pool size after limiting: 500
+End of iteration 848
+
+
+Iteration: 849
+Pool size after limiting: 496
+End of iteration 849
+
+
+Iteration: 850
+Pool size after limiting: 493
+End of iteration 850
+
+
+Iteration: 851
+Pool size after limiting: 507
+End of iteration 851
+
+
+Iteration: 852
+Pool size after limiting: 504
+End of iteration 852
+
+
+Iteration: 853
+Pool size after limiting: 505
+End of iteration 853
+
+
+Iteration: 854
+Pool size after limiting: 509
+End of iteration 854
+
+
+Iteration: 855
+Pool size after limiting: 498
+End of iteration 855
+
+
+Iteration: 856
+Pool size after limiting: 493
+End of iteration 856
+
+
+Iteration: 857
+Pool size after limiting: 502
+End of iteration 857
+
+
+Iteration: 858
+Pool size after limiting: 501
+End of iteration 858
+
+
+Iteration: 859
+Pool size after limiting: 503
+End of iteration 859
+
+
+Iteration: 860
+Pool size after limiting: 501
+End of iteration 860
+
+
+Iteration: 861
+Pool size after limiting: 511
+End of iteration 861
+
+
+Iteration: 862
+Pool size after limiting: 515
+End of iteration 862
+
+
+Iteration: 863
+Pool size after limiting: 501
+End of iteration 863
+
+
+Iteration: 864
+Pool size after limiting: 497
+End of iteration 864
+
+
+Iteration: 865
+Pool size after limiting: 502
+End of iteration 865
+
+
+Iteration: 866
+Pool size after limiting: 505
+End of iteration 866
+
+
+Iteration: 867
+Pool size after limiting: 508
+End of iteration 867
+
+
+Iteration: 868
+Pool size after limiting: 494
+End of iteration 868
+
+
+Iteration: 869
+Pool size after limiting: 503
+End of iteration 869
+
+
+Iteration: 870
+Pool size after limiting: 510
+End of iteration 870
+
+
+Iteration: 871
+Pool size after limiting: 503
+End of iteration 871
+
+
+Iteration: 872
+Pool size after limiting: 509
+End of iteration 872
+
+
+Iteration: 873
+Pool size after limiting: 515
+End of iteration 873
+
+
+Iteration: 874
+Pool size after limiting: 511
+End of iteration 874
+
+
+Iteration: 875
+Pool size after limiting: 517
+End of iteration 875
+
+
+Iteration: 876
+Pool size after limiting: 503
+End of iteration 876
+
+
+Iteration: 877
+Pool size after limiting: 509
+End of iteration 877
+
+
+Iteration: 878
+Pool size after limiting: 523
+End of iteration 878
+
+
+Iteration: 879
+Pool size after limiting: 516
+End of iteration 879
+
+
+Iteration: 880
+Pool size after limiting: 520
+End of iteration 880
+
+
+Iteration: 881
+Pool size after limiting: 521
+End of iteration 881
+
+
+Iteration: 882
+Pool size after limiting: 518
+End of iteration 882
+
+
+Iteration: 883
+Pool size after limiting: 513
+End of iteration 883
+
+
+Iteration: 884
+Pool size after limiting: 511
+End of iteration 884
+
+
+Iteration: 885
+Pool size after limiting: 515
+End of iteration 885
+
+
+Iteration: 886
+Pool size after limiting: 512
+End of iteration 886
+
+
+Iteration: 887
+Pool size after limiting: 520
+End of iteration 887
+
+
+Iteration: 888
+Pool size after limiting: 519
+End of iteration 888
+
+
+Iteration: 889
+Pool size after limiting: 534
+End of iteration 889
+
+
+Iteration: 890
+Pool size after limiting: 518
+End of iteration 890
+
+
+Iteration: 891
+Pool size after limiting: 522
+End of iteration 891
+
+
+Iteration: 892
+Pool size after limiting: 532
+End of iteration 892
+
+
+Iteration: 893
+Pool size after limiting: 526
+End of iteration 893
+
+
+Iteration: 894
+Pool size after limiting: 520
+End of iteration 894
+
+
+Iteration: 895
+Pool size after limiting: 524
+End of iteration 895
+
+
+Iteration: 896
+Pool size after limiting: 527
+End of iteration 896
+
+
+Iteration: 897
+Pool size after limiting: 534
+End of iteration 897
+
+
+Iteration: 898
+Pool size after limiting: 531
+End of iteration 898
+
+
+Iteration: 899
+Pool size after limiting: 527
+End of iteration 899
+
+
+Iteration: 900
+Pool size after limiting: 532
+End of iteration 900
+
+
+Iteration: 901
+Pool size after limiting: 532
+End of iteration 901
+
+
+Iteration: 902
+Pool size after limiting: 527
+End of iteration 902
+
+
+Iteration: 903
+Pool size after limiting: 530
+End of iteration 903
+
+
+Iteration: 904
+Pool size after limiting: 524
+End of iteration 904
+
+
+Iteration: 905
+Pool size after limiting: 555
+End of iteration 905
+
+
+Iteration: 906
+Pool size after limiting: 546
+End of iteration 906
+
+
+Iteration: 907
+Pool size after limiting: 536
+End of iteration 907
+
+
+Iteration: 908
+Pool size after limiting: 529
+End of iteration 908
+
+
+Iteration: 909
+Pool size after limiting: 541
+End of iteration 909
+
+
+Iteration: 910
+Pool size after limiting: 542
+End of iteration 910
+
+
+Iteration: 911
+Pool size after limiting: 537
+End of iteration 911
+
+
+Iteration: 912
+Pool size after limiting: 539
+End of iteration 912
+
+
+Iteration: 913
+Pool size after limiting: 528
+End of iteration 913
+
+
+Iteration: 914
+Pool size after limiting: 547
+End of iteration 914
+
+
+Iteration: 915
+Pool size after limiting: 550
+End of iteration 915
+
+
+Iteration: 916
+Pool size after limiting: 538
+End of iteration 916
+
+
+Iteration: 917
+Pool size after limiting: 549
+End of iteration 917
+
+
+Iteration: 918
+Pool size after limiting: 549
+End of iteration 918
+
+
+Iteration: 919
+Pool size after limiting: 553
+End of iteration 919
+
+
+Iteration: 920
+Pool size after limiting: 545
+End of iteration 920
+
+
+Iteration: 921
+Pool size after limiting: 553
+End of iteration 921
+
+
+Iteration: 922
+Pool size after limiting: 542
+End of iteration 922
+
+
+Iteration: 923
+Pool size after limiting: 559
+End of iteration 923
+
+
+Iteration: 924
+Pool size after limiting: 560
+End of iteration 924
+
+
+Iteration: 925
+Pool size after limiting: 556
+End of iteration 925
+
+
+Iteration: 926
+Pool size after limiting: 560
+End of iteration 926
+
+
+Iteration: 927
+Pool size after limiting: 561
+End of iteration 927
+
+
+Iteration: 928
+Pool size after limiting: 558
+End of iteration 928
+
+
+Iteration: 929
+Pool size after limiting: 557
+End of iteration 929
+
+
+Iteration: 930
+Pool size after limiting: 550
+End of iteration 930
+
+
+Iteration: 931
+Pool size after limiting: 555
+End of iteration 931
+
+
+Iteration: 932
+Pool size after limiting: 555
+End of iteration 932
+
+
+Iteration: 933
+Pool size after limiting: 564
+End of iteration 933
+
+
+Iteration: 934
+Pool size after limiting: 568
+End of iteration 934
+
+
+Iteration: 935
+Pool size after limiting: 571
+End of iteration 935
+
+
+Iteration: 936
+Pool size after limiting: 555
+End of iteration 936
+
+
+Iteration: 937
+Pool size after limiting: 556
+End of iteration 937
+
+
+Iteration: 938
+Pool size after limiting: 567
+End of iteration 938
+
+
+Iteration: 939
+Pool size after limiting: 560
+End of iteration 939
+
+
+Iteration: 940
+Pool size after limiting: 559
+End of iteration 940
+
+
+Iteration: 941
+Pool size after limiting: 565
+End of iteration 941
+
+
+Iteration: 942
+Pool size after limiting: 572
+End of iteration 942
+
+
+Iteration: 943
+Pool size after limiting: 560
+End of iteration 943
+
+
+Iteration: 944
+Pool size after limiting: 566
+End of iteration 944
+
+
+Iteration: 945
+Pool size after limiting: 570
+End of iteration 945
+
+
+Iteration: 946
+Pool size after limiting: 566
+End of iteration 946
+
+
+Iteration: 947
+Pool size after limiting: 573
+End of iteration 947
+
+
+Iteration: 948
+Pool size after limiting: 574
+End of iteration 948
+
+
+Iteration: 949
+Pool size after limiting: 560
+End of iteration 949
+
+
+Iteration: 950
+Pool size after limiting: 572
+End of iteration 950
+
+
+Iteration: 951
+Pool size after limiting: 569
+End of iteration 951
+
+
+Iteration: 952
+Pool size after limiting: 569
+End of iteration 952
+
+
+Iteration: 953
+Pool size after limiting: 574
+End of iteration 953
+
+
+Iteration: 954
+Pool size after limiting: 576
+End of iteration 954
+
+
+Iteration: 955
+Pool size after limiting: 571
+End of iteration 955
+
+
+Iteration: 956
+Pool size after limiting: 571
+End of iteration 956
+
+
+Iteration: 957
+Pool size after limiting: 572
+End of iteration 957
+
+
+Iteration: 958
+Pool size after limiting: 566
+End of iteration 958
+
+
+Iteration: 959
+Pool size after limiting: 577
+End of iteration 959
+
+
+Iteration: 960
+Pool size after limiting: 572
+End of iteration 960
+
+
+Iteration: 961
+Pool size after limiting: 575
+End of iteration 961
+
+
+Iteration: 962
+Pool size after limiting: 580
+End of iteration 962
+
+
+Iteration: 963
+Pool size after limiting: 582
+End of iteration 963
+
+
+Iteration: 964
+Pool size after limiting: 578
+End of iteration 964
+
+
+Iteration: 965
+Pool size after limiting: 579
+End of iteration 965
+
+
+Iteration: 966
+Pool size after limiting: 573
+End of iteration 966
+
+
+Iteration: 967
+Pool size after limiting: 577
+End of iteration 967
+
+
+Iteration: 968
+Pool size after limiting: 566
+End of iteration 968
+
+
+Iteration: 969
+Pool size after limiting: 572
+End of iteration 969
+
+
+Iteration: 970
+Pool size after limiting: 587
+End of iteration 970
+
+
+Iteration: 971
+Pool size after limiting: 586
+End of iteration 971
+
+
+Iteration: 972
+Pool size after limiting: 583
+End of iteration 972
+
+
+Iteration: 973
+Pool size after limiting: 574
+End of iteration 973
+
+
+Iteration: 974
+Pool size after limiting: 585
+End of iteration 974
+
+
+Iteration: 975
+Pool size after limiting: 580
+End of iteration 975
+
+
+Iteration: 976
+Pool size after limiting: 580
+End of iteration 976
+
+
+Iteration: 977
+Pool size after limiting: 566
+End of iteration 977
+
+
+Iteration: 978
+Pool size after limiting: 579
+End of iteration 978
+
+
+Iteration: 979
+Pool size after limiting: 584
+End of iteration 979
+
+
+Iteration: 980
+Pool size after limiting: 583
+End of iteration 980
+
+
+Iteration: 981
+Pool size after limiting: 587
+End of iteration 981
+
+
+Iteration: 982
+Pool size after limiting: 591
+End of iteration 982
+
+
+Iteration: 983
+Pool size after limiting: 594
+End of iteration 983
+
+
+Iteration: 984
+Pool size after limiting: 584
+End of iteration 984
+
+
+Iteration: 985
+Pool size after limiting: 583
+End of iteration 985
+
+
+Iteration: 986
+Pool size after limiting: 582
+End of iteration 986
+
+
+Iteration: 987
+Pool size after limiting: 581
+End of iteration 987
+
+
+Iteration: 988
+Pool size after limiting: 593
+End of iteration 988
+
+
+Iteration: 989
+Pool size after limiting: 596
+End of iteration 989
+
+
+Iteration: 990
+Pool size after limiting: 584
+End of iteration 990
+
+
+Iteration: 991
+Pool size after limiting: 585
+End of iteration 991
+
+
+Iteration: 992
+Pool size after limiting: 593
+End of iteration 992
+
+
+Iteration: 993
+Pool size after limiting: 587
+End of iteration 993
+
+
+Iteration: 994
+Pool size after limiting: 579
+End of iteration 994
+
+
+Iteration: 995
+Pool size after limiting: 585
+End of iteration 995
+
+
+Iteration: 996
+Pool size after limiting: 582
+End of iteration 996
+
+
+Iteration: 997
+Pool size after limiting: 591
+End of iteration 997
+
+
+Iteration: 998
+Pool size after limiting: 601
+End of iteration 998
+
+
+Iteration: 999
+Pool size after limiting: 599
+End of iteration 999
+
+
+Iteration: 1000
+Pool size after limiting: 597
+End of iteration 1000
+
+
+Iteration: 1001
+Pool size after limiting: 600
+End of iteration 1001
+
+
+Iteration: 1002
+Pool size after limiting: 601
+End of iteration 1002
+
+
+Iteration: 1003
+Pool size after limiting: 593
+End of iteration 1003
+
+
+Iteration: 1004
+Pool size after limiting: 591
+End of iteration 1004
+
+
+Iteration: 1005
+Pool size after limiting: 584
+End of iteration 1005
+
+
+Iteration: 1006
+Pool size after limiting: 578
+End of iteration 1006
+
+
+Iteration: 1007
+Pool size after limiting: 597
+End of iteration 1007
+
+
+Iteration: 1008
+Pool size after limiting: 597
+End of iteration 1008
+
+
+Iteration: 1009
+Pool size after limiting: 606
+End of iteration 1009
+
+
+Iteration: 1010
+Pool size after limiting: 604
+End of iteration 1010
+
+
+Iteration: 1011
+Pool size after limiting: 602
+End of iteration 1011
+
+
+Iteration: 1012
+Pool size after limiting: 601
+End of iteration 1012
+
+
+Iteration: 1013
+Pool size after limiting: 589
+End of iteration 1013
+
+
+Iteration: 1014
+Pool size after limiting: 589
+End of iteration 1014
+
+
+Iteration: 1015
+Pool size after limiting: 594
+End of iteration 1015
+
+
+Iteration: 1016
+Pool size after limiting: 585
+End of iteration 1016
+
+
+Iteration: 1017
+Pool size after limiting: 594
+End of iteration 1017
+
+
+Iteration: 1018
+Pool size after limiting: 603
+End of iteration 1018
+
+
+Iteration: 1019
+Pool size after limiting: 600
+End of iteration 1019
+
+
+Iteration: 1020
+Pool size after limiting: 610
+End of iteration 1020
+
+
+Iteration: 1021
+Pool size after limiting: 614
+End of iteration 1021
+
+
+Iteration: 1022
+Pool size after limiting: 606
+End of iteration 1022
+
+
+Iteration: 1023
+Pool size after limiting: 605
+End of iteration 1023
+
+
+Iteration: 1024
+Pool size after limiting: 588
+End of iteration 1024
+
+
 ━1024
- ┣━655
- ┃ ┣━437
- ┃ ┃ ┣━305
- ┃ ┃ ┃ ┣━213
- ┃ ┃ ┃ ┃ ┣━151
- ┃ ┃ ┃ ┃ ┃ ┣━112
- ┃ ┃ ┃ ┃ ┃ ┃ ┣━81
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━61
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━46
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━36
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━26
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━20
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━15
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━11
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━8
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━5
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━6
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━5
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━10
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━7
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━5
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━10
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━7
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━5
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━15
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━11
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━8
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━6
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━5
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━20
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━15
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━11
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━8
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━6
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━5
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━5
- ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃ ┗━31
- ┃ ┃ ┃ ┃ ┃ ┃   ┣━23
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━16
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━12
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━9
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━6
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━5
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━3
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━3
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━4
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━7
- ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━5
- ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━2
- ┃ ┃ ┃ ┃ ┃ ┃   ┃     ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┃     ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃   ┗━8
- ┃ ┃ ┃ ┃ ┃ ┃     ┣━5
- ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃     ┗━3
- ┃ ┃ ┃ ┃ ┃ ┃       ┣━2
- ┃ ┃ ┃ ┃ ┃ ┃       ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃       ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┃       ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃ ┗━39
- ┃ ┃ ┃ ┃ ┃   ┣━29
- ┃ ┃ ┃ ┃ ┃   ┃ ┣━20
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━15
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━11
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━8
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━6
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━2
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━3
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━2
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━4
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┣━3
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━5
- ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┣━4
- ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃ ┗━9
- ┃ ┃ ┃ ┃ ┃   ┃   ┣━6
- ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┣━5
- ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃   ┗━3
- ┃ ┃ ┃ ┃ ┃   ┃     ┣━2
- ┃ ┃ ┃ ┃ ┃   ┃     ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┃     ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃   ┗━10
- ┃ ┃ ┃ ┃ ┃     ┣━7
- ┃ ┃ ┃ ┃ ┃     ┃ ┣━5
- ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃     ┃ ┗━2
- ┃ ┃ ┃ ┃ ┃     ┃   ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃     ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃     ┗━3
- ┃ ┃ ┃ ┃ ┃       ┣━2
- ┃ ┃ ┃ ┃ ┃       ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃ ┃       ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃ ┃       ┗━ g1 k
- ┃ ┃ ┃ ┃ ┗━62
- ┃ ┃ ┃ ┃   ┣━42
- ┃ ┃ ┃ ┃   ┃ ┣━31
- ┃ ┃ ┃ ┃   ┃ ┃ ┣━23
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━16
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━12
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━9
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━3
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┣━2
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━4
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━3
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┣━2
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━7
- ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┣━5
- ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┣━4
- ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┗━2
- ┃ ┃ ┃ ┃   ┃ ┃ ┃     ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┃     ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃ ┗━8
- ┃ ┃ ┃ ┃   ┃ ┃   ┣━5
- ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┣━4
- ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃   ┗━3
- ┃ ┃ ┃ ┃   ┃ ┃     ┣━2
- ┃ ┃ ┃ ┃   ┃ ┃     ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┃     ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃ ┗━11
- ┃ ┃ ┃ ┃   ┃   ┣━8
- ┃ ┃ ┃ ┃   ┃   ┃ ┣━5
- ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃   ┃ ┗━3
- ┃ ┃ ┃ ┃   ┃   ┃   ┣━2
- ┃ ┃ ┃ ┃   ┃   ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃   ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃   ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃   ┗━3
- ┃ ┃ ┃ ┃   ┃     ┣━2
- ┃ ┃ ┃ ┃   ┃     ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃   ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃   ┃     ┗━ g1 k
- ┃ ┃ ┃ ┃   ┗━20
- ┃ ┃ ┃ ┃     ┣━14
- ┃ ┃ ┃ ┃     ┃ ┣━10
- ┃ ┃ ┃ ┃     ┃ ┃ ┣━7
- ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┣━5
- ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┗━2
- ┃ ┃ ┃ ┃     ┃ ┃ ┃   ┣━ g1 k
- ┃ ┃ ┃ ┃     ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃     ┃ ┃ ┗━3
- ┃ ┃ ┃ ┃     ┃ ┃   ┣━2
- ┃ ┃ ┃ ┃     ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃     ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃     ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃     ┃ ┗━4
- ┃ ┃ ┃ ┃     ┃   ┣━3
- ┃ ┃ ┃ ┃     ┃   ┃ ┣━2
- ┃ ┃ ┃ ┃     ┃   ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃     ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃     ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃     ┃   ┗━ g1 k
- ┃ ┃ ┃ ┃     ┗━6
- ┃ ┃ ┃ ┃       ┣━4
- ┃ ┃ ┃ ┃       ┃ ┣━3
- ┃ ┃ ┃ ┃       ┃ ┃ ┣━2
- ┃ ┃ ┃ ┃       ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃ ┃       ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃       ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃       ┃ ┗━ g1 k
- ┃ ┃ ┃ ┃       ┗━2
- ┃ ┃ ┃ ┃         ┣━ g1 k
- ┃ ┃ ┃ ┃         ┗━ g1 k
- ┃ ┃ ┃ ┗━92
- ┃ ┃ ┃   ┣━62
- ┃ ┃ ┃   ┃ ┣━42
- ┃ ┃ ┃   ┃ ┃ ┣━31
- ┃ ┃ ┃   ┃ ┃ ┃ ┣━23
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━16
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━12
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━9
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━4
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┣━3
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━7
- ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━5
- ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┣━4
- ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
- ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━2
- ┃ ┃ ┃   ┃ ┃ ┃ ┃     ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┃     ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃ ┗━8
- ┃ ┃ ┃   ┃ ┃ ┃   ┣━5
- ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┣━4
- ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┣━3
- ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃   ┗━3
- ┃ ┃ ┃   ┃ ┃ ┃     ┣━2
- ┃ ┃ ┃   ┃ ┃ ┃     ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┃     ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃ ┗━11
- ┃ ┃ ┃   ┃ ┃   ┣━8
- ┃ ┃ ┃   ┃ ┃   ┃ ┣━5
- ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┣━4
- ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃   ┃ ┗━3
- ┃ ┃ ┃   ┃ ┃   ┃   ┣━2
- ┃ ┃ ┃   ┃ ┃   ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃   ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃   ┃   ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃   ┗━3
- ┃ ┃ ┃   ┃ ┃     ┣━2
- ┃ ┃ ┃   ┃ ┃     ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃ ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃ ┃     ┗━ g1 k
- ┃ ┃ ┃   ┃ ┗━20
- ┃ ┃ ┃   ┃   ┣━14
- ┃ ┃ ┃   ┃   ┃ ┣━10
- ┃ ┃ ┃   ┃   ┃ ┃ ┣━7
- ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━5
- ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━2
- ┃ ┃ ┃   ┃   ┃ ┃ ┃   ┣━ g1 k
- ┃ ┃ ┃   ┃   ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃   ┃   ┃ ┃ ┗━3
- ┃ ┃ ┃   ┃   ┃ ┃   ┣━2
- ┃ ┃ ┃   ┃   ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃   ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃   ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃   ┃   ┃ ┗━4
- ┃ ┃ ┃   ┃   ┃   ┣━3
- ┃ ┃ ┃   ┃   ┃   ┃ ┣━2
- ┃ ┃ ┃   ┃   ┃   ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃   ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃   ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃   ┃   ┗━ g1 k
- ┃ ┃ ┃   ┃   ┗━6
- ┃ ┃ ┃   ┃     ┣━4
- ┃ ┃ ┃   ┃     ┃ ┣━3
- ┃ ┃ ┃   ┃     ┃ ┃ ┣━2
- ┃ ┃ ┃   ┃     ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃   ┃     ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃     ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃     ┃ ┗━ g1 k
- ┃ ┃ ┃   ┃     ┗━2
- ┃ ┃ ┃   ┃       ┣━ g1 k
- ┃ ┃ ┃   ┃       ┗━ g1 k
- ┃ ┃ ┃   ┗━30
- ┃ ┃ ┃     ┣━20
- ┃ ┃ ┃     ┃ ┣━14
- ┃ ┃ ┃     ┃ ┃ ┣━10
- ┃ ┃ ┃     ┃ ┃ ┃ ┣━7
- ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━5
- ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━2
- ┃ ┃ ┃     ┃ ┃ ┃ ┃   ┣━ g1 k
- ┃ ┃ ┃     ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃     ┃ ┃ ┃ ┗━3
- ┃ ┃ ┃     ┃ ┃ ┃   ┣━2
- ┃ ┃ ┃     ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃ ┃     ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃     ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃     ┃ ┃ ┗━4
- ┃ ┃ ┃     ┃ ┃   ┣━3
- ┃ ┃ ┃     ┃ ┃   ┃ ┣━2
- ┃ ┃ ┃     ┃ ┃   ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃     ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃     ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃     ┃ ┃   ┗━ g1 k
- ┃ ┃ ┃     ┃ ┗━6
- ┃ ┃ ┃     ┃   ┣━4
- ┃ ┃ ┃     ┃   ┃ ┣━3
- ┃ ┃ ┃     ┃   ┃ ┃ ┣━2
- ┃ ┃ ┃     ┃   ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃     ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃     ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃     ┃   ┃ ┗━ g1 k
- ┃ ┃ ┃     ┃   ┗━2
- ┃ ┃ ┃     ┃     ┣━ g1 k
- ┃ ┃ ┃     ┃     ┗━ g1 k
- ┃ ┃ ┃     ┗━10
- ┃ ┃ ┃       ┣━6
- ┃ ┃ ┃       ┃ ┣━4
- ┃ ┃ ┃       ┃ ┃ ┣━3
- ┃ ┃ ┃       ┃ ┃ ┃ ┣━2
- ┃ ┃ ┃       ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃ ┃       ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃       ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃       ┃ ┃ ┗━ g1 k
- ┃ ┃ ┃       ┃ ┗━2
- ┃ ┃ ┃       ┃   ┣━ g1 k
- ┃ ┃ ┃       ┃   ┗━ g1 k
- ┃ ┃ ┃       ┗━4
- ┃ ┃ ┃         ┣━2
- ┃ ┃ ┃         ┃ ┣━ g1 k
- ┃ ┃ ┃         ┃ ┗━ g1 k
- ┃ ┃ ┃         ┗━2
- ┃ ┃ ┃           ┣━ g1 k
- ┃ ┃ ┃           ┗━ g1 k
- ┃ ┃ ┗━132
- ┃ ┃   ┣━86
- ┃ ┃   ┃ ┣━58
- ┃ ┃   ┃ ┃ ┣━40
- ┃ ┃   ┃ ┃ ┃ ┣━30
- ┃ ┃   ┃ ┃ ┃ ┃ ┣━23
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━16
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━12
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━9
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━4
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┣━3
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━7
- ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┣━5
- ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┣━4
- ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
- ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
- ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┗━2
- ┃ ┃   ┃ ┃ ┃ ┃ ┃     ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┃     ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃ ┗━7
- ┃ ┃   ┃ ┃ ┃ ┃   ┣━5
- ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┣━4
- ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
- ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
- ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃   ┗━2
- ┃ ┃   ┃ ┃ ┃ ┃     ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┃     ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃ ┗━10
- ┃ ┃   ┃ ┃ ┃   ┣━7
- ┃ ┃   ┃ ┃ ┃   ┃ ┣━5
- ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┣━4
- ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
- ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃   ┃ ┗━2
- ┃ ┃   ┃ ┃ ┃   ┃   ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃   ┃   ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃   ┗━3
- ┃ ┃   ┃ ┃ ┃     ┣━2
- ┃ ┃   ┃ ┃ ┃     ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃ ┃     ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃ ┃     ┗━ g1 k
- ┃ ┃   ┃ ┃ ┗━18
- ┃ ┃   ┃ ┃   ┣━12
- ┃ ┃   ┃ ┃   ┃ ┣━9
- ┃ ┃   ┃ ┃   ┃ ┃ ┣━6
- ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┣━5
- ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃   ┃ ┃ ┗━3
- ┃ ┃   ┃ ┃   ┃ ┃   ┣━2
- ┃ ┃   ┃ ┃   ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃   ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃   ┃ ┃   ┗━ g1 k
- ┃ ┃   ┃ ┃   ┃ ┗━3
- ┃ ┃   ┃ ┃   ┃   ┣━2
- ┃ ┃   ┃ ┃   ┃   ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃   ┃   ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃   ┃   ┗━ g1 k
- ┃ ┃   ┃ ┃   ┗━6
- ┃ ┃   ┃ ┃     ┣━4
- ┃ ┃   ┃ ┃     ┃ ┣━3
- ┃ ┃   ┃ ┃     ┃ ┃ ┣━2
- ┃ ┃   ┃ ┃     ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃   ┃ ┃     ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃     ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃     ┃ ┗━ g1 k
- ┃ ┃   ┃ ┃     ┗━2
- ┃ ┃   ┃ ┃       ┣━ g1 k
- ┃ ┃   ┃ ┃       ┗━ g1 k
- ┃ ┃   ┃ ┗━28
- ┃ ┃   ┃   ┣━18
- ┃ ┃   ┃   ┃ ┣━12
- ┃ ┃   ┃   ┃ ┃ ┣━9
- ┃ ┃   ┃   ┃ ┃ ┃ ┣━6
- ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━5
- ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃   ┃ ┃ ┃ ┗━3
- ┃ ┃   ┃   ┃ ┃ ┃   ┣━2
- ┃ ┃   ┃   ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃   ┃   ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃   ┃   ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃   ┃   ┃ ┃ ┗━3
- ┃ ┃   ┃   ┃ ┃   ┣━2
- ┃ ┃   ┃   ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃   ┃   ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃   ┃   ┃ ┃   ┗━ g1 k
- ┃ ┃   ┃   ┃ ┗━6
- ┃ ┃   ┃   ┃   ┣━4
- ┃ ┃   ┃   ┃   ┃ ┣━3
- ┃ ┃   ┃   ┃   ┃ ┃ ┣━2
- ┃ ┃   ┃   ┃   ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃   ┃   ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃   ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃   ┃   ┃ ┗━ g1 k
- ┃ ┃   ┃   ┃   ┗━2
- ┃ ┃   ┃   ┃     ┣━ g1 k
- ┃ ┃   ┃   ┃     ┗━ g1 k
- ┃ ┃   ┃   ┗━10
- ┃ ┃   ┃     ┣━6
- ┃ ┃   ┃     ┃ ┣━4
- ┃ ┃   ┃     ┃ ┃ ┣━3
- ┃ ┃   ┃     ┃ ┃ ┃ ┣━2
- ┃ ┃   ┃     ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃   ┃     ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃     ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃     ┃ ┃ ┗━ g1 k
- ┃ ┃   ┃     ┃ ┗━2
- ┃ ┃   ┃     ┃   ┣━ g1 k
- ┃ ┃   ┃     ┃   ┗━ g1 k
- ┃ ┃   ┃     ┗━4
- ┃ ┃   ┃       ┣━2
- ┃ ┃   ┃       ┃ ┣━ g1 k
- ┃ ┃   ┃       ┃ ┗━ g1 k
- ┃ ┃   ┃       ┗━2
- ┃ ┃   ┃         ┣━ g1 k
- ┃ ┃   ┃         ┗━ g1 k
- ┃ ┃   ┗━46
- ┃ ┃     ┣━28
- ┃ ┃     ┃ ┣━18
- ┃ ┃     ┃ ┃ ┣━12
- ┃ ┃     ┃ ┃ ┃ ┣━9
- ┃ ┃     ┃ ┃ ┃ ┃ ┣━6
- ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━5
- ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃     ┃ ┃ ┃ ┃ ┗━3
- ┃ ┃     ┃ ┃ ┃ ┃   ┣━2
- ┃ ┃     ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃     ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃     ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃     ┃ ┃ ┃ ┗━3
- ┃ ┃     ┃ ┃ ┃   ┣━2
- ┃ ┃     ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃ ┃     ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃     ┃ ┃ ┃   ┗━ g1 k
- ┃ ┃     ┃ ┃ ┗━6
- ┃ ┃     ┃ ┃   ┣━4
- ┃ ┃     ┃ ┃   ┃ ┣━3
- ┃ ┃     ┃ ┃   ┃ ┃ ┣━2
- ┃ ┃     ┃ ┃   ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃     ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃     ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃     ┃ ┃   ┃ ┗━ g1 k
- ┃ ┃     ┃ ┃   ┗━2
- ┃ ┃     ┃ ┃     ┣━ g1 k
- ┃ ┃     ┃ ┃     ┗━ g1 k
- ┃ ┃     ┃ ┗━10
- ┃ ┃     ┃   ┣━6
- ┃ ┃     ┃   ┃ ┣━4
- ┃ ┃     ┃   ┃ ┃ ┣━3
- ┃ ┃     ┃   ┃ ┃ ┃ ┣━2
- ┃ ┃     ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃     ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃     ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃     ┃   ┃ ┃ ┗━ g1 k
- ┃ ┃     ┃   ┃ ┗━2
- ┃ ┃     ┃   ┃   ┣━ g1 k
- ┃ ┃     ┃   ┃   ┗━ g1 k
- ┃ ┃     ┃   ┗━4
- ┃ ┃     ┃     ┣━2
- ┃ ┃     ┃     ┃ ┣━ g1 k
- ┃ ┃     ┃     ┃ ┗━ g1 k
- ┃ ┃     ┃     ┗━2
- ┃ ┃     ┃       ┣━ g1 k
- ┃ ┃     ┃       ┗━ g1 k
- ┃ ┃     ┗━18
- ┃ ┃       ┣━10
- ┃ ┃       ┃ ┣━6
- ┃ ┃       ┃ ┃ ┣━4
- ┃ ┃       ┃ ┃ ┃ ┣━3
- ┃ ┃       ┃ ┃ ┃ ┃ ┣━2
- ┃ ┃       ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃ ┃       ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃       ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃       ┃ ┃ ┃ ┗━ g1 k
- ┃ ┃       ┃ ┃ ┗━2
- ┃ ┃       ┃ ┃   ┣━ g1 k
- ┃ ┃       ┃ ┃   ┗━ g1 k
- ┃ ┃       ┃ ┗━4
- ┃ ┃       ┃   ┣━2
- ┃ ┃       ┃   ┃ ┣━ g1 k
- ┃ ┃       ┃   ┃ ┗━ g1 k
- ┃ ┃       ┃   ┗━2
- ┃ ┃       ┃     ┣━ g1 k
- ┃ ┃       ┃     ┗━ g1 k
- ┃ ┃       ┗━8
- ┃ ┃         ┣━4
- ┃ ┃         ┃ ┣━2
- ┃ ┃         ┃ ┃ ┣━ g1 k
- ┃ ┃         ┃ ┃ ┗━ g1 k
- ┃ ┃         ┃ ┗━2
- ┃ ┃         ┃   ┣━ g1 k
- ┃ ┃         ┃   ┗━ g1 k
- ┃ ┃         ┗━4
- ┃ ┃           ┣━2
- ┃ ┃           ┃ ┣━ g1 k
- ┃ ┃           ┃ ┗━ g1 k
- ┃ ┃           ┗━2
- ┃ ┃             ┣━ g1 k
- ┃ ┃             ┗━ g1 k
- ┃ ┗━218
- ┃   ┣━138
- ┃   ┃ ┣━90
- ┃   ┃ ┃ ┣━60
- ┃   ┃ ┃ ┃ ┣━42
- ┃   ┃ ┃ ┃ ┃ ┣━31
- ┃   ┃ ┃ ┃ ┃ ┃ ┣━23
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━16
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━12
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━9
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━4
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━3
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━7
- ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┣━5
- ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━4
- ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
- ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
- ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┗━2
- ┃   ┃ ┃ ┃ ┃ ┃ ┃     ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┃     ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃ ┗━8
- ┃   ┃ ┃ ┃ ┃ ┃   ┣━5
- ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┣━4
- ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
- ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
- ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃   ┗━3
- ┃   ┃ ┃ ┃ ┃ ┃     ┣━2
- ┃   ┃ ┃ ┃ ┃ ┃     ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃     ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┃     ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃ ┗━11
- ┃   ┃ ┃ ┃ ┃   ┣━8
- ┃   ┃ ┃ ┃ ┃   ┃ ┣━6
- ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┣━5
- ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━4
- ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━3
- ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃   ┃ ┗━2
- ┃   ┃ ┃ ┃ ┃   ┃   ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃   ┃   ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃   ┗━3
- ┃   ┃ ┃ ┃ ┃     ┣━2
- ┃   ┃ ┃ ┃ ┃     ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃ ┃     ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃ ┃     ┗━ g1 k
- ┃   ┃ ┃ ┃ ┗━18
- ┃   ┃ ┃ ┃   ┣━12
- ┃   ┃ ┃ ┃   ┃ ┣━9
- ┃   ┃ ┃ ┃   ┃ ┃ ┣━6
- ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┣━5
- ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━4
- ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃   ┃ ┃ ┗━3
- ┃   ┃ ┃ ┃   ┃ ┃   ┣━2
- ┃   ┃ ┃ ┃   ┃ ┃   ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃   ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃   ┃ ┃   ┗━ g1 k
- ┃   ┃ ┃ ┃   ┃ ┗━3
- ┃   ┃ ┃ ┃   ┃   ┣━2
- ┃   ┃ ┃ ┃   ┃   ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃   ┃   ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃   ┃   ┗━ g1 k
- ┃   ┃ ┃ ┃   ┗━6
- ┃   ┃ ┃ ┃     ┣━4
- ┃   ┃ ┃ ┃     ┃ ┣━3
- ┃   ┃ ┃ ┃     ┃ ┃ ┣━2
- ┃   ┃ ┃ ┃     ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃ ┃     ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃     ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃     ┃ ┗━ g1 k
- ┃   ┃ ┃ ┃     ┗━2
- ┃   ┃ ┃ ┃       ┣━ g1 k
- ┃   ┃ ┃ ┃       ┗━ g1 k
- ┃   ┃ ┃ ┗━30
- ┃   ┃ ┃   ┣━20
- ┃   ┃ ┃   ┃ ┣━14
- ┃   ┃ ┃   ┃ ┃ ┣━10
- ┃   ┃ ┃   ┃ ┃ ┃ ┣━7
- ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┣━5
- ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┗━2
- ┃   ┃ ┃   ┃ ┃ ┃ ┃   ┣━ g1 k
- ┃   ┃ ┃   ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃   ┃ ┃   ┃ ┃ ┃ ┗━3
- ┃   ┃ ┃   ┃ ┃ ┃   ┣━2
- ┃   ┃ ┃   ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃   ┃ ┃   ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃ ┃   ┃ ┃ ┃   ┗━ g1 k
- ┃   ┃ ┃   ┃ ┃ ┗━4
- ┃   ┃ ┃   ┃ ┃   ┣━3
- ┃   ┃ ┃   ┃ ┃   ┃ ┣━2
- ┃   ┃ ┃   ┃ ┃   ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃   ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃   ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃ ┃   ┃ ┃   ┗━ g1 k
- ┃   ┃ ┃   ┃ ┗━6
- ┃   ┃ ┃   ┃   ┣━4
- ┃   ┃ ┃   ┃   ┃ ┣━3
- ┃   ┃ ┃   ┃   ┃ ┃ ┣━2
- ┃   ┃ ┃   ┃   ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃   ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃   ┃   ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃   ┃   ┃ ┗━ g1 k
- ┃   ┃ ┃   ┃   ┗━2
- ┃   ┃ ┃   ┃     ┣━ g1 k
- ┃   ┃ ┃   ┃     ┗━ g1 k
- ┃   ┃ ┃   ┗━10
- ┃   ┃ ┃     ┣━6
- ┃   ┃ ┃     ┃ ┣━4
- ┃   ┃ ┃     ┃ ┃ ┣━3
- ┃   ┃ ┃     ┃ ┃ ┃ ┣━2
- ┃   ┃ ┃     ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃ ┃     ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃     ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃     ┃ ┃ ┗━ g1 k
- ┃   ┃ ┃     ┃ ┗━2
- ┃   ┃ ┃     ┃   ┣━ g1 k
- ┃   ┃ ┃     ┃   ┗━ g1 k
- ┃   ┃ ┃     ┗━4
- ┃   ┃ ┃       ┣━2
- ┃   ┃ ┃       ┃ ┣━ g1 k
- ┃   ┃ ┃       ┃ ┗━ g1 k
- ┃   ┃ ┃       ┗━2
- ┃   ┃ ┃         ┣━ g1 k
- ┃   ┃ ┃         ┗━ g1 k
- ┃   ┃ ┗━48
- ┃   ┃   ┣━30
- ┃   ┃   ┃ ┣━20
- ┃   ┃   ┃ ┃ ┣━14
- ┃   ┃   ┃ ┃ ┃ ┣━10
- ┃   ┃   ┃ ┃ ┃ ┃ ┣━7
- ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━5
- ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━2
- ┃   ┃   ┃ ┃ ┃ ┃ ┃   ┣━ g1 k
- ┃   ┃   ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃   ┃   ┃ ┃ ┃ ┃ ┗━3
- ┃   ┃   ┃ ┃ ┃ ┃   ┣━2
- ┃   ┃   ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃   ┃   ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃   ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃   ┃   ┃ ┃ ┃ ┗━4
- ┃   ┃   ┃ ┃ ┃   ┣━3
- ┃   ┃   ┃ ┃ ┃   ┃ ┣━2
- ┃   ┃   ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
- ┃   ┃   ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃   ┃   ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃   ┃ ┃ ┃   ┗━ g1 k
- ┃   ┃   ┃ ┃ ┗━6
- ┃   ┃   ┃ ┃   ┣━4
- ┃   ┃   ┃ ┃   ┃ ┣━3
- ┃   ┃   ┃ ┃   ┃ ┃ ┣━2
- ┃   ┃   ┃ ┃   ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃   ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃   ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃   ┃   ┃ ┃   ┃ ┗━ g1 k
- ┃   ┃   ┃ ┃   ┗━2
- ┃   ┃   ┃ ┃     ┣━ g1 k
- ┃   ┃   ┃ ┃     ┗━ g1 k
- ┃   ┃   ┃ ┗━10
- ┃   ┃   ┃   ┣━6
- ┃   ┃   ┃   ┃ ┣━4
- ┃   ┃   ┃   ┃ ┃ ┣━3
- ┃   ┃   ┃   ┃ ┃ ┃ ┣━2
- ┃   ┃   ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃   ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃   ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃   ┃   ┃ ┃ ┗━ g1 k
- ┃   ┃   ┃   ┃ ┗━2
- ┃   ┃   ┃   ┃   ┣━ g1 k
- ┃   ┃   ┃   ┃   ┗━ g1 k
- ┃   ┃   ┃   ┗━4
- ┃   ┃   ┃     ┣━2
- ┃   ┃   ┃     ┃ ┣━ g1 k
- ┃   ┃   ┃     ┃ ┗━ g1 k
- ┃   ┃   ┃     ┗━2
- ┃   ┃   ┃       ┣━ g1 k
- ┃   ┃   ┃       ┗━ g1 k
- ┃   ┃   ┗━18
- ┃   ┃     ┣━10
- ┃   ┃     ┃ ┣━6
- ┃   ┃     ┃ ┃ ┣━4
- ┃   ┃     ┃ ┃ ┃ ┣━3
- ┃   ┃     ┃ ┃ ┃ ┃ ┣━2
- ┃   ┃     ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃   ┃     ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃     ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃     ┃ ┃ ┃ ┗━ g1 k
- ┃   ┃     ┃ ┃ ┗━2
- ┃   ┃     ┃ ┃   ┣━ g1 k
- ┃   ┃     ┃ ┃   ┗━ g1 k
- ┃   ┃     ┃ ┗━4
- ┃   ┃     ┃   ┣━2
- ┃   ┃     ┃   ┃ ┣━ g1 k
- ┃   ┃     ┃   ┃ ┗━ g1 k
- ┃   ┃     ┃   ┗━2
- ┃   ┃     ┃     ┣━ g1 k
- ┃   ┃     ┃     ┗━ g1 k
- ┃   ┃     ┗━8
- ┃   ┃       ┣━4
- ┃   ┃       ┃ ┣━2
- ┃   ┃       ┃ ┃ ┣━ g1 k
- ┃   ┃       ┃ ┃ ┗━ g1 k
- ┃   ┃       ┃ ┗━2
- ┃   ┃       ┃   ┣━ g1 k
- ┃   ┃       ┃   ┗━ g1 k
- ┃   ┃       ┗━4
- ┃   ┃         ┣━2
- ┃   ┃         ┃ ┣━ g1 k
- ┃   ┃         ┃ ┗━ g1 k
- ┃   ┃         ┗━2
- ┃   ┃           ┣━ g1 k
- ┃   ┃           ┗━ g1 k
- ┃   ┗━80
- ┃     ┣━46
- ┃     ┃ ┣━28
- ┃     ┃ ┃ ┣━18
- ┃     ┃ ┃ ┃ ┣━12
- ┃     ┃ ┃ ┃ ┃ ┣━9
- ┃     ┃ ┃ ┃ ┃ ┃ ┣━6
- ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
- ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
- ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
- ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃ ┃ ┃ ┃ ┃ ┗━3
- ┃     ┃ ┃ ┃ ┃ ┃   ┣━2
- ┃     ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃     ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃     ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃     ┃ ┃ ┃ ┃ ┗━3
- ┃     ┃ ┃ ┃ ┃   ┣━2
- ┃     ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
- ┃     ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃     ┃ ┃ ┃ ┃   ┗━ g1 k
- ┃     ┃ ┃ ┃ ┗━6
- ┃     ┃ ┃ ┃   ┣━4
- ┃     ┃ ┃ ┃   ┃ ┣━3
- ┃     ┃ ┃ ┃   ┃ ┃ ┣━2
- ┃     ┃ ┃ ┃   ┃ ┃ ┃ ┣━ g1 k
- ┃     ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃     ┃ ┃ ┃   ┃ ┗━ g1 k
- ┃     ┃ ┃ ┃   ┗━2
- ┃     ┃ ┃ ┃     ┣━ g1 k
- ┃     ┃ ┃ ┃     ┗━ g1 k
- ┃     ┃ ┃ ┗━10
- ┃     ┃ ┃   ┣━6
- ┃     ┃ ┃   ┃ ┣━4
- ┃     ┃ ┃   ┃ ┃ ┣━3
- ┃     ┃ ┃   ┃ ┃ ┃ ┣━2
- ┃     ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃     ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃ ┃   ┃ ┃ ┗━ g1 k
- ┃     ┃ ┃   ┃ ┗━2
- ┃     ┃ ┃   ┃   ┣━ g1 k
- ┃     ┃ ┃   ┃   ┗━ g1 k
- ┃     ┃ ┃   ┗━4
- ┃     ┃ ┃     ┣━2
- ┃     ┃ ┃     ┃ ┣━ g1 k
- ┃     ┃ ┃     ┃ ┗━ g1 k
- ┃     ┃ ┃     ┗━2
- ┃     ┃ ┃       ┣━ g1 k
- ┃     ┃ ┃       ┗━ g1 k
- ┃     ┃ ┗━18
- ┃     ┃   ┣━10
- ┃     ┃   ┃ ┣━6
- ┃     ┃   ┃ ┃ ┣━4
- ┃     ┃   ┃ ┃ ┃ ┣━3
- ┃     ┃   ┃ ┃ ┃ ┃ ┣━2
- ┃     ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃     ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃   ┃ ┃ ┃ ┗━ g1 k
- ┃     ┃   ┃ ┃ ┗━2
- ┃     ┃   ┃ ┃   ┣━ g1 k
- ┃     ┃   ┃ ┃   ┗━ g1 k
- ┃     ┃   ┃ ┗━4
- ┃     ┃   ┃   ┣━2
- ┃     ┃   ┃   ┃ ┣━ g1 k
- ┃     ┃   ┃   ┃ ┗━ g1 k
- ┃     ┃   ┃   ┗━2
- ┃     ┃   ┃     ┣━ g1 k
- ┃     ┃   ┃     ┗━ g1 k
- ┃     ┃   ┗━8
- ┃     ┃     ┣━4
- ┃     ┃     ┃ ┣━2
- ┃     ┃     ┃ ┃ ┣━ g1 k
- ┃     ┃     ┃ ┃ ┗━ g1 k
- ┃     ┃     ┃ ┗━2
- ┃     ┃     ┃   ┣━ g1 k
- ┃     ┃     ┃   ┗━ g1 k
- ┃     ┃     ┗━4
- ┃     ┃       ┣━2
- ┃     ┃       ┃ ┣━ g1 k
- ┃     ┃       ┃ ┗━ g1 k
- ┃     ┃       ┗━2
- ┃     ┃         ┣━ g1 k
- ┃     ┃         ┗━ g1 k
- ┃     ┗━34
- ┃       ┣━18
- ┃       ┃ ┣━10
- ┃       ┃ ┃ ┣━6
- ┃       ┃ ┃ ┃ ┣━4
- ┃       ┃ ┃ ┃ ┃ ┣━3
- ┃       ┃ ┃ ┃ ┃ ┃ ┣━2
- ┃       ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
- ┃       ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃       ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃       ┃ ┃ ┃ ┃ ┗━ g1 k
- ┃       ┃ ┃ ┃ ┗━2
- ┃       ┃ ┃ ┃   ┣━ g1 k
- ┃       ┃ ┃ ┃   ┗━ g1 k
- ┃       ┃ ┃ ┗━4
- ┃       ┃ ┃   ┣━2
- ┃       ┃ ┃   ┃ ┣━ g1 k
- ┃       ┃ ┃   ┃ ┗━ g1 k
- ┃       ┃ ┃   ┗━2
- ┃       ┃ ┃     ┣━ g1 k
- ┃       ┃ ┃     ┗━ g1 k
- ┃       ┃ ┗━8
- ┃       ┃   ┣━4
- ┃       ┃   ┃ ┣━2
- ┃       ┃   ┃ ┃ ┣━ g1 k
- ┃       ┃   ┃ ┃ ┗━ g1 k
- ┃       ┃   ┃ ┗━2
- ┃       ┃   ┃   ┣━ g1 k
- ┃       ┃   ┃   ┗━ g1 k
- ┃       ┃   ┗━4
- ┃       ┃     ┣━2
- ┃       ┃     ┃ ┣━ g1 k
- ┃       ┃     ┃ ┗━ g1 k
- ┃       ┃     ┗━2
- ┃       ┃       ┣━ g1 k
- ┃       ┃       ┗━ g1 k
- ┃       ┗━16
- ┃         ┣━8
- ┃         ┃ ┣━4
- ┃         ┃ ┃ ┣━2
- ┃         ┃ ┃ ┃ ┣━ g1 k
- ┃         ┃ ┃ ┃ ┗━ g1 k
- ┃         ┃ ┃ ┗━2
- ┃         ┃ ┃   ┣━ g1 k
- ┃         ┃ ┃   ┗━ g1 k
- ┃         ┃ ┗━4
- ┃         ┃   ┣━2
- ┃         ┃   ┃ ┣━ g1 k
- ┃         ┃   ┃ ┗━ g1 k
- ┃         ┃   ┗━2
- ┃         ┃     ┣━ g1 k
- ┃         ┃     ┗━ g1 k
- ┃         ┗━8
- ┃           ┣━4
- ┃           ┃ ┣━2
- ┃           ┃ ┃ ┣━ g1 k
- ┃           ┃ ┃ ┗━ g1 k
- ┃           ┃ ┗━2
- ┃           ┃   ┣━ g1 k
- ┃           ┃   ┗━ g1 k
- ┃           ┗━4
- ┃             ┣━2
- ┃             ┃ ┣━ g1 k
- ┃             ┃ ┗━ g1 k
- ┃             ┗━2
- ┃               ┣━ g1 k
- ┃               ┗━ g1 k
- ┗━369
-   ┣━222
-   ┃ ┣━142
-   ┃ ┃ ┣━95
-   ┃ ┃ ┃ ┣━65
-   ┃ ┃ ┃ ┃ ┣━45
-   ┃ ┃ ┃ ┃ ┃ ┣━35
-   ┃ ┃ ┃ ┃ ┃ ┃ ┣━26
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━19
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━14
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━10
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━7
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━4
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━3
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━5
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━4
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━3
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━7
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━5
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━4
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━2
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃ ┗━9
-   ┃ ┃ ┃ ┃ ┃ ┃   ┣━6
-   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━5
-   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━4
-   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
-   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
-   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃   ┗━3
-   ┃ ┃ ┃ ┃ ┃ ┃     ┣━2
-   ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┃     ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃ ┗━10
-   ┃ ┃ ┃ ┃ ┃   ┣━7
-   ┃ ┃ ┃ ┃ ┃   ┃ ┣━5
-   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━4
-   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
-   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
-   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃   ┃ ┗━2
-   ┃ ┃ ┃ ┃ ┃   ┃   ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃   ┃   ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃   ┗━3
-   ┃ ┃ ┃ ┃ ┃     ┣━2
-   ┃ ┃ ┃ ┃ ┃     ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃ ┃     ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┃     ┗━ g1 k
-   ┃ ┃ ┃ ┃ ┗━20
-   ┃ ┃ ┃ ┃   ┣━14
-   ┃ ┃ ┃ ┃   ┃ ┣━10
-   ┃ ┃ ┃ ┃   ┃ ┃ ┣━7
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━5
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━4
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━3
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━2
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┣━ g1 k
-   ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┗━ g1 k
-   ┃ ┃ ┃ ┃   ┃ ┃ ┗━3
-   ┃ ┃ ┃ ┃   ┃ ┃   ┣━2
-   ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃   ┃ ┃   ┗━ g1 k
-   ┃ ┃ ┃ ┃   ┃ ┗━4
-   ┃ ┃ ┃ ┃   ┃   ┣━3
-   ┃ ┃ ┃ ┃   ┃   ┃ ┣━2
-   ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃   ┃   ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃   ┃   ┗━ g1 k
-   ┃ ┃ ┃ ┃   ┗━6
-   ┃ ┃ ┃ ┃     ┣━4
-   ┃ ┃ ┃ ┃     ┃ ┣━3
-   ┃ ┃ ┃ ┃     ┃ ┃ ┣━2
-   ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃     ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃     ┃ ┗━ g1 k
-   ┃ ┃ ┃ ┃     ┗━2
-   ┃ ┃ ┃ ┃       ┣━ g1 k
-   ┃ ┃ ┃ ┃       ┗━ g1 k
-   ┃ ┃ ┃ ┗━30
-   ┃ ┃ ┃   ┣━20
-   ┃ ┃ ┃   ┃ ┣━14
-   ┃ ┃ ┃   ┃ ┃ ┣━10
-   ┃ ┃ ┃   ┃ ┃ ┃ ┣━7
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━5
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━4
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━2
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━ g1 k
-   ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━ g1 k
-   ┃ ┃ ┃   ┃ ┃ ┃ ┗━3
-   ┃ ┃ ┃   ┃ ┃ ┃   ┣━2
-   ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┣━ g1 k
-   ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃ ┃   ┃ ┃ ┃   ┗━ g1 k
-   ┃ ┃ ┃   ┃ ┃ ┗━4
-   ┃ ┃ ┃   ┃ ┃   ┣━3
-   ┃ ┃ ┃   ┃ ┃   ┃ ┣━2
-   ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃   ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃ ┃   ┃ ┃   ┗━ g1 k
-   ┃ ┃ ┃   ┃ ┗━6
-   ┃ ┃ ┃   ┃   ┣━4
-   ┃ ┃ ┃   ┃   ┃ ┣━3
-   ┃ ┃ ┃   ┃   ┃ ┃ ┣━2
-   ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃   ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃   ┃   ┃ ┗━ g1 k
-   ┃ ┃ ┃   ┃   ┗━2
-   ┃ ┃ ┃   ┃     ┣━ g1 k
-   ┃ ┃ ┃   ┃     ┗━ g1 k
-   ┃ ┃ ┃   ┗━10
-   ┃ ┃ ┃     ┣━6
-   ┃ ┃ ┃     ┃ ┣━4
-   ┃ ┃ ┃     ┃ ┃ ┣━3
-   ┃ ┃ ┃     ┃ ┃ ┃ ┣━2
-   ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃     ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃     ┃ ┃ ┗━ g1 k
-   ┃ ┃ ┃     ┃ ┗━2
-   ┃ ┃ ┃     ┃   ┣━ g1 k
-   ┃ ┃ ┃     ┃   ┗━ g1 k
-   ┃ ┃ ┃     ┗━4
-   ┃ ┃ ┃       ┣━2
-   ┃ ┃ ┃       ┃ ┣━ g1 k
-   ┃ ┃ ┃       ┃ ┗━ g1 k
-   ┃ ┃ ┃       ┗━2
-   ┃ ┃ ┃         ┣━ g1 k
-   ┃ ┃ ┃         ┗━ g1 k
-   ┃ ┃ ┗━47
-   ┃ ┃   ┣━29
-   ┃ ┃   ┃ ┣━19
-   ┃ ┃   ┃ ┃ ┣━13
-   ┃ ┃   ┃ ┃ ┃ ┣━9
-   ┃ ┃   ┃ ┃ ┃ ┃ ┣━6
-   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━5
-   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
-   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
-   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃ ┃ ┃ ┗━3
-   ┃ ┃   ┃ ┃ ┃ ┃   ┣━2
-   ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
-   ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃ ┃ ┃   ┗━ g1 k
-   ┃ ┃   ┃ ┃ ┃ ┗━4
-   ┃ ┃   ┃ ┃ ┃   ┣━3
-   ┃ ┃   ┃ ┃ ┃   ┃ ┣━2
-   ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
-   ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃ ┃   ┗━ g1 k
-   ┃ ┃   ┃ ┃ ┗━6
-   ┃ ┃   ┃ ┃   ┣━4
-   ┃ ┃   ┃ ┃   ┃ ┣━3
-   ┃ ┃   ┃ ┃   ┃ ┃ ┣━2
-   ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃   ┃ ┗━ g1 k
-   ┃ ┃   ┃ ┃   ┗━2
-   ┃ ┃   ┃ ┃     ┣━ g1 k
-   ┃ ┃   ┃ ┃     ┗━ g1 k
-   ┃ ┃   ┃ ┗━10
-   ┃ ┃   ┃   ┣━6
-   ┃ ┃   ┃   ┃ ┣━4
-   ┃ ┃   ┃   ┃ ┃ ┣━3
-   ┃ ┃   ┃   ┃ ┃ ┃ ┣━2
-   ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃   ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃   ┃ ┃ ┗━ g1 k
-   ┃ ┃   ┃   ┃ ┗━2
-   ┃ ┃   ┃   ┃   ┣━ g1 k
-   ┃ ┃   ┃   ┃   ┗━ g1 k
-   ┃ ┃   ┃   ┗━4
-   ┃ ┃   ┃     ┣━2
-   ┃ ┃   ┃     ┃ ┣━ g1 k
-   ┃ ┃   ┃     ┃ ┗━ g1 k
-   ┃ ┃   ┃     ┗━2
-   ┃ ┃   ┃       ┣━ g1 k
-   ┃ ┃   ┃       ┗━ g1 k
-   ┃ ┃   ┗━18
-   ┃ ┃     ┣━10
-   ┃ ┃     ┃ ┣━6
-   ┃ ┃     ┃ ┃ ┣━4
-   ┃ ┃     ┃ ┃ ┃ ┣━3
-   ┃ ┃     ┃ ┃ ┃ ┃ ┣━2
-   ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃     ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃     ┃ ┃ ┃ ┗━ g1 k
-   ┃ ┃     ┃ ┃ ┗━2
-   ┃ ┃     ┃ ┃   ┣━ g1 k
-   ┃ ┃     ┃ ┃   ┗━ g1 k
-   ┃ ┃     ┃ ┗━4
-   ┃ ┃     ┃   ┣━2
-   ┃ ┃     ┃   ┃ ┣━ g1 k
-   ┃ ┃     ┃   ┃ ┗━ g1 k
-   ┃ ┃     ┃   ┗━2
-   ┃ ┃     ┃     ┣━ g1 k
-   ┃ ┃     ┃     ┗━ g1 k
-   ┃ ┃     ┗━8
-   ┃ ┃       ┣━4
-   ┃ ┃       ┃ ┣━2
-   ┃ ┃       ┃ ┃ ┣━ g1 k
-   ┃ ┃       ┃ ┃ ┗━ g1 k
-   ┃ ┃       ┃ ┗━2
-   ┃ ┃       ┃   ┣━ g1 k
-   ┃ ┃       ┃   ┗━ g1 k
-   ┃ ┃       ┗━4
-   ┃ ┃         ┣━2
-   ┃ ┃         ┃ ┣━ g1 k
-   ┃ ┃         ┃ ┗━ g1 k
-   ┃ ┃         ┗━2
-   ┃ ┃           ┣━ g1 k
-   ┃ ┃           ┗━ g1 k
-   ┃ ┗━80
-   ┃   ┣━46
-   ┃   ┃ ┣━28
-   ┃   ┃ ┃ ┣━18
-   ┃   ┃ ┃ ┃ ┣━12
-   ┃   ┃ ┃ ┃ ┃ ┣━9
-   ┃   ┃ ┃ ┃ ┃ ┃ ┣━6
-   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
-   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
-   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
-   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃ ┃ ┃ ┃ ┃ ┗━3
-   ┃   ┃ ┃ ┃ ┃ ┃   ┣━2
-   ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
-   ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃   ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
-   ┃   ┃ ┃ ┃ ┃ ┗━3
-   ┃   ┃ ┃ ┃ ┃   ┣━2
-   ┃   ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
-   ┃   ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃   ┃ ┃ ┃ ┃   ┗━ g1 k
-   ┃   ┃ ┃ ┃ ┗━6
-   ┃   ┃ ┃ ┃   ┣━4
-   ┃   ┃ ┃ ┃   ┃ ┣━3
-   ┃   ┃ ┃ ┃   ┃ ┃ ┣━2
-   ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┣━ g1 k
-   ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
-   ┃   ┃ ┃ ┃   ┃ ┗━ g1 k
-   ┃   ┃ ┃ ┃   ┗━2
-   ┃   ┃ ┃ ┃     ┣━ g1 k
-   ┃   ┃ ┃ ┃     ┗━ g1 k
-   ┃   ┃ ┃ ┗━10
-   ┃   ┃ ┃   ┣━6
-   ┃   ┃ ┃   ┃ ┣━4
-   ┃   ┃ ┃   ┃ ┃ ┣━3
-   ┃   ┃ ┃   ┃ ┃ ┃ ┣━2
-   ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃ ┃   ┃ ┃ ┗━ g1 k
-   ┃   ┃ ┃   ┃ ┗━2
-   ┃   ┃ ┃   ┃   ┣━ g1 k
-   ┃   ┃ ┃   ┃   ┗━ g1 k
-   ┃   ┃ ┃   ┗━4
-   ┃   ┃ ┃     ┣━2
-   ┃   ┃ ┃     ┃ ┣━ g1 k
-   ┃   ┃ ┃     ┃ ┗━ g1 k
-   ┃   ┃ ┃     ┗━2
-   ┃   ┃ ┃       ┣━ g1 k
-   ┃   ┃ ┃       ┗━ g1 k
-   ┃   ┃ ┗━18
-   ┃   ┃   ┣━10
-   ┃   ┃   ┃ ┣━6
-   ┃   ┃   ┃ ┃ ┣━4
-   ┃   ┃   ┃ ┃ ┃ ┣━3
-   ┃   ┃   ┃ ┃ ┃ ┃ ┣━2
-   ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃   ┃ ┃ ┃ ┗━ g1 k
-   ┃   ┃   ┃ ┃ ┗━2
-   ┃   ┃   ┃ ┃   ┣━ g1 k
-   ┃   ┃   ┃ ┃   ┗━ g1 k
-   ┃   ┃   ┃ ┗━4
-   ┃   ┃   ┃   ┣━2
-   ┃   ┃   ┃   ┃ ┣━ g1 k
-   ┃   ┃   ┃   ┃ ┗━ g1 k
-   ┃   ┃   ┃   ┗━2
-   ┃   ┃   ┃     ┣━ g1 k
-   ┃   ┃   ┃     ┗━ g1 k
-   ┃   ┃   ┗━8
-   ┃   ┃     ┣━4
-   ┃   ┃     ┃ ┣━2
-   ┃   ┃     ┃ ┃ ┣━ g1 k
-   ┃   ┃     ┃ ┃ ┗━ g1 k
-   ┃   ┃     ┃ ┗━2
-   ┃   ┃     ┃   ┣━ g1 k
-   ┃   ┃     ┃   ┗━ g1 k
-   ┃   ┃     ┗━4
-   ┃   ┃       ┣━2
-   ┃   ┃       ┃ ┣━ g1 k
-   ┃   ┃       ┃ ┗━ g1 k
-   ┃   ┃       ┗━2
-   ┃   ┃         ┣━ g1 k
-   ┃   ┃         ┗━ g1 k
-   ┃   ┗━34
-   ┃     ┣━18
-   ┃     ┃ ┣━10
-   ┃     ┃ ┃ ┣━6
-   ┃     ┃ ┃ ┃ ┣━4
-   ┃     ┃ ┃ ┃ ┃ ┣━3
-   ┃     ┃ ┃ ┃ ┃ ┃ ┣━2
-   ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-   ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃     ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃     ┃ ┃ ┃ ┃ ┗━ g1 k
-   ┃     ┃ ┃ ┃ ┗━2
-   ┃     ┃ ┃ ┃   ┣━ g1 k
-   ┃     ┃ ┃ ┃   ┗━ g1 k
-   ┃     ┃ ┃ ┗━4
-   ┃     ┃ ┃   ┣━2
-   ┃     ┃ ┃   ┃ ┣━ g1 k
-   ┃     ┃ ┃   ┃ ┗━ g1 k
-   ┃     ┃ ┃   ┗━2
-   ┃     ┃ ┃     ┣━ g1 k
-   ┃     ┃ ┃     ┗━ g1 k
-   ┃     ┃ ┗━8
-   ┃     ┃   ┣━4
-   ┃     ┃   ┃ ┣━2
-   ┃     ┃   ┃ ┃ ┣━ g1 k
-   ┃     ┃   ┃ ┃ ┗━ g1 k
-   ┃     ┃   ┃ ┗━2
-   ┃     ┃   ┃   ┣━ g1 k
-   ┃     ┃   ┃   ┗━ g1 k
-   ┃     ┃   ┗━4
-   ┃     ┃     ┣━2
-   ┃     ┃     ┃ ┣━ g1 k
-   ┃     ┃     ┃ ┗━ g1 k
-   ┃     ┃     ┗━2
-   ┃     ┃       ┣━ g1 k
-   ┃     ┃       ┗━ g1 k
-   ┃     ┗━16
-   ┃       ┣━8
-   ┃       ┃ ┣━4
-   ┃       ┃ ┃ ┣━2
-   ┃       ┃ ┃ ┃ ┣━ g1 k
-   ┃       ┃ ┃ ┃ ┗━ g1 k
-   ┃       ┃ ┃ ┗━2
-   ┃       ┃ ┃   ┣━ g1 k
-   ┃       ┃ ┃   ┗━ g1 k
-   ┃       ┃ ┗━4
-   ┃       ┃   ┣━2
-   ┃       ┃   ┃ ┣━ g1 k
-   ┃       ┃   ┃ ┗━ g1 k
-   ┃       ┃   ┗━2
-   ┃       ┃     ┣━ g1 k
-   ┃       ┃     ┗━ g1 k
-   ┃       ┗━8
-   ┃         ┣━4
-   ┃         ┃ ┣━2
-   ┃         ┃ ┃ ┣━ g1 k
-   ┃         ┃ ┃ ┗━ g1 k
-   ┃         ┃ ┗━2
-   ┃         ┃   ┣━ g1 k
-   ┃         ┃   ┗━ g1 k
-   ┃         ┗━4
-   ┃           ┣━2
-   ┃           ┃ ┣━ g1 k
-   ┃           ┃ ┗━ g1 k
-   ┃           ┗━2
-   ┃             ┣━ g1 k
-   ┃             ┗━ g1 k
-   ┗━147
-     ┣━81
-     ┃ ┣━47
-     ┃ ┃ ┣━29
-     ┃ ┃ ┃ ┣━19
-     ┃ ┃ ┃ ┃ ┣━13
-     ┃ ┃ ┃ ┃ ┃ ┣━9
-     ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
-     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
-     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
-     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
-     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
-     ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
-     ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ g1 k
-     ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
-     ┃ ┃ ┃ ┃ ┃ ┗━4
-     ┃ ┃ ┃ ┃ ┃   ┣━3
-     ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
-     ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ g1 k
-     ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃ ┃   ┗━ g1 k
-     ┃ ┃ ┃ ┃ ┗━6
-     ┃ ┃ ┃ ┃   ┣━4
-     ┃ ┃ ┃ ┃   ┃ ┣━3
-     ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
-     ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ g1 k
-     ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃   ┃ ┗━ g1 k
-     ┃ ┃ ┃ ┃   ┗━2
-     ┃ ┃ ┃ ┃     ┣━ g1 k
-     ┃ ┃ ┃ ┃     ┗━ g1 k
-     ┃ ┃ ┃ ┗━10
-     ┃ ┃ ┃   ┣━6
-     ┃ ┃ ┃   ┃ ┣━4
-     ┃ ┃ ┃   ┃ ┃ ┣━3
-     ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
-     ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ g1 k
-     ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃   ┃ ┃ ┗━ g1 k
-     ┃ ┃ ┃   ┃ ┗━2
-     ┃ ┃ ┃   ┃   ┣━ g1 k
-     ┃ ┃ ┃   ┃   ┗━ g1 k
-     ┃ ┃ ┃   ┗━4
-     ┃ ┃ ┃     ┣━2
-     ┃ ┃ ┃     ┃ ┣━ g1 k
-     ┃ ┃ ┃     ┃ ┗━ g1 k
-     ┃ ┃ ┃     ┗━2
-     ┃ ┃ ┃       ┣━ g1 k
-     ┃ ┃ ┃       ┗━ g1 k
-     ┃ ┃ ┗━18
-     ┃ ┃   ┣━10
-     ┃ ┃   ┃ ┣━6
-     ┃ ┃   ┃ ┃ ┣━4
-     ┃ ┃   ┃ ┃ ┃ ┣━3
-     ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
-     ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-     ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃   ┃ ┃ ┃ ┗━ g1 k
-     ┃ ┃   ┃ ┃ ┗━2
-     ┃ ┃   ┃ ┃   ┣━ g1 k
-     ┃ ┃   ┃ ┃   ┗━ g1 k
-     ┃ ┃   ┃ ┗━4
-     ┃ ┃   ┃   ┣━2
-     ┃ ┃   ┃   ┃ ┣━ g1 k
-     ┃ ┃   ┃   ┃ ┗━ g1 k
-     ┃ ┃   ┃   ┗━2
-     ┃ ┃   ┃     ┣━ g1 k
-     ┃ ┃   ┃     ┗━ g1 k
-     ┃ ┃   ┗━8
-     ┃ ┃     ┣━4
-     ┃ ┃     ┃ ┣━2
-     ┃ ┃     ┃ ┃ ┣━ g1 k
-     ┃ ┃     ┃ ┃ ┗━ g1 k
-     ┃ ┃     ┃ ┗━2
-     ┃ ┃     ┃   ┣━ g1 k
-     ┃ ┃     ┃   ┗━ g1 k
-     ┃ ┃     ┗━4
-     ┃ ┃       ┣━2
-     ┃ ┃       ┃ ┣━ g1 k
-     ┃ ┃       ┃ ┗━ g1 k
-     ┃ ┃       ┗━2
-     ┃ ┃         ┣━ g1 k
-     ┃ ┃         ┗━ g1 k
-     ┃ ┗━34
-     ┃   ┣━18
-     ┃   ┃ ┣━10
-     ┃   ┃ ┃ ┣━6
-     ┃   ┃ ┃ ┃ ┣━4
-     ┃   ┃ ┃ ┃ ┃ ┣━3
-     ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
-     ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-     ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃   ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃   ┃ ┃ ┃ ┃ ┗━ g1 k
-     ┃   ┃ ┃ ┃ ┗━2
-     ┃   ┃ ┃ ┃   ┣━ g1 k
-     ┃   ┃ ┃ ┃   ┗━ g1 k
-     ┃   ┃ ┃ ┗━4
-     ┃   ┃ ┃   ┣━2
-     ┃   ┃ ┃   ┃ ┣━ g1 k
-     ┃   ┃ ┃   ┃ ┗━ g1 k
-     ┃   ┃ ┃   ┗━2
-     ┃   ┃ ┃     ┣━ g1 k
-     ┃   ┃ ┃     ┗━ g1 k
-     ┃   ┃ ┗━8
-     ┃   ┃   ┣━4
-     ┃   ┃   ┃ ┣━2
-     ┃   ┃   ┃ ┃ ┣━ g1 k
-     ┃   ┃   ┃ ┃ ┗━ g1 k
-     ┃   ┃   ┃ ┗━2
-     ┃   ┃   ┃   ┣━ g1 k
-     ┃   ┃   ┃   ┗━ g1 k
-     ┃   ┃   ┗━4
-     ┃   ┃     ┣━2
-     ┃   ┃     ┃ ┣━ g1 k
-     ┃   ┃     ┃ ┗━ g1 k
-     ┃   ┃     ┗━2
-     ┃   ┃       ┣━ g1 k
-     ┃   ┃       ┗━ g1 k
-     ┃   ┗━16
-     ┃     ┣━8
-     ┃     ┃ ┣━4
-     ┃     ┃ ┃ ┣━2
-     ┃     ┃ ┃ ┃ ┣━ g1 k
-     ┃     ┃ ┃ ┃ ┗━ g1 k
-     ┃     ┃ ┃ ┗━2
-     ┃     ┃ ┃   ┣━ g1 k
-     ┃     ┃ ┃   ┗━ g1 k
-     ┃     ┃ ┗━4
-     ┃     ┃   ┣━2
-     ┃     ┃   ┃ ┣━ g1 k
-     ┃     ┃   ┃ ┗━ g1 k
-     ┃     ┃   ┗━2
-     ┃     ┃     ┣━ g1 k
-     ┃     ┃     ┗━ g1 k
-     ┃     ┗━8
-     ┃       ┣━4
-     ┃       ┃ ┣━2
-     ┃       ┃ ┃ ┣━ g1 k
-     ┃       ┃ ┃ ┗━ g1 k
-     ┃       ┃ ┗━2
-     ┃       ┃   ┣━ g1 k
-     ┃       ┃   ┗━ g1 k
-     ┃       ┗━4
-     ┃         ┣━2
-     ┃         ┃ ┣━ g1 k
-     ┃         ┃ ┗━ g1 k
-     ┃         ┗━2
-     ┃           ┣━ g1 k
-     ┃           ┗━ g1 k
-     ┗━66
-       ┣━34
-       ┃ ┣━18
-       ┃ ┃ ┣━10
-       ┃ ┃ ┃ ┣━6
-       ┃ ┃ ┃ ┃ ┣━4
-       ┃ ┃ ┃ ┃ ┃ ┣━3
-       ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
-       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 k
-       ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-       ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-       ┃ ┃ ┃ ┃ ┃ ┗━ g1 k
-       ┃ ┃ ┃ ┃ ┗━2
-       ┃ ┃ ┃ ┃   ┣━ g1 k
-       ┃ ┃ ┃ ┃   ┗━ g1 k
-       ┃ ┃ ┃ ┗━4
-       ┃ ┃ ┃   ┣━2
-       ┃ ┃ ┃   ┃ ┣━ g1 k
-       ┃ ┃ ┃   ┃ ┗━ g1 k
-       ┃ ┃ ┃   ┗━2
-       ┃ ┃ ┃     ┣━ g1 k
-       ┃ ┃ ┃     ┗━ g1 k
-       ┃ ┃ ┗━8
-       ┃ ┃   ┣━4
-       ┃ ┃   ┃ ┣━2
-       ┃ ┃   ┃ ┃ ┣━ g1 k
-       ┃ ┃   ┃ ┃ ┗━ g1 k
-       ┃ ┃   ┃ ┗━2
-       ┃ ┃   ┃   ┣━ g1 k
-       ┃ ┃   ┃   ┗━ g1 k
-       ┃ ┃   ┗━4
-       ┃ ┃     ┣━2
-       ┃ ┃     ┃ ┣━ g1 k
-       ┃ ┃     ┃ ┗━ g1 k
-       ┃ ┃     ┗━2
-       ┃ ┃       ┣━ g1 k
-       ┃ ┃       ┗━ g1 k
-       ┃ ┗━16
-       ┃   ┣━8
-       ┃   ┃ ┣━4
-       ┃   ┃ ┃ ┣━2
-       ┃   ┃ ┃ ┃ ┣━ g1 k
-       ┃   ┃ ┃ ┃ ┗━ g1 k
-       ┃   ┃ ┃ ┗━2
-       ┃   ┃ ┃   ┣━ g1 k
-       ┃   ┃ ┃   ┗━ g1 k
-       ┃   ┃ ┗━4
-       ┃   ┃   ┣━2
-       ┃   ┃   ┃ ┣━ g1 k
-       ┃   ┃   ┃ ┗━ g1 k
-       ┃   ┃   ┗━2
-       ┃   ┃     ┣━ g1 k
-       ┃   ┃     ┗━ g1 k
-       ┃   ┗━8
-       ┃     ┣━4
-       ┃     ┃ ┣━2
-       ┃     ┃ ┃ ┣━ g1 k
-       ┃     ┃ ┃ ┗━ g1 k
-       ┃     ┃ ┗━2
-       ┃     ┃   ┣━ g1 k
-       ┃     ┃   ┗━ g1 k
-       ┃     ┗━4
-       ┃       ┣━2
-       ┃       ┃ ┣━ g1 k
-       ┃       ┃ ┗━ g1 k
-       ┃       ┗━2
-       ┃         ┣━ g1 k
-       ┃         ┗━ g1 k
-       ┗━32
-         ┣━16
-         ┃ ┣━8
-         ┃ ┃ ┣━4
-         ┃ ┃ ┃ ┣━2
-         ┃ ┃ ┃ ┃ ┣━ g1 k
-         ┃ ┃ ┃ ┃ ┗━ g1 k
-         ┃ ┃ ┃ ┗━2
-         ┃ ┃ ┃   ┣━ g1 k
-         ┃ ┃ ┃   ┗━ g1 k
-         ┃ ┃ ┗━4
-         ┃ ┃   ┣━2
-         ┃ ┃   ┃ ┣━ g1 k
-         ┃ ┃   ┃ ┗━ g1 k
-         ┃ ┃   ┗━2
-         ┃ ┃     ┣━ g1 k
-         ┃ ┃     ┗━ g1 k
-         ┃ ┗━8
-         ┃   ┣━4
-         ┃   ┃ ┣━2
-         ┃   ┃ ┃ ┣━ g1 k
-         ┃   ┃ ┃ ┗━ g1 k
-         ┃   ┃ ┗━2
-         ┃   ┃   ┣━ g1 k
-         ┃   ┃   ┗━ g1 k
-         ┃   ┗━4
-         ┃     ┣━2
-         ┃     ┃ ┣━ g1 k
-         ┃     ┃ ┗━ g1 k
-         ┃     ┗━2
-         ┃       ┣━ g1 k
-         ┃       ┗━ g1 k
-         ┗━16
-           ┣━8
-           ┃ ┣━4
-           ┃ ┃ ┣━2
-           ┃ ┃ ┃ ┣━ g1 k
-           ┃ ┃ ┃ ┗━ g1 k
-           ┃ ┃ ┗━2
-           ┃ ┃   ┣━ g1 k
-           ┃ ┃   ┗━ g1 k
-           ┃ ┗━4
-           ┃   ┣━2
-           ┃   ┃ ┣━ g1 k
-           ┃   ┃ ┗━ g1 k
-           ┃   ┗━2
-           ┃     ┣━ g1 k
-           ┃     ┗━ g1 k
-           ┗━8
-             ┣━4
-             ┃ ┣━2
-             ┃ ┃ ┣━ g1 k
-             ┃ ┃ ┗━ g1 k
-             ┃ ┗━2
-             ┃   ┣━ g1 k
-             ┃   ┗━ g1 k
-             ┗━4
-               ┣━2
-               ┃ ┣━ g1 k
-               ┃ ┗━ g1 k
-               ┗━2
-                 ┣━ g1 k
-                 ┗━ g1 k
-
-# Gems	Power
-1	1.000000
-2	2.590533
-3	4.513161
-4	6.737698
-5	9.545630
-6	12.509872
-7	15.471592
-8	18.376972
-9	21.711592
-10	25.921648
-11	29.910547
-12	33.626892
-13	37.624321
-14	41.925976
-15	46.255714
-16	50.431240
-17	54.829659
-18	59.467823
-19	64.056572
-20	68.976768
-21	74.341675
-22	79.972893
-23	85.877632
-24	91.683556
-25	97.254509
-26	102.952339
-27	108.865463
-28	114.998337
-29	120.961189
-30	127.123756
-31	133.012619
-32	138.956955
-33	145.073776
-34	151.365768
-35	157.430023
-36	163.652039
-37	169.587280
-38	176.117035
-39	182.324448
-40	188.699127
-41	195.187912
-42	201.679520
-43	209.176758
-44	217.144119
-45	225.313553
-46	233.688004
-47	241.722214
-48	249.940353
-49	257.821594
-50	265.607910
-51	273.550507
-52	281.651093
-53	289.911469
-54	297.791168
-55	305.813446
-56	313.334259
-57	321.794342
-58	329.472565
-59	337.468445
-60	345.479431
-61	353.607574
-62	361.853699
-63	370.218689
-64	378.631744
-65	387.172516
-66	395.842102
-67	404.641571
-68	413.129456
-69	421.726624
-70	430.433685
-71	438.991974
-72	447.930573
-73	456.728210
-74	465.429840
-75	474.683655
-76	483.486511
-77	492.083160
-78	500.775146
-79	509.525818
-80	518.414307
-81	527.428894
-82	536.507935
-83	545.664917
-84	554.905457
-85	564.293884
-86	573.767273
-87	582.808472
-88	591.938171
-89	601.156860
-90	610.637024
-91	620.588806
-92	631.661926
-93	642.345703
-94	652.653076
-95	663.059875
-96	673.603699
-97	684.231689
-98	694.988037
-99	705.835022
-100	716.790100
-101	727.816772
-102	738.984192
-103	750.308228
-104	761.700806
-105	773.203979
-106	784.755676
-107	796.545471
-108	807.692871
-109	818.939392
-110	830.285400
-111	841.731323
-112	852.785156
-113	864.891907
-114	876.615662
-115	887.985046
-116	899.783752
-117	911.362488
-118	922.449524
-119	933.481995
-120	944.748291
-121	955.944092
-122	967.475159
-123	979.100647
-124	990.473267
-125	1002.197815
-126	1014.016846
-127	1025.730469
-128	1037.522217
-129	1049.617676
-130	1061.920898
-131	1074.096802
-132	1086.362915
-133	1097.125977
-134	1109.695923
-135	1121.469116
-136	1133.330933
-137	1145.310791
-138	1157.319824
-139	1169.452637
-140	1181.254517
-141	1194.007568
-142	1206.344604
-143	1218.791138
-144	1230.912964
-145	1243.975220
-146	1255.603271
-147	1267.855225
-148	1279.766846
-149	1291.959229
-150	1303.888062
-151	1316.317139
-152	1328.397339
-153	1339.546265
-154	1352.783325
-155	1365.234619
-156	1377.322510
-157	1389.129028
-158	1402.157471
-159	1413.959351
-160	1426.800903
-161	1439.721802
-162	1452.387207
-163	1464.951172
-164	1477.934570
-165	1490.039062
-166	1501.866699
-167	1514.101562
-168	1526.734985
-169	1538.944092
-170	1551.381226
-171	1564.008789
-172	1576.515747
-173	1589.284058
-174	1602.180054
-175	1614.942505
-176	1627.770264
-177	1640.425537
-178	1653.391724
-179	1665.857178
-180	1678.817017
-181	1692.780762
-182	1704.154053
-183	1718.085571
-184	1730.222900
-185	1744.468872
-186	1756.709839
-187	1769.611450
-188	1782.596313
-189	1795.257812
-190	1808.284180
-191	1820.895630
-192	1833.997192
-193	1847.221436
-194	1860.131714
-195	1875.226929
-196	1890.211670
-197	1905.908936
-198	1920.417480
-199	1935.367798
-200	1951.324341
-201	1967.321655
-202	1981.851929
-203	1998.010376
-204	2013.640747
-205	2029.083130
-206	2045.498779
-207	2061.376953
-208	2077.697021
-209	2093.011475
-210	2109.871338
-211	2126.081299
-212	2142.374023
-213	2157.741455
-214	2173.217285
-215	2188.915527
-216	2204.331055
-217	2219.997559
-218	2235.902832
-219	2251.711670
-220	2267.594482
-221	2283.173096
-222	2300.395996
-223	2316.521484
-224	2332.720947
-225	2349.145508
-226	2365.489990
-227	2381.909668
-228	2397.215332
-229	2412.243652
-230	2428.743896
-231	2444.600586
-232	2459.482422
-233	2475.385742
-234	2491.469238
-235	2507.252197
-236	2522.464844
-237	2538.287354
-238	2553.638916
-239	2570.697998
-240	2585.066406
-241	2600.913574
-242	2618.518799
-243	2634.463135
-244	2649.690918
-245	2665.756592
-246	2681.086426
-247	2698.480713
-248	2714.743896
-249	2731.071533
-250	2747.462402
-251	2763.919922
-252	2780.860352
-253	2794.224609
-254	2810.968262
-255	2827.608154
-256	2843.435547
-257	2859.898682
-258	2875.756104
-259	2891.671143
-260	2906.548828
-261	2924.466553
-262	2940.120117
-263	2956.722656
-264	2970.231934
-265	2988.074707
-266	3005.268555
-267	3020.802734
-268	3037.247070
-269	3053.463379
-270	3070.314209
-271	3088.097168
-272	3102.452393
-273	3120.359619
-274	3136.002686
-275	3152.835693
-276	3167.447266
-277	3184.056396
-278	3201.390137
-279	3217.221191
-280	3233.191162
-281	3249.302979
-282	3265.239258
-283	3281.180908
-284	3297.609131
-285	3314.161621
-286	3329.817871
-287	3346.163574
-288	3362.865234
-289	3379.878418
-290	3396.119141
-291	3411.833252
-292	3428.803711
-293	3445.990234
-294	3462.392578
-295	3478.469971
-296	3495.332275
-297	3511.909180
-298	3529.487305
-299	3545.264160
-300	3562.910889
-301	3579.632568
-302	3597.079102
-303	3613.988525
-304	3630.164062
-305	3647.875000
-306	3665.014648
-307	3680.349121
-308	3698.575928
-309	3717.287354
-310	3733.202393
-311	3751.382080
-312	3767.476807
-313	3786.380859
-314	3802.593506
-315	3821.080078
-316	3837.213135
-317	3855.462646
-318	3873.524902
-319	3890.791504
-320	3908.095947
-321	3925.124268
-322	3942.864014
-323	3959.436523
-324	3977.829590
-325	3993.900146
-326	4011.622070
-327	4028.922852
-328	4045.976074
-329	4064.362549
-330	4081.803955
-331	4098.892578
-332	4116.436523
-333	4133.052734
-334	4151.210449
-335	4168.253906
-336	4186.320312
-337	4204.245117
-338	4221.051270
-339	4239.057129
-340	4256.081543
-341	4273.557617
-342	4292.042969
-343	4309.174805
-344	4326.448730
-345	4344.289551
-346	4363.166016
-347	4379.242676
-348	4398.035156
-349	4415.912598
-350	4434.816895
-351	4451.260742
-352	4469.452637
-353	4487.956543
-354	4507.079102
-355	4523.865723
-356	4541.365234
-357	4561.313965
-358	4579.076660
-359	4598.067871
-360	4615.130859
-361	4634.025391
-362	4653.015137
-363	4670.206543
-364	4687.710449
-365	4704.986816
-366	4723.127441
-367	4739.942383
-368	4757.613770
-369	4775.913086
-370	4792.823730
-371	4810.318848
-372	4828.204590
-373	4846.986816
-374	4864.875488
-375	4882.030762
-376	4898.943359
-377	4917.500488
-378	4934.257324
-379	4954.799316
-380	4972.213379
-381	4988.700195
-382	5007.411621
-383	5026.794434
-384	5045.031250
-385	5063.131836
-386	5079.742188
-387	5097.775391
-388	5117.380371
-389	5136.675293
-390	5153.607910
-391	5171.162109
-392	5189.184570
-393	5208.410156
-394	5228.144043
-395	5246.743652
-396	5264.232910
-397	5281.103027
-398	5299.321289
-399	5320.822754
-400	5339.841309
-401	5357.940918
-402	5375.113281
-403	5391.548340
-404	5414.074219
-405	5433.122070
-406	5452.003418
-407	5469.142090
-408	5488.616211
-409	5510.437500
-410	5529.909180
-411	5551.941895
-412	5575.043945
-413	5593.656738
-414	5616.888672
-415	5638.325684
-416	5658.181641
-417	5681.953613
-418	5701.916016
-419	5724.347656
-420	5744.413086
-421	5765.241211
-422	5787.121582
-423	5808.050293
-424	5828.878906
-425	5849.309570
-426	5870.922363
-427	5896.057129
-428	5916.009277
-429	5936.533691
-430	5957.802246
-431	5980.197754
-432	6001.566406
-433	6022.088379
-434	6042.521973
-435	6064.236816
-436	6084.774902
-437	6107.069824
-438	6127.847168
-439	6147.829590
-440	6170.310059
-441	6190.666016
-442	6211.632324
-443	6232.494629
-444	6252.575684
-445	6274.715820
-446	6295.502930
-447	6316.530762
-448	6336.808105
-449	6357.924316
-450	6380.134277
-451	6400.893066
-452	6421.504395
-453	6442.023926
-454	6464.899902
-455	6485.850586
-456	6507.450684
-457	6527.772949
-458	6548.120117
-459	6571.416992
-460	6593.023438
-461	6614.368652
-462	6635.043945
-463	6656.213379
-464	6678.224121
-465	6700.589844
-466	6721.934082
-467	6743.650879
-468	6765.011230
-469	6786.177734
-470	6808.753906
-471	6831.341797
-472	6854.096191
-473	6874.451172
-474	6896.387695
-475	6918.079102
-476	6941.035645
-477	6963.834961
-478	6985.587402
-479	7007.977539
-480	7028.728516
-481	7051.727539
-482	7074.739258
-483	7097.758789
-484	7120.515625
-485	7140.470215
-486	7163.595215
-487	7186.994629
-488	7210.051270
-489	7232.081055
-490	7253.545410
-491	7277.358887
-492	7300.077148
-493	7323.522949
-494	7344.668945
-495	7369.452148
-496	7389.305176
-497	7415.311035
-498	7438.184082
-499	7460.054199
-500	7482.736328
-501	7505.227051
-502	7526.418457
-503	7551.122559
-504	7573.212402
-505	7594.644531
-506	7617.594727
-507	7640.607422
-508	7662.863770
-509	7684.461426
-510	7709.179688
-511	7731.578613
-512	7753.283203
-513	7776.923828
-514	7798.580566
-515	7822.013672
-516	7843.899902
-517	7866.550781
-518	7889.245605
-519	7912.224121
-520	7933.978027
-521	7956.789062
-522	7979.642578
-523	8003.385254
-524	8025.529785
-525	8047.708496
-526	8070.720703
-527	8092.519043
-528	8116.184570
-529	8139.899414
-530	8162.828613
-531	8186.363770
-532	8205.930664
-533	8231.027344
-534	8254.386719
-535	8278.661133
-536	8300.678711
-537	8324.243164
-538	8345.201172
-539	8368.667969
-540	8393.391602
-541	8416.360352
-542	8438.862305
-543	8463.419922
-544	8484.930664
-545	8510.750977
-546	8534.518555
-547	8557.132812
-548	8580.625000
-549	8602.328125
-550	8626.609375
-551	8650.759766
-552	8674.889648
-553	8696.744141
-554	8718.473633
-555	8741.404297
-556	8765.901367
-557	8788.756836
-558	8810.807617
-559	8832.623047
-560	8855.766602
-561	8876.909180
-562	8900.123047
-563	8922.097656
-564	8944.712891
-565	8967.013672
-566	8988.717773
-567	9012.674805
-568	9035.095703
-569	9057.965820
-570	9079.932617
-571	9102.099609
-572	9124.742188
-573	9151.745117
-574	9173.884766
-575	9196.832031
-576	9217.916016
-577	9238.506836
-578	9259.914062
-579	9287.916016
-580	9311.504883
-581	9334.531250
-582	9357.454102
-583	9377.647461
-584	9398.437500
-585	9422.981445
-586	9447.507812
-587	9473.099609
-588	9495.602539
-589	9517.854492
-590	9539.073242
-591	9561.112305
-592	9585.185547
-593	9609.947266
-594	9635.693359
-595	9659.571289
-596	9682.088867
-597	9702.269531
-598	9725.364258
-599	9752.022461
-600	9776.720703
-601	9801.285156
-602	9824.939453
-603	9848.006836
-604	9868.528320
-605	9890.940430
-606	9917.230469
-607	9942.772461
-608	9967.554688
-609	9990.218750
-610	10014.654297
-611	10035.095703
-612	10061.532227
-613	10084.866211
-614	10108.678711
-615	10134.818359
-616	10158.517578
-617	10181.925781
-618	10204.410156
-619	10230.912109
-620	10254.984375
-621	10279.629883
-622	10303.898438
-623	10328.489258
-624	10352.958984
-625	10376.380859
-626	10400.929688
-627	10425.518555
-628	10448.084961
-629	10472.741211
-630	10496.014648
-631	10520.475586
-632	10545.256836
-633	10568.649414
-634	10590.806641
-635	10615.363281
-636	10637.759766
-637	10663.214844
-638	10687.948242
-639	10711.394531
-640	10736.360352
-641	10759.603516
-642	10783.293945
-643	10805.882812
-644	10829.563477
-645	10855.235352
-646	10879.061523
-647	10902.922852
-648	10926.812500
-649	10950.738281
-650	10974.693359
-651	10998.682617
-652	11021.642578
-653	11045.770508
-654	11069.859375
-655	11095.033203
-656	11118.140625
-657	11142.329102
-658	11166.303711
-659	11190.479492
-660	11214.766602
-661	11239.943359
-662	11264.318359
-663	11288.161133
-664	11311.978516
-665	11336.294922
-666	11361.939453
-667	11385.458008
-668	11411.053711
-669	11434.763672
-670	11459.393555
-671	11482.963867
-672	11509.123047
-673	11533.861328
-674	11558.630859
-675	11582.436523
-676	11607.551758
-677	11632.555664
-678	11656.142578
-679	11682.014648
-680	11706.799805
-681	11731.827148
-682	11756.886719
-683	11781.976562
-684	11804.725586
-685	11828.761719
-686	11855.356445
-687	11880.589844
-688	11905.857422
-689	11931.707031
-690	11957.242188
-691	11982.612305
-692	12008.020508
-693	12029.921875
-694	12054.879883
-695	12079.294922
-696	12103.667969
-697	12128.705078
-698	12156.174805
-699	12181.820312
-700	12205.076172
-701	12228.355469
-702	12252.161133
-703	12277.450195
-704	12301.300781
-705	12326.141602
-706	12350.587891
-707	12374.924805
-708	12398.143555
-709	12422.328125
-710	12446.219727
-711	12470.594727
-712	12496.864258
-713	12520.499023
-714	12544.443359
-715	12567.853516
-716	12591.866211
-717	12613.746094
-718	12642.250000
-719	12666.166016
-720	12691.034180
-721	12714.381836
-722	12737.032227
-723	12762.761719
-724	12785.409180
-725	12808.091797
-726	12836.764648
-727	12862.965820
-728	12887.836914
-729	12910.572266
-730	12933.573242
-731	12959.397461
-732	12980.043945
-733	13009.005859
-734	13035.019531
-735	13059.830078
-736	13085.304688
-737	13108.276367
-738	13131.108398
-739	13152.859375
-740	13175.867188
-741	13205.046875
-742	13233.706055
-743	13258.624023
-744	13282.310547
-745	13304.278320
-746	13327.787109
-747	13351.897461
-748	13378.039062
-749	13406.683594
-750	13434.275391
-751	13461.000000
-752	13484.741211
-753	13508.359375
-754	13529.580078
-755	13553.050781
-756	13576.500000
-757	13605.742188
-758	13632.909180
-759	13658.432617
-760	13684.359375
-761	13709.073242
-762	13732.196289
-763	13754.666016
-764	13777.480469
-765	13807.001953
-766	13833.105469
-767	13859.360352
-768	13886.352539
-769	13912.341797
-770	13936.160156
-771	13958.848633
-772	13981.574219
-773	14010.350586
-774	14035.232422
-775	14063.978516
-776	14090.104492
-777	14115.329102
-778	14141.551758
-779	14163.270508
-780	14192.975586
-781	14215.416992
-782	14243.462891
-783	14269.105469
-784	14293.921875
-785	14319.240234
-786	14346.998047
-787	14372.068359
-788	14398.833008
-789	14420.625977
-790	14446.231445
-791	14472.209961
-792	14497.788086
-793	14523.835938
-794	14547.453125
-795	14576.107422
-796	14597.743164
-797	14628.413086
-798	14650.357422
-799	14675.843750
-800	14702.191406
-801	14727.220703
-802	14751.469727
-803	14776.782227
-804	14804.269531
-805	14826.018555
-806	14852.551758
-807	14877.866211
-808	14906.513672
-809	14928.758789
-810	14956.713867
-811	14980.324219
-812	15002.614258
-813	15029.281250
-814	15056.504883
-815	15080.428711
-816	15105.919922
-817	15130.995117
-818	15157.113281
-819	15182.259766
-820	15207.842773
-821	15230.751953
-822	15256.000977
-823	15281.521484
-824	15306.676758
-825	15333.724609
-826	15358.447266
-827	15386.293945
-828	15409.446289
-829	15435.832031
-830	15461.527344
-831	15486.879883
-832	15511.681641
-833	15538.038086
-834	15563.194336
-835	15588.347656
-836	15613.692383
-837	15640.916992
-838	15665.291016
-839	15691.032227
-840	15715.705078
-841	15741.832031
-842	15767.315430
-843	15793.525391
-844	15820.113281
-845	15846.604492
-846	15873.510742
-847	15898.482422
-848	15924.288086
-849	15949.594727
-850	15976.107422
-851	16001.463867
-852	16027.494141
-853	16051.693359
-854	16080.417969
-855	16107.137695
-856	16131.743164
-857	16155.437500
-858	16184.215820
-859	16209.590820
-860	16235.810547
-861	16262.187500
-862	16287.499023
-863	16316.274414
-864	16343.289062
-865	16366.155273
-866	16395.015625
-867	16419.552734
-868	16447.000000
-869	16473.521484
-870	16498.591797
-871	16528.119141
-872	16557.978516
-873	16587.123047
-874	16617.669922
-875	16648.943359
-876	16679.232422
-877	16711.570312
-878	16741.769531
-879	16770.419922
-880	16802.908203
-881	16833.957031
-882	16864.675781
-883	16895.287109
-884	16925.248047
-885	16956.101562
-886	16984.501953
-887	17017.238281
-888	17045.994141
-889	17075.037109
-890	17103.814453
-891	17133.828125
-892	17163.478516
-893	17193.324219
-894	17222.283203
-895	17251.271484
-896	17279.167969
-897	17308.130859
-898	17340.847656
-899	17368.724609
-900	17399.705078
-901	17427.617188
-902	17458.107422
-903	17484.847656
-904	17514.265625
-905	17543.703125
-906	17582.242188
-907	17612.333984
-908	17638.582031
-909	17664.193359
-910	17693.941406
-911	17720.328125
-912	17750.027344
-913	17785.054688
-914	17812.035156
-915	17850.029297
-916	17878.962891
-917	17906.468750
-918	17932.664062
-919	17961.162109
-920	17989.439453
-921	18023.578125
-922	18057.107422
-923	18087.892578
-924	18117.843750
-925	18148.113281
-926	18177.576172
-927	18204.955078
-928	18230.777344
-929	18262.490234
-930	18296.019531
-931	18329.439453
-932	18359.216797
-933	18392.304688
-934	18420.851562
-935	18449.419922
-936	18477.562500
-937	18505.941406
-938	18535.927734
-939	18569.734375
-940	18603.169922
-941	18633.511719
-942	18666.878906
-943	18695.345703
-944	18726.251953
-945	18753.984375
-946	18782.625000
-947	18809.031250
-948	18845.814453
-949	18879.054688
-950	18913.902344
-951	18943.830078
-952	18973.701172
-953	19002.003906
-954	19031.994141
-955	19062.509766
-956	19090.529297
-957	19124.851562
-958	19159.013672
-959	19193.318359
-960	19224.162109
-961	19254.406250
-962	19282.150391
-963	19312.367188
-964	19341.763672
-965	19374.830078
-966	19409.300781
-967	19441.179688
-968	19475.449219
-969	19505.472656
-970	19535.152344
-971	19565.011719
-972	19596.595703
-973	19628.388672
-974	19661.667969
-975	19693.298828
-976	19724.947266
-977	19759.486328
-978	19792.402344
-979	19822.335938
-980	19852.167969
-981	19881.060547
-982	19913.287109
-983	19949.082031
-984	19981.386719
-985	20010.630859
-986	20042.632812
-987	20074.660156
-988	20101.908203
-989	20137.806641
-990	20166.878906
-991	20202.878906
-992	20231.535156
-993	20261.857422
-994	20293.908203
-995	20324.654297
-996	20355.392578
-997	20389.238281
-998	20420.970703
-999	20450.480469
-1000	20481.015625
-1001	20511.654297
-1002	20541.757812
-1003	20573.705078
-1004	20604.357422
-1005	20633.306641
-1006	20665.572266
-1007	20697.863281
-1008	20728.730469
-1009	20758.808594
-1010	20790.552734
-1011	20820.207031
-1012	20853.326172
-1013	20883.490234
-1014	20913.275391
-1015	20945.121094
-1016	20975.365234
-1017	21005.906250
-1018	21037.281250
-1019	21068.486328
-1020	21098.451172
-1021	21133.357422
-1022	21162.884766
-1023	21196.689453
-1024	21226.042969
+┣━661
+┃ ┣━442
+┃ ┃ ┣━305
+┃ ┃ ┃ ┣━215
+┃ ┃ ┃ ┃ ┣━157
+┃ ┃ ┃ ┃ ┃ ┣━118
+┃ ┃ ┃ ┃ ┃ ┃ ┣━89
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━63
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━48
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━36
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━27
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━20
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━15
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━11
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━8
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━5
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━7
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━5
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━9
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━7
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━5
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━12
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━9
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━7
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━5
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━15
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━11
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━8
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━6
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━5
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━26
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━19
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━14
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━10
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━7
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━5
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━5
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━7
+┃ ┃ ┃ ┃ ┃ ┃ ┃     ┣━5
+┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃     ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃     ┗━2
+┃ ┃ ┃ ┃ ┃ ┃ ┃       ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┃       ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃ ┗━29
+┃ ┃ ┃ ┃ ┃ ┃   ┣━20
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━15
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━11
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━8
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━6
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━5
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━2
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━3
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┣━2
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━4
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┣━3
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━5
+┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━4
+┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃   ┗━9
+┃ ┃ ┃ ┃ ┃ ┃     ┣━7
+┃ ┃ ┃ ┃ ┃ ┃     ┃ ┣━5
+┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃     ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃     ┃ ┗━2
+┃ ┃ ┃ ┃ ┃ ┃     ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃     ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃     ┗━2
+┃ ┃ ┃ ┃ ┃ ┃       ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┃       ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃ ┗━39
+┃ ┃ ┃ ┃ ┃   ┣━29
+┃ ┃ ┃ ┃ ┃   ┃ ┣━21
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━16
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━12
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━9
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━7
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━2
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━3
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━2
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━4
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┣━3
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┣━2
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━5
+┃ ┃ ┃ ┃ ┃   ┃ ┃   ┣━4
+┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┣━3
+┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃ ┗━8
+┃ ┃ ┃ ┃ ┃   ┃   ┣━6
+┃ ┃ ┃ ┃ ┃   ┃   ┃ ┣━5
+┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃   ┗━2
+┃ ┃ ┃ ┃ ┃   ┃     ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┃     ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃   ┗━10
+┃ ┃ ┃ ┃ ┃     ┣━7
+┃ ┃ ┃ ┃ ┃     ┃ ┣━5
+┃ ┃ ┃ ┃ ┃     ┃ ┃ ┣━4
+┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃     ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃     ┃ ┗━2
+┃ ┃ ┃ ┃ ┃     ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃     ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃     ┗━3
+┃ ┃ ┃ ┃ ┃       ┣━2
+┃ ┃ ┃ ┃ ┃       ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃       ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┃       ┗━ (g1 yellow)
+┃ ┃ ┃ ┃ ┗━58
+┃ ┃ ┃ ┃   ┣━40
+┃ ┃ ┃ ┃   ┃ ┣━30
+┃ ┃ ┃ ┃   ┃ ┃ ┣━23
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━16
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━12
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━9
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━7
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━3
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┣━2
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━4
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━3
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┣━2
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━7
+┃ ┃ ┃ ┃   ┃ ┃ ┃   ┣━5
+┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┣━4
+┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┣━3
+┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃   ┗━2
+┃ ┃ ┃ ┃   ┃ ┃ ┃     ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┃     ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃ ┗━7
+┃ ┃ ┃ ┃   ┃ ┃   ┣━5
+┃ ┃ ┃ ┃   ┃ ┃   ┃ ┣━4
+┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┣━3
+┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃   ┗━2
+┃ ┃ ┃ ┃   ┃ ┃     ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┃     ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃ ┗━10
+┃ ┃ ┃ ┃   ┃   ┣━7
+┃ ┃ ┃ ┃   ┃   ┃ ┣━5
+┃ ┃ ┃ ┃   ┃   ┃ ┃ ┣━4
+┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃   ┃ ┗━2
+┃ ┃ ┃ ┃   ┃   ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃   ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃   ┗━3
+┃ ┃ ┃ ┃   ┃     ┣━2
+┃ ┃ ┃ ┃   ┃     ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃     ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┃     ┗━ (g1 yellow)
+┃ ┃ ┃ ┃   ┗━18
+┃ ┃ ┃ ┃     ┣━12
+┃ ┃ ┃ ┃     ┃ ┣━9
+┃ ┃ ┃ ┃     ┃ ┃ ┣━7
+┃ ┃ ┃ ┃     ┃ ┃ ┃ ┣━5
+┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃ ┃ ┃ ┗━2
+┃ ┃ ┃ ┃     ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃ ┃ ┗━2
+┃ ┃ ┃ ┃     ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃ ┗━3
+┃ ┃ ┃ ┃     ┃   ┣━2
+┃ ┃ ┃ ┃     ┃   ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃     ┃   ┗━ (g1 yellow)
+┃ ┃ ┃ ┃     ┗━6
+┃ ┃ ┃ ┃       ┣━4
+┃ ┃ ┃ ┃       ┃ ┣━3
+┃ ┃ ┃ ┃       ┃ ┃ ┣━2
+┃ ┃ ┃ ┃       ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃ ┃       ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃       ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃       ┃ ┗━ (g1 yellow)
+┃ ┃ ┃ ┃       ┗━2
+┃ ┃ ┃ ┃         ┣━ (g1 yellow)
+┃ ┃ ┃ ┃         ┗━ (g1 yellow)
+┃ ┃ ┃ ┗━90
+┃ ┃ ┃   ┣━62
+┃ ┃ ┃   ┃ ┣━44
+┃ ┃ ┃   ┃ ┃ ┣━33
+┃ ┃ ┃   ┃ ┃ ┃ ┣━26
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━19
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━14
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━10
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━7
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━4
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┣━3
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━5
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┣━4
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┣━3
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━7
+┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━5
+┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┣━4
+┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
+┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
+┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━2
+┃ ┃ ┃   ┃ ┃ ┃ ┃     ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃ ┗━7
+┃ ┃ ┃   ┃ ┃ ┃   ┣━5
+┃ ┃ ┃   ┃ ┃ ┃   ┃ ┣━4
+┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┣━3
+┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
+┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃   ┗━2
+┃ ┃ ┃   ┃ ┃ ┃     ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┃     ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃ ┗━11
+┃ ┃ ┃   ┃ ┃   ┣━8
+┃ ┃ ┃   ┃ ┃   ┃ ┣━6
+┃ ┃ ┃   ┃ ┃   ┃ ┃ ┣━5
+┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┣━4
+┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃   ┃ ┗━2
+┃ ┃ ┃   ┃ ┃   ┃   ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃   ┃   ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃   ┗━3
+┃ ┃ ┃   ┃ ┃     ┣━2
+┃ ┃ ┃   ┃ ┃     ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃     ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┃     ┗━ (g1 yellow)
+┃ ┃ ┃   ┃ ┗━18
+┃ ┃ ┃   ┃   ┣━12
+┃ ┃ ┃   ┃   ┃ ┣━9
+┃ ┃ ┃   ┃   ┃ ┃ ┣━7
+┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━5
+┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━2
+┃ ┃ ┃   ┃   ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃ ┃ ┗━2
+┃ ┃ ┃   ┃   ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃ ┗━3
+┃ ┃ ┃   ┃   ┃   ┣━2
+┃ ┃ ┃   ┃   ┃   ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃   ┃   ┗━ (g1 yellow)
+┃ ┃ ┃   ┃   ┗━6
+┃ ┃ ┃   ┃     ┣━4
+┃ ┃ ┃   ┃     ┃ ┣━3
+┃ ┃ ┃   ┃     ┃ ┃ ┣━2
+┃ ┃ ┃   ┃     ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃   ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃     ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃     ┃ ┗━ (g1 yellow)
+┃ ┃ ┃   ┃     ┗━2
+┃ ┃ ┃   ┃       ┣━ (g1 yellow)
+┃ ┃ ┃   ┃       ┗━ (g1 yellow)
+┃ ┃ ┃   ┗━28
+┃ ┃ ┃     ┣━18
+┃ ┃ ┃     ┃ ┣━12
+┃ ┃ ┃     ┃ ┃ ┣━9
+┃ ┃ ┃     ┃ ┃ ┃ ┣━7
+┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━5
+┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━2
+┃ ┃ ┃     ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃ ┃ ┗━2
+┃ ┃ ┃     ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃ ┗━3
+┃ ┃ ┃     ┃ ┃   ┣━2
+┃ ┃ ┃     ┃ ┃   ┃ ┣━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃     ┃ ┃   ┗━ (g1 yellow)
+┃ ┃ ┃     ┃ ┗━6
+┃ ┃ ┃     ┃   ┣━4
+┃ ┃ ┃     ┃   ┃ ┣━3
+┃ ┃ ┃     ┃   ┃ ┃ ┣━2
+┃ ┃ ┃     ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃     ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃     ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃     ┃   ┃ ┗━ (g1 yellow)
+┃ ┃ ┃     ┃   ┗━2
+┃ ┃ ┃     ┃     ┣━ (g1 yellow)
+┃ ┃ ┃     ┃     ┗━ (g1 yellow)
+┃ ┃ ┃     ┗━10
+┃ ┃ ┃       ┣━6
+┃ ┃ ┃       ┃ ┣━4
+┃ ┃ ┃       ┃ ┃ ┣━3
+┃ ┃ ┃       ┃ ┃ ┃ ┣━2
+┃ ┃ ┃       ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃ ┃       ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃       ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃       ┃ ┃ ┗━ (g1 yellow)
+┃ ┃ ┃       ┃ ┗━2
+┃ ┃ ┃       ┃   ┣━ (g1 yellow)
+┃ ┃ ┃       ┃   ┗━ (g1 yellow)
+┃ ┃ ┃       ┗━4
+┃ ┃ ┃         ┣━2
+┃ ┃ ┃         ┃ ┣━ (g1 yellow)
+┃ ┃ ┃         ┃ ┗━ (g1 yellow)
+┃ ┃ ┃         ┗━2
+┃ ┃ ┃           ┣━ (g1 yellow)
+┃ ┃ ┃           ┗━ (g1 yellow)
+┃ ┃ ┗━137
+┃ ┃   ┣━91
+┃ ┃   ┃ ┣━61
+┃ ┃   ┃ ┃ ┣━43
+┃ ┃   ┃ ┃ ┃ ┣━33
+┃ ┃   ┃ ┃ ┃ ┃ ┣━24
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━17
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━12
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━9
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━7
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━5
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┣━4
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━3
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━7
+┃ ┃   ┃ ┃ ┃ ┃ ┃   ┣━5
+┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┣━4
+┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
+┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
+┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃   ┗━2
+┃ ┃   ┃ ┃ ┃ ┃ ┃     ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃ ┗━9
+┃ ┃   ┃ ┃ ┃ ┃   ┣━7
+┃ ┃   ┃ ┃ ┃ ┃   ┃ ┣━5
+┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┣━4
+┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
+┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
+┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃   ┃ ┗━2
+┃ ┃   ┃ ┃ ┃ ┃   ┃   ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃   ┗━2
+┃ ┃   ┃ ┃ ┃ ┃     ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃ ┗━10
+┃ ┃   ┃ ┃ ┃   ┣━7
+┃ ┃   ┃ ┃ ┃   ┃ ┣━5
+┃ ┃   ┃ ┃ ┃   ┃ ┃ ┣━4
+┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
+┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
+┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃   ┃ ┗━2
+┃ ┃   ┃ ┃ ┃   ┃   ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃   ┗━3
+┃ ┃   ┃ ┃ ┃     ┣━2
+┃ ┃   ┃ ┃ ┃     ┃ ┣━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃     ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┃     ┗━ (g1 yellow)
+┃ ┃   ┃ ┃ ┗━18
+┃ ┃   ┃ ┃   ┣━12
+┃ ┃   ┃ ┃   ┃ ┣━9
+┃ ┃   ┃ ┃   ┃ ┃ ┣━7
+┃ ┃   ┃ ┃   ┃ ┃ ┃ ┣━5
+┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┣━4
+┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃ ┃ ┃ ┗━2
+┃ ┃   ┃ ┃   ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃ ┃ ┗━2
+┃ ┃   ┃ ┃   ┃ ┃   ┣━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃ ┗━3
+┃ ┃   ┃ ┃   ┃   ┣━2
+┃ ┃   ┃ ┃   ┃   ┃ ┣━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃   ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃   ┃   ┗━ (g1 yellow)
+┃ ┃   ┃ ┃   ┗━6
+┃ ┃   ┃ ┃     ┣━4
+┃ ┃   ┃ ┃     ┃ ┣━3
+┃ ┃   ┃ ┃     ┃ ┃ ┣━2
+┃ ┃   ┃ ┃     ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃ ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃     ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃     ┃ ┗━ (g1 yellow)
+┃ ┃   ┃ ┃     ┗━2
+┃ ┃   ┃ ┃       ┣━ (g1 yellow)
+┃ ┃   ┃ ┃       ┗━ (g1 yellow)
+┃ ┃   ┃ ┗━30
+┃ ┃   ┃   ┣━20
+┃ ┃   ┃   ┃ ┣━14
+┃ ┃   ┃   ┃ ┃ ┣━10
+┃ ┃   ┃   ┃ ┃ ┃ ┣━7
+┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━5
+┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━2
+┃ ┃   ┃   ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃ ┃ ┗━3
+┃ ┃   ┃   ┃ ┃ ┃   ┣━2
+┃ ┃   ┃   ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃ ┗━4
+┃ ┃   ┃   ┃ ┃   ┣━3
+┃ ┃   ┃   ┃ ┃   ┃ ┣━2
+┃ ┃   ┃   ┃ ┃   ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃   ┃   ┃ ┃   ┗━ (g1 yellow)
+┃ ┃   ┃   ┃ ┗━6
+┃ ┃   ┃   ┃   ┣━4
+┃ ┃   ┃   ┃   ┃ ┣━3
+┃ ┃   ┃   ┃   ┃ ┃ ┣━2
+┃ ┃   ┃   ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃   ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃   ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃   ┃   ┃ ┗━ (g1 yellow)
+┃ ┃   ┃   ┃   ┗━2
+┃ ┃   ┃   ┃     ┣━ (g1 yellow)
+┃ ┃   ┃   ┃     ┗━ (g1 yellow)
+┃ ┃   ┃   ┗━10
+┃ ┃   ┃     ┣━6
+┃ ┃   ┃     ┃ ┣━4
+┃ ┃   ┃     ┃ ┃ ┣━3
+┃ ┃   ┃     ┃ ┃ ┃ ┣━2
+┃ ┃   ┃     ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃   ┃     ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃     ┃ ┃ ┗━ (g1 yellow)
+┃ ┃   ┃     ┃ ┗━2
+┃ ┃   ┃     ┃   ┣━ (g1 yellow)
+┃ ┃   ┃     ┃   ┗━ (g1 yellow)
+┃ ┃   ┃     ┗━4
+┃ ┃   ┃       ┣━2
+┃ ┃   ┃       ┃ ┣━ (g1 yellow)
+┃ ┃   ┃       ┃ ┗━ (g1 yellow)
+┃ ┃   ┃       ┗━2
+┃ ┃   ┃         ┣━ (g1 yellow)
+┃ ┃   ┃         ┗━ (g1 yellow)
+┃ ┃   ┗━46
+┃ ┃     ┣━28
+┃ ┃     ┃ ┣━18
+┃ ┃     ┃ ┃ ┣━12
+┃ ┃     ┃ ┃ ┃ ┣━9
+┃ ┃     ┃ ┃ ┃ ┃ ┣━7
+┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━5
+┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━2
+┃ ┃     ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃ ┃ ┗━2
+┃ ┃     ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃ ┗━3
+┃ ┃     ┃ ┃ ┃   ┣━2
+┃ ┃     ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃     ┃ ┃ ┃   ┗━ (g1 yellow)
+┃ ┃     ┃ ┃ ┗━6
+┃ ┃     ┃ ┃   ┣━4
+┃ ┃     ┃ ┃   ┃ ┣━3
+┃ ┃     ┃ ┃   ┃ ┃ ┣━2
+┃ ┃     ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃     ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃     ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃     ┃ ┃   ┃ ┗━ (g1 yellow)
+┃ ┃     ┃ ┃   ┗━2
+┃ ┃     ┃ ┃     ┣━ (g1 yellow)
+┃ ┃     ┃ ┃     ┗━ (g1 yellow)
+┃ ┃     ┃ ┗━10
+┃ ┃     ┃   ┣━6
+┃ ┃     ┃   ┃ ┣━4
+┃ ┃     ┃   ┃ ┃ ┣━3
+┃ ┃     ┃   ┃ ┃ ┃ ┣━2
+┃ ┃     ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃     ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃     ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃     ┃   ┃ ┃ ┗━ (g1 yellow)
+┃ ┃     ┃   ┃ ┗━2
+┃ ┃     ┃   ┃   ┣━ (g1 yellow)
+┃ ┃     ┃   ┃   ┗━ (g1 yellow)
+┃ ┃     ┃   ┗━4
+┃ ┃     ┃     ┣━2
+┃ ┃     ┃     ┃ ┣━ (g1 yellow)
+┃ ┃     ┃     ┃ ┗━ (g1 yellow)
+┃ ┃     ┃     ┗━2
+┃ ┃     ┃       ┣━ (g1 yellow)
+┃ ┃     ┃       ┗━ (g1 yellow)
+┃ ┃     ┗━18
+┃ ┃       ┣━10
+┃ ┃       ┃ ┣━6
+┃ ┃       ┃ ┃ ┣━4
+┃ ┃       ┃ ┃ ┃ ┣━3
+┃ ┃       ┃ ┃ ┃ ┃ ┣━2
+┃ ┃       ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃ ┃       ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃       ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃       ┃ ┃ ┃ ┗━ (g1 yellow)
+┃ ┃       ┃ ┃ ┗━2
+┃ ┃       ┃ ┃   ┣━ (g1 yellow)
+┃ ┃       ┃ ┃   ┗━ (g1 yellow)
+┃ ┃       ┃ ┗━4
+┃ ┃       ┃   ┣━2
+┃ ┃       ┃   ┃ ┣━ (g1 yellow)
+┃ ┃       ┃   ┃ ┗━ (g1 yellow)
+┃ ┃       ┃   ┗━2
+┃ ┃       ┃     ┣━ (g1 yellow)
+┃ ┃       ┃     ┗━ (g1 yellow)
+┃ ┃       ┗━8
+┃ ┃         ┣━4
+┃ ┃         ┃ ┣━2
+┃ ┃         ┃ ┃ ┣━ (g1 yellow)
+┃ ┃         ┃ ┃ ┗━ (g1 yellow)
+┃ ┃         ┃ ┗━2
+┃ ┃         ┃   ┣━ (g1 yellow)
+┃ ┃         ┃   ┗━ (g1 yellow)
+┃ ┃         ┗━4
+┃ ┃           ┣━2
+┃ ┃           ┃ ┣━ (g1 yellow)
+┃ ┃           ┃ ┗━ (g1 yellow)
+┃ ┃           ┗━2
+┃ ┃             ┣━ (g1 yellow)
+┃ ┃             ┗━ (g1 yellow)
+┃ ┗━219
+┃   ┣━138
+┃   ┃ ┣━92
+┃   ┃ ┃ ┣━64
+┃   ┃ ┃ ┃ ┣━46
+┃   ┃ ┃ ┃ ┃ ┣━35
+┃   ┃ ┃ ┃ ┃ ┃ ┣━26
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━19
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━14
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━10
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━7
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━4
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━3
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━2
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━5
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━4
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━3
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━7
+┃   ┃ ┃ ┃ ┃ ┃ ┃   ┣━5
+┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━4
+┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
+┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
+┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃   ┗━2
+┃   ┃ ┃ ┃ ┃ ┃ ┃     ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃ ┗━9
+┃   ┃ ┃ ┃ ┃ ┃   ┣━7
+┃   ┃ ┃ ┃ ┃ ┃   ┃ ┣━5
+┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━4
+┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
+┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
+┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃   ┃ ┗━2
+┃   ┃ ┃ ┃ ┃ ┃   ┃   ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃   ┗━2
+┃   ┃ ┃ ┃ ┃ ┃     ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃ ┗━11
+┃   ┃ ┃ ┃ ┃   ┣━8
+┃   ┃ ┃ ┃ ┃   ┃ ┣━6
+┃   ┃ ┃ ┃ ┃   ┃ ┃ ┣━5
+┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━4
+┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━3
+┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
+┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃   ┃ ┗━2
+┃   ┃ ┃ ┃ ┃   ┃   ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃   ┗━3
+┃   ┃ ┃ ┃ ┃     ┣━2
+┃   ┃ ┃ ┃ ┃     ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃     ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+┃   ┃ ┃ ┃ ┗━18
+┃   ┃ ┃ ┃   ┣━12
+┃   ┃ ┃ ┃   ┃ ┣━9
+┃   ┃ ┃ ┃   ┃ ┃ ┣━7
+┃   ┃ ┃ ┃   ┃ ┃ ┃ ┣━5
+┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━4
+┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━3
+┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃ ┃ ┃ ┗━2
+┃   ┃ ┃ ┃   ┃ ┃ ┃   ┣━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃ ┃ ┗━2
+┃   ┃ ┃ ┃   ┃ ┃   ┣━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃ ┗━3
+┃   ┃ ┃ ┃   ┃   ┣━2
+┃   ┃ ┃ ┃   ┃   ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃   ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+┃   ┃ ┃ ┃   ┗━6
+┃   ┃ ┃ ┃     ┣━4
+┃   ┃ ┃ ┃     ┃ ┣━3
+┃   ┃ ┃ ┃     ┃ ┃ ┣━2
+┃   ┃ ┃ ┃     ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃ ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃     ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃     ┃ ┗━ (g1 yellow)
+┃   ┃ ┃ ┃     ┗━2
+┃   ┃ ┃ ┃       ┣━ (g1 yellow)
+┃   ┃ ┃ ┃       ┗━ (g1 yellow)
+┃   ┃ ┃ ┗━28
+┃   ┃ ┃   ┣━18
+┃   ┃ ┃   ┃ ┣━12
+┃   ┃ ┃   ┃ ┃ ┣━9
+┃   ┃ ┃   ┃ ┃ ┃ ┣━7
+┃   ┃ ┃   ┃ ┃ ┃ ┃ ┣━5
+┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━4
+┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃ ┃ ┃ ┗━2
+┃   ┃ ┃   ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃ ┃ ┗━2
+┃   ┃ ┃   ┃ ┃ ┃   ┣━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃ ┗━3
+┃   ┃ ┃   ┃ ┃   ┣━2
+┃   ┃ ┃   ┃ ┃   ┃ ┣━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃   ┃ ┗━ (g1 yellow)
+┃   ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+┃   ┃ ┃   ┃ ┗━6
+┃   ┃ ┃   ┃   ┣━4
+┃   ┃ ┃   ┃   ┃ ┣━3
+┃   ┃ ┃   ┃   ┃ ┃ ┣━2
+┃   ┃ ┃   ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃   ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃   ┃   ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃   ┃   ┃ ┗━ (g1 yellow)
+┃   ┃ ┃   ┃   ┗━2
+┃   ┃ ┃   ┃     ┣━ (g1 yellow)
+┃   ┃ ┃   ┃     ┗━ (g1 yellow)
+┃   ┃ ┃   ┗━10
+┃   ┃ ┃     ┣━6
+┃   ┃ ┃     ┃ ┣━4
+┃   ┃ ┃     ┃ ┃ ┣━3
+┃   ┃ ┃     ┃ ┃ ┃ ┣━2
+┃   ┃ ┃     ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃ ┃     ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃     ┃ ┃ ┗━ (g1 yellow)
+┃   ┃ ┃     ┃ ┗━2
+┃   ┃ ┃     ┃   ┣━ (g1 yellow)
+┃   ┃ ┃     ┃   ┗━ (g1 yellow)
+┃   ┃ ┃     ┗━4
+┃   ┃ ┃       ┣━2
+┃   ┃ ┃       ┃ ┣━ (g1 yellow)
+┃   ┃ ┃       ┃ ┗━ (g1 yellow)
+┃   ┃ ┃       ┗━2
+┃   ┃ ┃         ┣━ (g1 yellow)
+┃   ┃ ┃         ┗━ (g1 yellow)
+┃   ┃ ┗━46
+┃   ┃   ┣━28
+┃   ┃   ┃ ┣━18
+┃   ┃   ┃ ┃ ┣━12
+┃   ┃   ┃ ┃ ┃ ┣━9
+┃   ┃   ┃ ┃ ┃ ┃ ┣━7
+┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━5
+┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━2
+┃   ┃   ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃ ┃ ┗━2
+┃   ┃   ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃ ┗━3
+┃   ┃   ┃ ┃ ┃   ┣━2
+┃   ┃   ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃   ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+┃   ┃   ┃ ┃ ┗━6
+┃   ┃   ┃ ┃   ┣━4
+┃   ┃   ┃ ┃   ┃ ┣━3
+┃   ┃   ┃ ┃   ┃ ┃ ┣━2
+┃   ┃   ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃   ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃   ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃   ┃   ┃ ┃   ┃ ┗━ (g1 yellow)
+┃   ┃   ┃ ┃   ┗━2
+┃   ┃   ┃ ┃     ┣━ (g1 yellow)
+┃   ┃   ┃ ┃     ┗━ (g1 yellow)
+┃   ┃   ┃ ┗━10
+┃   ┃   ┃   ┣━6
+┃   ┃   ┃   ┃ ┣━4
+┃   ┃   ┃   ┃ ┃ ┣━3
+┃   ┃   ┃   ┃ ┃ ┃ ┣━2
+┃   ┃   ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃   ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃   ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃   ┃   ┃ ┃ ┗━ (g1 yellow)
+┃   ┃   ┃   ┃ ┗━2
+┃   ┃   ┃   ┃   ┣━ (g1 yellow)
+┃   ┃   ┃   ┃   ┗━ (g1 yellow)
+┃   ┃   ┃   ┗━4
+┃   ┃   ┃     ┣━2
+┃   ┃   ┃     ┃ ┣━ (g1 yellow)
+┃   ┃   ┃     ┃ ┗━ (g1 yellow)
+┃   ┃   ┃     ┗━2
+┃   ┃   ┃       ┣━ (g1 yellow)
+┃   ┃   ┃       ┗━ (g1 yellow)
+┃   ┃   ┗━18
+┃   ┃     ┣━10
+┃   ┃     ┃ ┣━6
+┃   ┃     ┃ ┃ ┣━4
+┃   ┃     ┃ ┃ ┃ ┣━3
+┃   ┃     ┃ ┃ ┃ ┃ ┣━2
+┃   ┃     ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃   ┃     ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃     ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+┃   ┃     ┃ ┃ ┗━2
+┃   ┃     ┃ ┃   ┣━ (g1 yellow)
+┃   ┃     ┃ ┃   ┗━ (g1 yellow)
+┃   ┃     ┃ ┗━4
+┃   ┃     ┃   ┣━2
+┃   ┃     ┃   ┃ ┣━ (g1 yellow)
+┃   ┃     ┃   ┃ ┗━ (g1 yellow)
+┃   ┃     ┃   ┗━2
+┃   ┃     ┃     ┣━ (g1 yellow)
+┃   ┃     ┃     ┗━ (g1 yellow)
+┃   ┃     ┗━8
+┃   ┃       ┣━4
+┃   ┃       ┃ ┣━2
+┃   ┃       ┃ ┃ ┣━ (g1 yellow)
+┃   ┃       ┃ ┃ ┗━ (g1 yellow)
+┃   ┃       ┃ ┗━2
+┃   ┃       ┃   ┣━ (g1 yellow)
+┃   ┃       ┃   ┗━ (g1 yellow)
+┃   ┃       ┗━4
+┃   ┃         ┣━2
+┃   ┃         ┃ ┣━ (g1 yellow)
+┃   ┃         ┃ ┗━ (g1 yellow)
+┃   ┃         ┗━2
+┃   ┃           ┣━ (g1 yellow)
+┃   ┃           ┗━ (g1 yellow)
+┃   ┗━81
+┃     ┣━47
+┃     ┃ ┣━29
+┃     ┃ ┃ ┣━19
+┃     ┃ ┃ ┃ ┣━13
+┃     ┃ ┃ ┃ ┃ ┣━10
+┃     ┃ ┃ ┃ ┃ ┃ ┣━7
+┃     ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+┃     ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃ ┃ ┗━3
+┃     ┃ ┃ ┃ ┃ ┃   ┣━2
+┃     ┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃ ┗━3
+┃     ┃ ┃ ┃ ┃   ┣━2
+┃     ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃     ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+┃     ┃ ┃ ┃ ┗━6
+┃     ┃ ┃ ┃   ┣━4
+┃     ┃ ┃ ┃   ┃ ┣━3
+┃     ┃ ┃ ┃   ┃ ┃ ┣━2
+┃     ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+┃     ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃     ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃     ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+┃     ┃ ┃ ┃   ┗━2
+┃     ┃ ┃ ┃     ┣━ (g1 yellow)
+┃     ┃ ┃ ┃     ┗━ (g1 yellow)
+┃     ┃ ┃ ┗━10
+┃     ┃ ┃   ┣━6
+┃     ┃ ┃   ┃ ┣━4
+┃     ┃ ┃   ┃ ┃ ┣━3
+┃     ┃ ┃   ┃ ┃ ┃ ┣━2
+┃     ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃     ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃     ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃     ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+┃     ┃ ┃   ┃ ┗━2
+┃     ┃ ┃   ┃   ┣━ (g1 yellow)
+┃     ┃ ┃   ┃   ┗━ (g1 yellow)
+┃     ┃ ┃   ┗━4
+┃     ┃ ┃     ┣━2
+┃     ┃ ┃     ┃ ┣━ (g1 yellow)
+┃     ┃ ┃     ┃ ┗━ (g1 yellow)
+┃     ┃ ┃     ┗━2
+┃     ┃ ┃       ┣━ (g1 yellow)
+┃     ┃ ┃       ┗━ (g1 yellow)
+┃     ┃ ┗━18
+┃     ┃   ┣━10
+┃     ┃   ┃ ┣━6
+┃     ┃   ┃ ┃ ┣━4
+┃     ┃   ┃ ┃ ┃ ┣━3
+┃     ┃   ┃ ┃ ┃ ┃ ┣━2
+┃     ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃     ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃     ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃     ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+┃     ┃   ┃ ┃ ┗━2
+┃     ┃   ┃ ┃   ┣━ (g1 yellow)
+┃     ┃   ┃ ┃   ┗━ (g1 yellow)
+┃     ┃   ┃ ┗━4
+┃     ┃   ┃   ┣━2
+┃     ┃   ┃   ┃ ┣━ (g1 yellow)
+┃     ┃   ┃   ┃ ┗━ (g1 yellow)
+┃     ┃   ┃   ┗━2
+┃     ┃   ┃     ┣━ (g1 yellow)
+┃     ┃   ┃     ┗━ (g1 yellow)
+┃     ┃   ┗━8
+┃     ┃     ┣━4
+┃     ┃     ┃ ┣━2
+┃     ┃     ┃ ┃ ┣━ (g1 yellow)
+┃     ┃     ┃ ┃ ┗━ (g1 yellow)
+┃     ┃     ┃ ┗━2
+┃     ┃     ┃   ┣━ (g1 yellow)
+┃     ┃     ┃   ┗━ (g1 yellow)
+┃     ┃     ┗━4
+┃     ┃       ┣━2
+┃     ┃       ┃ ┣━ (g1 yellow)
+┃     ┃       ┃ ┗━ (g1 yellow)
+┃     ┃       ┗━2
+┃     ┃         ┣━ (g1 yellow)
+┃     ┃         ┗━ (g1 yellow)
+┃     ┗━34
+┃       ┣━18
+┃       ┃ ┣━10
+┃       ┃ ┃ ┣━6
+┃       ┃ ┃ ┃ ┣━4
+┃       ┃ ┃ ┃ ┃ ┣━3
+┃       ┃ ┃ ┃ ┃ ┃ ┣━2
+┃       ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+┃       ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃       ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃       ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+┃       ┃ ┃ ┃ ┗━2
+┃       ┃ ┃ ┃   ┣━ (g1 yellow)
+┃       ┃ ┃ ┃   ┗━ (g1 yellow)
+┃       ┃ ┃ ┗━4
+┃       ┃ ┃   ┣━2
+┃       ┃ ┃   ┃ ┣━ (g1 yellow)
+┃       ┃ ┃   ┃ ┗━ (g1 yellow)
+┃       ┃ ┃   ┗━2
+┃       ┃ ┃     ┣━ (g1 yellow)
+┃       ┃ ┃     ┗━ (g1 yellow)
+┃       ┃ ┗━8
+┃       ┃   ┣━4
+┃       ┃   ┃ ┣━2
+┃       ┃   ┃ ┃ ┣━ (g1 yellow)
+┃       ┃   ┃ ┃ ┗━ (g1 yellow)
+┃       ┃   ┃ ┗━2
+┃       ┃   ┃   ┣━ (g1 yellow)
+┃       ┃   ┃   ┗━ (g1 yellow)
+┃       ┃   ┗━4
+┃       ┃     ┣━2
+┃       ┃     ┃ ┣━ (g1 yellow)
+┃       ┃     ┃ ┗━ (g1 yellow)
+┃       ┃     ┗━2
+┃       ┃       ┣━ (g1 yellow)
+┃       ┃       ┗━ (g1 yellow)
+┃       ┗━16
+┃         ┣━8
+┃         ┃ ┣━4
+┃         ┃ ┃ ┣━2
+┃         ┃ ┃ ┃ ┣━ (g1 yellow)
+┃         ┃ ┃ ┃ ┗━ (g1 yellow)
+┃         ┃ ┃ ┗━2
+┃         ┃ ┃   ┣━ (g1 yellow)
+┃         ┃ ┃   ┗━ (g1 yellow)
+┃         ┃ ┗━4
+┃         ┃   ┣━2
+┃         ┃   ┃ ┣━ (g1 yellow)
+┃         ┃   ┃ ┗━ (g1 yellow)
+┃         ┃   ┗━2
+┃         ┃     ┣━ (g1 yellow)
+┃         ┃     ┗━ (g1 yellow)
+┃         ┗━8
+┃           ┣━4
+┃           ┃ ┣━2
+┃           ┃ ┃ ┣━ (g1 yellow)
+┃           ┃ ┃ ┗━ (g1 yellow)
+┃           ┃ ┗━2
+┃           ┃   ┣━ (g1 yellow)
+┃           ┃   ┗━ (g1 yellow)
+┃           ┗━4
+┃             ┣━2
+┃             ┃ ┣━ (g1 yellow)
+┃             ┃ ┗━ (g1 yellow)
+┃             ┗━2
+┃               ┣━ (g1 yellow)
+┃               ┗━ (g1 yellow)
+┗━363
+  ┣━217
+  ┃ ┣━137
+  ┃ ┃ ┣━91
+  ┃ ┃ ┃ ┣━63
+  ┃ ┃ ┃ ┃ ┣━45
+  ┃ ┃ ┃ ┃ ┃ ┣━33
+  ┃ ┃ ┃ ┃ ┃ ┃ ┣━24
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━18
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━13
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━10
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━7
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━6
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━3
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━2
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━5
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━4
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━3
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━6
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━5
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━4
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━3
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃ ┗━9
+  ┃ ┃ ┃ ┃ ┃ ┃   ┣━7
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┣━5
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━4
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━3
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃ ┗━2
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃   ┗━2
+  ┃ ┃ ┃ ┃ ┃ ┃     ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃ ┗━12
+  ┃ ┃ ┃ ┃ ┃   ┣━9
+  ┃ ┃ ┃ ┃ ┃   ┃ ┣━7
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┣━5
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━4
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━3
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃ ┗━2
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃   ┃ ┗━2
+  ┃ ┃ ┃ ┃ ┃   ┃   ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃   ┗━3
+  ┃ ┃ ┃ ┃ ┃     ┣━2
+  ┃ ┃ ┃ ┃ ┃     ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃     ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃ ┗━18
+  ┃ ┃ ┃ ┃   ┣━12
+  ┃ ┃ ┃ ┃   ┃ ┣━9
+  ┃ ┃ ┃ ┃   ┃ ┃ ┣━7
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━5
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━4
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━3
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━2
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃ ┃ ┗━2
+  ┃ ┃ ┃ ┃   ┃ ┃   ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃ ┗━3
+  ┃ ┃ ┃ ┃   ┃   ┣━2
+  ┃ ┃ ┃ ┃   ┃   ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃   ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃   ┗━6
+  ┃ ┃ ┃ ┃     ┣━4
+  ┃ ┃ ┃ ┃     ┃ ┣━3
+  ┃ ┃ ┃ ┃     ┃ ┃ ┣━2
+  ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃     ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃     ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┃     ┗━2
+  ┃ ┃ ┃ ┃       ┣━ (g1 yellow)
+  ┃ ┃ ┃ ┃       ┗━ (g1 yellow)
+  ┃ ┃ ┃ ┗━28
+  ┃ ┃ ┃   ┣━18
+  ┃ ┃ ┃   ┃ ┣━12
+  ┃ ┃ ┃   ┃ ┃ ┣━9
+  ┃ ┃ ┃   ┃ ┃ ┃ ┣━7
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━5
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━4
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━2
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃ ┃ ┗━2
+  ┃ ┃ ┃   ┃ ┃ ┃   ┣━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃ ┗━3
+  ┃ ┃ ┃   ┃ ┃   ┣━2
+  ┃ ┃ ┃   ┃ ┃   ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃   ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃ ┗━6
+  ┃ ┃ ┃   ┃   ┣━4
+  ┃ ┃ ┃   ┃   ┃ ┣━3
+  ┃ ┃ ┃   ┃   ┃ ┃ ┣━2
+  ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃   ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃   ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃   ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┃   ┗━2
+  ┃ ┃ ┃   ┃     ┣━ (g1 yellow)
+  ┃ ┃ ┃   ┃     ┗━ (g1 yellow)
+  ┃ ┃ ┃   ┗━10
+  ┃ ┃ ┃     ┣━6
+  ┃ ┃ ┃     ┃ ┣━4
+  ┃ ┃ ┃     ┃ ┃ ┣━3
+  ┃ ┃ ┃     ┃ ┃ ┃ ┣━2
+  ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃     ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃     ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃     ┃ ┗━2
+  ┃ ┃ ┃     ┃   ┣━ (g1 yellow)
+  ┃ ┃ ┃     ┃   ┗━ (g1 yellow)
+  ┃ ┃ ┃     ┗━4
+  ┃ ┃ ┃       ┣━2
+  ┃ ┃ ┃       ┃ ┣━ (g1 yellow)
+  ┃ ┃ ┃       ┃ ┗━ (g1 yellow)
+  ┃ ┃ ┃       ┗━2
+  ┃ ┃ ┃         ┣━ (g1 yellow)
+  ┃ ┃ ┃         ┗━ (g1 yellow)
+  ┃ ┃ ┗━46
+  ┃ ┃   ┣━28
+  ┃ ┃   ┃ ┣━18
+  ┃ ┃   ┃ ┃ ┣━12
+  ┃ ┃   ┃ ┃ ┃ ┣━9
+  ┃ ┃   ┃ ┃ ┃ ┃ ┣━7
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━5
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━2
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃ ┃ ┗━2
+  ┃ ┃   ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃ ┗━3
+  ┃ ┃   ┃ ┃ ┃   ┣━2
+  ┃ ┃   ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃ ┗━6
+  ┃ ┃   ┃ ┃   ┣━4
+  ┃ ┃   ┃ ┃   ┃ ┣━3
+  ┃ ┃   ┃ ┃   ┃ ┃ ┣━2
+  ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃   ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃   ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┃   ┗━2
+  ┃ ┃   ┃ ┃     ┣━ (g1 yellow)
+  ┃ ┃   ┃ ┃     ┗━ (g1 yellow)
+  ┃ ┃   ┃ ┗━10
+  ┃ ┃   ┃   ┣━6
+  ┃ ┃   ┃   ┃ ┣━4
+  ┃ ┃   ┃   ┃ ┃ ┣━3
+  ┃ ┃   ┃   ┃ ┃ ┃ ┣━2
+  ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃   ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃   ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃   ┃ ┗━2
+  ┃ ┃   ┃   ┃   ┣━ (g1 yellow)
+  ┃ ┃   ┃   ┃   ┗━ (g1 yellow)
+  ┃ ┃   ┃   ┗━4
+  ┃ ┃   ┃     ┣━2
+  ┃ ┃   ┃     ┃ ┣━ (g1 yellow)
+  ┃ ┃   ┃     ┃ ┗━ (g1 yellow)
+  ┃ ┃   ┃     ┗━2
+  ┃ ┃   ┃       ┣━ (g1 yellow)
+  ┃ ┃   ┃       ┗━ (g1 yellow)
+  ┃ ┃   ┗━18
+  ┃ ┃     ┣━10
+  ┃ ┃     ┃ ┣━6
+  ┃ ┃     ┃ ┃ ┣━4
+  ┃ ┃     ┃ ┃ ┃ ┣━3
+  ┃ ┃     ┃ ┃ ┃ ┃ ┣━2
+  ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃     ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃     ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃     ┃ ┃ ┗━2
+  ┃ ┃     ┃ ┃   ┣━ (g1 yellow)
+  ┃ ┃     ┃ ┃   ┗━ (g1 yellow)
+  ┃ ┃     ┃ ┗━4
+  ┃ ┃     ┃   ┣━2
+  ┃ ┃     ┃   ┃ ┣━ (g1 yellow)
+  ┃ ┃     ┃   ┃ ┗━ (g1 yellow)
+  ┃ ┃     ┃   ┗━2
+  ┃ ┃     ┃     ┣━ (g1 yellow)
+  ┃ ┃     ┃     ┗━ (g1 yellow)
+  ┃ ┃     ┗━8
+  ┃ ┃       ┣━4
+  ┃ ┃       ┃ ┣━2
+  ┃ ┃       ┃ ┃ ┣━ (g1 yellow)
+  ┃ ┃       ┃ ┃ ┗━ (g1 yellow)
+  ┃ ┃       ┃ ┗━2
+  ┃ ┃       ┃   ┣━ (g1 yellow)
+  ┃ ┃       ┃   ┗━ (g1 yellow)
+  ┃ ┃       ┗━4
+  ┃ ┃         ┣━2
+  ┃ ┃         ┃ ┣━ (g1 yellow)
+  ┃ ┃         ┃ ┗━ (g1 yellow)
+  ┃ ┃         ┗━2
+  ┃ ┃           ┣━ (g1 yellow)
+  ┃ ┃           ┗━ (g1 yellow)
+  ┃ ┗━80
+  ┃   ┣━46
+  ┃   ┃ ┣━28
+  ┃   ┃ ┃ ┣━18
+  ┃   ┃ ┃ ┃ ┣━12
+  ┃   ┃ ┃ ┃ ┃ ┣━9
+  ┃   ┃ ┃ ┃ ┃ ┃ ┣━7
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃ ┃ ┗━2
+  ┃   ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃ ┗━3
+  ┃   ┃ ┃ ┃ ┃   ┣━2
+  ┃   ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃ ┗━6
+  ┃   ┃ ┃ ┃   ┣━4
+  ┃   ┃ ┃ ┃   ┃ ┣━3
+  ┃   ┃ ┃ ┃   ┃ ┃ ┣━2
+  ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃   ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┃   ┗━2
+  ┃   ┃ ┃ ┃     ┣━ (g1 yellow)
+  ┃   ┃ ┃ ┃     ┗━ (g1 yellow)
+  ┃   ┃ ┃ ┗━10
+  ┃   ┃ ┃   ┣━6
+  ┃   ┃ ┃   ┃ ┣━4
+  ┃   ┃ ┃   ┃ ┃ ┣━3
+  ┃   ┃ ┃   ┃ ┃ ┃ ┣━2
+  ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃   ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃   ┃ ┗━2
+  ┃   ┃ ┃   ┃   ┣━ (g1 yellow)
+  ┃   ┃ ┃   ┃   ┗━ (g1 yellow)
+  ┃   ┃ ┃   ┗━4
+  ┃   ┃ ┃     ┣━2
+  ┃   ┃ ┃     ┃ ┣━ (g1 yellow)
+  ┃   ┃ ┃     ┃ ┗━ (g1 yellow)
+  ┃   ┃ ┃     ┗━2
+  ┃   ┃ ┃       ┣━ (g1 yellow)
+  ┃   ┃ ┃       ┗━ (g1 yellow)
+  ┃   ┃ ┗━18
+  ┃   ┃   ┣━10
+  ┃   ┃   ┃ ┣━6
+  ┃   ┃   ┃ ┃ ┣━4
+  ┃   ┃   ┃ ┃ ┃ ┣━3
+  ┃   ┃   ┃ ┃ ┃ ┃ ┣━2
+  ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃   ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃   ┃ ┃ ┗━2
+  ┃   ┃   ┃ ┃   ┣━ (g1 yellow)
+  ┃   ┃   ┃ ┃   ┗━ (g1 yellow)
+  ┃   ┃   ┃ ┗━4
+  ┃   ┃   ┃   ┣━2
+  ┃   ┃   ┃   ┃ ┣━ (g1 yellow)
+  ┃   ┃   ┃   ┃ ┗━ (g1 yellow)
+  ┃   ┃   ┃   ┗━2
+  ┃   ┃   ┃     ┣━ (g1 yellow)
+  ┃   ┃   ┃     ┗━ (g1 yellow)
+  ┃   ┃   ┗━8
+  ┃   ┃     ┣━4
+  ┃   ┃     ┃ ┣━2
+  ┃   ┃     ┃ ┃ ┣━ (g1 yellow)
+  ┃   ┃     ┃ ┃ ┗━ (g1 yellow)
+  ┃   ┃     ┃ ┗━2
+  ┃   ┃     ┃   ┣━ (g1 yellow)
+  ┃   ┃     ┃   ┗━ (g1 yellow)
+  ┃   ┃     ┗━4
+  ┃   ┃       ┣━2
+  ┃   ┃       ┃ ┣━ (g1 yellow)
+  ┃   ┃       ┃ ┗━ (g1 yellow)
+  ┃   ┃       ┗━2
+  ┃   ┃         ┣━ (g1 yellow)
+  ┃   ┃         ┗━ (g1 yellow)
+  ┃   ┗━34
+  ┃     ┣━18
+  ┃     ┃ ┣━10
+  ┃     ┃ ┃ ┣━6
+  ┃     ┃ ┃ ┃ ┣━4
+  ┃     ┃ ┃ ┃ ┃ ┣━3
+  ┃     ┃ ┃ ┃ ┃ ┃ ┣━2
+  ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃     ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃     ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃     ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃     ┃ ┃ ┃ ┗━2
+  ┃     ┃ ┃ ┃   ┣━ (g1 yellow)
+  ┃     ┃ ┃ ┃   ┗━ (g1 yellow)
+  ┃     ┃ ┃ ┗━4
+  ┃     ┃ ┃   ┣━2
+  ┃     ┃ ┃   ┃ ┣━ (g1 yellow)
+  ┃     ┃ ┃   ┃ ┗━ (g1 yellow)
+  ┃     ┃ ┃   ┗━2
+  ┃     ┃ ┃     ┣━ (g1 yellow)
+  ┃     ┃ ┃     ┗━ (g1 yellow)
+  ┃     ┃ ┗━8
+  ┃     ┃   ┣━4
+  ┃     ┃   ┃ ┣━2
+  ┃     ┃   ┃ ┃ ┣━ (g1 yellow)
+  ┃     ┃   ┃ ┃ ┗━ (g1 yellow)
+  ┃     ┃   ┃ ┗━2
+  ┃     ┃   ┃   ┣━ (g1 yellow)
+  ┃     ┃   ┃   ┗━ (g1 yellow)
+  ┃     ┃   ┗━4
+  ┃     ┃     ┣━2
+  ┃     ┃     ┃ ┣━ (g1 yellow)
+  ┃     ┃     ┃ ┗━ (g1 yellow)
+  ┃     ┃     ┗━2
+  ┃     ┃       ┣━ (g1 yellow)
+  ┃     ┃       ┗━ (g1 yellow)
+  ┃     ┗━16
+  ┃       ┣━8
+  ┃       ┃ ┣━4
+  ┃       ┃ ┃ ┣━2
+  ┃       ┃ ┃ ┃ ┣━ (g1 yellow)
+  ┃       ┃ ┃ ┃ ┗━ (g1 yellow)
+  ┃       ┃ ┃ ┗━2
+  ┃       ┃ ┃   ┣━ (g1 yellow)
+  ┃       ┃ ┃   ┗━ (g1 yellow)
+  ┃       ┃ ┗━4
+  ┃       ┃   ┣━2
+  ┃       ┃   ┃ ┣━ (g1 yellow)
+  ┃       ┃   ┃ ┗━ (g1 yellow)
+  ┃       ┃   ┗━2
+  ┃       ┃     ┣━ (g1 yellow)
+  ┃       ┃     ┗━ (g1 yellow)
+  ┃       ┗━8
+  ┃         ┣━4
+  ┃         ┃ ┣━2
+  ┃         ┃ ┃ ┣━ (g1 yellow)
+  ┃         ┃ ┃ ┗━ (g1 yellow)
+  ┃         ┃ ┗━2
+  ┃         ┃   ┣━ (g1 yellow)
+  ┃         ┃   ┗━ (g1 yellow)
+  ┃         ┗━4
+  ┃           ┣━2
+  ┃           ┃ ┣━ (g1 yellow)
+  ┃           ┃ ┗━ (g1 yellow)
+  ┃           ┗━2
+  ┃             ┣━ (g1 yellow)
+  ┃             ┗━ (g1 yellow)
+  ┗━146
+    ┣━80
+    ┃ ┣━46
+    ┃ ┃ ┣━28
+    ┃ ┃ ┃ ┣━18
+    ┃ ┃ ┃ ┃ ┣━12
+    ┃ ┃ ┃ ┃ ┃ ┣━9
+    ┃ ┃ ┃ ┃ ┃ ┃ ┣━7
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━5
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━4
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━3
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃ ┃ ┗━2
+    ┃ ┃ ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃ ┗━3
+    ┃ ┃ ┃ ┃ ┃   ┣━2
+    ┃ ┃ ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃ ┗━6
+    ┃ ┃ ┃ ┃   ┣━4
+    ┃ ┃ ┃ ┃   ┃ ┣━3
+    ┃ ┃ ┃ ┃   ┃ ┃ ┣━2
+    ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+    ┃ ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┃   ┗━2
+    ┃ ┃ ┃ ┃     ┣━ (g1 yellow)
+    ┃ ┃ ┃ ┃     ┗━ (g1 yellow)
+    ┃ ┃ ┃ ┗━10
+    ┃ ┃ ┃   ┣━6
+    ┃ ┃ ┃   ┃ ┣━4
+    ┃ ┃ ┃   ┃ ┃ ┣━3
+    ┃ ┃ ┃   ┃ ┃ ┃ ┣━2
+    ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+    ┃ ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃   ┃ ┗━2
+    ┃ ┃ ┃   ┃   ┣━ (g1 yellow)
+    ┃ ┃ ┃   ┃   ┗━ (g1 yellow)
+    ┃ ┃ ┃   ┗━4
+    ┃ ┃ ┃     ┣━2
+    ┃ ┃ ┃     ┃ ┣━ (g1 yellow)
+    ┃ ┃ ┃     ┃ ┗━ (g1 yellow)
+    ┃ ┃ ┃     ┗━2
+    ┃ ┃ ┃       ┣━ (g1 yellow)
+    ┃ ┃ ┃       ┗━ (g1 yellow)
+    ┃ ┃ ┗━18
+    ┃ ┃   ┣━10
+    ┃ ┃   ┃ ┣━6
+    ┃ ┃   ┃ ┃ ┣━4
+    ┃ ┃   ┃ ┃ ┃ ┣━3
+    ┃ ┃   ┃ ┃ ┃ ┃ ┣━2
+    ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+    ┃ ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃   ┃ ┃ ┗━2
+    ┃ ┃   ┃ ┃   ┣━ (g1 yellow)
+    ┃ ┃   ┃ ┃   ┗━ (g1 yellow)
+    ┃ ┃   ┃ ┗━4
+    ┃ ┃   ┃   ┣━2
+    ┃ ┃   ┃   ┃ ┣━ (g1 yellow)
+    ┃ ┃   ┃   ┃ ┗━ (g1 yellow)
+    ┃ ┃   ┃   ┗━2
+    ┃ ┃   ┃     ┣━ (g1 yellow)
+    ┃ ┃   ┃     ┗━ (g1 yellow)
+    ┃ ┃   ┗━8
+    ┃ ┃     ┣━4
+    ┃ ┃     ┃ ┣━2
+    ┃ ┃     ┃ ┃ ┣━ (g1 yellow)
+    ┃ ┃     ┃ ┃ ┗━ (g1 yellow)
+    ┃ ┃     ┃ ┗━2
+    ┃ ┃     ┃   ┣━ (g1 yellow)
+    ┃ ┃     ┃   ┗━ (g1 yellow)
+    ┃ ┃     ┗━4
+    ┃ ┃       ┣━2
+    ┃ ┃       ┃ ┣━ (g1 yellow)
+    ┃ ┃       ┃ ┗━ (g1 yellow)
+    ┃ ┃       ┗━2
+    ┃ ┃         ┣━ (g1 yellow)
+    ┃ ┃         ┗━ (g1 yellow)
+    ┃ ┗━34
+    ┃   ┣━18
+    ┃   ┃ ┣━10
+    ┃   ┃ ┃ ┣━6
+    ┃   ┃ ┃ ┃ ┣━4
+    ┃   ┃ ┃ ┃ ┃ ┣━3
+    ┃   ┃ ┃ ┃ ┃ ┃ ┣━2
+    ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+    ┃   ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃   ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃   ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃   ┃ ┃ ┃ ┗━2
+    ┃   ┃ ┃ ┃   ┣━ (g1 yellow)
+    ┃   ┃ ┃ ┃   ┗━ (g1 yellow)
+    ┃   ┃ ┃ ┗━4
+    ┃   ┃ ┃   ┣━2
+    ┃   ┃ ┃   ┃ ┣━ (g1 yellow)
+    ┃   ┃ ┃   ┃ ┗━ (g1 yellow)
+    ┃   ┃ ┃   ┗━2
+    ┃   ┃ ┃     ┣━ (g1 yellow)
+    ┃   ┃ ┃     ┗━ (g1 yellow)
+    ┃   ┃ ┗━8
+    ┃   ┃   ┣━4
+    ┃   ┃   ┃ ┣━2
+    ┃   ┃   ┃ ┃ ┣━ (g1 yellow)
+    ┃   ┃   ┃ ┃ ┗━ (g1 yellow)
+    ┃   ┃   ┃ ┗━2
+    ┃   ┃   ┃   ┣━ (g1 yellow)
+    ┃   ┃   ┃   ┗━ (g1 yellow)
+    ┃   ┃   ┗━4
+    ┃   ┃     ┣━2
+    ┃   ┃     ┃ ┣━ (g1 yellow)
+    ┃   ┃     ┃ ┗━ (g1 yellow)
+    ┃   ┃     ┗━2
+    ┃   ┃       ┣━ (g1 yellow)
+    ┃   ┃       ┗━ (g1 yellow)
+    ┃   ┗━16
+    ┃     ┣━8
+    ┃     ┃ ┣━4
+    ┃     ┃ ┃ ┣━2
+    ┃     ┃ ┃ ┃ ┣━ (g1 yellow)
+    ┃     ┃ ┃ ┃ ┗━ (g1 yellow)
+    ┃     ┃ ┃ ┗━2
+    ┃     ┃ ┃   ┣━ (g1 yellow)
+    ┃     ┃ ┃   ┗━ (g1 yellow)
+    ┃     ┃ ┗━4
+    ┃     ┃   ┣━2
+    ┃     ┃   ┃ ┣━ (g1 yellow)
+    ┃     ┃   ┃ ┗━ (g1 yellow)
+    ┃     ┃   ┗━2
+    ┃     ┃     ┣━ (g1 yellow)
+    ┃     ┃     ┗━ (g1 yellow)
+    ┃     ┗━8
+    ┃       ┣━4
+    ┃       ┃ ┣━2
+    ┃       ┃ ┃ ┣━ (g1 yellow)
+    ┃       ┃ ┃ ┗━ (g1 yellow)
+    ┃       ┃ ┗━2
+    ┃       ┃   ┣━ (g1 yellow)
+    ┃       ┃   ┗━ (g1 yellow)
+    ┃       ┗━4
+    ┃         ┣━2
+    ┃         ┃ ┣━ (g1 yellow)
+    ┃         ┃ ┗━ (g1 yellow)
+    ┃         ┗━2
+    ┃           ┣━ (g1 yellow)
+    ┃           ┗━ (g1 yellow)
+    ┗━66
+      ┣━34
+      ┃ ┣━18
+      ┃ ┃ ┣━10
+      ┃ ┃ ┃ ┣━6
+      ┃ ┃ ┃ ┃ ┣━4
+      ┃ ┃ ┃ ┃ ┃ ┣━3
+      ┃ ┃ ┃ ┃ ┃ ┃ ┣━2
+      ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+      ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+      ┃ ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+      ┃ ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+      ┃ ┃ ┃ ┃ ┗━2
+      ┃ ┃ ┃ ┃   ┣━ (g1 yellow)
+      ┃ ┃ ┃ ┃   ┗━ (g1 yellow)
+      ┃ ┃ ┃ ┗━4
+      ┃ ┃ ┃   ┣━2
+      ┃ ┃ ┃   ┃ ┣━ (g1 yellow)
+      ┃ ┃ ┃   ┃ ┗━ (g1 yellow)
+      ┃ ┃ ┃   ┗━2
+      ┃ ┃ ┃     ┣━ (g1 yellow)
+      ┃ ┃ ┃     ┗━ (g1 yellow)
+      ┃ ┃ ┗━8
+      ┃ ┃   ┣━4
+      ┃ ┃   ┃ ┣━2
+      ┃ ┃   ┃ ┃ ┣━ (g1 yellow)
+      ┃ ┃   ┃ ┃ ┗━ (g1 yellow)
+      ┃ ┃   ┃ ┗━2
+      ┃ ┃   ┃   ┣━ (g1 yellow)
+      ┃ ┃   ┃   ┗━ (g1 yellow)
+      ┃ ┃   ┗━4
+      ┃ ┃     ┣━2
+      ┃ ┃     ┃ ┣━ (g1 yellow)
+      ┃ ┃     ┃ ┗━ (g1 yellow)
+      ┃ ┃     ┗━2
+      ┃ ┃       ┣━ (g1 yellow)
+      ┃ ┃       ┗━ (g1 yellow)
+      ┃ ┗━16
+      ┃   ┣━8
+      ┃   ┃ ┣━4
+      ┃   ┃ ┃ ┣━2
+      ┃   ┃ ┃ ┃ ┣━ (g1 yellow)
+      ┃   ┃ ┃ ┃ ┗━ (g1 yellow)
+      ┃   ┃ ┃ ┗━2
+      ┃   ┃ ┃   ┣━ (g1 yellow)
+      ┃   ┃ ┃   ┗━ (g1 yellow)
+      ┃   ┃ ┗━4
+      ┃   ┃   ┣━2
+      ┃   ┃   ┃ ┣━ (g1 yellow)
+      ┃   ┃   ┃ ┗━ (g1 yellow)
+      ┃   ┃   ┗━2
+      ┃   ┃     ┣━ (g1 yellow)
+      ┃   ┃     ┗━ (g1 yellow)
+      ┃   ┗━8
+      ┃     ┣━4
+      ┃     ┃ ┣━2
+      ┃     ┃ ┃ ┣━ (g1 yellow)
+      ┃     ┃ ┃ ┗━ (g1 yellow)
+      ┃     ┃ ┗━2
+      ┃     ┃   ┣━ (g1 yellow)
+      ┃     ┃   ┗━ (g1 yellow)
+      ┃     ┗━4
+      ┃       ┣━2
+      ┃       ┃ ┣━ (g1 yellow)
+      ┃       ┃ ┗━ (g1 yellow)
+      ┃       ┗━2
+      ┃         ┣━ (g1 yellow)
+      ┃         ┗━ (g1 yellow)
+      ┗━32
+        ┣━16
+        ┃ ┣━8
+        ┃ ┃ ┣━4
+        ┃ ┃ ┃ ┣━2
+        ┃ ┃ ┃ ┃ ┣━ (g1 yellow)
+        ┃ ┃ ┃ ┃ ┗━ (g1 yellow)
+        ┃ ┃ ┃ ┗━2
+        ┃ ┃ ┃   ┣━ (g1 yellow)
+        ┃ ┃ ┃   ┗━ (g1 yellow)
+        ┃ ┃ ┗━4
+        ┃ ┃   ┣━2
+        ┃ ┃   ┃ ┣━ (g1 yellow)
+        ┃ ┃   ┃ ┗━ (g1 yellow)
+        ┃ ┃   ┗━2
+        ┃ ┃     ┣━ (g1 yellow)
+        ┃ ┃     ┗━ (g1 yellow)
+        ┃ ┗━8
+        ┃   ┣━4
+        ┃   ┃ ┣━2
+        ┃   ┃ ┃ ┣━ (g1 yellow)
+        ┃   ┃ ┃ ┗━ (g1 yellow)
+        ┃   ┃ ┗━2
+        ┃   ┃   ┣━ (g1 yellow)
+        ┃   ┃   ┗━ (g1 yellow)
+        ┃   ┗━4
+        ┃     ┣━2
+        ┃     ┃ ┣━ (g1 yellow)
+        ┃     ┃ ┗━ (g1 yellow)
+        ┃     ┗━2
+        ┃       ┣━ (g1 yellow)
+        ┃       ┗━ (g1 yellow)
+        ┗━16
+          ┣━8
+          ┃ ┣━4
+          ┃ ┃ ┣━2
+          ┃ ┃ ┃ ┣━ (g1 yellow)
+          ┃ ┃ ┃ ┗━ (g1 yellow)
+          ┃ ┃ ┗━2
+          ┃ ┃   ┣━ (g1 yellow)
+          ┃ ┃   ┗━ (g1 yellow)
+          ┃ ┗━4
+          ┃   ┣━2
+          ┃   ┃ ┣━ (g1 yellow)
+          ┃   ┃ ┗━ (g1 yellow)
+          ┃   ┗━2
+          ┃     ┣━ (g1 yellow)
+          ┃     ┗━ (g1 yellow)
+          ┗━8
+            ┣━4
+            ┃ ┣━2
+            ┃ ┃ ┣━ (g1 yellow)
+            ┃ ┃ ┗━ (g1 yellow)
+            ┃ ┗━2
+            ┃   ┣━ (g1 yellow)
+            ┃   ┗━ (g1 yellow)
+            ┗━4
+              ┣━2
+              ┃ ┣━ (g1 yellow)
+              ┃ ┗━ (g1 yellow)
+              ┗━2
+                ┣━ (g1 yellow)
+                ┗━ (g1 yellow)
+Value: 1024
+Grade: 10
+Crit: 30.4419
+Leech: 0
+Bloodbound: 2.63044
+Damage: 100.782
+Mana power: 0
+Mana power growth: -inf
+Damage power: 21228.2
+Damage power growth: 1.43737
+(val = 1)	0=(g1 yellow)
+(val = 2)	1=0+0
+(val = 3)	2=1+0
+(val = 4)	3=2+0
+(val = 4)	4=1+1
+(val = 5)	5=3+0
+(val = 6)	6=5+0
+(val = 6)	7=3+1
+(val = 7)	8=6+0
+(val = 7)	9=5+1
+(val = 8)	10=6+1
+(val = 8)	11=4+4
+(val = 9)	12=9+1
+(val = 10)	13=7+4
+(val = 10)	14=9+2
+(val = 10)	15=8+2
+(val = 11)	16=10+2
+(val = 12)	17=12+2
+(val = 13)	18=14+2
+(val = 13)	19=15+2
+(val = 14)	20=14+3
+(val = 15)	21=16+3
+(val = 16)	22=17+3
+(val = 16)	23=11+11
+(val = 17)	24=17+5
+(val = 18)	25=19+5
+(val = 18)	26=17+7
+(val = 18)	27=13+11
+(val = 19)	28=20+5
+(val = 19)	29=18+7
+(val = 20)	30=21+5
+(val = 20)	31=20+7
+(val = 21)	32=22+5
+(val = 23)	33=22+9
+(val = 24)	34=25+6
+(val = 24)	35=24+9
+(val = 26)	36=28+9
+(val = 27)	37=30+9
+(val = 28)	38=26+13
+(val = 29)	39=32+10
+(val = 29)	40=30+12
+(val = 29)	41=29+13
+(val = 30)	42=33+9
+(val = 30)	43=31+13
+(val = 32)	44=23+23
+(val = 33)	45=36+9
+(val = 33)	46=35+12
+(val = 33)	47=34+12
+(val = 34)	48=27+23
+(val = 35)	49=36+12
+(val = 36)	50=37+12
+(val = 39)	51=39+14
+(val = 40)	52=42+14
+(val = 43)	53=46+14
+(val = 44)	54=45+16
+(val = 45)	55=47+17
+(val = 46)	56=49+16
+(val = 46)	57=38+27
+(val = 47)	58=41+27
+(val = 48)	59=50+17
+(val = 58)	60=52+26
+(val = 61)	61=53+26
+(val = 62)	62=54+26
+(val = 63)	63=59+21
+(val = 63)	64=55+26
+(val = 64)	65=56+26
+(val = 66)	66=48+44
+(val = 80)	67=57+48
+(val = 81)	68=58+48
+(val = 89)	69=63+36
+(val = 90)	70=62+38
+(val = 91)	71=64+38
+(val = 91)	72=61+43
+(val = 92)	73=65+38
+(val = 118)	74=69+40
+(val = 137)	75=72+57
+(val = 137)	76=71+57
+(val = 138)	77=73+57
+(val = 146)	78=67+66
+(val = 157)	79=74+51
+(val = 215)	80=79+60
+(val = 217)	81=76+67
+(val = 219)	82=77+68
+(val = 305)	83=80+70
+(val = 363)	84=81+78
+(val = 442)	85=83+75
+(val = 661)	86=85+82
+(val = 1024)	87=86+84
