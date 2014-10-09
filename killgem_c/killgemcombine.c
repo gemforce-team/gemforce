@@ -5,51 +5,13 @@
 #include <string.h>
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
-#include "killgem_utils.h"
-
-const int ACC=60;							// ACC is for crit pooling & sorting-> results with 60 are indistinguishable from 1000+ up to 40s
+const int ACC=80;							// ACC is for crit pooling & sorting-> results with 80 are indistinguishable from 1000+ up to 500s
 const int ACC_CUT=250;				// ACC_CUT is accuracy for other inexact operations -> 100 differs from exact from 32s
 															// while 250 is ok even for 40s+, but takes 2x time
-															// Note: (60,250) is as fast as (100,100) but more precise
+#include "killgem_utils.h"
 
-void gem_init_killgem(gem *p_gem)	//start gem does not matter
-{
-	p_gem->grade=1;
-	p_gem->damage=1;
-	p_gem->crit=1;
-	p_gem->bbound=1;
-	p_gem->father=NULL;
-	p_gem->mother=NULL;
-}
 
-int gem_less_equal(gem gem1, gem gem2)
-{
-	if ((int)(gem1.damage*ACC) != (int)(gem2.damage*ACC))
-		return gem1.damage<gem2.damage;
-	if ((int)(gem1.bbound*ACC) != (int)(gem2.bbound*ACC))
-		return gem1.bbound<gem2.bbound;
-	return gem1.crit<gem2.crit;
-}
-
-void gem_sort_damage_bbound(gem* gems, int len)
-{
-	if (len<=1) return;
-	int pivot=0;
-	int i;
-	for (i=1;i<len;++i) {
-		if (gem_less_equal(gems[i],gems[pivot])) {
-			gem temp=gems[pivot];
-			gems[pivot]=gems[i];
-			gems[i]=gems[pivot+1];
-			gems[pivot+1]=temp;
-			pivot++;
-		}
-	}
-	gem_sort_damage_bbound(gems,pivot);
-	gem_sort_damage_bbound(gems+1+pivot,len-pivot-1);
-}
-
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
+void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int size)
 {
 	printf("\n");
 	int i;
@@ -57,11 +19,11 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	gem* pool[len];
 	int pool_length[len];
 	pool[0]=malloc(sizeof(gem));
-	gem_init_killgem(gems);
-	gem_init_killgem(pool[0]);
+	gem_init(gems   ,1,1,1,1);			// grade damage crit bbound
+	gem_init(pool[0],1,1,1,1);			// start gem does not matter
 	pool_length[0]=1;
 	gem_print(gems);
-	int size=3000;						// reasonable sizing
+	if (size==0) size=1000;				// reasonable sizing
 
 	for (i=1; i<len; ++i) {
 		int j,k,h,l;
@@ -105,7 +67,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 						}
 						if (subpools_length[grd]!=0) free(subpools[grd]);		// free
 						
-						gem_sort_damage_bbound(temp_array,length);								// work starts
+						gem_sort(temp_array,length);								// work starts
 						int broken=0;
 						int crit_cells=(int)(maxcrit*ACC)+1;									// this pool will be big from the beginning,
 						int tree_length=pow(2, ceil(log2(crit_cells)));						// but we avoid binary search
@@ -157,7 +119,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 						}
 						if (subpools_length[grd]!=0) free(subpools[grd]);		// free
 						
-						gem_sort_damage_bbound(temp_array,length);								// work starts
+						gem_sort(temp_array,length);								// work starts
 						int broken=0;
 						int crit_cells=(int)(maxcrit*ACC)+1;									// this pool will be big from the beginning,
 						int tree_length=pow(2, ceil(log2(crit_cells)));						// but we avoid binary search

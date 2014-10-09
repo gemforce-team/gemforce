@@ -21,6 +21,11 @@ float gem_power(gem gem1)
 	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound;			// amp-less
 }
 
+int gem_more_powerful(gem gem1, gem gem2)
+{
+	return (gem_power(gem1) > gem_power(gem2));
+}
+
 void gem_print(gem* p_gem) {
 	printf("Grade:\t%d\nDamage:\t%f\nCrit:\t%f\nBbound:\t%f\nPower:\t%f\n\n", 
 		p_gem->grade, p_gem->damage, p_gem->crit, p_gem->bbound, gem_power(*p_gem));
@@ -90,18 +95,43 @@ void gem_init(gem *p_gem, int grd, double damage, double crit, double bbound)
 	p_gem->mother=NULL;
 }
 
-int gem_more_powerful(gem gem1, gem gem2)
+int gem_stronger(const void* p_gem1, const void* p_gem2)		// qsort
 {
-	return (gem_power(gem1) > gem_power(gem2));
-}		
+	gem* gem1 =(gem*)p_gem1;
+	gem* gem2 =(gem*)p_gem2;
+	if ((int)(gem1->damage*ACC) < (int)(gem2->damage*ACC)) return -1;
+	else if ((int)(gem1->damage*ACC) > (int)(gem2->damage*ACC)) return 1;
+	if ((int)(gem1->bbound*ACC) < (int)(gem2->bbound*ACC)) return -1;
+	else if ((int)(gem1->bbound*ACC) > (int)(gem2->bbound*ACC)) return 1;
+	else if (gem1->crit < gem2->crit) return -1;
+	else return (gem1->crit > gem2->crit);
+}
 
-int subpools_to_big_convert(int* subpools_length, int grd, int index)
+int gem_less_equal(gem gem1, gem gem2)
 {
-	int result=0;
+	if ((int)(gem1.damage*ACC) != (int)(gem2.damage*ACC))
+		return gem1.damage<gem2.damage;
+	if ((int)(gem1.bbound*ACC) != (int)(gem2.bbound*ACC))
+		return gem1.bbound<gem2.bbound;
+	return gem1.crit<gem2.crit;
+}
+
+void gem_sort(gem* gems, int len)
+{
+	if (len<=1) return;
+	int pivot=0;
 	int i;
-	for (i=0;i<grd;++i) result+=subpools_length[i];
-	result+=index;
-	return result;
+	for (i=1;i<len;++i) {
+		if (gem_less_equal(gems[i],gems[pivot])) {
+			gem temp=gems[pivot];
+			gems[pivot]=gems[i];
+			gems[i]=gems[pivot+1];
+			gems[pivot+1]=temp;
+			pivot++;
+		}
+	}
+	gem_sort(gems,pivot);
+	gem_sort(gems+1+pivot,len-pivot-1);
 }
 
 void print_table(gem* gems, int len)
@@ -169,32 +199,7 @@ void print_tree(gem* gemf, char* prefix)
 	}
 }
 
-int gem_has_less_crit(gem gem1, gem gem2)
-{
-	if (gem1.crit < gem2.crit) return 1;
-	else if (gem1.crit == gem2.crit && gem1.bbound < gem2.bbound) return 1;
-	else return 0;
-}
-
-void gem_sort_crit(gem* gems, int len)    // it assumes all gems are at the same grade
-{
-	if (len<=1) return;											
-	int pivot=0;
-	int i;
-	for (i=1;i<len;++i) {
-		if (gem_has_less_crit(gems[i],gems[pivot])) {
-			gem temp=gems[pivot];
-			gems[pivot]=gems[i];
-			gems[i]=gems[pivot+1];
-			gems[pivot+1]=temp;
-			pivot++;
-		}
-	}
-	gem_sort_crit(gems,pivot);
-	gem_sort_crit(gems+1+pivot,len-pivot-1);
-}
-
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info);
+void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int size);
 
 int get_opts_and_call_worker(int argc, char** argv)
 {
@@ -205,7 +210,9 @@ int get_opts_and_call_worker(int argc, char** argv)
 	int output_table = 0;
 	int output_debug=0;
 	int output_info=0;
-	while ((opt=getopt(argc,argv,"ptedi"))!=-1) {
+	int size=0;				// worker or user must initialize it
+	
+	while ((opt=getopt(argc,argv,"ptedis:"))!=-1) {
 		switch(opt) {
 			case 'p':
 				output_parens = 1;
@@ -222,6 +229,9 @@ int get_opts_and_call_worker(int argc, char** argv)
 				break;
 			case 'i':
 				output_info = 1;
+				break;
+			case 's':
+				size = atoi(optarg);
 				break;
 			case '?':
 				return 1;
@@ -241,7 +251,7 @@ int get_opts_and_call_worker(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_parens, output_tree, output_table, output_debug, output_info);
+	else worker(len, output_parens, output_tree, output_table, output_debug, output_info, size);
 	return 0;
 }
 
