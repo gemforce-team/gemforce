@@ -6,11 +6,6 @@
 #include <algorithm>
 using namespace std;
 
-int ORANGE_ACC=150;
-int YELLOW_ACC=150;
-int  BLACK_ACC=150;
-int DAMAGE_ACC=150;
-
 class Gem;
 typedef pair<const Gem*, const Gem*> gem_pair;
 
@@ -39,14 +34,14 @@ public:
   }
 };
 
-Gem* combine (const Gem* self, const Gem* other)
+Gem combine (const Gem* self, const Gem* other)
 {
   if (self->value<other->value)
     swap(self, other);
   switch (abs(self->grade-other->grade))
   {
     case 0:
-      return new Gem(
+      return Gem(
         max(self->yellow, other->yellow)*0.88+min(self->yellow, other->yellow)*0.5,
                      max(self->orange, other->orange)*0.88+min(self->orange, other->orange)*0.5,
                      max(self->black, other->black)*0.78+min(self->black, other->black)*0.31,
@@ -56,7 +51,7 @@ Gem* combine (const Gem* self, const Gem* other)
                      make_pair(self, other)
       );
     case 1:
-      return new Gem(
+      return Gem(
         max(self->yellow, other->yellow)*0.88+min(self->yellow, other->yellow)*0.44,
                      max(self->orange, other->orange)*0.89+min(self->orange, other->orange)*0.44,
                      max(self->black, other->black)*0.79+min(self->black, other->black)*0.29,
@@ -66,7 +61,7 @@ Gem* combine (const Gem* self, const Gem* other)
                      make_pair(self, other)
       );
     default:
-      return new Gem(
+      return Gem(
         max(self->yellow, other->yellow)*0.88+min(self->yellow, other->yellow)*0.44,
                      max(self->orange, other->orange)*0.9+min(self->orange, other->orange)*0.38,
                      max(self->black, other->black)*0.8+min(self->black, other->black)*0.27,
@@ -95,7 +90,6 @@ void print_tree (const Gem* g, string prefix="")
     cout<<"━ (g1 "<<(abs(g->yellow)>0.0001 ? "yellow" : (abs(g->orange)>0.0001 ? "orange" : "black"))<<")\n";
   else
   {
-    
     cout<<"━"<<g->value<<"\n";
     cout<<prefix<<"┣";
     print_tree(g->parents.first, prefix+"┃ ");

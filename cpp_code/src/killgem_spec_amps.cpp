@@ -1,7 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
-#include "gem_utils.hpp"
+#include "gem_utils_killgem.hpp"
 #include "gemset_multithreaded.hpp"
 #include "killgem_limiter.hpp"
 using namespace std;
@@ -12,8 +12,8 @@ const float GROWTH = 1.4274;
 
 float amp_killgem_power (const Gem* killgem, const Gem* amplifier)
 {
-  int value = killgem->value+8*amplifier->value;
-  float power = (killgem->yellow*1.5+6*0.23*2.8*amplifier->yellow)*killgem->black*
+  int value = killgem->value+6*amplifier->value;
+  float power = (killgem->yellow*1.5+0.23*6*2.8*amplifier->yellow)*killgem->black*
                 (killgem->damage*3.2+0.28*6*2.8*amplifier->damage)*killgem->black;
   return power/pow(value, GROWTH);
 }
@@ -51,5 +51,6 @@ int main ()
   print_tree(best_amplifier);
   print_stats(best_killgem);
   print_stats(best_amplifier);
+  cout<<"power together: "<<power<<"\n";
   return 0;
 }

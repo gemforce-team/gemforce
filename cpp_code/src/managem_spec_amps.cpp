@@ -1,13 +1,13 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
-#include "gem_utils.hpp"
+#include "gem_utils_managem.hpp"
 #include "gemset_multithreaded.hpp"
 #include "managem_limiter.hpp"
 using namespace std;
 
-const int MANAGEM_VALUE=128;
-const int AMP_MAX_VALUE=32;
+const int MANAGEM_VALUE=512;
+const int AMP_MAX_VALUE=128;
 const float GROWTH = 0.6343;
 
 bool better_orange (const Gem* a, const Gem* b)

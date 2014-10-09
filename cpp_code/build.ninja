@@ -1,0 +1,31 @@
+cxx = clang++ -fcolor-diagnostics
+cflags = -Wall -Wextra -Fall -Fextra -std=c++11 -O3 -Iinclude
+
+rule cxx
+  command = $cxx -o$out -c $in $cflags -MMD -MF $out.d
+  description = cxx $in
+  depfile = $out.d
+
+rule link
+  command = $cxx -o$out $in -pthread
+  description = link $out
+
+bd = .build
+
+build $bd/killgem_combine.o: cxx src/killgem_combine.cpp
+build bin/killgem_combine: link $bd/killgem_combine.o
+
+build $bd/killgem_spec_alone.o: cxx src/killgem_spec_alone.cpp
+build bin/killgem_spec_alone: link $bd/killgem_spec_alone.o
+
+build $bd/killgem_spec_amps.o: cxx src/killgem_spec_amps.cpp
+build bin/killgem_spec_amps: link $bd/killgem_spec_amps.o
+
+build $bd/managem_combine.o: cxx src/managem_combine.cpp
+build bin/managem_combine: link $bd/managem_combine.o
+
+build $bd/managem_spec_alone.o: cxx src/managem_spec_alone.cpp
+build bin/managem_spec_alone: link $bd/managem_spec_alone.o
+
+build $bd/managem_spec_amps.o: cxx src/managem_spec_amps.cpp
+build bin/managem_spec_amps: link $bd/managem_spec_amps.o
