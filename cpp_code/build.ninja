@@ -1,4 +1,4 @@
-cxx = g++ -fcolor-diagnostics
+cxx = g++
 cflags = -Wall -Wextra -Fall -Fextra -std=c++11 -O3 -Iinclude
 
 rule cxx
