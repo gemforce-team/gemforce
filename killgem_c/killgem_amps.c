@@ -62,7 +62,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 
 			int j,k,h,l;
 			int eoc=(i+1)/2;				//end of combining
-			int comb_tot=0;
+			long comb_tot=0;
 			for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 
 			int grade_max=(int)(log2(i+1)+1);						// gems with max grade cannot be destroyed, so this is a max, not a sup
@@ -201,8 +201,8 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 
 			printf("Killgem: %d\n",i+1);
 			if (output_info) {
-				printf("Total raw:\t%d\n",comb_tot);
-				printf("Average raw:\t%d\n",comb_tot/(grade_max-1));
+				printf("Total raw:\t%ld\n",comb_tot);
+				printf("Average raw:\t%ld\n",comb_tot/(grade_max-1));
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
 			fflush(stdout);
