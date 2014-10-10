@@ -2,11 +2,11 @@
 #define _KILLGEM_UTILS_H
 
 struct Gem_YB {
-	int grade;							// short does NOT help
-	float damage;						// this is MAX damage, with the rand() part neglected
-	float crit;							// assumptions: crit chance capped
-	float bbound;						// BB hit lv >> 1
-	struct Gem_YB* father;	// maximize damage*bbound*crit*bbound
+	int grade;              // short does NOT help
+	float damage;           // this is MAX damage, with the rand() part neglected
+	float crit;             // assumptions: crit chance capped
+	float bbound;           // BB hit lv >> 1
+	struct Gem_YB* father;  // maximize damage*bbound*crit*bbound
 	struct Gem_YB* mother;
 };
 
@@ -18,7 +18,7 @@ int int_max(int a, int b)
 
 float gem_power(gem gem1)
 {
-	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound;			// amp-less
+	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound;     // amp-less
 }
 
 int gem_more_powerful(gem gem1, gem gem2)
@@ -95,18 +95,6 @@ void gem_init(gem *p_gem, int grd, double damage, double crit, double bbound)
 	p_gem->mother=NULL;
 }
 
-int gem_stronger(const void* p_gem1, const void* p_gem2)		// qsort
-{
-	gem* gem1 =(gem*)p_gem1;
-	gem* gem2 =(gem*)p_gem2;
-	if ((int)(gem1->damage*ACC) < (int)(gem2->damage*ACC)) return -1;
-	else if ((int)(gem1->damage*ACC) > (int)(gem2->damage*ACC)) return 1;
-	if ((int)(gem1->bbound*ACC) < (int)(gem2->bbound*ACC)) return -1;
-	else if ((int)(gem1->bbound*ACC) > (int)(gem2->bbound*ACC)) return 1;
-	else if (gem1->crit < gem2->crit) return -1;
-	else return (gem1->crit > gem2->crit);
-}
-
 int gem_less_equal(gem gem1, gem gem2)
 {
 	if ((int)(gem1.damage*ACC) != (int)(gem2.damage*ACC))
@@ -116,7 +104,7 @@ int gem_less_equal(gem gem1, gem gem2)
 	return gem1.crit<gem2.crit;
 }
 
-void gem_sort(gem* gems, int len)
+void gem_sort_old(gem* gems, int len)
 {
 	if (len<=1) return;
 	int pivot=0;
@@ -130,8 +118,32 @@ void gem_sort(gem* gems, int len)
 			pivot++;
 		}
 	}
-	gem_sort(gems,pivot);
-	gem_sort(gems+1+pivot,len-pivot-1);
+	gem_sort_old(gems,pivot);
+	gem_sort_old(gems+1+pivot,len-pivot-1);
+}
+
+void gem_sort (gem* gems, int len) {
+	if (len < 2) return;
+	gem pivot = gems[len/2];
+	gem* beg = gems;
+	gem* end = gems+len-1;
+	while (beg <= end) {
+		if (gem_less_equal(*beg, pivot)) {
+			beg++;
+		}
+		else if (gem_less_equal(pivot,*end)) {
+			end--;
+		}
+		else {
+			gem temp = *beg;
+			*beg = *end;
+			*end = temp;
+			beg++;
+			end--;
+		}
+	}
+	gem_sort(gems, end-gems+1);
+	gem_sort(beg, gems-beg+len);
 }
 
 void print_table(gem* gems, int len)
@@ -210,7 +222,7 @@ int get_opts_and_call_worker(int argc, char** argv)
 	int output_table = 0;
 	int output_debug=0;
 	int output_info=0;
-	int size=0;				// worker or user must initialize it
+	int size=0;       // worker or user must initialize it
 	
 	while ((opt=getopt(argc,argv,"ptedis:"))!=-1) {
 		switch(opt) {
