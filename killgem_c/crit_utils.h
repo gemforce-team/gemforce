@@ -84,7 +84,7 @@ int gem_has_less_grade_damage(gemY gem1, gemY gem2)
 	else return 0;
 }
 
-void gem_sort(gemY* gems, int len)
+void gem_sort_Y(gemY* gems, int len)
 {
 	if (len<=1) return;
 	int pivot=0;
@@ -98,8 +98,8 @@ void gem_sort(gemY* gems, int len)
 			pivot++;
 		}
 	}
-	gem_sort(gems,pivot);
-	gem_sort(gems+1+pivot,len-pivot-1);
+	gem_sort_Y(gems,pivot);
+	gem_sort_Y(gems+1+pivot,len-pivot-1);
 }
 
 void print_parens_Y(gemY* gemf)

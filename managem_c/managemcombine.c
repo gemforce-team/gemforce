@@ -7,16 +7,8 @@ typedef struct Gem_OB_appr gem;		// the strange order is so that gem_utils knows
 const int ACC=1000;
 #include "managem_utils.h"
 
-void gem_init_managem(gem *p_gem)	// start gem does not matter
-{
-	p_gem->grade=1;
-	p_gem->leech=1;
-	p_gem->bbound=1;
-	p_gem->father=NULL;
-	p_gem->mother=NULL;
-}
 
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info)
+void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int size)
 {
 	printf("\n");
 	int i;
@@ -24,11 +16,11 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 	gem* pool[len];
 	int pool_length[len];
 	pool[0]=malloc(sizeof(gem));
-	gem_init_managem(gems);
-	gem_init_managem(pool[0]);
+	gem_init(gems   ,1,1,1);			// grade leech bbound
+	gem_init(pool[0],1,1,1);			// start gem does not matter
 	pool_length[0]=1;
 	gem_print(gems);
-	int size=1000;						// reasonable sizing
+	if (size==0) size=100;				// reasonable sizing
 
 	for (i=1; i<len; ++i) {
 		int j,k,h,l;
