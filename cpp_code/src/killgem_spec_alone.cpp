@@ -22,5 +22,6 @@ int main ()
   Gem* g=best_from(gemset[VALUE], better_killgem);
   print_tree(g);
   print_stats(g);
+  print_equations(g);
   return 0;
 }

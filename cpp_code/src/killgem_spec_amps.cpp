@@ -6,7 +6,7 @@
 #include "killgem_limiter.hpp"
 using namespace std;
 
-const int KILLGEM_VALUE=64;
+const int KILLGEM_VALUE=128;
 const int AMP_MAX_VALUE=32;
 const float GROWTH = 1.4274;
 
@@ -51,6 +51,7 @@ int main ()
   print_tree(best_amplifier);
   print_stats(best_killgem);
   print_stats(best_amplifier);
+  print_equations(best_killgem);
   cout<<"power together: "<<power<<"\n";
   return 0;
 }

@@ -5,7 +5,7 @@
 #include "killgem_limiter.hpp"
 using namespace std;
 
-const int VALUE=64;
+const int VALUE=1024;
 
 bool better_killgem (const Gem* a, const Gem* b)
 {
@@ -21,5 +21,6 @@ int main ()
   Gem* g=best_from(gemset[VALUE], better_killgem);
   print_tree(g);
   print_stats(g);
+  print_equations(g);
   return 0;
 }

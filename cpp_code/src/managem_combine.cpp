@@ -5,7 +5,7 @@
 #include "managem_limiter.hpp"
 using namespace std;
 
-const int VALUE=512;
+const int VALUE=1024;
 
 bool better_managem (const Gem* a, const Gem* b)
 {
@@ -20,5 +20,6 @@ int main ()
   Gem* g=best_from(gemset[VALUE], better_managem);
   print_tree(g);
   print_stats(g);
+  print_equations(g);
   return 0;
 }

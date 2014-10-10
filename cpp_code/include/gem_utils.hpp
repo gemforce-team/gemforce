@@ -3,11 +3,13 @@
 
 #include <string>
 #include <vector>
+#include <set>
 #include <algorithm>
+#include <map>
 using namespace std;
 
 class Gem;
-typedef pair<const Gem*, const Gem*> gem_pair;
+typedef pair<Gem*, Gem*> gem_pair;
 
 class Gem
 {
@@ -32,9 +34,17 @@ public:
     static long long counter=0;
     number=counter++;
   }
+  string color ()
+  {
+    if (abs(yellow)>0.0001)
+      return "yellow";
+    else if (abs(orange)>0.0001)
+      return "orange";
+    return "black";
+  }
 };
 
-Gem combine (const Gem* self, const Gem* other)
+Gem combine (Gem* self, Gem* other)
 {
   if (self->value<other->value)
     swap(self, other);
@@ -84,10 +94,10 @@ Gem* best_from(vector<Gem*>* v, bool (*comparator) (const Gem*, const Gem*))
   return best;
 }
 
-void print_tree (const Gem* g, string prefix="")
+void print_tree (Gem* g, string prefix="")
 {
   if (g->value==1)
-    cout<<"━ (g1 "<<(abs(g->yellow)>0.0001 ? "yellow" : (abs(g->orange)>0.0001 ? "orange" : "black"))<<")\n";
+    cout<<"━ (g1 "<<g->color()<<")\n";
   else
   {
     cout<<"━"<<g->value<<"\n";
@@ -98,7 +108,39 @@ void print_tree (const Gem* g, string prefix="")
   }
 }
 
-void print_stats (const Gem* g)
+void print_equations (Gem* g)
+{
+  vector<Gem*> harvested;
+  set<long long> present;
+  harvested.push_back(g);
+  present.insert(g->number);
+  for (unsigned i=0; i<harvested.size(); i++)
+  {
+    Gem*& w=harvested[i];
+    if (w->value!=1)
+      for (Gem* c : {w->parents.first, w->parents.second})
+        if (present.find(c->number)==present.end())
+        {
+          present.insert(c->number);
+          harvested.push_back(c);
+        }
+  }
+  int k=0;
+  map<long long, int> renum;
+  for (auto it:present)
+    renum[it]=k++;
+  sort(harvested.begin(), harvested.end(), [](const Gem* a, const Gem* b){return a->number<b->number;});
+  for (Gem* w : harvested)
+  {
+    cout<<"(val = "<<w->value<<")\t"<<renum[w->number]<<"=";
+    if (w->value==1)
+      cout<<"(g1 "<<w->color()<<")\n";
+    else
+      cout<<renum[w->parents.first->number]<<"+"<<renum[w->parents.second->number]<<"\n";
+  }
+}
+
+void print_stats (Gem* g)
 {
   cout<<"Value: "<<g->value<<"\n";
   cout<<"Grade: "<<g->grade<<"\n";

@@ -54,5 +54,6 @@ int main ()
   print_tree(best_amplifier);
   print_stats(best_managem);
   print_stats(best_amplifier);
+  print_equations(best_managem);
   return 0;
 }
