@@ -76,30 +76,35 @@ void gem_init_Y(gemY *p_gem, int grd, float damage, float crit)
 	//return gem1.leech>=gem2.leech;
 //}
 
-int gem_has_less_grade_damage(gemY gem1, gemY gem2)
+int gem_has_less_damage_crit(gemY gem1, gemY gem2)
 {
-	if (gem1.grade < gem2.grade) return 1;
-	else if (gem1.grade == gem2.grade && gem1.damage < gem2.damage) return 1;
-	else if (gem1.grade == gem2.grade && gem1.damage == gem2.damage && gem1.crit < gem2.crit) return 1;
+	if (gem1.damage < gem2.damage) return 1;
+	else if (gem1.damage == gem2.damage && gem1.crit < gem2.crit) return 1;
 	else return 0;
 }
 
-void gem_sort_Y(gemY* gems, int len)
-{
-	if (len<=1) return;
-	int pivot=0;
-	int i;
-	for (i=1;i<len;++i) {
-		if (gem_has_less_grade_damage(gems[i],gems[pivot])) {
-			gemY temp=gems[pivot];
-			gems[pivot]=gems[i];
-			gems[i]=gems[pivot+1];
-			gems[pivot+1]=temp;
-			pivot++;
+void gem_sort_Y (gemY* gems, int len) {
+	if (len < 2) return;
+	gemY pivot = gems[len/2];
+	gemY* beg = gems;
+	gemY* end = gems+len-1;
+	while (beg <= end) {
+		if (gem_has_less_damage_crit(*beg, pivot)) {
+			beg++;
+		}
+		else if (gem_has_less_damage_crit(pivot,*end)) {
+			end--;
+		}
+		else {
+			gemY temp = *beg;
+			*beg = *end;
+			*end = temp;
+			beg++;
+			end--;
 		}
 	}
-	gem_sort_Y(gems,pivot);
-	gem_sort_Y(gems+1+pivot,len-pivot-1);
+	gem_sort_Y(gems, end-gems+1);
+	gem_sort_Y(beg, gems-beg+len);
 }
 
 void print_parens_Y(gemY* gemf)

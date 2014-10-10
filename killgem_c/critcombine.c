@@ -100,22 +100,28 @@ int gem_has_less_damage_crit(gem gem1, gem gem2)
 	else return 0;
 }
 
-void gem_sort(gem* gems, int len)
-{
-	if (len<=1) return;
-	int pivot=0;
-	int i;
-	for (i=1;i<len;++i) {
-		if (gem_has_less_damage_crit(gems[i],gems[pivot])) {
-			gem temp=gems[pivot];
-			gems[pivot]=gems[i];
-			gems[i]=gems[pivot+1];
-			gems[pivot+1]=temp;
-			pivot++;
+void gem_sort (gem* gems, int len) {
+	if (len < 2) return;
+	gem pivot = gems[len/2];
+	gem* beg = gems;
+	gem* end = gems+len-1;
+	while (beg <= end) {
+		if (gem_has_less_damage_crit(*beg, pivot)) {
+			beg++;
+		}
+		else if (gem_has_less_damage_crit(pivot,*end)) {
+			end--;
+		}
+		else {
+			gem temp = *beg;
+			*beg = *end;
+			*end = temp;
+			beg++;
+			end--;
 		}
 	}
-	gem_sort(gems,pivot);
-	gem_sort(gems+1+pivot,len-pivot-1);
+	gem_sort(gems, end-gems+1);
+	gem_sort(beg, gems-beg+len);
 }
 
 void print_parens(gem* gemf)

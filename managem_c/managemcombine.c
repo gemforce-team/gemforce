@@ -60,7 +60,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 							index++;
 						}
 						if (subpools_length[grd]!=0) free(subpools[grd]);		// free
-						gem_sort(temp_array,length);								// work starts
+						gem_sort_old(temp_array,length);								// work starts
 
 						int broken=0;
 						float lim_bbound=-1;
@@ -102,7 +102,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 					index++;
 				}
 				if (subpools_length[grd]!=0) free(subpools[grd]);		// free
-				gem_sort(temp_array,length);								// work starts
+				gem_sort_old(temp_array,length);								// work starts
 				int broken=0;
 				float lim_bbound=-1;
 				for (l=length-1;l>=0;--l) {

@@ -99,16 +99,6 @@ void gem_init(gem *p_gem, int grd, double leech, double bbound)
 	p_gem->mother=NULL;
 }
 
-int gem_stronger(const void* p_gem1, const void* p_gem2)		// qsort
-{
-	gem* gem1 =(gem*)p_gem1;
-	gem* gem2 =(gem*)p_gem2;
-	if ((int)(gem1->leech*ACC) < (int)(gem2->leech*ACC)) return -1;
-	else if ((int)(gem1->leech*ACC) > (int)(gem2->leech*ACC)) return 1;
-	else if (gem1->bbound < gem2->bbound) return -1;
-	else return (gem1->bbound > gem2->bbound);
-}
-
 int gem_less_equal(gem gem1, gem gem2)
 {
 	if ((int)(gem1.leech*ACC) != (int)(gem2.leech*ACC))
@@ -116,7 +106,7 @@ int gem_less_equal(gem gem1, gem gem2)
 	return gem1.bbound<gem2.bbound;
 }
 
-void gem_sort(gem* gems, int len)
+void gem_sort_old(gem* gems, int len)
 {
 	if (len<=1) return;
 	int pivot=0;
@@ -130,8 +120,32 @@ void gem_sort(gem* gems, int len)
 			pivot++;
 		}
 	}
-	gem_sort(gems,pivot);
-	gem_sort(gems+1+pivot,len-pivot-1);
+	gem_sort_old(gems,pivot);
+	gem_sort_old(gems+1+pivot,len-pivot-1);
+}
+
+void gem_sort (gem* gems, int len) {
+	if (len < 2) return;
+	gem pivot = gems[len/2];
+	gem* beg = gems;
+	gem* end = gems+len-1;
+	while (beg <= end) {
+		if (gem_less_equal(*beg, pivot)) {
+			beg++;
+		}
+		else if (gem_less_equal(pivot,*end)) {
+			end--;
+		}
+		else {
+			gem temp = *beg;
+			*beg = *end;
+			*end = temp;
+			beg++;
+			end--;
+		}
+	}
+	gem_sort(gems, end-gems+1);
+	gem_sort(beg, gems-beg+len);
 }
 
 void print_table(gem* gems, int len)
