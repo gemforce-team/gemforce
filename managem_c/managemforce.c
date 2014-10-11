@@ -37,54 +37,61 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		for (j=0; j<grade_max-1; ++j) {							// init everything
 			temp_pools[j]=malloc(size*sizeof(gem));
 			temp_index[j]=0;
-			subpools_length[j]=0;
+			subpools[j]=malloc(size*sizeof(gem));
+			subpools_length[j]=1;
+			gem_init(subpools[j],j+1,0,0);
 		}
-		for (j=0;j<eoc;++j) {                               // combine gems and put them in temp pools
-			for (k=0; k< pool_length[j]; ++k) {
-				for (h=0; h< pool_length[i-1-j]; ++h) {
-					gem temp;
-					gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
-					int grd=temp.grade-2;
-					temp_pools[grd][temp_index[grd]]=temp;
-					temp_index[grd]++;
-					if (temp_index[grd]==size) {									// let's skim a pool
-						int length=size+subpools_length[grd];
-						gem* temp_array=malloc(length*sizeof(gem));
-						int index=0;
-						for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
-							temp_array[index]=temp_pools[grd][l];
-							index++;
+		for (j=0;j<eoc;++j) {												// combine gems and put them in temp pools
+			if ((i-j)/(j+1) < 10) {										// value ratio < 10
+				for (k=0; k< pool_length[j]; ++k) {
+					for (h=0; h< pool_length[i-1-j]; ++h) {
+						int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
+						if (abs(delta)<=2) {								// grade difference <= 2
+							gem temp;
+							gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
+							int grd=temp.grade-2;
+							temp_pools[grd][temp_index[grd]]=temp;
+							temp_index[grd]++;
+							if (temp_index[grd]==size) {									// let's skim a pool
+								int length=size+subpools_length[grd];
+								gem* temp_array=malloc(length*sizeof(gem));
+								int index=0;
+								for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
+									temp_array[index]=temp_pools[grd][l];
+									index++;
+								}
+								temp_index[grd]=0;				// temp index reset
+								for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
+									temp_array[index]=subpools[grd][l];
+									index++;
+								}
+								if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+								gem_sort(temp_array,length);								// work starts
+		
+								int broken=0;
+								float lim_bbound=-1;
+								for (l=length-1;l>=0;--l) {
+									if ((int)(ACC*temp_array[l].bbound)<=(int)(ACC*lim_bbound)) {
+										temp_array[l].grade=0;
+										broken++;
+									}
+									else lim_bbound=temp_array[l].bbound;
+								}													// all unnecessary gems destroyed
+		
+								subpools_length[grd]=length-broken;
+								subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
+		
+								index=0;
+								for (l=0; l<length; ++l) {      // copying to subpool
+									if (temp_array[l].grade!=0) {
+										subpools[grd][index]=temp_array[l];
+										index++;
+									}
+								}
+								free(temp_array);     // free
+							}												// rebuilt subpool[grd], work restarts
 						}
-						temp_index[grd]=0;				// temp index reset
-						for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
-							temp_array[index]=subpools[grd][l];
-							index++;
-						}
-						if (subpools_length[grd]!=0) free(subpools[grd]);		// free
-						gem_sort(temp_array,length);								// work starts
-
-						int broken=0;
-						float lim_bbound=-1;
-						for (l=length-1;l>=0;--l) {
-							if ((int)(ACC*temp_array[l].bbound)<=(int)(ACC*lim_bbound)) {
-								temp_array[l].grade=0;
-								broken++;
-							}
-							else lim_bbound=temp_array[l].bbound;
-						}													// all unnecessary gems destroyed
-
-						subpools_length[grd]=length-broken;
-						subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
-
-						index=0;
-						for (l=0; l<length; ++l) {      // copying to subpool
-							if (temp_array[l].grade!=0) {
-								subpools[grd][index]=temp_array[l];
-								index++;
-							}
-						}
-						free(temp_array);     // free
-					}												// rebuilt subpool[grd], work restarts
+					}
 				}
 			}
 		}
@@ -174,7 +181,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			printf("\n\n");
 		}
 	}
-
+	
 	for (i=0;i<len;++i) free(pool[i]);		// free
 }
 

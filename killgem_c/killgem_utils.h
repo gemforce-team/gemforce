@@ -123,27 +123,39 @@ void gem_sort_old(gem* gems, int len)
 }
 
 void gem_sort (gem* gems, int len) {
-	if (len < 2) return;
-	gem pivot = gems[len/2];
-	gem* beg = gems;
-	gem* end = gems+len-1;
-	while (beg <= end) {
-		if (gem_less_equal(*beg, pivot)) {
-			beg++;
-		}
-		else if (gem_less_equal(pivot,*end)) {
-			end--;
-		}
-		else {
-			gem temp = *beg;
-			*beg = *end;
-			*end = temp;
-			beg++;
-			end--;
+	if (len < 10) {		// ins sort
+		int i,j;
+		gem element;
+		for (i=1; i<len; i++) {
+			element=gems[i];
+			for (j=i; j>0 && gem_less_equal(element, gems[j-1]); j--) {
+				gems[j]=gems[j-1];
+			}
+			gems[j]=element;
 		}
 	}
-	gem_sort(gems, end-gems+1);
-	gem_sort(beg, gems-beg+len);
+	else {					// quick sort
+		gem pivot = gems[len/2];
+		gem* beg = gems;
+		gem* end = gems+len-1;
+		while (beg <= end) {
+			if (gem_less_equal(*beg, pivot)) {
+				beg++;
+			}
+			else if (gem_less_equal(pivot,*end)) {
+				end--;
+			}
+			else {
+				gem temp = *beg;
+				*beg = *end;
+				*end = temp;
+				beg++;
+				end--;
+			}
+		}
+		gem_sort(gems, end-gems+1);
+		gem_sort(beg, gems-beg+len);
+	}
 }
 
 void print_table(gem* gems, int len)
