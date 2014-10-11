@@ -6,8 +6,8 @@
 
 typedef struct Gem_Y {
 	int grade;				//using short does NOT improve time/memory usage
-	double damage;		//note that float is faster but loses some precision after 2k in pure gems
-	double crit;
+	float damage;
+	float crit;
 	struct Gem_Y* father;
 	struct Gem_Y* mother;
 } gem;

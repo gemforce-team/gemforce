@@ -7,7 +7,7 @@
 
 typedef struct Gem_O {
 	int grade;			//using short does NOT improve time/memory usage
-	double leech;		//note that float is faster but loses some precision after 2k in pure gems
+	double leech;		//using float does NOT improve time/memory usage
 	struct Gem_O* father;
 	struct Gem_O* mother;
 } gem;
