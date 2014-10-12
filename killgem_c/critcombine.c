@@ -80,17 +80,14 @@ void gem_init(gem *p_gem, int grd, double damage, double crit)
 	p_gem->mother=NULL;
 }
 
+float gem_power(gem gem1)
+{
+	return gem1.damage*gem1.crit;		// not really useful, but at least it puts out something
+}
+
 int gem_more_powerful(gem gem1, gem gem2)
 {
 	return (gem1.damage*gem1.crit > gem2.damage*gem2.crit);		// not really useful, but at least it puts out something
-}
-
-void print_table(gem* gems, int len)
-{
-	printf("# Gems\tPower\n");
-	int i;
-	for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,gems[i].damage*gems[i].crit);	// not really useful, but at least it puts out something
-	printf("\n");
 }
 
 int gem_less_equal(gem gem1, gem gem2)
@@ -136,56 +133,14 @@ void gem_sort (gem* gems, int len) {
 	}
 }
 
-void print_parens(gem* gemf)
+char gem_color(gem* p_gem)
 {
-	if (gemf->father==NULL) printf("y");
-	else {
-		printf("(");
-		print_parens(gemf->father);
-		printf("+");
-		print_parens(gemf->mother);
-		printf(")");
-	}
-	return;
+	return 'y';
 }
 
-int gem_getvalue(gem* p_gem)
-{
-	if(p_gem->father==NULL) return 1;
-	else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
-}
+#include "print_utils.h"
 
-void print_tree(gem* gemf, char* prefix)
-{
-	if (gemf->father==NULL) {
-		printf("━ g1 y\n");
-	}
-	else {
-		printf("━%d\n",gem_getvalue(gemf));
-		printf("%s ┣",prefix);
-		char string[strlen(prefix)+2];
-		strcpy(string,prefix);
-		strcat(string," ┃");
-		gem* gem1;
-		gem* gem2;
-		if (gem_getvalue(gemf->father)>gem_getvalue(gemf->mother)) {
-			gem1=gemf->father;
-			gem2=gemf->mother;
-		}
-		else {
-			gem2=gemf->father;
-			gem1=gemf->mother;
-		}
-		print_tree(gem1, string);
-		printf("%s ┗",prefix);
-		char string2[strlen(prefix)+2];
-		strcpy(string2,prefix);
-		strcat(string2,"  ");
-		print_tree(gem2, string2);
-	}
-}
-
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int size)
+void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
 {
 	printf("\n");
 	int i;
@@ -356,7 +311,12 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			printf("\n\n");
 		}
 	}
-
+	if (output_equations) {		// it ruins gems, must be last
+		printf("Equations:\n");
+		print_equations(gems+len-1);
+		printf("\n");
+	}
+	
 	for (i=0;i<len;++i) free(pool[i]);		// free
 }
 
@@ -366,13 +326,14 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int output_parens=0;
+	int output_equations=0;
 	int output_tree=0;
 	int output_table = 0;
 	int output_debug=0;
 	int output_info=0;
 	int size=20000;				// reasonable sizing
 	
-	while ((opt=getopt(argc,argv,"ptedis:"))!=-1) {
+	while ((opt=getopt(argc,argv,"petcdis:"))!=-1) {
 		switch(opt) {
 			case 'p':
 				output_parens = 1;
@@ -381,6 +342,9 @@ int main(int argc, char** argv)
 				output_tree = 1;
 				break;
 			case 'e':
+				output_equations = 1;
+				break;
+			case 'c':
 				output_table = 1;
 				break;
 			case 'd':
@@ -411,6 +375,6 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_parens, output_tree, output_table, output_debug, output_info, size);
+	else worker(len, output_parens, output_equations, output_tree, output_table, output_debug, output_info, size);
 	return 0;
 }

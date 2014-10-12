@@ -71,11 +71,6 @@ void gem_init_Y(gemY *p_gem, int grd, float damage, float crit)
 	p_gem->mother=NULL;
 }
 
-//int gem_better(gemO gem1, gemO gem2)
-//{
-	//return gem1.leech>=gem2.leech;
-//}
-
 int gem_has_less_damage_crit(gemY gem1, gemY gem2)
 {
 	if (gem1.damage < gem2.damage) return 1;
@@ -125,6 +120,52 @@ int gem_getvalue_Y(gemY* p_gem)
 	if (p_gem->grade==0) return 0;
 	if (p_gem->father==NULL) return 1;
 	else return gem_getvalue_Y(p_gem->father)+gem_getvalue_Y(p_gem->mother);
+}
+
+void fill_array_Y(gemY* gemf, gemY** p_gems, int* place)
+{
+	if (gemf-> father != NULL) {
+		fill_array_Y(gemf->father, p_gems, place);
+		fill_array_Y(gemf->mother, p_gems, place);
+	}
+	int i;
+	int uniq=1;
+	for (i=0; i<*place; ++i) if (gemf==p_gems[i]) uniq=0;
+	if (uniq) {
+		gemf->grade+=1000*(*place);			// mark
+		p_gems[*place]=gemf;
+		(*place)++;
+	}
+}
+
+void print_eq_Y(gemY* p_gem, int* printed_uid)
+{
+	if (printed_uid[p_gem->grade/1000]==1) return;
+	if (gem_getvalue_Y(p_gem)==1) printf("(val = 1)\t%2d = g1 y\n", p_gem->grade/1000);
+	else {
+		print_eq_Y(p_gem->father, printed_uid);
+		print_eq_Y(p_gem->mother, printed_uid);
+		if (gem_getvalue_Y(p_gem->father) > gem_getvalue_Y(p_gem->father)) {
+			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue_Y(p_gem), p_gem->grade/1000, p_gem->father->grade/1000, p_gem->mother->grade/1000);
+		}
+		else {
+			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue_Y(p_gem), p_gem->grade/1000, p_gem->mother->grade/1000, p_gem->father->grade/1000);
+		}
+	}
+	printed_uid[p_gem->grade/1000]=1;
+}
+
+void print_equations_Y(gemY* gemf)
+{
+	int value=gem_getvalue_Y(gemf);
+	int len=2*value-1;
+	gemY** p_gems=malloc(len*sizeof(gemY*));		// let's store all the gem pointers
+	int place=0;
+	fill_array_Y(gemf, p_gems, &place);					// this array contains marked uniques only and is long "place"
+	int i;
+	int printed_uid[place];
+	for (i=0; i<place; ++i) printed_uid[i]=0;
+	print_eq_Y(gemf, printed_uid);
 }
 
 void print_tree_Y(gemY* gemf, char* prefix)

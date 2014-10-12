@@ -3,12 +3,12 @@
 #include <math.h>
 #include <unistd.h>
 #include <string.h>
-typedef struct Gem_OB_appr gem;		// the strange order is so that gem_utils knows which gem type are we defining as "gem"
+typedef struct Gem_OB gem;		// the strange order is so that gem_utils knows which gem type are we defining as "gem"
 const int ACC=1000;
 #include "managem_utils.h"
 
 
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int size)
+void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
 {
 	printf("\n");
 	int i;
@@ -179,6 +179,11 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			print_parens(pool[len-1]+i);
 			printf("\n\n");
 		}
+	}
+	if (output_equations) {		// it ruins gems, must be last
+		printf("Equations:\n");
+		print_equations(gems+len-1);
+		printf("\n");
 	}
 	
 	for (i=0;i<len;++i) free(pool[i]);		// free

@@ -233,11 +233,16 @@ int gem_build(char* parens, int len, gem* gems, int place)
 void print_eq(gem* p_gem, int* printed_uid)
 {
 	if (printed_uid[p_gem->uid]==1) return;
-	if (gem_getvalue(p_gem)==1) printf("(val = 1)\t%d = g1 %c\n", p_gem->uid, gem_color(p_gem));
+	if (gem_getvalue(p_gem)==1) printf("(val = 1)\t%2d = g1 %c\n", p_gem->uid, gem_color(p_gem));
 	else {
-		print_eq(p_gem->father, printed_uid);
 		print_eq(p_gem->mother, printed_uid);
-		printf("(val = %d)\t%d = %d + %d\n", gem_getvalue(p_gem), p_gem->uid, p_gem->father->uid, p_gem->mother->uid);
+		print_eq(p_gem->father, printed_uid);
+		if (gem_getvalue(p_gem->father) > gem_getvalue(p_gem->father)) {
+			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->uid, p_gem->father->uid, p_gem->mother->uid);
+		}
+		else {
+			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->uid, p_gem->mother->uid, p_gem->father->uid);
+		}
 	}
 	printed_uid[p_gem->uid]=1;
 }
@@ -277,7 +282,7 @@ int main(int argc, char** argv)
 {
 	char opt;
 	int output_tree=0;
-	int output_eq = 1;
+	int output_eq = 0;
 	char* parens_amps=NULL;
 	int len_amps=0;
 	while ((opt=getopt(argc,argv,"tea:"))!=-1) {

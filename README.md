@@ -12,21 +12,23 @@ run:
   ./file -ptedi number  
 where:  
   p - print best gem parens formula  
+  e - print best gem equations formula  
   t - print best gem tree formula  
-  e - print best gems table (for each value best gem stats)  
+  c - print best gems table (for each value best gem stats)   
   d - debug + info  
-  i - info  
+  i - info 
   l (num) - limit hard gem computation to num (amps only)  
+  s (num) - change chunk size (you should not need this)  
   number - value of gem to be computed  
 example:  
-  ./file -pte 32  
+  ./file -pet 32  
 
 
 Results:  
 All resulting schemes (recipes) are placed in "results" folder.  
 
 Name convention:  
-  First part of name describes whether this is managem or killgem recipe.  
+  First part of name describes what kind of recipe this is.  
   Second part is:  
     comb - it's combine which should be used for both gem and its amps  
     spec - it's spec optimised for using no amplifiers - you probably don't want

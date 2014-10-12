@@ -87,6 +87,52 @@ int gem_getvalue_O(gemO* p_gem)
 	else return gem_getvalue_O(p_gem->father)+gem_getvalue_O(p_gem->mother);
 }
 
+void fill_array_O(gemO* gemf, gemO** p_gems, int* place)
+{
+	if (gemf-> father != NULL) {
+		fill_array_O(gemf->father, p_gems, place);
+		fill_array_O(gemf->mother, p_gems, place);
+	}
+	int i;
+	int uniq=1;
+	for (i=0; i<*place; ++i) if (gemf==p_gems[i]) uniq=0;
+	if (uniq) {
+		gemf->grade+=1000*(*place);			// mark
+		p_gems[*place]=gemf;
+		(*place)++;
+	}
+}
+
+void print_eq_O(gemO* p_gem, int* printed_uid)
+{
+	if (printed_uid[p_gem->grade/1000]==1) return;
+	if (gem_getvalue_O(p_gem)==1) printf("(val = 1)\t%2d = g1 y\n", p_gem->grade/1000);
+	else {
+		print_eq_O(p_gem->father, printed_uid);
+		print_eq_O(p_gem->mother, printed_uid);
+		if (gem_getvalue_O(p_gem->father) > gem_getvalue_O(p_gem->father)) {
+			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue_O(p_gem), p_gem->grade/1000, p_gem->father->grade/1000, p_gem->mother->grade/1000);
+		}
+		else {
+			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue_O(p_gem), p_gem->grade/1000, p_gem->mother->grade/1000, p_gem->father->grade/1000);
+		}
+	}
+	printed_uid[p_gem->grade/1000]=1;
+}
+
+void print_equations_O(gemO* gemf)
+{
+	int value=gem_getvalue_O(gemf);
+	int len=2*value-1;
+	gemO** p_gems=malloc(len*sizeof(gemO*));		// let's store all the gem pointers
+	int place=0;
+	fill_array_O(gemf, p_gems, &place);					// this array contains marked uniques only and is long "place"
+	int i;
+	int printed_uid[place];
+	for (i=0; i<place; ++i) printed_uid[i]=0;
+	print_eq_O(gemf, printed_uid);
+}
+
 void print_tree_O(gemO* gemf, char* prefix)
 {
 	if (gemf->father==NULL) {

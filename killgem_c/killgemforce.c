@@ -10,8 +10,7 @@ const int ACC_CUT=250;				// ACC_CUT is accuracy for other inexact operations ->
 															// while 250 is ok even for 40s+, but takes 2x time
 #include "killgem_utils.h"		// Note: (60,250) is as fast as (100,100) but more precise
 
-
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int size)
+void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
 {
 	printf("\n");
 	int i;
@@ -191,7 +190,7 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 		printf("Combining scheme:\n");
 		print_parens(gems+len-1);
 		printf("\n\n");
-	}	
+	}
 	if (output_tree) {
 		printf("Gem tree:\n");
 		print_tree(gems+len-1, "");
@@ -206,6 +205,11 @@ void worker(int len, int output_parens, int output_tree, int output_table, int o
 			print_parens(pool[len-1]+i);
 			printf("\n\n");
 		}
+	}
+	if (output_equations) {		// it ruins gems, must be last
+		printf("Equations:\n");
+		print_equations(gems+len-1);
+		printf("\n");
 	}
 	
 	for (i=0;i<len;++i) free(pool[i]);		// free

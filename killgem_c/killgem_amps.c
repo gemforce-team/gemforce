@@ -13,7 +13,7 @@ const int ACC_CUT=250;				// ACC_CUT is accuracy for other inexact operations ->
 typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int size)
+void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
 {
 	// utils compatibility
 }
@@ -41,7 +41,7 @@ void print_amps_table(gem* gems, gemY* amps, int len)
 	printf("\n");
 }
 
-void worker_amps(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int killgem_limit, int size)
+void worker_amps(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int killgem_limit, int size)
 {
 	printf("\n");
 	int i;
@@ -413,7 +413,7 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 	}
 	if (output_table) print_amps_table(gems, amps, len);
 
-	if (output_debug) {											// quite useless...
+	if (output_debug) {
 		printf("Printing all parens for every best setup:\n\n");
 		for (i=2;i<len;++i) {
 			printf("Total value:\t%d\n\n",i+1);
@@ -424,6 +424,14 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 			print_parens_Y(amps+i-1);
 			printf("\n\n\n");
 		}
+	}
+	if (output_equations) {		// it ruins gems, must be last
+		printf("Killgem equations:\n");
+		print_equations(gems+len-1);
+		printf("\n");
+		printf("Amplifier equations:\n");
+		print_equations_Y(amps+len-1);
+		printf("\n");
 	}
 
 	for (i=0;i<len;++i) free(pool[i]);			// free gems
@@ -436,22 +444,26 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int output_parens=0;
+	int output_equations=0;
 	int output_tree=0;
 	int output_table = 0;
 	int output_debug=0;
 	int output_info=0;
 	int size=20000;
-	int managem_limit=0;
+	int killgem_limit=0;
 
-	while ((opt=getopt(argc,argv,"ptedis:l:"))!=-1) {
+	while ((opt=getopt(argc,argv,"petcdis:l:"))!=-1) {
 		switch(opt) {
 			case 'p':
 				output_parens = 1;
 				break;
+			case 'e':
+				output_equations = 1;
+				break;
 			case 't':
 				output_tree = 1;
 				break;
-			case 'e':
+			case 'c':
 				output_table = 1;
 				break;
 			case 'd':
@@ -462,7 +474,7 @@ int main(int argc, char** argv)
 				output_info = 1;
 				break;
 			case 'l':
-				managem_limit = atoi(optarg);
+				killgem_limit = atoi(optarg);
 				break;
 			case 's':
 				size = atoi(optarg);
@@ -485,7 +497,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker_amps(len, output_parens, output_tree, output_table, output_debug, output_info, managem_limit, size);
+	else worker_amps(len, output_parens, output_equations, output_tree, output_table, output_debug, output_info, killgem_limit, size);
 	return 0;
 }
 

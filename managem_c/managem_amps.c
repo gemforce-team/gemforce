@@ -3,14 +3,14 @@
 #include <math.h>
 #include <unistd.h>
 #include <string.h>
-typedef struct Gem_OB_appr gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
-const int ACC=450;								// 450 is as good as 1000 up to reasonable numbers and takes half the time
+typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
+const int ACC=450;						// 450 is as good as 1000 up to reasonable numbers and takes half the time
 #include "managem_utils.h"
 typedef struct Gem_O gemO;
 #include "leech_utils.h"
 
 
-void worker(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int size)
+void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
 {
 	// utils compatibility
 }
@@ -38,7 +38,7 @@ void print_amps_table(gem* gems, gemO* amps, int len)
 	printf("\n");
 }
 
-void worker_amps(int len, int output_parens, int output_tree, int output_table, int output_debug, int output_info, int managem_limit, int size)
+void worker_amps(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int managem_limit, int size)
 {
 	printf("\n");
 	int i;
@@ -303,7 +303,15 @@ void worker_amps(int len, int output_parens, int output_tree, int output_table, 
 			printf("\n\n\n");
 		}
 	}
-
+	if (output_equations) {		// it ruins gems, must be last
+		printf("Managem equations:\n");
+		print_equations(gems+len-1);
+		printf("\n");
+		printf("Amplifier equations:\n");
+		print_equations_O(amps+len-1);
+		printf("\n");
+	}
+	
 	for (i=0;i<len;++i) free(pool[i]);			// free gems
 	for (i=0;i<len/6;++i) free(poolO[i]);		// free amps
 }
@@ -314,22 +322,26 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int output_parens=0;
+	int output_equations=0;
 	int output_tree=0;
 	int output_table = 0;
 	int output_debug=0;
 	int output_info=0;
-	int size=2000;				// reasonable sizing
+	int size=2000;
 	int managem_limit=0;
 
-	while ((opt=getopt(argc,argv,"ptedis:l:"))!=-1) {
+	while ((opt=getopt(argc,argv,"petcdis:l:"))!=-1) {
 		switch(opt) {
 			case 'p':
 				output_parens = 1;
 				break;
+			case 'e':
+				output_equations = 1;
+				break;
 			case 't':
 				output_tree = 1;
 				break;
-			case 'e':
+			case 'c':
 				output_table = 1;
 				break;
 			case 'd':
@@ -363,7 +375,6 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker_amps(len, output_parens, output_tree, output_table, output_debug, output_info, managem_limit, size);
+	else worker_amps(len, output_parens, output_equations, output_tree, output_table, output_debug, output_info, managem_limit, size);
 	return 0;
 }
-
