@@ -16,7 +16,7 @@ where:
   t - print best gem tree formula  
   c - print best gems table (for each value best gem stats)   
   d - debug + info  
-  i - info 
+  i - info  
   l (num) - limit hard gem computation to num (amps only)  
   s (num) - change chunk size (you should not need this)  
   number - value of gem to be computed  
