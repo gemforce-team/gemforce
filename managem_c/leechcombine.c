@@ -98,7 +98,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 {
 	printf("\n");
 	int i;
-	gem gems[len];
+	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 131k is the limit
 	gem* pool[len];
 	int pool_length[len];
 	pool[0]=malloc(sizeof(gem));
