@@ -29,7 +29,6 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 		int j,k,h,l;
 		int eoc=(i+1)/2;        //end of combining
 		long comb_tot=0;
-		for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 		
 		int grade_max=(int)(log2(i+1)+1);       		// gems with max grade cannot be destroyed, so this is a max, not a sup
 		gem* temp_pools[grade_max-1];								// get the temp pools for every grade
@@ -49,6 +48,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 					for (h=0; h< pool_length[i-1-j]; ++h) {
 						int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
 						if (abs(delta)<=2) {								// grade difference <= 2
+							comb_tot++;
 							gem temp;
 							gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
 							int grd=temp.grade-2;

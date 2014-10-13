@@ -115,16 +115,21 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 		for (j=0; j<pool_length[i]; ++j) gem_init(pool[i]+j,j+2,1);
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
-		for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 
 		for (j=0;j<eoc;++j) {										// combine and put istantly in right pool
-			for (k=0; k< pool_length[j]; ++k) {
-				for (h=0; h< pool_length[i-1-j]; ++h) {
-					gem temp;
-					gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
-					int grd=temp.grade-2;
-					if (gem_better(temp, pool[i][grd])) {
-						pool[i][grd]=temp;
+			if ((i-j)/(j+1) < 10) {										// value ratio < 10
+				for (k=0; k< pool_length[j]; ++k) {
+					for (h=0; h< pool_length[i-1-j]; ++h) {
+						int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
+						if (abs(delta)<=2) {								// grade difference <= 2
+							comb_tot++;
+							gem temp;
+							gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
+							int grd=temp.grade-2;
+							if (gem_better(temp, pool[i][grd])) {
+								pool[i][grd]=temp;
+							}
+						}
 					}
 				}
 			}
@@ -171,6 +176,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 	}
 	
 	for (i=0;i<len;++i) free(pool[i]);		// free
+	free(gems);
 }
 
 

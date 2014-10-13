@@ -59,7 +59,6 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 			int j,k,h,l;
 			int eoc=(i+1)/2;				//end of combining
 			int comb_tot=0;
-			for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 
 			int grade_max=(int)(log2(i+1)+1);						// gems with max grade cannot be destroyed, so this is a max, not a sup
 			gem* temp_pools[grade_max-1];								// get the temp pools for every grade
@@ -79,6 +78,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 						for (h=0; h< pool_length[i-1-j]; ++h) {
 							int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
 							if (abs(delta)<=2) {								// grade difference <= 2
+								comb_tot++;
 								gem temp;
 								gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
 								int grd=temp.grade-2;
@@ -205,16 +205,21 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 		for (j=0; j<poolO_length[i]; ++j) gem_init_O(poolO[i]+j,j+2,1);
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
-		for (j=0; j<eoc; ++j) comb_tot+=poolO_length[j]*poolO_length[i-j-1];
 
 		for (j=0;j<eoc;++j) {										// combine and put istantly in right pool
-			for (k=0; k< poolO_length[j]; ++k) {
-				for (h=0; h< poolO_length[i-1-j]; ++h) {
-					gemO temp;
-					gem_combine_O(poolO[j]+k, poolO[i-1-j]+h, &temp);
-					int grd=temp.grade-2;
-					if (gem_better(temp, poolO[i][grd])) {
-						poolO[i][grd]=temp;
+			if ((i-j)/(j+1) < 10) {										// value ratio < 10
+				for (k=0; k< poolO_length[j]; ++k) {
+					for (h=0; h< poolO_length[i-1-j]; ++h) {
+						int delta=(poolO[j]+k)->grade - (poolO[i-1-j]+h)->grade;
+						if (abs(delta)<=2) {								// grade difference <= 2
+							comb_tot++;
+							gemO temp;
+							gem_combine_O(poolO[j]+k, poolO[i-1-j]+h, &temp);
+							int grd=temp.grade-2;
+							if (gem_better(temp, poolO[i][grd])) {
+								poolO[i][grd]=temp;
+							}
+						}
 					}
 				}
 			}

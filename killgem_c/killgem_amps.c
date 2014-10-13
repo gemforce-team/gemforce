@@ -63,7 +63,6 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 			int j,k,h,l;
 			int eoc=(i+1)/2;				//end of combining
 			long comb_tot=0;
-			for (j=0; j<eoc; ++j) comb_tot+=pool_length[j]*pool_length[i-j-1];
 
 			int grade_max=(int)(log2(i+1)+1);						// gems with max grade cannot be destroyed, so this is a max, not a sup
 			gem* temp_pools[grade_max-1];								// get the temp pools for every grade
@@ -84,6 +83,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 							int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
 							if (abs(delta)<=2) {								// grade difference <= 2
 								gem temp;
+								comb_tot++;
 								gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
 								int grd=temp.grade-2;
 								temp_pools[grd][temp_index[grd]]=temp;
@@ -228,7 +228,6 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 		int j,k,h,l;
 		int eoc=(i+1)/2;        //end of combining
 		int comb_tot=0;
-		for (j=0; j<eoc; ++j) comb_tot+=poolY_length[j]*poolY_length[i-j-1];
 
 		int grade_max=(int)(log2(i+1)+1);       		// gems with max grade cannot be destroyed, so this is a max, not a sup
 		gemY* temp_pools[grade_max-1];								// get the temp pools for every grade
@@ -244,6 +243,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 			for (k=0; k< poolY_length[j]; ++k) {
 				for (h=0; h< poolY_length[i-1-j]; ++h) {
 					gemY temp;
+					comb_tot++;
 					gem_combine_Y(poolY[j]+k, poolY[i-1-j]+h, &temp);
 					int grd=temp.grade-2;
 					temp_pools[grd][temp_index[grd]]=temp;
