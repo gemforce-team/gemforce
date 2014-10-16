@@ -15,26 +15,26 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 	// utils compatibility
 }
 
-float gem_amp_global_power(gem gem1, gemO amp1)
+float gem_amp_rescaled_power(gem gem1, gemO amp1)
 {
-	return (gem1.leech*1.5+6*0.23*2.8*amp1.leech)*gem1.bbound;
+	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
 }
 
 int gem_alone_more_powerful(gem gem1, gem gem2, gemO amp2)
 {
-	return gem1.leech*1.5*gem1.bbound > gem_amp_global_power(gem2, amp2);
+	return gem1.leech*gem1.bbound > gem_amp_rescaled_power(gem2, amp2);
 }
 
 int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 {
-	return gem_amp_global_power(gem1, amp1) > gem_amp_global_power(gem2, amp2);
+	return gem_amp_rescaled_power(gem1, amp1) > gem_amp_rescaled_power(gem2, amp2);
 }
 
 void print_amps_table(gem* gems, gemO* amps, int len)
 {
 	printf("# Gems\tManagem\tAmps\tPower (rescaled)\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_global_power(gems[i], amps[i])/1.5);
+	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_rescaled_power(gems[i], amps[i]));
 	printf("\n");
 }
 
@@ -59,7 +59,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 			int j,k,h,l;
 			int eoc=(i+1)/2;				//end of combining
 			int comb_tot=0;
-
+			
 			int grade_max=(int)(log2(i+1)+1);						// gems with max grade cannot be destroyed, so this is a max, not a sup
 			gem* temp_pools[grade_max-1];								// get the temp pools for every grade
 			int	temp_index[grade_max-1];								// index of work point in temp pools
@@ -97,9 +97,9 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 										temp_array[index]=subpools[grd][l];
 										index++;
 									}
-									if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+									free(subpools[grd]);			// free
 									gem_sort(temp_array,length);								// work starts
-		
+									
 									int broken=0;
 									float lim_bbound=-1;
 									for (l=length-1;l>=0;--l) {
@@ -109,10 +109,10 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 										}
 										else lim_bbound=temp_array[l].bbound;
 									}													// all unnecessary gems destroyed
-		
+									
 									subpools_length[grd]=length-broken;
 									subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
-		
+									
 									index=0;
 									for (l=0; l<length; ++l) {			// copying to subpool
 										if (temp_array[l].grade!=0) {
@@ -141,7 +141,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 						temp_array[index]=subpools[grd][l];
 						index++;
 					}
-					if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+					free(subpools[grd]);		// free
 					gem_sort(temp_array,length);								// work starts
 					int broken=0;
 					float lim_bbound=-1;
@@ -274,7 +274,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 		printf("Value:\t%d\n",gem_getvalue_O(amps+i));
 		if (output_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
 		gem_print_O(amps+i);
-		printf("Global power (rescaled):\t%f\n\n", (gem_amp_global_power(gems[i], amps[i])/1.5));
+		printf("Global power (rescaled):\t%f\n\n", gem_amp_rescaled_power(gems[i], amps[i]));
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 
@@ -329,7 +329,7 @@ int main(int argc, char** argv)
 	int output_parens=0;
 	int output_equations=0;
 	int output_tree=0;
-	int output_table = 0;
+	int output_table=0;
 	int output_debug=0;
 	int output_info=0;
 	int size=2000;

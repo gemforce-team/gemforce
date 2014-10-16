@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 typedef struct Gem_OB gem;		// the strange order is so that gem_utils knows which gem type are we defining as "gem"
-const int ACC=1000;
+const int ACC=1000;						// accuracy for comparisons
 #include "managem_utils.h"
 
 

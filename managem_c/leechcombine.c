@@ -187,7 +187,7 @@ int main(int argc, char** argv)
 	int output_parens=0;
 	int output_equations=0;
 	int output_tree=0;
-	int output_table = 0;
+	int output_table=0;
 	int output_debug=0;
 	int output_info=0;
 
