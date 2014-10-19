@@ -356,5 +356,7 @@ int main(int argc, char** argv)
 			printf("Global kill power (rescaled):\t%f\n\n", (gem_amp_global_kill_power(gems[place], amps[place])/(3.2*1.5)));
 		}
 	}
+	free(parens);
+	if (len_amps > 0) free(parens_amps);
 	return 0;
 }

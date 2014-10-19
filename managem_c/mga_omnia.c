@@ -3,6 +3,7 @@
 #include <math.h>
 #include <unistd.h>
 #include <string.h>
+
 typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
 const int ACC_S=450;					// used for speccing limiting
 const int ACC=540;						// used for combining liminting and sorting
@@ -51,7 +52,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem_init(pool[0],  1, 1, 0);
 	gem_init(pool[0]+1,1, 0, 1);
 	pool_length[0]=2;
-
+	
 	for (i=1; i<len; ++i) {				// managem speccing
 		int j,k,h,l;
 		int eoc=(i+1)/2;				//end of combining
@@ -186,14 +187,14 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		fflush(stdout);
 	}
 	printf("Gem speccing done!\n\n");
-	
+
 	size=sizec;
 	gem* poolc[lenc];
 	int poolc_length[lenc];
 	poolc[0]=malloc(sizeof(gem));
 	gem_init(poolc[0],1,1,1);			// grade leech bbound
 	poolc_length[0]=1;						// start gem does not matter
-
+	
 	for (i=1; i<lenc; ++i) {			// managem combining
 		int j,k,h,l;
 		int eoc=(i+1)/2;				//end of combining
@@ -328,10 +329,10 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		fflush(stdout);
 	}
 	printf("Gem combining done!\n\n");
-	
+
 	gem* poolcf;
 	int poolcf_length;
-
+	
 	{															// managem pool compression
 		gem_sort(poolc[lenc-1],poolc_length[lenc-1]);
 		int broken=0;
@@ -355,7 +356,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		printf("Managem comb compressed pool size:\t%d\n",poolcf_length);
 	}
 	printf("Gem combining pool compression done!\n\n");
-	
+
 	int lena;
 	if (lenc > 2*len) lena=lenc;	// see which is bigger between 2x spec len and comb len
 	else lena=2*len;							// and we'll combspec till there
@@ -365,7 +366,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	poolO[0]=malloc(sizeof(gemO));
 	gem_init_O(poolO[0],1,1);
 	poolO_length[0]=1;
-
+	
 	for (i=1; i<lena; ++i) {			// amps computing
 		int j,k,h;
 		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
@@ -401,8 +402,20 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		}
 	}
 	printf("Amplifier pooling done!\n\n");
+
+	gemO combO;
 	
-	int j,k,h,l,m;								// let's choose the right gem-amp combo
+	{
+		combO=poolO[lenc-1][0];
+		for (i=1; i<poolO_length[lenc-1]; ++i) {			// amps pool compression
+		if (gem_better(poolO[lenc-1][i], combO)) {
+			combO=poolO[lenc-1][i];
+			}
+		}
+	}
+	printf("Amp combining pool compression done!\n\n");
+
+	int j,k,h,l;									// let's choose the right gem-amp combo
 	gem gems[len];								// for every speccing value
 	gemO amps[len];								// we'll choose the best amps
 	gem gemsc[len];								// and the best NC combine
@@ -417,7 +430,6 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem_print(gems);
 	printf("Amplifier:\n");
 	gem_print_O(amps);
-	float cbar=log(NT)/log(lenc);
 	
 	for (i=1;i<len;++i) {																		// for every gem value
 		gem_init(gems+i,0,0,0);																// we init the gems
@@ -427,14 +439,16 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		powers[i]=0;
 		for (j=-1;j<2*i+2;++j) {															// for every amp value from 0 to to 2*gem_value
 			int NS=(i+1)+6*(j+1);																// we get the num of gems used in speccing
-			float c = cbar-log(NS)/log(lenc);										// we compute the combination number
+			double c = log((double)NT/NS)/log(lenc);						// we compute the combination number
+			double Ca= 2.576 * pow(combO.leech,c);							// <- this is ok only for mg
 			for (k=0;k<pool_length[i];++k) {										// then we search in the gem pool
 				if (pool[i][k].leech!=0) {												// if the gem has leech we go on
+					double Pg=gem_power(pool[i][k]);
 					for (l=0; l<poolcf_length; ++l) {								// to the NC gem comb pool
+						double Palone=pow(gem_power(poolcf[l]),c) * Pg;
 						if (j==-1) {																	// if no amp is needed we compare the gem alone
-							float power=pow(gem_power(poolcf[l]),c) * gem_power(pool[i][k]);
-							if (power>powers[i]) {
-								powers[i]=power;
+							if (Palone>powers[i]) {
+								powers[i]=Palone;
 								gems[i]=pool[i][k];
 								gem_init_O(amps+i,0,0);
 								gemsc[i]=poolcf[l];
@@ -442,16 +456,15 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 							}
 						}
 						else {
-							for (h=0;h<poolO_length[j];++h) {							// else we look in the amp pool
-								for (m=0; m<poolO_length[lenc-1]; ++m) {		// and in the NC amp pool to compare
-									float power=pow(poolcf[l].bbound,c) * pool[i][k].bbound * (pow(poolcf[l].leech,c) * pool[i][k].leech + 2.576 * pow(poolO[lenc-1][m].leech,c) * poolO[j][h].leech);
-									if (power>powers[i]) {
-										powers[i]=power;
-										gems[i]=pool[i][k];
-										amps[i]=poolO[j][h];
-										gemsc[i]=poolcf[l];
-										ampsc[i]=poolO[lenc-1][m];
-									}
+							double Pb=pow(poolcf[l].bbound,c) * pool[i][k].bbound;
+							for (h=0;h<poolO_length[j];++h) {						// else we look in the amp pool
+								double power = Palone + Pb * Ca * poolO[j][h].leech;
+								if (power>powers[i]) {
+									powers[i]=power;
+									gems[i]=pool[i][k];
+									amps[i]=poolO[j][h];
+									gemsc[i]=poolcf[l];
+									ampsc[i]=combO;
 								}
 							}
 						}
@@ -473,7 +486,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		gem_print(gemsc+i);
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
-		if (output_info) printf("Pool:\t%d\n",poolO_length[lenc-1]);
+		if (output_info) printf("Pool:\t1\n");
 		gem_print_O(ampsc+i);
 		printf("Global power (resc. 1k):\t%f\n\n\n", powers[i]/1000);
 		fflush(stdout);								// forces buffer write, so redirection works well
