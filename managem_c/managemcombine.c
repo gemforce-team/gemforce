@@ -64,7 +64,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 									temp_array[index]=subpools[grd][l];
 									index++;
 								}
-								if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+								free(subpools[grd]);			// free
 								gem_sort(temp_array,length);								// work starts
 		
 								int broken=0;
@@ -108,7 +108,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 					temp_array[index]=subpools[grd][l];
 					index++;
 				}
-				if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+				free(subpools[grd]);		// free
 				gem_sort(temp_array,length);								// work starts
 				int broken=0;
 				float lim_bbound=-1;

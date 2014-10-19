@@ -15,26 +15,26 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 	// utils compatibility
 }
 
-float gem_amp_rescaled_power(gem gem1, gemO amp1)
+float gem_amp_power(gem gem1, gemO amp1)
 {
 	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
 }
 
 int gem_alone_more_powerful(gem gem1, gem gem2, gemO amp2)
 {
-	return gem1.leech*gem1.bbound > gem_amp_rescaled_power(gem2, amp2);
+	return gem1.leech*gem1.bbound > gem_amp_power(gem2, amp2);
 }
 
 int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 {
-	return gem_amp_rescaled_power(gem1, amp1) > gem_amp_rescaled_power(gem2, amp2);
+	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
 }
 
 void print_amps_table(gem* gems, gemO* amps, float* spec_coeffs, int len)
 {
 	printf("# Gems\tManagem\tAmps\tPower (resc.)\tSpec coeff\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_rescaled_power(gems[i], amps[i]), spec_coeffs[i]);
+	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i]), spec_coeffs[i]);
 	printf("\n");
 }
 
@@ -237,16 +237,16 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 	gem_print(gems);
 	printf("Amplifier:\n");
 	gem_print_O(amps);
-
+	
 	for (i=1;i<len;++i) {															// for every gem value
 		gem_init(gems+i,0,0,0);													// we init the gems
 		gem_init_O(amps+i,0,0);													// to extremely weak ones
-		spec_coeffs[i]=0;
+		spec_coeffs[i]=0;																// and init a spec coeff
 		for (j=-1;j<2*i+2;++j) {												// for every amp value from 0 to to 2*gem_value
-			int NS=(i+1)+6*(j+1);
-			float comb_coeff=pow(NS, -growth_comb);
-			for (k=0;k<pool_length[i];++k) {							// we search in the gem pool 
-				if (j==-1) {																// if no amp is needed we already know
+			int NS=(i+1)+6*(j+1);													// we get total gem used
+			float comb_coeff=pow(NS, -growth_comb);				// and comb_coeff for that number
+			for (k=0;k<pool_length[i];++k) {							// then we search in the gem pool 
+				if (j==-1) {																// if no amp is needed we compare the gem alone
 					float power=gem_power(pool[i][k]);
 					float spec_coeff=power*comb_coeff;
 					if (spec_coeff>spec_coeffs[i]) {
@@ -255,8 +255,8 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 						gem_init_O(amps+i,0,0);
 					}
 				}
-				else for (h=0;h<poolO_length[j];++h) {			// else we look in the amp pool
-					float power=gem_amp_rescaled_power(pool[i][k], poolO[j][h]);
+				else for (h=0;h<poolO_length[j];++h) {			// else we look in the amp pool and compare
+					float power=gem_amp_power(pool[i][k], poolO[j][h]);
 					float spec_coeff=power*comb_coeff;
 					if (spec_coeff>spec_coeffs[i]) {
 						spec_coeffs[i]=spec_coeff;
@@ -274,7 +274,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 		printf("Value:\t%d\n",gem_getvalue_O(amps+i));
 		if (output_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
 		gem_print_O(amps+i);
-		printf("Global power (resc.):\t%f\n", gem_amp_rescaled_power(gems[i], amps[i]));
+		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
 		printf("Spec coefficient:\t%f\n\n", spec_coeffs[i]);
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}

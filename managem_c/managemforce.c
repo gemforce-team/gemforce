@@ -65,7 +65,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 									temp_array[index]=subpools[grd][l];
 									index++;
 								}
-								if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+								free(subpools[grd]);			// free
 								gem_sort(temp_array,length);								// work starts
 		
 								int broken=0;
@@ -82,7 +82,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 								subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
 		
 								index=0;
-								for (l=0; l<length; ++l) {      // copying to subpool
+								for (l=0; l<length; ++l) {			// copying to subpool
 									if (temp_array[l].grade!=0) {
 										subpools[grd][index]=temp_array[l];
 										index++;
@@ -101,7 +101,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 				int length=temp_index[grd]+subpools_length[grd];
 				gem* temp_array=malloc(length*sizeof(gem));
 				int index=0;
-				for (l=0; l<temp_index[grd]; ++l) {										// copy new gems
+				for (l=0; l<temp_index[grd]; ++l) {									// copy new gems
 					temp_array[index]=temp_pools[grd][l];
 					index++;
 				}
@@ -109,7 +109,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 					temp_array[index]=subpools[grd][l];
 					index++;
 				}
-				if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+				free(subpools[grd]);		// free
 				gem_sort(temp_array,length);								// work starts
 				int broken=0;
 				float lim_bbound=-1;

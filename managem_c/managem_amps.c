@@ -15,26 +15,26 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 	// utils compatibility
 }
 
-float gem_amp_rescaled_power(gem gem1, gemO amp1)
+float gem_amp_power(gem gem1, gemO amp1)
 {
 	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
 }
 
 int gem_alone_more_powerful(gem gem1, gem gem2, gemO amp2)
 {
-	return gem1.leech*gem1.bbound > gem_amp_rescaled_power(gem2, amp2);
+	return gem1.leech*gem1.bbound > gem_amp_power(gem2, amp2);
 }
 
 int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 {
-	return gem_amp_rescaled_power(gem1, amp1) > gem_amp_rescaled_power(gem2, amp2);
+	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
 }
 
 void print_amps_table(gem* gems, gemO* amps, int len)
 {
 	printf("# Gems\tManagem\tAmps\tPower (rescaled)\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_rescaled_power(gems[i], amps[i]));
+	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i]));
 	printf("\n");
 }
 
@@ -274,7 +274,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 		printf("Value:\t%d\n",gem_getvalue_O(amps+i));
 		if (output_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
 		gem_print_O(amps+i);
-		printf("Global power (rescaled):\t%f\n\n", gem_amp_rescaled_power(gems[i], amps[i]));
+		printf("Global power (rescaled):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 

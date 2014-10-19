@@ -70,7 +70,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 									maxcrit=max(maxcrit, (temp_array+index)->crit);
 									index++;
 								}
-								if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+								free(subpools[grd]);		// free
 								
 								gem_sort(temp_array,length);								// work starts
 								int broken=0;
@@ -124,11 +124,11 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 							maxcrit=max(maxcrit, (temp_array+index)->crit);
 							index++;
 						}
-						if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+						free(subpools[grd]);		// free
 						
 						gem_sort(temp_array,length);								// work starts
 						int broken=0;
-						int crit_cells=(int)(maxcrit*ACC)+1;									// this pool will be big from the beginning,
+						int crit_cells=(int)(maxcrit*ACC)+1;											// this pool will be big from the beginning,
 						int tree_length=pow(2, ceil(log2(crit_cells)));						// but we avoid binary search
 						float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed	
 						for (l=1; l<tree_length+crit_cells+1; ++l) tree[l]=-1;

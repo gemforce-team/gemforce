@@ -5,7 +5,7 @@
 #include <string.h>
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
-const int ACC=60;							// ACC is for crit pooling & sorting-> results with 60 are indistinguishable from 1000+ up to 40s
+const int ACC=55;							// ACC is for crit pooling & sorting-> results with 60 are indistinguishable from 1000+ up to 40s
 const int ACC_CUT=250;				// ACC_CUT is accuracy for other inexact operations -> 100 differs from exact from 32s
 															// while 250 is ok even for 40s+, but takes 2x time
 #include "killgem_utils.h"		// Note: (60,250) is as fast as (100,100) but more precise
@@ -70,7 +70,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 									maxcrit=max(maxcrit, (temp_array+index)->crit);
 									index++;
 								}
-								if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+								free(subpools[grd]);		// free
 								
 								gem_sort(temp_array,length);								// work starts
 								int broken=0;
@@ -124,12 +124,12 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 							maxcrit=max(maxcrit, (temp_array+index)->crit);
 							index++;
 						}
-						if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+						free(subpools[grd]);		// free
 						
 						gem_sort(temp_array,length);								// work starts
 						int broken=0;
 						int crit_cells=(int)(maxcrit*ACC)+1;									// this pool will be big from the beginning,
-						int tree_length=pow(2, ceil(log2(crit_cells)));						// but we avoid binary search
+						int tree_length=pow(2, ceil(log2(crit_cells)));				// but we avoid binary search
 						float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed	
 						for (l=1; l<tree_length+crit_cells+1; ++l) tree[l]=-1;
 						for (l=length-1;l>=0;--l) {																							// start from large z
