@@ -6,8 +6,8 @@
 
 typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
 const int ACC_S=450;					// used for speccing limiting
-const int ACC=540;						// used for combining liminting and sorting
-const int NT=1000000;					// 1m, it's still low, but there's no difference going on
+const int ACC=540;						// used for combining limiting and sorting
+const int NT=1048576;					// 2^20 ~ 1m, it's still low, but there's no difference going on (even 10k gives the same results)
 #include "managem_utils.h"
 typedef struct Gem_O gemO;
 #include "leech_utils.h"
