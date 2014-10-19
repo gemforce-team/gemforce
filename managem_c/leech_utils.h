@@ -106,7 +106,7 @@ void fill_array_O(gemO* gemf, gemO** p_gems, int* place)
 void print_eq_O(gemO* p_gem, int* printed_uid)
 {
 	if (printed_uid[p_gem->grade/1000]==1) return;
-	if (gem_getvalue_O(p_gem)==1) printf("(val = 1)\t%2d = g1 y\n", p_gem->grade/1000);
+	if (gem_getvalue_O(p_gem)==1) printf("(val = 1)\t%2d = g1 o\n", p_gem->grade/1000);
 	else {
 		print_eq_O(p_gem->father, printed_uid);
 		print_eq_O(p_gem->mother, printed_uid);

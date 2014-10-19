@@ -4,7 +4,9 @@
 #include <unistd.h>
 #include <string.h>
 typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
-const int ACC=450;						// 450 is as good as 1000 up to reasonable numbers and takes half the time
+const int ACC_S=450;					// used for speccing limiting
+const int ACC=540;						// used for combining liminting and sorting
+const int NT=1000000;					// 1m, it's still low, but there's no difference going on
 #include "managem_utils.h"
 typedef struct Gem_O gemO;
 #include "leech_utils.h"
@@ -30,11 +32,11 @@ int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
 }
 
-void print_amps_table(gem* gems, gemO* amps, float* spec_coeffs, int len)
+void print_amps_table(gem* gems, gemO* amps, float* powers, int len)
 {
-	printf("# Gems\tManagem\tAmps\tPower (resc.)\tSpec coeff\n");
+	printf("# Gems\tManagem\tAmps\tPower (resc. 1k)\n");			// we'll rescale again for 1k, no need to have 10 digits
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i]), spec_coeffs[i]);
+	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6f\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), powers[i]/1000);
 	printf("\n");
 }
 
@@ -50,7 +52,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem_init(pool[0]+1,1, 0, 1);
 	pool_length[0]=2;
 
-	for (i=1; i<len; ++i) {						// managem speccing
+	for (i=1; i<len; ++i) {				// managem speccing
 		int j,k,h,l;
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
@@ -98,7 +100,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 								int broken=0;
 								float lim_bbound=-1;
 								for (l=length-1;l>=0;--l) {
-									if ((int)(ACC*temp_array[l].bbound)<=(int)(ACC*lim_bbound)) {
+									if ((int)(ACC_S*temp_array[l].bbound)<=(int)(ACC_S*lim_bbound)) {
 										temp_array[l].grade=0;
 										broken++;
 									}
@@ -141,7 +143,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 				int broken=0;
 				float lim_bbound=-1;
 				for (l=length-1;l>=0;--l) {
-					if ((int)(ACC*temp_array[l].bbound)<=(int)(ACC*lim_bbound)) {
+					if ((int)(ACC_S*temp_array[l].bbound)<=(int)(ACC_S*lim_bbound)) {
 						temp_array[l].grade=0;
 						broken++;
 					}
@@ -188,11 +190,11 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	size=sizec;
 	gem* poolc[lenc];
 	int poolc_length[lenc];
-	poolc[0]=malloc(sizeof(gem));	// grade leech bbound
-	gem_init(poolc[0],1,1,1);			// start gem does not matter
-	poolc_length[0]=1;
+	poolc[0]=malloc(sizeof(gem));
+	gem_init(poolc[0],1,1,1);			// grade leech bbound
+	poolc_length[0]=1;						// start gem does not matter
 
-	for (i=1; i<lenc; ++i) {				// managem combining
+	for (i=1; i<lenc; ++i) {			// managem combining
 		int j,k,h,l;
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
@@ -326,7 +328,34 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		fflush(stdout);
 	}
 	printf("Gem combining done!\n\n");
+	
+	gem* poolcf;
+	int poolcf_length;
 
+	{															// managem pool compression
+		gem_sort(poolc[lenc-1],poolc_length[lenc-1]);
+		int broken=0;
+		float lim_bbound=-1;
+		for (i=poolc_length[lenc-1]-1;i>=0;--i) {
+			if ((int)(ACC*poolc[lenc-1][i].bbound)<=(int)(ACC*lim_bbound)) {
+				poolc[lenc-1][i].grade=0;
+				broken++;
+			}
+			else lim_bbound=poolc[lenc-1][i].bbound;
+		}													// all unnecessary gems destroyed
+		poolcf_length=poolc_length[lenc-1]-broken;
+		poolcf=malloc(poolcf_length*sizeof(gem));			// pool init via broken
+		int index=0;
+		for (i=0; i<poolc_length[lenc-1]; ++i) {			// copying to subpool
+			if (poolc[lenc-1][i].grade!=0) {
+				poolcf[index]=poolc[lenc-1][i];
+				index++;
+			}
+		}
+		printf("Managem comb compressed pool size:\t%d\n",poolcf_length);
+	}
+	printf("Gem combining pool compression done!\n\n");
+	
 	int lena;
 	if (lenc > 2*len) lena=lenc;	// see which is bigger between 2x spec len and comb len
 	else lena=2*len;							// and we'll combspec till there
@@ -371,55 +400,59 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 			printf("Pool:\t%d\n\n",poolO_length[i]);
 		}
 	}
-	printf("Amplifier pooling done!\n\n");			// compression?
+	printf("Amplifier pooling done!\n\n");
 	
 	int j,k,h,l,m;								// let's choose the right gem-amp combo
 	gem gems[len];								// for every speccing value
 	gemO amps[len];								// we'll choose the best amps
 	gem gemsc[len];								// and the best NC combine
 	gemO ampsc[len];							// for both;
-	float sc_coeffs[len];
+	float powers[len];
 	gem_init(gems,1,1,0);
 	gem_init_O(amps,0,0);
 	gem_init(gemsc,1,0,0);
 	gem_init_O(ampsc,0,0);
-	sc_coeffs[0]=0;
+	powers[0]=0;
 	printf("Gem:\n");
 	gem_print(gems);
 	printf("Amplifier:\n");
 	gem_print_O(amps);
+	float cbar=log(NT)/log(lenc);
 	
-	for (i=1;i<len;++i) {																	// for every gem value
-		gem_init(gems+i,0,0,0);															// we init the gems
-		gem_init_O(amps+i,0,0);															// to extremely weak ones
+	for (i=1;i<len;++i) {																		// for every gem value
+		gem_init(gems+i,0,0,0);																// we init the gems
+		gem_init_O(amps+i,0,0);																// to extremely weak ones
 		gem_init(gemsc+i,0,0,0);
 		gem_init_O(ampsc+i,0,0);
-		sc_coeffs[i]=0;
-		for (j=-1;j<2*i+2;++j) {														// for every amp value from 0 to to 2*gem_value
-			//int NS=(i+1)+6*(j+1);															// we get the num of gems used in speccing
-			//float c = -log(NS)/log(lenc);											// we compute the combination number (yes, it's negative)
-			float c=1;
-			for (k=0;k<pool_length[i];++k) {									// then we search in the gem pool
-				for (l=0; l<poolc_length[lenc-1]; ++l) {					// and in the NC gem comb pool
-					for (m=0; m<poolO_length[lenc-1]; ++m) {				// aaand in the NC amp pool
-						if (j==-1) {																// if no amp is needed we compare the gem alone
-							float sc_coeff=pow(gem_power(poolc[lenc-1][l]), c)*gem_power(pool[i][k]);
-							if (sc_coeff>sc_coeffs[i]) {
-								sc_coeffs[i]=sc_coeff;
+		powers[i]=0;
+		for (j=-1;j<2*i+2;++j) {															// for every amp value from 0 to to 2*gem_value
+			int NS=(i+1)+6*(j+1);																// we get the num of gems used in speccing
+			float c = cbar-log(NS)/log(lenc);										// we compute the combination number
+			for (k=0;k<pool_length[i];++k) {										// then we search in the gem pool
+				if (pool[i][k].leech!=0) {												// if the gem has leech we go on
+					for (l=0; l<poolcf_length; ++l) {								// to the NC gem comb pool
+						if (j==-1) {																	// if no amp is needed we compare the gem alone
+							float power=pow(gem_power(poolcf[l]),c) * gem_power(pool[i][k]);
+							if (power>powers[i]) {
+								powers[i]=power;
 								gems[i]=pool[i][k];
 								gem_init_O(amps+i,0,0);
-								gemsc[i]=poolc[lenc-1][l];
+								gemsc[i]=poolcf[l];
 								gem_init_O(ampsc+i,0,0);
 							}
 						}
-						else for (h=0;h<poolO_length[j];++h) {			// else we look in the amp pool and compare
-							float sc_coeff=pow(poolc[lenc-1][l].bbound, c)*pool[i][k].bbound*(pow(poolc[lenc-1][l].leech, c)*pool[i][k].leech+2.576*pow(poolO[lenc-1][m].leech, c)*pool[j][h].leech);
-							if (sc_coeff>sc_coeffs[i]) {
-								sc_coeffs[i]=sc_coeff;
-								gems[i]=pool[i][k];
-								amps[i]=poolO[j][h];
-								gemsc[i]=poolc[lenc-1][l];
-								ampsc[i]=poolO[lenc-1][m];
+						else {
+							for (h=0;h<poolO_length[j];++h) {							// else we look in the amp pool
+								for (m=0; m<poolO_length[lenc-1]; ++m) {		// and in the NC amp pool to compare
+									float power=pow(poolcf[l].bbound,c) * pool[i][k].bbound * (pow(poolcf[l].leech,c) * pool[i][k].leech + 2.576 * pow(poolO[lenc-1][m].leech,c) * poolO[j][h].leech);
+									if (power>powers[i]) {
+										powers[i]=power;
+										gems[i]=pool[i][k];
+										amps[i]=poolO[j][h];
+										gemsc[i]=poolcf[l];
+										ampsc[i]=poolO[lenc-1][m];
+									}
+								}
 							}
 						}
 					}
@@ -436,36 +469,47 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		gem_print_O(amps+i);
 		printf("Managem combine\n");
 		printf("Comb:\t%d\n",lenc);
-		if (output_info) printf("Pool:\t%d\n",poolc_length[lenc-1]);
+		if (output_info) printf("Pool:\t%d\n",poolcf_length);
 		gem_print(gemsc+i);
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
 		if (output_info) printf("Pool:\t%d\n",poolO_length[lenc-1]);
 		gem_print_O(ampsc+i);
-		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
-		printf("Spec-combine coefficient:\t%f\n\n", sc_coeffs[i]);
+		printf("Global power (resc. 1k):\t%f\n\n\n", powers[i]/1000);
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
-printf("pippo");
+
 	if (output_parens) {
-		printf("Managem combining scheme:\n");
+		printf("Managem speccing scheme:\n");
 		print_parens(gems+len-1);
 		printf("\n\n");
-		printf("Amplifier combining scheme:\n");
+		printf("Amplifier speccing scheme:\n");
 		print_parens_O(amps+len-1);
+		printf("\n\n");
+		printf("Managem combining scheme:\n");
+		print_parens(gemsc+len-1);
+		printf("\n\n");
+		printf("Amplifier combining scheme:\n");
+		print_parens_O(ampsc+len-1);
 		printf("\n\n");
 	}
 	if (output_tree) {
-		printf("Managem tree:\n");
+		printf("Managem speccing tree:\n");
 		print_tree(gems+len-1, "");
 		printf("\n");
-		printf("Amplifier tree:\n");
+		printf("Amplifier speccing tree:\n");
 		print_tree_O(amps+len-1, "");
 		printf("\n");
+		printf("Managem combining tree:\n");
+		print_tree(gemsc+len-1, "");
+		printf("\n");
+		printf("Amplifier combining tree:\n");
+		print_tree_O(ampsc+len-1, "");
+		printf("\n");
 	}
-	if (output_table) print_amps_table(gems, amps, sc_coeffs, len);
+	if (output_table) print_amps_table(gems, amps, powers, len);
 
-	if (output_debug) {
+	if (output_debug) {			// useless
 		printf("Printing all parens for every best setup:\n\n");
 		for (i=2;i<len;++i) {
 			printf("Total value:\t%d\n\n",i+1);
@@ -478,16 +522,24 @@ printf("pippo");
 		}
 	}
 	if (output_equations) {		// it ruins gems, must be last
-		printf("Managem equations:\n");
+		printf("Managem speccing equations:\n");
 		print_equations(gems+len-1);
 		printf("\n");
-		printf("Amplifier equations:\n");
+		printf("Amplifier speccing equations:\n");
 		print_equations_O(amps+len-1);
+		printf("\n");
+		printf("Managem combining equations:\n");
+		print_equations(gemsc+len-1);
+		printf("\n");
+		printf("Amplifier combining equations:\n");
+		print_equations_O(ampsc+len-1);
 		printf("\n");
 	}
 	
 	for (i=0;i<len;++i) free(pool[i]);			// free gems
-	for (i=0;i<2*len;++i) free(poolO[i]);		// free amps
+	for (i=0;i<lenc;++i) free(poolc[i]);		// free gems
+	free(poolcf);
+	for (i=0;i<lena;++i) free(poolO[i]);		// free amps
 }
 
 
