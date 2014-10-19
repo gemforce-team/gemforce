@@ -17,26 +17,26 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 	// utils compatibility
 }
 
-float gem_amp_rescaled_power(gem gem1, gemY amp1)		// should be ok...
+float gem_amp_power(gem gem1, gemY amp1)		// should be ok...
 {
-	return (gem1.damage+6*0.28*(2.8/3.2)*amp1.damage)*gem1.bbound*(gem1.crit+4*0.23*2.8*amp1.crit)*gem1.bbound;		// yes, 4, due to 3.2 and 1.5 rescaling
+	return (gem1.damage+6*0.28*(2.8/3.2)*amp1.damage)*gem1.bbound*(gem1.crit+4*0.23*2.8*amp1.crit)*gem1.bbound;		// yes, fraction and 4, due to 3.2 and 1.5 rescaling
 }
 
 int gem_alone_more_powerful(gem gem1, gem gem2, gemY amp2)
 {
-	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound > gem_amp_rescaled_power(gem2, amp2);
+	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound > gem_amp_power(gem2, amp2);
 }
 
 int gem_amp_more_powerful(gem gem1, gemY amp1, gem gem2, gemY amp2)
 {
-	return gem_amp_rescaled_power(gem1, amp1) > gem_amp_rescaled_power(gem2, amp2);
+	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
 }
 
 void print_amps_table(gem* gems, gemY* amps, float* spec_coeffs, int len)
 {
 	printf("# Gems\tKillgem\tAmps\tPower (resc.)\tSpec coeff\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), gem_amp_rescaled_power(gems[i], amps[i]), spec_coeffs[i]);
+	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), gem_amp_power(gems[i], amps[i]), spec_coeffs[i]);
 	printf("\n");
 }
 
@@ -257,7 +257,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 									temp_array[index]=subpools[grd][l];
 									index++;
 								}
-								if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+								free(subpools[grd]);		// free
 								gem_sort_Y(temp_array,length);								// work starts
 		
 								int broken=0;
@@ -301,7 +301,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 					temp_array[index]=subpools[grd][l];
 					index++;
 				}
-				if (subpools_length[grd]!=0) free(subpools[grd]);		// free
+				free(subpools[grd]);		// free
 				gem_sort_Y(temp_array,length);								// work starts
 				int broken=0;
 				float lim_crit=-1;
@@ -378,7 +378,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 					}
 				}
 				else for (h=0;h<poolY_length[j];++h) {			// else we look in the amp pool
-					float power=gem_amp_rescaled_power(pool[i][k], poolY[j][h]);
+					float power=gem_amp_power(pool[i][k], poolY[j][h]);
 					float spec_coeff=power*comb_coeff;
 					if (spec_coeff>spec_coeffs[i]) {
 						spec_coeffs[i]=spec_coeff;
@@ -397,7 +397,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 		printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
 		if (output_info) printf("Pool:\t%d\n",poolY_length[gem_getvalue_Y(amps+i)-1]);
 		gem_print_Y(amps+i);
-		printf("Global power (rescaled):\t%f\n\n", gem_amp_rescaled_power(gems[i], amps[i]));
+		printf("Global power (rescaled):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 

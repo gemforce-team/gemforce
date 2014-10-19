@@ -3,7 +3,6 @@
 #include <math.h>
 #include <unistd.h>
 #include <string.h>
-
 typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
 const int ACC_S=450;					// used for speccing limiting
 const int ACC=540;						// used for combining limiting and sorting
@@ -405,9 +404,9 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 
 	gemO combO;
 	
-	{
+	{															// amps pool compression
 		combO=poolO[lenc-1][0];
-		for (i=1; i<poolO_length[lenc-1]; ++i) {			// amps pool compression
+		for (i=1; i<poolO_length[lenc-1]; ++i) {
 		if (gem_better(poolO[lenc-1][i], combO)) {
 			combO=poolO[lenc-1][i];
 			}
