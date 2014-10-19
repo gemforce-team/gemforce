@@ -166,6 +166,7 @@ void print_equations_Y(gemY* gemf)
 	int printed_uid[place];
 	for (i=0; i<place; ++i) printed_uid[i]=0;
 	print_eq_Y(gemf, printed_uid);
+	free(p_gems);
 }
 
 void print_tree_Y(gemY* gemf, char* prefix)

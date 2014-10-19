@@ -131,6 +131,7 @@ void print_equations_O(gemO* gemf)
 	int printed_uid[place];
 	for (i=0; i<place; ++i) printed_uid[i]=0;
 	print_eq_O(gemf, printed_uid);
+	free(p_gems);
 }
 
 void print_tree_O(gemO* gemf, char* prefix)

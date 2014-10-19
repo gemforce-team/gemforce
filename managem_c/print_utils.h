@@ -64,6 +64,7 @@ void print_equations(gem* gemf)
 	int printed_uid[place];
 	for (i=0; i<place; ++i) printed_uid[i]=0;
 	print_eq(gemf, printed_uid);
+	free(p_gems);
 }
 
 void print_tree(gem* gemf, char* prefix)
