@@ -11,7 +11,6 @@ const int NT=1048576;					// 2^20 ~ 1m, it's still low, but there's no differenc
 typedef struct Gem_O gemO;
 #include "leech_utils.h"
 
-
 void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
 {
 	// utils compatibility
@@ -32,7 +31,7 @@ int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
 }
 
-void print_amps_table(gem* gems, gemO* amps, float* powers, int len)
+void print_amps_table(gem* gems, gemO* amps, double* powers, int len)
 {
 	printf("# Gems\tManagem\tAmps\tPower (resc. 1k)\n");			// we'll rescale again for 1k, no need to have 10 digits
 	int i;
@@ -419,7 +418,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gemO amps[len];								// we'll choose the best amps
 	gem gemsc[len];								// and the best NC combine
 	gemO ampsc[len];							// for both;
-	float powers[len];
+	double powers[len];
 	gem_init(gems,1,1,0);
 	gem_init_O(amps,0,0);
 	gem_init(gemsc,1,0,0);
@@ -429,10 +428,10 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem_print(gems);
 	printf("Amplifier:\n");
 	gem_print_O(amps);
-	
+
 	for (i=1;i<len;++i) {																		// for every gem value
-		gem_init(gems+i,0,0,0);																// we init the gems
-		gem_init_O(amps+i,0,0);																// to extremely weak ones
+		gem_init(gems+i, 0,0,0);															// we init the gems
+		gem_init_O(amps+i, 0,0);															// to extremely weak ones
 		gem_init(gemsc+i,0,0,0);
 		gem_init_O(ampsc+i,0,0);
 		powers[i]=0;
@@ -440,11 +439,12 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 			int NS=(i+1)+6*(j+1);																// we get the num of gems used in speccing
 			double c = log((double)NT/NS)/log(lenc);						// we compute the combination number
 			double Ca= 2.576 * pow(combO.leech,c);							// <- this is ok only for mg
-			for (k=0;k<pool_length[i];++k) {										// then we search in the gem pool
-				if (pool[i][k].leech!=0) {												// if the gem has leech we go on
-					double Pg=gem_power(pool[i][k]);
-					for (l=0; l<poolcf_length; ++l) {								// to the NC gem comb pool
-						double Palone=pow(gem_power(poolcf[l]),c) * Pg;
+			for (l=0; l<poolcf_length; ++l) {										// then we search in NC gem comb pool
+				double Cbg = pow(poolcf[l].bbound,c);
+				double Cg  = pow(gem_power(poolcf[l]),c);
+				for (k=0;k<pool_length[i];++k) {									// and in the gem pool
+					if (pool[i][k].leech!=0) {											// if the gem has leech we go on
+						double Palone = Cg * gem_power(pool[i][k]);
 						if (j==-1) {																	// if no amp is needed we compare the gem alone
 							if (Palone>powers[i]) {
 								powers[i]=Palone;
@@ -455,9 +455,8 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 							}
 						}
 						else {
-							double Pb=pow(poolcf[l].bbound,c) * pool[i][k].bbound;
 							for (h=0;h<poolO_length[j];++h) {						// else we look in the amp pool
-								double power = Palone + Pb * Ca * poolO[j][h].leech;
+								double power = Palone + Cbg * pool[i][k].bbound * Ca * poolO[j][h].leech;
 								if (power>powers[i]) {
 									powers[i]=power;
 									gems[i]=pool[i][k];

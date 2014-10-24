@@ -361,8 +361,8 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 	gem_print_Y(amps);
 	
 	for (i=1;i<len;++i) {															// for every gem value
-		gem_init(gems+i,0,0,0,0);													// we init the gems
-		gem_init_Y(amps+i,0,0,0);													// to extremely weak ones
+		gem_init(gems+i,0,0,0,0);												// we init the gems
+		gem_init_Y(amps+i,0,0,0);												// to extremely weak ones
 		spec_coeffs[i]=0;
 		for (j=-1;j<2*i+2;++j) {												// for every amp value from 0 to to 2*gem_value
 			int NS=(i+1)+6*(j+1);
