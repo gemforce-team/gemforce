@@ -33,9 +33,9 @@ int gem_amp_more_powerful(gem gem1, gemY amp1, gem gem2, gemY amp2)
 	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
 }
 
-void print_amps_table(gem* gems, gemY* amps, float* powers, int len)
+void print_amps_table(gem* gems, gemY* amps, double* powers, int len)
 {
-	printf("# Gems\tKillgem\tAmps\tPower (resc. 1m)\n");			// we'll rescale again for 10m, no need to have 10 digits
+	printf("# Gems\tKillgem\tAmps\tPower (resc. 10m)\n");			// we'll rescale again for 10m, no need to have 10 digits
 	int i;
 	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6f\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), powers[i]/10000/1000);
 	printf("\n");
@@ -590,7 +590,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gemY amps[len];								// we'll choose the best amps
 	gem gemsc[len];								// and the best NC combine
 	gemY ampsc[len];							// for both;
-	float powers[len];
+	double powers[len];
 	gem_init(gems,1,1,1,0);
 	gem_init_Y(amps,0,0,0);
 	gem_init(gemsc,1,1,0,0);
@@ -600,37 +600,44 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem_print(gems);
 	printf("Amplifier:\n");
 	gem_print_Y(amps);
-	double time=clock();
+double time=clock();
 	for (i=1;i<len;++i) {																		// for every gem value
-		gem_init(gems+i,0,0,0,0);																// we init the gems
-		gem_init_Y(amps+i,0,0,0);																// to extremely weak ones
+		gem_init(gems+i, 0,0,0,0);														// we init the gems
+		gem_init_Y(amps+i, 0,0,0);														// to extremely weak ones
 		gem_init(gemsc+i,0,0,0,0);
 		gem_init_Y(ampsc+i,0,0,0);
 		powers[i]=0;
 		for (j=-1;j<2*i+2;++j) {															// for every amp value from 0 to to 2*gem_value
 			int NS=(i+1)+6*(j+1);																// we get the num of gems used in speccing
 			double c = log((double)NT/NS)/log(lenc);						// we compute the combination number
-			for (k=0;k<pool_length[i];++k) {										// then we search in the gem pool
-				if (pool[i][k].crit!=0) {													// if the gem has crit we go on
-					double Pg=gem_power(pool[i][k]);
-					for (l=0; l<poolcf_length; ++l) {								// to the NC gem comb pool
-						double Palone=pow(gem_power(poolcf[l]),c) * Pg;
-						if (j==-1) {																	// if no amp is needed we compare the gem alone
-							if (Palone>powers[i]) {
-								powers[i]=Palone;
-								gems[i]=pool[i][k];
-								gem_init_Y(amps+i,0,0,0);
-								gemsc[i]=poolcf[l];
-								gem_init_Y(ampsc+i,0,0,0);
+			for (l=0; l<poolcf_length; ++l) {										// then we search in the NC gem comb pool
+				double Cbg = pow(poolcf[l].bbound,c);
+				double Cdg = pow(poolcf[l].damage,c);
+				double Ccg = pow(poolcf[l].crit  ,c);
+				double Cg  = pow(gem_power(poolcf[l]),c);
+				for (m=0;m<poolYf_length;++m) {										// and in the amp NC pool
+					double Cda = pow(poolYf[m].damage,c);
+					double Cca = pow(poolYf[m].crit  ,c);
+					for (k=0;k<pool_length[i];++k) {								// then we look at the gem pool
+						if (pool[i][k].crit!=0) {											// if the gem has crit we go on
+							double Palone = Cg * gem_power(pool[i][k]);
+							if (j==-1) {																// if no amp is needed we compare the gem alone
+								if (Palone>powers[i]) {
+									powers[i]=Palone;
+									gems[i]=pool[i][k];
+									gem_init_Y(amps+i,0,0,0);
+									gemsc[i]=poolcf[l];
+									gem_init_Y(ampsc+i,0,0,0);
+								}
 							}
-						}
-						else {
-							double Pb2=pow(poolcf[l].bbound,c) * pool[i][k].bbound * pow(poolcf[l].bbound,c) * pool[i][k].bbound;
-							for (h=0;h<poolY_length[j];++h) {						// else we look in the amp pool
-								for (m=0;m<poolYf_length;++m) {						// and in the amp NC pool
-									double Pdmg = pow(poolcf[l].damage,c) * pool[i][k].damage + 1.47 * pow(poolYf[m].damage,c) * poolY[j][h].damage ;
-									double Pcr  = pow(poolcf[l].crit  ,c) * pool[i][k].crit   + 2.576* pow(poolYf[m].crit  ,c) * poolY[j][h].crit   ;
-									double power = Pb2 * Pdmg * Pcr ;
+							else {
+								double Pb2 = Cbg * pool[i][k].bbound * Cbg * pool[i][k].bbound;
+								double Pdg = Cdg * pool[i][k].damage;
+								double Pcg = Ccg * pool[i][k].crit  ;
+								for (h=0;h<poolY_length[j];++h) {					// and in the amp pool
+									double Pdamage = Pdg + 1.47 * Cda * poolY[j][h].damage ;
+									double Pcrit   = Pcg + 2.576* Cca * poolY[j][h].crit   ;
+									double power   = Pb2 * Pdamage * Pcrit ;
 									if (power>powers[i]) {
 										powers[i]=power;
 										gems[i]=pool[i][k];
@@ -661,10 +668,10 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		printf("Comb:\t%d\n",lenc);
 		if (output_info) printf("Pool:\t%d\n",poolYf_length);
 		gem_print_Y(ampsc+i);
-		printf("Global power (resc. 1m):\t%f\n\n\n", powers[i]/10000/1000);
+		printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/10000/1000);
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
-printf("%.0f",clock()-time);
+printf("%.0f\n",clock()-time);
 	if (output_parens) {
 		printf("Killgem speccing scheme:\n");
 		print_parens(gems+len-1);
