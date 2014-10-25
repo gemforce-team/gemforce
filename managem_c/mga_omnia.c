@@ -434,9 +434,23 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		gem_init_O(amps+i, 0,0);															// to extremely weak ones
 		gem_init(gemsc+i,0,0,0);
 		gem_init_O(ampsc+i,0,0);
-		powers[i]=0;
-		for (j=-1;j<2*i+2;++j) {															// for every amp value from 0 to to 2*gem_value
-			int NS=(i+1)+6*(j+1);																// we get the num of gems used in speccing
+																													// first we compare the gem alone
+		for (l=0; l<poolcf_length; ++l) {											// first search in the NC gem comb pool
+			if (gem_power(poolcf[l]) > gem_power(gemsc[i])) {
+				gemsc[i]=poolcf[l];
+			}
+		}
+		for (k=0;k<pool_length[i];++k) {											// and then in the the gem pool
+			if (gem_power(pool[i][k]) > gem_power(gems[i])) {
+				gems[i]=pool[i][k];
+			}
+		}
+		int NS=i+1;
+		double c0 = log((double)NT/(i+1))/log(lenc);					// last we compute the combination number
+		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
+																													// now we compare the whole setup
+		for (j=0;j<2*i+2;++j) {																// for every amp value from 1 to to 2*gem_value
+			NS+=6;																							// we get the num of gems used in speccing
 			double c = log((double)NT/NS)/log(lenc);						// we compute the combination number
 			double Ca= 2.576 * pow(combO.leech,c);							// <- this is ok only for mg
 			for (l=0; l<poolcf_length; ++l) {										// then we search in NC gem comb pool
@@ -445,25 +459,15 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 				for (k=0;k<pool_length[i];++k) {									// and in the gem pool
 					if (pool[i][k].leech!=0) {											// if the gem has leech we go on
 						double Palone = Cg * gem_power(pool[i][k]);
-						if (j==-1) {																	// if no amp is needed we compare the gem alone
-							if (Palone>powers[i]) {
-								powers[i]=Palone;
+						double Pbg = Cbg * pool[i][k].bbound;
+						for (h=0;h<poolO_length[j];++h) {							// and we look in the amp pool
+							double power = Palone + Pbg * Ca * poolO[j][h].leech;
+							if (power>powers[i]) {
+								powers[i]=power;
 								gems[i]=pool[i][k];
-								gem_init_O(amps+i,0,0);
+								amps[i]=poolO[j][h];
 								gemsc[i]=poolcf[l];
-								gem_init_O(ampsc+i,0,0);
-							}
-						}
-						else {
-							for (h=0;h<poolO_length[j];++h) {						// else we look in the amp pool
-								double power = Palone + Cbg * pool[i][k].bbound * Ca * poolO[j][h].leech;
-								if (power>powers[i]) {
-									powers[i]=power;
-									gems[i]=pool[i][k];
-									amps[i]=poolO[j][h];
-									gemsc[i]=poolcf[l];
-									ampsc[i]=combO;
-								}
+								ampsc[i]=combO;
 							}
 						}
 					}
