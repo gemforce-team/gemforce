@@ -625,6 +625,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 			NS+=6;																							// we get the num of gems used in speccing
 			double c = log((double)NT/NS)/log(lenc);						// we compute the combination number
 			for (l=0; l<poolcf_length; ++l) {										// then we search in the NC gem comb pool
+				poolcf[l]=gemsc[i];
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cdg = pow(poolcf[l].damage,c);
 				double Ccg = pow(poolcf[l].crit  ,c);
