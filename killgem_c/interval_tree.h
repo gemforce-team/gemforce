@@ -11,7 +11,7 @@ void tree_add_element(float* tree, int N, int place, float val)
 	place+=N;
 	while (place!=1) {
 		tree[place]=max(val,tree[place]);
-		place/=2;
+		place >>= 1;		// place/=2 bitwise, it's a bit faster
 	}
 	tree[1]=max(val,tree[1]);
 }
@@ -22,7 +22,7 @@ float tree_read_max(float* tree, int N, int place)
 	float result = tree[place];
 	while (place!=1) {
 		if (place%2==0) result=max(result,tree[place+1]);
-		place/=2;
+		place >>= 1;		// place/=2 bitwise, it's a bit faster
 	}
 	return result;
 }

@@ -102,8 +102,8 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 								
 								gem_sort(temp_array,length);								// work starts
 								int broken=0;
-								int crit_cells=(int)(maxcrit*ACC)+1;											// this pool will be big from the beginning,
-								int tree_length=pow(2, ceil(log2(crit_cells)));						// but we avoid binary search
+								int crit_cells=(int)(maxcrit*ACC)+1;				// this pool will be big from the beginning, but we avoid binary search
+								int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
 								float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed
 								for (l=1; l<tree_length+crit_cells+1; ++l) tree[l]=-1;
 								for (l=length-1;l>=0;--l) {																							// start from large z
@@ -320,8 +320,8 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 						
 						gem_sort(temp_array,length);								// work starts
 						int broken=0;
-						int crit_cells=(int)(maxcrit*ACC)+1;											// this pool will be big from the beginning,
-						int tree_length=pow(2, ceil(log2(crit_cells)));						// but we avoid binary search
+								int crit_cells=(int)(maxcrit*ACC)+1;				// this pool will be big from the beginning, but we avoid binary search
+								int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
 						float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed	
 						for (l=1; l<tree_length+crit_cells+1; ++l) tree[l]=-1;
 						for (l=length-1;l>=0;--l) {																							// start from large z
@@ -384,8 +384,8 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		}
 		gem_sort(poolc[lenc-1],poolc_length[lenc-1]);								// work starts
 		int broken=0;
-		int crit_cells=(int)(maxcrit*ACC)+1;											// this pool will be big from the beginning,
-		int tree_length=pow(2, ceil(log2(crit_cells)));						// but we avoid binary search
+		int crit_cells=(int)(maxcrit*ACC)+1;				// this pool will be big from the beginning, but we avoid binary search
+		int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
 		float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed	
 		for (i=1; i<tree_length+crit_cells+1; ++i) tree[i]=-1;
 		int index;
