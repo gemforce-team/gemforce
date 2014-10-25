@@ -12,12 +12,6 @@ typedef struct Gem_O {
 	struct Gem_O* mother;
 } gem;
 
-void int_swap (int *p1, int *p2)
-{
-	int t=*p1;
-	*p1=*p2;
-	*p2=t;
-}
 
 int int_max(int a, int b)
 {
