@@ -28,7 +28,7 @@
 ;
 ; Maybe a little less obviously:
 ;
-;		g / k = copy of gem in the BOTTOM-LEFT! corner of the 12*3 craftingfield
+;		g / k / m = copy of gem in the BOTTOM-LEFT! corner of the 12*3 craftingfield
 ;
 ; Furthermore:   ### New Features ###
 ; 		
