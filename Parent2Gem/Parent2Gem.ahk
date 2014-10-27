@@ -260,6 +260,11 @@ GGem() {
 	MouseMove, CraftingField[1]-(2*FieldWidth), CraftingField[2]
 	send d
 }
+WGem() {
+	global CraftingField
+	Send {Numpad9}
+	MouseClick, left, CraftingField[1], CraftingField[2]	
+}
 
 AddtoStk() {
 	global CraftingField
@@ -354,7 +359,13 @@ While StrPos < StrLen(ParentStr) {
 		else
 			AddtoStk()		
 	}
-	
+	if (SubStr(ParentStr, StrPos, 1) = "w") {
+		WGem()
+		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+			MovetoStk()
+		else
+			AddtoStk()		
+	}
 	if ((SubStr(ParentStr, StrPos, 1) = "g") or (SubStr(ParentStr, StrPos, 1) = "k") or (SubStr(ParentStr, StrPos, 1) = "m")) {
 		if (LastGemPos != StrPos)
 			GGem()
@@ -375,6 +386,8 @@ While StrPos < StrLen(ParentStr) {
 			BGem()	
 		if (SubStr(ParentStr, StrPos + 1, 1) = "r")
 			RGem()	
+		if (SubStr(ParentStr, StrPos + 1, 1) = "r")
+			WGem()				
 		if (SubStr(ParentStr, StrPos + 1, 1) = "g") {
 			if (LastGemPos != StrPos + 1) 
 				GGem()		
