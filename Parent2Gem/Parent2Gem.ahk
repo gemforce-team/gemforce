@@ -202,7 +202,7 @@ if (InitialMode = True) {
 	
 	MsgBox The Script has been initialised and will be reloaded!
 	
-	ExitApp
+	Reload
 }
 FieldWidth := (BottomRightCornerX - TopLeftCornerX) / 3
 FieldHeight := (BottomRightCornerY - TopLeftCornerY) / 12
