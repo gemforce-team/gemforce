@@ -12,9 +12,9 @@ void print_parens(gem* gemf)
 	if (gemf->father==NULL) printf("%c",gem_color(gemf));
 	else {
 		printf("(");
-		print_parens(gemf->father);
-		printf("+");
 		print_parens(gemf->mother);
+		printf("+");
+		print_parens(gemf->father);
 		printf(")");
 	}
 	return;
