@@ -85,7 +85,7 @@ OptionsMenu() {
 
 ; ################# DDL ######################	
 	TempReadOnly := ""
-	If LastDDL != 5
+	If LastDDL != 6
 		TempReadOnly := "readonly"
 	Gui, Add, Text,, Choose your desired combine
 	Gui, Add, DropDownList, w200 Choose%LastDDL% vChosenCombine gShowCustomField, killgem_amps64-5-gem|killgem_amps64-5-amps|managem_amps256-30_ieee-gem|managem_amps256-30_ieee-amps|universal16c|Custom
