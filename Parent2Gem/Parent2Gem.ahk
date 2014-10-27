@@ -88,7 +88,7 @@ OptionsMenu() {
 	If LastDDL != 5
 		TempReadOnly := "readonly"
 	Gui, Add, Text,, Choose your desired combine
-	Gui, Add, DropDownList, w200 Choose%LastDDL% vChosenCombine gShowCustomField, killgem_amps64-5-gem|killgem_amps64-5-amps|managem_amps256-30_ieee-gem|managem_amps256-30_ieee-amps|Custom
+	Gui, Add, DropDownList, w200 Choose%LastDDL% vChosenCombine gShowCustomField, killgem_amps64-5-gem|killgem_amps64-5-amps|managem_amps256-30_ieee-gem|managem_amps256-30_ieee-amps|universal16c|Custom
 	Gui, Add, Text,, Custom Bracket Formula:        Attention! Syntaxerrors may lead to chaos!
 	Gui, Add, Edit, w400 r3 vCustomFormula %TempReadOnly%, %CurrentCustom% 
 
@@ -140,12 +140,17 @@ OptionsMenu() {
 			ParentNewStr := "((((o+o)+(o+o))+((o+o)+(o+(o+(o+o)))))+(((o+o)+(o+(o+(o+o))))+((o+(o+o))+((o+(o+o))+(o+(o+(o+(o+(o+(o+(o+o)))))))))))"			
 			LastDDL := 4
 		}	
-			
+
+		if (ChosenCombine = "universal16c") {
+			ParentNewStr := "(((((((((g+g)+g)+g)+g)+g)+g)+(g+g))+(g+g))+(((g+g)+g)+(g+g)))"
+			LastDDL := 5
+		}	
+
 		if (ChosenCombine = "Custom") {
 			ParentNewStr := CustomFormula			
-			LastDDL := 5
-		}		
-	
+			LastDDL := 6
+		}
+			
 ;		if (ChosenCombine = "") {
 ;			ParentNewStr := ""
 ;			LastDDL := 1
@@ -204,240 +209,241 @@ if (InitialMode = True) {
 	
 	Reload
 }
-FieldWidth := (BottomRightCornerX - TopLeftCornerX) / 3
-FieldHeight := (BottomRightCornerY - TopLeftCornerY) / 12
-CraftingField := [BottomRightCornerX -(FieldWidth / 2), BottomRightCornerY -(FieldHeight / 2)]
-
-SetDefaultMouseSpeed, 0
-i := 0
-j := 0
-StkCount := 1
-initPos := [TopLeftCornerX + (FieldWidth / 2), BottomRightCornerY - (FieldHeight * 1.5)]
-StackFields := []
-While i < 12 
-{
-	while j < 3 
-	{
-		StackFields[StkCount, 1] := initPos[1] + (j * FieldWidth) 
-		StackFields[StkCount, 2] := initPos[2] - (i * FieldHeight)
-		StkCount := StkCount + 1
-		j := j + 1
-	}
+	else {
+	FieldWidth := (BottomRightCornerX - TopLeftCornerX) / 3
+	FieldHeight := (BottomRightCornerY - TopLeftCornerY) / 12
+	CraftingField := [BottomRightCornerX -(FieldWidth / 2), BottomRightCornerY -(FieldHeight / 2)]
+	
+	SetDefaultMouseSpeed, 0
+	i := 0
 	j := 0
-	i := i + 1
-}	
-
-
-; For FieldNum, FieldValue in StackFields
-;	MsgBox % " Coordinates of Stack-Field #" . FieldNum .  ": " . FieldValue[1] . FieldValue[2]
-
-CurrentStk := 0
-
-OGem() {
-	global CraftingField
-	Send {Numpad7}
-	MouseClick, left, CraftingField[1], CraftingField[2]
-}
-YGem() {
-	global CraftingField
-	Send {Numpad8}
-	MouseClick, left, CraftingField[1], CraftingField[2]
-}
-BGem() {
-	global CraftingField
-	Send {Numpad1}
-	MouseClick, left, CraftingField[1], CraftingField[2]
-}
-RGem() {
-	global CraftingField
-	Send {Numpad4}
-	MouseClick, left, CraftingField[1], CraftingField[2]
-}
-
-GGem() {
-	global CraftingField
-	global FieldWidth
-	MouseMove, CraftingField[1]-(2*FieldWidth), CraftingField[2]
-	send d
-}
-WGem() {
-	global CraftingField
-	Send {Numpad9}
-	MouseClick, left, CraftingField[1], CraftingField[2]	
-}
-
-AddtoStk() {
-	global CraftingField
-	global CurrentStk
-	global StackFields
-	if CurrentStk != 0 
-		{	
-		Send g
-		MouseClickDrag, L, CraftingField[1], CraftingField[2], StackFields[CurrentStk][1], StackFields[CurrentStk][2]
-		}
-}
-
-MovetoStk() { 
-	global CraftingField
-	global CurrentStk
-	global StackFields
-	CurrentStk := CurrentStk + 1
-	MouseClickDrag, L, CraftingField[1], CraftingField[2], StackFields[CurrentStk][1], StackFields[CurrentStk][2]
-}
-
-
-PopStk() {
-	global CraftingField
-	global CurrentStk
-	global StackFields
-	if CurrentStk > 1	
+	StkCount := 1
+	initPos := [TopLeftCornerX + (FieldWidth / 2), BottomRightCornerY - (FieldHeight * 1.5)]
+	StackFields := []
+	While i < 12 
+	{
+		while j < 3 
 		{
-		Send g
-		MouseClickDrag, L, StackFields[CurrentStk][1], StackFields[CurrentStk][2], StackFields[CurrentStk - 1][1], StackFields[CurrentStk - 1][2]
-		CurrentStk := CurrentStk - 1
+			StackFields[StkCount, 1] := initPos[1] + (j * FieldWidth) 
+			StackFields[StkCount, 2] := initPos[2] - (i * FieldHeight)
+			StkCount := StkCount + 1
+			j := j + 1
 		}
-}
-
-if (CombineMode = True) {
-	StrPosEnd := StrLen(ParentStr)
-	ElementFound := False
-	While ElementFound = False {
-		if (SubStr(ParentStr, StrPosEnd, 1) != ")") {
-			ElementFound := True
-			LastGemPos := StrPosEnd
-		}
-		StrPosEnd := StrPosEnd - 1
+		j := 0
+		i := i + 1
 	}	
-}
-
-
-StrPos := 1
-Parents := []
-
-While StrPos < StrLen(ParentStr) {
-	if (SubStr(ParentStr, StrPos, 1) = "(") {
-		if ((SubStr(ParentStr, StrPos - 1, 1) = "(") or (StrPos = 1)) 
-			Parents.Insert(False)
-		else
-			Parents.Insert(True)
+	
+	
+	; For FieldNum, FieldValue in StackFields
+	;	MsgBox % " Coordinates of Stack-Field #" . FieldNum .  ": " . FieldValue[1] . FieldValue[2]
+	
+	CurrentStk := 0
+	
+	OGem() {
+		global CraftingField
+		Send {Numpad7}
+		MouseClick, left, CraftingField[1], CraftingField[2]
 	}
-
-	if (SubStr(ParentStr, StrPos, 1) = ")") {
-		if (Parents[Parents.MaxIndex()] = True)
-			PopStk()
-		Parents.remove(Parents.MaxIndex())
+	YGem() {
+		global CraftingField
+		Send {Numpad8}
+		MouseClick, left, CraftingField[1], CraftingField[2]
+	}
+	BGem() {
+		global CraftingField
+		Send {Numpad1}
+		MouseClick, left, CraftingField[1], CraftingField[2]
+	}
+	RGem() {
+		global CraftingField
+		Send {Numpad4}
+		MouseClick, left, CraftingField[1], CraftingField[2]
 	}
 	
-	if (SubStr(ParentStr, StrPos, 1) = "o") {
-		OGem()
-		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
-			MovetoStk()
-		else
-			AddtoStk()
+	GGem() {
+		global CraftingField
+		global FieldWidth
+		MouseMove, CraftingField[1]-(2*FieldWidth), CraftingField[2]
+		send d
+	}
+	WGem() {
+		global CraftingField
+		Send {Numpad9}
+		MouseClick, left, CraftingField[1], CraftingField[2]	
 	}
 	
-	if (SubStr(ParentStr, StrPos, 1) = "r") {
-		RGem()
-		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
-			MovetoStk()
-		else
-			AddtoStk()		
+	AddtoStk() {
+		global CraftingField
+		global CurrentStk
+		global StackFields
+		if CurrentStk != 0 
+			{	
+			Send g
+			MouseClickDrag, L, CraftingField[1], CraftingField[2], StackFields[CurrentStk][1], StackFields[CurrentStk][2]
+			}
 	}
 	
-	if (SubStr(ParentStr, StrPos, 1) = "b") {
-		BGem()
-		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
-			MovetoStk()
-		else
-			AddtoStk()		
+	MovetoStk() { 
+		global CraftingField
+		global CurrentStk
+		global StackFields
+		CurrentStk := CurrentStk + 1
+		MouseClickDrag, L, CraftingField[1], CraftingField[2], StackFields[CurrentStk][1], StackFields[CurrentStk][2]
 	}
 	
-	if (SubStr(ParentStr, StrPos, 1) = "y") {
-		YGem()
-		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
-			MovetoStk()
-		else
-			AddtoStk()		
-	}
-	if (SubStr(ParentStr, StrPos, 1) = "w") {
-		WGem()
-		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
-			MovetoStk()
-		else
-			AddtoStk()		
-	}
-	if ((SubStr(ParentStr, StrPos, 1) = "g") or (SubStr(ParentStr, StrPos, 1) = "k") or (SubStr(ParentStr, StrPos, 1) = "m")) {
-		if (LastGemPos != StrPos)
-			GGem()
-		else 
-			MouseClickDrag, L, CraftingField[1]-(2*FieldWidth), CraftingField[2], CraftingField[1], CraftingField[2]
-		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
-			MovetoStk()
-		else
-			AddtoStk()				
+	
+	PopStk() {
+		global CraftingField
+		global CurrentStk
+		global StackFields
+		if CurrentStk > 1	
+			{
+			Send g
+			MouseClickDrag, L, StackFields[CurrentStk][1], StackFields[CurrentStk][2], StackFields[CurrentStk - 1][1], StackFields[CurrentStk - 1][2]
+			CurrentStk := CurrentStk - 1
+			}
 	}
 	
-	if ((SubStr(ParentStr, StrPos, 1) < 10) and (SubStr(ParentStr, StrPos, 1) > 1)) {
-		if (SubStr(ParentStr, StrPos + 1, 1) = "o")
-			OGem()
-		if (SubStr(ParentStr, StrPos + 1, 1) = "y")
-			YGem()	
-		if (SubStr(ParentStr, StrPos + 1, 1) = "b")
-			BGem()	
-		if (SubStr(ParentStr, StrPos + 1, 1) = "r")
-			RGem()	
-		if (SubStr(ParentStr, StrPos + 1, 1) = "r")
-			WGem()				
-		if (SubStr(ParentStr, StrPos + 1, 1) = "g") {
-			if (LastGemPos != StrPos + 1) 
-				GGem()		
-			else 
-				MouseClickDrag, L, CraftingField[1]-(2*FieldWidth), CraftingField[2], CraftingField[1], CraftingField[2]
+	if (CombineMode = True) {
+		StrPosEnd := StrLen(ParentStr)
+		ElementFound := False
+		While ElementFound = False {
+			if (SubStr(ParentStr, StrPosEnd, 1) != ")") {
+				ElementFound := True
+				LastGemPos := StrPosEnd
+			}
+			StrPosEnd := StrPosEnd - 1
+		}	
+	}
+	
+	
+	StrPos := 1
+	Parents := []
+	
+	While StrPos < StrLen(ParentStr) {
+		if (SubStr(ParentStr, StrPos, 1) = "(") {
+			if ((SubStr(ParentStr, StrPos - 1, 1) = "(") or (StrPos = 1)) 
+				Parents.Insert(False)
+			else
+				Parents.Insert(True)
 		}
-		UCount := 1
-		While UCount <= SubStr(ParentStr, StrPos + 1, 1) {
-			MouseMove, CraftingField[1], CraftingField[2]
-			send u
-			UCount := UCount + 1
+	
+		if (SubStr(ParentStr, StrPos, 1) = ")") {
+			if (Parents[Parents.MaxIndex()] = True)
+				PopStk()
+			Parents.remove(Parents.MaxIndex())
 		}
 		
-		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
-			MovetoStk()
-		else
-			AddtoStk()		
-		StrPos := StrPos + 1
+		if (SubStr(ParentStr, StrPos, 1) = "o") {
+			OGem()
+			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+				MovetoStk()
+			else
+				AddtoStk()
+		}
+		
+		if (SubStr(ParentStr, StrPos, 1) = "r") {
+			RGem()
+			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+				MovetoStk()
+			else
+				AddtoStk()		
+		}
+		
+		if (SubStr(ParentStr, StrPos, 1) = "b") {
+			BGem()
+			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+				MovetoStk()
+			else
+				AddtoStk()		
+		}
+		
+		if (SubStr(ParentStr, StrPos, 1) = "y") {
+			YGem()
+			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+				MovetoStk()
+			else
+				AddtoStk()		
+		}
+		if (SubStr(ParentStr, StrPos, 1) = "w") {
+			WGem()
+			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+				MovetoStk()
+			else
+				AddtoStk()		
+		}
+		if ((SubStr(ParentStr, StrPos, 1) = "g") or (SubStr(ParentStr, StrPos, 1) = "k") or (SubStr(ParentStr, StrPos, 1) = "m")) {
+			if (LastGemPos != StrPos)
+				GGem()
+			else 
+				MouseClickDrag, L, CraftingField[1]-(2*FieldWidth), CraftingField[2], CraftingField[1], CraftingField[2]
+			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+				MovetoStk()
+			else
+				AddtoStk()				
+		}
+		
+		if ((SubStr(ParentStr, StrPos, 1) < 10) and (SubStr(ParentStr, StrPos, 1) > 1)) {
+			if (SubStr(ParentStr, StrPos + 1, 1) = "o")
+				OGem()
+			if (SubStr(ParentStr, StrPos + 1, 1) = "y")
+				YGem()	
+			if (SubStr(ParentStr, StrPos + 1, 1) = "b")
+				BGem()	
+			if (SubStr(ParentStr, StrPos + 1, 1) = "r")
+				RGem()	
+			if (SubStr(ParentStr, StrPos + 1, 1) = "r")
+				WGem()				
+			if (SubStr(ParentStr, StrPos + 1, 1) = "g") {
+				if (LastGemPos != StrPos + 1) 
+					GGem()		
+				else 
+					MouseClickDrag, L, CraftingField[1]-(2*FieldWidth), CraftingField[2], CraftingField[1], CraftingField[2]
+			}
+			UCount := 1
+			While UCount <= SubStr(ParentStr, StrPos + 1, 1) {
+				MouseMove, CraftingField[1], CraftingField[2]
+				send u
+				UCount := UCount + 1
+			}
+			
+			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+				MovetoStk()
+			else
+				AddtoStk()		
+			StrPos := StrPos + 1
+		}
+		
+		if (SubStr(ParentStr, StrPos, 1) = "a") {
+			MouseClickDrag, L, TopLeftCornerX + (FieldWidth / 2), TopLeftCornerY + (FieldHeight / 2), CraftingField[1], CraftingField[2]
+			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+				MovetoStk()
+			else
+				AddtoStk()		
+		
+		}
+		if (SubStr(ParentStr, StrPos, 1) = "s") {
+			MouseClickDrag, L, TopLeftCornerX + (FieldWidth * 1.5), TopLeftCornerY + (FieldHeight / 2), CraftingField[1], CraftingField[2]
+			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+				MovetoStk()
+			else
+				AddtoStk()		
+		
+		}
+		if (SubStr(ParentStr, StrPos, 1) = "d") {
+			MouseClickDrag, L, TopLeftCornerX + (FieldWidth * 2.5), TopLeftCornerY + (FieldHeight / 2), CraftingField[1], CraftingField[2]
+			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+				MovetoStk()
+			else
+				AddtoStk()		
+		
+		}
+		StrPos := StrPos + 1	
 	}
-	
-	if (SubStr(ParentStr, StrPos, 1) = "a") {
-		MouseClickDrag, L, TopLeftCornerX + (FieldWidth / 2), TopLeftCornerY + (FieldHeight / 2), CraftingField[1], CraftingField[2]
-		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
-			MovetoStk()
-		else
-			AddtoStk()		
-	
+	while CurrentStk > 1 {
+		PopStk()
 	}
-	if (SubStr(ParentStr, StrPos, 1) = "s") {
-		MouseClickDrag, L, TopLeftCornerX + (FieldWidth * 1.5), TopLeftCornerY + (FieldHeight / 2), CraftingField[1], CraftingField[2]
-		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
-			MovetoStk()
-		else
-			AddtoStk()		
-	
-	}
-	if (SubStr(ParentStr, StrPos, 1) = "d") {
-		MouseClickDrag, L, TopLeftCornerX + (FieldWidth * 2.5), TopLeftCornerY + (FieldHeight / 2), CraftingField[1], CraftingField[2]
-		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
-			MovetoStk()
-		else
-			AddtoStk()		
-	
-	}
-	StrPos := StrPos + 1	
 }
-while CurrentStk > 1 {
-	PopStk()
-}
-
 
 
 Return
