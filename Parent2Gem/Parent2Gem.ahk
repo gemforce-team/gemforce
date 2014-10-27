@@ -49,7 +49,7 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 InitialMode := False ; Initialisation
-;CoordMode, Mouse, Screen
+CoordMode, Mouse, Screen
 CurrentCustom := "(g+g)+(g+g)"
 LastDDL := 5
 ;             I
