@@ -254,7 +254,7 @@ While StrPos < StrLen(ParentStr) {
 			BGem()	
 		if (SubStr(ParentStr, StrPos + 1, 1) = "r")
 			RGem()	
-		if (SubStr(ParentStr, StrPos + 1, 1) = "g") {
+		if ((SubStr(ParentStr, StrPos + 1, 1) = "g")  or (SubStr(ParentStr, StrPos, 1) = "k") or (SubStr(ParentStr, StrPos, 1) = "m")) {
 			if (LastGemPos != StrPos + 1) 
 				GGem()		
 			else 
