@@ -48,14 +48,14 @@
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-InitialMode := True  ; Initialisation
-CoordMode, Mouse, Screen
-CurrentCustom := ""
-LastDDL := 1
+InitialMode := False ; Initialisation
+;CoordMode, Mouse, Screen
+CurrentCustom := "(g+g)+(g+g)"
+LastDDL := 5
 ;             I
 ; #####      V V       																					 #########
 ; #####       V        INSERT THE SCHEME TO BE COMBINED INBETWEEN THE QUTATION-MARKS IN THE LINE BELOW   #########
-ParentStr := ""
+ParentStr := "(g+g)+(g+g)"
 
 ; #####   						The default example is some random 1024 combine							 #########
 
@@ -181,7 +181,7 @@ OptionsMenu() {
 CombineMode := True
 LastGemPos := 1
 
-TopLeftCornerX := 1122 				;  ####### ENTER THE COORDINATES OF THE 3*12 CRAFTINGFIELD ON YOUR SCREEN #########
+TopLeftCornerX := 1590 				;  ####### ENTER THE COORDINATES OF THE 3*12 CRAFTINGFIELD ON YOUR SCREEN #########
 TopLeftCornerY := 338				;	###### If you don't know how to obtain those values, you'd better  ########
 BottomRightCornerX := 1436			;    ##### ask somebody. They don't have to be really precise.     #######
 BottomRightCornerY := 686			;	  #### AND THAT'S IT! The script should work for you now!  ######
@@ -192,11 +192,11 @@ if (InitialMode = True) {
 	MsgBox Place your mouse over the top-left corner of the 12*3 craftingfield and press ENTER 
 		MouseGetPos, TLCX, TLCY
 		PGScript := RegExReplace(PGScript, "TopLeftCornerX := [0-9]+", "TopLeftCornerX := " TLCX, , 1)  
-		PGScript := RegExReplace(PGScript, "TopLeftCornerY := [0-9]+ ", "TopLeftCornerY := " TLCY, , 1)  	
+		PGScript := RegExReplace(PGScript, "TopLeftCornerY := [0-9]+", "TopLeftCornerY := " TLCY, , 1)  	
 	MsgBox Place your mouse over the bottom-right corner of the 12*3 craftingfield and press ENTER
 		MouseGetPos, BRCX, BRCY
-		PGScript := RegExReplace(PGScript, "BottomRightCornerX := [0-9]+ ", "BottomRightCornerX := "BRCX, , 1)  
-		PGScript := RegExReplace(PGScript, "BottomRightCornerY := [0-9]+ ", "BottomRightCornerY := "BRCY, , 1)
+		PGScript := RegExReplace(PGScript, "BottomRightCornerX := [0-9]+", "BottomRightCornerX := "BRCX, , 1)  
+		PGScript := RegExReplace(PGScript, "BottomRightCornerY := [0-9]+", "BottomRightCornerY := "BRCY, , 1)
 		PGScript := RegExReplace(PGScript, "InitialMode := True  `; Init", "InitialMode := False `; Init", , 1)
 	FileAppend, %PGScript%, Parent2Gem.ahk
 	
@@ -434,4 +434,10 @@ While StrPos < StrLen(ParentStr) {
 	}
 	StrPos := StrPos + 1	
 }
+while CurrentStk > 1 {
+	PopStk()
+}
+
+
+
 Return
