@@ -23,7 +23,7 @@
 ; ###  Syntax for the Bracket-Formula ###
 ;
 ; Obviously: 
-; 		r = Red / b = Black / o = orange / y = yellow
+; 		r = Red / b = Black / o = orange / y = yellow / w = white
 ;
 ; Maybe a little less obviously:
 ;
@@ -97,7 +97,11 @@ While i < 12
 ;	MsgBox % " Coordinates of Stack-Field #" . FieldNum .  ": " . FieldValue[1] . FieldValue[2]
 
 CurrentStk := 0
-
+WGem() {
+	global CraftingField
+	Send {Numpad9}
+	MouseClick, left, CraftingField[1], CraftingField[2]
+}
 OGem() {
 	global CraftingField
 	Send {Numpad7}
@@ -188,6 +192,14 @@ While StrPos < StrLen(ParentStr) {
 		Parents.remove(Parents.MaxIndex())
 	}
 	
+	if (SubStr(ParentStr, StrPos, 1) = "w") {
+		WGem()
+		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
+			MovetoStk()
+		else
+			AddtoStk()
+	}	
+	
 	if (SubStr(ParentStr, StrPos, 1) = "o") {
 		OGem()
 		if (SubStr(ParentStr, StrPos - 1, 1) = "(")
@@ -232,6 +244,8 @@ While StrPos < StrLen(ParentStr) {
 	}
 	
 	if ((SubStr(ParentStr, StrPos, 1) < 10) and (SubStr(ParentStr, StrPos, 1) > 1)) {
+		if (SubStr(ParentStr, StrPos + 1, 1) = "w")
+			WGem()
 		if (SubStr(ParentStr, StrPos + 1, 1) = "o")
 			OGem()
 		if (SubStr(ParentStr, StrPos + 1, 1) = "y")
