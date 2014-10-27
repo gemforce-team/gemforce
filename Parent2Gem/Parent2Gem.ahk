@@ -50,42 +50,160 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 InitialMode := True  ; Initialisation
 CoordMode, Mouse, Screen
-
-!C::
+CurrentCustom := ""
+LastDDL := 1
 ;             I
 ; #####      V V       																					 #########
 ; #####       V        INSERT THE SCHEME TO BE COMBINED INBETWEEN THE QUTATION-MARKS IN THE LINE BELOW   #########
-ParentStr := "(((((((g+g)+(g+g))+((g+g)+(g+g)))+(((g+g)+(g+g))+((g+g)+(g+g))))+((((g+g)+(g+g))+((g+g)+(g+g)))+(((g+g)+(g+g))+((g+g)+(g+(g+(g+(g+g))))))))+(((((g+g)+(g+g))+((g+g)+(g+g)))+(((g+g)+(g+g))+((g+g)+(g+(g+(g+(g+g)))))))+((((g+g)+(g+g))+((g+g)+(g+(g+(g+(g+g))))))+(((g+g)+(g+(g+(g+(g+g)))))+((g+(g+(g+g)))+((g+(g+g))+((g+g)+((g+g)+(g+(g+(g+(g+g))))))))))))+((((((g+g)+(g+g))+((g+g)+(g+g)))+(((g+g)+(g+g))+((g+g)+(g+(g+(g+(g+g)))))))+((((g+g)+(g+g))+((g+g)+(g+(g+(g+(g+g))))))+(((g+g)+(g+(g+(g+(g+g)))))+((g+(g+(g+g)))+((g+(g+g))+((g+g)+((g+g)+(g+(g+(g+(g+g)))))))))))+(((((g+g)+(g+g))+((g+g)+(g+(g+(g+(g+g))))))+(((g+g)+(g+(g+(g+(g+g)))))+((g+(g+(g+g)))+((g+(g+g))+((g+g)+((g+g)+(g+(g+(g+(g+g))))))))))+((((g+g)+(g+(g+(g+(g+g)))))+((g+(g+(g+g)))+((g+(g+g))+((g+g)+((g+g)+(g+(g+(g+(g+g)))))))))+(((g+(g+(g+g)))+((g+(g+g))+((g+g)+(g+(g+(g+(g+g)))))))+(((g+(g+g))+((g+g)+(g+(g+(g+(g+(g+g)))))))+(((g+g)+((g+g)+(g+(g+(g+(g+g))))))+((g+(g+(g+(g+(g+g)))))+((g+(g+(g+g)))+((g+(g+g))+((g+(g+g))+((g+g)+(g+(g+(g+(g+(g+g)))))))))))))))))"
+ParentStr := ""
 
 ; #####   						The default example is some random 1024 combine							 #########
+
+
+!V:: 
+	OptionsMenu()
+return
+
+
+OptionsMenu() {
+	Global ParentStr
+	Global ChosenCombine
+	Global ParentNewStr
+	Global ChosenIniMode
+	Global IsIniChecked
+	Global InitialMode
+	Global CustomFormula
+	Global PGScript
+	Global CustomTemp
+	Global LastDDL
+	Global CurrentCustom
+	Global LastDDLTemp
+	Global TempReadOnly
+	
+	Gui, New,, Options
+	GuiHWND := WinExist()
+
+; ################# DDL ######################	
+	TempReadOnly := ""
+	If LastDDL != 5
+		TempReadOnly := "readonly"
+	Gui, Add, Text,, Choose your desired combine
+	Gui, Add, DropDownList, w200 Choose%LastDDL% vChosenCombine gShowCustomField, killgem_amps64-5-gem|killgem_amps64-5-amps|managem_amps256-30_ieee-gem|managem_amps256-30_ieee-amps|Custom
+	Gui, Add, Text,, Custom Bracket Formula:        Attention! Syntaxerrors may lead to chaos!
+	Gui, Add, Edit, w400 r3 vCustomFormula %TempReadOnly%, %CurrentCustom% 
+
+
+; ################# INITMODE ################	
+
+	Gui, Add, Text,, `n`n In order to reset the coordinates check the following option`: `n
+	If (InitialMode = False)
+		IsIniChecked := ""
+	If (InitialMode = True)
+		IsIniChecked := "Checked"
+	Gui, Add, Checkbox, vChosenIniMode %IsIniChecked%, Initialisation-Mode 	
+	Gui, Add, Text,, If checked, you will be asked for coordinates the next time the CombiningHotkey is pressed.`n CombiningHotkey is Alt C by default. 
+
+;###############Wait For Input ##############
+
+	Gui, Add, Button, default, Ok 
+	Gui, Show
+	WinWaitClose, ahk_id %GuiHWND%
+	return                
+
+;############### SUBS / Labels #############	
+
+	ShowCustomField: 
+		GuiControlGet, StatusOfDll, , ChosenCombine
+		if (StatusOfDll = "custom")
+			GuiControl, -readonly, CustomFormula
+		else
+			GuiControl, +readonly, CustomFormula
+	return
+	
+	ButtonOk:
+		Gui, Submit
+		if (ChosenCombine = "killgem_amps64-5-gem") {
+			ParentNewStr := "((((b+((b+y)+(y+y)))+((b+(b+y))+(b+(b+(b+b)))))+(((b+b)+(b+(y+y)))+(((b+y)+(y+y))+((y+y)+(y+(y+(y+(y+y))))))))+((((b+(b+y))+(b+(y+y)))+((b+(b+y))+(b+(b+(b+(b+b))))))+(((b+(b+y))+(b+(b+(b+b))))+((b+(b+(b+b)))+((b+(b+b))+((b+(b+b))+(b+(b+(b+(b+b))))))))))"
+			LastDDL := 1
+		}	
+		if (ChosenCombine = "killgem_amps64-5-amps") {
+			ParentNewStr := "((y+y)+(y+(y+y)))"
+			LastDDL := 2
+		}	
+			
+		if (ChosenCombine = "managem_amps256-30_ieee-gem") {
+			ParentNewStr := "(((((((b+o)+(b+b))+(b+((o+o)+(b+o))))+(((b+o)+(b+b))+((b+b)+(b+(b+(b+(b+b)))))))+((((b+o)+(b+b))+(b+((o+o)+(o+(o+o)))))+((b+((o+o)+(b+o)))+(((o+o)+(b+o))+((o+o)+(o+(o+(o+(o+(o+(o+o)))))))))))+(((((b+o)+(b+b))+(b+((o+o)+(o+(o+o)))))+(((b+o)+(b+b))+((b+b)+(b+(b+(b+(b+b)))))))+((((b+o)+(b+b))+((b+b)+(b+(b+(b+(b+b))))))+(((b+b)+(b+(b+(b+(b+b)))))+((b+(b+(b+(b+b))))+((b+(b+(b+b)))+((b+(b+b))+((b+b)+(b+(b+(b+(b+(b+b)))))))))))))+((((((b+o)+(b+b))+(b+((b+o)+(o+(o+o)))))+(((b+o)+(b+b))+((b+b)+(b+(b+(b+(b+b)))))))+((((b+o)+(b+b))+(b+((b+o)+(o+(o+o)))))+((b+((o+o)+(b+o)))+(((o+o)+(b+o))+((o+(o+o))+(o+(o+(o+(o+(o+(o+o)))))))))))+(((((b+o)+(b+b))+(b+((b+o)+(o+(o+o)))))+((b+((o+o)+(b+o)))+(((b+o)+(o+(o+o)))+((o+(o+o))+(o+(o+(o+(o+(o+(o+o))))))))))+(((b+((o+o)+(b+o)))+((b+(o+o))+((o+o)+(o+(o+(o+(o+(o+o))))))))+((((o+o)+(b+o))+((o+(o+o))+(o+(o+(o+(o+(o+(o+o))))))))+(((o+o)+(o+(o+(o+(o+(o+o))))))+(((o+o)+(o+(o+(o+(o+(o+o))))))+((o+(o+(o+(o+o))))+((o+(o+(o+o)))+((o+(o+o))+((o+(o+o))+(o+(o+(o+(o+(o+(o+(o+o))))))))))))))))))"
+			LastDDL := 3
+		}		
+	
+		if (ChosenCombine = "managem_amps256-30_ieee-amps") {
+			ParentNewStr := "((((o+o)+(o+o))+((o+o)+(o+(o+(o+o)))))+(((o+o)+(o+(o+(o+o))))+((o+(o+o))+((o+(o+o))+(o+(o+(o+(o+(o+(o+(o+o)))))))))))"			
+			LastDDL := 4
+		}	
+			
+		if (ChosenCombine = "Custom") {
+			ParentNewStr := CustomFormula			
+			LastDDL := 5
+		}		
+	
+;		if (ChosenCombine = "") {
+;			ParentNewStr := ""
+;			LastDDL := 1
+;		}	
+			
+		if (ChosenCombine = "")
+			ParentNewStr := ParentStr		
+	
+		FileRead, PGScript, Parent2Gem.ahk
+		FileDelete, Parent2Gem.ahk
+		ParentNewStr = ParentStr := "%ParentNewStr%" 
+		PGScript := RegExReplace(PGScript, "ParentStr := ""[A-Za-z0-9()+]*""", ParentNewStr, , 1)  
+		
+		CustomTemp = CurrentCustom := "%CustomFormula%"
+		if (ChosenCombine = "Custom") 
+			PGScript := RegExReplace(PGScript, "CurrentCustom := "".*""", CustomTemp, , 1)		
+		
+		LastDDLTemp = LastDDL := %LastDDL%
+		PGScript := RegExReplace(PGScript, "LastDDL := [0-9]*", LastDDLTemp, , 1)	
+		
+		if ((ChosenIniMode = 0) and (InitialMode = True))
+			PGScript := RegExReplace(PGScript, "InitialMode := True  `; Init", "InitialMode := False `; Init", , 1)
+		if ((ChosenIniMode = 1) and (InitialMode = False))
+			PGScript := RegExReplace(PGScript, "InitialMode := False `; Init", "InitialMode := True  `; Init", , 1)	
+	
+		FileAppend, %PGScript%, Parent2Gem.ahk		
+		Gui, Destroy
+	Reload
+}
+!C::
+
+
+CombineMode := True
+LastGemPos := 1
+
+TopLeftCornerX := 1122 				;  ####### ENTER THE COORDINATES OF THE 3*12 CRAFTINGFIELD ON YOUR SCREEN #########
+TopLeftCornerY := 338				;	###### If you don't know how to obtain those values, you'd better  ########
+BottomRightCornerX := 1436			;    ##### ask somebody. They don't have to be really precise.     #######
+BottomRightCornerY := 686			;	  #### AND THAT'S IT! The script should work for you now!  ######
 
 if (InitialMode = True) {
 	FileRead, PGScript, Parent2Gem.ahk
 	FileDelete, Parent2Gem.ahk
 	MsgBox Place your mouse over the top-left corner of the 12*3 craftingfield and press ENTER 
-	MouseGetPos, TLCX, TLCY
-	PGScript := RegExReplace(PGScript, "TopLeftCornerX := [0-9]+", "TopLeftCornerX := " TLCX)  
-	PGScript := RegExReplace(PGScript, "TopLeftCornerY := [0-9]+ ", "TopLeftCornerY := " TLCY)  	
+		MouseGetPos, TLCX, TLCY
+		PGScript := RegExReplace(PGScript, "TopLeftCornerX := [0-9]+", "TopLeftCornerX := " TLCX, , 1)  
+		PGScript := RegExReplace(PGScript, "TopLeftCornerY := [0-9]+ ", "TopLeftCornerY := " TLCY, , 1)  	
 	MsgBox Place your mouse over the bottom-right corner of the 12*3 craftingfield and press ENTER
-	MouseGetPos, BRCX, BRCY
-	PGScript := RegExReplace(PGScript, "BottomRightCornerX := [0-9]+ ", "TopLeftCornerX := "BRCX)  
-	PGScript := RegExReplace(PGScript, "BottomRightCornerY := [0-9]+ ", "TopLeftCornerX := "BRCY)
-	PGScript := RegExReplace(PGScript, "InitialMode := True  `; Init", "InitialMode := False `; Init")
+		MouseGetPos, BRCX, BRCY
+		PGScript := RegExReplace(PGScript, "BottomRightCornerX := [0-9]+ ", "BottomRightCornerX := "BRCX, , 1)  
+		PGScript := RegExReplace(PGScript, "BottomRightCornerY := [0-9]+ ", "BottomRightCornerY := "BRCY, , 1)
+		PGScript := RegExReplace(PGScript, "InitialMode := True  `; Init", "InitialMode := False `; Init", , 1)
 	FileAppend, %PGScript%, Parent2Gem.ahk
 	
-	MsgBox The Script has been initialised and will be terminated upon pressing "OK". Needs to be restarted!
+	MsgBox The Script has been initialised and will be reloaded!
 	
 	ExitApp
 }
-
-CombineMode := True
-LastGemPos := 1
-
-TopLeftCornerX :=  				;  ####### ENTER THE COORDINATES OF THE 3*12 CRAFTINGFIELD ON YOUR SCREEN #########
-TopLeftCornerY := 338				;	###### If you don't know how to obtain those values, you'd better  ########
-TopLeftCornerX := 1436			;    ##### ask somebody. They don't have to be really precise.     #######
-TopLeftCornerX := 686			;	  #### AND THAT'S IT! The script should work for you now!  ######
-
 FieldWidth := (BottomRightCornerX - TopLeftCornerX) / 3
 FieldHeight := (BottomRightCornerY - TopLeftCornerY) / 12
 CraftingField := [BottomRightCornerX -(FieldWidth / 2), BottomRightCornerY -(FieldHeight / 2)]
