@@ -24,20 +24,20 @@
 ; ###  Syntax for the Bracket-Formula ###
 ;
 ; Obviously: 
-; 		r = Red / b = Black / o = orange / y = yellow
+;		r = red / b = black / o = orange / y = yellow / w = white
 ;
 ; Maybe a little less obviously:
 ;
 ;		g / k = copy of gem in the BOTTOM-LEFT! corner of the 12*3 craftingfield
 ;
 ; Furthermore:   ### New Features ###
-; 		
+;		
 ;		the numerals 2 to 9 followed by any of the above = Corresponding color (or duplicate, respectively), upgraded 1 to 8 times 
 ;		
 ;		Examples: 9o / 2g = Orange upgraded 8 times (grade 9) / Base-gem (BottomLeft corner) upgraded once
 ;		(Needless to say, the upgrading happens via the "u"-button.) 
 ;
-; And: 			
+; And:
 ;
 ;		a / s / d  =  use (left / middle / right) gem in the top row of the 3*12 craftingfield
 ;		
@@ -53,8 +53,8 @@ CoordMode, Mouse, Screen
 CurrentCustom := "(g+g)+(g+g)"
 LastDDL := 5
 ;             I
-; #####      V V       																					 #########
-; #####       V        INSERT THE SCHEME TO BE COMBINED INBETWEEN THE QUTATION-MARKS IN THE LINE BELOW   #########
+; #####      V V       																					#########
+; #####       V        INSERT THE SCHEME TO BE COMBINED INBETWEEN THE QUOTATION-MARKS IN THE LINE BELOW   #########
 ParentStr := "(g+g)+(g+g)"
 
 ; #####   						The default example is some random 1024 combine							 #########
@@ -83,7 +83,7 @@ OptionsMenu() {
 	Gui, New,, Options
 	GuiHWND := WinExist()
 
-; ################# DDL ######################	
+; ################# DDL ######################
 	TempReadOnly := ""
 	If LastDDL != 6
 		TempReadOnly := "readonly"
@@ -93,7 +93,7 @@ OptionsMenu() {
 	Gui, Add, Edit, w400 r3 vCustomFormula %TempReadOnly%, %CurrentCustom% 
 
 
-; ################# INITMODE ################	
+; ################# INITMODE ################
 
 	Gui, Add, Text,, `n`n In order to reset the coordinates check the following option`: `n
 	If (InitialMode = False)
@@ -103,14 +103,14 @@ OptionsMenu() {
 	Gui, Add, Checkbox, vChosenIniMode %IsIniChecked%, Initialisation-Mode 	
 	Gui, Add, Text,, If checked, you will be asked for coordinates the next time the CombiningHotkey is pressed.`n CombiningHotkey is Alt C by default. 
 
-;###############Wait For Input ##############
+;############## Wait For Input ##############
 
 	Gui, Add, Button, default, Ok 
 	Gui, Show
 	WinWaitClose, ahk_id %GuiHWND%
 	return                
 
-;############### SUBS / Labels #############	
+;############### SUBS / Labels #############
 
 	ShowCustomField: 
 		GuiControlGet, StatusOfDll, , ChosenCombine
@@ -147,7 +147,7 @@ OptionsMenu() {
 		}	
 
 		if (ChosenCombine = "Custom") {
-			ParentNewStr := CustomFormula			
+			ParentNewStr := CustomFormula
 			LastDDL := 6
 		}
 			
@@ -157,7 +157,7 @@ OptionsMenu() {
 ;		}	
 			
 		if (ChosenCombine = "")
-			ParentNewStr := ParentStr		
+			ParentNewStr := ParentStr
 	
 		FileRead, PGScript, Parent2Gem.ahk
 		FileDelete, Parent2Gem.ahk
@@ -166,17 +166,17 @@ OptionsMenu() {
 		
 		CustomTemp = CurrentCustom := "%CustomFormula%"
 		if (ChosenCombine = "Custom") 
-			PGScript := RegExReplace(PGScript, "CurrentCustom := "".*""", CustomTemp, , 1)		
+			PGScript := RegExReplace(PGScript, "CurrentCustom := "".*""", CustomTemp, , 1)
 		
 		LastDDLTemp = LastDDL := %LastDDL%
-		PGScript := RegExReplace(PGScript, "LastDDL := [0-9]*", LastDDLTemp, , 1)	
+		PGScript := RegExReplace(PGScript, "LastDDL := [0-9]*", LastDDLTemp, , 1)
 		
 		if ((ChosenIniMode = 0) and (InitialMode = True))
 			PGScript := RegExReplace(PGScript, "InitialMode := True  `; Init", "InitialMode := False `; Init", , 1)
 		if ((ChosenIniMode = 1) and (InitialMode = False))
 			PGScript := RegExReplace(PGScript, "InitialMode := False `; Init", "InitialMode := True  `; Init", , 1)	
 	
-		FileAppend, %PGScript%, Parent2Gem.ahk		
+		FileAppend, %PGScript%, Parent2Gem.ahk
 		Gui, Destroy
 	Reload
 }
@@ -186,21 +186,21 @@ OptionsMenu() {
 CombineMode := True
 LastGemPos := 1
 
-TopLeftCornerX := 1590 				;  ####### ENTER THE COORDINATES OF THE 3*12 CRAFTINGFIELD ON YOUR SCREEN #########
-TopLeftCornerY := 338				;	###### If you don't know how to obtain those values, you'd better  ########
-BottomRightCornerX := 1436			;    ##### ask somebody. They don't have to be really precise.     #######
-BottomRightCornerY := 686			;	  #### AND THAT'S IT! The script should work for you now!  ######
+TopLeftCornerX := 1590 				;		####### ENTER THE COORDINATES OF THE 3*12 CRAFTINGFIELD ON YOUR SCREEN #########
+TopLeftCornerY := 338					;		###### If you don't know how to obtain those values, you'd better  ########
+BottomRightCornerX := 1436		;			##### ask somebody. They don't have to be really precise.     #######
+BottomRightCornerY := 686			;			#### AND THAT'S IT! The script should work for you now!  ######
 
 if (InitialMode = True) {
 	FileRead, PGScript, Parent2Gem.ahk
 	FileDelete, Parent2Gem.ahk
 	MsgBox Place your mouse over the top-left corner of the 12*3 craftingfield and press ENTER 
 		MouseGetPos, TLCX, TLCY
-		PGScript := RegExReplace(PGScript, "TopLeftCornerX := [0-9]+", "TopLeftCornerX := " TLCX, , 1)  
-		PGScript := RegExReplace(PGScript, "TopLeftCornerY := [0-9]+", "TopLeftCornerY := " TLCY, , 1)  	
+		PGScript := RegExReplace(PGScript, "TopLeftCornerX := [0-9]+", "TopLeftCornerX := " TLCX, , 1)
+		PGScript := RegExReplace(PGScript, "TopLeftCornerY := [0-9]+", "TopLeftCornerY := " TLCY, , 1)
 	MsgBox Place your mouse over the bottom-right corner of the 12*3 craftingfield and press ENTER
 		MouseGetPos, BRCX, BRCY
-		PGScript := RegExReplace(PGScript, "BottomRightCornerX := [0-9]+", "BottomRightCornerX := "BRCX, , 1)  
+		PGScript := RegExReplace(PGScript, "BottomRightCornerX := [0-9]+", "BottomRightCornerX := "BRCX, , 1)
 		PGScript := RegExReplace(PGScript, "BottomRightCornerY := [0-9]+", "BottomRightCornerY := "BRCY, , 1)
 		PGScript := RegExReplace(PGScript, "InitialMode := True  `; Init", "InitialMode := False `; Init", , 1)
 	FileAppend, %PGScript%, Parent2Gem.ahk
@@ -209,12 +209,12 @@ if (InitialMode = True) {
 	
 	Reload
 }
-	else {
+else {
 	FieldWidth := (BottomRightCornerX - TopLeftCornerX) / 3
 	FieldHeight := (BottomRightCornerY - TopLeftCornerY) / 12
 	CraftingField := [BottomRightCornerX -(FieldWidth / 2), BottomRightCornerY -(FieldHeight / 2)]
 	
-	SetDefaultMouseSpeed, 0
+	SetDefaultMouseSpeed, 0		; #### Here you can change mouse speed (0=istant, 100=slowest)
 	i := 0
 	j := 0
 	StkCount := 1
@@ -259,17 +259,17 @@ if (InitialMode = True) {
 		Send {Numpad4}
 		MouseClick, left, CraftingField[1], CraftingField[2]
 	}
+	WGem() {
+		global CraftingField
+		Send {Numpad9}
+		MouseClick, left, CraftingField[1], CraftingField[2]	
+	}
 	
 	GGem() {
 		global CraftingField
 		global FieldWidth
 		MouseMove, CraftingField[1]-(2*FieldWidth), CraftingField[2]
 		send d
-	}
-	WGem() {
-		global CraftingField
-		Send {Numpad9}
-		MouseClick, left, CraftingField[1], CraftingField[2]	
 	}
 	
 	AddtoStk() {
@@ -392,7 +392,7 @@ if (InitialMode = True) {
 				BGem()	
 			if (SubStr(ParentStr, StrPos + 1, 1) = "r")
 				RGem()	
-			if (SubStr(ParentStr, StrPos + 1, 1) = "r")
+			if (SubStr(ParentStr, StrPos + 1, 1) = "w")
 				WGem()				
 			if (SubStr(ParentStr, StrPos + 1, 1) = "g") {
 				if (LastGemPos != StrPos + 1) 
@@ -410,7 +410,7 @@ if (InitialMode = True) {
 			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
 				MovetoStk()
 			else
-				AddtoStk()		
+				AddtoStk()
 			StrPos := StrPos + 1
 		}
 		
@@ -419,7 +419,7 @@ if (InitialMode = True) {
 			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
 				MovetoStk()
 			else
-				AddtoStk()		
+				AddtoStk()
 		
 		}
 		if (SubStr(ParentStr, StrPos, 1) = "s") {
@@ -427,7 +427,7 @@ if (InitialMode = True) {
 			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
 				MovetoStk()
 			else
-				AddtoStk()		
+				AddtoStk()
 		
 		}
 		if (SubStr(ParentStr, StrPos, 1) = "d") {
@@ -435,10 +435,10 @@ if (InitialMode = True) {
 			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
 				MovetoStk()
 			else
-				AddtoStk()		
+				AddtoStk()
 		
 		}
-		StrPos := StrPos + 1	
+		StrPos := StrPos + 1
 	}
 	while CurrentStk > 1 {
 		PopStk()
