@@ -84,8 +84,10 @@ OptionsMenu() {
 	return
 	
 	ButtonSetupScript:
-		if (InitialMode = False)
+		if (InitialMode = False) {
 			PGScript := RegExReplace(PGScript, "InitialMode := False `; Init", "InitialMode := True  `; Init", , 1)	
+			InitialMode := True
+		}
 		FileRead, PGScript, Parent2Gem.ahk
 		FileDelete, Parent2Gem.ahk
 		MsgBox Place your mouse over the top-left corner of the 12*3 craftingfield and press ENTER 
