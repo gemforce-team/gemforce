@@ -122,6 +122,25 @@ int gem_getvalue_Y(gemY* p_gem)
 	else return gem_getvalue_Y(p_gem->father)+gem_getvalue_Y(p_gem->mother);
 }
 
+void print_parens_compressed_Y(gemY* gemf)
+{
+	if (gemf->father==NULL) {
+		printf("y");
+		return;
+	}
+	else if (pow(2,gemf->grade-1)==gem_getvalue_Y(gemf)) {				// if gem is standard combine
+		printf("%dy",gemf->grade);
+		return;
+	}
+	else {
+		printf("(");
+		print_parens_compressed_Y(gemf->mother);
+		printf("+");
+		print_parens_compressed_Y(gemf->father);
+		printf(")");
+	}
+}
+
 void fill_array_Y(gemY* gemf, gemY** p_gems, int* place)
 {
 	if (gemf-> father != NULL) {

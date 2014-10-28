@@ -20,6 +20,26 @@ void print_parens(gem* gemf)
 	return;
 }
 
+void print_parens_compressed(gem* gemf)
+{
+	if (gemf->father==NULL) {
+		printf("%c",gem_color(gemf));
+		return;
+	}
+	else if (gem_color(gemf->father)==gem_color(gemf->mother)					// if gem is uniform combination (g1 are already done)
+	&& pow(2,gemf->grade-1)==gem_getvalue(gemf)) {										// and is standard combine
+		printf("%d%c",gemf->grade,gem_color(gemf));
+		return;
+	}
+	else {
+		printf("(");
+		print_parens_compressed(gemf->mother);
+		printf("+");
+		print_parens_compressed(gemf->father);
+		printf(")");
+	}
+}
+
 void fill_array(gem* gemf, gem** p_gems, int* place)
 {
 	if (gemf-> father != NULL) {

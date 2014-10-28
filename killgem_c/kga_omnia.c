@@ -677,15 +677,23 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	if (output_parens) {
 		printf("Killgem speccing scheme:\n");
 		print_parens(gems+len-1);
+		printf("\n");
+		print_parens_compressed(gems+len-1);
 		printf("\n\n");
 		printf("Amplifier speccing scheme:\n");
 		print_parens_Y(amps+len-1);
+		printf("\n");
+		print_parens_compressed_Y(amps+len-1);
 		printf("\n\n");
 		printf("Killgem combining scheme:\n");
 		print_parens(gemsc+len-1);
+		printf("\n");
+		print_parens_compressed(gemsc+len-1);
 		printf("\n\n");
 		printf("Amplifier combining scheme:\n");
 		print_parens_Y(ampsc+len-1);
+		printf("\n");
+		print_parens_compressed_Y(ampsc+len-1);
 		printf("\n\n");
 	}
 	if (output_tree) {

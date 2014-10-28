@@ -404,9 +404,13 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 	if (output_parens) {
 		printf("Killgem combining scheme:\n");
 		print_parens(gems+len-1);
+		printf("\n");
+		print_parens_compressed(gems+len-1);
 		printf("\n\n");
 		printf("Amplifier combining scheme:\n");
 		print_parens_Y(amps+len-1);
+		printf("\n");
+		print_parens_compressed_Y(amps+len-1);
 		printf("\n\n");
 	}
 	if (output_tree) {

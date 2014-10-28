@@ -147,6 +147,9 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 		printf("Combining scheme:\n");
 		print_parens(gems+len-1);
 		printf("\n\n");
+		printf("Compressed combining scheme:\n");
+		print_parens_compressed(gems+len-1);
+		printf("\n\n");
 	}
 	if (output_tree) {
 		printf("Gem tree:\n");

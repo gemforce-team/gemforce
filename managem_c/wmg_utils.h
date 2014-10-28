@@ -32,7 +32,7 @@ float pbound_power(gem gem1)
 }
 
 void gem_print(gem *p_gem) {
-	printf("Grade:\t%d\nLeech:\t%f\nPbound:\t%f\nPower:\t%f\n\n", p_gem->grade, p_gem->leech, p_gem->pbound, pbound_power(*p_gem));
+	printf("Grade:\t%d\nLeech:\t%f\nPbound:\t%f\nPower:\t%f\n\n", p_gem->grade, p_gem->leech, p_gem->pbound, p_gem->leech*pbound_power(*p_gem));
 }
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)

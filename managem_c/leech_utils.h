@@ -87,6 +87,25 @@ int gem_getvalue_O(gemO* p_gem)
 	else return gem_getvalue_O(p_gem->father)+gem_getvalue_O(p_gem->mother);
 }
 
+void print_parens_compressed_O(gemO* gemf)
+{
+	if (gemf->father==NULL) {
+		printf("o");
+		return;
+	}
+	else if (pow(2,gemf->grade-1)==gem_getvalue_O(gemf)) {				// if gem is standard combine
+		printf("%do",gemf->grade);
+		return;
+	}
+	else {
+		printf("(");
+		print_parens_compressed_O(gemf->mother);
+		printf("+");
+		print_parens_compressed_O(gemf->father);
+		printf(")");
+	}
+}
+
 void fill_array_O(gemO* gemf, gemO** p_gems, int* place)
 {
 	if (gemf-> father != NULL) {

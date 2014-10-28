@@ -497,15 +497,23 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	if (output_parens) {
 		printf("Managem speccing scheme:\n");
 		print_parens(gems+len-1);
+		printf("\n");
+		print_parens_compressed(gems+len-1);
 		printf("\n\n");
 		printf("Amplifier speccing scheme:\n");
 		print_parens_O(amps+len-1);
+		printf("\n");
+		print_parens_compressed_O(amps+len-1);
 		printf("\n\n");
 		printf("Managem combining scheme:\n");
 		print_parens(gemsc+len-1);
+		printf("\n");
+		print_parens_compressed(gemsc+len-1);
 		printf("\n\n");
 		printf("Amplifier combining scheme:\n");
 		print_parens_O(ampsc+len-1);
+		printf("\n");
+		print_parens_compressed_O(ampsc+len-1);
 		printf("\n\n");
 	}
 	if (output_tree) {
