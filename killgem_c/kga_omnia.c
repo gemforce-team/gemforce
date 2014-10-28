@@ -49,7 +49,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem* pool[len];
 	int pool_length[len];
 	pool[0]=malloc(2*sizeof(gem));
-	gem_init(pool[0]  ,1,1,1,0);
+	gem_init(pool[0]  ,1,1       ,1,0);		// grd dmg crit bb
 	gem_init(pool[0]+1,1,1.186168,0,1);		// BB has more dmg
 	pool_length[0]=2;
 	
@@ -209,6 +209,48 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		fflush(stdout);
 	}
 	printf("Gem speccing done!\n\n");
+
+	gem* poolf[len];
+	int poolf_length[len];
+	
+	for (i=0;i<len;++i) {															// killgem spec compression
+		int j;
+		float maxcrit=0;
+		for (j=0; j<pool_length[i]; ++j) {		// get maxcrit;
+			maxcrit=max(maxcrit, (pool[i]+j)->crit);
+		}
+		gem_sort(pool[i],pool_length[i]);								// work starts
+		int broken=0;
+		int crit_cells=(int)(maxcrit*ACC)+1;						// this pool will be big from the beginning, but we avoid binary search
+		int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
+		float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed	
+		for (j=1; j<tree_length+crit_cells+1; ++j) tree[j]=-1;
+		int index;
+		for (j=pool_length[i]-1;j>=0;--j) {																			// start from large z
+			gem* p_gem=pool[i]+j;
+			index=(int)(p_gem->crit*ACC);																					// find its place in x
+			int wall = (int)(tree_read_max(tree,tree_length,index)*ACC_CUT);			// look at y
+			if ((int)(p_gem->bbound*ACC_CUT) > wall) tree_add_element(tree,tree_length,index,p_gem->bbound);
+			else {
+				p_gem->grade+=1000;			// non destructive marking
+				broken++;
+			}
+		}														// all unnecessary gems marked
+		free(tree);									// free
+		
+		poolf_length[i]=pool_length[i]-broken;
+		poolf[i]=malloc(poolf_length[i]*sizeof(gem));			// pool init via broken
+		index=0;
+		for (j=0; j<pool_length[i]; ++j) {								// copying to subpool
+			if (pool[i][j].grade<1000) {
+				poolf[i][index]=pool[i][j];
+				index++;
+			}
+			else pool[i][j].grade-=1000;										// correct grade again  
+		}
+		printf("Killgem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);
+	}
+	printf("Gem speccing pool compression done!\n\n");
 
 	size=sizec;
 	gem* poolc[lenc];
@@ -377,7 +419,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem* poolcf;
 	int poolcf_length;
 	
-	{															// killgem pool compression
+	{															// killgem comb compression
 		float maxcrit=0;
 		for (i=0; i<poolc_length[lenc-1]; ++i) {		// get maxcrit;
 			maxcrit=max(maxcrit, (poolc[lenc-1]+i)->crit);
@@ -415,17 +457,17 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	printf("Gem combining pool compression done!\n\n");
 
 	int lena;
-	if (lenc > 2*len) lena=lenc;	// see which is bigger between 2x spec len and comb len
-	else lena=2*len;							// and we'll combspec till there
+	if (lenc > len) lena=lenc;		// see which is bigger between spec len and comb len
+	else lena=len;								// and we'll combspec till there
 	
-	gemY* poolY[lena];						// 2x killgem value
+	gemY* poolY[lena];
 	int poolY_length[lena];
 	poolY[0]=malloc(sizeof(gemY));
 	gem_init_Y(poolY[0],1,1,1);
 	poolY_length[0]=1;
 	size=20000;
 
- for (i=1; i<lena; ++i) {			//amplifier computing
+ for (i=1; i<lena; ++i) {				// amplifier computing
 		int j,k,h,l;
 		int eoc=(i+1)/2;        	//end of combining
 		int comb_tot=0;
@@ -503,11 +545,11 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 				int length=temp_index[grd]+subpools_length[grd];
 				gemY* temp_array=malloc(length*sizeof(gemY));
 				int index=0;
-				for (l=0; l<temp_index[grd]; ++l) {										// copy new gems
+				for (l=0; l<temp_index[grd]; ++l) {									// copy new gems
 					temp_array[index]=temp_pools[grd][l];
 					index++;
 				}
-				for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
+				for (l=0; l<subpools_length[grd]; ++l) {			// copy old gems
 					temp_array[index]=subpools[grd][l];
 					index++;
 				}
@@ -558,30 +600,39 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	}
 	printf("Amplifier pooling done!\n\n");
 
-	gemY* poolYf;
-	int poolYf_length;
+	gemY* poolYf[lena];
+	int poolYf_length[lena];
 	
-	{														// amps pool compression
-		gem_sort_Y(poolY[lenc-1],poolY_length[lenc-1]);								// work starts
+	for (i=0; i<lena; ++i) {			// amps pool compression
+		int j;
+		gem_sort_Y(poolY[i],poolY_length[i]);		// work starts
 		int broken=0;
 		float lim_crit=-1;
-		for (i=poolY_length[lenc-1]-1;i>=0;--i) {
-			if (poolY[lenc-1][i].crit<=lim_crit) {
-				poolY[lenc-1][i].grade=0;
+		for (j=poolY_length[i]-1;j>=0;--j) {
+			if (poolY[i][j].crit<=lim_crit) {
+				poolY[i][j].grade+=1000;						// non destructive marking
 				broken++;
 			}
-			else lim_crit=poolY[lenc-1][i].crit;
-		}													// all unnecessary gems destroyed
-		poolYf_length=poolY_length[lenc-1]-broken;
-		poolYf=malloc(poolYf_length*sizeof(gemY));		// pool init via broken
+			else lim_crit=poolY[i][j].crit;
+		}													// all unnecessary gems marked
+		poolYf_length[i]=poolY_length[i]-broken;
+		poolYf[i]=malloc(poolYf_length[i]*sizeof(gemY));		// pool init via broken
 		int index=0;
-		for (i=0; i<poolY_length[lenc-1]; ++i) {      // copying to pool
-			if (poolY[lenc-1][i].grade!=0) {
-				poolYf[index]=poolY[lenc-1][i];
+		for (j=0; j<poolY_length[i]; ++j) {			// copying to pool
+			if (poolY[i][j].grade<1000) {
+				poolYf[i][index]=poolY[i][j];
 				index++;
 			}
+			else poolY[i][j].grade-=1000;					// correct grade again 
 		}
-		printf("Amp comb compressed pool size:\t%d\n",poolYf_length);
+		printf("Amp value %d compressed pool size:\t%d\n", i+1, poolYf_length[i]);
+	}
+
+	gemY poolYc[poolYf_length[lenc-1]];
+	int poolYc_length=poolYf_length[lenc-1];
+	
+	for (i=0; i<poolYf_length[lenc-1]; ++i) {		// amps fast access combining pool
+		poolYc[i]=poolYf[lenc-1][i];
 	}
 	printf("Amp combining pool compression done!\n\n");
 
@@ -600,7 +651,8 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem_print(gems);
 	printf("Amplifier:\n");
 	gem_print_Y(amps);
-
+#include <time.h>
+double t=clock();
 	for (i=1;i<len;++i) {																		// for every gem value
 		gem_init(gems+i, 0,0,0,0);														// we init the gems
 		gem_init_Y(amps+i, 0,0,0);														// to extremely weak ones
@@ -612,41 +664,40 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 				gemsc[i]=poolcf[l];
 			}
 		}
-		for (k=0;k<pool_length[i];++k) {											// and then in the the gem pool
-			if (gem_power(pool[i][k]) > gem_power(gems[i])) {
-				gems[i]=pool[i][k];
+		for (k=0;k<poolf_length[i];++k) {											// and then in the compressed gem pool
+			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
+				gems[i]=poolf[i][k];
 			}
 		}
 		int NS=i+1;
 		double c0 = log((double)NT/(i+1))/log(lenc);					// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
 																													// now we compare the whole setup
-		for (j=0;j<2*i+2;++j) {																// for every amp value from 1 to to 2*gem_value
+		for (j=0;j<i+1;++j) {																	// for every amp value from 1 to to gem_value
 			NS+=6;																							// we get the num of gems used in speccing
 			double c = log((double)NT/NS)/log(lenc);						// we compute the combination number
 			for (l=0; l<poolcf_length; ++l) {										// then we search in the NC gem comb pool
-				poolcf[l]=gemsc[i];
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cdg = pow(poolcf[l].damage,c);
 				double Ccg = pow(poolcf[l].crit  ,c);
-				for (m=0;m<poolYf_length;++m) {										// and in the amp NC pool
-					double Cda = pow(poolYf[m].damage,c);
-					double Cca = pow(poolYf[m].crit  ,c);
-					for (k=0;k<pool_length[i];++k) {								// then in the gem pool
+				for (m=0;m<poolYc_length;++m) {										// and in the amp NC pool
+					double Cda = pow(poolYc[m].damage,c);
+					double Cca = pow(poolYc[m].crit  ,c);
+					for (k=0;k<poolf_length[i];++k) {								// then in the gem pool
 						if (pool[i][k].crit!=0) {											// if the gem has crit we go on
-							double Pb2 = Cbg * pool[i][k].bbound * Cbg * pool[i][k].bbound;
-							double Pdg = Cdg * pool[i][k].damage;
-							double Pcg = Ccg * pool[i][k].crit  ;
-							for (h=0;h<poolY_length[j];++h) {						// and in the amp pool
-								double Pdamage = Pdg + 1.47 * Cda * poolY[j][h].damage ;
-								double Pcrit   = Pcg + 2.576* Cca * poolY[j][h].crit   ;
+							double Pb2 = Cbg * poolf[i][k].bbound * Cbg * poolf[i][k].bbound;
+							double Pdg = Cdg * poolf[i][k].damage;
+							double Pcg = Ccg * poolf[i][k].crit  ;
+							for (h=0;h<poolYf_length[j];++h) {					// and in the reduced amp pool
+								double Pdamage = Pdg + 1.47 * Cda * poolYf[j][h].damage ;
+								double Pcrit   = Pcg + 2.576* Cca * poolYf[j][h].crit   ;
 								double power   = Pb2 * Pdamage * Pcrit ;
 								if (power>powers[i]) {
 									powers[i]=power;
-									gems[i]=pool[i][k];
-									amps[i]=poolY[j][h];
+									gems[i]=poolf[i][k];
+									amps[i]=poolYf[j][h];
 									gemsc[i]=poolcf[l];
-									ampsc[i]=poolYf[m];
+									ampsc[i]=poolYc[m];
 								}
 							}
 						}
@@ -656,11 +707,11 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		}
 		printf("Killgem spec\n");
 		printf("Value:\t%d\n",i+1);
-		if (output_info) printf("Pool:\t%d\n",pool_length[i]);
+		if (output_info) printf("Pool:\t%d\n",poolf_length[i]);
 		gem_print(gems+i);
 		printf("Amplifier spec\n");
 		printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
-		if (output_info) printf("Pool:\t%d\n",poolY_length[gem_getvalue_Y(amps+i)-1]);
+		if (output_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
 		gem_print_Y(amps+i);
 		printf("Killgem combine\n");
 		printf("Comb:\t%d\n",lenc);
@@ -668,12 +719,12 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 		gem_print(gemsc+i);
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
-		if (output_info) printf("Pool:\t%d\n",poolYf_length);
+		if (output_info) printf("Pool:\t%d\n",poolYc_length);
 		gem_print_Y(ampsc+i);
 		printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/10000/1000);
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
-
+printf("%.0f\n",clock()-t);
 	if (output_parens) {
 		printf("Killgem speccing scheme:\n");
 		print_parens(gems+len-1);
@@ -740,9 +791,11 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	}
 	
 	for (i=0;i<len;++i) free(pool[i]);			// free gems
+	for (i=0;i<len;++i) free(poolf[i]);			// free gems compressed
 	for (i=0;i<lenc;++i) free(poolc[i]);		// free gems
 	free(poolcf);
 	for (i=0;i<lena;++i) free(poolY[i]);		// free amps
+	for (i=0;i<lena;++i) free(poolYf[i]);		// free amps compressed
 }
 
 
