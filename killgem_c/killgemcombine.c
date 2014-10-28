@@ -72,11 +72,11 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 								}
 								free(subpools[grd]);		// free
 								
-								gem_sort(temp_array,length);									// work starts
+								gem_sort(temp_array,length);								// work starts
 								int broken=0;
-									int crit_cells=(int)(maxcrit*ACC)+1;				// this pool will be big from the beginning, but we avoid binary search
+								int crit_cells=(int)(maxcrit*ACC)+1;				// this pool will be big from the beginning, but we avoid binary search
 								int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
-								float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed	
+								float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed
 								for (l=1; l<tree_length+crit_cells+1; ++l) tree[l]=-1;
 								for (l=length-1;l>=0;--l) {																							// start from large z
 									gem* p_gem=temp_array+l;
@@ -94,7 +94,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 								subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
 								
 								index=0;
-								for (l=0; l<length; ++l) {      // copying to subpool
+								for (l=0; l<length; ++l) {			// copying to subpool
 									if (temp_array[l].grade!=0) {
 										subpools[grd][index]=temp_array[l];
 										index++;

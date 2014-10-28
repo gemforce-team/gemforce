@@ -6,6 +6,7 @@
 ;                     #####         Parent2Gem.ahk - Version 2       #####
 ; 
 
+
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
@@ -15,6 +16,8 @@ CurrentCustom := "(g+g)+(g+g)"
 LastDDL := 6
 CombineMode := True
 LastGemPos := 1
+SetDefaultMouseSpeed, 0		; #### Here you can change mouse speed (0=instant, 100=slowest)
+
 
 TopLeftCornerX := 1590 				
 TopLeftCornerY := 338				
@@ -45,8 +48,9 @@ OptionsMenu() {
 	Gui, New,, Options
 	GuiHWND := WinExist()
 
+
 ; ################# DDL #####################
-	
+
 	TempReadOnly := ""
 	If LastDDL != 6
 		TempReadOnly := "readonly"
@@ -56,20 +60,20 @@ OptionsMenu() {
 	Gui, Add, Edit, w400 r3 vCustomFormula %TempReadOnly%, %CurrentCustom% 
 
 
-; ################# INITMODE ################	
+; ################# INITMODE ################
 
 	Gui, Add, Text, w400, `n`nIn order to setup the script for your screen-resolution press the following button and follow the instructions`: `n
 	Gui, Add, Button, , Setup Script 
 	Gui, Add, Text,, You have to run this setup each time your screen-resolution changes 
 
-;###############Wait For Input ##############
+;############## Wait For Input ##############
 
 	Gui, Add, Button, default, Ok 
 	Gui, Show
 	WinWaitClose, ahk_id %GuiHWND%
 	return                
 
-;############### SUBS / Labels #############	
+;############### SUBS / Labels #############
 
 	ShowCustomField: 
 		GuiControlGet, StatusOfDll, , ChosenCombine
@@ -130,7 +134,7 @@ OptionsMenu() {
 		}	
 
 		if (ChosenCombine = "Custom") {
-			ParentNewStr := CustomFormula			
+			ParentNewStr := CustomFormula
 			LastDDL := 6
 		}
 			
@@ -143,6 +147,7 @@ OptionsMenu() {
 			ParentNewStr := ParentStr		
 		
 		ParentStr := ParentNewStr
+
 		FileRead, PGScript, Parent2Gem.ahk
 		FileDelete, Parent2Gem.ahk
 		ParentNewStr = ParentStr := "%ParentNewStr%" 
@@ -150,17 +155,19 @@ OptionsMenu() {
 		
 		CustomTemp = CurrentCustom := "%CustomFormula%"
 		if (ChosenCombine = "Custom") 
-			PGScript := RegExReplace(PGScript, "CurrentCustom := "".*""", CustomTemp, , 1)		
+			PGScript := RegExReplace(PGScript, "CurrentCustom := "".*""", CustomTemp, , 1)
 		
 		LastDDLTemp = LastDDL := %LastDDL%
-		PGScript := RegExReplace(PGScript, "LastDDL := [0-9]*", LastDDLTemp, , 1)	
+		PGScript := RegExReplace(PGScript, "LastDDL := [0-9]*", LastDDLTemp, , 1)
 		
+
 		FileAppend, %PGScript%, Parent2Gem.ahk
 			
 		Gui, Destroy
 	Return
 }
 !C::
+
 
 if (InitialMode = False) {
 	MsgBox, You have to adapt the script to your screen-resolution. You will be redirected to the options-menu, where you can hit the "Setup Script"-Button to do this.
@@ -171,7 +178,6 @@ else {
 	FieldHeight := (BottomRightCornerY - TopLeftCornerY) / 12
 	CraftingField := [BottomRightCornerX -(FieldWidth / 2), BottomRightCornerY -(FieldHeight / 2)]
 	
-	SetDefaultMouseSpeed, 0
 	i := 0
 	j := 0
 	StkCount := 1
@@ -212,17 +218,17 @@ else {
 		Send {Numpad4}
 		MouseClick, left, CraftingField[1], CraftingField[2]
 	}
+	WGem() {
+		global CraftingField
+		Send {Numpad9}
+		MouseClick, left, CraftingField[1], CraftingField[2]	
+	}
 	
 	GGem() {
 		global CraftingField
 		global FieldWidth
 		MouseMove, CraftingField[1]-(2*FieldWidth), CraftingField[2]
 		send d
-	}
-	WGem() {
-		global CraftingField
-		Send {Numpad9}
-		MouseClick, left, CraftingField[1], CraftingField[2]	
 	}
 	
 	AddtoStk() {
@@ -345,7 +351,7 @@ else {
 				BGem()	
 			if (SubStr(ParentStr, StrPos + 1, 1) = "r")
 				RGem()	
-			if (SubStr(ParentStr, StrPos + 1, 1) = "r")
+			if (SubStr(ParentStr, StrPos + 1, 1) = "w")
 				WGem()				
 			if (SubStr(ParentStr, StrPos + 1, 1) = "g") {
 				if (LastGemPos != StrPos + 1) 
@@ -363,7 +369,7 @@ else {
 			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
 				MovetoStk()
 			else
-				AddtoStk()		
+				AddtoStk()
 			StrPos := StrPos + 1
 		}
 		
@@ -372,7 +378,7 @@ else {
 			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
 				MovetoStk()
 			else
-				AddtoStk()		
+				AddtoStk()
 		
 		}
 		if (SubStr(ParentStr, StrPos, 1) = "s") {
@@ -380,7 +386,7 @@ else {
 			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
 				MovetoStk()
 			else
-				AddtoStk()		
+				AddtoStk()
 		
 		}
 		if (SubStr(ParentStr, StrPos, 1) = "d") {
@@ -388,10 +394,10 @@ else {
 			if (SubStr(ParentStr, StrPos - 1, 1) = "(")
 				MovetoStk()
 			else
-				AddtoStk()		
+				AddtoStk()
 		
 		}
-		StrPos := StrPos + 1	
+		StrPos := StrPos + 1
 	}
 	while CurrentStk > 1 {
 		PopStk()
