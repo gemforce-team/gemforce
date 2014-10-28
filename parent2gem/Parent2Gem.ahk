@@ -5,45 +5,6 @@
 ;
 ;                     #####         Parent2Gem.ahk - Version 2       #####
 ; 
-;                     ##### Description of Purpose and Functionality #####
-;
-; ###            General             ###
-; This script translates a String containing the Parenthesis-( i.e. Bracket-)Version of 
-; a speccing or combining scheme for gemcraft into actual commands for the gems creation.
-; Works best in a STANDALONE FLASHPLAYER set to FULLSCREEN.
-; It is hopefully easy to use and customize.
-; The section which has to be changed is almost right at the top of the following code,
-; namely under the command "!C::", and is commented to indicate the exact usage.
-; 
-; The STANDARD HOTKEY is  Alt + c (No shift!!). This corresponds to "!C". 
-; Check ahkscript.org for Hotkey usage.
-;
-; CombiningMode is turned on by default. Speccing still works. Suggestion: Don't turn it off... 
-;
-;
-; ###  Syntax for the Bracket-Formula ###
-;
-; Obviously: 
-; 		r = Red / b = Black / o = orange / y = yellow
-;
-; Maybe a little less obviously:
-;
-;		g / k = copy of gem in the BOTTOM-LEFT! corner of the 12*3 craftingfield
-;
-; Furthermore:   ### New Features ###
-; 		
-;		the numerals 2 to 9 followed by any of the above = Corresponding color (or duplicate, respectively), upgraded 1 to 8 times 
-;		
-;		Examples: 9o / 2g = Orange upgraded 8 times (grade 9) / Base-gem (BottomLeft corner) upgraded once
-;		(Needless to say, the upgrading happens via the "u"-button.) 
-;
-; And: 			
-;
-;		a / s / d  =  use (left / middle / right) gem in the top row of the 3*12 craftingfield
-;		
-;		(The order is inspired by the position of the keys on a standard keyboard.
-;		 Attention: Those three can't be used in combination with numerals.)
-
 
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
@@ -51,13 +12,16 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 InitialMode := False ; Initialisation
 CoordMode, Mouse, Screen
 CurrentCustom := "(g+g)+(g+g)"
-LastDDL := 5
-;             I
-; #####      V V       																					 #########
-; #####       V        INSERT THE SCHEME TO BE COMBINED INBETWEEN THE QUTATION-MARKS IN THE LINE BELOW   #########
-ParentStr := "(g+g)+(g+g)"
+LastDDL := 6
+CombineMode := True
+LastGemPos := 1
 
-; #####   						The default example is some random 1024 combine							 #########
+TopLeftCornerX := 1590 				
+TopLeftCornerY := 338				
+BottomRightCornerX := 1436			
+BottomRightCornerY := 686			
+       
+ParentStr := "(g+g)+(g+g)"
 
 
 !V:: 
@@ -69,8 +33,6 @@ OptionsMenu() {
 	Global ParentStr
 	Global ChosenCombine
 	Global ParentNewStr
-	Global ChosenIniMode
-	Global IsIniChecked
 	Global InitialMode
 	Global CustomFormula
 	Global PGScript
@@ -83,7 +45,8 @@ OptionsMenu() {
 	Gui, New,, Options
 	GuiHWND := WinExist()
 
-; ################# DDL ######################	
+; ################# DDL #####################
+	
 	TempReadOnly := ""
 	If LastDDL != 6
 		TempReadOnly := "readonly"
@@ -95,13 +58,9 @@ OptionsMenu() {
 
 ; ################# INITMODE ################	
 
-	Gui, Add, Text,, `n`n In order to reset the coordinates check the following option`: `n
-	If (InitialMode = False)
-		IsIniChecked := ""
-	If (InitialMode = True)
-		IsIniChecked := "Checked"
-	Gui, Add, Checkbox, vChosenIniMode %IsIniChecked%, Initialisation-Mode 	
-	Gui, Add, Text,, If checked, you will be asked for coordinates the next time the CombiningHotkey is pressed.`n CombiningHotkey is Alt C by default. 
+	Gui, Add, Text, w400, `n`nIn order to setup the script for your screen-resolution press the following button and follow the instructions`: `n
+	Gui, Add, Button, , Setup Script 
+	Gui, Add, Text,, You have to run this setup each time your screen-resolution changes 
 
 ;###############Wait For Input ##############
 
@@ -118,6 +77,30 @@ OptionsMenu() {
 			GuiControl, -readonly, CustomFormula
 		else
 			GuiControl, +readonly, CustomFormula
+	return
+	
+	ButtonSetupScript:
+		if (InitialMode = False)
+			PGScript := RegExReplace(PGScript, "InitialMode := False `; Init", "InitialMode := True  `; Init", , 1)	
+		FileRead, PGScript, Parent2Gem.ahk
+		FileDelete, Parent2Gem.ahk
+		MsgBox Place your mouse over the top-left corner of the 12*3 craftingfield and press ENTER 
+			MouseGetPos, TLCX, TLCY
+			PGScript := RegExReplace(PGScript, "TopLeftCornerX := [0-9]+", "TopLeftCornerX := " TLCX, , 1)  
+			PGScript := RegExReplace(PGScript, "TopLeftCornerY := [0-9]+", "TopLeftCornerY := " TLCY, , 1)  	
+		MsgBox Place your mouse over the bottom-right corner of the 12*3 craftingfield and press ENTER
+			MouseGetPos, BRCX, BRCY
+			PGScript := RegExReplace(PGScript, "BottomRightCornerX := [0-9]+", "BottomRightCornerX := "BRCX, , 1)  
+			PGScript := RegExReplace(PGScript, "BottomRightCornerY := [0-9]+", "BottomRightCornerY := "BRCY, , 1)
+				
+		FileAppend, %PGScript%, Parent2Gem.ahk
+		
+		TopLeftCornerX := TLCX
+		TopLeftCornerY := TLCY
+		BottomRightCornerX := BRCX
+		BottomRightCornerY := BRCY
+		MsgBox The Script has been adapted to your screen-resolution. `nRemember to do this whenever your screen-resolution changes!
+	
 	return
 	
 	ButtonOk:
@@ -158,7 +141,8 @@ OptionsMenu() {
 			
 		if (ChosenCombine = "")
 			ParentNewStr := ParentStr		
-	
+		
+		ParentStr := ParentNewStr
 		FileRead, PGScript, Parent2Gem.ahk
 		FileDelete, Parent2Gem.ahk
 		ParentNewStr = ParentStr := "%ParentNewStr%" 
@@ -171,45 +155,18 @@ OptionsMenu() {
 		LastDDLTemp = LastDDL := %LastDDL%
 		PGScript := RegExReplace(PGScript, "LastDDL := [0-9]*", LastDDLTemp, , 1)	
 		
-		if ((ChosenIniMode = 0) and (InitialMode = True))
-			PGScript := RegExReplace(PGScript, "InitialMode := True  `; Init", "InitialMode := False `; Init", , 1)
-		if ((ChosenIniMode = 1) and (InitialMode = False))
-			PGScript := RegExReplace(PGScript, "InitialMode := False `; Init", "InitialMode := True  `; Init", , 1)	
-	
-		FileAppend, %PGScript%, Parent2Gem.ahk		
+		FileAppend, %PGScript%, Parent2Gem.ahk
+			
 		Gui, Destroy
-	Reload
+	Return
 }
 !C::
 
-
-CombineMode := True
-LastGemPos := 1
-
-TopLeftCornerX := 1590 				;  ####### ENTER THE COORDINATES OF THE 3*12 CRAFTINGFIELD ON YOUR SCREEN #########
-TopLeftCornerY := 338				;	###### If you don't know how to obtain those values, you'd better  ########
-BottomRightCornerX := 1436			;    ##### ask somebody. They don't have to be really precise.     #######
-BottomRightCornerY := 686			;	  #### AND THAT'S IT! The script should work for you now!  ######
-
-if (InitialMode = True) {
-	FileRead, PGScript, Parent2Gem.ahk
-	FileDelete, Parent2Gem.ahk
-	MsgBox Place your mouse over the top-left corner of the 12*3 craftingfield and press ENTER 
-		MouseGetPos, TLCX, TLCY
-		PGScript := RegExReplace(PGScript, "TopLeftCornerX := [0-9]+", "TopLeftCornerX := " TLCX, , 1)  
-		PGScript := RegExReplace(PGScript, "TopLeftCornerY := [0-9]+", "TopLeftCornerY := " TLCY, , 1)  	
-	MsgBox Place your mouse over the bottom-right corner of the 12*3 craftingfield and press ENTER
-		MouseGetPos, BRCX, BRCY
-		PGScript := RegExReplace(PGScript, "BottomRightCornerX := [0-9]+", "BottomRightCornerX := "BRCX, , 1)  
-		PGScript := RegExReplace(PGScript, "BottomRightCornerY := [0-9]+", "BottomRightCornerY := "BRCY, , 1)
-		PGScript := RegExReplace(PGScript, "InitialMode := True  `; Init", "InitialMode := False `; Init", , 1)
-	FileAppend, %PGScript%, Parent2Gem.ahk
-	
-	MsgBox The Script has been initialised and will be reloaded!
-	
-	Reload
+if (InitialMode = False) {
+	MsgBox, You have to adapt the script to your screen-resolution. You will be redirected to the options-menu, where you can hit the "Setup Script"-Button to do this.
+	OptionsMenu()
 }
-	else {
+else {
 	FieldWidth := (BottomRightCornerX - TopLeftCornerX) / 3
 	FieldHeight := (BottomRightCornerY - TopLeftCornerY) / 12
 	CraftingField := [BottomRightCornerX -(FieldWidth / 2), BottomRightCornerY -(FieldHeight / 2)]
@@ -232,10 +189,6 @@ if (InitialMode = True) {
 		j := 0
 		i := i + 1
 	}	
-	
-	
-	; For FieldNum, FieldValue in StackFields
-	;	MsgBox % " Coordinates of Stack-Field #" . FieldNum .  ": " . FieldValue[1] . FieldValue[2]
 	
 	CurrentStk := 0
 	
