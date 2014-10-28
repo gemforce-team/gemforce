@@ -40,7 +40,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 			temp_index[j]=0;
 			subpools[j]=malloc(size*sizeof(gem));
 			subpools_length[j]=1;
-			gem_init(subpools[j],1,0,0,0);
+			gem_init(subpools[j],j+1,0,0,0);
 		}
 		for (j=0;j<eoc;++j) {												// combine gems and put them in temp pools
 			if ((i-j)/(j+1) < 10) {										// value ratio < 10
@@ -94,7 +94,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 								subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
 								
 								index=0;
-								for (l=0; l<length; ++l) {      // copying to subpool
+								for (l=0; l<length; ++l) {			// copying to subpool
 									if (temp_array[l].grade!=0) {
 										subpools[grd][index]=temp_array[l];
 										index++;
@@ -171,8 +171,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 			free(temp_pools[grd]);
 			free(subpools[grd]);
 		}
-
-		gems[i]=pool[i][0];						// choosing gem (criteria moved to gem_power def)
+		gems[i]=pool[i][0];						// choosing gem (criteria moved to more_power def)
 		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
