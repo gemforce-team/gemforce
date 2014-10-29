@@ -37,7 +37,7 @@ void print_amps_table(gem* gems, gemY* amps, double* powers, int len)
 {
 	printf("Killgem\tAmps\tPower (resc. 10m)\n");			// we'll rescale again for 10m, no need to have 10 digits
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\n", gem_getvalue(gems+i), gem_getvalue_Y(amps+i), powers[i]/10000/1000);
+	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\n", i+1, gem_getvalue_Y(amps+i), powers[i]/10000/1000);
 	printf("\n");
 }
 

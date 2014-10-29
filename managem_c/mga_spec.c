@@ -32,9 +32,9 @@ int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 
 void print_amps_table(gem* gems, gemO* amps, float* spec_coeffs, int len)
 {
-	printf("# Gems\tManagem\tAmps\tPower (resc.)\tSpec coeff\n");
+	printf("Managem\tAmps\tPower (resc.)\tSpec coeff\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i]), spec_coeffs[i]);
+	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i]), spec_coeffs[i]);
 	printf("\n");
 }
 
