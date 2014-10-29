@@ -388,7 +388,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 				}
 			}
 		}
-		printf("Total value:\t%d\n\n", i+1);
+		printf("Total value:\t%d\n\n", i+1+6*gem_getvalue_Y(amps+i));
 		printf("Killgem\n");
 		printf("Value:\t%d\n",gem_getvalue(gems+i));
 		if (output_info) printf("Pool:\t%d\n",pool_length[gem_getvalue(gems+i)-1]);
@@ -397,7 +397,8 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 		printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
 		if (output_info) printf("Pool:\t%d\n",poolY_length[gem_getvalue_Y(amps+i)-1]);
 		gem_print_Y(amps+i);
-		printf("Global power (rescaled):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
+		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
+		printf("Spec coefficient:\t%f\n\n", spec_coeffs[i]);
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 

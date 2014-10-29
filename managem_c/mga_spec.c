@@ -266,6 +266,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 				}
 			}
 		}
+		printf("Total value:\t%d\n\n", i+1+6*gem_getvalue_O(amps+i));
 		printf("Managem\n");
 		printf("Value:\t%d\n",i+1);
 		if (output_info) printf("Pool:\t%d\n",pool_length[i]);
