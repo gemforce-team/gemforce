@@ -35,9 +35,9 @@ int gem_amp_more_powerful(gem gem1, gemY amp1, gem gem2, gemY amp2)
 
 void print_amps_table(gem* gems, gemY* amps, double* powers, int len)
 {
-	printf("# Gems\tKillgem\tAmps\tPower (resc. 10m)\n");			// we'll rescale again for 10m, no need to have 10 digits
+	printf("Killgem\tAmps\tPower (resc. 10m)\n");			// we'll rescale again for 10m, no need to have 10 digits
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6f\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), powers[i]/10000/1000);
+	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\n", gem_getvalue(gems+i), gem_getvalue_Y(amps+i), powers[i]/10000/1000);
 	printf("\n");
 }
 
@@ -651,8 +651,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem_print(gems);
 	printf("Amplifier:\n");
 	gem_print_Y(amps);
-#include <time.h>
-double t=clock();
+
 	for (i=1;i<len;++i) {																		// for every gem value
 		gem_init(gems+i, 0,0,0,0);														// we init the gems
 		gem_init_Y(amps+i, 0,0,0);														// to extremely weak ones
@@ -724,7 +723,7 @@ double t=clock();
 		printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/10000/1000);
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
-printf("%.0f\n",clock()-t);
+
 	if (output_parens) {
 		printf("Killgem speccing scheme:\n");
 		print_parens(gems+len-1);

@@ -33,9 +33,9 @@ int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 
 void print_amps_table(gem* gems, gemO* amps, double* powers, int len)
 {
-	printf("# Gems\tManagem\tAmps\tPower (resc. 1k)\n");			// we'll rescale again for 1k, no need to have 10 digits
+	printf("Managem\tAmps\tPower (resc. 1k)\n");			// we'll rescale again for 1k, no need to have 10 digits
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6f\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), powers[i]/1000);
+	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\n", gem_getvalue(gems+i), gem_getvalue_O(amps+i), powers[i]/1000);
 	printf("\n");
 }
 
