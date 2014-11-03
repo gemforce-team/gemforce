@@ -43,26 +43,28 @@ double gem_power(gem gem1) {
 void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_info, char* filename)
 {
 	printf("\n");
-	if (file_check(filename)==NULL) exit(1);		// if the file is not good exit
-	FILE* table=file_check(filename);			// file is good and open to read
+	FILE* table=file_check(filename);			// file is open to read
+	if (table==NULL) exit(1);							// if the file is not good we exit
 	int i;
-	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 131k is the limit
-	gem* pool[len];
+	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
+	gem** pool=malloc(len*sizeof(gem*));	// if not malloc-ed 690k is the limit
 	int pool_length[len];
 	pool[0]=malloc(sizeof(gem));
 	gem_init(gems,1,1);
 	gem_init(pool[0],1,1);
 	pool_length[0]=1;
-	gem_print(gems);
 
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	if (prevmax<len-1) {
 		fclose(table);
 		for (i=0;i<len;++i) free(pool[i]);		// free
+		free(pool);		// free
+		free(gems);		// free
 		printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
-	
+	gem_print(gems);
+
 	for (i=1;i<len;++i) {
 		int j;
 		gems[i]=pool[i][0];
@@ -101,7 +103,8 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 	
 	fclose(table);
 	for (i=0;i<len;++i) free(pool[i]);		// free
-	free(gems);
+	free(pool);		// free
+	free(gems);		// free
 }
 
 

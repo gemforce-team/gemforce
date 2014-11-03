@@ -88,6 +88,7 @@ void worker(int len, int output_info, int output_quiet, char* filename)
 	if (prevmax+1==len) {
 		fclose(table);
 		for (i=0;i<len;++i) free(pool[i]);		// free
+		free(pool);		// free
 		printf("Table is longer than %d, no need to do anything\n",prevmax+1);
 		exit(1);
 	}
@@ -132,6 +133,7 @@ void worker(int len, int output_info, int output_quiet, char* filename)
 	}
 	fclose(table);			// close
 	for (i=0;i<len;++i) free(pool[i]);		// free
+	free(pool);		// free
 }
 
 int main(int argc, char** argv)
