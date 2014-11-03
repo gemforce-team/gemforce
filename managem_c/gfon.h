@@ -7,7 +7,7 @@ void line_init(FILE* table, int code)
 {
 	switch (code) {
 		case 2:				// orange
-			fprintf(table, "1\n1 0x1p+0 -1 0 -1 0\n\n");
+			fprintf(table, "1\n1 0x1p+0 -1 0 0\n\n");
 		break;
 		default:
 		break;
@@ -54,6 +54,7 @@ FILE* file_check(char* filename)
 
 int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 {
+	printf("Building pool...");
 	rewind(table);
 	int i;
 	for (i=0;i<1+pool_length[0];++i) {						// discard value 0 gems
@@ -79,6 +80,7 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 			prevmax++;
 		}
 	}
+	printf(" Done\n");
 	return prevmax;
 }
 

@@ -107,7 +107,7 @@ void worker(int len, int output_info, int output_quiet, char* filename)
 				for (k=0; k< pool_length[j]; ++k) {
 					for (h=0; h< pool_length[i-1-j]; ++h) {
 						int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
-						if (abs(delta)<=2) {								// grade difference <= 2
+						if (abs(delta)<=2) {						// grade difference <= 2
 							comb_tot++;
 							gem temp;
 							gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
