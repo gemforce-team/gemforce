@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include <string.h>
 typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
-const int ACC=450;						// 450 is as good as 1000 up to reasonable numbers and takes half the time
 #include "managem_utils.h"
 typedef struct Gem_O gemO;
 #include "leech_utils.h"

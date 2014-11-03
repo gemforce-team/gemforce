@@ -1,7 +1,7 @@
 #ifndef _MANAGEM_UTILS_H
 #define _MANAGEM_UTILS_H
 
-//const int ACC=1000; 			// EXPLICITELY PUT IT IN THE OTHER FILE
+const int ACC=1000;						// accuracy for comparisons
 
 /* Info: to go from low to high accuracy: change gems_sort in gems_sort_exact and
  * if ((int)(ACC*pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound)<=(int)(ACC*lim_bbound)) {
