@@ -3,7 +3,7 @@
 #include <math.h>
 #include <unistd.h>
 #include <string.h>
-typedef struct Gem_OW gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
+typedef struct Gem_OW gem;		// the strange order is so that wmg_utils knows which gem type are we defining as "gem"
 const int ACC=450;						// 450 is as good as 1000 up to reasonable numbers and takes half the time
 #include "wmg_utils.h"
 typedef struct Gem_O gemO;

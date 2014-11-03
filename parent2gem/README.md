@@ -7,6 +7,7 @@ Features are documented below the wishlist, but documentation is currently out o
 
 WISHLIST:
 
+0) I still cannot get it to work consistently, maybe needs some tweaking.  
 1) Speed toggle, so that it's possible to use it on slower setups.
 
 
