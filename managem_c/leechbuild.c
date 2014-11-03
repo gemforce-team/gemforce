@@ -76,17 +76,21 @@ int gem_better(gem gem1, gem gem2)
 
 void worker(int len, int output_info, int output_quiet, char* filename)
 {
-	FILE* table=table_init(filename);
+	FILE* table=table_init(filename, 2);		// init orange
 	int i;
-	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 131k is the limit
-	gem* pool[len];
+	gem** pool=malloc(len*sizeof(gem*));		// if not malloc-ed 690k is the limit
 	int pool_length[len];
 	pool[0]=malloc(sizeof(gem));
-	gem_init(gems,1,1);
 	gem_init(pool[0],1,1);
 	pool_length[0]=1;
 
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
+	if (prevmax+1==len) {
+		fclose(table);
+		for (i=0;i<len;++i) free(pool[i]);		// free
+		printf("Table is longer than %d, no need to do anything\n",prevmax+1);
+		exit(1);
+	}
 	table=freopen(filename,"a", table);		// append -> updating possible
 	
 	for (i=prevmax+1; i<len; ++i) {				// more building

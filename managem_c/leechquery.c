@@ -58,6 +58,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	if (prevmax<len-1) {
 		fclose(table);
+		for (i=0;i<len;++i) free(pool[i]);		// free
 		printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
@@ -157,7 +158,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (filename[0]=='\0') strcpy(filename, "leechtable");
-	else worker(len, output_parens, output_equations, output_tree, output_table, output_info, filename);
+	worker(len, output_parens, output_equations, output_tree, output_table, output_info, filename);
 	return 0;
 }
 

@@ -1,22 +1,36 @@
 #ifndef _GFON_H
 #define _GFON_H
 
-FILE* table_init(char* filename)
+/* GemForce Object Notation */
+
+void line_init(FILE* table, int code)
+{
+	switch (code) {
+		case 2:				// orange
+			fprintf(table, "1\n1 0x1p+0 -1 0 -1 0\n\n");
+		break;
+		default:
+		break;
+	}
+}
+
+
+FILE* table_init(char* filename, int code)
 {
 	FILE* table;
 	table=fopen(filename,"rb");				// binary to check size
 	if(table==NULL) {
 		table=fopen(filename,"w");			// creation
-		fprintf(table, "1\n1 1.000000 -1 0 -1 0\n\n");		// printed g1
+		line_init(table, code);					// printed g1
 	}
 	else {
 		fseek(table, 0, SEEK_END);
 		if (ftell(table)==0) {
-			table=freopen(filename,"w", table);							// init
-			fprintf(table, "1\n1 1.000000 -1 0 -1 0\n\n");	// printed g1
+			table=freopen(filename,"w", table);					// init
+			line_init(table, code);				// printed g1
 		}
 	}																			// we now have the file with at least g1
-	table=freopen(filename,"r", table);							// read
+	table=freopen(filename,"r", table);		// read
 	return table;
 }
 
@@ -73,7 +87,7 @@ void table_write_iteration(gem** pool, int* pool_length, int iteration, FILE* ta
 	int i=iteration;
 	int j,k;
 	int broken=0;
-	if (pool[i][0].father==NULL) broken=1;				// solve false g2 problem
+	while (pool[i][broken].father==NULL) broken++;				// solve false g2(3) problem
 	fprintf(table, "%d\n", pool_length[i]-broken);
 	for (j=broken;j<pool_length[i];++j) {
 		fprintf(table, "%d %la", pool[i][j].grade, pool[i][j].leech);
