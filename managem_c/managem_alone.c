@@ -3,31 +3,41 @@
 #include <math.h>
 #include <unistd.h>
 #include <string.h>
-typedef struct Gem_OB gem;		// the strange order is so that gem_utils knows which gem type are we defining as "gem"
+typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
 const int ACC=1000;						// accuracy for comparisons
 #include "managem_utils.h"
 
 
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
+void worker(int len, int init_number, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
 {
 	printf("\n");
 	int i;
 	gem gems[len];
 	gem* pool[len];
 	int pool_length[len];
-	pool[0]=malloc(sizeof(gem));
-	gem_init(gems   ,1,1,1);			// grade leech bbound
-	gem_init(pool[0],1,1,1);			// start gem does not matter
-	pool_length[0]=1;
+	
+	if (init_number==1) {						// combine
+		pool[0]=malloc(sizeof(gem));
+		gem_init(pool[0],1,1,1);
+		pool_length[0]=1;
+		if (size==0) size=100;				// reasonable comb sizing
+	}
+	else {													// spec
+		pool[0]=malloc(2*sizeof(gem));
+		gem_init(pool[0]  ,1,1,0);
+		gem_init(pool[0]+1,1,0,1);
+		pool_length[0]=2;
+		if (size==0) size=2000;				// reasonable spec sizing
+	}
+	gem_init(gems,1,1,0);
 	gem_print(gems);
-	if (size==0) size=100;				// reasonable sizing
 
 	for (i=1; i<len; ++i) {
 		int j,k,h,l;
 		int eoc=(i+1)/2;        //end of combining
 		int comb_tot=0;
 
-		int grade_max=(int)(log2(i+1)+1);       		// gems with max grade cannot be destroyed, so this is a max, not a sup
+		int grade_max=(int)(log2(i+1)+1);						// gems with max grade cannot be destroyed, so this is a max, not a sup
 		gem* temp_pools[grade_max-1];								// get the temp pools for every grade
 		int  temp_index[grade_max-1];								// index of work point in temp pools
 		gem* subpools[grade_max-1];									// get subpools for every grade
@@ -192,9 +202,65 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 	for (i=0;i<len;++i) free(pool[i]);		// free
 }
 
-
 int main(int argc, char** argv)
 {
-	return get_opts_and_call_worker(argc, argv);
+	int len;
+	char opt;
+	int init_number=2;		// speccing by default
+	int output_parens=0;
+	int output_equations=0;
+	int output_tree=0;
+	int output_table=0;
+	int output_debug=0;
+	int output_info=0;
+	int size=0;						// worker or user must initialize it
+	
+	while ((opt=getopt(argc,argv,"petcdis:"))!=-1) {
+		switch(opt) {
+			case 'p':
+				output_parens = 1;
+				break;
+			case 't':
+				output_tree = 1;
+				break;
+			case 'e':
+				output_equations = 1;
+				break;
+			case 'c':
+				output_table = 1;
+				break;
+			case 'd':
+				output_debug = 1;
+				output_info = 1;
+				break;
+			case 'i':
+				output_info = 1;
+				break;
+			case 's':
+				size = atoi(optarg);
+				break;
+			case '?':
+				return 1;
+			default:
+				break;
+		}
+	}
+	if (optind+1==argc) {
+		len = atoi(argv[optind]);
+		char* p=argv[optind];
+		while (*p != '\0') p++;
+		if (*(p-1)=='c') init_number=1;
+	}
+	else {
+		printf("Unknown arguments:\n");
+		while (argv[optind]!=NULL) {
+			printf("%s ", argv[optind]);
+			optind++;
+		}
+		return 1;
+	}
+	if (len<1) printf("Improper gem number\n");
+	else worker(len, init_number, output_parens, output_equations, output_tree, output_table, output_debug, output_info, size);
+	return 0;
 }
 

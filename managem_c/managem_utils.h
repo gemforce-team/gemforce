@@ -10,7 +10,7 @@
  */
 
 struct Gem_OB {
-	unsigned short grade;
+	short grade;
 	float leech;
 	float bbound;
 	struct Gem_OB* father;
@@ -18,6 +18,16 @@ struct Gem_OB {
 };
 
 // remember to define the gem in your file
+
+void line_from_table(FILE* table, gem* p_gem, int* value_father, int* offset_father, int* offset_mother)
+{
+	fscanf(table, "%hd %a %a %d %d %d\n", &(p_gem->grade), &(p_gem->leech), &(p_gem->bbound), value_father, offset_father, offset_mother);
+}
+
+void line_write_iteration(FILE* table, gem* p_gem)
+{
+	fprintf(table, " %la %la", p_gem->leech, p_gem->bbound);
+}
 
 int gem_more_powerful(gem gem1, gem gem2)
 {
@@ -165,65 +175,6 @@ char gem_color(gem* p_gem)
 }
 
 #include "print_utils.h"
-
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size);
-int get_opts_and_call_worker(int argc, char** argv)
-{
-	int len;
-	char opt;
-	int output_parens=0;
-	int output_equations=0;
-	int output_tree=0;
-	int output_table=0;
-	int output_debug=0;
-	int output_info=0;
-	int size=0;       // worker or user must initialize it
-	
-	while ((opt=getopt(argc,argv,"petcdis:"))!=-1) {
-		switch(opt) {
-			case 'p':
-				output_parens = 1;
-				break;
-			case 't':
-				output_tree = 1;
-				break;
-			case 'e':
-				output_equations = 1;
-				break;
-			case 'c':
-				output_table = 1;
-				break;
-			case 'd':
-				output_debug = 1;
-				output_info = 1;
-				break;
-			case 'i':
-				output_info = 1;
-				break;
-			case 's':
-				size = atoi(optarg);
-				break;
-			case '?':
-				return 1;
-			default:
-				break;
-		}
-	}
-	if (optind+1==argc) {
-		len = atoi(argv[optind]);
-	}
-	else {
-		printf("Unknown arguments:\n");
-		while (argv[optind]!=NULL) {
-			printf("%s ", argv[optind]);
-			optind++;
-		}
-		return 1;
-	}
-	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_parens, output_equations, output_tree, output_table, output_debug, output_info, size);
-	return 0;
-}
 
 
 #endif // _MANAGEM_UTILS_H
