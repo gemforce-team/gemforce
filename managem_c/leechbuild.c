@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
-
+#include <string.h>
 
 typedef struct Gem_O {
 	int grade;			//using short does NOT improve time/memory usage
@@ -11,6 +11,7 @@ typedef struct Gem_O {
 	struct Gem_O* mother;
 } gem;
 
+#include "gfon.h"
 
 int int_max(int a, int b)
 {
@@ -73,24 +74,10 @@ int gem_better(gem gem1, gem gem2)
 	return gem1.leech>gem2.leech;
 }
 
-void worker(int len, int output_info, int output_quiet)
+void worker(int len, int output_info, int output_quiet, char* filename)
 {
+	FILE* table=table_init(filename);
 	int i;
-	FILE* table;
-	table=fopen("leechtable","rb");				// binary to check size
-	if(table==NULL) {
-		table=fopen("leechtable","w");			// creation
-		fprintf(table, "1\n1 1.000000 -1 0 -1 0\n\n");		// printed g1
-	}
-	else {
-		fseek(table, 0, SEEK_END);
-		if (ftell(table)==0) {
-			table=freopen("leechtable","w", table);					// init
-			fprintf(table, "1\n1 1.000000 -1 0 -1 0\n\n");	// printed g1
-		}
-	}																			// we now have the file with at least g1
-	table=freopen("leechtable","r", table);							// read
-
 	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 131k is the limit
 	gem* pool[len];
 	int pool_length[len];
@@ -99,33 +86,10 @@ void worker(int len, int output_info, int output_quiet)
 	gem_init(pool[0],1,1);
 	pool_length[0]=1;
 
-	rewind(table);
-	for (i=0;i<1+pool_length[0];++i) {						// discard value 0 gems
-		fscanf(table, "%*[^\n]\n");
-	}
-	fscanf(table, "\n");													// discard newline
-	int prevmax=0;
-	for (i=1;i<len;++i) {
-		int eof_check=fscanf(table, "%d\n", pool_length+i);				// get pool length
-		if (eof_check==-1) break;
-		else {
-			pool[i]=malloc(pool_length[i]*sizeof(gem));
-			int j;
-			for (j=0; j<pool_length[i]; ++j) {
-				int value_father, offset_father;
-				int value_mother, offset_mother;
-				fscanf(table, "%d %la %d %d %d\n", &pool[i][j].grade, &pool[i][j].leech, &value_father, &offset_father, &offset_mother);
-				value_mother=i-1-value_father;
-				pool[i][j].father=pool[value_father]+offset_father;
-				pool[i][j].mother=pool[value_mother]+offset_mother;
-			}
-			fscanf(table, "\n");						// discard newline
-			prevmax++;
-		}
-	}
-	table=freopen("leechtable","a", table);				// append -> updating possible
+	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
+	table=freopen(filename,"a", table);		// append -> updating possible
 	
-	for (i=prevmax+1; i<len; ++i) {
+	for (i=prevmax+1; i<len; ++i) {				// more building
 		int j,k,h;
 		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
 		pool_length[i]=grade_max-1;
@@ -160,25 +124,7 @@ void worker(int len, int output_info, int output_quiet)
 			}
 		fflush(stdout);								// forces buffer write, so redirection works well
 		}
-		
-		int broken=0;			// write on file
-		if (pool[i][0].father==NULL) broken=1;				// solve false g2 problem
-		fprintf(table, "%d\n", pool_length[i]-broken);
-		for (j=broken;j<pool_length[i];++j) {
-			fprintf(table, "%d %la", pool[i][j].grade, pool[i][j].leech);
-			for (k=0; ; k++) {								// print parents
-				int place=pool[i][j].father - pool[k];
-				if (place < pool_length[k]) {
-					fprintf(table, " %d %d", k, place);
-					int mom_pool=i-1-k;
-					place=pool[i][j].mother - pool[mom_pool];
-					fprintf(table, " %d\n", place);
-					break;
-				}
-			}
-		}
-		fprintf(table, "\n");
-		fflush(table);
+		table_write_iteration(pool, pool_length, i, table);			// write on file
 	}
 	fclose(table);			// close
 	for (i=0;i<len;++i) free(pool[i]);		// free
@@ -190,14 +136,18 @@ int main(int argc, char** argv)
 	char opt;
 	int output_info=0;
 	int output_quiet=0;
+	char filename[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iq"))!=-1) {
+	while ((opt=getopt(argc,argv,"iqf:"))!=-1) {
 		switch(opt) {
 			case 'i':
 				output_info = 1;
 				break;
 			case 'q':
 				output_quiet = 1;
+				break;
+			case 'f':
+				strcpy(filename,optarg);
 				break;
 			case '?':
 				return 1;
@@ -216,8 +166,12 @@ int main(int argc, char** argv)
 		}
 		return 1;
 	}
-	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_info, output_quiet);
+	if (len<1) {
+		printf("Improper gem number\n");
+		return 1;
+	}
+	if (filename[0]=='\0') strcpy(filename, "leechtable");
+	worker(len, output_info, output_quiet, filename);
 	return 0;
 }
 
