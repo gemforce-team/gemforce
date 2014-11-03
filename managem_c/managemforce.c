@@ -38,7 +38,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 			temp_index[j]=0;
 			subpools[j]=malloc(size*sizeof(gem));
 			subpools_length[j]=1;
-			gem_init(subpools[j],j+1,0,0);
+			gem_init(subpools[j],j+2,0,0);
 		}
 		for (j=0;j<eoc;++j) {												// combine gems and put them in temp pools
 			if ((i-j)/(j+1) < 10) {										// value ratio < 10
