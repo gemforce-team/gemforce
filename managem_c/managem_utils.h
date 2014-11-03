@@ -26,7 +26,7 @@ void line_from_table(FILE* table, gem* p_gem, int* value_father, int* offset_fat
 
 void line_write_iteration(FILE* table, gem* p_gem)
 {
-	fprintf(table, " %la %la", p_gem->leech, p_gem->bbound);
+	fprintf(table, " %a %a", p_gem->leech, p_gem->bbound);
 }
 
 int gem_more_powerful(gem gem1, gem gem2)

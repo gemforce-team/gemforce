@@ -11,6 +11,16 @@ typedef struct Gem_O {
 	struct Gem_O* mother;
 } gem;
 
+void line_from_table(FILE* table, gem* p_gem, int* value_father, int* offset_father, int* offset_mother)
+{
+	fscanf(table, "%d %la %d %d %d\n", &(p_gem->grade), &(p_gem->leech), value_father, offset_father, offset_mother);
+}
+
+void line_write_iteration(FILE* table, gem* p_gem)
+{
+	fprintf(table, " %la", p_gem->leech);
+}
+
 #include "gfon.h"
 
 int int_max(int a, int b)
@@ -89,17 +99,17 @@ void worker(int len, int output_info, int output_quiet, char* filename)
 		fclose(table);
 		for (i=0;i<len;++i) free(pool[i]);		// free
 		free(pool);		// free
-		printf("Table is longer than %d, no need to do anything\n",prevmax+1);
+		printf("Table is longer than %d, no need to do anything\n\n",prevmax+1);
 		exit(1);
 	}
 	table=freopen(filename,"a", table);		// append -> updating possible
-	
+
 	for (i=prevmax+1; i<len; ++i) {				// more building
 		int j,k,h;
 		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
 		pool_length[i]=grade_max-1;
 		pool[i]=malloc(pool_length[i]*sizeof(gem));
-		for (j=0; j<pool_length[i]; ++j) gem_init(pool[i]+j,j+2,1);
+		for (j=0; j<pool_length[i]; ++j) gem_init(pool[i]+j,j+2,0);
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
 
@@ -176,7 +186,7 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (filename[0]=='\0') strcpy(filename, "leechtable");
+	if (filename[0]=='\0') strcpy(filename, "table_leech");
 	worker(len, output_info, output_quiet, filename);
 	return 0;
 }

@@ -2,6 +2,7 @@
 #define _GFON_H
 
 /* GemForce Object Notation */
+/* Remember to declare line_from_table and line_write_iteration in the other files */
 
 void line_init(FILE* table, int code)
 {
@@ -9,11 +10,17 @@ void line_init(FILE* table, int code)
 		case 2:				// orange
 			fprintf(table, "1\n1 0x1p+0 -1 0 0\n\n");
 		break;
+		case 51:			// mg comb
+			fprintf(table, "1\n1 0x1p+0 0x1p+0 -1 0 0\n\n");
+		break;
+		case 52:			// mg spec
+			fprintf(table, "2\n1 0x1p+0 0x0p+0 -1 1 0\n");
+			fprintf(table, "1 0x0p+0 0x1p+0 -1 0 1\n\n");
+		break;
 		default:
 		break;
 	}
 }
-
 
 FILE* table_init(char* filename, int code)
 {
@@ -54,7 +61,7 @@ FILE* file_check(char* filename)
 
 int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 {
-	printf("Building pool...");
+	printf("\nBuilding pool...");
 	rewind(table);
 	int i;
 	for (i=0;i<1+pool_length[0];++i) {						// discard value 0 gems
@@ -71,7 +78,7 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 			for (j=0; j<pool_length[i]; ++j) {
 				int value_father, offset_father;
 				int value_mother, offset_mother;
-				fscanf(table, "%d %la %d %d %d\n", &pool[i][j].grade, &pool[i][j].leech, &value_father, &offset_father, &offset_mother);
+				line_from_table(table, pool[i]+j, &value_father, &offset_father, &offset_mother);
 				value_mother=i-1-value_father;
 				pool[i][j].father=pool[value_father]+offset_father;
 				pool[i][j].mother=pool[value_mother]+offset_mother;
@@ -80,7 +87,7 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 			prevmax++;
 		}
 	}
-	printf(" Done\n");
+	printf(" Done\n\n");
 	return prevmax;
 }
 
@@ -92,10 +99,11 @@ void table_write_iteration(gem** pool, int* pool_length, int iteration, FILE* ta
 	while (pool[i][broken].father==NULL) broken++;				// solve false g2(3) problem
 	fprintf(table, "%d\n", pool_length[i]-broken);
 	for (j=broken;j<pool_length[i];++j) {
-		fprintf(table, "%d %la", pool[i][j].grade, pool[i][j].leech);
+		fprintf(table, "%d", pool[i][j].grade);
+		line_write_iteration(table, pool[i]+j);
 		for (k=0; ; k++) {								// print parents
 			int place=pool[i][j].father - pool[k];
-			if (place < pool_length[k]) {
+			if (place < pool_length[k] && place >=0) {
 				fprintf(table, " %d %d", k, place);
 				int mom_pool=i-1-k;
 				place=pool[i][j].mother - pool[mom_pool];

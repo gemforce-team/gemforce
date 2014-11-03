@@ -3,81 +3,44 @@
 #include <math.h>
 #include <unistd.h>
 #include <string.h>
-
-typedef struct Gem_O {
-	int grade;			//using short does NOT improve time/memory usage
-	double leech;		//using float does NOT improve time/memory usage
-	struct Gem_O* father;
-	struct Gem_O* mother;
-} gem;
-
-void line_from_table(FILE* table, gem* p_gem, int* value_father, int* offset_father, int* offset_mother)
-{
-	fscanf(table, "%d %la %d %d %d\n", &(p_gem->grade), &(p_gem->leech), value_father, offset_father, offset_mother);
-}
-
-void line_write_iteration(FILE* table, gem* p_gem)
-{
-	fprintf(table, " %la", p_gem->leech);
-}
-
+typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
+const int ACC=1000;						// accuracy for comparisons
+#include "managem_utils.h"
 #include "gfon.h"
 
-void gem_print(gem *p_gem) {
-	printf("Grade:\t%d\nLeech:\t%f\n\n", p_gem->grade, p_gem->leech);
-}
-
-void gem_init(gem *p_gem, int grd, double leech)
-{
-	p_gem->grade=grd;
-	p_gem->leech=leech;
-	p_gem->father=NULL;
-	p_gem->mother=NULL;
-}
-
-int gem_better(gem gem1, gem gem2)
-{
-	return gem1.leech>gem2.leech;
-}
-
-char gem_color(gem* p_gem) {
-	return 'o';
-}
-
-double gem_power(gem gem1) {
-	return gem1.leech;
-}
-
-#include "print_utils.h"
-
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_info, char* filename)
+void worker(int len, int pool_zero, int output_parens, int output_equations, int output_tree, int output_table, int output_info, char* filename)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);							// if the file is not good we exit
 	int i;
-	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
-	gem** pool=malloc(len*sizeof(gem*));	// if not malloc-ed 690k is the limit
+	gem gems[len];
+	gem* pool[len];
 	int pool_length[len];
-	pool[0]=malloc(sizeof(gem));
-	gem_init(gems,1,1);
-	gem_init(pool[0],1,1);
-	pool_length[0]=1;
-
+	pool[0]=malloc(pool_zero*sizeof(gem));
+	pool_length[0]=pool_zero;
+	
+	if (pool_zero==1) {							// combine
+		gem_init(pool[0],1,1,1);
+	}
+	else {													// spec
+		gem_init(pool[0]  ,1,1,0);
+		gem_init(pool[0]+1,1,0,1);
+	}
+	gem_init(gems,1,1,0);
+	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	if (prevmax<len-1) {
 		fclose(table);
 		for (i=0;i<len;++i) free(pool[i]);		// free
-		free(pool);		// free
-		free(gems);		// free
 		printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
 	gem_print(gems);
 
-	for (i=1;i<len;++i) {
+	for (i=1; i<len; ++i) {
 		int j;
-		gems[i]=pool[i][0];
-		for (j=1;j<pool_length[i];++j) if (gem_better(pool[i][j],gems[i])) {
+		gems[i]=pool[i][0];						// choosing gem (criteria moved to more_power def)
+		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
 
@@ -112,15 +75,13 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 	
 	fclose(table);
 	for (i=0;i<len;++i) free(pool[i]);		// free
-	free(pool);		// free
-	free(gems);		// free
 }
-
 
 int main(int argc, char** argv)
 {
 	int len;
 	char opt;
+	int pool_zero=2;		// speccing by default
 	int output_parens=0;
 	int output_equations=0;
 	int output_tree=0;
@@ -156,6 +117,9 @@ int main(int argc, char** argv)
 	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
+		char* p=argv[optind];
+		while (*p != '\0') p++;
+		if (*(p-1)=='c') pool_zero=1;
 	}
 	else {
 		printf("Unknown arguments:\n");
@@ -169,9 +133,11 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (filename[0]=='\0') strcpy(filename, "table_leech");
-	worker(len, output_parens, output_equations, output_tree, output_table, output_info, filename);
+	if (filename[0]=='\0') {
+		if (pool_zero==2) strcpy(filename, "table_mgspec");
+		else strcpy(filename, "table_mgcomb");
+	}
+	worker(len, pool_zero, output_parens, output_equations, output_tree, output_table, output_info, filename);
 	return 0;
 }
-
 

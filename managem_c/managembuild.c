@@ -6,33 +6,37 @@
 typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
 const int ACC=1000;						// accuracy for comparisons
 #include "managem_utils.h"
+#include "gfon.h"
 
-
-void worker(int len, int init_number, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
+void worker(int len, int pool_zero, int output_info, int output_quiet, int size, char* filename)
 {
-	printf("\n");
+	FILE* table=table_init(filename, 50+pool_zero);		// init managem
 	int i;
-	gem gems[len];
 	gem* pool[len];
 	int pool_length[len];
+	pool[0]=malloc(pool_zero*sizeof(gem));
+	pool_length[0]=pool_zero;
 	
-	if (init_number==1) {						// combine
-		pool[0]=malloc(sizeof(gem));
+	if (pool_zero==1) {							// combine
 		gem_init(pool[0],1,1,1);
-		pool_length[0]=1;
 		if (size==0) size=100;				// reasonable comb sizing
 	}
 	else {													// spec
-		pool[0]=malloc(2*sizeof(gem));
 		gem_init(pool[0]  ,1,1,0);
 		gem_init(pool[0]+1,1,0,1);
-		pool_length[0]=2;
 		if (size==0) size=2000;				// reasonable spec sizing
 	}
-	gem_init(gems,1,1,0);
-	gem_print(gems);
 
-	for (i=1; i<len; ++i) {
+	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
+	if (prevmax+1==len) {
+		fclose(table);
+		for (i=0;i<len;++i) free(pool[i]);		// free
+		printf("Table is longer than %d, no need to do anything\n\n",prevmax+1);
+		exit(1);
+	}
+	table=freopen(filename,"a", table);		// append -> updating possible
+
+	for (i=prevmax+1; i<len; ++i) {
 		int j,k,h,l;
 		int eoc=(i+1)/2;        //end of combining
 		int comb_tot=0;
@@ -156,49 +160,17 @@ void worker(int len, int init_number, int output_parens, int output_equations, i
 			free(temp_pools[grd]);
 			free(subpools[grd]);
 		}
-		gems[i]=pool[i][0];						// choosing gem (criteria moved to more_power def)
-		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
-			gems[i]=pool[i][j];
-		}
-
-		printf("Value:\t%d\n",i+1);
-		if (output_info) {
-			printf("Raw:\t%d\n",comb_tot);
-			printf("Pool:\t%d\n",pool_length[i]);
-		}
-		gem_print(gems+i);
+		if (!output_quiet) {
+			printf("Value:\t%d\n",i+1);
+			if (output_info) {
+				printf("Raw:\t%d\n",comb_tot);
+				printf("Pool:\t%d\n\n",pool_length[i]);
+			}
 		fflush(stdout);								// forces buffer write, so redirection works well
-	}
-
-	if (output_parens) {
-		printf("Combining scheme:\n");
-		print_parens(gems+len-1);
-		printf("\n\n");
-		printf("Compressed combining scheme:\n");
-		print_parens_compressed(gems+len-1);
-		printf("\n\n");
-	}
-	if (output_tree) {
-		printf("Gem tree:\n");
-		print_tree(gems+len-1, "");
-		printf("\n");
-	}
-	if (output_table) print_table(gems, len);
-
-	if (output_debug) {
-		printf("Dumping whole pool of value %d:\n\n",len);
-		for (i=0;i<pool_length[len-1];++i) {
-			gem_print(pool[len-1]+i);
-			print_parens(pool[len-1]+i);
-			printf("\n\n");
 		}
+		table_write_iteration(pool, pool_length, i, table);			// write on file
 	}
-	if (output_equations) {		// it ruins gems, must be last
-		printf("Equations:\n");
-		print_equations(gems+len-1);
-		printf("\n");
-	}
-	
+	fclose(table);			// close
 	for (i=0;i<len;++i) free(pool[i]);		// free
 }
 
@@ -206,38 +178,25 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int init_number=2;		// speccing by default
-	int output_parens=0;
-	int output_equations=0;
-	int output_tree=0;
-	int output_table=0;
-	int output_debug=0;
+	int pool_zero=2;		// speccing by default
 	int output_info=0;
+	int output_quiet=0;
 	int size=0;						// worker or user must initialize it
-	
-	while ((opt=getopt(argc,argv,"ptecdis:"))!=-1) {
+	char filename[256]="";		// it should be enough
+
+	while ((opt=getopt(argc,argv,"iqs:f:"))!=-1) {
 		switch(opt) {
-			case 'p':
-				output_parens = 1;
-				break;
-			case 't':
-				output_tree = 1;
-				break;
-			case 'e':
-				output_equations = 1;
-				break;
-			case 'c':
-				output_table = 1;
-				break;
-			case 'd':
-				output_debug = 1;
-				output_info = 1;
-				break;
 			case 'i':
 				output_info = 1;
 				break;
+			case 'q':
+				output_quiet = 1;
+				break;
 			case 's':
 				size = atoi(optarg);
+				break;
+			case 'f':
+				strcpy(filename,optarg);
 				break;
 			case '?':
 				return 1;
@@ -249,7 +208,7 @@ int main(int argc, char** argv)
 		len = atoi(argv[optind]);
 		char* p=argv[optind];
 		while (*p != '\0') p++;
-		if (*(p-1)=='c') init_number=1;
+		if (*(p-1)=='c') pool_zero=1;
 	}
 	else {
 		printf("Unknown arguments:\n");
@@ -259,8 +218,15 @@ int main(int argc, char** argv)
 		}
 		return 1;
 	}
-	if (len<1) printf("Improper gem number\n");
-	else worker(len, init_number, output_parens, output_equations, output_tree, output_table, output_debug, output_info, size);
+	if (len<1) {
+		printf("Improper gem number\n");
+		return 1;
+	}
+	if (filename[0]=='\0') {
+		if (pool_zero==2) strcpy(filename, "table_mgspec");
+		else strcpy(filename, "table_mgcomb");
+	}
+	worker(len, pool_zero, output_info, output_quiet, size, filename);
 	return 0;
 }
 
