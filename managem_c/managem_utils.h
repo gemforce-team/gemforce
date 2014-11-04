@@ -24,7 +24,7 @@ void line_from_table(FILE* table, gem* p_gem, int* value_father, int* offset_fat
 	fscanf(table, "%hd %a %a %d %d %d\n", &(p_gem->grade), &(p_gem->leech), &(p_gem->bbound), value_father, offset_father, offset_mother);
 }
 
-void line_write_iteration(FILE* table, gem* p_gem)
+void write_stats(FILE* table, gem* p_gem)
 {
 	fprintf(table, " %a %a", p_gem->leech, p_gem->bbound);
 }
