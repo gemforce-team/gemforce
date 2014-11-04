@@ -66,7 +66,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	if (prevmax<len-1) {
 		fclose(table);
-		for (i=0;i<len;++i) free(pool[i]);		// free
+		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
 		free(pool);		// free
 		free(gems);		// free
 		printf("Table stops at %d, not %d\n",prevmax+1,len);

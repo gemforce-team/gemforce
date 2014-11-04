@@ -42,7 +42,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);							// if the file is not good we exit
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
-	if (table==NULL) exit(1);							// if the file is not good we exit
+	if (tableA==NULL) exit(1);						// if the file is not good we exit
 	
 	int i;
 	gem* pool[len];
@@ -55,7 +55,8 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// managem pool filling
 	if (prevmax<len-1) {				// FIXME managem_limit
 		fclose(table);
-		for (i=0;i<len;++i) free(pool[i]);		// free
+		fclose(tableA);
+		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
 		printf("Gem table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
@@ -67,11 +68,11 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 	poolO_length[0]=1;
 	gem_init_O(poolO[0],1,1);
 
-	prevmax=pool_from_table_O(poolO, poolO_length, lena, tableA);		// managem pool filling
+	prevmax=pool_from_table_O(poolO, poolO_length, lena, tableA);		// amps pool filling
 	if (prevmax<lena-1) {
 		fclose(tableA);
-		for (i=0;i<lena;++i) free(poolO[i]);		// free
-		printf("Amps table stops at %d, not %d\n",prevmax+1,lena);
+		for (i=0;i<=prevmax;++i) free(poolO[i]);		// free
+		printf("Amp table stops at %d, not %d\n",prevmax+1,lena);
 		exit(1);
 	}
 
@@ -153,7 +154,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 	fclose(table);
 	fclose(tableA);
 	for (i=0;i<len;++i) free(pool[i]);			// free gems
-	for (i=0;i<len/6;++i) free(poolO[i]);		// free amps
+	for (i=0;i<lena;++i) free(poolO[i]);		// free amps
 }
 
 
@@ -187,8 +188,14 @@ int main(int argc, char** argv)
 			case 'i':
 				output_info = 1;
 				break;
-			case 'f':
+			case 'f':			// can be "filename,filenameA", if missing default is used
+				;
+				char* p=optarg;
+				while (*p != ',' && *p != '\0') p++;
+				if (*p==',') *p='\0';			// ok, it's "f,fA"
+				else p--;									// not ok, it's "f" -> empty string
 				strcpy(filename,optarg);
+				strcpy(filenameA,p+1);
 				break;
 			case 'l':
 				managem_limit = atoi(optarg);
@@ -217,10 +224,8 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (filename[0]=='\0') {
-		//if (pool_zero==2) strcpy(filename, "table_mgspec");			FIXME
-		//else strcpy(filename, "table_mgcomb");
-	}
+	if (filename[0]=='\0') strcpy(filename, "table_mgspec");
+	if (filenameA[0]=='\0') strcpy(filenameA, "table_leech");
 	worker_amps(len, output_parens, output_equations, output_tree, output_table, output_info, managem_limit, filename, filenameA);
 	return 0;
 }
