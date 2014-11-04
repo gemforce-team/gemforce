@@ -78,7 +78,8 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 			for (j=0; j<pool_length[i]; ++j) {
 				int value_father, offset_father;
 				int value_mother, offset_mother;
-				line_from_table(table, pool[i]+j, &value_father, &offset_father, &offset_mother);
+				read_stats(table, pool[i]+j);
+				fscanf(table, " %d %x %x\n", &value_father, &offset_father, &offset_mother);
 				if (value_father != -1) {
 					value_mother=i-1-value_father;
 					pool[i][j].father=pool[value_father]+offset_father;
@@ -110,10 +111,10 @@ void table_write_iteration(gem** pool, int* pool_length, int iteration, FILE* ta
 			for (k=0; ; k++) {								// find and print parents
 				int place=pool[i][j].father - pool[k];
 				if (place < pool_length[k] && place >=0) {
-					fprintf(table, " %d %d", k, place);
+					fprintf(table, " %d %x", k, place);
 					int mom_pool=i-1-k;
 					place=pool[i][j].mother - pool[mom_pool];
-					fprintf(table, " %d\n", place);
+					fprintf(table, " %x\n", place);
 					break;
 				}
 			}

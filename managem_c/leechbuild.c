@@ -11,9 +11,9 @@ typedef struct Gem_O {
 	struct Gem_O* mother;
 } gem;
 
-void line_from_table(FILE* table, gem* p_gem, int* value_father, int* offset_father, int* offset_mother)
+void read_stats(FILE* table, gem* p_gem)
 {
-	fscanf(table, "%d %la %d %d %d\n", &(p_gem->grade), &(p_gem->leech), value_father, offset_father, offset_mother);
+	fscanf(table, "%d %la", &(p_gem->grade), &(p_gem->leech));
 }
 
 void write_stats(FILE* table, gem* p_gem)

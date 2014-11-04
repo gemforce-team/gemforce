@@ -19,9 +19,9 @@ struct Gem_OB {
 
 // remember to define the gem in your file
 
-void line_from_table(FILE* table, gem* p_gem, int* value_father, int* offset_father, int* offset_mother)
+void read_stats(FILE* table, gem* p_gem)
 {
-	fscanf(table, "%hd %a %a %d %d %d\n", &(p_gem->grade), &(p_gem->leech), &(p_gem->bbound), value_father, offset_father, offset_mother);
+	fscanf(table, "%hd %a %a", &(p_gem->grade), &(p_gem->leech), &(p_gem->bbound));
 }
 
 void write_stats(FILE* table, gem* p_gem)

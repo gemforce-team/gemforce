@@ -27,7 +27,7 @@ int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
 			for (j=0; j<pool_length[i]; ++j) {
 				int value_father, offset_father;
 				int value_mother, offset_mother;
-				fscanf(table, "%d %la %d %d %d\n", &(pool[i][j].grade), &(pool[i][j].leech), &value_father, &offset_father, &offset_mother);
+				fscanf(table, "%d %la %d %x %x\n", &(pool[i][j].grade), &(pool[i][j].leech), &value_father, &offset_father, &offset_mother);
 				value_mother=i-1-value_father;
 				pool[i][j].father=pool[value_father]+offset_father;
 				pool[i][j].mother=pool[value_mother]+offset_mother;
