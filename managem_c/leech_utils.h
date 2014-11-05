@@ -8,38 +8,6 @@ struct Gem_O {
 	struct Gem_O* mother;
 };
 
-int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
-{
-	printf("\nBuilding pool...");
-	rewind(table);
-	int i;
-	for (i=0;i<1+pool_length[0];++i) {						// discard value 0 gems
-		fscanf(table, "%*[^\n]\n");
-	}
-	fscanf(table, "\n");													// discard newline
-	int prevmax=0;
-	for (i=1;i<len;++i) {
-		int eof_check=fscanf(table, "%d\n", pool_length+i);				// get pool length
-		if (eof_check==-1) break;
-		else {
-			pool[i]=malloc(pool_length[i]*sizeof(gemO));
-			int j;
-			for (j=0; j<pool_length[i]; ++j) {
-				int value_father, offset_father;
-				int value_mother, offset_mother;
-				fscanf(table, "%d %la %d %x %x\n", &(pool[i][j].grade), &(pool[i][j].leech), &value_father, &offset_father, &offset_mother);
-				value_mother=i-1-value_father;
-				pool[i][j].father=pool[value_father]+offset_father;
-				pool[i][j].mother=pool[value_mother]+offset_mother;
-			}
-			fscanf(table, "\n");						// discard newline
-			prevmax++;
-		}
-	}
-	printf(" Done\n\n");
-	return prevmax;
-}
-
 void gem_print_O(gemO *p_gem) {
 	printf("Grade:\t%d\nLeech:\t%f\n\n", p_gem->grade, p_gem->leech);
 }
@@ -84,6 +52,40 @@ void gem_combine_O (gemO *p_gem1, gemO *p_gem2, gemO *p_gem_combined)
 			gem_comb_gn_O(p_gem1, p_gem2, p_gem_combined);
 			break;
 	}
+}
+
+int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
+{
+	printf("\nBuilding pool...");
+	rewind(table);
+	int i;
+	for (i=0;i<1+pool_length[0];++i) {						// discard value 0 gems
+		fscanf(table, "%*[^\n]\n");
+	}
+	fscanf(table, "\n");													// discard newline
+	int prevmax=0;
+	for (i=1;i<len;++i) {
+		int eof_check=fscanf(table, "%d\n", pool_length+i);				// get pool length
+		if (eof_check==-1) break;
+		else {
+			pool[i]=malloc(pool_length[i]*sizeof(gemO));
+			int j;
+			for (j=0; j<pool_length[i]; ++j) {
+				int value_father, offset_father;
+				int value_mother, offset_mother;
+				fscanf(table, "%d %x %x\n", &value_father, &offset_father, &offset_mother);
+				if (value_father != -1) {
+					value_mother=i-1-value_father;
+					gem_combine_O(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
+				}
+				else pool[i][j]=(gemO){0};		// 0-NULL init
+			}
+			fscanf(table, "\n");						// discard newline
+			prevmax++;
+		}
+	}
+	printf(" Done\n\n");
+	return prevmax;
 }
 
 void gem_init_O(gemO *p_gem, int grd, float leech)

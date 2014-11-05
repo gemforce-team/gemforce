@@ -19,16 +19,6 @@ struct Gem_OB {
 
 // remember to define the gem in your file
 
-void read_stats(FILE* table, gem* p_gem)
-{
-	fscanf(table, "%hd %a %a", &(p_gem->grade), &(p_gem->leech), &(p_gem->bbound));
-}
-
-void write_stats(FILE* table, gem* p_gem)
-{
-	fprintf(table, " %a %a", p_gem->leech, p_gem->bbound);
-}
-
 int gem_more_powerful(gem gem1, gem gem2)
 {
 	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);   // optimization at infinity hits (hit lv infinity)

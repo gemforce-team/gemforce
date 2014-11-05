@@ -11,18 +11,6 @@ typedef struct Gem_O {
 	struct Gem_O* mother;
 } gem;
 
-void read_stats(FILE* table, gem* p_gem)
-{
-	fscanf(table, "%d %la", &(p_gem->grade), &(p_gem->leech));
-}
-
-void write_stats(FILE* table, gem* p_gem)
-{
-	fprintf(table, " %la", p_gem->leech);
-}
-
-#include "gfon.h"
-
 int int_max(int a, int b)
 {
 	if (a > b) return a;
@@ -71,6 +59,8 @@ void gem_combine (gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 	}
 }
 
+#include "gfon.h"
+
 void gem_init(gem *p_gem, int grd, double leech)
 {
 	p_gem->grade=grd;
@@ -86,7 +76,7 @@ int gem_better(gem gem1, gem gem2)
 
 void worker(int len, int output_info, int output_quiet, char* filename)
 {
-	FILE* table=table_init(filename, 2);		// init orange
+	FILE* table=table_init(filename, 1);		// init orange
 	int i;
 	gem** pool=malloc(len*sizeof(gem*));		// if not malloc-ed 690k is the limit
 	int pool_length[len];

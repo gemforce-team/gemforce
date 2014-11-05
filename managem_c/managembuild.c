@@ -9,7 +9,7 @@ typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows 
 
 void worker(int len, int pool_zero, int output_info, int output_quiet, int size, char* filename)
 {
-	FILE* table=table_init(filename, 50+pool_zero);		// init managem
+	FILE* table=table_init(filename, pool_zero);		// init managem
 	int i;
 	gem* pool[len];
 	int pool_length[len];
@@ -50,59 +50,60 @@ void worker(int len, int pool_zero, int output_info, int output_quiet, int size,
 			temp_index[j]=0;
 			subpools[j]=malloc(size*sizeof(gem));
 			subpools_length[j]=1;
-			gem_init(subpools[j],j+2,0,0);
+			subpools[j][0]=(gem){0};		// 0-NULL init
 		}
-		for (j=0;j<eoc;++j) {												// combine gems and put them in temp pools
-			if ((i-j)/(j+1) < 10) {										// value ratio < 10
-				for (k=0; k< pool_length[j]; ++k) {
-					for (h=0; h< pool_length[i-1-j]; ++h) {
-						int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
-						if (abs(delta)<=2) {								// grade difference <= 2
-							comb_tot++;
-							gem temp;
-							gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
-							int grd=temp.grade-2;
-							temp_pools[grd][temp_index[grd]]=temp;
-							temp_index[grd]++;
-							if (temp_index[grd]==size) {									// let's skim a pool
-								int length=size+subpools_length[grd];
-								gem* temp_array=malloc(length*sizeof(gem));
-								int index=0;
-								for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
-									temp_array[index]=temp_pools[grd][l];
+		for (j=0;j<eoc;++j)										// combine gems and put them in temp pools
+		if ((i-j)/(j+1) < 10) {								// value ratio < 10
+			for (k=0; k< pool_length[j]; ++k)
+			if ((pool[j]+k)->grade!=0) {				// extensive false gems check ahead
+				for (h=0; h< pool_length[i-1-j]; ++h)
+				if ((pool[i-1-j]+h)->grade!=0) {
+					int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
+					if (abs(delta)<=2) {									// grade difference <= 2
+						comb_tot++;
+						gem temp;
+						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
+						int grd=temp.grade-2;
+						temp_pools[grd][temp_index[grd]]=temp;
+						temp_index[grd]++;
+						if (temp_index[grd]==size) {									// let's skim a pool
+							int length=size+subpools_length[grd];
+							gem* temp_array=malloc(length*sizeof(gem));
+							int index=0;
+							for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
+								temp_array[index]=temp_pools[grd][l];
+								index++;
+							}
+							temp_index[grd]=0;				// temp index reset
+							for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
+								temp_array[index]=subpools[grd][l];
+								index++;
+							}
+							free(subpools[grd]);			// free
+							gem_sort(temp_array,length);								// work starts
+	
+							int broken=0;
+							float lim_bbound=-1;
+							for (l=length-1;l>=0;--l) {
+								if ((int)(ACC*temp_array[l].bbound)<=(int)(ACC*lim_bbound)) {
+									temp_array[l].grade=0;
+									broken++;
+								}
+								else lim_bbound=temp_array[l].bbound;
+							}													// all unnecessary gems destroyed
+	
+							subpools_length[grd]=length-broken;
+							subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
+	
+							index=0;
+							for (l=0; l<length; ++l) {			// copying to subpool
+								if (temp_array[l].grade!=0) {
+									subpools[grd][index]=temp_array[l];
 									index++;
 								}
-								temp_index[grd]=0;				// temp index reset
-								for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
-									temp_array[index]=subpools[grd][l];
-									index++;
-								}
-								free(subpools[grd]);			// free
-								gem_sort(temp_array,length);								// work starts
-		
-								int broken=0;
-								float lim_bbound=-1;
-								for (l=length-1;l>=0;--l) {
-									if ((int)(ACC*temp_array[l].bbound)<=(int)(ACC*lim_bbound)) {
-										temp_array[l].grade=0;
-										broken++;
-									}
-									else lim_bbound=temp_array[l].bbound;
-								}													// all unnecessary gems destroyed
-		
-								subpools_length[grd]=length-broken;
-								subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
-		
-								index=0;
-								for (l=0; l<length; ++l) {			// copying to subpool
-									if (temp_array[l].grade!=0) {
-										subpools[grd][index]=temp_array[l];
-										index++;
-									}
-								}
-								free(temp_array);     // free
-							}												// rebuilt subpool[grd], work restarts
-						}
+							}
+							free(temp_array);     // free
+						}												// rebuilt subpool[grd], work restarts
 					}
 				}
 			}
