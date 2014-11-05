@@ -11,11 +11,11 @@ void print_parens(gem* gemf)
 {
 	if (gemf->father==NULL) printf("%c",gem_color(gemf));
 	else {
-		printf("("); fflush(stdout);
-		print_parens(gemf->mother); fflush(stdout);
-		printf("+"); fflush(stdout);
-		print_parens(gemf->father); fflush(stdout);
-		printf(")"); fflush(stdout);
+		printf("(");
+		print_parens(gemf->mother);
+		printf("+");
+		print_parens(gemf->father);
+		printf(")");
 	}
 	return;
 }
