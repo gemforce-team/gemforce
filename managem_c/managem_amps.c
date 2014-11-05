@@ -67,7 +67,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 			for (j=0; j<grade_max-1; ++j) {							// init everything
 				temp_pools[j]=malloc(size*sizeof(gem));
 				temp_index[j]=0;
-				subpools[j]=malloc(size*sizeof(gem));
+				subpools[j]=malloc(sizeof(gem));
 				subpools_length[j]=1;
 				subpools[j][0]=(gem){0};		// 0-NULL init
 			}

@@ -48,7 +48,7 @@ void worker(int len, int pool_zero, int output_info, int output_quiet, int size,
 		for (j=0; j<grade_max-1; ++j) {							// init everything
 			temp_pools[j]=malloc(size*sizeof(gem));
 			temp_index[j]=0;
-			subpools[j]=malloc(size*sizeof(gem));
+			subpools[j]=malloc(sizeof(gem));
 			subpools_length[j]=1;
 			subpools[j][0]=(gem){0};		// 0-NULL init
 		}
