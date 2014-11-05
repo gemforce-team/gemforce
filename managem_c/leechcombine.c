@@ -106,7 +106,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
 		pool_length[i]=grade_max-1;
 		pool[i]=malloc(pool_length[i]*sizeof(gem));
-		for (j=0; j<pool_length[i]; ++j) gem_init(pool[i]+j,j+2,1);
+		for (j=0; j<pool_length[i]; ++j) gem_init(pool[i]+j,j+2,0);
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
 
