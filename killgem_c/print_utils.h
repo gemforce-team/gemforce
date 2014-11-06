@@ -1,6 +1,13 @@
 #ifndef _PRINT_UTILS_H
 #define _PRINT_UTILS_H
 
+const int mask_info=1;
+const int mask_parens=2;
+const int mask_tree=4;
+const int mask_table=8;
+const int mask_equations=16;
+const int mask_quiet=32;
+
 int gem_getvalue(gem* p_gem)
 {
 	if(p_gem->father==NULL) return 1;
@@ -61,14 +68,9 @@ void print_eq(gem* p_gem, int* printed_uid)
 	if (printed_uid[p_gem->grade]==1) return;
 	if (gem_getvalue(p_gem)==1) printf("(val = 1)\t%2d = g1 %c\n", p_gem->grade, gem_color(p_gem));
 	else {
-		print_eq(p_gem->father, printed_uid);
+		print_eq(p_gem->father, printed_uid);		// mother is always bigger
 		print_eq(p_gem->mother, printed_uid);
-		if (gem_getvalue(p_gem->father) > gem_getvalue(p_gem->father)) {
-			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->grade, p_gem->father->grade, p_gem->mother->grade);
-		}
-		else {
-			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->grade, p_gem->mother->grade, p_gem->father->grade);
-		}
+		printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->grade, p_gem->mother->grade, p_gem->father->grade);
 	}
 	printed_uid[p_gem->grade]=1;
 }
