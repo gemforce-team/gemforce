@@ -117,7 +117,7 @@ void gem_sort_old(gem* gems, int len)
 }
 
 void gem_sort (gem* gems, int len) {
-	if (len < 10) {		// ins sort
+	if (len < 20) {		// ins sort
 		int i,j;
 		gem element;
 		for (i=1; i<len; i++) {
