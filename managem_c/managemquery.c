@@ -7,7 +7,7 @@ typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows 
 #include "managem_utils.h"
 #include "gfon.h"
 
-void worker(int len, int pool_zero, int output_parens, int output_equations, int output_tree, int output_table, int output_info, char* filename)
+void worker(int len, int output_options, int pool_zero, char* filename)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);							// if the file is not good we exit
@@ -44,14 +44,14 @@ void worker(int len, int pool_zero, int output_parens, int output_equations, int
 		}
 
 		printf("Value:\t%d\n",i+1);
-		if (output_info) {
+		if (output_options & mask_info) {
 			printf("Pool:\t%d\n",pool_length[i]);
 		}
 		gem_print(gems+i);
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 
-	if (output_parens) {
+	if (output_options & mask_parens) {
 		printf("Combining scheme:\n");
 		print_parens(gems+len-1);
 		printf("\n\n");
@@ -59,14 +59,14 @@ void worker(int len, int pool_zero, int output_parens, int output_equations, int
 		print_parens_compressed(gems+len-1);
 		printf("\n\n");
 	}
-	if (output_tree) {
+	if (output_options & mask_tree) {
 		printf("Gem tree:\n");
 		print_tree(gems+len-1, "");
 		printf("\n");
 	}
-	if (output_table) print_table(gems, len);
-
-	if (output_equations) {		// it ruins gems, must be last
+	if (output_options & mask_table) print_table(gems, len);
+	
+	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Equations:\n");
 		print_equations(gems+len-1);
 		printf("\n");
@@ -81,29 +81,25 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int pool_zero=2;		// speccing by default
-	int output_parens=0;
-	int output_equations=0;
-	int output_tree=0;
-	int output_table=0;
-	int output_info=0;
+	int output_options=0;
 	char filename[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"ptecif:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcef:"))!=-1) {
 		switch(opt) {
+			case 'i':
+				output_options |= mask_info;
+				break;
 			case 'p':
-				output_parens = 1;
+				output_options |= mask_parens;
 				break;
 			case 't':
-				output_tree = 1;
-				break;
-			case 'e':
-				output_equations = 1;
+				output_options |= mask_tree;
 				break;
 			case 'c':
-				output_table = 1;
+				output_options |= mask_table;
 				break;
-			case 'i':
-				output_info = 1;
+			case 'e':
+				output_options |= mask_equations;
 				break;
 			case 'f':
 				strcpy(filename,optarg);
@@ -136,7 +132,7 @@ int main(int argc, char** argv)
 		if (pool_zero==2) strcpy(filename, "table_mgspec");
 		else strcpy(filename, "table_mgcomb");
 	}
-	worker(len, pool_zero, output_parens, output_equations, output_tree, output_table, output_info, filename);
+	worker(len, output_options, pool_zero, filename);
 	return 0;
 }
 

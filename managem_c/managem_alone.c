@@ -7,27 +7,26 @@ typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows 
 #include "managem_utils.h"
 
 
-void worker(int len, int init_number, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
+void worker(int len, int output_options, int pool_zero, int size)
 {
 	printf("\n");
 	int i;
 	gem gems[len];
 	gem* pool[len];
 	int pool_length[len];
+	pool[0]=malloc(pool_zero*sizeof(gem));
+	pool_length[0]=pool_zero;
 	
-	if (init_number==1) {						// combine
-		pool[0]=malloc(sizeof(gem));
+	if (pool_zero==1) {							// combine
 		gem_init(pool[0],1,1,1);
-		pool_length[0]=1;
 		if (size==0) size=100;				// reasonable comb sizing
 	}
 	else {													// spec
-		pool[0]=malloc(2*sizeof(gem));
 		gem_init(pool[0]  ,1,1,0);
 		gem_init(pool[0]+1,1,0,1);
-		pool_length[0]=2;
 		if (size==0) size=2000;				// reasonable spec sizing
 	}
+	
 	gem_init(gems,1,1,0);
 	gem_print(gems);
 
@@ -162,7 +161,7 @@ void worker(int len, int init_number, int output_parens, int output_equations, i
 		}
 
 		printf("Value:\t%d\n",i+1);
-		if (output_info) {
+		if (output_options & mask_info) {
 			printf("Raw:\t%d\n",comb_tot);
 			printf("Pool:\t%d\n",pool_length[i]);
 		}
@@ -170,7 +169,7 @@ void worker(int len, int init_number, int output_parens, int output_equations, i
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 
-	if (output_parens) {
+	if (output_options & mask_parens) {
 		printf("Combining scheme:\n");
 		print_parens(gems+len-1);
 		printf("\n\n");
@@ -178,22 +177,14 @@ void worker(int len, int init_number, int output_parens, int output_equations, i
 		print_parens_compressed(gems+len-1);
 		printf("\n\n");
 	}
-	if (output_tree) {
+	if (output_options & mask_tree) {
 		printf("Gem tree:\n");
 		print_tree(gems+len-1, "");
 		printf("\n");
 	}
-	if (output_table) print_table(gems, len);
-
-	if (output_debug) {
-		printf("Dumping whole pool of value %d:\n\n",len);
-		for (i=0;i<pool_length[len-1];++i) {
-			gem_print(pool[len-1]+i);
-			print_parens(pool[len-1]+i);
-			printf("\n\n");
-		}
-	}
-	if (output_equations) {		// it ruins gems, must be last
+	if (output_options & mask_table) print_table(gems, len);
+	
+	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Equations:\n");
 		print_equations(gems+len-1);
 		printf("\n");
@@ -206,35 +197,26 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int init_number=2;		// speccing by default
-	int output_parens=0;
-	int output_equations=0;
-	int output_tree=0;
-	int output_table=0;
-	int output_debug=0;
-	int output_info=0;
+	int pool_zero=2;			// speccing by default
+	int output_options=0;
 	int size=0;						// worker or user must initialize it
 	
-	while ((opt=getopt(argc,argv,"ptecdis:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptces:"))!=-1) {
 		switch(opt) {
+			case 'i':
+				output_options |= mask_info;
+				break;
 			case 'p':
-				output_parens = 1;
+				output_options |= mask_parens;
 				break;
 			case 't':
-				output_tree = 1;
-				break;
-			case 'e':
-				output_equations = 1;
+				output_options |= mask_tree;
 				break;
 			case 'c':
-				output_table = 1;
+				output_options |= mask_table;
 				break;
-			case 'd':
-				output_debug = 1;
-				output_info = 1;
-				break;
-			case 'i':
-				output_info = 1;
+			case 'e':
+				output_options |= mask_equations;
 				break;
 			case 's':
 				size = atoi(optarg);
@@ -249,7 +231,7 @@ int main(int argc, char** argv)
 		len = atoi(argv[optind]);
 		char* p=argv[optind];
 		while (*p != '\0') p++;
-		if (*(p-1)=='c') init_number=1;
+		if (*(p-1)=='c') pool_zero=1;
 	}
 	else {
 		printf("Unknown arguments:\n");
@@ -260,7 +242,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, init_number, output_parens, output_equations, output_tree, output_table, output_debug, output_info, size);
+	else worker(len, output_options, pool_zero, size);
 	return 0;
 }
 

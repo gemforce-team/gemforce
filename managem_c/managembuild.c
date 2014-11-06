@@ -7,7 +7,7 @@ typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows 
 #include "managem_utils.h"
 #include "gfon.h"
 
-void worker(int len, int pool_zero, int output_info, int output_quiet, int size, char* filename)
+void worker(int len, int output_options, int pool_zero, int size, char* filename)
 {
 	FILE* table=table_init(filename, pool_zero);		// init managem
 	int i;
@@ -160,9 +160,9 @@ void worker(int len, int pool_zero, int output_info, int output_quiet, int size,
 			free(temp_pools[grd]);
 			free(subpools[grd]);
 		}
-		if (!output_quiet) {
+		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
-			if (output_info) {
+			if (output_options & mask_info) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
@@ -178,19 +178,18 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int pool_zero=2;		// speccing by default
-	int output_info=0;
-	int output_quiet=0;
+	int pool_zero=2;			// speccing by default
+	int output_options=0;
 	int size=0;						// worker or user must initialize it
 	char filename[256]="";		// it should be enough
 
 	while ((opt=getopt(argc,argv,"iqs:f:"))!=-1) {
 		switch(opt) {
 			case 'i':
-				output_info = 1;
+				output_options |= mask_info;
 				break;
 			case 'q':
-				output_quiet = 1;
+				output_options |= mask_quiet;
 				break;
 			case 's':
 				size = atoi(optarg);
@@ -226,7 +225,7 @@ int main(int argc, char** argv)
 		if (pool_zero==2) strcpy(filename, "table_mgspec");
 		else strcpy(filename, "table_mgcomb");
 	}
-	worker(len, pool_zero, output_info, output_quiet, size, filename);
+	worker(len, output_options, pool_zero, size, filename);
 	return 0;
 }
 

@@ -88,7 +88,7 @@ double gem_power(gem gem1) {
 
 #include "print_utils.h"
 
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info)
+void worker(int len, int output_options)
 {
 	printf("\n");
 	int i;
@@ -106,7 +106,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
 		pool_length[i]=grade_max-1;
 		pool[i]=malloc(pool_length[i]*sizeof(gem));
-		for (j=0; j<pool_length[i]; ++j) gem_init(pool[i]+j,j+2,0);
+		for (j=0; j<pool_length[i]; ++j) gem_init(pool[i]+j,j+2,1);
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
 
@@ -135,7 +135,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 		}
 
 		printf("Value:\t%d\n",i+1);
-		if (output_info) {
+		if (output_options & mask_info) {
 			printf("Raw:\t%d\n",comb_tot);
 			printf("Pool:\t%d\n",pool_length[i]);
 		}
@@ -143,7 +143,7 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 
-	if (output_parens) {
+	if (output_options & mask_parens) {
 		printf("Combining scheme:\n");
 		print_parens(gems+len-1);
 		printf("\n\n");
@@ -151,22 +151,14 @@ void worker(int len, int output_parens, int output_equations, int output_tree, i
 		print_parens_compressed(gems+len-1);
 		printf("\n\n");
 	}
-	if (output_tree) {
+	if (output_options & mask_tree) {
 		printf("Gem tree:\n");
 		print_tree(gems+len-1, "");
 		printf("\n");
 	}
-	if (output_table) print_table(gems, len);
-
-	if (output_debug) {
-		printf("Dumping whole pool of value %d:\n\n",len);
-		for (i=0;i<pool_length[len-1];++i) {
-			gem_print(pool[len-1]+i);
-			print_parens(pool[len-1]+i);
-			printf("\n\n");
-		}
-	}
-	if (output_equations) {		// it ruins gems, must be last
+	if (output_options & mask_table) print_table(gems, len);
+	
+	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Equations:\n");
 		print_equations(gems+len-1);
 		printf("\n");
@@ -181,33 +173,24 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int output_parens=0;
-	int output_equations=0;
-	int output_tree=0;
-	int output_table=0;
-	int output_debug=0;
-	int output_info=0;
+	int output_options=0;
 
-	while ((opt=getopt(argc,argv,"petcdi"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptce"))!=-1) {
 		switch(opt) {
-			case 'p':
-				output_parens = 1;
+			case 'i':
+				output_options |= mask_info;
 				break;
-			case 'e':
-				output_equations = 1;
+			case 'p':
+				output_options |= mask_parens;
 				break;
 			case 't':
-				output_tree = 1;
+				output_options |= mask_tree;
 				break;
 			case 'c':
-				output_table = 1;
+				output_options |= mask_table;
 				break;
-			case 'd':
-				output_debug = 1;
-				output_info = 1;
-				break;
-			case 'i':
-				output_info = 1;
+			case 'e':
+				output_options |= mask_equations;
 				break;
 			case '?':
 				return 1;
@@ -227,7 +210,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_parens, output_equations, output_tree, output_table, output_debug, output_info);
+	else worker(len, output_options);
 	return 0;
 }
 

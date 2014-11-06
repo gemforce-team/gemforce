@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <string.h>
 
+const int mask_info=1;
+const int mask_quiet=32;
+
 typedef struct Gem_O {
 	int grade;			//using short does NOT improve time/memory usage
 	double leech;		//using float does NOT improve time/memory usage
@@ -74,7 +77,7 @@ int gem_better(gem gem1, gem gem2)
 	return gem1.leech>gem2.leech;
 }
 
-void worker(int len, int output_info, int output_quiet, char* filename)
+void worker(int len, int output_options, char* filename)
 {
 	FILE* table=table_init(filename, 1);		// init orange
 	int i;
@@ -121,9 +124,9 @@ void worker(int len, int output_info, int output_quiet, char* filename)
 				}
 			}
 		}
-		if (!output_quiet) {
+		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
-			if (output_info) {
+			if (output_options & mask_info) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
@@ -140,17 +143,16 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int output_info=0;
-	int output_quiet=0;
+	int output_options=0;
 	char filename[256]="";		// it should be enough
 
 	while ((opt=getopt(argc,argv,"iqf:"))!=-1) {
 		switch(opt) {
 			case 'i':
-				output_info = 1;
+				output_options |= mask_info;
 				break;
 			case 'q':
-				output_quiet = 1;
+				output_options |= mask_quiet;
 				break;
 			case 'f':
 				strcpy(filename,optarg);
@@ -177,7 +179,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (filename[0]=='\0') strcpy(filename, "table_leech");
-	worker(len, output_info, output_quiet, filename);
+	worker(len, output_options, filename);
 	return 0;
 }
 
