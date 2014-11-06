@@ -106,9 +106,9 @@ void print_parens_O(gemO* gemf)
 	if (gemf->father==NULL) printf("o");
 	else {
 		printf("(");
-		print_parens_O(gemf->father);
-		printf("+");
 		print_parens_O(gemf->mother);
+		printf("+");
+		print_parens_O(gemf->father);
 		printf(")");
 	}
 	return;

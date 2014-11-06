@@ -79,27 +79,39 @@ int gem_has_less_damage_crit(gemY gem1, gemY gem2)
 }
 
 void gem_sort_Y (gemY* gems, int len) {
-	if (len < 2) return;
-	gemY pivot = gems[len/2];
-	gemY* beg = gems;
-	gemY* end = gems+len-1;
-	while (beg <= end) {
-		if (gem_has_less_damage_crit(*beg, pivot)) {
-			beg++;
-		}
-		else if (gem_has_less_damage_crit(pivot,*end)) {
-			end--;
-		}
-		else {
-			gemY temp = *beg;
-			*beg = *end;
-			*end = temp;
-			beg++;
-			end--;
+	if (len < 10) {		// ins sort
+		int i,j;
+		gemY element;
+		for (i=1; i<len; i++) {
+			element=gems[i];
+			for (j=i; j>0 && gem_has_less_damage_crit(element, gems[j-1]); j--) {
+				gems[j]=gems[j-1];
+			}
+			gems[j]=element;
 		}
 	}
-	gem_sort_Y(gems, end-gems+1);
-	gem_sort_Y(beg, gems-beg+len);
+	else {					// quick sort
+		gemY pivot = gems[len/2];
+		gemY* beg = gems;
+		gemY* end = gems+len-1;
+		while (beg <= end) {
+			if (gem_has_less_damage_crit(*beg, pivot)) {
+				beg++;
+			}
+			else if (gem_has_less_damage_crit(pivot,*end)) {
+				end--;
+			}
+			else {
+				gemY temp = *beg;
+				*beg = *end;
+				*end = temp;
+				beg++;
+				end--;
+			}
+		}
+		gem_sort_Y(gems, end-gems+1);
+		gem_sort_Y(beg, gems-beg+len);
+	}
 }
 
 void print_parens_Y(gemY* gemf)
@@ -107,9 +119,9 @@ void print_parens_Y(gemY* gemf)
 	if (gemf->father==NULL) printf("y");
 	else {
 		printf("(");
-		print_parens_Y(gemf->father);
-		printf("+");
 		print_parens_Y(gemf->mother);
+		printf("+");
+		print_parens_Y(gemf->father);
 		printf(")");
 	}
 	return;
