@@ -9,11 +9,6 @@ typedef struct Gem_O gemO;
 #include "leech_utils.h"
 #include "gfon.h"
 
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
-{
-	// utils compatibility
-}
-
 float gem_amp_power(gem gem1, gemO amp1)
 {
 	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
@@ -37,13 +32,10 @@ void print_amps_table(gem* gems, gemO* amps, int len)
 	printf("\n");
 }
 
-void worker_amps(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_info, int managem_limit, char* filename, char* filenameA)
+void worker(int len, int output_options, int global_mode, float growth_comb, char* filename, char* filenameA)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);							// if the file is not good we exit
-	FILE* tableA=file_check(filenameA);		// fileA is open to read
-	if (tableA==NULL) exit(1);						// if the file is not good we exit
-	
 	int i;
 	gem* pool[len];
 	int pool_length[len];
@@ -53,26 +45,38 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 	gem_init(pool[0]+1,1,0,1);
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// managem pool filling
-	if (prevmax<len-1) {				// FIXME managem_limit
-		fclose(table);
-		fclose(tableA);
-		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
-		printf("Gem table stops at %d, not %d\n",prevmax+1,len);
-		exit(1);
+	if (prevmax<len-1) {						// if the managems are not enough
+		if (global_mode==0) {					// behave as mga_spec -> quit if not enough managems
+			fclose(table);
+			for (i=0;i<=prevmax;++i) free(pool[i]);		// free
+			printf("Gem table stops at %d, not %d\n",prevmax+1,len);
+			exit(1);
+		}
+		else {												// behave as managem_amps -> fill the remaining with false gems
+			for (i=prevmax+1; i<len; ++i) {
+				pool_length[i]=1;
+				pool[i]=malloc(sizeof(gem));
+				pool[i][0]=(gem){0};			// null gems
+			}
+		}
 	}
 
-	int lena=len/6;
+	FILE* tableA=file_check(filenameA);		// fileA is open to read
+	if (tableA==NULL) exit(1);						// if the file is not good we exit
+	int lena;
+	if (global_mode) lena=len/6;					// managem_amps -> len/6
+	else lena=2*len;											// mga_spec -> 2x mg value
 	gemO* poolO[lena];
 	int poolO_length[lena];
 	poolO[0]=malloc(sizeof(gemO));
 	poolO_length[0]=1;
 	gem_init_O(poolO[0],1,1);
-
-	prevmax=pool_from_table_O(poolO, poolO_length, lena, tableA);		// amps pool filling
-	if (prevmax<lena-1) {
+	
+	int prevmaxA=pool_from_table_O(poolO, poolO_length, lena, tableA);		// amps pool filling
+	if (prevmaxA<lena-1) {
 		fclose(tableA);
-		for (i=0;i<=prevmax;++i) free(poolO[i]);		// free
-		printf("Amp table stops at %d, not %d\n",prevmax+1,lena);
+		for (i=0;i<=prevmaxA;++i) free(poolO[i]);		// free
+		printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
 
@@ -81,47 +85,100 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 	gem gems[len];
 	gem_init(gems,1,1,0);
 	gem_init_O(amps,0,0);
-	printf("Total value: 1\n");
-	printf("Gem:\n");
-	gem_print(gems);
-	printf("Amplifier:\n");
-	gem_print_O(amps);
+	
+	if (global_mode) { 							// behave like managem_amps
+		printf("Total value: 1\n");
+		printf("Gem:\n");
+		gem_print(gems);
+		printf("Amplifier:\n");
+		gem_print_O(amps);
 
-	for (i=1;i<len;++i) {																	// for every total value
-		gem_init(gems+i,0,0,0);															// we init the gems
-		gem_init_O(amps+i,0,0);															// to extremely weak ones
-		for (j=0;j<=i/6;++j) {															// for every amount of amps we can fit in
-			int value = i-6*j;																// this is the amount of gems we have left
-			for (k=0;k<pool_length[value];++k) {							// we search in that pool
-				if (j!=0) {																			// and if we need an amp
-					for (h=0;h<poolO_length[j-1];++h) {						// we look in the amp pool
-						if (pool[value][k].leech!=0 && gem_amp_more_powerful(pool[value][k],poolO[j-1][h],gems[i],amps[i])) {
-							gems[i]=pool[value][k];
-							amps[i]=poolO[j-1][h];
+		for (i=1;i<len;++i) {																	// for every total value
+			gem_init(gems+i,0,0,0);															// we init the gems
+			gem_init_O(amps+i,0,0);															// to extremely weak ones
+			for (j=0;j<=i/6;++j) {															// for every amount of amps we can fit in
+				int value = i-6*j;																// this is the amount of gems we have left
+				for (k=0;k<pool_length[value];++k) {							// we search in that pool
+					if (j!=0) {																			// and if we need an amp
+						for (h=0;h<poolO_length[j-1];++h) {						// we look in the amp pool
+							if (pool[value][k].leech!=0 && gem_amp_more_powerful(pool[value][k],poolO[j-1][h],gems[i],amps[i])) {
+								gems[i]=pool[value][k];
+								amps[i]=poolO[j-1][h];
+							}
+						}
+					}
+					else if (gem_alone_more_powerful(pool[value][k],gems[i],amps[i])) {
+						gems[i]=pool[value][k];
+						gem_init_O(amps+i,0,0);
+					}
+				}
+			}
+			printf("Total value:\t%d\n\n", i+1);
+			printf("Managem\n");
+			if (prevmax<len-1) printf("Managem limit:\t%d\n", prevmax+1);
+			printf("Value:\t%d\n",gem_getvalue(gems+i));
+			if (output_options & mask_info) printf("Pool:\t%d\n",pool_length[gem_getvalue(gems+i)-1]);
+			gem_print(gems+i);
+			printf("Amplifier\n");
+			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
+			gem_print_O(amps+i);
+			printf("Global power (rescaled):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
+			fflush(stdout);								// forces buffer write, so redirection works well
+		}
+	}
+	else { 							// behave like mga_spec
+		float spec_coeffs[len];
+		spec_coeffs[0]=0;
+		printf("Gem:\n");
+		gem_print(gems);
+		printf("Amplifier:\n");
+		gem_print_O(amps);
+		
+		for (i=1;i<len;++i) {															// for every gem value
+			gem_init(gems+i,0,0,0);													// we init the gems
+			gem_init_O(amps+i,0,0);													// to extremely weak ones
+			spec_coeffs[i]=0;																// and init a spec coeff
+			for (j=-1;j<2*i+2;++j) {												// for every amp value from 0 to to 2*gem_value
+				int NS=(i+1)+6*(j+1);													// we get total num of gems used
+				float comb_coeff=pow(NS, -growth_comb);				// we compute comb_coeff
+				for (k=0;k<pool_length[i];++k) {							// then we search in the gem pool 
+					if (j==-1) {																// if no amp is needed we compare the gem alone
+						float power=gem_power(pool[i][k]);
+						float spec_coeff=power*comb_coeff;
+						if (spec_coeff>spec_coeffs[i]) {
+							spec_coeffs[i]=spec_coeff;
+							gems[i]=pool[i][k];
+							gem_init_O(amps+i,0,0);
+						}
+					}
+					else for (h=0;h<poolO_length[j];++h) {			// else we look in the amp pool and compare
+						float power=gem_amp_power(pool[i][k], poolO[j][h]);
+						float spec_coeff=power*comb_coeff;
+						if (spec_coeff>spec_coeffs[i]) {
+							spec_coeffs[i]=spec_coeff;
+							gems[i]=pool[i][k];
+							amps[i]=poolO[j][h];
 						}
 					}
 				}
-				else if (gem_alone_more_powerful(pool[value][k],gems[i],amps[i])) {
-					gems[i]=pool[value][k];
-					gem_init_O(amps+i,0,0);
-				}
 			}
+			printf("Total value:\t%d\n\n", i+1+6*gem_getvalue_O(amps+i));
+			printf("Managem\n");
+			printf("Value:\t%d\n",i+1);
+			if (output_options & mask_info) printf("Pool:\t%d\n",pool_length[i]);
+			gem_print(gems+i);
+			printf("Amplifier\n");
+			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
+			gem_print_O(amps+i);
+			printf("Global power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
+			printf("Spec coefficient:\t%f\n\n", spec_coeffs[i]);
+			fflush(stdout);								// forces buffer write, so redirection works well
 		}
-		printf("Total value:\t%d\n\n", i+1);
-		printf("Managem\n");
-		if (managem_limit!=0) printf("Managem limit:\t%d\n", managem_limit);
-		printf("Value:\t%d\n",gem_getvalue(gems+i));
-		if (output_info) printf("Pool:\t%d\n",pool_length[gem_getvalue(gems+i)-1]);
-		gem_print(gems+i);
-		printf("Amplifier\n");
-		printf("Value:\t%d\n",gem_getvalue_O(amps+i));
-		if (output_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
-		gem_print_O(amps+i);
-		printf("Global power (rescaled):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
-		fflush(stdout);								// forces buffer write, so redirection works well
 	}
 
-	if (output_parens) {
+	if (output_options & mask_parens) {
 		printf("Managem combining scheme:\n");
 		print_parens(gems+len-1);
 		printf("\n");
@@ -133,7 +190,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 		print_parens_compressed_O(amps+len-1);
 		printf("\n\n");
 	}
-	if (output_tree) {
+	if (output_options & mask_tree) {
 		printf("Managem tree:\n");
 		print_tree(gems+len-1, "");
 		printf("\n");
@@ -141,9 +198,9 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 		print_tree_O(amps+len-1, "");
 		printf("\n");
 	}
-	if (output_table) print_amps_table(gems, amps, len);
-
-	if (output_equations) {		// it ruins gems, must be last
+	if (output_options & mask_table) print_amps_table(gems, amps, len);
+	
+	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Managem equations:\n");
 		print_equations(gems+len-1);
 		printf("\n");
@@ -162,31 +219,28 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int output_parens=0;
-	int output_equations=0;
-	int output_tree=0;
-	int output_table=0;
-	int output_info=0;
-	int managem_limit=0;
+	int output_options=0;
+	int global_mode=0;
+	double growth_comb=0.627216;		// 16c
 	char filename[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"ptecif:l:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcef:g:"))!=-1) {
 		switch(opt) {
+			case 'i':
+				output_options |= mask_info;
+				break;
 			case 'p':
-				output_parens = 1;
+				output_options |= mask_parens;
 				break;
 			case 't':
-				output_tree = 1;
-				break;
-			case 'e':
-				output_equations = 1;
+				output_options |= mask_tree;
 				break;
 			case 'c':
-				output_table = 1;
+				output_options |= mask_table;
 				break;
-			case 'i':
-				output_info = 1;
+			case 'e':
+				output_options |= mask_equations;
 				break;
 			case 'f':			// can be "filename,filenameA", if missing default is used
 				;
@@ -197,8 +251,8 @@ int main(int argc, char** argv)
 				strcpy(filename,optarg);
 				strcpy(filenameA,p+1);
 				break;
-			case 'l':
-				managem_limit = atoi(optarg);
+			case 'g':
+				growth_comb = atof(optarg);
 				break;
 			case '?':
 				return 1;
@@ -210,7 +264,7 @@ int main(int argc, char** argv)
 		len = atoi(argv[optind]);
 		char* p=argv[optind];
 		while (*p != '\0') p++;
-		//if (*(p-1)=='c') pool_zero=1;			FIXME
+		if (*(p-1)=='t') global_mode=1;
 	}
 	else {
 		printf("Unknown arguments:\n");
@@ -226,6 +280,6 @@ int main(int argc, char** argv)
 	}
 	if (filename[0]=='\0') strcpy(filename, "table_mgspec");
 	if (filenameA[0]=='\0') strcpy(filenameA, "table_leech");
-	worker_amps(len, output_parens, output_equations, output_tree, output_table, output_info, managem_limit, filename, filenameA);
+	worker(len, output_options, global_mode, growth_comb, filename, filenameA);
 	return 0;
 }
