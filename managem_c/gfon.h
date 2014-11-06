@@ -25,7 +25,7 @@ FILE* table_init(char* filename, int pool_zero)
 	table=fopen(filename,"rb");				// binary to check size
 	if(table==NULL) {
 		table=fopen(filename,"w");			// creation
-		line_init(table, pool_zero);				// printed g1
+		line_init(table, pool_zero);		// printed g1
 	}
 	else {
 		fseek(table, 0, SEEK_END);
