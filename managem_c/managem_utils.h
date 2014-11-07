@@ -149,7 +149,7 @@ void gem_sort (gem* gems, int len)
 	ins_sort (gems, len);			// finish the nearly sorted array
 }
 
-float gem_power(gem gem1)
+double gem_power(gem gem1)
 {
 	return gem1.leech*gem1.bbound;     // amp-less
 }

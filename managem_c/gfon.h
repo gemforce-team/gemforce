@@ -2,7 +2,7 @@
 #define _GFON_H
 
 /* GemForce Object Notation */
-/* Remember to declare line_from_table and write_stats in the other files */
+/* Remember to redeclare pool_from_table in the amplifier_utils */
 
 void line_init(FILE* table, int pool_zero)
 {

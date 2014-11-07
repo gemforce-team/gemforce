@@ -9,14 +9,9 @@ typedef struct Gem_O gemO;
 #include "leech_utils.h"
 #include "gfon.h"
 
-float gem_amp_power(gem gem1, gemO amp1)
+double gem_amp_power(gem gem1, gemO amp1)
 {
 	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
-}
-
-int gem_alone_more_powerful(gem gem1, gem gem2, gemO amp2)
-{
-	return gem1.leech*gem1.bbound > gem_amp_power(gem2, amp2);
 }
 
 int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
@@ -92,7 +87,7 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 	gemO amps[len];
 	gem gems[len];
 	gem_init(gems,1,1,0);
-	gem_init_O(amps,0,0);
+	amps[0]=(gemO){0};
 	printf("Total value:\t1\n\n");
 	printf("Managem:\n");
 	gem_print(gems);
@@ -103,22 +98,22 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 
 	if (global_mode) { 							// behave like managem_amps
 		for (i=1;i<len;++i) {																	// for every total value
-			gem_init(gems+i,0,0,0);															// we init the gems
-			gem_init_O(amps+i,0,0);															// to extremely weak ones
-			for (j=0;j<=i/6;++j) {															// for every amount of amps we can fit in
+			gems[i]=(gem){0};																		// we init the gems
+			amps[i]=(gemO){0};																	// to extremely weak ones
+			for (k=0;k<pool_length[i];++k) {										// first we compare the gem alone
+				if (gem_power(pool[i][k]) > gem_power(gems[i])) {
+					gems[i]=pool[i][k];
+				}
+			}
+			for (j=1;j<=i/6;++j) {															// for every amount of amps we can fit in
 				int value = i-6*j;																// this is the amount of gems we have left
-				for (k=0;k<pool_length[value];++k) {							// we search in that pool
-					if (j!=0) {																			// and if we need an amp
-						for (h=0;h<poolO_length[j-1];++h) {						// we look in the amp pool
-							if (pool[value][k].leech!=0 && gem_amp_more_powerful(pool[value][k],poolO[j-1][h],gems[i],amps[i])) {
-								gems[i]=pool[value][k];
-								amps[i]=poolO[j-1][h];
-							}
+				for (k=0;k<pool_length[value];++k)								// we search in that pool
+				if (pool[value][k].leech!=0) {										// if the gem has leech we go on
+					for (h=0;h<poolO_length[j-1];++h) {							// and we look in the amp pool
+						if (gem_amp_more_powerful(pool[value][k],poolO[j-1][h],gems[i],amps[i])) {
+							gems[i]=pool[value][k];
+							amps[i]=poolO[j-1][h];
 						}
-					}
-					else if (gem_alone_more_powerful(pool[value][k],gems[i],amps[i])) {
-						gems[i]=pool[value][k];
-						gem_init_O(amps+i,0,0);
 					}
 				}
 			}
@@ -153,11 +148,12 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 			for (j=0;j<2*i+2;++j) {													// for every amp value from 1 to to 2*gem_value
 				NS+=6;																				// we get total num of gems used
 				double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
-				for (k=0;k<pool_length[i];++k) {							// then we search in the gem pool
+				for (k=0;k<pool_length[i];++k)								// then we search in the gem pool
+				if (pool[i][k].leech!=0) {										// if the gem has leech we go on
 					double Palone = gem_power(pool[i][k]);
 					double Pbg = pool[i][k].bbound; 
 					for (h=0;h<poolO_length[j];++h) {						// and in the amp pool and compare
-						double power = Palone + Pbg * 2.576 * poolO[j][h].leech;
+						double power = Palone + Pbg * 2.576 * poolO[j][h].leech;		// that number is 6*0.23*2.8/1.5
 						double spec_coeff=power*comb_coeff;
 						if (spec_coeff>spec_coeffs[i]) {
 							spec_coeffs[i]=spec_coeff;

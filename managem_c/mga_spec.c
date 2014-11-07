@@ -19,11 +19,6 @@ float gem_amp_power(gem gem1, gemO amp1)
 	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
 }
 
-int gem_alone_more_powerful(gem gem1, gem gem2, gemO amp2)
-{
-	return gem1.leech*gem1.bbound > gem_amp_power(gem2, amp2);
-}
-
 int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 {
 	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
