@@ -180,13 +180,9 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 
 	if (output_options & mask_parens) {
 		printf("Managem combining scheme:\n");
-		print_parens(gems+len-1);
-		printf("\n");
 		print_parens_compressed(gems+len-1);
 		printf("\n\n");
 		printf("Amplifier combining scheme:\n");
-		print_parens_O(amps+len-1);
-		printf("\n");
 		print_parens_compressed_O(amps+len-1);
 		printf("\n\n");
 	}
