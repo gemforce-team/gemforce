@@ -32,6 +32,14 @@ void print_amps_table(gem* gems, gemO* amps, int len)
 	printf("\n");
 }
 
+void print_spec_table(gem* gems, gemO* amps, double* spec_coeffs, int len)
+{
+	printf("Managem\tAmps\tPower (resc.)\tSpec coeff\n");
+	int i;
+	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i]), spec_coeffs[i]);
+	printf("\n");
+}
+
 void worker(int len, int output_options, int global_mode, float growth_comb, char* filename, char* filenameA)
 {
 	FILE* table=file_check(filename);			// file is open to read
@@ -85,14 +93,15 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 	gem gems[len];
 	gem_init(gems,1,1,0);
 	gem_init_O(amps,0,0);
-	
-	if (global_mode) { 							// behave like managem_amps
-		printf("Total value: 1\n");
-		printf("Gem:\n");
-		gem_print(gems);
-		printf("Amplifier:\n");
-		gem_print_O(amps);
+	printf("Total value:\t1\n\n");
+	printf("Managem:\n");
+	gem_print(gems);
+	printf("Amplifier:\n");
+	gem_print_O(amps);
+	double spec_coeffs[len];
+	spec_coeffs[0]=0;
 
+	if (global_mode) { 							// behave like managem_amps
 		for (i=1;i<len;++i) {																	// for every total value
 			gem_init(gems+i,0,0,0);															// we init the gems
 			gem_init_O(amps+i,0,0);															// to extremely weak ones
@@ -123,38 +132,33 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
 			if (output_options & mask_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
 			gem_print_O(amps+i);
-			printf("Global power (rescaled):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
+			printf("Global power (resc.):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
 			fflush(stdout);								// forces buffer write, so redirection works well
 		}
 	}
-	else { 							// behave like mga_spec
-		float spec_coeffs[len];
-		spec_coeffs[0]=0;
-		printf("Gem:\n");
-		gem_print(gems);
-		printf("Amplifier:\n");
-		gem_print_O(amps);
-		
+	else { 										// behave like mga_spec
 		for (i=1;i<len;++i) {															// for every gem value
-			gem_init(gems+i,0,0,0);													// we init the gems
-			gem_init_O(amps+i,0,0);													// to extremely weak ones
+			gems[i]=(gem){0};																// we init the gems
+			amps[i]=(gemO){0};															// to extremely weak ones
 			spec_coeffs[i]=0;																// and init a spec coeff
-			for (j=-1;j<2*i+2;++j) {												// for every amp value from 0 to to 2*gem_value
-				int NS=(i+1)+6*(j+1);													// we get total num of gems used
-				float comb_coeff=pow(NS, -growth_comb);				// we compute comb_coeff
-				for (k=0;k<pool_length[i];++k) {							// then we search in the gem pool 
-					if (j==-1) {																// if no amp is needed we compare the gem alone
-						float power=gem_power(pool[i][k]);
-						float spec_coeff=power*comb_coeff;
-						if (spec_coeff>spec_coeffs[i]) {
-							spec_coeffs[i]=spec_coeff;
-							gems[i]=pool[i][k];
-							gem_init_O(amps+i,0,0);
-						}
-					}
-					else for (h=0;h<poolO_length[j];++h) {			// else we look in the amp pool and compare
-						float power=gem_amp_power(pool[i][k], poolO[j][h]);
-						float spec_coeff=power*comb_coeff;
+			for (k=0;k<pool_length[i];++k) {								// first we compare the gem alone
+				if (gem_power(pool[i][k]) > gem_power(gems[i])) {
+					gems[i]=pool[i][k];
+				}
+			}
+			int NS=i+1;
+			double comb_coeff=pow(NS, -growth_comb);
+			spec_coeffs[i]=comb_coeff*gem_power(pool[i][k]);
+																											// now with amps
+			for (j=0;j<2*i+2;++j) {													// for every amp value from 1 to to 2*gem_value
+				NS+=6;																				// we get total num of gems used
+				double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
+				for (k=0;k<pool_length[i];++k) {							// then we search in the gem pool
+					double Palone = gem_power(pool[i][k]);
+					double Pbg = pool[i][k].bbound; 
+					for (h=0;h<poolO_length[j];++h) {						// and in the amp pool and compare
+						double power = Palone + Pbg * 2.576 * poolO[j][h].leech;
+						double spec_coeff=power*comb_coeff;
 						if (spec_coeff>spec_coeffs[i]) {
 							spec_coeffs[i]=spec_coeff;
 							gems[i]=pool[i][k];
@@ -198,7 +202,10 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 		print_tree_O(amps+len-1, "");
 		printf("\n");
 	}
-	if (output_options & mask_table) print_amps_table(gems, amps, len);
+	if (output_options & mask_table) {
+		if (global_mode) print_amps_table(gems, amps, len);
+		else print_spec_table(gems, amps, spec_coeffs, len);
+	}
 	
 	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Managem equations:\n");
