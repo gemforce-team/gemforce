@@ -174,14 +174,9 @@ void print_eq_Y(gemY* p_gem, int* printed_uid)
 	if (printed_uid[p_gem->grade/1000]==1) return;
 	if (gem_getvalue_Y(p_gem)==1) printf("(val = 1)\t%2d = g1 y\n", p_gem->grade/1000);
 	else {
-		print_eq_Y(p_gem->father, printed_uid);
+		print_eq_Y(p_gem->father, printed_uid);		// mother is always bigger
 		print_eq_Y(p_gem->mother, printed_uid);
-		if (gem_getvalue_Y(p_gem->father) > gem_getvalue_Y(p_gem->father)) {
-			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue_Y(p_gem), p_gem->grade/1000, p_gem->father->grade/1000, p_gem->mother->grade/1000);
-		}
-		else {
-			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue_Y(p_gem), p_gem->grade/1000, p_gem->mother->grade/1000, p_gem->father->grade/1000);
-		}
+		printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue_Y(p_gem), p_gem->grade/1000, p_gem->mother->grade/1000, p_gem->father->grade/1000);
 	}
 	printed_uid[p_gem->grade/1000]=1;
 }
