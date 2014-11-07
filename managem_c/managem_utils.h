@@ -98,48 +98,33 @@ int gem_less_equal(gem gem1, gem gem2)
 	return gem1.bbound<gem2.bbound;
 }
 
-void gem_sort_old(gem* gems, int len)
+void ins_sort (gem* gems, int len)
 {
-	if (len<=1) return;
-	int pivot=0;
-	int i;
-	for (i=1;i<len;++i) {
-		if (gem_less_equal(gems[i],gems[pivot])) {
-			gem temp=gems[pivot];
-			gems[pivot]=gems[i];
-			gems[i]=gems[pivot+1];
-			gems[pivot+1]=temp;
-			pivot++;
+	int i,j;
+	gem element;
+	for (i=1; i<len; i++) {
+		element=gems[i];
+		for (j=i; j>0 && gem_less_equal(element, gems[j-1]); j--) {
+			gems[j]=gems[j-1];
 		}
+		gems[j]=element;
 	}
-	gem_sort_old(gems,pivot);
-	gem_sort_old(gems+1+pivot,len-pivot-1);
 }
 
-void gem_sort (gem* gems, int len) {
-	if (len < 20) {		// ins sort
-		int i,j;
-		gem element;
-		for (i=1; i<len; i++) {
-			element=gems[i];
-			for (j=i; j>0 && gem_less_equal(element, gems[j-1]); j--) {
-				gems[j]=gems[j-1];
-			}
-			gems[j]=element;
-		}
-	}
-	else {					// quick sort
+void quick_sort (gem* gems, int len)
+{
+	if (len > 20)  {
 		gem pivot = gems[len/2];
 		gem* beg = gems;
 		gem* end = gems+len-1;
 		while (beg <= end) {
-			if (gem_less_equal(*beg, pivot)) {
+			while (gem_less_equal(*beg, pivot)) {
 				beg++;
 			}
-			else if (gem_less_equal(pivot,*end)) {
+			while (gem_less_equal(pivot,*end)) {
 				end--;
 			}
-			else {
+			if (beg <= end) {
 				gem temp = *beg;
 				*beg = *end;
 				*end = temp;
@@ -147,9 +132,21 @@ void gem_sort (gem* gems, int len) {
 				end--;
 			}
 		}
-		gem_sort(gems, end-gems+1);
-		gem_sort(beg, gems-beg+len);
+		if (end-gems+1 < gems-beg+len) {		// sort smaller first
+			quick_sort(gems, end-gems+1);
+			quick_sort(beg, gems-beg+len);
+		}
+		else {
+			quick_sort(beg, gems-beg+len);
+			quick_sort(gems, end-gems+1);
+		}
 	}
+}
+
+void gem_sort (gem* gems, int len)
+{
+	quick_sort (gems, len);		// partially sort
+	ins_sort (gems, len);			// finish the nearly sorted array
 }
 
 float gem_power(gem gem1)
