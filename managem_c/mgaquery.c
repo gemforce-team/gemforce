@@ -95,7 +95,7 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 	gem_print_O(amps);
 	double spec_coeffs[len];
 	spec_coeffs[0]=0;
-
+	
 	if (global_mode) { 							// behave like managem_amps
 		for (i=1;i<len;++i) {																	// for every total value
 			gems[i]=(gem){0};																		// we init the gems

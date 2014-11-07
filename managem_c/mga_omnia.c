@@ -10,21 +10,6 @@ const int NT=1048576;					// 2^20 ~ 1m, it's still low, but there's no differenc
 typedef struct Gem_O gemO;
 #include "leech_utils.h"
 
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
-{
-	// utils compatibility
-}
-
-float gem_amp_power(gem gem1, gemO amp1)
-{
-	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
-}
-
-int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
-{
-	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
-}
-
 void print_amps_table(gem* gems, gemO* amps, double* powers, int len)
 {
 	printf("Managem\tAmps\tPower (resc. 1k)\n");			// we'll rescale again for 1k, no need to have 10 digits
@@ -413,7 +398,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem gems[len];								// for every speccing value
 	gemO amps[len];								// we'll choose the best amps
 	gem gemsc[len];								// and the best NC combine
-	gemO ampsc[len];							// for both;
+	gemO ampsc[len];							// for both
 	double powers[len];
 	gem_init(gems,1,1,0);
 	gem_init_O(amps,0,0);
