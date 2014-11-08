@@ -263,7 +263,7 @@ int main(int argc, char** argv)
 		len = atoi(argv[optind]);
 		char* p=argv[optind];
 		while (*p != '\0') p++;
-		if (*(p-1)=='t') global_mode=1;
+		if (*(p-1)=='g') global_mode=1;
 	}
 	else {
 		printf("Unknown arguments:\n");
