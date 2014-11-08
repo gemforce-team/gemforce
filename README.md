@@ -3,14 +3,19 @@ gemforce
 
 Gem combining program for GC2:CS - Written in C.
 
+***
 
 ### HOWTO use our programs:
 
-compile:  
-  gcc -O2 -lm file.c -o output
+**manual compilation:**  
+  `gcc -O2 -lm -I "../include" file.c -o output`
+  
+**automatic setup:**  
+  in the repo root launch `auto_setup.sh`  
+  everything you typically need will be placed in `bin/`
 
-run:  
-  ./file -[flags] number
+**run:**  
+  `./file -[flags] number(s)`
   
 where flags are:  
   p - print best gem parens formula  
@@ -22,17 +27,21 @@ where flags are:
   f (filepath) - change table file (build/query only)  
   l (num) - limit hard gem computation to num (amps only)  
   s (num) - change chunk size (you should not need this)  
-  number - value of gem to be computed
+  number - value of gem to be computed  
+  numbers - spec value and comb value (omnia programs only)
   
-example:  
-  ./file -pet 32  
+**example:**  
+  `./file -pet 32`  
 
+***
 
 ### Results and tables:
 
 All resulting schemes (recipes) are placed in "results" folder.  
 Precomputed tables up to 1 MB are placed in "gem_tables" folder.  
 More info on both can be found on the folder's README.
+
+***
 
 ### Roadmap:
 
