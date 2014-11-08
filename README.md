@@ -30,7 +30,7 @@ where flags are:
   numbers - spec value and comb value (omnia programs only)
   
 to specify if you want a speccing or a combining recipe out of a general program
-(e.g. managemquery) use (num)s or (num)c (default is speccing)
+(e.g. managemquery) use (num)s or (num)c (default is speccing)  
 global mode in (m/k)gaquery is toggled via (num)t (you should not need this)
 
 **example:**  

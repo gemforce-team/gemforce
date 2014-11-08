@@ -104,7 +104,7 @@ void gem_init(gem *p_gem, int grd, double damage, double crit, double leech, dou
 
 void gem_color_init(gem* p_gem, char color)
 {
-	switch (color) {				//  gr dm        cr le bl
+	switch (color) {				//  gr dmg       cr le bl
 		case 'y': gem_init(p_gem, 1, 1       , 1, 0, 0);
 		break;
 		case 'o': gem_init(p_gem, 1, 0.727542, 0, 1, 0);
@@ -235,14 +235,9 @@ void print_eq(gem* p_gem, int* printed_uid)
 	if (printed_uid[p_gem->uid]==1) return;
 	if (gem_getvalue(p_gem)==1) printf("(val = 1)\t%2d = g1 %c\n", p_gem->uid, gem_color(p_gem));
 	else {
-		print_eq(p_gem->mother, printed_uid);
 		print_eq(p_gem->father, printed_uid);
-		if (gem_getvalue(p_gem->father) > gem_getvalue(p_gem->father)) {
-			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->uid, p_gem->father->uid, p_gem->mother->uid);
-		}
-		else {
-			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->uid, p_gem->mother->uid, p_gem->father->uid);
-		}
+		print_eq(p_gem->mother, printed_uid);
+		printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->uid, p_gem->mother->uid, p_gem->father->uid);
 	}
 	printed_uid[p_gem->uid]=1;
 }
