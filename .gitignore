@@ -1,2 +1,2 @@
-bin/*
-table_*
+bin/
+/table_*
