@@ -20,12 +20,13 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	
 	if (pool_zero==1) {							// combine
 		gem_init(pool[0],1,1,1);
+		gem_init(gems   ,1,1,1);
 	}
 	else {													// spec
 		gem_init(pool[0]  ,1,1,0);
 		gem_init(pool[0]+1,1,0,1);
+		gem_init(gems     ,1,1,0);
 	}
-	gem_init(gems,1,1,0);
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	if (prevmax<len-1) {

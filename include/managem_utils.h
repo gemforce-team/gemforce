@@ -25,7 +25,7 @@ int int_max(int a, int b)
 
 int gem_more_powerful(gem gem1, gem gem2)
 {
-	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);   // optimization at infinity hits (hit lv infinity)
+	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);		// optimization at infinity hits (hit lv infinity)
 }
 
 void gem_print(gem *p_gem) {

@@ -19,15 +19,15 @@ void worker(int len, int output_options, int pool_zero, int size)
 	
 	if (pool_zero==1) {							// combine
 		gem_init(pool[0],1,1,1);
+		gem_init(gems   ,1,1,1);
 		if (size==0) size=100;				// reasonable comb sizing
 	}
 	else {													// spec
 		gem_init(pool[0]  ,1,1,0);
 		gem_init(pool[0]+1,1,0,1);
+		gem_init(gems     ,1,1,0);
 		if (size==0) size=2000;				// reasonable spec sizing
 	}
-	
-	gem_init(gems,1,1,0);
 	gem_print(gems);
 
 	for (i=1; i<len; ++i) {
@@ -145,13 +145,13 @@ void worker(int len, int output_options, int pool_zero, int size)
 		pool[i]=malloc(pool_length[i]*sizeof(gem));
 
 		int place=0;
-		for (grd=0;grd<grade_max-1;++grd) {      // copying to pool
+		for (grd=0;grd<grade_max-1;++grd) {			// copying to pool
 			for (j=0; j<subpools_length[grd]; ++j) {
 				pool[i][place]=subpools[grd][j];
 				place++;
 			}
 		}
-		for (grd=0;grd<grade_max-1;++grd) {     // free
+		for (grd=0;grd<grade_max-1;++grd) {			// free
 			free(temp_pools[grd]);
 			free(subpools[grd]);
 		}
