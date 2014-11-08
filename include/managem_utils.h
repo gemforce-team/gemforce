@@ -17,17 +17,15 @@ struct Gem_OB {
 	struct Gem_OB* mother;
 };
 
-// remember to define the gem in your file
-
-int gem_more_powerful(gem gem1, gem gem2)
-{
-	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);   // optimization at infinity hits (hit lv infinity)
-}
-
 int int_max(int a, int b)
 {
 	if (a > b) return a;
 	else return b;
+}
+
+int gem_more_powerful(gem gem1, gem gem2)
+{
+	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);   // optimization at infinity hits (hit lv infinity)
 }
 
 void gem_print(gem *p_gem) {

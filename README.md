@@ -8,10 +8,10 @@ Gem combining program for GC2:CS - Written in C.
 ### HOWTO use our programs:
 
 **manual compilation:**  
-  `gcc -O2 -lm -I "../include" file.c -o output`
+  `gcc -O2 -lm -I "include" file.c -o output`
   
 **automatic setup:**  
-  in the repo root launch `auto_setup.sh`  
+  in the repo root run `./auto_setup.sh`  
   everything you typically need will be placed in `bin/`
 
 **run:**  
@@ -19,10 +19,9 @@ Gem combining program for GC2:CS - Written in C.
   
 where flags are:  
   p - print best gem parens formula  
-  e - print best gem equations formula  
   t - print best gem tree formula  
+  e - print best gem equations formula  
   c - print best gems table (for each value best gem stats)   
-  d - debug + info  
   i - info  
   f (filepath) - change table file (build/query only)  
   l (num) - limit hard gem computation to num (amps only)  
@@ -30,6 +29,10 @@ where flags are:
   number - value of gem to be computed  
   numbers - spec value and comb value (omnia programs only)
   
+to specify if you want a speccing or a combining recipe out of a general program
+(e.g. managemquery) use (num)s or (num)c (default is speccing)
+global mode in (m/k)gaquery is toggled via (num)t (you should not need this)
+
 **example:**  
   `./file -pet 32`  
 
@@ -39,7 +42,7 @@ where flags are:
 
 All resulting schemes (recipes) are placed in "results" folder.  
 Precomputed tables up to 1 MB are placed in "gem_tables" folder.  
-More info on both can be found on the folder's README.
+More info on both can be found on the respective folders' README.
 
 ***
 

@@ -17,8 +17,6 @@ struct Gem_OW {
 	struct Gem_OW* mother;
 };
 
-// remember to define the gem in your file
-
 int int_max(int a, int b)
 {
 	if (a > b) return a;
