@@ -5,9 +5,8 @@
 #include <string.h>
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
-const int ACC=60;							// ACC is for crit pooling & sorting-> results with 60 are indistinguishable from 1000+ up to 40s
-const int ACC_CUT=280;				// ACC_CUT is accuracy for other inexact operations -> 100 differs from exact from 32s
-															// while 280 is ok even for 40s+, but takes 2x time
+const int ACC=60;				// 80,60  ACC is for z-axis sorting and for the length of the interval tree
+const int ACC_TR=250;		//   800  ACC_TR is for bbound comparisons inside tree
 #include "killgem_utils.h"
 typedef struct Gem_Y gemY;
 #include "crit_utils.h"
@@ -107,15 +106,16 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 									
 									gem_sort(temp_array,length);							// work starts
 									int broken=0;
-								int crit_cells=(int)(maxcrit*ACC)+1;				// this pool will be big from the beginning, but we avoid binary search
-								int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
-									float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed
-									for (l=1; l<tree_length+crit_cells+1; ++l) tree[l]=-1;
-									for (l=length-1;l>=0;--l) {																							// start from large z
+									int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
+									int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
+									int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));									// memory improvement, 2* is not needed
+									for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;										// init also tree[0], it's faster
+									for (l=length-1;l>=0;--l) {																								// start from large z
 										gem* p_gem=temp_array+l;
-										index=(int)(p_gem->crit*ACC);																					// find its place in x
-										int wall = (int)(tree_read_max(tree,tree_length,index)*ACC_CUT);			// look at y
-										if ((int)(p_gem->bbound*ACC_CUT) > wall) tree_add_element(tree,tree_length,index,p_gem->bbound);
+										index=(int)(p_gem->crit*ACC);																				// find its place in x
+										if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
+											tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
+										}
 										else {
 											p_gem->grade=0;
 											broken++;
@@ -161,15 +161,16 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 						
 						gem_sort(temp_array,length);							// work starts
 						int broken=0;
-						int crit_cells=(int)(maxcrit*ACC)+1;				// this pool will be big from the beginning, but we avoid binary search
+						int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 						int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
-						float* tree=malloc((tree_length+crit_cells+1)*(sizeof(float)));					// memory improvement, 2* is not needed
-						for (l=1; l<tree_length+crit_cells+1; ++l) tree[l]=-1;
-						for (l=length-1;l>=0;--l) {																							// start from large z
+						int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));									// memory improvement, 2* is not needed
+						for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;										// init also tree[0], it's faster
+						for (l=length-1;l>=0;--l) {																								// start from large z
 							gem* p_gem=temp_array+l;
-							index=(int)(p_gem->crit*ACC);																					// find its place in x
-							int wall = (int)(tree_read_max(tree,tree_length,index)*ACC_CUT);			// look at y
-							if ((int)(p_gem->bbound*ACC_CUT) > wall) tree_add_element(tree,tree_length,index,p_gem->bbound);
+							index=(int)(p_gem->crit*ACC);																				// find its place in x
+							if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
+								tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
+							}
 							else {
 								p_gem->grade=0;
 								broken++;
