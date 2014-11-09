@@ -162,7 +162,7 @@ void worker(int len, int output_options, int size, char* filename)
 		int eoc=(i+1)/2;        //end of combining
 		int comb_tot=0;
 
-		int grade_max=(int)(log2(i+1)+1);       		// gems with max grade cannot be destroyed, so this is a max, not a sup
+		int grade_max=(int)(log2(i+1)+1);						// gems with max grade cannot be destroyed, so this is a max, not a sup
 		gem* temp_pools[grade_max-1];								// get the temp pools for every grade
 		int  temp_index[grade_max-1];								// index of work point in temp pools
 		gem* subpools[grade_max-1];									// get subpools for every grade
@@ -170,7 +170,7 @@ void worker(int len, int output_options, int size, char* filename)
 		for (j=0; j<grade_max-1; ++j) {							// init everything
 			temp_pools[j]=malloc(size*sizeof(gem));
 			temp_index[j]=0;
-			subpools[j]=malloc(size*sizeof(gem));
+			subpools[j]=malloc(sizeof(gem));
 			subpools_length[j]=1;
 			subpools[j][0]=(gem){0};		// 0-NULL init
 		}
@@ -181,7 +181,7 @@ void worker(int len, int output_options, int size, char* filename)
 				for (h=0; h< pool_length[i-1-j]; ++h)
 				if ((pool[i-1-j]+h)->grade!=0) {
 					int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
-					if (abs(delta)<=2) {									// grade difference <= 2
+					if (abs(delta)<=2) {						// grade difference <= 2
 						comb_tot++;
 						gem temp;
 						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
@@ -201,7 +201,7 @@ void worker(int len, int output_options, int size, char* filename)
 								temp_array[index]=subpools[grd][l];
 								index++;
 							}
-							free(subpools[grd]);		// free
+							free(subpools[grd]);			// free
 							gem_sort(temp_array,length);								// work starts
 	
 							int broken=0;
@@ -231,12 +231,12 @@ void worker(int len, int output_options, int size, char* filename)
 			}
 		}
 		int grd;
-		for (grd=0; grd<grade_max-1; ++grd)  {									// let's put remaining gems on
+		for (grd=0; grd<grade_max-1; ++grd) {						// let's put remaining gems on
 			if (temp_index[grd] != 0) {
 				int length=temp_index[grd]+subpools_length[grd];
 				gem* temp_array=malloc(length*sizeof(gem));
 				int index=0;
-				for (l=0; l<temp_index[grd]; ++l) {									// copy new gems
+				for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
 					temp_array[index]=temp_pools[grd][l];
 					index++;
 				}
