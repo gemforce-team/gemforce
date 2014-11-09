@@ -119,7 +119,7 @@ void ins_sort (gem* gems, int len)
 
 void quick_sort (gem* gems, int len)
 {
-	if (len > 20)  {
+	if (len > 10)  {
 		gem pivot = gems[len/2];
 		gem* beg = gems;
 		gem* end = gems+len-1;

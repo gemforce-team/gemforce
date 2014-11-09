@@ -6,7 +6,7 @@
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
 int ACC;								// 80,60  ACC is for z-axis sorting and for the length of the interval tree
-const int ACC_TR=800;		//   800  ACC_TR is for bbound comparisons inside tree
+const int ACC_TR=750;		//   750  ACC_TR is for bbound comparisons inside tree
 #include "killgem_utils.h"
 
 
@@ -31,7 +31,7 @@ void worker(int len, int output_options, int pool_zero, int size)
 		gem_init(pool[0]  ,1,1.000000,1,0);
 		gem_init(pool[0]+1,1,1.186168,0,1);		// BB has more dmg
 		gem_init(gems     ,1,1.000000,1,0);		// grade damage crit bbound
-		if (size==0) size=16000;			// reasonable spec sizing
+		if (size==0) size=20000;			// reasonable spec sizing
 	}
 	gem_print(gems);
 
