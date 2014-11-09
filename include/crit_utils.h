@@ -62,11 +62,45 @@ void gem_combine_Y (gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
 	}
 }
 
+int pool_from_table_Y(gemY** pool, int* pool_length, int len, FILE* table)
+{
+	printf("\nBuilding pool...");
+	rewind(table);
+	int i;
+	for (i=0;i<1+pool_length[0];++i) {						// discard value 0 gems
+		fscanf(table, "%*[^\n]\n");
+	}
+	fscanf(table, "\n");													// discard newline
+	int prevmax=0;
+	for (i=1;i<len;++i) {
+		int eof_check=fscanf(table, "%d\n", pool_length+i);				// get pool length
+		if (eof_check==-1) break;
+		else {
+			pool[i]=malloc(pool_length[i]*sizeof(gemY));
+			int j;
+			for (j=0; j<pool_length[i]; ++j) {
+				int value_father, offset_father;
+				int value_mother, offset_mother;
+				fscanf(table, "%d %x %x\n", &value_father, &offset_father, &offset_mother);
+				if (value_father != -1) {
+					value_mother=i-1-value_father;
+					gem_combine_Y(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
+				}
+				else pool[i][j]=(gemY){0};		// 0-NULL init
+			}
+			fscanf(table, "\n");						// discard newline
+			prevmax++;
+		}
+	}
+	printf(" Done\n\n");
+	return prevmax;
+}
+
 void gem_init_Y(gemY *p_gem, int grd, float damage, float crit)
 {
 	p_gem->grade =grd;
 	p_gem->damage=damage;
-	p_gem->crit=crit;
+	p_gem->crit  =crit;
 	p_gem->father=NULL;
 	p_gem->mother=NULL;
 }
@@ -78,30 +112,33 @@ int gem_has_less_damage_crit(gemY gem1, gemY gem2)
 	else return 0;
 }
 
-void gem_sort_Y (gemY* gems, int len) {
-	if (len < 10) {		// ins sort
-		int i,j;
-		gemY element;
-		for (i=1; i<len; i++) {
-			element=gems[i];
-			for (j=i; j>0 && gem_has_less_damage_crit(element, gems[j-1]); j--) {
-				gems[j]=gems[j-1];
-			}
-			gems[j]=element;
+void ins_sort_Y (gemY* gems, int len)
+{
+	int i,j;
+	gemY element;
+	for (i=1; i<len; i++) {
+		element=gems[i];
+		for (j=i; j>0 && gem_has_less_damage_crit(element, gems[j-1]); j--) {
+			gems[j]=gems[j-1];
 		}
+		gems[j]=element;
 	}
-	else {					// quick sort
+}
+
+void quick_sort_Y (gemY* gems, int len)
+{
+	if (len > 20)  {
 		gemY pivot = gems[len/2];
 		gemY* beg = gems;
 		gemY* end = gems+len-1;
 		while (beg <= end) {
-			if (gem_has_less_damage_crit(*beg, pivot)) {
+			while (gem_has_less_damage_crit(*beg, pivot)) {
 				beg++;
 			}
-			else if (gem_has_less_damage_crit(pivot,*end)) {
+			while (gem_has_less_damage_crit(pivot,*end)) {
 				end--;
 			}
-			else {
+			if (beg <= end) {
 				gemY temp = *beg;
 				*beg = *end;
 				*end = temp;
@@ -109,9 +146,21 @@ void gem_sort_Y (gemY* gems, int len) {
 				end--;
 			}
 		}
-		gem_sort_Y(gems, end-gems+1);
-		gem_sort_Y(beg, gems-beg+len);
+		if (end-gems+1 < gems-beg+len) {		// sort smaller first
+			quick_sort_Y(gems, end-gems+1);
+			quick_sort_Y(beg, gems-beg+len);
+		}
+		else {
+			quick_sort_Y(beg, gems-beg+len);
+			quick_sort_Y(gems, end-gems+1);
+		}
 	}
+}
+
+void gem_sort_Y (gemY* gems, int len)
+{
+	quick_sort_Y (gems, len);		// partially sort
+	ins_sort_Y (gems, len);			// finish the nearly sorted array
 }
 
 void print_parens_Y(gemY* gemf)
