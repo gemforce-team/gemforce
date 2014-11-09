@@ -18,7 +18,7 @@ int int_max(int a, int b)
 
 float gem_power(gem gem1)
 {
-	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound;     // amp-less
+	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound;			// amp-less
 }
 
 int gem_more_powerful(gem gem1, gem gem2)
@@ -104,48 +104,33 @@ int gem_less_equal(gem gem1, gem gem2)
 	return gem1.crit<gem2.crit;
 }
 
-void gem_sort_old(gem* gems, int len)
+void ins_sort (gem* gems, int len)
 {
-	if (len<=1) return;
-	int pivot=0;
-	int i;
-	for (i=1;i<len;++i) {
-		if (gem_less_equal(gems[i],gems[pivot])) {
-			gem temp=gems[pivot];
-			gems[pivot]=gems[i];
-			gems[i]=gems[pivot+1];
-			gems[pivot+1]=temp;
-			pivot++;
+	int i,j;
+	gem element;
+	for (i=1; i<len; i++) {
+		element=gems[i];
+		for (j=i; j>0 && gem_less_equal(element, gems[j-1]); j--) {
+			gems[j]=gems[j-1];
 		}
+		gems[j]=element;
 	}
-	gem_sort_old(gems,pivot);
-	gem_sort_old(gems+1+pivot,len-pivot-1);
 }
 
-void gem_sort (gem* gems, int len) {
-	if (len < 10) {		// ins sort
-		int i,j;
-		gem element;
-		for (i=1; i<len; i++) {
-			element=gems[i];
-			for (j=i; j>0 && gem_less_equal(element, gems[j-1]); j--) {
-				gems[j]=gems[j-1];
-			}
-			gems[j]=element;
-		}
-	}
-	else {					// quick sort
+void quick_sort (gem* gems, int len)
+{
+	if (len > 20)  {
 		gem pivot = gems[len/2];
 		gem* beg = gems;
 		gem* end = gems+len-1;
 		while (beg <= end) {
-			if (gem_less_equal(*beg, pivot)) {
+			while (gem_less_equal(*beg, pivot)) {
 				beg++;
 			}
-			else if (gem_less_equal(pivot,*end)) {
+			while (gem_less_equal(pivot,*end)) {
 				end--;
 			}
-			else {
+			if (beg <= end) {
 				gem temp = *beg;
 				*beg = *end;
 				*end = temp;
@@ -153,9 +138,21 @@ void gem_sort (gem* gems, int len) {
 				end--;
 			}
 		}
-		gem_sort(gems, end-gems+1);
-		gem_sort(beg, gems-beg+len);
+		if (end-gems+1 < gems-beg+len) {		// sort smaller first
+			quick_sort(gems, end-gems+1);
+			quick_sort(beg, gems-beg+len);
+		}
+		else {
+			quick_sort(beg, gems-beg+len);
+			quick_sort(gems, end-gems+1);
+		}
 	}
+}
+
+void gem_sort (gem* gems, int len)
+{
+	quick_sort (gems, len);		// partially sort
+	ins_sort (gems, len);			// finish the nearly sorted array
 }
 
 char gem_color(gem* p_gem)
@@ -166,66 +163,6 @@ char gem_color(gem* p_gem)
 }
 
 #include "print_utils.h"
-
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size);
-
-int get_opts_and_call_worker(int argc, char** argv)
-{
-	int len;
-	char opt;
-	int output_parens=0;
-	int output_equations=0;
-	int output_tree=0;
-	int output_table=0;
-	int output_debug=0;
-	int output_info=0;
-	int size=0;       // worker or user must initialize it
-	
-	while ((opt=getopt(argc,argv,"petcdis:"))!=-1) {
-		switch(opt) {
-			case 'p':
-				output_parens = 1;
-				break;
-			case 't':
-				output_tree = 1;
-				break;
-			case 'e':
-				output_equations = 1;
-				break;
-			case 'c':
-				output_table = 1;
-				break;
-			case 'd':
-				output_debug = 1;
-				output_info = 1;
-				break;
-			case 'i':
-				output_info = 1;
-				break;
-			case 's':
-				size = atoi(optarg);
-				break;
-			case '?':
-				return 1;
-			default:
-				break;
-		}
-	}
-	if (optind+1==argc) {
-		len = atoi(argv[optind]);
-	}
-	else {
-		printf("Unknown arguments:\n");
-		while (argv[optind]!=NULL) {
-			printf("%s ", argv[optind]);
-			optind++;
-		}
-		return 1;
-	}
-	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_parens, output_equations, output_tree, output_table, output_debug, output_info, size);
-	return 0;
-}
 
 
 #endif // _KILLGEM_UTILS_H
