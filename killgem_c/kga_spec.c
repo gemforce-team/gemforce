@@ -6,15 +6,11 @@
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
 const int ACC=60;				// 80,60  ACC is for z-axis sorting and for the length of the interval tree
-const int ACC_TR=250;		//   800  ACC_TR is for bbound comparisons inside tree
+const int ACC_TR=250;		//   750  ACC_TR is for bbound comparisons inside tree
 #include "killgem_utils.h"
 typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
-{
-	// utils compatibility
-}
 
 float gem_amp_power(gem gem1, gemY amp1)		// should be ok...
 {
@@ -214,7 +210,7 @@ void worker_amps(int len, int output_parens, int output_equations, int output_tr
 	poolY[0]=malloc(sizeof(gemY));
 	gem_init_Y(poolY[0],1,1,1);
 	poolY_length[0]=1;
-	size=20000;
+	size=1000;
 
  for (i=1; i<2*len; ++i) {			//amplifier computing
 		int j,k,h,l;
@@ -462,7 +458,7 @@ int main(int argc, char** argv)
 	int output_debug=0;
 	int output_info=0;
 	int size=20000;
-	float growth_comb=1.415847;		// 16c
+	float growth_comb=1.414061;		// 16c
 
 	while ((opt=getopt(argc,argv,"petcdis:g:"))!=-1) {
 		switch(opt) {

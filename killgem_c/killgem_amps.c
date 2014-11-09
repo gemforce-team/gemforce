@@ -6,15 +6,11 @@
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
 const int ACC=60;				// 80,60  ACC is for z-axis sorting and for the length of the interval tree
-const int ACC_TR=250;		//   800  ACC_TR is for bbound comparisons inside tree
+const int ACC_TR=250;		//   750  ACC_TR is for bbound comparisons inside tree
 #include "killgem_utils.h"
 typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
-{
-	// utils compatibility
-}
 
 float gem_amp_power(gem gem1, gemY amp1)		// should be ok...
 {

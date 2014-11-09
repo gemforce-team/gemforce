@@ -19,9 +19,9 @@ int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
 	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
 }
 
-void print_amps_table(gem* gems, gemO* amps, int len)
+void print_global_table(gem* gems, gemO* amps, int len)
 {
-	printf("# Gems\tManagem\tAmps\tPower (rescaled)\n");
+	printf("# Gems\tManagem\tAmps\tPower (resc.)\n");
 	int i;
 	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i]));
 	printf("\n");
@@ -35,7 +35,7 @@ void print_spec_table(gem* gems, gemO* amps, double* spec_coeffs, int len)
 	printf("\n");
 }
 
-void worker(int len, int output_options, int global_mode, float growth_comb, char* filename, char* filenameA)
+void worker(int len, int output_options, int global_mode, double growth_comb, char* filename, char* filenameA)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);							// if the file is not good we exit
@@ -152,7 +152,7 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 				if (pool[i][k].leech!=0) {										// if the gem has leech we go on
 					double Palone = gem_power(pool[i][k]);
 					double Pbg = pool[i][k].bbound; 
-					for (h=0;h<poolO_length[j];++h) {						// and in the amp pool and compare
+					for (h=0;h<poolO_length[j];++h) {						// to the amp pool and compare
 						double power = Palone + Pbg * 2.576 * poolO[j][h].leech;		// that number is 6*0.23*2.8/1.5
 						double spec_coeff=power*comb_coeff;
 						if (spec_coeff>spec_coeffs[i]) {
@@ -195,7 +195,7 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 		printf("\n");
 	}
 	if (output_options & mask_table) {
-		if (global_mode) print_amps_table(gems, amps, len);
+		if (global_mode) print_global_table(gems, amps, len);
 		else print_spec_table(gems, amps, spec_coeffs, len);
 	}
 	
@@ -207,6 +207,7 @@ void worker(int len, int output_options, int global_mode, float growth_comb, cha
 		print_equations_O(amps+len-1);
 		printf("\n");
 	}
+	
 	fclose(table);
 	fclose(tableA);
 	for (i=0;i<len;++i) free(pool[i]);			// free gems
@@ -282,3 +283,4 @@ int main(int argc, char** argv)
 	worker(len, output_options, global_mode, growth_comb, filename, filenameA);
 	return 0;
 }
+
