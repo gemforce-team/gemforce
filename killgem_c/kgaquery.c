@@ -51,7 +51,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// killgem pool filling
 	if (prevmax<len-1) {						// if the killgems are not enough
-		if (global_mode==0) {					// behave as kga_spec -> quit if not enough managems
+		if (global_mode==0) {					// behave as kga_spec -> quit if not enough killgems
 			fclose(table);
 			for (i=0;i<=prevmax;++i) free(pool[i]);		// free
 			printf("Gem table stops at %d, not %d\n",prevmax+1,len);
