@@ -25,7 +25,7 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 		gem_init(pool[0]+1,1,0,1);
 		if (size==0) size=2000;				// reasonable spec sizing
 	}
-
+	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	if (prevmax+1==len) {
 		fclose(table);
@@ -170,6 +170,7 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 		}
 		table_write_iteration(pool, pool_length, i, table);			// write on file
 	}
+	
 	fclose(table);			// close
 	for (i=0;i<len;++i) free(pool[i]);		// free
 }

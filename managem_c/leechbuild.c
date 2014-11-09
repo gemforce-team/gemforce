@@ -86,7 +86,7 @@ void worker(int len, int output_options, char* filename)
 	pool[0]=malloc(sizeof(gem));
 	gem_init(pool[0],1,1);
 	pool_length[0]=1;
-
+	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	if (prevmax+1==len) {
 		fclose(table);
@@ -134,6 +134,7 @@ void worker(int len, int output_options, char* filename)
 		}
 		table_write_iteration(pool, pool_length, i, table);			// write on file
 	}
+	
 	fclose(table);			// close
 	for (i=0;i<len;++i) free(pool[i]);		// free
 	free(pool);		// free

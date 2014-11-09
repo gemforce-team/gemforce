@@ -3,10 +3,10 @@
 
 const int ACC=1000;			// accuracy for comparisons
 
-/* Info: to go from low to high accuracy: change gems_sort in gems_sort_exact and
- * if ((int)(ACC*pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound)<=(int)(ACC*lim_bbound)) {
+/* Info: to go from low to high accuracy: change gem_less_equal in an exact version, and
+ * if ((int)(ACC*temp_array[l].bbound)<=(int)(ACC*lim_bbound)) {
  * in
- * if (pool_big[subpools_to_big_convert(subpools_length,grd,j)].bbound<=lim_bbound) {
+ * if (temp_array[l].bbound<=lim_bbound) {
  */
 
 struct Gem_OB {

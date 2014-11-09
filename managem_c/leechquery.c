@@ -100,7 +100,7 @@ void worker(int len, int output_options, char* filename)
 	gem_init(gems,1,1);
 	gem_init(pool[0],1,1);
 	pool_length[0]=1;
-
+	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	if (prevmax<len-1) {
 		fclose(table);
