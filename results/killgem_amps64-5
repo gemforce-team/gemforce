@@ -1,13 +1,8 @@
-12345ieee's & psorek's killgem 64spec with 5c amps
-
-Global power (rescaled):	561.140951
-
 Total value:	94
 
 Killgem
-Killgem limit:	64
 Value:	64
-Pool:	15119
+Pool:	24833
 Grade:	6
 Damage:	17.852776
 Crit:	4.031490
@@ -22,13 +17,14 @@ Damage:	2.912956
 Crit:	2.145872
 Power:	6.250830
 
-Global power (rescaled):	570.040385
+Global power (resc.):	570.040384
+Spec coefficient:	0.924235
 
 Killgem combining scheme:
-((((b+((b+y)+(y+y)))+((b+(b+y))+(b+(b+(b+b)))))+(((b+b)+(b+(y+y)))+(((b+y)+(y+y))+((y+y)+(y+(y+(y+(y+y))))))))+((((b+(b+y))+(b+(y+y)))+((b+(b+y))+(b+(b+(b+(b+b))))))+(((b+(b+y))+(b+(b+(b+b))))+((b+(b+(b+b)))+((b+(b+b))+((b+(b+b))+(b+(b+(b+(b+b))))))))))
+(((((((((2b+b)+b)+2b)+2b)+(2b+b))+((2b+b)+b))+((((2b+b)+b)+b)+((y+b)+b)))+((((2b+b)+b)+((y+b)+b))+((2y+b)+((y+b)+b))))+(((((((2y+y)+y)+y)+2y)+(2y+(y+b)))+((2y+b)+2b))+((((2b+b)+b)+((y+b)+b))+((2y+(y+b))+b))))
 
 Amplifier combining scheme:
-((y+y)+(y+(y+y)))
+((2y+y)+2y)
 
 Killgem equations:
 (val = 1)	 0 = g1 b
@@ -53,15 +49,16 @@ Killgem equations:
 (val = 16)	19 = 18 + 13
 (val = 28)	20 = 19 + 11
 (val = 6)	21 = 12 +  6
-(val = 5)	22 =  9 +  0
-(val = 8)	23 = 22 +  6
-(val = 14)	24 = 23 + 21
-(val = 8)	25 = 22 +  8
-(val = 11)	26 = 25 +  8
-(val = 15)	27 = 26 +  9
-(val = 22)	28 = 27 + 10
-(val = 36)	29 = 28 + 24
-(val = 64)	30 = 29 + 20
+(val = 13)	22 = 10 + 21
+(val = 5)	23 =  9 +  0
+(val = 8)	24 = 23 +  6
+(val = 6)	25 =  9 +  7
+(val = 8)	26 = 25 +  7
+(val = 11)	27 = 26 +  8
+(val = 15)	28 = 27 +  9
+(val = 23)	29 = 28 + 24
+(val = 36)	30 = 29 + 22
+(val = 64)	31 = 30 + 20
 
 Amplifier equations:
 (val = 1)	 0 = g1 y
