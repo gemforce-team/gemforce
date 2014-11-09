@@ -59,7 +59,7 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 				for (h=0; h< pool_length[i-1-j]; ++h)
 				if ((pool[i-1-j]+h)->grade!=0) {
 					int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
-					if (abs(delta)<=2) {									// grade difference <= 2
+					if (abs(delta)<=2) {						// grade difference <= 2
 						comb_tot++;
 						gem temp;
 						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
@@ -109,12 +109,12 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 			}
 		}
 		int grd;
-		for (grd=0; grd<grade_max-1; ++grd)  {									// let's put remaining gems on
+		for (grd=0; grd<grade_max-1; ++grd) {						// let's put remaining gems on
 			if (temp_index[grd] != 0) {
 				int length=temp_index[grd]+subpools_length[grd];
 				gem* temp_array=malloc(length*sizeof(gem));
 				int index=0;
-				for (l=0; l<temp_index[grd]; ++l) {									// copy new gems
+				for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
 					temp_array[index]=temp_pools[grd][l];
 					index++;
 				}

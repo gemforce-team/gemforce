@@ -9,11 +9,6 @@ typedef struct Gem_O gemO;
 #include "leech_utils.h"
 
 
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
-{
-	// utils compatibility
-}
-
 float gem_amp_power(gem gem1, gemO amp1)
 {
 	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
