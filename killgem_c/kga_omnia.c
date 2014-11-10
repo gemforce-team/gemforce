@@ -12,25 +12,6 @@ const int NT=1048576;		// 2^20 ~ 1m, it's still low, but there's no difference g
 typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 
-void worker(int len, int output_parens, int output_equations, int output_tree, int output_table, int output_debug, int output_info, int size)
-{
-	// utils compatibility
-}
-
-float gem_amp_power(gem gem1, gemY amp1)		// should be ok...
-{
-	return (gem1.damage+6*0.28*(2.8/3.2)*amp1.damage)*gem1.bbound*(gem1.crit+4*0.23*2.8*amp1.crit)*gem1.bbound;		// yes, fraction and 4, due to 3.2 and 1.5 rescaling
-}
-
-int gem_alone_more_powerful(gem gem1, gem gem2, gemY amp2)
-{
-	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound > gem_amp_power(gem2, amp2);
-}
-
-int gem_amp_more_powerful(gem gem1, gemY amp1, gem gem2, gemY amp2)
-{
-	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
-}
 
 void print_amps_table(gem* gems, gemY* amps, double* powers, int len)
 {
@@ -470,7 +451,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	poolY[0]=malloc(sizeof(gemY));
 	gem_init_Y(poolY[0],1,1,1);
 	poolY_length[0]=1;
-	size=20000;
+	size=1000;
 
  for (i=1; i<lena; ++i) {				// amplifier computing
 		int j,k,h,l;
@@ -645,7 +626,7 @@ void worker_omnia(int len, int lenc, int output_parens, int output_equations, in
 	gem gems[len];								// for every speccing value
 	gemY amps[len];								// we'll choose the best amps
 	gem gemsc[len];								// and the best NC combine
-	gemY ampsc[len];							// for both;
+	gemY ampsc[len];							// for both
 	double powers[len];
 	gem_init(gems,1,1,1,0);
 	gem_init_Y(amps,0,0,0);

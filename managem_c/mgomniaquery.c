@@ -234,6 +234,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		print_equations_O(ampsc+len-1);
 		printf("\n");
 	}
+	
 	fclose(table);
 	fclose(tablec);
 	fclose(tableA);
@@ -242,7 +243,6 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	free(poolcf);
 	for (i=0;i<lena;++i) free(poolO[i]);		// free amps
 }
-
 
 int main(int argc, char** argv)
 {

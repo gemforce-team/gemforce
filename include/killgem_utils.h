@@ -16,7 +16,7 @@ int int_max(int a, int b)
 	else return b;
 }
 
-float gem_power(gem gem1)
+double gem_power(gem gem1)
 {
 	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound;			// amp-less
 }
