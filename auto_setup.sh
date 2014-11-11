@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # this script should be called in the repo root
-# but I'll check all the folders the same
+# but I'll check all the folders anyway
 
 if [ ! -d "include" ]; then
 	echo "No include folder found, aborting"
@@ -11,7 +11,7 @@ fi
 mkdir bin
 
 if [ -d "managem_c" ]; then
-	echo "Compliling leech/managem programs"
+	echo "Compiling leech/managem programs"
 	gcc -O2 -lm -I "include" managem_c/leechquery.c   -o bin/leechquery
 	gcc -O2 -lm -I "include" managem_c/managemquery.c -o bin/managemquery
 	gcc -O2 -lm -I "include" managem_c/mgaquery.c     -o bin/mgaquery
@@ -21,7 +21,7 @@ else
 fi
 
 if [ -d "killgem_c" ]; then
-	echo "Compliling killgem programs"
+	echo "Compiling killgem programs"
 	gcc -O2 -lm -I "include" killgem_c/killgemquery.c -o bin/killgemquery
 	gcc -O2 -lm -I "include" killgem_c/kgaquery.c     -o bin/kgaquery
 	gcc -O2 -lm -I "include" killgem_c/kgomniaquery.c -o bin/kgomniaquery
