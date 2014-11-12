@@ -150,6 +150,7 @@ void fill_array_O(gemO* gemf, gemO** p_gems, int* place)
 	int uniq=1;
 	for (i=0; i<*place; ++i) if (gemf==p_gems[i]) uniq=0;
 	if (uniq) {
+		gemf->grade=gemf->grade%1000;
 		gemf->grade+=1000*(*place);			// mark
 		p_gems[*place]=gemf;
 		(*place)++;
