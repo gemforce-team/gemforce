@@ -59,7 +59,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		int index;
 		for (j=pool_length[i]-1;j>=0;--j) {																				// start from large z
 			gem* p_gem=pool[i]+j;
-			index=(int)(p_gem->crit*ACC);																				// find its place in x
+			index=(int)(p_gem->crit*ACC);																						// find its place in x
 			if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 				tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 			}
@@ -93,7 +93,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init(poolc[0],1,1,1,1);
 	
 	int prevmaxc=pool_from_table(poolc, poolc_length, lenc, tablec);		// killgem comb pool filling
-	if (prevmaxc<lenc-1) {												// if the managems are not enough
+	if (prevmaxc<lenc-1) {												// if the killgems are not enough
 		fclose(tablec);
 		for (i=0;i<=prevmaxc;++i) free(poolc[i]);		// free
 		printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);

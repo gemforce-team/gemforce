@@ -1,0 +1,148 @@
+Managem spec
+Value:	16
+Grade:	4
+Leech:	2.476340
+Bbound:	1.249609
+Power:	3.094457
+
+Amplifier spec
+Value:	2
+Grade:	2
+Leech:	1.380000
+
+Managem combine
+Comb:	8
+Grade:	3
+Leech:	2.763415
+Bbound:	1.326648
+Power:	3.666080
+
+Amplifier combine
+Comb:	8
+Grade:	3
+Leech:	2.763415
+
+Global power (resc. 1k):	5.425244
+
+
+Managem speccing scheme:
+((((((2o+o)+o)+o)+(o+b))+((o+b)+b))+(((o+b)+b)+(2b+b)))
+
+Amplifier speccing scheme:
+2o
+
+Managem combining scheme:
+(((((2m+m)+m)+m)+m)+2m)
+
+Amplifier combining scheme:
+(((((2o+o)+o)+o)+o)+2o)
+
+Managem speccing tree:
+━16
+ ┣━10
+ ┃ ┣━7
+ ┃ ┃ ┣━5
+ ┃ ┃ ┃ ┣━4
+ ┃ ┃ ┃ ┃ ┣━3
+ ┃ ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┗━2
+ ┃ ┃   ┣━ g1 o
+ ┃ ┃   ┗━ g1 b
+ ┃ ┗━3
+ ┃   ┣━2
+ ┃   ┃ ┣━ g1 o
+ ┃   ┃ ┗━ g1 b
+ ┃   ┗━ g1 b
+ ┗━6
+   ┣━3
+   ┃ ┣━2
+   ┃ ┃ ┣━ g1 o
+   ┃ ┃ ┗━ g1 b
+   ┃ ┗━ g1 b
+   ┗━3
+     ┣━2
+     ┃ ┣━ g1 b
+     ┃ ┗━ g1 b
+     ┗━ g1 b
+
+Amplifier speccing tree:
+━2
+ ┣━ g1 o
+ ┗━ g1 o
+
+Managem combining tree:
+━8
+ ┣━6
+ ┃ ┣━5
+ ┃ ┃ ┣━4
+ ┃ ┃ ┃ ┣━3
+ ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┣━ g1 m
+ ┃ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┃ ┗━ g1 m
+ ┃ ┃ ┗━ g1 m
+ ┃ ┗━ g1 m
+ ┗━2
+   ┣━ g1 m
+   ┗━ g1 m
+
+Amplifier combining tree:
+━8
+ ┣━6
+ ┃ ┣━5
+ ┃ ┃ ┣━4
+ ┃ ┃ ┃ ┣━3
+ ┃ ┃ ┃ ┃ ┣━2
+ ┃ ┃ ┃ ┃ ┃ ┣━ g1 o
+ ┃ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┃ ┗━ g1 o
+ ┃ ┃ ┗━ g1 o
+ ┃ ┗━ g1 o
+ ┗━2
+   ┣━ g1 o
+   ┗━ g1 o
+
+Managem speccing equations:
+(val = 1)	 0 = g1 b
+(val = 2)	 1 =  0 +  0
+(val = 3)	 2 =  1 +  0
+(val = 1)	 3 = g1 o
+(val = 2)	 4 =  3 +  0
+(val = 3)	 5 =  4 +  0
+(val = 6)	 6 =  5 +  2
+(val = 2)	 7 =  3 +  3
+(val = 3)	 8 =  7 +  3
+(val = 4)	 9 =  8 +  3
+(val = 5)	10 =  9 +  3
+(val = 7)	11 = 10 +  4
+(val = 10)	12 = 11 +  5
+(val = 16)	13 = 12 +  6
+
+Amplifier speccing equations:
+(val = 1)	 0 = g1 o
+(val = 2)	 1 =  0 +  0
+
+Managem combining equations:
+(val = 1)	 0 = g1 m
+(val = 2)	 1 =  0 +  0
+(val = 3)	 2 =  1 +  0
+(val = 4)	 3 =  2 +  0
+(val = 5)	 4 =  3 +  0
+(val = 6)	 5 =  4 +  0
+(val = 8)	 6 =  5 +  1
+
+Amplifier combining equations:
+(val = 1)	 0 = g1 o
+(val = 2)	 1 =  0 +  0
+(val = 3)	 2 =  1 +  0
+(val = 4)	 3 =  2 +  0
+(val = 5)	 4 =  3 +  0
+(val = 6)	 5 =  4 +  0
+(val = 8)	 6 =  5 +  1

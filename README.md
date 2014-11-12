@@ -44,15 +44,3 @@ All resulting schemes (recipes) are placed in "results" folder.
 Precomputed tables up to 1 MB are placed in "gem_tables" folder.  
 More info on both can be found on the respective folders' README.
 
-***
-
-### Roadmap:
-
-Orange combine - Done  
-Orange/black spec - Done  
-Orange/black combine - Done  
-Yellow/black spec - Done  
-Yellow/black combine - Done  
-Amplifier-oriented OB - Done  
-Amplifier-oriented YB - Done  
-OBR and YBR
