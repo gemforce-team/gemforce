@@ -91,7 +91,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	gem_init(gems,1,1,1,0);
 	amps[0]=(gemY){0};
 	printf("Total value:\t1\n\n");
-	printf("Managem:\n");
+	printf("Killgem:\n");
 	gem_print(gems);
 	printf("Amplifier:\n");
 	gem_print_Y(amps);
