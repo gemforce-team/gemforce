@@ -47,7 +47,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	for (i=0;i<len;++i) {															// killgem spec compression
 		int j;
 		float maxcrit=0;
-		for (j=0; j<pool_length[i]; ++j) {		// get maxcrit;
+		for (j=0; j<pool_length[i]; ++j) {			// get maxcrit;
 			maxcrit=max(maxcrit, (pool[i]+j)->crit);
 		}
 		gem_sort(pool[i],pool_length[i]);								// work starts
@@ -110,14 +110,14 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		}
 		gem_sort(poolc[lenc-1],poolc_length[lenc-1]);							// work starts
 		int broken=0;
-		int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
+		int crit_cells=(int)(maxcrit*ACC)+1;			// this pool will be big from the beginning, but we avoid binary search
 		int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
 		int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));									// memory improvement, 2* is not needed
 		for (i=0; i<tree_length+crit_cells+1; ++i) tree[i]=-1;										// init also tree[0], it's faster
 		int index;
 		for (i=poolc_length[lenc-1]-1;i>=0;--i) {																	// start from large z
 			gem* p_gem=poolc[lenc-1]+i;
-			index=(int)(p_gem->crit*ACC);																				// find its place in x
+			index=(int)(p_gem->crit*ACC);																						// find its place in x
 			if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 				tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 			}
@@ -206,6 +206,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init(gemsc,1,1,0,0);
 	gem_init_Y(ampsc,0,0,0);
 	powers[0]=0;
+	double loglenc=log(lenc);
 	printf("Killgem:\n");
 	gem_print(gems);
 	printf("Amplifier:\n");
@@ -228,12 +229,12 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			}
 		}
 		int NS=i+1;
-		double c0 = log((double)NT/(i+1))/log(lenc);					// last we compute the combination number
+		double c0 = log((double)NT/(i+1))/loglenc;						// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
 																													// now we compare the whole setup
 		for (j=0;j<i+1;++j) {																	// for every amp value from 1 to to gem_value
 			NS+=6;																							// we get the num of gems used in speccing
-			double c = log((double)NT/NS)/log(lenc);						// we compute the combination number
+			double c = log((double)NT/NS)/loglenc;							// we compute the combination number
 			for (l=0; l<poolcf_length; ++l) {										// then we search in the NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cdg = pow(poolcf[l].damage,c);

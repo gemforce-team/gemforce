@@ -38,6 +38,35 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		exit(1);
 	}
 
+	gem* poolf[len];
+	int poolf_length[len];
+	
+	for (i=0;i<len;++i) {															// managem spec compression
+		int j;
+		gem_sort(pool[i],pool_length[i]);								// work starts
+		int broken=0;
+		float lim_bbound=-1;
+		for (j=pool_length[i]-1;j>=0;--j) {
+			if ((int)(ACC*pool[i][j].bbound)<=(int)(ACC*lim_bbound)) {
+				pool[i][j].grade+=1000;			// non destructive marking
+				broken++;
+			}
+			else lim_bbound=pool[i][j].bbound;
+		}																// all unnecessary gems marked
+		poolf_length[i]=pool_length[i]-broken;
+		poolf[i]=malloc(poolf_length[i]*sizeof(gem));		// pool init via broken
+		int index=0;
+		for (j=0; j<pool_length[i]; ++j) {							// copying to subpool
+			if (pool[i][j].grade<1000) {
+				poolf[i][index]=pool[i][j];
+				index++;
+			}
+			else pool[i][j].grade-=1000;									// correct grade again  
+		}
+		if (output_options & mask_info) printf("Managem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);
+	}
+	printf("Gem speccing pool compression done!\n");
+
 	FILE* tablec=file_check(filenamec);		// file is open to read
 	if (tablec==NULL) exit(1);						// if the file is not good we exit
 	gem* poolc[lenc];
@@ -121,6 +150,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init(gemsc,1,0,0);
 	gem_init_O(ampsc,0,0);
 	powers[0]=0;
+	double loglenc=log(lenc);
 	printf("Managem:\n");
 	gem_print(gems);
 	printf("Amplifier:\n");
@@ -137,31 +167,31 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				gemsc[i]=poolcf[l];
 			}
 		}
-		for (k=0;k<pool_length[i];++k) {											// and then in the the gem pool
-			if (gem_power(pool[i][k]) > gem_power(gems[i])) {
-				gems[i]=pool[i][k];
+		for (k=0;k<poolf_length[i];++k) {											// and then in the the gem pool
+			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
+				gems[i]=poolf[i][k];
 			}
 		}
 		int NS=i+1;
-		double c0 = log((double)NT/(i+1))/log(lenc);					// last we compute the combination number
+		double c0 = log((double)NT/(i+1))/loglenc;						// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
 																													// now we compare the whole setup
 		for (j=0;j<i+1;++j) {																	// for every amp value from 1 up to gem_value
 			NS+=6;																							// we get the num of gems used in speccing
-			double c = log((double)NT/NS)/log(lenc);						// we compute the combination number
+			double c = log((double)NT/NS)/loglenc;							// we compute the combination number
 			double Ca= 2.576 * pow(combO.leech,c);							// <- this is ok only for mg
 			for (l=0; l<poolcf_length; ++l) {										// then we search in NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cg  = pow(gem_power(poolcf[l]),c);
-				for (k=0;k<pool_length[i];++k) {									// and in the gem pool
-					if (pool[i][k].leech!=0) {											// if the gem has leech we go on
-						double Palone = Cg * gem_power(pool[i][k]);
-						double Pbg = Cbg * pool[i][k].bbound;
+				for (k=0;k<poolf_length[i];++k) {									// and in the reduced gem pool
+					if (poolf[i][k].leech!=0) {											// if the gem has leech we go on
+						double Palone = Cg * gem_power(poolf[i][k]);
+						double Pbg = Cbg * poolf[i][k].bbound;
 						for (h=0;h<poolO_length[j];++h) {							// and we look in the amp pool
 							double power = Palone + Pbg * Ca * poolO[j][h].leech;
 							if (power>powers[i]) {
 								powers[i]=power;
-								gems[i]=pool[i][k];
+								gems[i]=poolf[i][k];
 								amps[i]=poolO[j][h];
 								gemsc[i]=poolcf[l];
 							}
@@ -172,7 +202,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		}
 		printf("Managem spec\n");
 		printf("Value:\t%d\n",i+1);
-		if (output_options & mask_info) printf("Pool:\t%d\n",pool_length[i]);
+		if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
 		gem_print(gems+i);
 		printf("Amplifier spec\n");
 		printf("Value:\t%d\n",gem_getvalue_O(amps+i));
