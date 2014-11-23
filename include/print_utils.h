@@ -27,14 +27,21 @@ void print_parens(gem* gemf)
 	return;
 }
 
+int monocolor_ancestors(gem* gemf)
+{
+	if (gemf->father==NULL) return 1;
+	else if (gem_color(gemf->father)!=gem_color(gemf->mother)) return 0;
+	else return monocolor_ancestors(gemf->mother) & monocolor_ancestors(gemf->father);
+}
+
 void print_parens_compressed(gem* gemf)
 {
 	if (gemf->father==NULL) {
 		printf("%c",gem_color(gemf));
 		return;
 	}
-	else if (gem_color(gemf->father)==gem_color(gemf->mother)					// if gem is uniform combination (g1 are already done)
-	&& pow(2,gemf->grade-1)==gem_getvalue(gemf)) {										// and is standard combine
+	else if (monocolor_ancestors(gemf)									// if gem is uniform combination (g1 are already done)
+	&& pow(2,gemf->grade-1)==gem_getvalue(gemf)) {			// and is standard combine
 		printf("%d%c",gemf->grade,gem_color(gemf));
 		return;
 	}
