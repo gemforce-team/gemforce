@@ -23,12 +23,12 @@ int int_max(int a, int b)
 
 double gem_amp_global_mana_power(gem gem1, gem amp1)
 {
-	return (gem1.leech*1.5+6*0.23*2.8*amp1.leech)*gem1.bbound;
+	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
 }
 
-double gem_amp_global_kill_power(gem gem1, gem amp1)		// should be ok...
+double gem_amp_global_kill_power(gem gem1, gem amp1)
 {
-	return (gem1.damage*3.2+6*0.28*2.8*amp1.damage)*gem1.bbound*(gem1.crit*1.5+6*0.23*2.8*amp1.crit)*gem1.bbound;
+	return (gem1.damage+6*0.28*(2.8/3.2)*amp1.damage)*gem1.bbound*(gem1.crit+4*0.23*2.8*amp1.crit)*gem1.bbound;		// yes, fraction and 4, due to 3.2 and 1.5 rescaling
 }
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
@@ -347,8 +347,8 @@ int main(int argc, char** argv)
 				print_equations(amps, 2*value-1, place_amps);
 				printf("\n");
 			}
-			printf("Global mana power (rescaled):\t%f\n", (gem_amp_global_mana_power(gems[place], amps[place])/1.5));
-			printf("Global kill power (rescaled):\t%f\n\n", (gem_amp_global_kill_power(gems[place], amps[place])/(3.2*1.5)));
+			printf("Global mana power (resc.):\t%f\n", gem_amp_global_mana_power(gems[place], amps[place_amps]));
+			printf("Global kill power (resc.):\t%f\n\n", gem_amp_global_kill_power(gems[place], amps[place_amps]));
 		}
 	}
 	free(parens);
