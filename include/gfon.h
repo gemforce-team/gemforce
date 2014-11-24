@@ -43,13 +43,13 @@ FILE* file_check(char* filename)
 	FILE* table;
 	table=fopen(filename,"rb");				// binary to check size
 	if(table==NULL) {
-		printf("Unexistant table\n");
+		printf("Unexistant table: %s\n",filename);
 		return NULL;
 	}
 	fseek(table, 0, SEEK_END);
 	if (ftell(table)==0) {
 		fclose(table);
-		printf("Empty table\n");
+		printf("Empty table: %s\n",filename);
 		return NULL;
 	}
 	table=freopen(filename,"r", table);		// read
