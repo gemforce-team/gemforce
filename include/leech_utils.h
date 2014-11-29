@@ -186,14 +186,14 @@ void print_equations_O(gemO* gemf)
 void print_tree_O(gemO* gemf, char* prefix)
 {
 	if (gemf->father==NULL) {
-		printf("━ g1 o\n");
+		printf("─ g1 o\n");
 	}
 	else {
-		printf("━%d\n",gem_getvalue_O(gemf));
-		printf("%s ┣",prefix);
+		printf("─%d\n",gem_getvalue_O(gemf));
+		printf("%s ├",prefix);
 		char string[strlen(prefix)+2];
 		strcpy(string,prefix);
-		strcat(string," ┃");
+		strcat(string," │");
 		gemO* gem1;
 		gemO* gem2;
 		if (gem_getvalue_O(gemf->father)>gem_getvalue_O(gemf->mother)) {
@@ -205,7 +205,7 @@ void print_tree_O(gemO* gemf, char* prefix)
 			gem1=gemf->mother;
 		}
 		print_tree_O(gem1, string);
-		printf("%s ┗",prefix);
+		printf("%s └",prefix);
 		char string2[strlen(prefix)+2];
 		strcpy(string2,prefix);
 		strcat(string2,"  ");

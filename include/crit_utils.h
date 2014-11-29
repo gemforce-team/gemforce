@@ -248,14 +248,14 @@ void print_equations_Y(gemY* gemf)
 void print_tree_Y(gemY* gemf, char* prefix)
 {
 	if (gemf->father==NULL) {
-		printf("━ g1 y\n");
+		printf("─ g1 y\n");
 	}
 	else {
-		printf("━%d\n",gem_getvalue_Y(gemf));
-		printf("%s ┣",prefix);
+		printf("─%d\n",gem_getvalue_Y(gemf));
+		printf("%s ├",prefix);
 		char string[strlen(prefix)+2];
 		strcpy(string,prefix);
-		strcat(string," ┃");
+		strcat(string," │");
 		gemY* gem1;
 		gemY* gem2;
 		if (gem_getvalue_Y(gemf->father)>gem_getvalue_Y(gemf->mother)) {
@@ -267,7 +267,7 @@ void print_tree_Y(gemY* gemf, char* prefix)
 			gem1=gemf->mother;
 		}
 		print_tree_Y(gem1, string);
-		printf("%s ┗",prefix);
+		printf("%s └",prefix);
 		char string2[strlen(prefix)+2];
 		strcpy(string2,prefix);
 		strcat(string2,"  ");

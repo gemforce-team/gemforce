@@ -99,14 +99,14 @@ void print_equations(gem* gemf)
 void print_tree(gem* gemf, char* prefix)
 {
 	if (gemf->father==NULL) {
-		printf("━ g1 %c\n",gem_color(gemf));
+		printf("─ g1 %c\n",gem_color(gemf));
 	}
 	else {
-		printf("━%d\n",gem_getvalue(gemf));
-		printf("%s ┣",prefix);
+		printf("─%d\n",gem_getvalue(gemf));
+		printf("%s ├",prefix);
 		char string[strlen(prefix)+2];
 		strcpy(string,prefix);
-		strcat(string," ┃");
+		strcat(string," │");
 		gem* gem1;
 		gem* gem2;
 		if (gem_getvalue(gemf->father)>gem_getvalue(gemf->mother)) {
@@ -118,7 +118,7 @@ void print_tree(gem* gemf, char* prefix)
 			gem1=gemf->mother;
 		}
 		print_tree(gem1, string);
-		printf("%s ┗",prefix);
+		printf("%s └",prefix);
 		char string2[strlen(prefix)+2];
 		strcpy(string2,prefix);
 		strcat(string2,"  ");
