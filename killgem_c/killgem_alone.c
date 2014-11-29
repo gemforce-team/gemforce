@@ -92,7 +92,7 @@ void worker(int len, int output_options, int pool_zero, int size)
 							for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;										// init also tree[0], it's faster
 							for (l=length-1;l>=0;--l) {																								// start from large z
 								gem* p_gem=temp_array+l;
-								index=(int)(p_gem->crit*ACC);																				// find its place in x
+								index=(int)(p_gem->crit*ACC);																						// find its place in x
 								if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 									tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 								}
@@ -146,7 +146,7 @@ void worker(int len, int output_options, int pool_zero, int size)
 					for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;										// init also tree[0], it's faster
 					for (l=length-1;l>=0;--l) {																								// start from large z
 						gem* p_gem=temp_array+l;
-						index=(int)(p_gem->crit*ACC);																				// find its place in x
+						index=(int)(p_gem->crit*ACC);																						// find its place in x
 						if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 							tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 						}
