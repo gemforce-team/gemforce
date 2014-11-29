@@ -59,10 +59,16 @@ int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
 	printf("\nBuilding pool...");
 	rewind(table);
 	int i;
-	for (i=0;i<1+pool_length[0];++i) {						// discard value 0 gems
+	int pool_zero;
+	fscanf(table, "%d\n", &pool_zero);			// get pool_zero
+	if (pool_zero != pool_length[0]) {			// and check if it's right
+		printf("\nWrong table type, exiting...\n");
+		exit(1);
+	}
+	for (i=0;i<pool_length[0];++i) {				// discard value 0 gems
 		fscanf(table, "%*[^\n]\n");
 	}
-	fscanf(table, "\n");													// discard newline
+	fscanf(table, "\n");										// discard newline
 	int prevmax=0;
 	for (i=1;i<len;++i) {
 		int eof_check=fscanf(table, "%d\n", pool_length+i);				// get pool length
