@@ -81,7 +81,12 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 			for (j=0; j<pool_length[i]; ++j) {
 				int value_father, offset_father;
 				int value_mother, offset_mother;
-				fscanf(table, "%d %x %x\n", &value_father, &offset_father, &offset_mother);
+				int integrity_check=fscanf(table, "%d %x %x\n", &value_father, &offset_father, &offset_mother);
+				if (integrity_check!=3) {
+					printf("\nERROR: integrity check failed at byte %ld\n", ftell(table));
+					printf("Your table may be corrupt, brutally exiting...\n");
+					exit(1);
+				}
 				if (value_father != -1) {
 					value_mother=i-1-value_father;
 					gem_combine(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
