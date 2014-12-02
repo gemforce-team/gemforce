@@ -150,7 +150,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init(gemsc,1,0,0);
 	gem_init_O(ampsc,0,0);
 	powers[0]=0;
-	double loglenc=log(lenc);
+	double iloglenc=1/log(lenc);
 	printf("Managem:\n");
 	gem_print(gems);
 	printf("Amplifier:\n");
@@ -173,12 +173,12 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			}
 		}
 		int NS=i+1;
-		double c0 = log((double)NT/(i+1))/loglenc;						// last we compute the combination number
+		double c0 = log((double)NT/(i+1))*iloglenc;						// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
 																													// now we compare the whole setup
 		for (j=0;j<i+1;++j) {																	// for every amp value from 1 up to gem_value
 			NS+=6;																							// we get the num of gems used in speccing
-			double c = log((double)NT/NS)/loglenc;							// we compute the combination number
+			double c = log((double)NT/NS)*iloglenc;							// we compute the combination number
 			double Ca= 2.576 * pow(combO.leech,c);							// <- this is ok only for mg
 			for (l=0; l<poolcf_length; ++l) {										// then we search in NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
