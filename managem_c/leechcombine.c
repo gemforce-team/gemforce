@@ -92,7 +92,7 @@ void worker(int len, int output_options)
 {
 	printf("\n");
 	int i;
-	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 131k is the limit
+	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
 	gem* pool[len];
 	int pool_length[len];
 	pool[0]=malloc(sizeof(gem));
