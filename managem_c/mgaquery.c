@@ -69,37 +69,40 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	
 	for (i=0;i<len;++i) {															// managem spec compression
 		int j;
-		gem_sort(pool[i],pool_length[i]);								// work starts
+		gem temp_pool[pool_length[i]];
+		for (j=0; j<pool_length[i]; ++j) {			// copy gems
+			temp_pool[j]=pool[i][j];
+		}
+		gem_sort(temp_pool,pool_length[i]);							// work starts
 		int broken=0;
 		float lim_bbound=-1;
 		for (j=pool_length[i]-1;j>=0;--j) {
-			if ((int)(ACC*pool[i][j].bbound)<=(int)(ACC*lim_bbound)) {
-				pool[i][j].grade+=1000;			// non destructive marking
+			if ((int)(ACC*temp_pool[j].bbound)<=(int)(ACC*lim_bbound)) {
+				temp_pool[j].grade=0;
 				broken++;
 			}
-			else lim_bbound=pool[i][j].bbound;
-		}																// unnecessary gems marked
+			else lim_bbound=temp_pool[j].bbound;
+		}																// unnecessary gems broken
 		gem best=(gem){0};							// choosing best i-spec
 		for (j=0;j<pool_length[i];++j)
-		if (gem_more_powerful(pool[i][j], best)) {
-			best=pool[i][j];
+		if (gem_more_powerful(temp_pool[j], best)) {
+			best=temp_pool[j];
 		}
 		for (j=0;j<pool_length[i];++j)							// comparison compression (only for mg):
-		if (pool[i][j].bbound < best.bbound
-		&&  pool[i][j].grade<1000)									// a mg makes sense only if
+		if (temp_pool[j].bbound < best.bbound
+		&&  temp_pool[j].grade!=0)									// a mg makes sense only if
 		{																						// its bbound is bigger than
-			pool[i][j].grade+=1000;										// the bbound of the best one
+			temp_pool[j].grade=0;											// the bbound of the best one
 			broken++;
-		}																						// all the unnecessary gems marked
+		}																						// all the unnecessary gems broked
 		poolf_length[i]=pool_length[i]-broken;
 		poolf[i]=malloc(poolf_length[i]*sizeof(gem));		// pool init via broken
 		int index=0;
 		for (j=0; j<pool_length[i]; ++j) {							// copying to subpool
-			if (pool[i][j].grade<1000) {
-				poolf[i][index]=pool[i][j];
+			if (temp_pool[j].grade!=0) {
+				poolf[i][index]=temp_pool[j];
 				index++;
 			}
-			else pool[i][j].grade-=1000;									// correct grade again  
 		}
 		if (output_options & mask_info) printf("Managem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);
 	}

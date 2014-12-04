@@ -52,10 +52,12 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	for (i=0;i<len;++i) {															// killgem spec compression
 		int j;
 		float maxcrit=0;
-		for (j=0; j<pool_length[i]; ++j) {			// get maxcrit;
+		gem temp_pool[pool_length[i]];
+		for (j=0; j<pool_length[i]; ++j) {			// copy gems and get maxcrit
+			temp_pool[j]=pool[i][j];
 			maxcrit=max(maxcrit, (pool[i]+j)->crit);
 		}
-		gem_sort(pool[i],pool_length[i]);								// work starts
+		gem_sort(temp_pool,pool_length[i]);							// work starts
 		int broken=0;
 		int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 		int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
@@ -63,27 +65,26 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		for (j=0; j<tree_length+crit_cells+1; ++j) tree[j]=-1;										// init also tree[0], it's faster
 		int index;
 		for (j=pool_length[i]-1;j>=0;--j) {																				// start from large z
-			gem* p_gem=pool[i]+j;
+			gem* p_gem=temp_pool+j;
 			index=(int)(p_gem->crit*ACC);																						// find its place in x
 			if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 				tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 			}
 			else {
-				p_gem->grade+=1000;			// non destructive marking
+				p_gem->grade=0;
 				broken++;
 			}
-		}														// all unnecessary gems marked
+		}														// all unnecessary gems broken
 		free(tree);									// free
 		
 		poolf_length[i]=pool_length[i]-broken;
 		poolf[i]=malloc(poolf_length[i]*sizeof(gem));			// pool init via broken
 		index=0;
 		for (j=0; j<pool_length[i]; ++j) {								// copying to subpool
-			if (pool[i][j].grade<1000) {
-				poolf[i][index]=pool[i][j];
+			if (temp_pool[j].grade!=0) {
+				poolf[i][index]=temp_pool[j];
 				index++;
 			}
-			else pool[i][j].grade-=1000;										// correct grade again  
 		}
 		if (output_options & mask_info) printf("Killgem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);
 	}
@@ -169,25 +170,28 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	
 	for (i=0; i<lena; ++i) {			// amps pool compression
 		int j;
-		gem_sort_Y(poolY[i],poolY_length[i]);		// work starts
+		gemY temp_pool[poolY_length[i]];
+		for (j=0; j<poolY_length[i]; ++j) {			// copy gems
+			temp_pool[j]=poolY[i][j];
+		}
+		gem_sort_Y(temp_pool,poolY_length[i]);		// work starts
 		int broken=0;
 		float lim_crit=-1;
 		for (j=poolY_length[i]-1;j>=0;--j) {
-			if (poolY[i][j].crit<=lim_crit) {
-				poolY[i][j].grade+=1000;						// non destructive marking
+			if (temp_pool[j].crit<=lim_crit) {
+				temp_pool[j].grade=0;
 				broken++;
 			}
-			else lim_crit=poolY[i][j].crit;
+			else lim_crit=temp_pool[j].crit;
 		}													// all unnecessary gems marked
 		poolYf_length[i]=poolY_length[i]-broken;
 		poolYf[i]=malloc(poolYf_length[i]*sizeof(gemY));		// pool init via broken
 		int index=0;
 		for (j=0; j<poolY_length[i]; ++j) {			// copying to pool
-			if (poolY[i][j].grade<1000) {
-				poolYf[i][index]=poolY[i][j];
+			if (temp_pool[j].grade!=0) {
+				poolYf[i][index]=temp_pool[j];
 				index++;
 			}
-			else poolY[i][j].grade-=1000;					// correct grade again 
 		}
 		if (output_options & mask_info) printf("Amp value %d compressed pool size:\t%d\n", i+1, poolYf_length[i]);
 	}
