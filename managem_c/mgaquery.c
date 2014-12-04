@@ -64,6 +64,47 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		}
 	}
 
+	gem* poolf[len];
+	int poolf_length[len];
+	
+	for (i=0;i<len;++i) {															// managem spec compression
+		int j;
+		gem_sort(pool[i],pool_length[i]);								// work starts
+		int broken=0;
+		float lim_bbound=-1;
+		for (j=pool_length[i]-1;j>=0;--j) {
+			if ((int)(ACC*pool[i][j].bbound)<=(int)(ACC*lim_bbound)) {
+				pool[i][j].grade+=1000;			// non destructive marking
+				broken++;
+			}
+			else lim_bbound=pool[i][j].bbound;
+		}																// unnecessary gems marked
+		gem best=(gem){0};							// choosing best i-spec
+		for (j=0;j<pool_length[i];++j)
+		if (gem_more_powerful(pool[i][j], best)) {
+			best=pool[i][j];
+		}
+		for (j=0;j<pool_length[i];++j)							// comparison compression (only for mg):
+		if (pool[i][j].bbound < best.bbound
+		&&  pool[i][j].grade<1000)									// a mg makes sense only if
+		{																						// its bbound is bigger than
+			pool[i][j].grade+=1000;										// the bbound of the best one
+			broken++;
+		}																						// all the unnecessary gems marked
+		poolf_length[i]=pool_length[i]-broken;
+		poolf[i]=malloc(poolf_length[i]*sizeof(gem));		// pool init via broken
+		int index=0;
+		for (j=0; j<pool_length[i]; ++j) {							// copying to subpool
+			if (pool[i][j].grade<1000) {
+				poolf[i][index]=pool[i][j];
+				index++;
+			}
+			else pool[i][j].grade-=1000;									// correct grade again  
+		}
+		if (output_options & mask_info) printf("Managem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);
+	}
+	printf("Gem speccing pool compression done!\n");
+
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);						// if the file is not good we exit
 	int lena;
@@ -83,7 +124,20 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		exit(1);
 	}
 
-	int j,k,h;											// let's choose the right gem-amp combo
+	gemO* bestO=malloc(lena*sizeof(gem));		// if not malloc-ed 140k is the limit
+	
+	for (i=0; i<lena; ++i) {			// amps pool compression
+		int j;
+		bestO[i]=(gemO){0};
+		for (j=0; j<poolO_length[i]; ++j) {
+			if (gem_better(poolO[i][j], bestO[i])) {
+				bestO[i]=poolO[i][j];
+			}
+		}
+	}
+	printf("Amp pool compression done!\n\n");
+
+	int j,k;											// let's choose the right gem-amp combo
 	gemO amps[len];
 	gem gems[len];
 	gem_init(gems,1,1,0);
@@ -100,32 +154,30 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		for (i=1;i<len;++i) {																	// for every total value
 			gems[i]=(gem){0};																		// we init the gems
 			amps[i]=(gemO){0};																	// to extremely weak ones
-			for (k=0;k<pool_length[i];++k) {										// first we compare the gem alone
-				if (gem_power(pool[i][k]) > gem_power(gems[i])) {
-					gems[i]=pool[i][k];
+			for (k=0;k<poolf_length[i];++k) {										// first we compare the gem alone
+				if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
+					gems[i]=poolf[i][k];
 				}
 			}
 			for (j=1;j<=i/6;++j) {															// for every amount of amps we can fit in
 				int value = i-6*j;																// this is the amount of gems we have left
-				for (k=0;k<pool_length[value];++k)								// we search in that pool
-				if (pool[value][k].leech!=0) {										// if the gem has leech we go on
-					for (h=0;h<poolO_length[j-1];++h) {							// and we look in the amp pool
-						if (gem_amp_more_powerful(pool[value][k],poolO[j-1][h],gems[i],amps[i])) {
-							gems[i]=pool[value][k];
-							amps[i]=poolO[j-1][h];
-						}
-					}
+				for (k=0;k<poolf_length[value];++k)								// we search in that pool
+				if (poolf[value][k].leech!=0											// if the gem has leech we go on and get the amp
+				&&  gem_amp_more_powerful(poolf[value][k],bestO[j-1],gems[i],amps[i]))
+				{
+					gems[i]=poolf[value][k];
+					amps[i]=bestO[j-1];
 				}
 			}
 			printf("Total value:\t%d\n\n", i+1);
 			printf("Managem\n");
 			if (prevmax<len-1) printf("Managem limit:\t%d\n", prevmax+1);
 			printf("Value:\t%d\n",gem_getvalue(gems+i));
-			if (output_options & mask_info) printf("Pool:\t%d\n",pool_length[gem_getvalue(gems+i)-1]);
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
 			gem_print(gems+i);
 			printf("Amplifier\n");
 			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
-			if (output_options & mask_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
+			if (output_options & mask_info) printf("Pool:\t1\n");
 			gem_print_O(amps+i);
 			printf("Global power (resc.):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
 			fflush(stdout);								// forces buffer write, so redirection works well
@@ -136,29 +188,28 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			gems[i]=(gem){0};																// we init the gems
 			amps[i]=(gemO){0};															// to extremely weak ones
 			spec_coeffs[i]=0;																// and init a spec coeff
-			for (k=0;k<pool_length[i];++k) {								// first we compare the gem alone
-				if (gem_power(pool[i][k]) > gem_power(gems[i])) {
-					gems[i]=pool[i][k];
+			for (k=0;k<poolf_length[i];++k) {								// first we compare the gem alone
+				if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
+					gems[i]=poolf[i][k];
 				}
 			}
 			int NS=i+1;
 			double comb_coeff=pow(NS, -growth_comb);
-			spec_coeffs[i]=comb_coeff*gem_power(pool[i][k]);
+			spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
 																											// now with amps
 			for (j=0;j<2*i+2;++j) {													// for every amp value from 1 to to 2*gem_value
 				NS+=6;																				// we get total num of gems used
 				double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
-				for (k=0;k<pool_length[i];++k)								// then we search in the gem pool
-				if (pool[i][k].leech!=0) {										// if the gem has leech we go on
-					double Palone = gem_power(pool[i][k]);
-					double Pbg = pool[i][k].bbound; 
-					for (h=0;h<poolO_length[j];++h) {						// to the amp pool and compare
-						double power = Palone + Pbg * 2.576 * poolO[j][h].leech;		// that number is 6*0.23*2.8/1.5
+				double Pa= 2.576 * bestO[j].leech;						// <- this is ok only for mg
+				for (k=0;k<poolf_length[i];++k) {							// then we search in the reduced gem pool
+					if (poolf[i][k].leech!=0) {									// if the gem has leech we go on
+						double Palone = gem_power(poolf[i][k]);
+						double power = Palone + poolf[i][k].bbound * Pa;
 						double spec_coeff=power*comb_coeff;
 						if (spec_coeff>spec_coeffs[i]) {
 							spec_coeffs[i]=spec_coeff;
-							gems[i]=pool[i][k];
-							amps[i]=poolO[j][h];
+							gems[i]=poolf[i][k];
+							amps[i]=bestO[j];
 						}
 					}
 				}
@@ -166,11 +217,11 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			printf("Total value:\t%d\n\n", i+1+6*gem_getvalue_O(amps+i));
 			printf("Managem\n");
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info) printf("Pool:\t%d\n",pool_length[i]);
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
 			gem_print(gems+i);
 			printf("Amplifier\n");
 			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
-			if (output_options & mask_info) printf("Pool:\t%d\n",poolO_length[gem_getvalue_O(amps+i)-1]);
+			if (output_options & mask_info) printf("Pool:\t1\n");
 			gem_print_O(amps+i);
 			printf("Global power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
 			printf("Spec coefficient:\t%f\n\n", spec_coeffs[i]);
@@ -211,7 +262,9 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	fclose(table);
 	fclose(tableA);
 	for (i=0;i<len;++i) free(pool[i]);			// free gems
+	for (i=0;i<len;++i) free(poolf[i]);			// free gems compressed
 	for (i=0;i<lena;++i) free(poolO[i]);		// free amps
+	free(bestO);														// free amps compressed
 }
 
 
