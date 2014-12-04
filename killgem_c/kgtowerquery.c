@@ -164,7 +164,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		exit(1);
 	}
 
-	gemY* poolYf[lena];
+	gemY** poolYf=malloc(lena*sizeof(gemY*));		// if not malloc-ed 140k is the limit
 	int poolYf_length[lena];
 	
 	for (i=0; i<lena; ++i) {			// amps pool compression
@@ -245,16 +245,16 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				double Cdg = pow(poolcf[l].damage,c);
 				double Ccg = pow(poolcf[l].crit  ,c);
 				for (m=0;m<poolYc_length;++m) {										// and in the amp NC pool
-					double Cda = pow(poolYc[m].damage,c);
-					double Cca = pow(poolYc[m].crit  ,c);
+					double Cda = 1.96  * pow(poolYc[m].damage,c);
+					double Cca = 3.4347* pow(poolYc[m].crit  ,c);
 					for (k=0;k<poolf_length[i];++k) {								// then in the gem pool
 						if (pool[i][k].crit!=0) {											// if the gem has crit we go on
 							double Pb2 = Cbg * poolf[i][k].bbound * Cbg * poolf[i][k].bbound;
 							double Pdg = Cdg * poolf[i][k].damage;
 							double Pcg = Ccg * poolf[i][k].crit  ;
 							for (h=0;h<poolYf_length[j];++h) {					// and in the reduced amp pool
-								double Pdamage = Pdg + 1.96  * Cda * poolYf[j][h].damage ;
-								double Pcrit   = Pcg + 3.4347* Cca * poolYf[j][h].crit   ;
+								double Pdamage = Pdg + Cda * poolYf[j][h].damage ;
+								double Pcrit   = Pcg + Cca * poolYf[j][h].crit   ;
 								double power   = Pb2 * Pdamage * Pcrit ;
 								if (power>powers[i]) {
 									powers[i]=power;
