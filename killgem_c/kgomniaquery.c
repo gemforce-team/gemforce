@@ -13,6 +13,11 @@ typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 #include "gfon.h"
 
+double gem_amp_power(gem gem1, gemY amp1)
+{
+	return (gem1.damage+1.47*amp1.damage)*gem1.bbound*(gem1.crit+2.576*amp1.crit)*gem1.bbound;
+}
+
 void print_omnia_table(gem* gems, gemY* amps, double* powers, int len)
 {
 	printf("Killgem\tAmps\tPower (resc. 10m)\n");			// we'll rescale again for 10m, no need to have 10 digits
@@ -280,6 +285,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Comb:\t%d\n",lenc);
 		if (output_options & mask_info) printf("Pool:\t%d\n",poolYc_length);
 		gem_print_Y(ampsc+i);
+		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
 		printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/10000/1000);
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}

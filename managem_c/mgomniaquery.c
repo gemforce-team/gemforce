@@ -243,6 +243,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Comb:\t%d\n",lenc);
 		if (output_options & mask_info) printf("Pool:\t1\n");
 		gem_print_O(ampsc+i);
+		printf("Spec base power (resc.):\t%f\n", gems[i].bbound*(gems[i].leech+2.576*amps[i].leech));
 		printf("Global power (resc. 1k):\t%f\n\n\n", powers[i]/1000);
 		fflush(stdout);								// forces buffer write, so redirection works well
 	}
