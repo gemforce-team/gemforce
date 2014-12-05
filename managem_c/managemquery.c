@@ -12,7 +12,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);							// if the file is not good we exit
 	int i;
-	gem gems[len];
+	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
 	gem* pool[len];
 	int pool_length[len];
 	pool[0]=malloc(pool_zero*sizeof(gem));
