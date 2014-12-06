@@ -252,7 +252,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 					double Cda = 1.96  * pow(poolYc[m].damage,c);
 					double Cca = 3.4347* pow(poolYc[m].crit  ,c);
 					for (k=0;k<poolf_length[i];++k) {								// then in the gem pool
-						if (pool[i][k].crit!=0) {											// if the gem has crit we go on
+						if (poolf[i][k].crit!=0) {											// if the gem has crit we go on
 							double Pb2 = Cbg * poolf[i][k].bbound * Cbg * poolf[i][k].bbound;
 							double Pdg = Cdg * poolf[i][k].damage;
 							double Pcg = Ccg * poolf[i][k].crit  ;
