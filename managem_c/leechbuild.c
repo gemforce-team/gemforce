@@ -3,79 +3,12 @@
 #include <math.h>
 #include <unistd.h>
 #include <string.h>
+typedef struct Gem_O gem;
+#include "leechg_utils.h"
+#include "gfon.h"
 
 const int mask_info=1;
 const int mask_quiet=32;
-
-typedef struct Gem_O {
-	int grade;			//using short does NOT improve time/memory usage
-	double leech;		//using float does NOT improve time/memory usage
-	struct Gem_O* father;
-	struct Gem_O* mother;
-} gem;
-
-int int_max(int a, int b)
-{
-	if (a > b) return a;
-	else return b;
-}
-
-void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
-{
-	p_gem_combined->grade = p_gem1->grade+1;
-	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = 0.88*p_gem1->leech + 0.5*p_gem2->leech;
-	else p_gem_combined->leech = 0.88*p_gem2->leech + 0.5*p_gem1->leech;
-}
-
-void gem_comb_d1(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)		//bigger is always gem1
-{
-	p_gem_combined->grade = p_gem1->grade;
-	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = 0.89*p_gem1->leech + 0.44*p_gem2->leech;
-	else p_gem_combined->leech = 0.89*p_gem2->leech + 0.44*p_gem1->leech;
-}
-
-void gem_comb_gn(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
-{
-	p_gem_combined->grade = int_max(p_gem1->grade, p_gem2->grade);
-	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = 0.9*p_gem1->leech + 0.38*p_gem2->leech;
-	else p_gem_combined->leech = 0.9*p_gem2->leech + 0.38*p_gem1->leech;
-}
-
-void gem_combine (gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
-{
-	p_gem_combined->father=p_gem1;
-	p_gem_combined->mother=p_gem2;
-	int delta = p_gem1->grade - p_gem2->grade;
-	switch (delta){
-		case 0:
-			gem_comb_eq(p_gem1, p_gem2, p_gem_combined);
-			break;
-		case 1:
-			gem_comb_d1(p_gem1, p_gem2, p_gem_combined);
-			break;
-		case -1:
-			gem_comb_d1(p_gem2, p_gem1, p_gem_combined);
-			break;
-		default:
-			gem_comb_gn(p_gem1, p_gem2, p_gem_combined);
-			break;
-	}
-}
-
-#include "gfon.h"
-
-void gem_init(gem *p_gem, int grd, double leech)
-{
-	p_gem->grade=grd;
-	p_gem->leech=leech;
-	p_gem->father=NULL;
-	p_gem->mother=NULL;
-}
-
-int gem_better(gem gem1, gem gem2)
-{
-	return gem1.leech>gem2.leech;
-}
 
 void worker(int len, int output_options, char* filename)
 {
@@ -102,23 +35,24 @@ void worker(int len, int output_options, char* filename)
 		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
 		pool_length[i]=grade_max-1;
 		pool[i]=malloc(pool_length[i]*sizeof(gem));
-		for (j=0; j<pool_length[i]; ++j) gem_init(pool[i]+j,j+2,0);
+		for (j=0; j<pool_length[i]; ++j) pool[i][j]=(gem){0};
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
 
-		for (j=0;j<eoc;++j) {										// combine and put istantly in right pool
-			if ((i-j)/(j+1) < 10) {								// value ratio < 10
-				for (k=0; k< pool_length[j]; ++k) {
-					for (h=0; h< pool_length[i-1-j]; ++h) {
-						int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
-						if (abs(delta)<=2) {						// grade difference <= 2
-							comb_tot++;
-							gem temp;
-							gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
-							int grd=temp.grade-2;
-							if (gem_better(temp, pool[i][grd])) {
-								pool[i][grd]=temp;
-							}
+		for (j=0;j<eoc;++j)										// combine gems and put them in temp pools
+		if ((i-j)/(j+1) < 10) {								// value ratio < 10
+			for (k=0; k< pool_length[j]; ++k)
+			if ((pool[j]+k)->grade!=0) {				// extensive false gems check ahead
+				for (h=0; h< pool_length[i-1-j]; ++h)
+				if ((pool[i-1-j]+h)->grade!=0) {
+					int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
+					if (abs(delta)<=2) {						// grade difference <= 2
+						comb_tot++;
+						gem temp;
+						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
+						int grd=temp.grade-2;
+						if (gem_better(temp, pool[i][grd])) {
+							pool[i][grd]=temp;
 						}
 					}
 				}
