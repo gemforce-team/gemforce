@@ -8,12 +8,16 @@ const int ACC=0;							// I don't really use it here
 #include "killgem_utils.h"
 #include "gfon.h"
 
-const int pool_depth=2;
-const int nchecks=2;
+const int nchecks=3;
 
-double gem_ranking(gem gem1)
+double gem_rk311(gem gem1)
 {
 	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.crit*gem1.damage;			// 311 seems to be the optimal proportion for low values
+}
+
+double gem_rk411(gem gem1)
+{
+	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.bbound*gem1.crit*gem1.damage;			// 411 seems to help, too
 }
 
 void worker(int len, int output_options, char* filename)
@@ -36,11 +40,11 @@ void worker(int len, int output_options, char* filename)
 	table=freopen(filename,"a", table);		// append -> updating possible
 
 	for (i=prevmax+1; i<len; ++i) {
-		int j,k,h,l;
+		int j,k,h;
 		int eoc=(i+1)/2;        //end of combining
 		int comb_tot=0;
 		int ngrades=(int)log2(i+1);
-		pool_length[i]=nchecks*pool_depth*ngrades;
+		pool_length[i]=nchecks*ngrades;
 		pool[i]=malloc(pool_length[i]*sizeof(gem));
 		for (j=0; j<pool_length[i]; ++j) pool[i][j]=(gem){0};
 
@@ -56,30 +60,15 @@ void worker(int len, int output_options, char* filename)
 						gem temp;
 						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
 						int grd=temp.grade-2;
-						if ( gem_power(temp) >= gem_power(pool[i][pool_depth*grd]) ) {			// power check
-							for (l=pool_depth-1; l>=0; --l) {						// compression check
-								if ((temp.damage <= pool[i][pool_depth*grd+l].damage) &&
-								    (temp.crit   <= pool[i][pool_depth*grd+l].crit  ) &&
-								    (temp.bbound <= pool[i][pool_depth*grd+l].bbound) ) goto exit;
-							}
-							for (l=1; l<pool_depth && (gem_power(temp) >= gem_power(pool[i][pool_depth*grd+l])); ++l) {		// sort
-								pool[i][pool_depth*grd+l-1]=pool[i][pool_depth*grd+l];
-							}
-							pool[i][pool_depth*grd+l-1]=temp;						// put in pool
-							goto exit;
+						if      ( gem_rk411(temp) >= gem_rk411(pool[i][grd]) ) {							// rk411 check
+							pool[i][grd]=temp;							// put in pool
 						}
-						if ( gem_ranking(temp) >= gem_ranking(pool[i][pool_depth*ngrades+pool_depth*grd]) ) {			// ranking check
-							for (l=pool_depth-1; l>=0; --l) {						// compression check
-								if ((temp.damage <= pool[i][pool_depth*ngrades+pool_depth*grd+l].damage) &&
-								    (temp.crit   <= pool[i][pool_depth*ngrades+pool_depth*grd+l].crit  ) &&
-								    (temp.bbound <= pool[i][pool_depth*ngrades+pool_depth*grd+l].bbound) ) goto exit;
-							}
-							for (l=1; l<pool_depth && (gem_ranking(temp) >= gem_ranking(pool[i][pool_depth*ngrades+pool_depth*grd+l])); ++l) {		// sort
-								pool[i][pool_depth*ngrades+pool_depth*grd+l-1]=pool[i][pool_depth*ngrades+pool_depth*grd+l];
-							}
-							pool[i][pool_depth*ngrades+pool_depth*grd+l-1]=temp;						// put in pool
+						else if ( gem_rk311(temp) >= gem_rk311(pool[i][ngrades+grd]) ) {			// rk311 check
+							pool[i][ngrades+grd]=temp;			// put in pool
 						}
-						exit:;
+						else if ( gem_power(temp) >= gem_power(pool[i][2*ngrades+grd]) ) {		// rk211 check
+							pool[i][2*ngrades+grd]=temp;		// put in pool
+						}
 					}
 				}
 			}
@@ -138,7 +127,7 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (filename[0]=='\0') strcpy(filename, "table_kgsloppy");
+	if (filename[0]=='\0') strcpy(filename, "table_kgfast");
 	worker(len, output_options, filename);
 	return 0;
 }
