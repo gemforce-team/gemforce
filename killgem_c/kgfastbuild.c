@@ -12,12 +12,12 @@ const int nchecks=3;
 
 double gem_rk311(gem gem1)
 {
-	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.crit*gem1.damage;			// 311 seems to be the optimal proportion for low values
+	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.crit*gem1.damage;
 }
 
-double gem_rk411(gem gem1)
+double gem_rk511(gem gem1)
 {
-	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.bbound*gem1.crit*gem1.damage;			// 411 seems to help, too
+	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.bbound*gem1.bbound*gem1.crit*gem1.damage;
 }
 
 void worker(int len, int output_options, char* filename)
@@ -60,13 +60,13 @@ void worker(int len, int output_options, char* filename)
 						gem temp;
 						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
 						int grd=temp.grade-2;
-						if      ( gem_rk411(temp) >= gem_rk411(pool[i][grd]) ) {							// rk411 check
+						if      ( gem_rk511(temp) >= gem_rk511(pool[i][grd]) ) {							// rk511 check
 							pool[i][grd]=temp;							// put in pool
 						}
-						else if ( gem_rk311(temp) >= gem_rk311(pool[i][ngrades+grd]) ) {			// rk311 check
+						else if ( gem_power(temp) >= gem_power(pool[i][ngrades+grd]) ) {			// rk211 check
 							pool[i][ngrades+grd]=temp;			// put in pool
 						}
-						else if ( gem_power(temp) >= gem_power(pool[i][2*ngrades+grd]) ) {		// rk211 check
+						else if ( gem_rk311(temp) >= gem_rk311(pool[i][2*ngrades+grd]) ) {		// rk311 check
 							pool[i][2*ngrades+grd]=temp;		// put in pool
 						}
 					}
