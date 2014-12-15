@@ -9,9 +9,9 @@ typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows 
 
 const int nchecks=3;
 
-double gem_rk12(gem gem1)
+double gem_rk31(gem gem1)
 {
-	return gem1.bbound*gem1.leech*gem1.leech;
+	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.leech;
 }
 
 double gem_rk13(gem gem1)
@@ -62,10 +62,10 @@ void worker(int len, int output_options, char* filename)
 						if      ( gem_rk13(temp) >= gem_rk13(pool[i][grd]) ) {							// rk13 check
 							pool[i][grd]=temp;							// put in pool
 						}
-						else if ( gem_rk12(temp) >= gem_rk12(pool[i][ngrades+grd]) ) {			// rk12 check
+						else if ( gem_power(temp) >= gem_power(pool[i][ngrades+grd]) ) {		// rk11 check
 							pool[i][ngrades+grd]=temp;			// put in pool
 						}
-						else if ( gem_power(temp) >= gem_power(pool[i][2*ngrades+grd]) ) {		// rk11 check
+						else if ( gem_rk31(temp) >= gem_rk31(pool[i][2*ngrades+grd]) ) {		// rk31 check
 							pool[i][2*ngrades+grd]=temp;		// put in pool
 						}
 					}
