@@ -60,6 +60,8 @@ void gem_combine_Y (gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
 			gem_comb_gn_Y(p_gem1, p_gem2, p_gem_combined);
 			break;
 	}
+	if (p_gem_combined->damage < p_gem1->damage) p_gem_combined->damage = p_gem1->damage;
+	if (p_gem_combined->damage < p_gem2->damage) p_gem_combined->damage = p_gem2->damage;
 }
 
 int pool_from_table_Y(gemY** pool, int* pool_length, int len, FILE* table)

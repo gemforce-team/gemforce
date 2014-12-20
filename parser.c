@@ -89,6 +89,8 @@ void gem_combine (gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 			gem_comb_gn(p_gem1, p_gem2, p_gem_combined);
 			break;
 	}
+	if (p_gem_combined->damage < p_gem1->damage) p_gem_combined->damage = p_gem1->damage;
+	if (p_gem_combined->damage < p_gem2->damage) p_gem_combined->damage = p_gem2->damage;
 }
 
 void gem_init(gem *p_gem, int grd, double damage, double crit, double leech, double bbound)
