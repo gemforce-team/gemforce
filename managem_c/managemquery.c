@@ -75,6 +75,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	
 	fclose(table);
 	for (i=0;i<len;++i) free(pool[i]);		// free
+	free(gems);
 }
 
 int main(int argc, char** argv)

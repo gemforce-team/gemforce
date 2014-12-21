@@ -348,6 +348,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	free(poolcf);
 	for (i=0;i<lena;++i) free(poolY[i]);		// free amps
 	for (i=0;i<lena;++i) free(poolYf[i]);		// free amps compressed
+	free(poolYf);
 }
 
 int main(int argc, char** argv)
