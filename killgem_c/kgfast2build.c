@@ -127,7 +127,7 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (filename[0]=='\0') strcpy(filename, "table_kgfast");
+	if (filename[0]=='\0') strcpy(filename, "table_kgfast2");
 	worker(len, output_options, filename);
 	return 0;
 }
