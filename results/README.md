@@ -26,18 +26,20 @@ In every speccing recipe, simply replace the most deeply nested gem with a red g
 
 ### So many choices, so little time
 
-What to choose depends mostly on your grade of foolishness (and on your free time),
-but I'd advice choosing a couple of omnia recipes (one for killgem and one for managem)
-and sticking to them.
+What to choose depends mostly on your grade of foolishness (and on your free time):  
+I'd advice choosing a couple of omnia recipes (one for killgem and one for managem)
+and sticking to them.  
+If you prefer using a single combine method for both amps and gem grab
+an amped spec and a combine recipe from the appropriate gem folder.
 
-If you need a particular spec number - combine number combination you don't find here
-(e.g 512-16 managem) you can build it yourself using the programs
+If you need a particular recipe you don't find here
+(e.g 512-16 omnia managem or killgem 32 combine) you can build it yourself using the programs
 or contact me (12345ieee) and I should be able to make it.
 
-Current technological limits are 128spec for killgems and 512spec for managems,
+Current technological limits are 128spec for killgems and 1024spec for managems,
 the *_ultimate files are the best gems that mana can buy at this moment.
    
-I may write more about this later, in the meantime here is some general advice.
+I may write more about this later, in the meantime here is some general advice from psorek.
 
 Lower numbers are faster to perform, but higher ones yield bigger growth.  
 It's recommended to use highest spec available (you do that only once) and highest

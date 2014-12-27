@@ -5,12 +5,20 @@ Gem combining program for GC2:CS - Written in C.
 
 ***
 
+### Results and tables:
+
+All resulting schemes (recipes) are placed in "results" folder.  
+Precomputed tables up to 1 MB are placed in "gem_tables" folder.  
+More info on both can be found on the respective folders' README.
+
+***
+
 ### HOWTO use our programs:
 
 **manual compilation:**  
   `gcc -O2 -lm -I "include" file.c -o output`
   
-**automatic setup:**  
+**automatic setup (*NIX shell required):**  
   in the repo root run `./auto_setup.sh`  
   everything you typically need will be placed in `bin/`
 
@@ -36,11 +44,4 @@ global mode in (m/k)gaquery is toggled via (num)g (you should not need this)
 **example:**  
   `./file -pet 32`  
 
-***
-
-### Results and tables:
-
-All resulting schemes (recipes) are placed in "results" folder.  
-Precomputed tables up to 1 MB are placed in "gem_tables" folder.  
-More info on both can be found on the respective folders' README.
 
