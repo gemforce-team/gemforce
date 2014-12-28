@@ -1,27 +1,44 @@
-Total value:	472
-
-Managem
+Managem spec
 Value:	256
 Grade:	8
 Leech:	11.398806
 Bbound:	1.887315
 Power:	21.513136
 
-Amplifier
+Amplifier spec
 Value:	36
 Grade:	5
 Leech:	5.880226
 
-Global power (resc.):	50.101169
-Spec coefficient:	1.053680
+Managem combine
+Comb:	128
+Grade:	7
+Leech:	11.101823
+Bbound:	1.961914
+Power:	21.780819
 
-Managem combining scheme:
+Amplifier combine
+Comb:	128
+Grade:	7
+Leech:	11.122554
+
+Spec base power (resc.):	50.101169
+Global power (resc. 1k):	6.694279
+
+
+Managem speccing scheme:
 (((((((((((((((((2o+o)+o)+o)+o)+o)+o)+(2o+o))+(2o+o))+((2o+o)+o))+(((2o+o)+o)+o))+((((2o+o)+o)+o)+o))+((((((2o+o)+o)+o)+o)+o)+2o))+((((((2o+o)+o)+o)+o)+2o)+(2o+b)))+((((((((2o+o)+o)+o)+o)+o)+2o)+(2o+(o+b)))+((2o+(o+b))+b)))+(((((((((2o+o)+o)+o)+o)+o)+2o)+(2o+(o+b)))+((2o+(o+b))+b))+(((2o+(o+b))+b)+(2b+(o+b)))))+((((((((((2o+o)+o)+o)+o)+o)+2o)+(2o+(o+b)))+((2o+(o+b))+b))+((((2o+o)+(o+b))+b)+(2b+(o+b))))+((((((2b+b)+b)+b)+2b)+(2b+(o+b)))+((((2o+o)+(o+b))+b)+(2b+(o+b))))))+((((((((((((2b+b)+b)+b)+b)+2b)+(2b+b))+((2b+b)+b))+(((2b+b)+b)+b))+((((2b+b)+b)+b)+2b))+(((((2b+b)+b)+b)+2b)+(((o+b)+b)+2b)))+((((((2b+b)+b)+b)+2b)+(((o+b)+b)+2b))+((((2o+o)+(o+b))+b)+(((o+b)+b)+2b))))+((((((((((2o+o)+o)+o)+o)+o)+2o)+(2o+(o+b)))+((2o+(o+b))+b))+((((2o+o)+(o+b))+b)+(((o+b)+b)+2b)))+(((((2o+o)+(o+b))+b)+(((o+b)+b)+2b))+(((((2b+b)+b)+b)+2b)+(2b+(o+b)))))))
 
-Amplifier combining scheme:
+Amplifier speccing scheme:
 (((((((((((2o+o)+o)+o)+o)+o)+2o)+2o)+(2o+o))+((2o+o)+o))+((((2o+o)+o)+o)+2o))+(((((2o+o)+o)+o)+2o)+3o))
 
-Managem equations:
+Managem combining scheme:
+(((((((((((((((2m+m)+m)+m)+m)+m)+2m)+(2m+m))+((2m+m)+m))+(((2m+m)+m)+m))+((((2m+m)+m)+m)+m))+(((((2m+m)+m)+m)+m)+m))+((((((2m+m)+m)+m)+m)+2m)+(2m+m)))+(((((((2m+m)+m)+m)+m)+2m)+(2m+m))+((2m+m)+2m)))+((((((((2m+m)+m)+m)+m)+2m)+(2m+m))+((2m+m)+2m))+(((2m+m)+2m)+3m)))+(((((((((2m+m)+m)+m)+m)+2m)+(2m+m))+((2m+m)+2m))+(((2m+m)+2m)+3m))+((((2m+m)+2m)+3m)+4m)))
+
+Amplifier combining scheme:
+(((((((((((((((2o+o)+o)+o)+o)+2o)+2o)+(2o+o))+((2o+o)+o))+(((2o+o)+o)+o))+((((2o+o)+o)+o)+o))+((((2o+o)+o)+o)+o))+(((((((2o+o)+o)+o)+o)+o)+2o)+2o))+((((((((2o+o)+o)+o)+o)+o)+2o)+2o)+((2o+o)+2o)))+(((((((((2o+o)+o)+o)+o)+o)+2o)+2o)+((2o+o)+2o))+(((2o+o)+2o)+3o)))+((((((((((2o+o)+o)+o)+o)+o)+2o)+2o)+((2o+o)+2o))+(((2o+o)+2o)+3o))+((((2o+o)+2o)+3o)+4o)))
+
+Managem speccing equations:
 (val = 1)	 0 = g1 b
 (val = 1)	 1 = g1 o
 (val = 2)	 2 =  1 +  0
@@ -84,7 +101,7 @@ Managem equations:
 (val = 143)	59 = 58 + 43
 (val = 256)	60 = 59 + 39
 
-Amplifier equations:
+Amplifier speccing equations:
 (val = 1)	 0 = g1 o
 (val = 2)	 1 =  0 +  0
 (val = 4)	 2 =  1 +  1
@@ -101,3 +118,62 @@ Amplifier equations:
 (val = 18)	13 = 12 +  4
 (val = 25)	14 = 13 +  6
 (val = 36)	15 = 14 +  7
+
+Managem combining equations:
+(val = 1)	 0 = g1 m
+(val = 2)	 1 =  0 +  0
+(val = 4)	 2 =  1 +  1
+(val = 8)	 3 =  2 +  2
+(val = 3)	 4 =  1 +  0
+(val = 5)	 5 =  4 +  1
+(val = 9)	 6 =  5 +  2
+(val = 17)	 7 =  6 +  3
+(val = 4)	 8 =  4 +  0
+(val = 5)	 9 =  8 +  0
+(val = 6)	10 =  9 +  0
+(val = 8)	11 = 10 +  1
+(val = 11)	12 = 11 +  4
+(val = 16)	13 = 12 +  5
+(val = 25)	14 = 13 +  6
+(val = 42)	15 = 14 +  7
+(val = 7)	16 = 10 +  0
+(val = 9)	17 = 16 +  1
+(val = 12)	18 = 17 +  4
+(val = 16)	19 = 18 +  8
+(val = 21)	20 = 19 +  9
+(val = 27)	21 = 20 + 10
+(val = 34)	22 = 21 + 16
+(val = 45)	23 = 22 + 12
+(val = 61)	24 = 23 + 13
+(val = 86)	25 = 24 + 14
+(val = 128)	26 = 25 + 15
+
+Amplifier combining equations:
+(val = 1)	 0 = g1 o
+(val = 2)	 1 =  0 +  0
+(val = 4)	 2 =  1 +  1
+(val = 8)	 3 =  2 +  2
+(val = 3)	 4 =  1 +  0
+(val = 5)	 5 =  4 +  1
+(val = 9)	 6 =  5 +  2
+(val = 17)	 7 =  6 +  3
+(val = 4)	 8 =  4 +  0
+(val = 5)	 9 =  8 +  0
+(val = 6)	10 =  9 +  0
+(val = 7)	11 = 10 +  0
+(val = 9)	12 = 11 +  1
+(val = 11)	13 = 12 +  1
+(val = 16)	14 = 13 +  5
+(val = 25)	15 = 14 +  6
+(val = 42)	16 = 15 +  7
+(val = 8)	17 = 10 +  1
+(val = 10)	18 = 17 +  1
+(val = 13)	19 = 18 +  4
+(val = 17)	20 = 19 +  8
+(val = 22)	21 = 20 +  9
+(val = 28)	22 = 21 + 10
+(val = 34)	23 = 22 + 10
+(val = 45)	24 = 23 + 13
+(val = 61)	25 = 24 + 14
+(val = 86)	26 = 25 + 15
+(val = 128)	27 = 26 + 16
