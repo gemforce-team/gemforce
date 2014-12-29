@@ -52,7 +52,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	for (i=0;i<len;++i) {															// killgem spec compression
 		int j;
 		float maxcrit=0;
-		gem temp_pool[pool_length[i]];
+		gem* temp_pool=malloc(pool_length[i]*sizeof(gem));
 		for (j=0; j<pool_length[i]; ++j) {			// copy gems and get maxcrit
 			temp_pool[j]=pool[i][j];
 			maxcrit=max(maxcrit, (pool[i]+j)->crit);
@@ -86,6 +86,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				index++;
 			}
 		}
+		free(temp_pool);
 		if (output_options & mask_info) printf("Killgem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);
 	}
 	printf("Gem speccing pool compression done!\n");
@@ -170,7 +171,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	
 	for (i=0; i<lena; ++i) {			// amps pool compression
 		int j;
-		gemY temp_pool[poolY_length[i]];
+		gemY* temp_pool=malloc(poolY_length[i]*sizeof(gem));
 		for (j=0; j<poolY_length[i]; ++j) {			// copy gems
 			temp_pool[j]=poolY[i][j];
 		}
@@ -193,6 +194,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				index++;
 			}
 		}
+		free(temp_pool);
 		if (output_options & mask_info) printf("Amp value %d compressed pool size:\t%d\n", i+1, poolYf_length[i]);
 	}
 
