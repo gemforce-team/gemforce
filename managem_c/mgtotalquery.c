@@ -43,7 +43,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	
 	for (i=0;i<len;++i) {															// managem spec compression
 		int j;
-		gem temp_pool[pool_length[i]];
+		gem* temp_pool=malloc(pool_length[i]*sizeof(gem));
 		for (j=0; j<pool_length[i]; ++j) {			// copy gems
 			temp_pool[j]=pool[i][j];
 		}
@@ -78,6 +78,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				index++;
 			}
 		}
+		free(temp_pool);
 		if (output_options & mask_info) printf("Managem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);
 	}
 	printf("Gem speccing pool compression done!\n");
