@@ -168,11 +168,13 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	gem gems[len];
 	gem_init(gems,1,1,1,0);
 	amps[0]=(gemY){0};
-	printf("Total value:\t1\n\n");
-	printf("Killgem:\n");
-	gem_print(gems);
-	printf("Amplifier:\n");
-	gem_print_Y(amps);
+	if (!(output_options & mask_quiet)) {
+		printf("Total value:\t1\n\n");
+		printf("Killgem:\n");
+		gem_print(gems);
+		printf("Amplifier:\n");
+		gem_print_Y(amps);
+	}
 	double spec_coeffs[len];
 	spec_coeffs[0]=0;
 	
@@ -197,18 +199,20 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 					}
 				}
 			}
-			printf("Total value:\t%d\n\n", i+1);
-			printf("Killgem\n");
-			if (prevmax<len-1) printf("Killgem limit:\t%d\n", prevmax+1);
-			printf("Value:\t%d\n",gem_getvalue(gems+i));
-			if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
-			gem_print(gems+i);
-			printf("Amplifier\n");
-			printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
-			if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
-			gem_print_Y(amps+i);
-			printf("Global power (resc.):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
-			fflush(stdout);								// forces buffer write, so redirection works well
+			if (!(output_options & mask_quiet)) {
+				printf("Total value:\t%d\n\n", i+1);
+				printf("Killgem\n");
+				if (prevmax<len-1) printf("Killgem limit:\t%d\n", prevmax+1);
+				printf("Value:\t%d\n",gem_getvalue(gems+i));
+				if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
+				gem_print(gems+i);
+				printf("Amplifier\n");
+				printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
+				if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
+				gem_print_Y(amps+i);
+				printf("Global power (resc.):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
+				fflush(stdout);								// forces buffer write, so redirection works well
+			}
 		}
 	}
 	else { 										// behave like kga_spec
@@ -246,21 +250,59 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 					}
 				}
 			}
-			printf("Total value:\t%d\n\n", i+1+6*gem_getvalue_Y(amps+i));
-			printf("Killgem\n");
-			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
-			gem_print(gems+i);
-			printf("Amplifier\n");
-			printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
-			if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
-			gem_print_Y(amps+i);
-			printf("Global power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
-			printf("Spec coefficient:\t%f\n\n", spec_coeffs[i]);
-			fflush(stdout);								// forces buffer write, so redirection works well
+			if (!(output_options & mask_quiet)) {
+				printf("Total value:\t%d\n\n", i+1+6*gem_getvalue_Y(amps+i));
+				printf("Killgem\n");
+				printf("Value:\t%d\n",i+1);
+				if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
+				gem_print(gems+i);
+				printf("Amplifier\n");
+				printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
+				if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
+				gem_print_Y(amps+i);
+				printf("Global power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
+				printf("Spec coefficient:\t%f\n\n", spec_coeffs[i]);
+				fflush(stdout);								// forces buffer write, so redirection works well
+			}
 		}
 	}
 	
+	if (output_options & mask_quiet) {		// outputs last if we never seen any
+		printf("Total value:\t%d\n\n", gem_getvalue(gems+len-1)+6*gem_getvalue_Y(amps+len-1));
+		printf("Killagem\n");
+		printf("Value:\t%d\n", gem_getvalue(gems+len-1));
+		gem_print(gems+len-1);
+		printf("Amplifier\n");
+		printf("Value:\t%d\n", gem_getvalue_Y(amps+len-1));
+		gem_print_Y(amps+len-1);
+		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[len-1], amps[len-1]));
+		if (!global_mode) printf("Spec coefficient:\t%f\n", spec_coeffs[len-1]);
+		printf("\n");
+	}
+
+	if ((output_options & mask_upto) && !global_mode) {
+		double best_sc=0;
+		int best_index=0;
+		for (i=0; i<len; ++i) {
+			if (spec_coeffs[i] > best_sc) {
+				best_index=i;
+				best_sc=spec_coeffs[i];
+			}
+		}
+		printf("Best setup up to %d:\n\n", len);
+		printf("Total value:\t%d\n\n", gem_getvalue(gems+best_index)+6*gem_getvalue_Y(amps+best_index));
+		printf("Killgem\n");
+		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
+		gem_print(gems+best_index);
+		printf("Amplifier\n");
+		printf("Value:\t%d\n", gem_getvalue_Y(amps+best_index));
+		gem_print_Y(amps+best_index);
+		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index]));
+		printf("Spec coefficient:\t%f\n\n", best_sc);
+		gems[len-1]=gems[best_index];
+		amps[len-1]=amps[best_index];
+	}
+
 	if (output_options & mask_parens) {
 		printf("Killgem combining scheme:\n");
 		print_parens_compressed(gems+len-1);
@@ -309,7 +351,7 @@ int main(int argc, char** argv)
 	char filename[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iptcef:g:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcequf:g:"))!=-1) {
 		switch(opt) {
 			case 'i':
 				output_options |= mask_info;
@@ -325,6 +367,12 @@ int main(int argc, char** argv)
 				break;
 			case 'e':
 				output_options |= mask_equations;
+				break;
+			case 'q':
+				output_options |= mask_quiet;
+				break;
+			case 'u':
+				output_options |= mask_upto;
 				break;
 			case 'f':			// can be "filename,filenameA", if missing default is used
 				;

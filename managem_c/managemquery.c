@@ -35,7 +35,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 		printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
-	gem_print(gems);
+	if (!(output_options & mask_quiet)) gem_print(gems);
 
 	for (i=1; i<len; ++i) {
 		int j;
@@ -43,19 +43,41 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
-
-		printf("Value:\t%d\n",i+1);
-		if (output_options & mask_info) {
-			printf("Pool:\t%d\n",pool_length[i]);
+		
+		if (!(output_options & mask_quiet)) {
+			printf("Value:\t%d\n",i+1);
+			if (output_options & mask_info) {
+				printf("Growth:\t%f\n", log(gem_power(gems[i]))/log(i+1));
+				printf("Pool:\t%d\n",pool_length[i]);
+			}
+			gem_print(gems+i);
+			fflush(stdout);								// forces buffer write, so redirection works well
 		}
-		gem_print(gems+i);
-		fflush(stdout);								// forces buffer write, so redirection works well
+	}
+	
+	if (output_options & mask_quiet) {		// outputs last if we never seen any
+		printf("Value:\t%d\n",len);
+		printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
+		gem_print(gems+len-1);
+	}
+
+	if (output_options & mask_upto) {
+		double best_growth=0;
+		int best_index=0;
+		for (i=0; i<len; ++i) {
+			if (log(gem_power(gems[i]))/log(i+1) > best_growth) {
+				best_index=i;
+				best_growth=log(gem_power(gems[i]))/log(i+1);
+			}
+		}
+		printf("Best gem up to %d:\n\n", len);
+		printf("Value:\t%d\n",best_index+1);
+		printf("Growth:\t%f\n", best_growth);
+		gem_print(gems+best_index);
+		gems[len-1]=gems[best_index];
 	}
 
 	if (output_options & mask_parens) {
-		printf("Combining scheme:\n");
-		print_parens(gems+len-1);
-		printf("\n\n");
 		printf("Compressed combining scheme:\n");
 		print_parens_compressed(gems+len-1);
 		printf("\n\n");
@@ -86,7 +108,7 @@ int main(int argc, char** argv)
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iptcef:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcequf:"))!=-1) {
 		switch(opt) {
 			case 'i':
 				output_options |= mask_info;
@@ -102,6 +124,12 @@ int main(int argc, char** argv)
 				break;
 			case 'e':
 				output_options |= mask_equations;
+				break;
+			case 'q':
+				output_options |= mask_quiet;
+				break;
+			case 'u':
+				output_options |= mask_upto;
 				break;
 			case 'f':
 				strcpy(filename,optarg);

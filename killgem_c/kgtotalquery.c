@@ -218,10 +218,12 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init_Y(ampsc,0,0,0);
 	powers[0]=0;
 	double iloglenc=1/log(lenc);
-	printf("Killgem:\n");
-	gem_print(gems);
-	printf("Amplifier:\n");
-	gem_print_Y(amps);
+	if (!(output_options & mask_quiet)) {
+		printf("Killgem:\n");
+		gem_print(gems);
+		printf("Amplifier:\n");
+		gem_print_Y(amps);
+}
 
 	for (i=1;i<len;++i) {																		// for every gem value
 		gems[i]=(gem){0};																			// we init the gems
@@ -275,27 +277,76 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				}
 			}
 		}
-		printf("Killgem spec\n");
-		printf("Value:\t%d\n",i+1);
-		if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
-		gem_print(gems+i);
-		printf("Amplifier spec\n");
-		printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
-		if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
-		gem_print_Y(amps+i);
-		printf("Killgem combine\n");
-		printf("Comb:\t%d\n",lenc);
-		if (output_options & mask_info) printf("Pool:\t%d\n",poolcf_length);
-		gem_print(gemsc+i);
-		printf("Amplifier combine\n");
-		printf("Comb:\t%d\n",lenc);
-		if (output_options & mask_info) printf("Pool:\t%d\n",poolYc_length);
-		gem_print_Y(ampsc+i);
-		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
-		printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/10000/1000);
-		fflush(stdout);								// forces buffer write, so redirection works well
+		if (!(output_options & mask_quiet)) {
+			printf("Killgem spec\n");
+			printf("Value:\t%d\n",i+1);
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
+			gem_print(gems+i);
+			printf("Amplifier spec\n");
+			printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
+			gem_print_Y(amps+i);
+			printf("Killgem combine\n");
+			printf("Comb:\t%d\n",lenc);
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolcf_length);
+			gem_print(gemsc+i);
+			printf("Amplifier combine\n");
+			printf("Comb:\t%d\n",lenc);
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolYc_length);
+			gem_print_Y(ampsc+i);
+			printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
+			printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/10000/1000);
+			fflush(stdout);								// forces buffer write, so redirection works well
+		}
 	}
 	
+		if (output_options & mask_quiet) {		// outputs last if we never seen any
+		printf("Killgem spec\n");
+		printf("Value:\t%d\n",len);
+		gem_print(gems+len-1);
+		printf("Amplifier spec\n");
+		printf("Value:\t%d\n",gem_getvalue_Y(amps+len-1));
+		gem_print_Y(amps+len-1);
+		printf("Killgem combine\n");
+		printf("Comb:\t%d\n",lenc);
+		gem_print(gemsc+len-1);
+		printf("Amplifier combine\n");
+		printf("Comb:\t%d\n",lenc);
+		gem_print_Y(ampsc+len-1);
+		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
+		printf("Global power (resc. 1k):\t%f\n\n\n", powers[len-1]/1000);
+	}
+
+	if (output_options & mask_upto) {
+		double best_pow=0;
+		int best_index=0;
+		for (i=0; i<len; ++i) {
+			if (powers[i] > best_pow) {
+				best_index=i;
+				best_pow=powers[i];
+			}
+		}
+		printf("Best setup up to %d:\n\n", len);
+		printf("Killagem spec\n");
+		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
+		gem_print(gems+best_index);
+		printf("Amplifier spec\n");
+		printf("Value:\t%d\n", gem_getvalue_Y(amps+best_index));
+		gem_print_Y(amps+best_index);
+		printf("Killgem combine\n");
+		printf("Comb:\t%d\n",lenc);
+		gem_print(gemsc+best_index);
+		printf("Amplifier combine\n");
+		printf("Comb:\t%d\n",lenc);
+		gem_print_Y(ampsc+best_index);
+		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index], damage_ratio, crit_ratio));
+		printf("Global power (resc. 1k):\t%f\n\n\n", powers[best_index]/1000);
+		gems[len-1]=gems[best_index];
+		amps[len-1]=amps[best_index];
+		gemsc[len-1]=gemsc[best_index];
+		ampsc[len-1]=ampsc[best_index];
+	}
+
 	if (output_options & mask_parens) {
 		printf("Killgem speccing scheme:\n");
 		print_parens_compressed(gems+len-1);
@@ -365,7 +416,7 @@ int main(int argc, char** argv)
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iptcef:T:N:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcequf:T:N:"))!=-1) {
 		switch(opt) {
 			case 'i':
 				output_options |= mask_info;
@@ -381,6 +432,12 @@ int main(int argc, char** argv)
 				break;
 			case 'e':
 				output_options |= mask_equations;
+				break;
+			case 'q':
+				output_options |= mask_quiet;
+				break;
+			case 'u':
+				output_options |= mask_upto;
 				break;
 			case 'f':			// can be "filename,filenamec,filenameA", if missing default is used
 				;

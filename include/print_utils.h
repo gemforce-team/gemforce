@@ -7,6 +7,7 @@ const int mask_tree=4;
 const int mask_table=8;
 const int mask_equations=16;
 const int mask_quiet=32;
+const int mask_upto=64;
 
 int gem_getvalue(gem* p_gem)
 {
