@@ -13,9 +13,9 @@ typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 #include "gfon.h"
 
-double gem_amp_power(gem gem1, gemY amp1)
+double gem_amp_power(gem gem1, gemY amp1, double damage_ratio, double crit_ratio)
 {
-	return (gem1.damage+1.47*amp1.damage)*gem1.bbound*(gem1.crit+2.576*amp1.crit)*gem1.bbound;
+	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+crit_ratio*amp1.crit)*gem1.bbound;
 }
 
 void print_omnia_table(gem* gems, gemY* amps, double* powers, int len)
@@ -26,7 +26,7 @@ void print_omnia_table(gem* gems, gemY* amps, double* powers, int len)
 	printf("\n");
 }
 
-void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA)
+void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, double crit_ratio, double damage_ratio, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);							// if the file is not good we exit
@@ -218,10 +218,12 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init_Y(ampsc,0,0,0);
 	powers[0]=0;
 	double iloglenc=1/log(lenc);
-	printf("Killgem:\n");
-	gem_print(gems);
-	printf("Amplifier:\n");
-	gem_print_Y(amps);
+	if (!(output_options & mask_quiet)) {
+		printf("Killgem:\n");
+		gem_print(gems);
+		printf("Amplifier:\n");
+		gem_print_Y(amps);
+}
 
 	for (i=1;i<len;++i) {																		// for every gem value
 		gems[i]=(gem){0};																			// we init the gems
@@ -244,15 +246,15 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
 																													// now we compare the whole setup
 		for (j=0;j<i+1;++j) {																	// for every amp value from 1 to to gem_value
-			NS+=6;																							// we get the num of gems used in speccing
+			NS+=Namps;																					// we get the num of gems used in speccing
 			double c = log((double)NT/NS)*iloglenc;							// we compute the combination number
 			for (l=0; l<poolcf_length; ++l) {										// then we search in the NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cdg = pow(poolcf[l].damage,c);
 				double Ccg = pow(poolcf[l].crit  ,c);
 				for (m=0;m<poolYc_length;++m) {										// and in the amp NC pool
-					double Cda = 1.47 * pow(poolYc[m].damage,c);
-					double Cca = 2.576* pow(poolYc[m].crit  ,c);
+					double Cda = damage_ratio* pow(poolYc[m].damage,c);
+					double Cca = crit_ratio  * pow(poolYc[m].crit  ,c);
 					for (k=0;k<poolf_length[i];++k) {								// then in the gem pool
 						if (poolf[i][k].crit!=0) {											// if the gem has crit we go on
 							double Pb2 = Cbg * poolf[i][k].bbound * Cbg * poolf[i][k].bbound;
@@ -275,27 +277,76 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				}
 			}
 		}
-		printf("Killgem spec\n");
-		printf("Value:\t%d\n",i+1);
-		if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
-		gem_print(gems+i);
-		printf("Amplifier spec\n");
-		printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
-		if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
-		gem_print_Y(amps+i);
-		printf("Killgem combine\n");
-		printf("Comb:\t%d\n",lenc);
-		if (output_options & mask_info) printf("Pool:\t%d\n",poolcf_length);
-		gem_print(gemsc+i);
-		printf("Amplifier combine\n");
-		printf("Comb:\t%d\n",lenc);
-		if (output_options & mask_info) printf("Pool:\t%d\n",poolYc_length);
-		gem_print_Y(ampsc+i);
-		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
-		printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/10000/1000);
-		fflush(stdout);								// forces buffer write, so redirection works well
+		if (!(output_options & mask_quiet)) {
+			printf("Killgem spec\n");
+			printf("Value:\t%d\n",i+1);
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
+			gem_print(gems+i);
+			printf("Amplifier spec\n");
+			printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
+			gem_print_Y(amps+i);
+			printf("Killgem combine\n");
+			printf("Comb:\t%d\n",lenc);
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolcf_length);
+			gem_print(gemsc+i);
+			printf("Amplifier combine\n");
+			printf("Comb:\t%d\n",lenc);
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolYc_length);
+			gem_print_Y(ampsc+i);
+			printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
+			printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/10000/1000);
+			fflush(stdout);								// forces buffer write, so redirection works well
+		}
 	}
 	
+		if (output_options & mask_quiet) {		// outputs last if we never seen any
+		printf("Killgem spec\n");
+		printf("Value:\t%d\n",len);
+		gem_print(gems+len-1);
+		printf("Amplifier spec\n");
+		printf("Value:\t%d\n",gem_getvalue_Y(amps+len-1));
+		gem_print_Y(amps+len-1);
+		printf("Killgem combine\n");
+		printf("Comb:\t%d\n",lenc);
+		gem_print(gemsc+len-1);
+		printf("Amplifier combine\n");
+		printf("Comb:\t%d\n",lenc);
+		gem_print_Y(ampsc+len-1);
+		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
+		printf("Global power (resc. 1k):\t%f\n\n\n", powers[len-1]/1000);
+	}
+
+	if (output_options & mask_upto) {
+		double best_pow=0;
+		int best_index=0;
+		for (i=0; i<len; ++i) {
+			if (powers[i] > best_pow) {
+				best_index=i;
+				best_pow=powers[i];
+			}
+		}
+		printf("Best setup up to %d:\n\n", len);
+		printf("Killagem spec\n");
+		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
+		gem_print(gems+best_index);
+		printf("Amplifier spec\n");
+		printf("Value:\t%d\n", gem_getvalue_Y(amps+best_index));
+		gem_print_Y(amps+best_index);
+		printf("Killgem combine\n");
+		printf("Comb:\t%d\n",lenc);
+		gem_print(gemsc+best_index);
+		printf("Amplifier combine\n");
+		printf("Comb:\t%d\n",lenc);
+		gem_print_Y(ampsc+best_index);
+		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index], damage_ratio, crit_ratio));
+		printf("Global power (resc. 1k):\t%f\n\n\n", powers[best_index]/1000);
+		gems[len-1]=gems[best_index];
+		amps[len-1]=amps[best_index];
+		gemsc[len-1]=gemsc[best_index];
+		ampsc[len-1]=ampsc[best_index];
+	}
+
 	if (output_options & mask_parens) {
 		printf("Killgem speccing scheme:\n");
 		print_parens_compressed(gems+len-1);
@@ -358,12 +409,14 @@ int main(int argc, char** argv)
 	int len;
 	int lenc;
 	char opt;
+	int TC=0;
+	int Namps=0;
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iptcef:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcequf:T:N:"))!=-1) {
 		switch(opt) {
 			case 'i':
 				output_options |= mask_info;
@@ -380,6 +433,12 @@ int main(int argc, char** argv)
 			case 'e':
 				output_options |= mask_equations;
 				break;
+			case 'q':
+				output_options |= mask_quiet;
+				break;
+			case 'u':
+				output_options |= mask_upto;
+				break;
 			case 'f':			// can be "filename,filenamec,filenameA", if missing default is used
 				;
 				char* p=optarg;
@@ -393,6 +452,12 @@ int main(int argc, char** argv)
 				strcpy(filename,optarg);
 				strcpy(filenamec,p+1);
 				strcpy(filenameA,q+1);
+				break;
+			case 'T':
+				TC=atoi(optarg);
+				break;
+			case 'N':
+				Namps=atoi(optarg);
 				break;
 			case '?':
 				return 1;
@@ -420,10 +485,18 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
+	if (len<1 || lenc<1) {
+		printf("Improper gem number\n");
+		return 1;
+	}
 	if (filename[0]=='\0') strcpy(filename, "table_kgspec");
 	if (filenamec[0]=='\0') strcpy(filenamec, "table_kgcomb");
 	if (filenameA[0]=='\0') strcpy(filenameA, "table_crit");
-	worker(len, lenc, output_options, filename, filenamec, filenameA);
+	if (TC==0) TC=60;
+	if (Namps==0) Namps=6;
+	double crit_ratio  =Namps*0.46*(1+(double)TC*3/100)/(1  +(double)TC/30);
+	double damage_ratio=Namps*0.28*(1+(double)TC*3/100)/(1.2+(double)TC/30);
+	worker(len, lenc, output_options, filename, filenamec, filenameA, crit_ratio, damage_ratio, Namps);
 	return 0;
 }
 

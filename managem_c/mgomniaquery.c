@@ -18,7 +18,7 @@ void print_omnia_table(gem* gems, gemO* amps, double* powers, int len)
 	printf("\n");
 }
 
-void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA)
+void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, double leech_ratio, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);							// if the file is not good we exit
@@ -183,10 +183,12 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init_O(ampsc,0,0);
 	powers[0]=0;
 	double iloglenc=1/log(lenc);
-	printf("Managem:\n");
-	gem_print(gems);
-	printf("Amplifier:\n");
-	gem_print_O(amps);
+	if (!(output_options & mask_quiet)) {
+		printf("Managem:\n");
+		gem_print(gems);
+		printf("Amplifier:\n");
+		gem_print_O(amps);
+}
 
 	for (i=1;i<len;++i) {																		// for every gem value
 		gems[i]=(gem){0};																			// we init the gems
@@ -209,9 +211,9 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
 																													// now we compare the whole setup
 		for (j=0;j<i+1;++j) {																	// for every amp value from 1 up to gem_value
-			NS+=6;																							// we get the num of gems used in speccing
+			NS+=Namps;																					// we get the num of gems used in speccing
 			double c = log((double)NT/NS)*iloglenc;							// we compute the combination number
-			double Ca= 2.576 * pow(combO.leech,c);							// <- this is ok only for mg
+			double Ca= leech_ratio * pow(combO.leech,c);				// <- this is ok only for mg
 			double Pa= Ca * bestO[j].leech;											// <- because we already know the best amps
 			for (l=0; l<poolcf_length; ++l) {										// then we search in NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
@@ -231,25 +233,74 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				}
 			}
 		}
+		if (!(output_options & mask_quiet)) {
+			printf("Managem spec\n");
+			printf("Value:\t%d\n",i+1);
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
+			gem_print(gems+i);
+			printf("Amplifier spec\n");
+			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
+			if (output_options & mask_info) printf("Pool:\t1\n");
+			gem_print_O(amps+i);
+			printf("Managem combine\n");
+			printf("Comb:\t%d\n",lenc);
+			if (output_options & mask_info) printf("Pool:\t%d\n",poolcf_length);
+			gem_print(gemsc+i);
+			printf("Amplifier combine\n");
+			printf("Comb:\t%d\n",lenc);
+			if (output_options & mask_info) printf("Pool:\t1\n");
+			gem_print_O(ampsc+i);
+			printf("Spec base power (resc.):\t%f\n", gems[i].bbound*(gems[i].leech+leech_ratio*amps[i].leech));
+			printf("Global power (resc. 1k):\t%f\n\n\n", powers[i]/1000);
+			fflush(stdout);								// forces buffer write, so redirection works well
+		}
+	}
+	
+	if (output_options & mask_quiet) {		// outputs last if we never seen any
 		printf("Managem spec\n");
-		printf("Value:\t%d\n",i+1);
-		if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
-		gem_print(gems+i);
+		printf("Value:\t%d\n",len);
+		gem_print(gems+len-1);
 		printf("Amplifier spec\n");
-		printf("Value:\t%d\n",gem_getvalue_O(amps+i));
-		if (output_options & mask_info) printf("Pool:\t1\n");
-		gem_print_O(amps+i);
+		printf("Value:\t%d\n",gem_getvalue_O(amps+len-1));
+		gem_print_O(amps+len-1);
 		printf("Managem combine\n");
 		printf("Comb:\t%d\n",lenc);
-		if (output_options & mask_info) printf("Pool:\t%d\n",poolcf_length);
-		gem_print(gemsc+i);
+		gem_print(gemsc+len-1);
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
-		if (output_options & mask_info) printf("Pool:\t1\n");
-		gem_print_O(ampsc+i);
-		printf("Spec base power (resc.):\t%f\n", gems[i].bbound*(gems[i].leech+2.576*amps[i].leech));
-		printf("Global power (resc. 1k):\t%f\n\n\n", powers[i]/1000);
-		fflush(stdout);								// forces buffer write, so redirection works well
+		gem_print_O(ampsc+len-1);
+		printf("Spec base power (resc.):\t%f\n", gems[len-1].bbound*(gems[len-1].leech+leech_ratio*amps[len-1].leech));
+		printf("Global power (resc. 1k):\t%f\n\n\n", powers[len-1]/1000);
+	}
+
+	if (output_options & mask_upto) {
+		double best_pow=0;
+		int best_index=0;
+		for (i=0; i<len; ++i) {
+			if (powers[i] > best_pow) {
+				best_index=i;
+				best_pow=powers[i];
+			}
+		}
+		printf("Best setup up to %d:\n\n", len);
+		printf("Managem spec\n");
+		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
+		gem_print(gems+best_index);
+		printf("Amplifier spec\n");
+		printf("Value:\t%d\n", gem_getvalue_O(amps+best_index));
+		gem_print_O(amps+best_index);
+		printf("Managem combine\n");
+		printf("Comb:\t%d\n",lenc);
+		gem_print(gemsc+best_index);
+		printf("Amplifier combine\n");
+		printf("Comb:\t%d\n",lenc);
+		gem_print_O(ampsc+best_index);
+		printf("Spec base power (resc.):\t%f\n", gems[best_index].bbound*(gems[best_index].leech+leech_ratio*amps[best_index].leech));
+		printf("Global power (resc. 1k):\t%f\n\n\n", powers[best_index]/1000);
+		gems[len-1]=gems[best_index];
+		amps[len-1]=amps[best_index];
+		gemsc[len-1]=gemsc[best_index];
+		ampsc[len-1]=ampsc[best_index];
 	}
 
 	if (output_options & mask_parens) {
@@ -313,12 +364,14 @@ int main(int argc, char** argv)
 	int len;
 	int lenc;
 	char opt;
+	int TC=0;
+	int Namps=0;
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iptcef:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcequf:T:N:"))!=-1) {
 		switch(opt) {
 			case 'i':
 				output_options |= mask_info;
@@ -335,6 +388,12 @@ int main(int argc, char** argv)
 			case 'e':
 				output_options |= mask_equations;
 				break;
+			case 'q':
+				output_options |= mask_quiet;
+				break;
+			case 'u':
+				output_options |= mask_upto;
+				break;
 			case 'f':			// can be "filename,filenamec,filenameA", if missing default is used
 				;
 				char* p=optarg;
@@ -348,6 +407,12 @@ int main(int argc, char** argv)
 				strcpy(filename,optarg);
 				strcpy(filenamec,p+1);
 				strcpy(filenameA,q+1);
+				break;
+			case 'T':
+				TC=atoi(optarg);
+				break;
+			case 'N':
+				Namps=atoi(optarg);
 				break;
 			case '?':
 				return 1;
@@ -378,6 +443,9 @@ int main(int argc, char** argv)
 	if (filename[0]=='\0') strcpy(filename, "table_mgspec");
 	if (filenamec[0]=='\0') strcpy(filenamec, "table_mgcomb");
 	if (filenameA[0]=='\0') strcpy(filenameA, "table_leech");
-	worker(len, lenc, output_options, filename, filenamec, filenameA);
+	if (TC==0) TC=60;
+	if (Namps==0) Namps=6;
+	double leech_ratio=Namps*0.46*(1+(double)TC*3/100)/(1+(double)TC/30);
+	worker(len, lenc, output_options, filename, filenamec, filenameA, leech_ratio, Namps);
 	return 0;
 }
