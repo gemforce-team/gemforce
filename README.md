@@ -31,8 +31,9 @@ where flags are:
   e - print best gem equations formula  
   c - print best gems table (for each value best gem stats)   
   i - info  
+  q - quiet, print only final gem
+  u - upto, at the end consider the best gem up to N, not the Nth
   f (filepath) - change table file (build/query only)  
-  l (num) - limit hard gem computation to num (amps only)  
   s (num) - change chunk size (you should not need this)  
   number - value of gem to be computed  
   numbers - spec value and comb value (omnia programs only)
