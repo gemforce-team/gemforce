@@ -303,6 +303,29 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		ampsc[len-1]=ampsc[best_index];
 	}
 
+	gem** gem_array;
+	int array_index;
+	if (output_options & mask_red) {
+		if (len < 3) printf("I could not add red!\n\n");
+		else {
+			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index);
+			printf("Setup with red added:\n\n");
+			printf("Managem spec\n");
+			printf("Value:\t%d\n",len);
+			gem_print(gems+len-1);
+			printf("Amplifier spec\n");
+			printf("Value:\t%d\n",gem_getvalue_O(amps+len-1));
+			gem_print_O(amps+len-1);
+			printf("Managem combine\n");
+			printf("Comb:\t%d\n",lenc);
+			gem_print(gemsc+len-1);
+			printf("Amplifier combine\n");
+			printf("Comb:\t%d\n",lenc);
+			gem_print_O(ampsc+len-1);
+			printf("Spec base power with red:\t%f\n\n\n", gems[len-1].bbound*(gems[len-1].leech+leech_ratio*amps[len-1].leech));
+		}
+	}
+
 	if (output_options & mask_parens) {
 		printf("Managem speccing scheme:\n");
 		print_parens_compressed(gems+len-1);
@@ -357,6 +380,10 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	free(poolcf);
 	for (i=0;i<lena;++i) free(poolO[i]);		// free amps
 	free(bestO);														// free amps compressed
+	if (output_options & mask_red && len > 2) {
+		array_free(gem_array, array_index);
+		free(gem_array);
+	}
 }
 
 int main(int argc, char** argv)
@@ -371,7 +398,7 @@ int main(int argc, char** argv)
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iptcequf:T:N:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcequrf:T:N:"))!=-1) {
 		switch(opt) {
 			case 'i':
 				output_options |= mask_info;
@@ -393,6 +420,9 @@ int main(int argc, char** argv)
 				break;
 			case 'u':
 				output_options |= mask_upto;
+				break;
+			case 'r':
+				output_options |= mask_red;
 				break;
 			case 'f':			// can be "filename,filenamec,filenameA", if missing default is used
 				;

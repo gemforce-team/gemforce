@@ -240,7 +240,6 @@ gem gem_putred(gem* gemf, int len, gem*** gem_array, int* array_index)
 	return target;
 }
 
-
 #include "print_utils.h"
 
 

@@ -275,6 +275,24 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		amps[len-1]=amps[best_index];
 	}
 
+	gem** gem_array;
+	int array_index;
+	if (output_options & mask_red) {
+		if (len < 3) printf("I could not add red!\n\n");
+		else {
+			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index);
+			printf("Setup with red added:\n\n");
+			printf("Total value:\t%d\n\n", gem_getvalue(gems+len-1)+6*gem_getvalue_O(amps+len-1));
+			printf("Managem\n");
+			printf("Value:\t%d\n", gem_getvalue(gems+len-1));
+			gem_print(gems+len-1);
+			printf("Amplifier\n");
+			printf("Value:\t%d\n", gem_getvalue_O(amps+len-1));
+			gem_print_O(amps+len-1);
+			printf("Global power with red:\t%f\n\n", gem_amp_power(gems[len-1], amps[len-1]));
+		}
+	}
+
 	if (output_options & mask_parens) {
 		printf("Managem combining scheme:\n");
 		print_parens_compressed(gems+len-1);
@@ -311,6 +329,10 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	for (i=0;i<len;++i) free(poolf[i]);			// free gems compressed
 	for (i=0;i<lena;++i) free(poolO[i]);		// free amps
 	free(bestO);														// free amps compressed
+	if (output_options & mask_red && len > 2) {
+		array_free(gem_array, array_index);
+		free(gem_array);
+	}
 }
 
 
@@ -324,7 +346,7 @@ int main(int argc, char** argv)
 	char filename[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iptcequf:g:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcequrf:g:"))!=-1) {
 		switch(opt) {
 			case 'i':
 				output_options |= mask_info;
@@ -346,6 +368,9 @@ int main(int argc, char** argv)
 				break;
 			case 'u':
 				output_options |= mask_upto;
+				break;
+			case 'r':
+				output_options |= mask_red;
 				break;
 			case 'f':			// can be "filename,filenameA", if missing default is used
 				;
