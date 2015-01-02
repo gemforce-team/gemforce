@@ -154,10 +154,92 @@ double gem_power(gem gem1)
 
 char gem_color(gem* p_gem)
 {
+	if (p_gem->leech==0 && p_gem->bbound==0) return 'r';
 	if (p_gem->leech==0) return 'b';
 	if (p_gem->bbound==0) return 'o';
 	else return 'm';
 }
+
+gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem** tobe_freed, int* tbf_index)
+{		// more magic
+	if (gemf->father==NULL || *isRed) return gemf;
+	if (gemf->father->father==NULL) {		// father is g1
+		if (*curr < last) (*curr)++;
+		else {
+			gem* gemt=malloc(sizeof(gem));
+			tobe_freed[(*tbf_index)++]=gemt;
+			gem_combine(pred, gemf->mother, gemt);
+			*isRed=1;
+			return gemt;
+		}
+	}
+	if (gemf->mother->father==NULL) {		// mother is g1
+		if (*curr < last) (*curr)++;
+		else {
+			gem* gemt=malloc(sizeof(gem));
+			tobe_freed[(*tbf_index)++]=gemt;
+			gem_combine(gemf->father, pred, gemt);
+			*isRed=1;
+			return gemt;
+		}
+	}
+	int wasRed;
+	wasRed=(*isRed);
+	gem* g1= gem_explore(gemf->father, isRed, pred, last, curr, tobe_freed, tbf_index);
+	if (wasRed==(*isRed)) g1=gemf->father;
+	wasRed=(*isRed);
+	gem* g2= gem_explore(gemf->mother, isRed, pred, last, curr, tobe_freed, tbf_index);
+	if (wasRed==(*isRed)) g2=gemf->mother;
+	if (g1==gemf->father && g2==gemf->mother) return gemf;
+	
+	gem* gemt=malloc(sizeof(gem));
+	tobe_freed[(*tbf_index)++]=gemt;
+	gem_combine(g1, g2, gemt);
+	return gemt;
+}
+
+void array_free(gem** tobe_freed, int tbf_index)
+{
+	int i;
+	for (i=0; i<tbf_index; ++i) free(tobe_freed[i]);
+}
+
+gem gem_putred(gem* gemf, int len, gem*** gem_array, int* array_index)
+{		// magic
+	int isRed;
+	int last;
+	int curr;
+	double best_pow=0;
+	gem* red=malloc(sizeof(gem));
+	gem_init(red,1,0,0);
+	gem* best_gem=NULL;
+	gem** tobe_freed=malloc(2*len*sizeof(gem));
+	gem** btb_freed=malloc(2*len*sizeof(gem));
+	int tbf_index;
+	int btbf_index=0;
+	for (last=0; last<len; last++) {
+		isRed=0;
+		curr=0;
+		tbf_index=0;
+		gem* gp=gem_explore(gemf, &isRed, red, last, &curr, tobe_freed, &tbf_index);
+		if (gem_power(*gp) > best_pow) {
+			best_pow=gem_power(*gp);
+			if (best_gem!=NULL) array_free(btb_freed, btbf_index);
+			best_gem=gp;
+			btbf_index=tbf_index;
+			int i;
+			for (i=0; i< tbf_index; ++i) btb_freed[i]=tobe_freed[i];
+		}
+		else array_free(tobe_freed, tbf_index);
+	}
+	free(tobe_freed);
+	gem target=*best_gem;
+	btb_freed[btbf_index]=red;
+	(*gem_array)=btb_freed;
+	(*array_index)=btbf_index+1;
+	return target;
+}
+
 
 #include "print_utils.h"
 

@@ -31,8 +31,9 @@ where flags are:
   e - print best gem equations formula  
   c - print best gems table (for each value best gem stats)   
   i - info  
-  q - quiet, print only final gem
-  u - upto, at the end consider the best gem up to N, not the Nth
+  q - quiet, print only final gem  
+  u - upto, at the end consider the best gem up to N, not the Nth  
+  r - adds red at the best gem, then consider the new gem
   f (filepath) - change table file (build/query only)  
   s (num) - change chunk size (you should not need this)  
   number - value of gem to be computed  

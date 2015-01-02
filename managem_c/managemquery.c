@@ -13,7 +13,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	if (table==NULL) exit(1);							// if the file is not good we exit
 	int i;
 	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
-	gem* pool[len];
+	gem** pool=malloc(len*sizeof(gem*));	// if not malloc-ed 200k is the limit (win)
 	int pool_length[len];
 	pool[0]=malloc(pool_zero*sizeof(gem));
 	pool_length[0]=pool_zero;
@@ -77,6 +77,19 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 		gems[len-1]=gems[best_index];
 	}
 
+	gem** gem_array;
+	int array_index;
+	if (output_options & mask_red) {
+		if (len < 3 || pool_zero!=2) printf("I could not add red!\n\n");
+		else {
+			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index);
+			printf("Gem with red added:\n\n");
+			printf("Value:\t%d\n",len);
+			printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
+			gem_print(gems+len-1);
+		}
+	}
+
 	if (output_options & mask_parens) {
 		printf("Compressed combining scheme:\n");
 		print_parens_compressed(gems+len-1);
@@ -97,7 +110,12 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	
 	fclose(table);
 	for (i=0;i<len;++i) free(pool[i]);		// free
+	free(pool);		// free
 	free(gems);
+	if (output_options & mask_red && len > 2 && pool_zero==2) {
+		array_free(gem_array, array_index);
+		free(gem_array);
+	}
 }
 
 int main(int argc, char** argv)
@@ -108,7 +126,7 @@ int main(int argc, char** argv)
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iptcequf:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcequrf:"))!=-1) {
 		switch(opt) {
 			case 'i':
 				output_options |= mask_info;
@@ -130,6 +148,9 @@ int main(int argc, char** argv)
 				break;
 			case 'u':
 				output_options |= mask_upto;
+				break;
+			case 'r':
+				output_options |= mask_red;
 				break;
 			case 'f':
 				strcpy(filename,optarg);
