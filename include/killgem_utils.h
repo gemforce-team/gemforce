@@ -209,7 +209,9 @@ void array_free(gem** tobe_freed, int tbf_index)
 	for (i=0; i<tbf_index; ++i) free(tobe_freed[i]);
 }
 
-gem gem_putred(gem* gemf, int len, gem*** gem_array, int* array_index)
+extern double gem_cfr_power(gem gem1, void* amp, double dr, double cr);
+
+gem gem_putred(gem* gemf, int len, gem*** gem_array, int* array_index, void* amp, double dr, double cr)
 {		// magic
 	int isRed;
 	int last;
@@ -227,8 +229,9 @@ gem gem_putred(gem* gemf, int len, gem*** gem_array, int* array_index)
 		curr=0;
 		tbf_index=0;
 		gem* gp=gem_explore(gemf, &isRed, red, last, &curr, tobe_freed, &tbf_index);
-		if (gem_power(*gp) > best_pow) {
-			best_pow=gem_power(*gp);
+		double new_pow=gem_cfr_power(*gp, amp, dr, cr);
+		if (new_pow > best_pow) {
+			best_pow=new_pow;
 			if (best_gem!=NULL) array_free(btb_freed, btbf_index);
 			best_gem=gp;
 			btbf_index=tbf_index;

@@ -7,6 +7,11 @@ typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows 
 #include "managem_utils.h"
 #include "gfon.h"
 
+double gem_cfr_power(gem gem1, void* amp, double lr)
+{
+	return gem1.leech*gem1.bbound;				// amp-less
+}
+
 void worker(int len, int output_options, int pool_zero, char* filename)
 {
 	FILE* table=file_check(filename);			// file is open to read
@@ -82,7 +87,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	if (output_options & mask_red) {
 		if (len < 3 || pool_zero!=2) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index);
+			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index, NULL, 0);
 			printf("Gem with red added:\n\n");
 			printf("Value:\t%d\n",len);
 			printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));

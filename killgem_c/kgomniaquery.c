@@ -13,6 +13,11 @@ typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 #include "gfon.h"
 
+double gem_cfr_power(gem gem1, void* amp, double damage_ratio, double crit_ratio)
+{
+	return (gem1.damage+damage_ratio*((gemY*)amp)->damage)*gem1.bbound*(gem1.crit+crit_ratio*((gemY*)amp)->crit)*gem1.bbound;
+}
+
 double gem_amp_power(gem gem1, gemY amp1, double damage_ratio, double crit_ratio)
 {
 	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+crit_ratio*amp1.crit)*gem1.bbound;
@@ -352,7 +357,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index);
+			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index, amps+len-1, damage_ratio, crit_ratio);
 			printf("Setup with red added:\n\n");
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n",len);

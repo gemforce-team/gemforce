@@ -10,6 +10,11 @@ typedef struct Gem_O gemO;
 #include "gfon.h"
 const int NT=1048576;					// 2^20 ~ 1m, it's still low, but there's no difference going on (even 10k gives the same results)
 
+double gem_cfr_power(gem gem1, void* amp, double leech_ratio)
+{
+	return (gem1.leech+leech_ratio*((gemO*)amp)->leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
+}
+
 void print_omnia_table(gem* gems, gemO* amps, double* powers, int len)
 {
 	printf("Managem\tAmps\tPower (resc. 1k)\n");			// we'll rescale again for 1k, no need to have 10 digits
@@ -308,7 +313,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index);
+			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index, amps+len-1, leech_ratio);
 			printf("Setup with red added:\n\n");
 			printf("Managem spec\n");
 			printf("Value:\t%d\n",len);
