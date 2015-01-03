@@ -37,7 +37,9 @@ where flags are:
   f (filepath) - change table file (build/query only)  
   s (num) - change chunk size (you should not need this)  
   number - value of gem to be computed  
-  numbers - spec value and comb value (omnia programs only)
+  numbers - spec value and comb value (omnia programs only)  
+  N (num) - specify how many amps you use (omnia programs only)  
+  T (num) - give your True Colors skill for better amps fitting  (omnia programs only)
   
 to specify if you want a speccing or a combining recipe out of a general program
 (e.g. managemquery) use (num)s or (num)c (default is speccing)  

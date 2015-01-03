@@ -98,8 +98,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 
 	FILE* tablec=file_check(filenamec);		// file is open to read
 	if (tablec==NULL) exit(1);						// if the file is not good we exit
-	gem* poolc[lenc];
-	int poolc_length[lenc];
+	gem** poolc=malloc(lenc*sizeof(gem*));;
+	int* poolc_length=malloc(lenc*sizeof(int));
 	poolc[0]=malloc(sizeof(gem));
 	poolc_length[0]=1;
 	gem_init(poolc[0],1,1,1,1);
@@ -157,8 +157,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	int lena;
 	if (lenc > len) lena=lenc;						// see which is bigger between spec len and comb len
 	else lena=len;												// and we'll get the amp pool till there
-	gemY* poolY[lena];
-	int poolY_length[lena];
+	gemY** poolY=malloc(lena*sizeof(gemY*));
+	int* poolY_length=malloc(lena*sizeof(int));;
 	poolY[0]=malloc(sizeof(gemY));
 	poolY_length[0]=1;
 	gem_init_Y(poolY[0],1,1,1);
@@ -287,7 +287,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Value:\t%d\n",i+1);
 			if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
 			gem_print(gems+i);
-			printf("Amplifier spec\n");
+			printf("Amplifier spec (%dx)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
 			if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
 			gem_print_Y(amps+i);
@@ -305,11 +305,11 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		}
 	}
 	
-		if (output_options & mask_quiet) {		// outputs last if we never seen any
+	if (output_options & mask_quiet) {		// outputs last if we never seen any
 		printf("Killgem spec\n");
 		printf("Value:\t%d\n",len);
 		gem_print(gems+len-1);
-		printf("Amplifier spec\n");
+		printf("Amplifier spec (%dx)\n", Namps);
 		printf("Value:\t%d\n",gem_getvalue_Y(amps+len-1));
 		gem_print_Y(amps+len-1);
 		printf("Killgem combine\n");
@@ -335,7 +335,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Killagem spec\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
 		gem_print(gems+best_index);
-		printf("Amplifier spec\n");
+		printf("Amplifier spec (%dx)\n", Namps);
 		printf("Value:\t%d\n", gem_getvalue_Y(amps+best_index));
 		gem_print_Y(amps+best_index);
 		printf("Killgem combine\n");
@@ -362,7 +362,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n",len);
 			gem_print(gems+len-1);
-			printf("Amplifier spec\n");
+			printf("Amplifier spec (%dx)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_Y(amps+len-1));
 			gem_print_Y(amps+len-1);
 			printf("Managem combine\n");
@@ -427,9 +427,13 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	for (i=0;i<len;++i) free(pool[i]);			// free gems
 	for (i=0;i<len;++i) free(poolf[i]);			// free gems compressed
 	for (i=0;i<lenc;++i) free(poolc[i]);		// free gems
+	free(poolc);
+	free(poolc_length);
 	free(poolcf);
 	for (i=0;i<lena;++i) free(poolY[i]);		// free amps
 	for (i=0;i<lena;++i) free(poolYf[i]);		// free amps compressed
+	free(poolY);
+	free(poolY_length);
 	free(poolYf);
 	if (output_options & mask_red && len > 2) {
 		array_free(gem_array, array_index);

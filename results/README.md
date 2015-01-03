@@ -22,7 +22,7 @@ numbers in the last part specify how many gems go into specific recipe:
 
 ### Where do I put red?
 
-In every speccing recipe, simply replace the most deeply nested gem with a red g1.
+In every speccing recipe, simply replace the most deeply nested non black gem with a red g1.
 
 ### So many choices, so little time
 
