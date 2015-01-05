@@ -48,4 +48,27 @@ global mode in (m/k)gaquery is toggled via (num)g (you should not need this)
 **example:**  
   `./file -pet 32`  
 
+### What does every program do?
+
+Mana and kill suites are alike, so I'll just describe the mana one:
+
+Included in auto setup package:
+
+* leechquery    : gets leech combines from table
+* managemquery  : gets managem combines and specces (alone) from tables
+* mgaquery      : gets amped managem specces and their amps from tables
+* mgomniaquery  : gets a full package of amped spec and combine for both from tables
+
+Not included in auto setup package:
+
+* leechbuild    : builds leech table
+* leechcombine  : makes leech combines from scratch
+* managem_alone : makes managem combines and specces (alone) from scatch
+* managembuild  : builds managem tables
+* mgfast1build  : build fast managem combine tables
+* mgfast2build  : build fast managem combine tables
+* mgsloppybuild : build fast managem combine tables
+* wmga          : outdated program that makes white managem recipes from scratch
+
+
 

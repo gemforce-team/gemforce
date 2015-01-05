@@ -20,6 +20,12 @@ numbers in the last part specify how many gems go into specific recipe:
              the optimized amps' cost is written only inside the file
              and both the combines require C copies of the main gem/amplifier
 
+### Parenthesis convention
+
+In most parenthesis schemes you'll find gems written as "3o" or "4k", etc.  
+This simply mean that the gem is the basic gem upgraded the written number of times less one:
+4o = 3o+3o = (2o+2o)+(2o+2o) = ((o+o)+(o+o))+((o+o)+(o+o)) which is the base gem upgraded 3 times.
+
 ### Where do I put red?
 
 In every speccing recipe, simply replace the most deeply nested non black gem with a red g1.
