@@ -6,11 +6,6 @@
 typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
 #include "managem_utils.h"
 
-double gem_cfr_power(gem gem1, void* amp, double lr)
-{
-	return gem1.leech*gem1.bbound;				// amp-less
-}
-
 void worker(int len, int output_options, int pool_zero, int size)
 {
 	printf("\n");
@@ -203,9 +198,9 @@ void worker(int len, int output_options, int pool_zero, int size)
 	if (output_options & mask_red) {
 		if (len < 3 || pool_zero!=2) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index, NULL, 0);
+			gems[len-1]=gem_putred(gems+len-1, &gem_array, &array_index, 0, 0);
 			printf("Gem with red added:\n\n");
-			printf("Value:\t%d\n",len);
+			printf("Value:\t%d\n",gem_getvalue(gems+len-1));		// made to work well with -u
 			printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
 			gem_print(gems+len-1);
 		}

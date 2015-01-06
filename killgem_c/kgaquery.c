@@ -22,11 +22,6 @@ int gem_amp_more_powerful(gem gem1, gemY amp1, gem gem2, gemY amp2)
 	return gem_amp_power(gem1, amp1) > gem_amp_power(gem2, amp2);
 }
 
-double gem_cfr_power(gem gem1, void* amp, double dr, double cr)
-{
-	return (gem1.damage+6*0.28*(2.8/3.2)*((gemY*)amp)->damage)*gem1.bbound*(gem1.crit+4*0.23*2.8*((gemY*)amp)->crit)*gem1.bbound;		// yes, fraction and 4, due to 3.2 and 1.5 rescaling
-}
-
 void print_global_table(gem* gems, gemY* amps, int len)
 {
 	printf("# Gems\tKillgem\tAmps\tPower (resc.)\n");
@@ -313,7 +308,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index, amps+len-1, 0, 0);
+			gems[len-1]=gem_putred(gems+len-1, &gem_array, &array_index, (amps+len-1)->damage, (amps+len-1)->crit, 1.47, 2.576);
 			printf("Setup with red added:\n\n");
 			printf("Total value:\t%d\n\n", gem_getvalue(gems+len-1)+6*gem_getvalue_Y(amps+len-1));
 			printf("Killgem\n");

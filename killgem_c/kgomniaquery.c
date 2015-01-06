@@ -13,11 +13,6 @@ typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 #include "gfon.h"
 
-double gem_cfr_power(gem gem1, void* amp, double damage_ratio, double crit_ratio)
-{
-	return (gem1.damage+damage_ratio*((gemY*)amp)->damage)*gem1.bbound*(gem1.crit+crit_ratio*((gemY*)amp)->crit)*gem1.bbound;
-}
-
 double gem_amp_power(gem gem1, gemY amp1, double damage_ratio, double crit_ratio)
 {
 	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+crit_ratio*amp1.crit)*gem1.bbound;
@@ -228,7 +223,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		gem_print(gems);
 		printf("Amplifier:\n");
 		gem_print_Y(amps);
-}
+	}
 
 	for (i=1;i<len;++i) {																		// for every gem value
 		gems[i]=(gem){0};																			// we init the gems
@@ -319,7 +314,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Comb:\t%d\n",lenc);
 		gem_print_Y(ampsc+len-1);
 		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
-		printf("Global power (resc. 1k):\t%f\n\n\n", powers[len-1]/1000);
+		printf("Global power (resc. 1k):\t%f\n\n\n", powers[len-1]/1e7);
 	}
 
 	if (output_options & mask_upto) {
@@ -332,7 +327,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			}
 		}
 		printf("Best setup up to %d:\n\n", len);
-		printf("Killagem spec\n");
+		printf("Killgem spec\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
 		gem_print(gems+best_index);
 		printf("Amplifier spec (%dx)\n", Namps);
@@ -345,7 +340,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Comb:\t%d\n",lenc);
 		gem_print_Y(ampsc+best_index);
 		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index], damage_ratio, crit_ratio));
-		printf("Global power (resc. 1k):\t%f\n\n\n", powers[best_index]/1000);
+		printf("Global power (resc. 1k):\t%f\n\n\n", powers[best_index]/1e7);
 		gems[len-1]=gems[best_index];
 		amps[len-1]=amps[best_index];
 		gemsc[len-1]=gemsc[best_index];
@@ -357,10 +352,10 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index, amps+len-1, damage_ratio, crit_ratio);
+			gems[len-1]=gem_putred(gems+len-1, &gem_array, &array_index, (amps+len-1)->damage, (amps+len-1)->crit, damage_ratio, crit_ratio);
 			printf("Setup with red added:\n\n");
 			printf("Killgem spec\n");
-			printf("Value:\t%d\n",len);
+			printf("Value:\t%d\n",gem_getvalue(gems+len-1));		// made to work well with -u
 			gem_print(gems+len-1);
 			printf("Amplifier spec (%dx)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_Y(amps+len-1));
@@ -446,8 +441,8 @@ int main(int argc, char** argv)
 	int len;
 	int lenc;
 	char opt;
-	int TC=0;
-	int Namps=0;
+	int TC=60;
+	int Namps=6;
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 	char filenamec[256]="";		// it should be enough
@@ -532,8 +527,6 @@ int main(int argc, char** argv)
 	if (filename[0]=='\0') strcpy(filename, "table_kgspec");
 	if (filenamec[0]=='\0') strcpy(filenamec, "table_kgcomb");
 	if (filenameA[0]=='\0') strcpy(filenameA, "table_crit");
-	if (TC==0) TC=60;
-	if (Namps==0) Namps=6;
 	double crit_ratio  =Namps*0.46*(1+(double)TC*3/100)/(1  +(double)TC/30);
 	double damage_ratio=Namps*0.28*(1+(double)TC*3/100)/(1.2+(double)TC/30);
 	worker(len, lenc, output_options, filename, filenamec, filenameA, crit_ratio, damage_ratio, Namps);

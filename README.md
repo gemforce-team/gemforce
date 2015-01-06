@@ -29,17 +29,18 @@ where flags are:
   p - print best gem parens formula  
   t - print best gem tree formula  
   e - print best gem equations formula  
-  c - print best gems table (for each value best gem stats)   
+  c - print best gems table (for each value best gem power) **do not use with -r or -u**  
   i - info  
   q - quiet, print only final gem  
   u - upto, at the end consider the best gem up to N, not the Nth  
-  r - adds red at the best gem, then consider the new gem
+  r - adds red to the best gem, then consider the new gem
   f (filepath) - change table file (build/query only)  
   s (num) - change chunk size (you should not need this)  
-  number - value of gem to be computed  
-  numbers - spec value and comb value (omnia programs only)  
   N (num) - specify how many amps you use (omnia programs only)  
-  T (num) - give your True Colors skill for better amps fitting  (omnia programs only)
+  T (num) - give your True Colors skill for better amps fitting (omnia programs only)
+
+number - value of gem to be computed  
+numbers - spec value and comb value (omnia programs only)
   
 to specify if you want a speccing or a combining recipe out of a general program
 (e.g. managemquery) use (num)s or (num)c (default is speccing)  
@@ -48,7 +49,7 @@ global mode in (m/k)gaquery is toggled via (num)g (you should not need this)
 **example:**  
   `./file -pet 32`  
 
-### What does every program do?
+### What does each program do?
 
 Mana and kill suites are alike, so I'll just describe the mana one:
 
@@ -65,9 +66,9 @@ Not included in auto setup package:
 * leechcombine  : makes leech combines from scratch
 * managem_alone : makes managem combines and specces (alone) from scatch
 * managembuild  : builds managem tables
-* mgfast1build  : build fast managem combine tables
-* mgfast2build  : build fast managem combine tables
-* mgsloppybuild : build fast managem combine tables
+* mgfast1build  : builds a fast managem combine table
+* mgfast2build  : builds a fast managem combine table
+* mgsloppybuild : builds a fast managem combine table
 * wmga          : outdated program that makes white managem recipes from scratch
 
 

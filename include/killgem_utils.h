@@ -165,6 +165,8 @@ char gem_color(gem* p_gem)
 	else return 'k';
 }
 
+#include "print_utils.h"
+
 gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem** tobe_freed, int* tbf_index)
 {		// more magic
 	if (gemf->father==NULL || *isRed) return gemf;
@@ -209,19 +211,24 @@ void array_free(gem** tobe_freed, int tbf_index)
 	for (i=0; i<tbf_index; ++i) free(tobe_freed[i]);
 }
 
-extern double gem_cfr_power(gem gem1, void* amp, double dr, double cr);
+double gem_cfr_power(gem gem1, double amp_damage, double amp_crit, double damage_ratio, double crit_ratio)
+{
+	if (gem1.crit==0) return 0;
+	return (gem1.damage+damage_ratio*amp_damage)*gem1.bbound*(gem1.crit+crit_ratio*amp_crit)*gem1.bbound;
+}
 
-gem gem_putred(gem* gemf, int len, gem*** gem_array, int* array_index, void* amp, double dr, double cr)
+gem gem_putred(gem* gemf, gem*** gem_array, int* array_index, double amp_damage, double amp_crit, double dr, double cr)
 {		// magic
 	int isRed;
 	int last;
 	int curr;
+	int len=gem_getvalue(gemf);
 	double best_pow=0;
 	gem* red=malloc(sizeof(gem));
 	gem_init(red,1,0.909091,0,0);
 	gem* best_gem=NULL;
-	gem** tobe_freed=malloc(2*len*sizeof(gem));
-	gem** btb_freed=malloc(2*len*sizeof(gem));
+	gem** tobe_freed=malloc(len*sizeof(gem));
+	gem** btb_freed=malloc(len*sizeof(gem));
 	int tbf_index;
 	int btbf_index=0;
 	for (last=0; last<len; last++) {
@@ -229,7 +236,7 @@ gem gem_putred(gem* gemf, int len, gem*** gem_array, int* array_index, void* amp
 		curr=0;
 		tbf_index=0;
 		gem* gp=gem_explore(gemf, &isRed, red, last, &curr, tobe_freed, &tbf_index);
-		double new_pow=gem_cfr_power(*gp, amp, dr, cr);
+		double new_pow=gem_cfr_power(*gp, amp_damage, amp_crit, dr, cr);
 		if (new_pow > best_pow) {
 			best_pow=new_pow;
 			if (best_gem!=NULL) array_free(btb_freed, btbf_index);
@@ -247,8 +254,5 @@ gem gem_putred(gem* gemf, int len, gem*** gem_array, int* array_index, void* amp
 	(*array_index)=btbf_index+1;
 	return target;
 }
-
-#include "print_utils.h"
-
 
 #endif // _KILLGEM_UTILS_H

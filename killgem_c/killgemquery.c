@@ -9,11 +9,6 @@ const int ACC=0;								// I don't really use it here
 #include "killgem_utils.h"
 #include "gfon.h"
 
-double gem_cfr_power(gem gem1, void* amp, double dr, double cr)
-{
-	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound;			// amp-less
-}
-
 void worker(int len, int output_options, int pool_zero, char* filename)
 {
 	FILE* table=file_check(filename);			// file is open to read
@@ -89,9 +84,9 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	if (output_options & mask_red) {
 		if (len < 3 || pool_zero!=2) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index, NULL, 0, 0);
+			gems[len-1]=gem_putred(gems+len-1, &gem_array, &array_index, 0, 0, 0, 0);
 			printf("Gem with red added:\n\n");
-			printf("Value:\t%d\n",len);
+			printf("Value:\t%d\n",gem_getvalue(gems+len-1));		// made to work well with -u
 			printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
 			gem_print(gems+len-1);
 		}

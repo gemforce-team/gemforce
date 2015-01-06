@@ -10,11 +10,6 @@ typedef struct Gem_O gemO;
 #include "gfon.h"
 const int NT=1048576;					// 2^20 ~ 1m, it's still low, but there's no difference going on (even 10k gives the same results)
 
-double gem_cfr_power(gem gem1, void* amp, double leech_ratio)
-{
-	return (gem1.leech+leech_ratio*((gemO*)amp)->leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
-}
-
 void print_omnia_table(gem* gems, gemO* amps, double* powers, int len)
 {
 	printf("Managem\tAmps\tPower (resc. 1k)\n");			// we'll rescale again for 1k, no need to have 10 digits
@@ -193,7 +188,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		gem_print(gems);
 		printf("Amplifier:\n");
 		gem_print_O(amps);
-}
+	}
 
 	for (i=1;i<len;++i) {																		// for every gem value
 		gems[i]=(gem){0};																			// we init the gems
@@ -313,10 +308,10 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, len, &gem_array, &array_index, amps+len-1, leech_ratio);
+			gems[len-1]=gem_putred(gems+len-1, &gem_array, &array_index, (amps+len-1)->leech, leech_ratio);
 			printf("Setup with red added:\n\n");
 			printf("Managem spec\n");
-			printf("Value:\t%d\n",len);
+			printf("Value:\t%d\n",gem_getvalue(gems+len-1));		// made to work well with -u
 			gem_print(gems+len-1);
 			printf("Amplifier spec (x%d)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_O(amps+len-1));
@@ -399,8 +394,8 @@ int main(int argc, char** argv)
 	int len;
 	int lenc;
 	char opt;
-	int TC=0;
-	int Namps=0;
+	int TC=60;
+	int Namps=6;
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 	char filenamec[256]="";		// it should be enough
@@ -481,8 +476,6 @@ int main(int argc, char** argv)
 	if (filename[0]=='\0') strcpy(filename, "table_mgspec");
 	if (filenamec[0]=='\0') strcpy(filenamec, "table_mgcomb");
 	if (filenameA[0]=='\0') strcpy(filenameA, "table_leech");
-	if (TC==0) TC=60;
-	if (Namps==0) Namps=6;
 	double leech_ratio=Namps*0.46*(1+(double)TC*3/100)/(1+(double)TC/30);
 	worker(len, lenc, output_options, filename, filenamec, filenameA, leech_ratio, Namps);
 	return 0;
