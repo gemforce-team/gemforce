@@ -114,7 +114,8 @@ int gem_better(gemO gem1, gemO gem2)
 
 void print_parens_O(gemO* gemf)
 {
-	if (gemf->father==NULL) printf("o");
+	if (gemf->grade==0) printf("-");
+	else if (gemf->father==NULL) printf("o");
 	else {
 		printf("(");
 		print_parens_O(gemf->mother);
@@ -134,13 +135,12 @@ int gem_getvalue_O(gemO* p_gem)
 
 void print_parens_compressed_O(gemO* gemf)
 {
-	if (gemf->father==NULL) {
+	if (gemf->grade==0) printf("-");
+	else if (gemf->father==NULL) {
 		printf("o");
-		return;
 	}
 	else if (pow(2,gemf->grade-1)==gem_getvalue_O(gemf)) {				// if gem is standard combine
 		printf("%do",gemf->grade);
-		return;
 	}
 	else {
 		printf("(");
@@ -196,7 +196,8 @@ void print_equations_O(gemO* gemf)
 
 void print_tree_O(gemO* gemf, char* prefix)
 {
-	if (gemf->father==NULL) {
+	if (gemf->grade==0) printf("-\n");
+	else if (gemf->father==NULL) {
 		printf("─ g1 o\n");
 	}
 	else {

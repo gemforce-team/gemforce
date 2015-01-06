@@ -178,7 +178,8 @@ void gem_sort_Y (gemY* gems, int len)
 
 void print_parens_Y(gemY* gemf)
 {
-	if (gemf->father==NULL) printf("y");
+	if (gemf->grade==0) printf("-");
+	else if (gemf->father==NULL) printf("y");
 	else {
 		printf("(");
 		print_parens_Y(gemf->mother);
@@ -198,13 +199,12 @@ int gem_getvalue_Y(gemY* p_gem)
 
 void print_parens_compressed_Y(gemY* gemf)
 {
-	if (gemf->father==NULL) {
+	if (gemf->grade==0) printf("-");
+	else if (gemf->father==NULL) {
 		printf("y");
-		return;
 	}
 	else if (pow(2,gemf->grade-1)==gem_getvalue_Y(gemf)) {				// if gem is standard combine
 		printf("%dy",gemf->grade);
-		return;
 	}
 	else {
 		printf("(");
@@ -260,7 +260,8 @@ void print_equations_Y(gemY* gemf)
 
 void print_tree_Y(gemY* gemf, char* prefix)
 {
-	if (gemf->father==NULL) {
+	if (gemf->grade==0) printf("-\n");
+	else if (gemf->father==NULL) {
 		printf("─ g1 y\n");
 	}
 	else {
