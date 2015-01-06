@@ -79,15 +79,16 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 		gems[len-1]=gems[best_index];
 	}
 
-	gem** gem_array;
-	int array_index;
+	gem* gem_array;
+	gem red;
 	if (output_options & mask_red) {
 		if (len < 3 || pool_zero!=2) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, &gem_array, &array_index, 0, 0, 0, 0);
+			int value=gem_getvalue(gems+len-1);
+			gems[len-1]=gem_putred(pool[value-1], pool_length[value-1], value, &red, &gem_array, 0, 0, 0, 0);
 			printf("Gem with red added:\n\n");
-			printf("Value:\t%d\n",gem_getvalue(gems+len-1));		// made to work well with -u
-			printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
+			printf("Value:\t%d\n", value);		// made to work well with -u
+			printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(value));
 			gem_print(gems+len-1);
 		}
 	}
@@ -115,7 +116,6 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	free(pool);
 	free(gems);
 	if (output_options & mask_red && len > 2 && pool_zero==2) {
-		array_free(gem_array, array_index);
 		free(gem_array);
 	}
 }

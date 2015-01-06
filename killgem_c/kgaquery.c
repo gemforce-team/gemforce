@@ -190,7 +190,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			for (j=1;j<=i/6;++j) {															// for every amount of amps we can fit in
 				int value = i-6*j;																// this is the amount of gems we have left
 				for (k=0;k<poolf_length[value];++k)								// we search in that pool
-				if (poolf[value][k].crit!=0) {										// if the gem has leech we go on
+				if (poolf[value][k].crit!=0) {										// if the gem has crit we go on
 					for (h=0;h<poolYf_length[j-1];++h) {						// and we look in the amp pool
 						if (gem_amp_more_powerful(poolf[value][k],poolYf[j-1][h],gems[i],amps[i])) {
 							gems[i]=poolf[value][k];
@@ -303,16 +303,17 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		amps[len-1]=amps[best_index];
 	}
 
-	gem** gem_array;
-	int array_index;
+	gem* gem_array;
+	gem red;
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, &gem_array, &array_index, (amps+len-1)->damage, (amps+len-1)->crit, 1.47, 2.576);
+			int value=gem_getvalue(gems+len-1);
+			gems[len-1]=gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, (amps+len-1)->damage, (amps+len-1)->crit, 1.47, 2.576);
 			printf("Setup with red added:\n\n");
-			printf("Total value:\t%d\n\n", gem_getvalue(gems+len-1)+6*gem_getvalue_Y(amps+len-1));
+			printf("Total value:\t%d\n\n", value+6*gem_getvalue_Y(amps+len-1));
 			printf("Killgem\n");
-			printf("Value:\t%d\n", gem_getvalue(gems+len-1));
+			printf("Value:\t%d\n", value);
 			gem_print(gems+len-1);
 			printf("Amplifier\n");
 			printf("Value:\t%d\n", gem_getvalue_Y(amps+len-1));
@@ -358,7 +359,6 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	for (i=0;i<lena;++i) free(poolY[i]);		// free amps
 	for (i=0;i<lena;++i) free(poolYf[i]);		// free amps compressed
 	if (output_options & mask_red && len > 2) {
-		array_free(gem_array, array_index);
 		free(gem_array);
 	}
 }

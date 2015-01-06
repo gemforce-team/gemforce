@@ -303,15 +303,16 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		ampsc[len-1]=ampsc[best_index];
 	}
 
-	gem** gem_array;
-	int array_index;
+	gem* gem_array;
+	gem red;
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, &gem_array, &array_index, (amps+len-1)->leech, leech_ratio);
+			int value=gem_getvalue(gems+len-1);
+			gems[len-1]=gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, (amps+len-1)->leech, leech_ratio);
 			printf("Setup with red added:\n\n");
 			printf("Managem spec\n");
-			printf("Value:\t%d\n",gem_getvalue(gems+len-1));		// made to work well with -u
+			printf("Value:\t%d\n", value);		// made to work well with -u
 			gem_print(gems+len-1);
 			printf("Amplifier spec (x%d)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_O(amps+len-1));
@@ -384,7 +385,6 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	free(poolO);
 	free(bestO);														// free amps compressed
 	if (output_options & mask_red && len > 2) {
-		array_free(gem_array, array_index);
 		free(gem_array);
 	}
 }

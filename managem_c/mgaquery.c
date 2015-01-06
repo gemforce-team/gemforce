@@ -275,16 +275,17 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		amps[len-1]=amps[best_index];
 	}
 
-	gem** gem_array;
-	int array_index;
+	gem* gem_array;
+	gem red;
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			gems[len-1]=gem_putred(gems+len-1, &gem_array, &array_index, (amps+len-1)->leech, 4*0.23*2.8);
+			int value=gem_getvalue(gems+len-1);
+			gems[len-1]=gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, (amps+len-1)->leech, 4*0.23*2.8);
 			printf("Setup with red added:\n\n");
-			printf("Total value:\t%d\n\n", gem_getvalue(gems+len-1)+6*gem_getvalue_O(amps+len-1));
+			printf("Total value:\t%d\n\n", value+6*gem_getvalue_O(amps+len-1));
 			printf("Managem\n");
-			printf("Value:\t%d\n", gem_getvalue(gems+len-1));
+			printf("Value:\t%d\n", value);
 			gem_print(gems+len-1);
 			printf("Amplifier\n");
 			printf("Value:\t%d\n", gem_getvalue_O(amps+len-1));
@@ -330,7 +331,6 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	for (i=0;i<lena;++i) free(poolO[i]);		// free amps
 	free(bestO);														// free amps compressed
 	if (output_options & mask_red && len > 2) {
-		array_free(gem_array, array_index);
 		free(gem_array);
 	}
 }

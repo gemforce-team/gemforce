@@ -165,16 +165,14 @@ char gem_color(gem* p_gem)
 	else return 'k';
 }
 
-#include "print_utils.h"
-
-gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem** tobe_freed, int* tbf_index)
-{		// more magic
+gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem* new_array, int* new_index)
+{
 	if (gemf->father==NULL || *isRed) return gemf;
 	if (gemf->father->father==NULL) {		// father is g1
 		if (*curr < last) (*curr)++;
 		else {
-			gem* gemt=malloc(sizeof(gem));
-			tobe_freed[(*tbf_index)++]=gemt;
+			(*new_index)++;
+			gem* gemt=new_array+(*new_index);
 			gem_combine(pred, gemf->mother, gemt);
 			*isRed=1;
 			return gemt;
@@ -183,32 +181,21 @@ gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem** to
 	if (gemf->mother->father==NULL) {		// mother is g1
 		if (*curr < last) (*curr)++;
 		else {
-			gem* gemt=malloc(sizeof(gem));
-			tobe_freed[(*tbf_index)++]=gemt;
+			(*new_index)++;
+			gem* gemt=new_array+(*new_index);
 			gem_combine(gemf->father, pred, gemt);
 			*isRed=1;
 			return gemt;
 		}
 	}
-	int wasRed;
-	wasRed=(*isRed);
-	gem* g1= gem_explore(gemf->father, isRed, pred, last, curr, tobe_freed, tbf_index);
-	if (wasRed==(*isRed)) g1=gemf->father;
-	wasRed=(*isRed);
-	gem* g2= gem_explore(gemf->mother, isRed, pred, last, curr, tobe_freed, tbf_index);
-	if (wasRed==(*isRed)) g2=gemf->mother;
+	gem* g1= gem_explore(gemf->father, isRed, pred, last, curr, new_array, new_index);
+	gem* g2= gem_explore(gemf->mother, isRed, pred, last, curr, new_array, new_index);
 	if (g1==gemf->father && g2==gemf->mother) return gemf;
 	
-	gem* gemt=malloc(sizeof(gem));
-	tobe_freed[(*tbf_index)++]=gemt;
+	(*new_index)++;
+	gem* gemt=new_array+(*new_index);
 	gem_combine(g1, g2, gemt);
 	return gemt;
-}
-
-void array_free(gem** tobe_freed, int tbf_index)
-{
-	int i;
-	for (i=0; i<tbf_index; ++i) free(tobe_freed[i]);
 }
 
 double gem_cfr_power(gem gem1, double amp_damage, double amp_crit, double damage_ratio, double crit_ratio)
@@ -217,42 +204,41 @@ double gem_cfr_power(gem gem1, double amp_damage, double amp_crit, double damage
 	return (gem1.damage+damage_ratio*amp_damage)*gem1.bbound*(gem1.crit+crit_ratio*amp_crit)*gem1.bbound;
 }
 
-gem gem_putred(gem* gemf, gem*** gem_array, int* array_index, double amp_damage, double amp_crit, double dr, double cr)
-{		// magic
+gem gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_damage, double amp_crit, double dr, double cr)
+{
 	int isRed;
 	int last;
 	int curr;
-	int len=gem_getvalue(gemf);
 	double best_pow=0;
-	gem* red=malloc(sizeof(gem));
 	gem_init(red,1,0.909091,0,0);
 	gem* best_gem=NULL;
-	gem** tobe_freed=malloc(len*sizeof(gem));
-	gem** btb_freed=malloc(len*sizeof(gem));
-	int tbf_index;
-	int btbf_index=0;
-	for (last=0; last<len; last++) {
-		isRed=0;
-		curr=0;
-		tbf_index=0;
-		gem* gp=gem_explore(gemf, &isRed, red, last, &curr, tobe_freed, &tbf_index);
-		double new_pow=gem_cfr_power(*gp, amp_damage, amp_crit, dr, cr);
-		if (new_pow > best_pow) {
-			best_pow=new_pow;
-			if (best_gem!=NULL) array_free(btb_freed, btbf_index);
-			best_gem=gp;
-			btbf_index=tbf_index;
-			int i;
-			for (i=0; i< tbf_index; ++i) btb_freed[i]=tobe_freed[i];
+	gem* new_array;
+	gem* best_array=NULL;
+	int new_index;
+	int i;
+	for (i=0; i<pool_length; ++i) {
+		gem* gemf=pool+i;
+		for (last=0; last<value; last++) {
+			isRed=0;
+			curr=0;
+			new_array=malloc(value*sizeof(gem));
+			new_index=0;
+			gem* gp=gem_explore(gemf, &isRed, red, last, &curr, new_array, &new_index);
+			double new_pow=gem_cfr_power(*gp, amp_damage, amp_crit, dr, cr);
+			if (new_pow > best_pow) {
+				best_pow=new_pow;
+				if (best_gem!=NULL) free(best_array);
+				best_gem=gp;
+				best_array=new_array;
+			}
+			else free(new_array);
 		}
-		else array_free(tobe_freed, tbf_index);
 	}
-	free(tobe_freed);
-	gem target=*best_gem;
-	btb_freed[btbf_index]=red;
-	(*gem_array)=btb_freed;
-	(*array_index)=btbf_index+1;
-	return target;
+	(*gem_array)=best_array;
+	if (best_gem==NULL) return (gem){0};
+	return *best_gem;
 }
+
+#include "print_utils.h"
 
 #endif // _KILLGEM_UTILS_H
