@@ -455,7 +455,7 @@ int main(int argc, char** argv)
 	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
-		lenc= len;
+		lenc= 16;		// 16c as default combine
 	}
 	else if (optind+2==argc) {
 		len = atoi(argv[optind]);
