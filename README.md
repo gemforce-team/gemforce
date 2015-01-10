@@ -33,7 +33,7 @@ where flags are:
   i - info  
   q - quiet, print only final gem  
   u - upto, at the end consider the best gem up to N, not the Nth  
-  r - adds red to the best gem, then consider the new gem
+  r - adds red to the best gem, then consider the new gem  
   f (filepath) - change table file (build/query only)  
   s (num) - change chunk size (you should not need this)  
   N (num) - specify how many amps you use (omnia programs only)  
