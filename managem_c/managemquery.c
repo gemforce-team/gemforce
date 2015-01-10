@@ -80,7 +80,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	gem* gem_array;
 	gem red;
 	if (output_options & mask_red) {
-		if (len < 3) printf("I could not add red!\n\n");
+		if (len < 3 || pool_zero!=2) printf("I could not add red!\n\n");
 		else {
 			int value=gem_getvalue(gems+len-1);
 			gems[len-1]=gem_putred(pool[value-1], pool_length[value-1], value, &red, &gem_array, 0, 0);
