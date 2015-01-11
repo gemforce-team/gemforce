@@ -12,11 +12,8 @@ void gem_print(gem *p_gem) {
 }
 
 char gem_color(gem* p_gem) {
-	return 'o';
-}
-
-double gem_power(gem gem1) {
-	return gem1.leech;
+	if (p_gem->leech==0) return 'r';
+	else return 'o';
 }
 
 #include "print_utils.h"
@@ -36,10 +33,11 @@ void worker(int len, int output_options, char* filename)
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	if (prevmax<len-1) {
-		fclose(table);
+		fclose(table);			// close
 		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
-		free(pool);		// free
-		free(gems);		// free
+		free(pool);					// free
+		free(pool_length);	// free
+		free(gems);					// free
 		printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
@@ -85,6 +83,20 @@ void worker(int len, int output_options, char* filename)
 		gems[len-1]=gems[best_index];
 	}
 
+	gem* gem_array;
+	gem red;
+	if (output_options & mask_red) {
+		if (len < 2) printf("I could not add red!\n\n");
+		else {
+			int value=gem_getvalue(gems+len-1);
+			gems[len-1]=gem_putred(pool[value-1], pool_length[value-1], value, &red, &gem_array);
+			printf("Gem with red added:\n\n");
+			printf("Value:\t%d\n", value);		// made to work well with -u
+			printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(value));
+			gem_print(gems+len-1);
+		}
+	}
+
 	if (output_options & mask_parens) {
 		printf("Compressed combining scheme:\n");
 		print_parens_compressed(gems+len-1);
@@ -106,9 +118,12 @@ void worker(int len, int output_options, char* filename)
 	fclose(table);
 	for (i=0;i<len;++i) free(pool[i]);		// free
 	free(pool);		// free
+	free(pool_length);
 	free(gems);		// free
+	if (output_options & mask_red && len > 1) {
+		free(gem_array);
+	}
 }
-
 
 int main(int argc, char** argv)
 {
@@ -117,7 +132,7 @@ int main(int argc, char** argv)
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iptcequf:"))!=-1) {
+	while ((opt=getopt(argc,argv,"iptcequrf:"))!=-1) {
 		switch(opt) {
 			case 'i':
 				output_options |= mask_info;
@@ -139,6 +154,9 @@ int main(int argc, char** argv)
 				break;
 			case 'u':
 				output_options |= mask_upto;
+				break;
+			case 'r':
+				output_options |= mask_red;
 				break;
 			case 'f':
 				strcpy(filename,optarg);
