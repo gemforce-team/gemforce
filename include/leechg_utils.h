@@ -8,13 +8,13 @@ struct Gem_O {
 	struct Gem_O* mother;
 };
 
-int int_max(int a, int b)
+inline int int_max(int a, int b)
 {
 	if (a > b) return a;
 	else return b;
 }
 
-int gem_better(gem gem1, gem gem2)
+inline int gem_better(gem gem1, gem gem2)
 {
 	return gem1.leech>gem2.leech;
 }
@@ -69,7 +69,7 @@ void gem_init(gem *p_gem, int grd, double leech)
 	p_gem->mother=NULL;
 }
 
-double gem_power(gem gem1) {
+inline double gem_power(gem gem1) {
 	return gem1.leech;
 }
 

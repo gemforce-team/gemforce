@@ -33,29 +33,38 @@ void worker(int len, int output_options)
 	for (i=1; i<len; ++i) {
 		int j,k,h;
 		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
-		pool_length[i]=grade_max-1;
-		pool[i]=malloc(pool_length[i]*sizeof(gem));
-		for (j=0; j<pool_length[i]; ++j) pool[i][j]=(gem){0};
+		gem temp_array[grade_max-1];				// this will have all the grades
+		for (j=0; j<grade_max-1; ++j) temp_array[j]=(gem){0};
 		int eoc=(i+1)/2;				//end of combining
 		int comb_tot=0;
 
-		for (j=0;j<eoc;++j)										// combine gems and put them in temp pools
+		for (j=0;j<eoc;++j)										// combine gems and put them in temp array
 		if ((i-j)/(j+1) < 10) {								// value ratio < 10
-			for (k=0; k< pool_length[j]; ++k)
-			if ((pool[j]+k)->grade!=0) {				// extensive false gems check ahead
-				for (h=0; h< pool_length[i-1-j]; ++h)
-				if ((pool[i-1-j]+h)->grade!=0) {
+			for (k=0; k< pool_length[j]; ++k) {
+				for (h=0; h< pool_length[i-1-j]; ++h) {
 					int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
 					if (abs(delta)<=2) {						// grade difference <= 2
 						comb_tot++;
 						gem temp;
 						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
 						int grd=temp.grade-2;
-						if (gem_better(temp, pool[i][grd])) {
-							pool[i][grd]=temp;
+						if (gem_better(temp, temp_array[grd])) {
+							temp_array[grd]=temp;
 						}
 					}
 				}
+			}
+		}
+		int gemNum=0;
+		for (j=0; j<grade_max-1; ++j) if (temp_array[j].grade!=0) gemNum++;
+		pool_length[i]=gemNum;
+		pool[i]=malloc(pool_length[i]*sizeof(gem));
+		
+		int place=0;
+		for (j=0; j<grade_max-1; ++j) {				// copying to pool
+			if (temp_array[j].grade!=0) {
+				pool[i][place]=temp_array[j];
+				place++;
 			}
 		}
 		
