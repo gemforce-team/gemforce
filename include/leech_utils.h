@@ -182,6 +182,10 @@ void print_eq_O(gemO* p_gem, int* printed_uid)
 
 void print_equations_O(gemO* gemf)
 {
+	if (gemf->grade==0) {
+		printf("-\n");
+		return;
+	}
 	int value=gem_getvalue_O(gemf);
 	int len=2*value-1;
 	gemO** p_gems=malloc(len*sizeof(gemO*));		// let's store all the gem pointers
