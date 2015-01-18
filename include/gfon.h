@@ -8,15 +8,16 @@ void line_init(FILE* table, int pool_zero)
 {
 	switch (pool_zero) {
 		case 1:				// combines
-			fprintf(table, "1\n-1 0 0\n\n");
+			fprintf(table, "1\n-1 0 0\n");
 		break;
 		case 2:				// specces
 			fprintf(table, "2\n-1 1 0\n");
-			fprintf(table, "-1 0 1\n\n");
+			fprintf(table, "-1 0 1\n");
 		break;
 		default:
 		break;
 	}
+	fprintf(table, "0\n\n");
 }
 
 FILE* table_init(char* filename, int pool_zero)
@@ -70,7 +71,7 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 	for (i=0;i<pool_length[0];++i) {				// discard value 0 gems
 		fscanf(table, "%*[^\n]\n");
 	}
-	fscanf(table, "\n");										// discard newline
+	fscanf(table, "%*d\n\n");								// discard iteration number
 	int prevmax=0;
 	for (i=1;i<len;++i) {
 		int eof_check=fscanf(table, "%d\n", pool_length+i);				// get pool length
@@ -81,19 +82,18 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 			for (j=0; j<pool_length[i]; ++j) {
 				int value_father, offset_father;
 				int value_mother, offset_mother;
-				int integrity_check=fscanf(table, "%d %x %x\n", &value_father, &offset_father, &offset_mother);
+				int integrity_check=fscanf(table, "%x %x %x\n", &value_father, &offset_father, &offset_mother);
 				if (integrity_check!=3) {
 					printf("\nERROR: integrity check failed at byte %ld\n", ftell(table));
 					printf("Your table may be corrupt, brutally exiting...\n");
 					exit(1);
 				}
-				if (value_father != -1) {
+				else {
 					value_mother=i-1-value_father;
 					gem_combine(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
 				}
-				else pool[i][j]=(gem){0};			// 0-NULL init
 			}
-			fscanf(table, "\n");						// discard newline
+			fscanf(table, "%*d\n\n");						// discard iteration number
 			prevmax++;
 		}
 	}
@@ -104,24 +104,22 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 void table_write_iteration(gem** pool, int* pool_length, int iteration, FILE* table)
 {
 	int i=iteration;
-	int j,k;
+	int j;
 	fprintf(table, "%d\n", pool_length[i]);
 	for (j=0;j<pool_length[i];++j) {
-		if (pool[i][j].father==NULL) fprintf(table, "-1 0 0\n");		// solve false g2(3) pointer problem
-		else {
-			for (k=0; ; k++) {								// find and print parents
-				int place=pool[i][j].father - pool[k];
-				if (place < pool_length[k] && place >=0) {
-					fprintf(table, "%d %x", k, place);
-					int mom_pool=i-1-k;
-					place=pool[i][j].mother - pool[mom_pool];
-					fprintf(table, " %x\n", place);
-					break;
-				}
+		int k;
+		for (k=0; ; k++) {								// find and print parents
+			int place=pool[i][j].father - pool[k];
+			if (place < pool_length[k] && place >=0) {
+				fprintf(table, "%x %x", k, place);
+				int mom_pool=i-1-k;
+				place=pool[i][j].mother - pool[mom_pool];
+				fprintf(table, " %x\n", place);
+				break;
 			}
 		}
 	}
-	fprintf(table, "\n");
+	fprintf(table, "%d\n\n", i);
 	fflush(table);
 }
 
