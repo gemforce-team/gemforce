@@ -42,8 +42,9 @@ void worker(int len, int output_options, char* filename)
 		for (j=0;j<eoc;++j)										// combine gems and put them in temp array
 		if ((i-j)/(j+1) < 10) {								// value ratio < 10
 			for (k=0; k< pool_length[j]; ++k) {
+				int g1=(pool[j]+k)->grade;
 				for (h=0; h< pool_length[i-1-j]; ++h) {
-					int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
+					int delta=g1 - (pool[i-1-j]+h)->grade;
 					if (abs(delta)<=2) {						// grade difference <= 2
 						comb_tot++;
 						gem temp;

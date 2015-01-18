@@ -47,17 +47,15 @@ void worker(int len, int output_options, int pool_zero, int size)
 		for (j=0; j<grade_max-1; ++j) {							// init everything
 			temp_pools[j]=malloc(size*sizeof(gem));
 			temp_index[j]=0;
-			subpools[j]=malloc(sizeof(gem));
-			subpools_length[j]=1;
-			subpools[j][0]=(gem){0};		// 0-NULL init
+			subpools[j]=NULL;										// just to be able to free it
+			subpools_length[j]=0;
 		}
 		for (j=0;j<eoc;++j)										// combine gems and put them in temp pools
 		if ((i-j)/(j+1) < 10) {								// value ratio < 10
-			for (k=0; k< pool_length[j]; ++k)
-			if ((pool[j]+k)->grade!=0) {				// extensive false gems check ahead
-				for (h=0; h< pool_length[i-1-j]; ++h)
-				if ((pool[i-1-j]+h)->grade!=0) {
-					int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
+			for (k=0; k< pool_length[j]; ++k) {
+				int g1=(pool[j]+k)->grade;
+				for (h=0; h< pool_length[i-1-j]; ++h) {
+					int delta=g1 - (pool[i-1-j]+h)->grade;
 					if (abs(delta)<=2) {						// grade difference <= 2
 						comb_tot++;
 						gem temp;
