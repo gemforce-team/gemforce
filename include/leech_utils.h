@@ -107,7 +107,7 @@ void gem_init_O(gemO *p_gem, int grd, float leech)
 	p_gem->mother=NULL;
 }
 
-int gem_better(gemO gem1, gemO gem2)
+inline int gem_better(gemO gem1, gemO gem2)
 {
 	return gem1.leech>gem2.leech;
 }

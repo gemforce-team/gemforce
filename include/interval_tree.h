@@ -29,7 +29,7 @@ int tree_check_after(int* tree, int N, int place, int val)
 
 /* we also have support for an unapproximated tree of floats */
 
-float max (float a, float b)
+inline float max (float a, float b)
 {
 	return a>b ? a : b;
 }

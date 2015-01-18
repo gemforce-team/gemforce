@@ -9,7 +9,7 @@ struct Gem_Y {
 	struct Gem_Y* mother;
 };
 
-int int_max(int a, int b)
+inline int int_max(int a, int b)
 {
 	if (a > b) return a;
 	else return b;
@@ -74,7 +74,7 @@ void gem_init(gem *p_gem, int grd, double damage, double crit)
 	p_gem->mother=NULL;
 }
 
-int gem_less_equal(gem gem1, gem gem2)
+inline int gem_less_equal(gem gem1, gem gem2)
 {
 	if (gem1.damage < gem2.damage) return 1;
 	else if (gem1.damage == gem2.damage && gem1.crit < gem2.crit) return 1;

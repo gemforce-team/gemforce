@@ -17,13 +17,13 @@ struct Gem_OB {
 	struct Gem_OB* mother;
 };
 
-int int_max(int a, int b)
+inline int int_max(int a, int b)
 {
 	if (a > b) return a;
 	else return b;
 }
 
-int gem_more_powerful(gem gem1, gem gem2)
+inline int gem_more_powerful(gem gem1, gem gem2)
 {
 	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);		// optimization at infinity hits (hit lv infinity)
 }
@@ -89,7 +89,7 @@ void gem_init(gem *p_gem, int grd, double leech, double bbound)
 	p_gem->mother=NULL;
 }
 
-int gem_less_equal(gem gem1, gem gem2)
+inline int gem_less_equal(gem gem1, gem gem2)
 {
 	if ((int)(gem1.leech*ACC) != (int)(gem2.leech*ACC))
 		return gem1.leech<gem2.leech;
@@ -147,7 +147,7 @@ void gem_sort (gem* gems, int len)
 	ins_sort (gems, len);			// finish the nearly sorted array
 }
 
-double gem_power(gem gem1)
+inline double gem_power(gem gem1)
 {
 	return gem1.leech*gem1.bbound;     // amp-less
 }
@@ -193,7 +193,7 @@ gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem* new
 	return gemt;
 }
 
-double gem_cfr_power(gem gem1, double amp_leech, double leech_ratio)
+inline double gem_cfr_power(gem gem1, double amp_leech, double leech_ratio)
 {
 	if (gem1.leech==0) return 0;
 	return (gem1.leech+leech_ratio*amp_leech)*gem1.bbound;

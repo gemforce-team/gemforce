@@ -10,18 +10,18 @@ struct Gem_YB {
 	struct Gem_YB* mother;
 };
 
-int int_max(int a, int b) 
+inline int int_max(int a, int b)
 {
 	if (a > b) return a;
 	else return b;
 }
 
-double gem_power(gem gem1)
+inline double gem_power(gem gem1)
 {
 	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound;			// amp-less
 }
 
-int gem_more_powerful(gem gem1, gem gem2)
+inline int gem_more_powerful(gem gem1, gem gem2)
 {
 	return (gem_power(gem1) > gem_power(gem2));
 }
@@ -97,7 +97,7 @@ void gem_init(gem *p_gem, int grd, double damage, double crit, double bbound)
 	p_gem->mother=NULL;
 }
 
-int gem_less_equal(gem gem1, gem gem2)
+inline int gem_less_equal(gem gem1, gem gem2)
 {
 	if ((int)(gem1.damage*ACC) != (int)(gem2.damage*ACC))
 		return gem1.damage<gem2.damage;
@@ -198,7 +198,7 @@ gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem* new
 	return gemt;
 }
 
-double gem_cfr_power(gem gem1, double amp_damage, double amp_crit, double damage_ratio, double crit_ratio)
+inline double gem_cfr_power(gem gem1, double amp_damage, double amp_crit, double damage_ratio, double crit_ratio)
 {
 	if (gem1.crit==0) return 0;
 	return (gem1.damage+damage_ratio*amp_damage)*gem1.bbound*(gem1.crit+crit_ratio*amp_crit)*gem1.bbound;

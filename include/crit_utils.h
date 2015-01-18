@@ -118,7 +118,7 @@ void gem_init_Y(gemY *p_gem, int grd, float damage, float crit)
 	p_gem->mother=NULL;
 }
 
-int gem_has_less_damage_crit(gemY gem1, gemY gem2)
+inline int gem_has_less_damage_crit(gemY gem1, gemY gem2)
 {
 	if (gem1.damage < gem2.damage) return 1;
 	else if (gem1.damage == gem2.damage && gem1.crit < gem2.crit) return 1;
