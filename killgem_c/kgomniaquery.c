@@ -22,11 +22,11 @@ void print_omnia_table(gem* gems, gemY* amps, double* powers, int len)
 {
 	printf("Killgem\tAmps\tPower (resc. 10m)\n");			// we'll rescale again for 10m, no need to have 10 digits
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\n", i+1, gem_getvalue_Y(amps+i), powers[i]/10000/1000);
+	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\n", i+1, gem_getvalue_Y(amps+i), powers[i]/1e7);
 	printf("\n");
 }
 
-void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, double crit_ratio, double damage_ratio, int Namps)
+void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, int TC, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);							// if the file is not good we exit
@@ -218,6 +218,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init_Y(ampsc,0,0,0);
 	powers[0]=0;
 	double iloglenc=1/log(lenc);
+	double crit_ratio  =Namps*0.46*(1+(double)TC*3/100)/(1  +(double)TC/30);
+	double damage_ratio=Namps*0.28*(1+(double)TC*3/100)/(1.2+(double)TC/30);
 	if (!(output_options & mask_quiet)) {
 		printf("Killgem:\n");
 		gem_print(gems);
@@ -295,7 +297,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			if (output_options & mask_info) printf("Pool:\t%d\n",poolYc_length);
 			gem_print_Y(ampsc+i);
 			printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
-			printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/10000/1000);
+			printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/1e7);
 			fflush(stdout);								// forces buffer write, so redirection works well
 		}
 	}
@@ -520,16 +522,10 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (len<1 || lenc<1) {
-		printf("Improper gem number\n");
-		return 1;
-	}
 	if (filename[0]=='\0') strcpy(filename, "table_kgspec");
 	if (filenamec[0]=='\0') strcpy(filenamec, "table_kgcomb");
 	if (filenameA[0]=='\0') strcpy(filenameA, "table_crit");
-	double crit_ratio  =Namps*0.46*(1+(double)TC*3/100)/(1  +(double)TC/30);
-	double damage_ratio=Namps*0.28*(1+(double)TC*3/100)/(1.2+(double)TC/30);
-	worker(len, lenc, output_options, filename, filenamec, filenameA, crit_ratio, damage_ratio, Namps);
+	worker(len, lenc, output_options, filename, filenamec, filenameA, TC, Namps);
 	return 0;
 }
 

@@ -18,7 +18,7 @@ void print_omnia_table(gem* gems, gemO* amps, double* powers, int len)
 	printf("\n");
 }
 
-void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, double leech_ratio, int Namps)
+void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, int TC, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);							// if the file is not good we exit
@@ -183,6 +183,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init_O(ampsc,0,0);
 	powers[0]=0;
 	double iloglenc=1/log(lenc);
+	double leech_ratio=Namps*0.46*(1+(double)TC*3/100)/(1+(double)TC/30);
 	if (!(output_options & mask_quiet)) {
 		printf("Managem:\n");
 		gem_print(gems);
@@ -476,7 +477,6 @@ int main(int argc, char** argv)
 	if (filename[0]=='\0') strcpy(filename, "table_mgspec");
 	if (filenamec[0]=='\0') strcpy(filenamec, "table_mgcomb");
 	if (filenameA[0]=='\0') strcpy(filenameA, "table_leech");
-	double leech_ratio=Namps*0.46*(1+(double)TC*3/100)/(1+(double)TC/30);
-	worker(len, lenc, output_options, filename, filenamec, filenameA, leech_ratio, Namps);
+	worker(len, lenc, output_options, filename, filenamec, filenameA, TC, Namps);
 	return 0;
 }
