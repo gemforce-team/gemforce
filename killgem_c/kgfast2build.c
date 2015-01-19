@@ -43,36 +43,49 @@ void worker(int len, int output_options, char* filename)
 		int j,k,h;
 		int eoc=(i+1)/2;        //end of combining
 		int comb_tot=0;
+
 		int ngrades=(int)log2(i+1);
-		pool_length[i]=nchecks*ngrades;
-		pool[i]=malloc(pool_length[i]*sizeof(gem));
-		for (j=0; j<pool_length[i]; ++j) pool[i][j]=(gem){0};
+		int temp_length=nchecks*ngrades;
+		gem temp_array[temp_length];					// this will have all the grades
+		for (j=0; j<temp_length; ++j) temp_array[j]=(gem){0};
 
 		for (j=0;j<eoc;++j)										// combine gems and put them in temp pools
 		if ((i-j)/(j+1) < 10) {								// value ratio < 10
-			for (k=0; k< pool_length[j]; ++k)
-			if ((pool[j]+k)->grade!=0) {				// extensive false gems check ahead
-				for (h=0; h< pool_length[i-1-j]; ++h)
-				if ((pool[i-1-j]+h)->grade!=0) {
-					int delta=(pool[j]+k)->grade - (pool[i-1-j]+h)->grade;
+			for (k=0; k< pool_length[j]; ++k) {
+				int g1=(pool[j]+k)->grade;
+				for (h=0; h< pool_length[i-1-j]; ++h) {
+					int delta=g1 - (pool[i-1-j]+h)->grade;
 					if (abs(delta)<=2) {						// grade difference <= 2
 						comb_tot++;
 						gem temp;
 						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
 						int grd=temp.grade-2;
-						if      ( gem_rk511(temp) >= gem_rk511(pool[i][grd]) ) {							// rk511 check
-							pool[i][grd]=temp;							// put in pool
+						if      ( gem_rk511(temp) >= gem_rk511(temp_array[grd]) ) {							// rk511 check
+							temp_array[grd]=temp;							// put in pool
 						}
-						else if ( gem_power(temp) >= gem_power(pool[i][ngrades+grd]) ) {			// rk211 check
-							pool[i][ngrades+grd]=temp;			// put in pool
+						else if ( gem_power(temp) >= gem_power(temp_array[ngrades+grd]) ) {			// rk211 check
+							temp_array[ngrades+grd]=temp;			// put in pool
 						}
-						else if ( gem_rk311(temp) >= gem_rk311(pool[i][2*ngrades+grd]) ) {		// rk311 check
-							pool[i][2*ngrades+grd]=temp;		// put in pool
+						else if ( gem_rk311(temp) >= gem_rk311(temp_array[2*ngrades+grd]) ) {		// rk311 check
+							temp_array[2*ngrades+grd]=temp;		// put in pool
 						}
 					}
 				}
 			}
 		}
+		int gemNum=0;
+		for (j=0; j<temp_length; ++j) if (temp_array[j].grade!=0) gemNum++;
+		pool_length[i]=gemNum;
+		pool[i]=malloc(pool_length[i]*sizeof(gem));
+		
+		int place=0;
+		for (j=0; j<temp_length; ++j) {				// copying to pool
+			if (temp_array[j].grade!=0) {
+				pool[i][place]=temp_array[j];
+				place++;
+			}
+		}
+		
 		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
 			if (output_options & mask_info) {
