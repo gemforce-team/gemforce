@@ -78,7 +78,7 @@ int pool_from_table_Y(gemY** pool, int* pool_length, int len, FILE* table)
 	for (i=0;i<pool_length[0];++i) {				// discard value 0 gems
 		fscanf(table, "%*[^\n]\n");
 	}
-	fscanf(table, "\n");										// discard newline
+	fscanf(table, "%*d\n\n");								// discard iteration number
 	int prevmax=0;
 	for (i=1;i<len;++i) {
 		int eof_check=fscanf(table, "%d\n", pool_length+i);				// get pool length
@@ -89,19 +89,18 @@ int pool_from_table_Y(gemY** pool, int* pool_length, int len, FILE* table)
 			for (j=0; j<pool_length[i]; ++j) {
 				int value_father, offset_father;
 				int value_mother, offset_mother;
-				int integrity_check=fscanf(table, "%d %x %x\n", &value_father, &offset_father, &offset_mother);
+				int integrity_check=fscanf(table, "%x %x %x\n", &value_father, &offset_father, &offset_mother);
 				if (integrity_check!=3) {
 					printf("\nERROR: integrity check failed at byte %ld\n", ftell(table));
 					printf("Your table may be corrupt, brutally exiting...\n");
 					exit(1);
 				}
-				if (value_father != -1) {
+				else {
 					value_mother=i-1-value_father;
 					gem_combine_Y(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
 				}
-				else pool[i][j]=(gemY){0};			// 0-NULL init
 			}
-			fscanf(table, "\n");						// discard newline
+			fscanf(table, "%*d\n\n");						// discard iteration number
 			prevmax++;
 		}
 	}
