@@ -10,23 +10,23 @@ fi
 
 mkdir bin
 
-if [ -d "managem_c" ]; then
+if [ -d "managem" ]; then
 	echo "Compiling leech/managem programs"
-	gcc -O2 -lm -I "include" managem_c/leechquery.c   -o bin/leechquery
-	gcc -O2 -lm -I "include" managem_c/managemquery.c -o bin/managemquery
-	gcc -O2 -lm -I "include" managem_c/mgaquery.c     -o bin/mgaquery
-	gcc -O2 -lm -I "include" managem_c/mgomniaquery.c -o bin/mgomniaquery
+	gcc -O2 -lm -I "include" managem/leechquery.c   -o bin/leechquery
+	gcc -O2 -lm -I "include" managem/managemquery.c -o bin/managemquery
+	gcc -O2 -lm -I "include" managem/mgaquery.c     -o bin/mgaquery
+	gcc -O2 -lm -I "include" managem/mgomniaquery.c -o bin/mgomniaquery
 else
-	echo "No managem_c folder found, you get no leech/managem programs"
+	echo "No managem folder found, you get no leech/managem programs"
 fi
 
-if [ -d "killgem_c" ]; then
+if [ -d "killgem" ]; then
 	echo "Compiling killgem programs"
-	gcc -O2 -lm -I "include" killgem_c/killgemquery.c -o bin/killgemquery
-	gcc -O2 -lm -I "include" killgem_c/kgaquery.c     -o bin/kgaquery
-	gcc -O2 -lm -I "include" killgem_c/kgomniaquery.c -o bin/kgomniaquery
+	gcc -O2 -lm -I "include" killgem/killgemquery.c -o bin/killgemquery
+	gcc -O2 -lm -I "include" killgem/kgaquery.c     -o bin/kgaquery
+	gcc -O2 -lm -I "include" killgem/kgomniaquery.c -o bin/kgomniaquery
 else
-	echo "No killgem_c folder found, you get no killgem programs"
+	echo "No killgem folder found, you get no killgem programs"
 fi
 
 if [ -d "gem_tables" ]; then
