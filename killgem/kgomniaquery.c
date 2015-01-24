@@ -316,7 +316,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Comb:\t%d\n",lenc);
 		gem_print_Y(ampsc+len-1);
 		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
-		printf("Global power (resc. 1k):\t%f\n\n\n", powers[len-1]/1e7);
+		printf("Global power (resc. 10m):\t%f\n\n\n", powers[len-1]/1e7);
 	}
 
 	if (output_options & mask_upto) {
