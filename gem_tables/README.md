@@ -9,7 +9,7 @@ These values are more than enough to query for the most common combine/specces.
 Full tables with the highest values we could compute can be retrived from the sister repository:
 [gemforce-tables](https://github.com/gemforce-team/gemforce-tables).
 
-From these full tables are extracted the results you see in the [results folder](../tree/master/results).  
+From these full tables are extracted the results you see in the [results folder](results).  
 If you are interested in helping me expand them over my coding ability/computational power feel free to contact me (12345ieee).
 
 
