@@ -342,7 +342,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Comb:\t%d\n",lenc);
 		gem_print_Y(ampsc+best_index);
 		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index], damage_ratio, crit_ratio));
-		printf("Global power (resc. 1k):\t%f\n\n\n", powers[best_index]/1e7);
+		printf("Global power (resc. 10m):\t%f\n\n\n", powers[best_index]/1e7);
 		gems[len-1]=gems[best_index];
 		amps[len-1]=amps[best_index];
 		gemsc[len-1]=gemsc[best_index];

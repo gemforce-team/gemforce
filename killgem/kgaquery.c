@@ -323,10 +323,10 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	}
 
 	if (output_options & mask_parens) {
-		printf("Killgem combining scheme:\n");
+		printf("Killgem speccing scheme:\n");
 		print_parens_compressed(gems+len-1);
 		printf("\n\n");
-		printf("Amplifier combining scheme:\n");
+		printf("Amplifier speccing scheme:\n");
 		print_parens_compressed_Y(amps+len-1);
 		printf("\n\n");
 	}
