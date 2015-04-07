@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <unistd.h>
+#include <getopt.h>
 #include <string.h>
 typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
 #include "managem_utils.h"
@@ -191,36 +191,36 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		gem_print_O(amps);
 	}
 
-	for (i=1;i<len;++i) {																		// for every gem value
-		gems[i]=(gem){0};																			// we init the gems
-		amps[i]=(gemO){0};																		// to extremely weak ones
+	for (i=1;i<len;++i) {													// for every gem value
+		gems[i]=(gem){0};														// we init the gems
+		amps[i]=(gemO){0};													// to extremely weak ones
 		gemsc[i]=(gem){0};
-		ampsc[i]=combO;																				// <- this is ok only for mg
-																													// first we compare the gem alone
-		for (l=0; l<poolcf_length; ++l) {											// first search in the NC gem comb pool
+		ampsc[i]=combO;														// <- this is ok only for mg
+																					// first we compare the gem alone
+		for (l=0; l<poolcf_length; ++l) {								// first search in the NC gem comb pool
 			if (gem_power(poolcf[l]) > gem_power(gemsc[i])) {
 				gemsc[i]=poolcf[l];
 			}
 		}
-		for (k=0;k<poolf_length[i];++k) {											// and then in the the gem pool
+		for (k=0;k<poolf_length[i];++k) {								// and then in the the gem pool
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
 		}
 		int NS=i+1;
-		double c0 = log((double)NT/(i+1))*iloglenc;						// last we compute the combination number
+		double c0 = log((double)NT/(i+1))*iloglenc;					// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
-																													// now we compare the whole setup
-		for (j=0;j<i+1;++j) {																	// for every amp value from 1 up to gem_value
-			NS+=Namps;																					// we get the num of gems used in speccing
-			double c = log((double)NT/NS)*iloglenc;							// we compute the combination number
+																					// now we compare the whole setup
+		for (j=0;j<i+1;++j) {												// for every amp value from 1 up to gem_value
+			NS+=Namps;															// we get the num of gems used in speccing
+			double c = log((double)NT/NS)*iloglenc;					// we compute the combination number
 			double Ca= leech_ratio * pow(combO.leech,c);				// <- this is ok only for mg
-			double Pa= Ca * bestO[j].leech;											// <- because we already know the best amps
-			for (l=0; l<poolcf_length; ++l) {										// then we search in NC gem comb pool
+			double Pa= Ca * bestO[j].leech;								// <- because we already know the best amps
+			for (l=0; l<poolcf_length; ++l) {							// then we search in NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cg  = pow(gem_power(poolcf[l]),c);
-				for (k=0;k<poolf_length[i];++k) {									// and in the reduced gem pool
-					if (poolf[i][k].leech!=0) {											// if the gem has leech we go on
+				for (k=0;k<poolf_length[i];++k) {						// and in the reduced gem pool
+					if (poolf[i][k].leech!=0) {							// if the gem has leech we go on
 						double Palone = Cg * gem_power(poolf[i][k]);
 						double Pbg = Cbg * poolf[i][k].bbound;
 						double power = Palone + Pbg * Pa;  
@@ -253,7 +253,6 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			gem_print_O(ampsc+i);
 			printf("Spec base power (resc.):\t%f\n", gems[i].bbound*(gems[i].leech+leech_ratio*amps[i].leech));
 			printf("Global power (resc. 1k):\t%f\n\n\n", powers[i]/1000);
-			fflush(stdout);								// forces buffer write, so redirection works well
 		}
 	}
 	
@@ -463,7 +462,8 @@ int main(int argc, char** argv)
 		lenc= atoi(argv[optind+1]);
 	}
 	else {
-		printf("Unknown arguments:\n");
+		if (optind==argc) printf("No length specified\n");
+		else printf("Unknown arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;

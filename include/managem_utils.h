@@ -143,8 +143,8 @@ void quick_sort (gem* gems, int len)
 
 void gem_sort (gem* gems, int len)
 {
-	quick_sort (gems, len);		// partially sort
-	ins_sort (gems, len);			// finish the nearly sorted array
+	quick_sort (gems, len);    // partially sort
+	ins_sort (gems, len);      // finish the nearly sorted array
 }
 
 inline double gem_power(gem gem1)
@@ -163,7 +163,7 @@ char gem_color(gem* p_gem)
 gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem* new_array, int* new_index)
 {
 	if (gemf->father==NULL || *isRed) return gemf;
-	if (gemf->father->father==NULL) {		// father is g1
+	if (gemf->father->father==NULL) {    // father is g1
 		if (*curr < last) (*curr)++;
 		else {
 			(*new_index)++;
@@ -173,7 +173,7 @@ gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem* new
 			return gemt;
 		}
 	}
-	if (gemf->mother->father==NULL) {		// mother is g1
+	if (gemf->mother->father==NULL) {    // mother is g1
 		if (*curr < last) (*curr)++;
 		else {
 			(*new_index)++;

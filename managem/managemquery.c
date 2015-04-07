@@ -1,37 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <unistd.h>
+#include <getopt.h>
 #include <string.h>
-typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
+typedef struct Gem_OB gem;    // the strange order is so that managem_utils knows which gem type are we defining as "gem"
 #include "managem_utils.h"
 #include "gfon.h"
 
 void worker(int len, int output_options, int pool_zero, char* filename)
 {
-	FILE* table=file_check(filename);			// file is open to read
-	if (table==NULL) exit(1);							// if the file is not good we exit
+	FILE* table=file_check(filename);      // file is open to read
+	if (table==NULL) exit(1);              // if the file is not good we exit
 	int i;
-	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
-	gem** pool=malloc(len*sizeof(gem*));	// if not malloc-ed 200k is the limit (win)
+	gem* gems=malloc(len*sizeof(gem));     // if not malloc-ed 230k is the limit
+	gem** pool=malloc(len*sizeof(gem*));   // if not malloc-ed 200k is the limit (win)
 	int pool_length[len];
 	pool[0]=malloc(pool_zero*sizeof(gem));
 	pool_length[0]=pool_zero;
 	
-	if (pool_zero==1) {							// combine
+	if (pool_zero==1) {                    // combine
 		gem_init(pool[0],1,1,1);
 		gem_init(gems   ,1,1,1);
 	}
-	else {													// spec
+	else {                                 // spec
 		gem_init(pool[0]  ,1,1,0);
 		gem_init(pool[0]+1,1,0,1);
 		gem_init(gems     ,1,1,0);
 	}
 	
-	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
+	int prevmax=pool_from_table(pool, pool_length, len, table);    // pool filling
 	if (prevmax<len-1) {
 		fclose(table);
-		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
+		for (i=0;i<=prevmax;++i) free(pool[i]);      // free
 		printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
@@ -39,7 +39,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 
 	for (i=1; i<len; ++i) {
 		int j;
-		gems[i]=pool[i][0];						// choosing gem (criteria moved to more_power def)
+		gems[i]=pool[i][0];                 // choosing gem (criteria moved to more_power def)
 		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
@@ -51,11 +51,10 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 				printf("Pool:\t%d\n",pool_length[i]);
 			}
 			gem_print(gems+i);
-			fflush(stdout);								// forces buffer write, so redirection works well
 		}
 	}
 	
-	if (output_options & mask_quiet) {		// outputs last if we never seen any
+	if (output_options & mask_quiet) {     // outputs last if we never seen any
 		printf("Value:\t%d\n",len);
 		printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
 		gem_print(gems+len-1);
@@ -85,7 +84,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 			int value=gem_getvalue(gems+len-1);
 			gems[len-1]=gem_putred(pool[value-1], pool_length[value-1], value, &red, &gem_array, 0, 0);
 			printf("Gem with red added:\n\n");
-			printf("Value:\t%d\n", value);		// made to work well with -u
+			printf("Value:\t%d\n", value);      // made to work well with -u
 			printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(value));
 			gem_print(gems+len-1);
 		}
@@ -103,15 +102,15 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	}
 	if (output_options & mask_table) print_table(gems, len);
 	
-	if (output_options & mask_equations) {		// it ruins gems, must be last
+	if (output_options & mask_equations) {    // it ruins gems, must be last
 		printf("Equations:\n");
 		print_equations(gems+len-1);
 		printf("\n");
 	}
 	
 	fclose(table);
-	for (i=0;i<len;++i) free(pool[i]);		// free
-	free(pool);		// free
+	for (i=0;i<len;++i) free(pool[i]);     // free
+	free(pool);    // free
 	free(gems);
 	if (output_options & mask_red && len > 2 && pool_zero==2) {
 		free(gem_array);
@@ -122,9 +121,9 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int pool_zero=2;		// speccing by default
+	int pool_zero=2;     // speccing by default
 	int output_options=0;
-	char filename[256]="";		// it should be enough
+	char filename[256]="";     // it should be enough
 
 	while ((opt=getopt(argc,argv,"iptcequrf:"))!=-1) {
 		switch(opt) {
@@ -168,7 +167,8 @@ int main(int argc, char** argv)
 		if (*(p-1)=='c') pool_zero=1;
 	}
 	else {
-		printf("Unknown arguments:\n");
+		if (optind==argc) printf("No length specified\n");
+		else printf("Unknown arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
