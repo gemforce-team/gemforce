@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <unistd.h>
+#include <getopt.h>
 #include <string.h>
 typedef struct Gem_O gem;
 #include "leechg_utils.h"
@@ -20,12 +20,12 @@ char gem_color(gem* p_gem) {
 
 void worker(int len, int output_options, char* filename)
 {
-	FILE* table=file_check(filename);			// file is open to read
-	if (table==NULL) exit(1);							// if the file is not good we exit
+	FILE* table=file_check(filename);      // file is open to read
+	if (table==NULL) exit(1);              // if the file is not good we exit
 	int i;
-	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
-	gem** pool=malloc(len*sizeof(gem*));	// if not malloc-ed 690k is the limit
-	int* pool_length=malloc(len*sizeof(int));		// if not malloced 400k is the limit (win)
+	gem* gems=malloc(len*sizeof(gem));     // if not malloc-ed 230k is the limit
+	gem** pool=malloc(len*sizeof(gem*));   // if not malloc-ed 690k is the limit
+	int* pool_length=malloc(len*sizeof(int));    // if not malloced 400k is the limit (win)
 	pool[0]=malloc(sizeof(gem));
 	gem_init(gems,1,1);
 	gem_init(pool[0],1,1);
@@ -35,9 +35,9 @@ void worker(int len, int output_options, char* filename)
 	if (prevmax<len-1) {
 		fclose(table);			// close
 		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
-		free(pool);					// free
+		free(pool);				// free
 		free(pool_length);	// free
-		free(gems);					// free
+		free(gems);				// free
 		printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
@@ -57,7 +57,6 @@ void worker(int len, int output_options, char* filename)
 				printf("Pool:\t%d\n",pool_length[i]);
 			}
 			gem_print(gems+i);
-			fflush(stdout);								// forces buffer write, so redirection works well
 		}
 	}
 	
@@ -171,7 +170,8 @@ int main(int argc, char** argv)
 		len = atoi(argv[optind]);
 	}
 	else {
-		printf("Unknown arguments:\n");
+		if (optind==argc) printf("No length specified\n");
+		else printf("Unknown arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
@@ -186,5 +186,4 @@ int main(int argc, char** argv)
 	worker(len, output_options, filename);
 	return 0;
 }
-
 

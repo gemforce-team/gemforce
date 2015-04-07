@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <unistd.h>
-#include <string.h>
+#include <getopt.h>
 typedef struct Gem_O gem;
 #include "leechg_utils.h"
 
@@ -21,7 +20,7 @@ void worker(int len, int output_options)
 {
 	printf("\n");
 	int i;
-	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
+	gem* gems=malloc(len*sizeof(gem));      // if not malloc-ed 230k is the limit
 	gem* pool[len];
 	int pool_length[len];
 	pool[0]=malloc(sizeof(gem));
@@ -32,22 +31,25 @@ void worker(int len, int output_options)
 
 	for (i=1; i<len; ++i) {
 		int j,k,h;
-		int grade_max=(int)(log2(i+1)+1);		// gems with max grade cannot be destroyed, so this is a max, not a sup
-		gem temp_array[grade_max-1];				// this will have all the grades
-		for (j=0; j<grade_max-1; ++j) temp_array[j]=(gem){0};
-		int eoc=(i+1)/2;				//end of combining
+		const int eoc=(i+1)/ (1+1);      // end of combining
+		const int j0 =(i+1)/(10+1);      // value ratio < 10
 		int comb_tot=0;
 
-		for (j=0;j<eoc;++j)										// combine gems and put them in temp array
-		if ((i-j)/(j+1) < 10) {								// value ratio < 10
+		const int grade_max=(int)(log2(i+1)+1);    // gems with max grade cannot be destroyed, so this is a max, not a sup
+		gem temp_array[grade_max-1];         // this will have all the grades
+		for (j=0; j<grade_max-1; ++j) temp_array[j]=(gem){0};
+
+		for (j=j0; j<eoc; ++j) {         // combine gems and put them in temp array
+			gem* dad_array = pool[j];
+			gem* mom_array = pool[i-1-j];
 			for (k=0; k< pool_length[j]; ++k) {
-				int g1=(pool[j]+k)->grade;
+				int g1=(dad_array+k)->grade;
 				for (h=0; h< pool_length[i-1-j]; ++h) {
-					int delta=g1 - (pool[i-1-j]+h)->grade;
-					if (abs(delta)<=2) {						// grade difference <= 2
+					int delta=g1 - (mom_array+h)->grade;
+					if (abs(delta)<=2) {        // grade difference <= 2
 						comb_tot++;
 						gem temp;
-						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
+						gem_combine(dad_array+k, mom_array+h, &temp);
 						int grd=temp.grade-2;
 						if (gem_better(temp, temp_array[grd])) {
 							temp_array[grd]=temp;
@@ -62,7 +64,7 @@ void worker(int len, int output_options)
 		pool[i]=malloc(pool_length[i]*sizeof(gem));
 		
 		int place=0;
-		for (j=0; j<grade_max-1; ++j) {				// copying to pool
+		for (j=0; j<grade_max-1; ++j) {      // copying to pool
 			if (temp_array[j].grade!=0) {
 				pool[i][place]=temp_array[j];
 				place++;
@@ -82,11 +84,10 @@ void worker(int len, int output_options)
 				printf("Pool:\t%d\n",pool_length[i]);
 			}
 			gem_print(gems+i);
-			fflush(stdout);								// forces buffer write, so redirection works well
 		}
 	}
 	
-	if (output_options & mask_quiet) {		// outputs last if we never seen any
+	if (output_options & mask_quiet) {    // outputs last if we never seen any
 		printf("Value:\t%d\n",len);
 		printf("Growth:\t%f\n", log(gems[len-1].leech)/log(len));
 		gem_print(gems+len-1);
@@ -116,7 +117,7 @@ void worker(int len, int output_options)
 			int value=gem_getvalue(gems+len-1);
 			gems[len-1]=gem_putred(pool[value-1], pool_length[value-1], value, &red, &gem_array);
 			printf("Gem with red added:\n\n");
-			printf("Value:\t%d\n", value);		// made to work well with -u
+			printf("Value:\t%d\n", value);    // made to work well with -u
 			printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(value));
 			gem_print(gems+len-1);
 		}
@@ -134,13 +135,13 @@ void worker(int len, int output_options)
 	}
 	if (output_options & mask_table) print_table(gems, len);
 	
-	if (output_options & mask_equations) {		// it ruins gems, must be last
+	if (output_options & mask_equations) {   // it ruins gems, must be last
 		printf("Equations:\n");
 		print_equations(gems+len-1);
 		printf("\n");
 	}
 	
-	for (i=0;i<len;++i) free(pool[i]);		// free
+	for (i=0;i<len;++i) free(pool[i]);    // free
 	free(gems);
 	if (output_options & mask_red && len > 1) {
 		free(gem_array);
@@ -189,7 +190,8 @@ int main(int argc, char** argv)
 		len = atoi(argv[optind]);
 	}
 	else {
-		printf("Unknown arguments:\n");
+		if (optind==argc) printf("No length specified\n");
+		else printf("Unknown arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
