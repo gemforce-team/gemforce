@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <unistd.h>
+#include <getopt.h>
 #include <string.h>
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
@@ -41,7 +41,7 @@ void print_spec_table(gem* gems, gemY* amps, double* spec_coeffs, int len)
 void worker(int len, int output_options, int global_mode, double growth_comb, char* filename, char* filenameA)
 {
 	FILE* table=file_check(filename);			// file is open to read
-	if (table==NULL) exit(1);							// if the file is not good we exit
+	if (table==NULL) exit(1);						// if the file is not good we exit
 	int i;
 	gem* pool[len];
 	int pool_length[len];
@@ -51,7 +51,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	gem_init(pool[0]+1,1,1.186168,0,1);		// BB has more dmg
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// killgem pool filling
-	if (prevmax<len-1) {						// if the killgems are not enough
+	if (prevmax<len-1) {							// if the killgems are not enough
 		if (global_mode==0) {					// behave as kga_spec -> quit if not enough killgems
 			fclose(table);
 			for (i=0;i<=prevmax;++i) free(pool[i]);		// free
@@ -70,7 +70,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	gem* poolf[len];
 	int poolf_length[len];
 	
-	for (i=0;i<len;++i) {															// killgem spec compression
+	for (i=0;i<len;++i) {								// killgem spec compression
 		int j;
 		float maxcrit=0;
 		gem* temp_pool=malloc(pool_length[i]*sizeof(gem));
@@ -95,13 +95,13 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 				p_gem->grade=0;
 				broken++;
 			}
-		}														// all unnecessary gems broken
+		}												// all unnecessary gems broken
 		free(tree);									// free
 		
 		poolf_length[i]=pool_length[i]-broken;
 		poolf[i]=malloc(poolf_length[i]*sizeof(gem));			// pool init via broken
 		index=0;
-		for (j=0; j<pool_length[i]; ++j) {								// copying to subpool
+		for (j=0; j<pool_length[i]; ++j) {							// copying to subpool
 			if (temp_pool[j].grade!=0) {
 				poolf[i][index]=temp_pool[j];
 				index++;
@@ -116,7 +116,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	if (tableA==NULL) exit(1);						// if the file is not good we exit
 	int lena;
 	if (global_mode) lena=len/6;					// killgem_amps -> len/6
-	else lena=2*len;											// kga_spec -> 2x kg value
+	else lena=2*len;									// kga_spec -> 2x kg value
 	gemY* poolY[lena];
 	int poolY_length[lena];
 	poolY[0]=malloc(sizeof(gemY));
@@ -179,19 +179,19 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	spec_coeffs[0]=0;
 	
 	if (global_mode) { 							// behave like killgem_amps
-		for (i=1;i<len;++i) {																	// for every total value
-			gems[i]=(gem){0};																		// we init the gems
-			amps[i]=(gemY){0};																	// to extremely weak ones
-			for (k=0;k<poolf_length[i];++k) {										// first we compare the gem alone
+		for (i=1;i<len;++i) {												// for every total value
+			gems[i]=(gem){0};													// we init the gems
+			amps[i]=(gemY){0};												// to extremely weak ones
+			for (k=0;k<poolf_length[i];++k) {							// first we compare the gem alone
 				if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 					gems[i]=poolf[i][k];
 				}
 			}
-			for (j=1;j<=i/6;++j) {															// for every amount of amps we can fit in
-				int value = i-6*j;																// this is the amount of gems we have left
-				for (k=0;k<poolf_length[value];++k)								// we search in that pool
-				if (poolf[value][k].crit!=0) {										// if the gem has crit we go on
-					for (h=0;h<poolYf_length[j-1];++h) {						// and we look in the amp pool
+			for (j=1;j<=i/6;++j) {											// for every amount of amps we can fit in
+				int value = i-6*j;											// this is the amount of gems we have left
+				for (k=0;k<poolf_length[value];++k)						// we search in that pool
+				if (poolf[value][k].crit!=0) {							// if the gem has crit we go on
+					for (h=0;h<poolYf_length[j-1];++h) {				// and we look in the amp pool
 						if (gem_amp_more_powerful(poolf[value][k],poolYf[j-1][h],gems[i],amps[i])) {
 							gems[i]=poolf[value][k];
 							amps[i]=poolYf[j-1][h];
@@ -211,16 +211,15 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 				if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
 				gem_print_Y(amps+i);
 				printf("Global power (resc.):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
-				fflush(stdout);								// forces buffer write, so redirection works well
 			}
 		}
 	}
 	else { 										// behave like kga_spec
-		for (i=1;i<len;++i) {															// for every gem value
-			gems[i]=(gem){0};																// we init the gems
-			amps[i]=(gemY){0};															// to extremely weak ones
-			spec_coeffs[i]=0;																// and init a spec coeff
-			for (k=0;k<poolf_length[i];++k) {								// first we compare the gem alone
+		for (i=1;i<len;++i) {											// for every gem value
+			gems[i]=(gem){0};												// we init the gems
+			amps[i]=(gemY){0};											// to extremely weak ones
+			spec_coeffs[i]=0;												// and init a spec coeff
+			for (k=0;k<poolf_length[i];++k) {						// first we compare the gem alone
 				if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 					gems[i]=poolf[i][k];
 				}
@@ -228,16 +227,16 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			int NS=i+1;
 			double comb_coeff=pow(NS, -growth_comb);
 			spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
-																											// now with amps
-			for (j=0;j<2*i+2;++j) {													// for every amp value from 1 to to 2*gem_value
-				NS+=6;																				// we get total num of gems used
+																				// now with amps
+			for (j=0;j<2*i+2;++j) {										// for every amp value from 1 to to 2*gem_value
+				NS+=6;														// we get total num of gems used
 				double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
-				for (k=0;k<poolf_length[i];++k)								// then we search in the gem pool
-				if (poolf[i][k].crit!=0) {										// if the gem has crit we go on
+				for (k=0;k<poolf_length[i];++k)						// then we search in the gem pool
+				if (poolf[i][k].crit!=0) {								// if the gem has crit we go on
 					double Pb2 = poolf[i][k].bbound * poolf[i][k].bbound;
 					double Pdg = poolf[i][k].damage;
 					double Pcg = poolf[i][k].crit  ;
-					for (h=0;h<poolYf_length[j];++h) {					// to the amp pool and compare
+					for (h=0;h<poolYf_length[j];++h) {				// to the amp pool and compare
 						double Pdamage = Pdg + 1.47 * poolYf[j][h].damage ;
 						double Pcrit   = Pcg + 2.576* poolYf[j][h].crit   ;
 						double power   = Pb2 * Pdamage * Pcrit ;
@@ -262,7 +261,6 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 				gem_print_Y(amps+i);
 				printf("Global power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
 				printf("Spec coefficient:\t%f\n\n", spec_coeffs[i]);
-				fflush(stdout);								// forces buffer write, so redirection works well
 			}
 		}
 	}
@@ -424,7 +422,8 @@ int main(int argc, char** argv)
 		if (*(p-1)=='g') global_mode=1;
 	}
 	else {
-		printf("Unknown arguments:\n");
+		if (optind==argc) printf("No length specified\n");
+		else printf("Unknown arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;

@@ -2,7 +2,7 @@
 #define _CRITG_UTILS_H
 
 struct Gem_Y {
-	int grade;				//using short does NOT improve time/memory usage
+	int grade;			//using short does NOT improve time/memory usage
 	float damage;
 	float crit;
 	struct Gem_Y* father;
@@ -129,7 +129,7 @@ void quick_sort (gem* gems, int len)
 void gem_sort (gem* gems, int len)
 {
 	quick_sort (gems, len);		// partially sort
-	ins_sort (gems, len);			// finish the nearly sorted array
+	ins_sort (gems, len);		// finish the nearly sorted array
 }
 
 #endif // _CRITG_UTILS_H

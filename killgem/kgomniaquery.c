@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <unistd.h>
+#include <getopt.h>
 #include <string.h>
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
@@ -298,7 +298,6 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			gem_print_Y(ampsc+i);
 			printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
 			printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/1e7);
-			fflush(stdout);								// forces buffer write, so redirection works well
 		}
 	}
 	
@@ -372,7 +371,6 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Spec base power with red:\t%f\n\n\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
 		}
 	}
-
 
 	if (output_options & mask_parens) {
 		printf("Killgem speccing scheme:\n");
@@ -511,7 +509,8 @@ int main(int argc, char** argv)
 		lenc= atoi(argv[optind+1]);
 	}
 	else {
-		printf("Unknown arguments:\n");
+		if (optind==argc) printf("No length specified\n");
+		else printf("Unknown arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;

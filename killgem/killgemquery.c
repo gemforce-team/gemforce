@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <unistd.h>
+#include <getopt.h>
 #include <string.h>
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
@@ -12,7 +12,7 @@ const int ACC=0;								// I don't really use it here
 void worker(int len, int output_options, int pool_zero, char* filename)
 {
 	FILE* table=file_check(filename);			// file is open to read
-	if (table==NULL) exit(1);							// if the file is not good we exit
+	if (table==NULL) exit(1);						// if the file is not good we exit
 	int i;
 	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
 	gem** pool=malloc(len*sizeof(gem*));
@@ -20,11 +20,11 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	pool[0]=malloc(pool_zero*sizeof(gem));
 	pool_length[0]=pool_zero;
 
-	if (pool_zero==1) {							// combine
+	if (pool_zero==1) {					// combine
 		gem_init(pool[0],1,1,1,1);		// start gem does not matter
 		gem_init(gems   ,1,1,1,1);		// grade damage crit bbound
 	}
-	else {													// spec
+	else {												// spec
 		gem_init(pool[0]  ,1,1.000000,1,0);
 		gem_init(pool[0]+1,1,1.186168,0,1);		// BB has more dmg
 		gem_init(gems     ,1,1.000000,1,0);		// grade damage crit bbound
@@ -53,7 +53,6 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 				printf("Pool:\t%d\n",pool_length[i]);
 			}
 			gem_print(gems+i);
-			fflush(stdout);								// forces buffer write, so redirection works well
 		}
 	}
 	
@@ -170,7 +169,8 @@ int main(int argc, char** argv)
 		if (*(p-1)=='c') pool_zero=1;
 	}
 	else {
-		printf("Unknown arguments:\n");
+		if (optind==argc) printf("No length specified\n");
+		else printf("Unknown arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;

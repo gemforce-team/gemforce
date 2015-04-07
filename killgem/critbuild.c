@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <unistd.h>
+#include <getopt.h>
 #include <string.h>
 typedef struct Gem_Y gem;
 #include "critg_utils.h"
@@ -31,27 +31,30 @@ void worker(int len, int output_options, int size, char* filename)
 
 	for (i=prevmax+1; i<len; ++i) {
 		int j,k,h,l;
-		int eoc=(i+1)/2;        //end of combining
+		const int eoc=(i+1)/ (1+1);      // end of combining
+		const int j0 =(i+1)/(10+1);      // value ratio < 10
 		int comb_tot=0;
 
-		int grade_max=(int)(log2(i+1)+1);						// gems with max grade cannot be destroyed, so this is a max, not a sup
-		gem* temp_pools[grade_max-1];								// get the temp pools for every grade
-		int  temp_index[grade_max-1];								// index of work point in temp pools
-		gem* subpools[grade_max-1];									// get subpools for every grade
+		int grade_max=(int)(log2(i+1)+1);          // gems with max grade cannot be destroyed, so this is a max, not a sup
+		gem* temp_pools[grade_max-1];              // get the temp pools for every grade
+		int  temp_index[grade_max-1];              // index of work point in temp pools
+		gem* subpools[grade_max-1];                // get subpools for every grade
 		int  subpools_length[grade_max-1];
-		for (j=0; j<grade_max-1; ++j) {							// init everything
+		for (j=0; j<grade_max-1; ++j) {            // init everything
 			temp_pools[j]=malloc(size*sizeof(gem));
 			temp_index[j]=0;
-			subpools[j]=NULL;										// just to be able to free it
+			subpools[j]=NULL;                       // just to be able to free it
 			subpools_length[j]=0;
 		}
-		for (j=0;j<eoc;++j)										// combine gems and put them in temp pools
-		if ((i-j)/(j+1) < 10) {								// value ratio < 10
+
+		for (j=j0; j<eoc; ++j) {         // combine gems and put them in temp array
+			gem* dad_array = pool[j];
+			gem* mom_array = pool[i-1-j];
 			for (k=0; k< pool_length[j]; ++k) {
-				int g1=(pool[j]+k)->grade;
+				int g1=(dad_array+k)->grade;
 				for (h=0; h< pool_length[i-1-j]; ++h) {
-					int delta=g1 - (pool[i-1-j]+h)->grade;
-					if (abs(delta)<=2) {						// grade difference <= 2
+					int delta=g1 - (mom_array+h)->grade;
+					if (abs(delta)<=2) {        // grade difference <= 2
 						comb_tot++;
 						gem temp;
 						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
@@ -158,7 +161,6 @@ void worker(int len, int output_options, int size, char* filename)
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
-		fflush(stdout);								// forces buffer write, so redirection works well
 		}
 		table_write_iteration(pool, pool_length, i, table);			// write on file
 	}
@@ -198,7 +200,8 @@ int main(int argc, char** argv)
 		len = atoi(argv[optind]);
 	}
 	else {
-		printf("Unknown arguments:\n");
+		if (optind==argc) printf("No length specified\n");
+		else printf("Unknown arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
