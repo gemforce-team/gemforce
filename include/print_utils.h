@@ -1,6 +1,8 @@
 #ifndef _PRINT_UTILS_H
 #define _PRINT_UTILS_H
 
+#include <string.h>
+
 const int mask_info=1;
 const int mask_parens=2;
 const int mask_tree=4;
@@ -126,9 +128,10 @@ void print_tree(gem* gemf, char* prefix)
 
 void print_table(gem* gems, int len)
 {
-	printf("# Gems\tPower\n");
+	printf("# Gems\tPower\t\tGrowth\n");
+	printf("1\t%.6f\t0\n", gem_power(gems[0]));
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%.6lf\n",i+1,gem_power(gems[i]));
+	for (i=1;i<len;i++) printf("%d\t%.6f\t%.6f\n", i+1, gem_power(gems[i]), log(gem_power(gems[i]))/log(i+1));
 	printf("\n");
 }
 
