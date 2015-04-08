@@ -189,6 +189,8 @@ void worker(int len, int output_options, int size)
 		gem_print(gems+len-1);
 	}
 
+	gem* gemf=gems+len+1;  // gem that will be displayed
+
 	if (output_options & mask_upto) {
 		double best_growth=0;
 		int best_index=0;
@@ -202,24 +204,24 @@ void worker(int len, int output_options, int size)
 		printf("Value:\t%d\n",best_index+1);
 		printf("Growth:\t%f\n", best_growth);
 		gem_print(gems+best_index);
-		gems[len-1]=gems[best_index];
+		gemf = gems+best_index;
 	}
 
 	if (output_options & mask_parens) {
 		printf("Compressed combining scheme:\n");
-		print_parens_compressed(gems+len-1);
+		print_parens_compressed(gemf);
 		printf("\n\n");
 	}
 	if (output_options & mask_tree) {
 		printf("Gem tree:\n");
-		print_tree(gems+len-1, "");
+		print_tree(gemf, "");
 		printf("\n");
 	}
 	if (output_options & mask_table) print_table(gems, len);
 	
 	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Equations:\n");
-		print_equations(gems+len-1);
+		print_equations(gemf);
 		printf("\n");
 	}
 	

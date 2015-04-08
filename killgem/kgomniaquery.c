@@ -29,7 +29,7 @@ void print_omnia_table(gem* gems, gemY* amps, double* powers, int len)
 void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, int TC, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
-	if (table==NULL) exit(1);							// if the file is not good we exit
+	if (table==NULL) exit(1);						// if the file is not good we exit
 	int i;
 	gem* pool[len];
 	int pool_length[len];
@@ -41,7 +41,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// killgem spec pool filling
 	if (prevmax<len-1) {									// if the killgems are not enough
 		fclose(table);
-		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
+		for (i=0;i<=prevmax;++i) free(pool[i]);	// free
 		printf("Gem table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
@@ -49,7 +49,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem* poolf[len];
 	int poolf_length[len];
 	
-	for (i=0;i<len;++i) {															// killgem spec compression
+	for (i=0;i<len;++i) {												// killgem spec compression
 		int j;
 		float maxcrit=0;
 		gem* temp_pool=malloc(pool_length[i]*sizeof(gem));
@@ -64,9 +64,9 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));									// memory improvement, 2* is not needed
 		for (j=0; j<tree_length+crit_cells+1; ++j) tree[j]=-1;										// init also tree[0], it's faster
 		int index;
-		for (j=pool_length[i]-1;j>=0;--j) {																				// start from large z
+		for (j=pool_length[i]-1;j>=0;--j) {																		// start from large z
 			gem* p_gem=temp_pool+j;
-			index=(int)(p_gem->crit*ACC);																						// find its place in x
+			index=(int)(p_gem->crit*ACC);																			// find its place in x
 			if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 				tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 			}
@@ -74,13 +74,13 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				p_gem->grade=0;
 				broken++;
 			}
-		}														// all unnecessary gems broken
+		}												// all unnecessary gems broken
 		free(tree);									// free
 		
 		poolf_length[i]=pool_length[i]-broken;
 		poolf[i]=malloc(poolf_length[i]*sizeof(gem));			// pool init via broken
 		index=0;
-		for (j=0; j<pool_length[i]; ++j) {								// copying to subpool
+		for (j=0; j<pool_length[i]; ++j) {							// copying to subpool
 			if (temp_pool[j].grade!=0) {
 				poolf[i][index]=temp_pool[j];
 				index++;
@@ -92,8 +92,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	printf("Gem speccing pool compression done!\n");
 
 	FILE* tablec=file_check(filenamec);		// file is open to read
-	if (tablec==NULL) exit(1);						// if the file is not good we exit
-	gem** poolc=malloc(lenc*sizeof(gem*));;
+	if (tablec==NULL) exit(1);					// if the file is not good we exit
+	gem** poolc=malloc(lenc*sizeof(gem*));
 	int* poolc_length=malloc(lenc*sizeof(int));
 	poolc[0]=malloc(sizeof(gem));
 	poolc_length[0]=1;
@@ -115,16 +115,16 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		for (i=0; i<poolc_length[lenc-1]; ++i) {		// get maxcrit;
 			maxcrit=max(maxcrit, (poolc[lenc-1]+i)->crit);
 		}
-		gem_sort(poolc[lenc-1],poolc_length[lenc-1]);							// work starts
+		gem_sort(poolc[lenc-1],poolc_length[lenc-1]);						// work starts
 		int broken=0;
 		int crit_cells=(int)(maxcrit*ACC)+1;			// this pool will be big from the beginning, but we avoid binary search
 		int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
 		int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));									// memory improvement, 2* is not needed
 		for (i=0; i<tree_length+crit_cells+1; ++i) tree[i]=-1;										// init also tree[0], it's faster
 		int index;
-		for (i=poolc_length[lenc-1]-1;i>=0;--i) {																	// start from large z
+		for (i=poolc_length[lenc-1]-1;i>=0;--i) {																// start from large z
 			gem* p_gem=poolc[lenc-1]+i;
-			index=(int)(p_gem->crit*ACC);																						// find its place in x
+			index=(int)(p_gem->crit*ACC);																			// find its place in x
 			if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 				tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 			}
@@ -132,7 +132,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				p_gem->grade=0;
 				broken++;
 			}
-		}														// all unnecessary gems destroyed
+		}												// all unnecessary gems destroyed
 		free(tree);									// free
 		
 		poolcf_length=poolc_length[lenc-1]-broken;
@@ -148,10 +148,10 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	printf("Killgem comb compressed pool size:\t%d\n",poolcf_length);
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
-	if (tableA==NULL) exit(1);						// if the file is not good we exit
+	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena;
-	if (lenc > len) lena=lenc;						// see which is bigger between spec len and comb len
-	else lena=len;												// and we'll get the amp pool till there
+	if (lenc > len) lena=lenc;					// see which is bigger between spec len and comb len
+	else lena=len;									// and we'll get the amp pool till there
 	gemY** poolY=malloc(lena*sizeof(gemY*));
 	int* poolY_length=malloc(lena*sizeof(int));;
 	poolY[0]=malloc(sizeof(gemY));
@@ -208,8 +208,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 
 	int j,k,h,l,m;								// let's choose the right gem-amp combo
 	gem gems[len];								// for every speccing value
-	gemY amps[len];								// we'll choose the best amps
-	gem gemsc[len];								// and the best NC combine
+	gemY amps[len];							// we'll choose the best amps
+	gem gemsc[len];							// and the best NC combine
 	gemY ampsc[len];							// for both
 	double powers[len];
 	gem_init(gems,1,1,1,0);
@@ -227,18 +227,18 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		gem_print_Y(amps);
 	}
 
-	for (i=1;i<len;++i) {																		// for every gem value
-		gems[i]=(gem){0};																			// we init the gems
-		amps[i]=(gemY){0};																		// to extremely weak ones
+	for (i=1;i<len;++i) {														// for every gem value
+		gems[i]=(gem){0};															// we init the gems
+		amps[i]=(gemY){0};														// to extremely weak ones
 		gemsc[i]=(gem){0};
 		ampsc[i]=(gemY){0};
-																													// first we compare the gem alone
-		for (l=0; l<poolcf_length; ++l) {											// first search in the NC gem comb pool
+																						// first we compare the gem alone
+		for (l=0; l<poolcf_length; ++l) {									// first search in the NC gem comb pool
 			if (gem_power(poolcf[l]) > gem_power(gemsc[i])) {
 				gemsc[i]=poolcf[l];
 			}
 		}
-		for (k=0;k<poolf_length[i];++k) {											// and then in the compressed gem pool
+		for (k=0;k<poolf_length[i];++k) {									// and then in the compressed gem pool
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
@@ -246,23 +246,22 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		int NS=i+1;
 		double c0 = log((double)NT/(i+1))*iloglenc;						// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
-																													// now we compare the whole setup
-		for (j=0;j<i+1;++j) {																	// for every amp value from 1 to to gem_value
-			NS+=Namps;																					// we get the num of gems used in speccing
-			double c = log((double)NT/NS)*iloglenc;							// we compute the combination number
-			for (l=0; l<poolcf_length; ++l) {										// then we search in the NC gem comb pool
+																						// now we compare the whole setup
+		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {									// for every amp value from 1 to to gem_value
+			double c = log((double)NT/NS)*iloglenc;						// we compute the combination number
+			for (l=0; l<poolcf_length; ++l) {								// then we search in the NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cdg = pow(poolcf[l].damage,c);
 				double Ccg = pow(poolcf[l].crit  ,c);
-				for (m=0;m<poolYc_length;++m) {										// and in the amp NC pool
+				for (m=0;m<poolYc_length;++m) {								// and in the amp NC pool
 					double Cda = damage_ratio* pow(poolYc[m].damage,c);
 					double Cca = crit_ratio  * pow(poolYc[m].crit  ,c);
-					for (k=0;k<poolf_length[i];++k) {								// then in the gem pool
-						if (poolf[i][k].crit!=0) {											// if the gem has crit we go on
+					for (k=0;k<poolf_length[i];++k) {						// then in the gem pool
+						if (poolf[i][k].crit!=0) {								// if the gem has crit we go on
 							double Pb2 = Cbg * poolf[i][k].bbound * Cbg * poolf[i][k].bbound;
 							double Pdg = Cdg * poolf[i][k].damage;
 							double Pcg = Ccg * poolf[i][k].crit  ;
-							for (h=0;h<poolYf_length[j];++h) {					// and in the reduced amp pool
+							for (h=0;h<poolYf_length[j];++h) {				// and in the reduced amp pool
 								double Pdamage = Pdg + Cda * poolYf[j][h].damage ;
 								double Pcrit   = Pcg + Cca * poolYf[j][h].crit   ;
 								double power   = Pb2 * Pdamage * Pcrit ;
@@ -318,6 +317,11 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Global power (resc. 10m):\t%f\n\n\n", powers[len-1]/1e7);
 	}
 
+	gem*  gemf = gems+len+1;  // gem  that will be displayed
+	gemY* ampf = amps+len+1;  // amp  that will be displayed
+	gem*  gemfc=gemsc+len+1;  // gemc that will be displayed
+	gemY* ampfc=ampsc+len+1;  // ampc that will be displayed
+
 	if (output_options & mask_upto) {
 		double best_pow=0;
 		int best_index=0;
@@ -342,10 +346,10 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		gem_print_Y(ampsc+best_index);
 		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index], damage_ratio, crit_ratio));
 		printf("Global power (resc. 10m):\t%f\n\n\n", powers[best_index]/1e7);
-		gems[len-1]=gems[best_index];
-		amps[len-1]=amps[best_index];
-		gemsc[len-1]=gemsc[best_index];
-		ampsc[len-1]=ampsc[best_index];
+		gemf = gems+best_index;
+		ampf = amps+best_index;
+		gemfc = gemsc+best_index;
+		ampfc = ampsc+best_index;
 	}
 
 	gem* gem_array;
@@ -353,67 +357,67 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			int value=gem_getvalue(gems+len-1);
-			gems[len-1]=gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, (amps+len-1)->damage, (amps+len-1)->crit, damage_ratio, crit_ratio);
+			int value=gem_getvalue(gemf);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, ampf->damage, ampf->crit, damage_ratio, crit_ratio);
 			printf("Setup with red added:\n\n");
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
-			gem_print(gems+len-1);
+			gem_print(gemf);
 			printf("Amplifier spec (%dx)\n", Namps);
-			printf("Value:\t%d\n",gem_getvalue_Y(amps+len-1));
-			gem_print_Y(amps+len-1);
+			printf("Value:\t%d\n",gem_getvalue_Y(ampf));
+			gem_print_Y(ampf);
 			printf("Managem combine\n");
 			printf("Comb:\t%d\n",lenc);
-			gem_print(gemsc+len-1);
+			gem_print(gemfc);
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
-			gem_print_Y(ampsc+len-1);
-			printf("Spec base power with red:\t%f\n\n\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
+			gem_print_Y(ampfc);
+			printf("Spec base power with red:\t%f\n\n\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
 		}
 	}
 
 	if (output_options & mask_parens) {
 		printf("Killgem speccing scheme:\n");
-		print_parens_compressed(gems+len-1);
+		print_parens_compressed(gemf);
 		printf("\n\n");
 		printf("Amplifier speccing scheme:\n");
-		print_parens_compressed_Y(amps+len-1);
+		print_parens_compressed_Y(ampf);
 		printf("\n\n");
 		printf("Killgem combining scheme:\n");
-		print_parens_compressed(gemsc+len-1);
+		print_parens_compressed(gemfc);
 		printf("\n\n");
 		printf("Amplifier combining scheme:\n");
-		print_parens_compressed_Y(ampsc+len-1);
+		print_parens_compressed_Y(ampfc);
 		printf("\n\n");
 	}
 	if (output_options & mask_tree) {
 		printf("Killgem speccing tree:\n");
-		print_tree(gems+len-1, "");
+		print_tree(gemf, "");
 		printf("\n");
 		printf("Amplifier speccing tree:\n");
-		print_tree_Y(amps+len-1, "");
+		print_tree_Y(ampf, "");
 		printf("\n");
 		printf("Killgem combining tree:\n");
-		print_tree(gemsc+len-1, "");
+		print_tree(gemfc, "");
 		printf("\n");
 		printf("Amplifier combining tree:\n");
-		print_tree_Y(ampsc+len-1, "");
+		print_tree_Y(ampfc, "");
 		printf("\n");
 	}
 	if (output_options & mask_table) print_omnia_table(gems, amps, powers, len);
 	
 	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Killgem speccing equations:\n");
-		print_equations(gems+len-1);
+		print_equations(gemf);
 		printf("\n");
 		printf("Amplifier speccing equations:\n");
-		print_equations_Y(amps+len-1);
+		print_equations_Y(ampf);
 		printf("\n");
 		printf("Killgem combining equations:\n");
-		print_equations(gemsc+len-1);
+		print_equations(gemfc);
 		printf("\n");
 		printf("Amplifier combining equations:\n");
-		print_equations_Y(ampsc+len-1);
+		print_equations_Y(ampfc);
 		printf("\n");
 	}
 	
@@ -479,11 +483,11 @@ int main(int argc, char** argv)
 				char* p=optarg;
 				while (*p != ',' && *p != '\0') p++;
 				if (*p==',') *p='\0';			// ok, it's "f,..."
-				else p--;									// not ok, it's "f" -> empty string
+				else p--;							// not ok, it's "f" -> empty string
 				char* q=p+1;
 				while (*q != ',' && *q != '\0') q++;
 				if (*q==',') *q='\0';			// ok, it's "...,fc,fA"
-				else q--;									// not ok, it's "...,fc" -> empty string
+				else q--;							// not ok, it's "...,fc" -> empty string
 				strcpy(filename,optarg);
 				strcpy(filenamec,p+1);
 				strcpy(filenameA,q+1);

@@ -204,7 +204,7 @@ inline double gem_cfr_power(gem gem1, double amp_damage, double amp_crit, double
 	return (gem1.damage+damage_ratio*amp_damage)*gem1.bbound*(gem1.crit+crit_ratio*amp_crit)*gem1.bbound;
 }
 
-gem gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_damage, double amp_crit, double dr, double cr)
+gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_damage, double amp_crit, double dr, double cr)
 {
 	int isRed;
 	int last;
@@ -235,8 +235,7 @@ gem gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array,
 		}
 	}
 	(*gem_array)=best_array;
-	if (best_gem==NULL) return (gem){0};
-	return *best_gem;
+	return best_gem;
 }
 
 #include "print_utils.h"

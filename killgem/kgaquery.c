@@ -78,16 +78,16 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			temp_pool[j]=pool[i][j];
 			maxcrit=max(maxcrit, (pool[i]+j)->crit);
 		}
-		gem_sort(temp_pool,pool_length[i]);							// work starts
+		gem_sort(temp_pool,pool_length[i]);			// work starts
 		int broken=0;
 		int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 		int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
-		int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));									// memory improvement, 2* is not needed
-		for (j=0; j<tree_length+crit_cells+1; ++j) tree[j]=-1;										// init also tree[0], it's faster
+		int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));		// memory improvement, 2* is not needed
+		for (j=0; j<tree_length+crit_cells+1; ++j) tree[j]=-1;			// init also tree[0], it's faster
 		int index;
-		for (j=pool_length[i]-1;j>=0;--j) {																				// start from large z
+		for (j=pool_length[i]-1;j>=0;--j) {										// start from large z
 			gem* p_gem=temp_pool+j;
-			index=(int)(p_gem->crit*ACC);																						// find its place in x
+			index=(int)(p_gem->crit*ACC);											// find its place in x
 			if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 				tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 			}
@@ -113,10 +113,10 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
-	if (tableA==NULL) exit(1);						// if the file is not good we exit
+	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena;
-	if (global_mode) lena=len/6;					// killgem_amps -> len/6
-	else lena=2*len;									// kga_spec -> 2x kg value
+	if (global_mode) lena=len/6;				// killgem_amps -> len/6
+	else lena=2*len;								// kga_spec -> 2x kg value
 	gemY* poolY[lena];
 	int poolY_length[lena];
 	poolY[0]=malloc(sizeof(gemY));
@@ -178,7 +178,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	double spec_coeffs[len];
 	spec_coeffs[0]=0;
 	
-	if (global_mode) { 							// behave like killgem_amps
+	if (global_mode) {							// behave like killgem_amps
 		for (i=1;i<len;++i) {												// for every total value
 			gems[i]=(gem){0};													// we init the gems
 			amps[i]=(gemY){0};												// to extremely weak ones
@@ -214,7 +214,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			}
 		}
 	}
-	else { 										// behave like kga_spec
+	else {										// behave like kga_spec
 		for (i=1;i<len;++i) {											// for every gem value
 			gems[i]=(gem){0};												// we init the gems
 			amps[i]=(gemY){0};											// to extremely weak ones
@@ -228,8 +228,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			double comb_coeff=pow(NS, -growth_comb);
 			spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
 																				// now with amps
-			for (j=0;j<2*i+2;++j) {										// for every amp value from 1 to to 2*gem_value
-				NS+=6;														// we get total num of gems used
+			for (j=0, NS+=6; j<2*i+2; ++j, NS+=6) {							// for every amp value from 1 to to 2*gem_value
 				double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
 				for (k=0;k<poolf_length[i];++k)						// then we search in the gem pool
 				if (poolf[i][k].crit!=0) {								// if the gem has crit we go on
@@ -278,6 +277,9 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		printf("\n");
 	}
 
+	gem*  gemf=gems+len+1;  // gem that will be displayed
+	gemY* ampf=amps+len+1;  // amp that will be displayed
+
 	if ((output_options & mask_upto) && !global_mode) {
 		double best_sc=0;
 		int best_index=0;
@@ -297,8 +299,8 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		gem_print_Y(amps+best_index);
 		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index]));
 		printf("Spec coefficient:\t%f\n\n", best_sc);
-		gems[len-1]=gems[best_index];
-		amps[len-1]=amps[best_index];
+		gemf = gems+best_index;
+		ampf = amps+best_index;
 	}
 
 	gem* gem_array;
@@ -306,34 +308,34 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			int value=gem_getvalue(gems+len-1);
-			gems[len-1]=gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, (amps+len-1)->damage, (amps+len-1)->crit, 1.47, 2.576);
+			int value=gem_getvalue(gemf);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, ampf->damage, ampf->crit, 1.47, 2.576);
 			printf("Setup with red added:\n\n");
-			printf("Total value:\t%d\n\n", value+6*gem_getvalue_Y(amps+len-1));
+			printf("Total value:\t%d\n\n", value+6*gem_getvalue_Y(ampf));
 			printf("Killgem\n");
 			printf("Value:\t%d\n", value);
-			gem_print(gems+len-1);
+			gem_print(gemf);
 			printf("Amplifier\n");
-			printf("Value:\t%d\n", gem_getvalue_Y(amps+len-1));
-			gem_print_Y(amps+len-1);
-			printf("Global power with red:\t%f\n\n", gem_amp_power(gems[len-1], amps[len-1]));
+			printf("Value:\t%d\n", gem_getvalue_Y(ampf));
+			gem_print_Y(ampf);
+			printf("Global power with red:\t%f\n\n", gem_amp_power(*gemf, *ampf));
 		}
 	}
 
 	if (output_options & mask_parens) {
 		printf("Killgem speccing scheme:\n");
-		print_parens_compressed(gems+len-1);
+		print_parens_compressed(gemf);
 		printf("\n\n");
 		printf("Amplifier speccing scheme:\n");
-		print_parens_compressed_Y(amps+len-1);
+		print_parens_compressed_Y(ampf);
 		printf("\n\n");
 	}
 	if (output_options & mask_tree) {
 		printf("Killgem tree:\n");
-		print_tree(gems+len-1, "");
+		print_tree(gemf, "");
 		printf("\n");
 		printf("Amplifier tree:\n");
-		print_tree_Y(amps+len-1, "");
+		print_tree_Y(ampf, "");
 		printf("\n");
 	}
 	if (output_options & mask_table) {
@@ -343,10 +345,10 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	
 	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Killgem equations:\n");
-		print_equations(gems+len-1);
+		print_equations(gemf);
 		printf("\n");
 		printf("Amplifier equations:\n");
-		print_equations_Y(amps+len-1);
+		print_equations_Y(ampf);
 		printf("\n");
 	}
 	
