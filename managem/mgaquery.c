@@ -49,13 +49,13 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// managem pool filling
 	if (prevmax<len-1) {						// if the managems are not enough
-		if (global_mode==0) {					// behave as mga_spec -> quit if not enough managems
+		if (global_mode==0) {				// behave as mga_spec -> quit if not enough managems
 			fclose(table);
 			for (i=0;i<=prevmax;++i) free(pool[i]);		// free
 			printf("Gem table stops at %d, not %d\n",prevmax+1,len);
 			exit(1);
 		}
-		else {												// behave as managem_amps -> fill the remaining with false gems
+		else {									// behave as managem_amps -> fill the remaining with false gems
 			for (i=prevmax+1; i<len; ++i) {
 				pool_length[i]=1;
 				pool[i]=malloc(sizeof(gem));
@@ -67,13 +67,13 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	gem* poolf[len];
 	int poolf_length[len];
 	
-	for (i=0;i<len;++i) {												// managem spec compression
+	for (i=0;i<len;++i) {								// managem spec compression
 		int j;
 		gem* temp_pool=malloc(pool_length[i]*sizeof(gem));
 		for (j=0; j<pool_length[i]; ++j) {			// copy gems
 			temp_pool[j]=pool[i][j];
 		}
-		gem_sort(temp_pool,pool_length[i]);							// work starts
+		gem_sort(temp_pool,pool_length[i]);			// work starts
 		int broken=0;
 		float lim_bbound=-1;
 		for (j=pool_length[i]-1;j>=0;--j) {
@@ -156,7 +156,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	double spec_coeffs[len];
 	spec_coeffs[0]=0;
 	
-	if (global_mode) { 							// behave like managem_amps
+	if (global_mode) {							// behave like managem_amps
 		for (i=1;i<len;++i) {											// for every total value
 			gems[i]=(gem){0};												// we init the gems
 			amps[i]=(gemO){0};											// to extremely weak ones
@@ -190,7 +190,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			}
 		}
 	}
-	else { 										// behave like mga_spec
+	else {										// behave like mga_spec
 		for (i=1;i<len;++i) {											// for every gem value
 			gems[i]=(gem){0};												// we init the gems
 			amps[i]=(gemO){0};											// to extremely weak ones
@@ -204,8 +204,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			double comb_coeff=pow(NS, -growth_comb);
 			spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
 																				// now with amps
-			for (j=0;j<2*i+2;++j) {										// for every amp value from 1 to to 2*gem_value
-				NS+=6;														// we get total num of gems used
+			for (j=0, NS+=6; j<2*i+2; ++j, NS+=6) {										// for every amp value from 1 to to 2*gem_value
 				double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
 				double Pa= 2.576 * bestO[j].leech;					// <- this is ok only for mg
 				for (k=0;k<poolf_length[i];++k) {					// then we search in the reduced gem pool
@@ -250,6 +249,9 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		printf("\n");
 	}
 
+	gem*  gemf=gems+len+1;  // gem that will be displayed
+	gemO* ampf=amps+len+1;  // amp that will be displayed
+
 	if ((output_options & mask_upto) && !global_mode) {
 		double best_sc=0;
 		int best_index=0;
@@ -269,8 +271,8 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		gem_print_O(amps+best_index);
 		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index]));
 		printf("Spec coefficient:\t%f\n\n", best_sc);
-		gems[len-1]=gems[best_index];
-		amps[len-1]=amps[best_index];
+		gemf = gems+best_index;
+		ampf = amps+best_index;
 	}
 
 	gem* gem_array;
@@ -278,34 +280,34 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			int value=gem_getvalue(gems+len-1);
-			gems[len-1]=gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, (amps+len-1)->leech, 4*0.23*2.8);
+			int value=gem_getvalue(gemf);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, ampf->leech, 4*0.23*2.8);
 			printf("Setup with red added:\n\n");
-			printf("Total value:\t%d\n\n", value+6*gem_getvalue_O(amps+len-1));
+			printf("Total value:\t%d\n\n", value+6*gem_getvalue_O(ampf));
 			printf("Managem\n");
 			printf("Value:\t%d\n", value);
-			gem_print(gems+len-1);
+			gem_print(gemf);
 			printf("Amplifier\n");
-			printf("Value:\t%d\n", gem_getvalue_O(amps+len-1));
-			gem_print_O(amps+len-1);
-			printf("Global power with red:\t%f\n\n", gem_amp_power(gems[len-1], amps[len-1]));
+			printf("Value:\t%d\n", gem_getvalue_O(ampf));
+			gem_print_O(ampf);
+			printf("Global power with red:\t%f\n\n", gem_amp_power(*gemf, *ampf));
 		}
 	}
 
 	if (output_options & mask_parens) {
 		printf("Managem speccing scheme:\n");
-		print_parens_compressed(gems+len-1);
+		print_parens_compressed(gemf);
 		printf("\n\n");
 		printf("Amplifier speccing scheme:\n");
-		print_parens_compressed_O(amps+len-1);
+		print_parens_compressed_O(ampf);
 		printf("\n\n");
 	}
 	if (output_options & mask_tree) {
 		printf("Managem tree:\n");
-		print_tree(gems+len-1, "");
+		print_tree(gemf, "");
 		printf("\n");
 		printf("Amplifier tree:\n");
-		print_tree_O(amps+len-1, "");
+		print_tree_O(ampf, "");
 		printf("\n");
 	}
 	if (output_options & mask_table) {
@@ -315,10 +317,10 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	
 	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Managem equations:\n");
-		print_equations(gems+len-1);
+		print_equations(gemf);
 		printf("\n");
 		printf("Amplifier equations:\n");
-		print_equations_O(amps+len-1);
+		print_equations_O(ampf);
 		printf("\n");
 	}
 	

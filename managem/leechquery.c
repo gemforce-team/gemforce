@@ -60,11 +60,13 @@ void worker(int len, int output_options, char* filename)
 		}
 	}
 	
-	if (output_options & mask_quiet) {		// outputs last if we never seen any
+	if (output_options & mask_quiet) {    // outputs last if we never seen any
 		printf("Value:\t%d\n",len);
 		printf("Growth:\t%f\n", log(gems[len-1].leech)/log(len));
 		gem_print(gems+len-1);
 	}
+
+	gem* gemf=gems+len+1;  // gem that will be displayed
 
 	if (output_options & mask_upto) {
 		double best_growth=0;
@@ -79,7 +81,7 @@ void worker(int len, int output_options, char* filename)
 		printf("Value:\t%d\n",best_index+1);
 		printf("Growth:\t%f\n", best_growth);
 		gem_print(gems+best_index);
-		gems[len-1]=gems[best_index];
+		gemf = gems+best_index;
 	}
 
 	gem* gem_array;
@@ -87,30 +89,30 @@ void worker(int len, int output_options, char* filename)
 	if (output_options & mask_red) {
 		if (len < 2) printf("I could not add red!\n\n");
 		else {
-			int value=gem_getvalue(gems+len-1);
-			gems[len-1]=gem_putred(pool[value-1], pool_length[value-1], value, &red, &gem_array);
+			int value=gem_getvalue(gemf);
+			gemf = gem_putred(pool[value-1], pool_length[value-1], value, &red, &gem_array);
 			printf("Gem with red added:\n\n");
-			printf("Value:\t%d\n", value);		// made to work well with -u
-			printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(value));
-			gem_print(gems+len-1);
+			printf("Value:\t%d\n", value);    // made to work well with -u
+			printf("Growth:\t%f\n", log(gem_power(*gemf))/log(value));
+			gem_print(gemf);
 		}
 	}
 
 	if (output_options & mask_parens) {
 		printf("Compressed combining scheme:\n");
-		print_parens_compressed(gems+len-1);
+		print_parens_compressed(gemf);
 		printf("\n\n");
 	}
 	if (output_options & mask_tree) {
 		printf("Gem tree:\n");
-		print_tree(gems+len-1, "");
+		print_tree(gemf, "");
 		printf("\n");
 	}
 	if (output_options & mask_table) print_table(gems, len);
 	
-	if (output_options & mask_equations) {		// it ruins gems, must be last
+	if (output_options & mask_equations) {   // it ruins gems, must be last
 		printf("Equations:\n");
-		print_equations(gems+len-1);
+		print_equations(gemf);
 		printf("\n");
 	}
 	

@@ -106,7 +106,7 @@ gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem* new
 	return gemt;
 }
 
-gem gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array)
+gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array)
 {
 	int isRed;
 	int last;
@@ -137,8 +137,7 @@ gem gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array)
 		}
 	}
 	(*gem_array)=best_array;
-	if (best_gem==NULL) return (gem){0};
-	return *best_gem;
+	return best_gem;
 }
 
 #endif // _LEECHG_UTILS_H

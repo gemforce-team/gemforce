@@ -199,7 +199,7 @@ inline double gem_cfr_power(gem gem1, double amp_leech, double leech_ratio)
 	return (gem1.leech+leech_ratio*amp_leech)*gem1.bbound;
 }
 
-gem gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_leech, double leech_ratio)
+gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_leech, double leech_ratio)
 {
 	int isRed;
 	int last;
@@ -230,8 +230,7 @@ gem gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array,
 		}
 	}
 	(*gem_array)=best_array;
-	if (best_gem==NULL) return (gem){0};
-	return *best_gem;
+	return best_gem;
 }
 
 #include "print_utils.h"
