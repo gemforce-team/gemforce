@@ -4,7 +4,7 @@ First part of name describes what kind of recipe this is (leech/managem/killgem)
   
 Second part is:  
 * comb - it's a combine which should be used with an already built gem  
-* spec - it's a spec optimised for using no amplifiers,
+* spec - it's a spec optimized for using no amplifiers,
          we don't have them anymore, they are far from optimal  
 * amps - it's a pair of main gem spec and amps spec in optimal proportions,
          though they don't take the combine into consideration  
@@ -28,7 +28,18 @@ This simply mean that the gem is the basic gem upgraded the written number of ti
 
 ### Where do I put red?
 
-In every speccing recipe, simply replace the most deeply nested non black gem with a red g1.
+In every speccing recipe, simply replace the most deeply nested non black gem with a red g1.  
+The programs' `-r` flag for adding red has still some problems with the `*omniaquery` programs,
+so the recipes here are red-less until I have time to fix it.
+
+### Assumptions on skill levels
+
+gemforce needs minimal knowledge of the user skill levels.  
+The programs that deal with a gem alone give valid output regardless of skill levels.  
+When dealing with amps (`*omniaquery` and `*gaquery`) two values are needed:
+* Amplifiers: assumed at `45+15` - it matters quite a lot  
+* True Colors: assumed at `45+15` - it matters nearly nothing  
+If you want more precise output `*omniaquery` programs accept your True Colors level with the `-T` flag.
 
 ### So many choices, so little time
 

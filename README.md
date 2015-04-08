@@ -95,7 +95,7 @@ where the flags are:
 * `p` - print best gem parenthesis formula  
 * `t` - print best gem tree formula  
 * `e` - print best gem equations formula  
-* `c` - print best gems table (for each value best gem power) **do not use with -r or -u**  
+* `c` - print best gems table (for each value best gem power)  
 * `i` - info  
 * `q` - quiet, print only final gem  
 * `u` - upto, at the end consider the best gem up to N, not the Nth  
@@ -126,7 +126,7 @@ Debug flags/options (you should not need these):
 
 **examples:**  
 `./file -pet 32`  
-`./filequery -ipf "path/to/file" 128c`  
+`./filequery -ipf "path/to/table" 128c`  
 `./file_omnia -pq 32 16`  
 
 
@@ -184,7 +184,7 @@ Not included in auto setup package:
 * mgsloppybuild : builds a fast managem combine table
 
 
-### Miscellaneous:
+### Credits:
 
 gemforce authors are:
 * Andrea Stacchiotti aka AG user '12345ieee' 
