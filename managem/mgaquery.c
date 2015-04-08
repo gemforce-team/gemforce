@@ -9,9 +9,12 @@ typedef struct Gem_O gemO;
 #include "leech_utils.h"
 #include "gfon.h"
 
+#define Namps 6
+#define leech_ratio (Namps*0.23*(2.8/1.5))
+
 double gem_amp_power(gem gem1, gemO amp1)
 {
-	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
+	return gem1.bbound*(gem1.leech+leech_ratio*amp1.leech);
 }
 
 int gem_amp_more_powerful(gem gem1, gemO amp1, gem gem2, gemO amp2)
@@ -112,7 +115,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena;
-	if (global_mode) lena=len/6;				// managem_amps -> len/6
+	if (global_mode) lena=len/Namps;			// managem_amps -> len/Namps
 	else lena=len;									// mga_spec -> mg value
 	gemO* poolO[lena];
 	int poolO_length[lena];
@@ -148,9 +151,9 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	amps[0]=(gemO){0};
 	if (!(output_options & mask_quiet)) {
 		printf("Total value:\t1\n\n");
-		printf("Managem:\n");
+		printf("Managem\n");
 		gem_print(gems);
-		printf("Amplifier:\n");
+		printf("Amplifier (x%d)\n", Namps);
 		gem_print_O(amps);
 	}
 	double spec_coeffs[len];
@@ -165,8 +168,8 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 					gems[i]=poolf[i][k];
 				}
 			}
-			for (j=1;j<=i/6;++j) {										// for every amount of amps we can fit in
-				int value = i-6*j;										// this is the amount of gems we have left
+			for (j=1;j<=i/Namps;++j) {									// for every amount of amps we can fit in
+				int value = i-Namps*j;									// this is the amount of gems we have left
 				for (k=0;k<poolf_length[value];++k)					// we search in that pool
 				if (poolf[value][k].leech!=0							// if the gem has leech we go on and get the amp
 				&&  gem_amp_more_powerful(poolf[value][k],bestO[j-1],gems[i],amps[i]))
@@ -182,7 +185,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 				printf("Value:\t%d\n",gem_getvalue(gems+i));
 				if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
 				gem_print(gems+i);
-				printf("Amplifier\n");
+				printf("Amplifier (x%d)\n", Namps);
 				printf("Value:\t%d\n",gem_getvalue_O(amps+i));
 				if (output_options & mask_info) printf("Pool:\t1\n");
 				gem_print_O(amps+i);
@@ -204,9 +207,9 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			double comb_coeff=pow(NS, -growth_comb);
 			spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
 																				// now with amps
-			for (j=0, NS+=6; j<i+1; ++j, NS+=6) {					// for every amp value from 1 to to gem_value
+			for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {		// for every amp value from 1 to to gem_value
 				double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
-				double Pa= 2.576 * bestO[j].leech;					// <- this is ok only for mg
+				double Pa= leech_ratio * bestO[j].leech;			// <- this is ok only for mg
 				for (k=0;k<poolf_length[i];++k) {					// then we search in the reduced gem pool
 					if (poolf[i][k].leech!=0) {						// if the gem has leech we go on
 						double Palone = gem_power(poolf[i][k]);
@@ -221,12 +224,12 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 				}
 			}
 			if (!(output_options & mask_quiet)) {
-				printf("Total value:\t%d\n\n", i+1+6*gem_getvalue_O(amps+i));
+				printf("Total value:\t%d\n\n", i+1+Namps*gem_getvalue_O(amps+i));
 				printf("Managem\n");
 				printf("Value:\t%d\n",i+1);
 				if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
 				gem_print(gems+i);
-				printf("Amplifier\n");
+				printf("Amplifier (x%d)\n", Namps);
 				printf("Value:\t%d\n",gem_getvalue_O(amps+i));
 				if (output_options & mask_info) printf("Pool:\t1\n");
 				gem_print_O(amps+i);
@@ -237,11 +240,11 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	}
 	
 	if (output_options & mask_quiet) {		// outputs last if we never seen any
-		printf("Total value:\t%d\n\n", gem_getvalue(gems+len-1)+6*gem_getvalue_O(amps+len-1));
+		printf("Total value:\t%d\n\n", gem_getvalue(gems+len-1)+Namps*gem_getvalue_O(amps+len-1));
 		printf("Managem\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+len-1));
 		gem_print(gems+len-1);
-		printf("Amplifier\n");
+		printf("Amplifier (x%d)\n", Namps);
 		printf("Value:\t%d\n", gem_getvalue_O(amps+len-1));
 		gem_print_O(amps+len-1);
 		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[len-1], amps[len-1]));
@@ -262,11 +265,11 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			}
 		}
 		printf("Best setup up to %d:\n\n", len);
-		printf("Total value:\t%d\n\n", gem_getvalue(gems+best_index)+6*gem_getvalue_O(amps+best_index));
+		printf("Total value:\t%d\n\n", gem_getvalue(gems+best_index)+Namps*gem_getvalue_O(amps+best_index));
 		printf("Managem\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
 		gem_print(gems+best_index);
-		printf("Amplifier\n");
+		printf("Amplifier (x%d)\n", Namps);
 		printf("Value:\t%d\n", gem_getvalue_O(amps+best_index));
 		gem_print_O(amps+best_index);
 		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index]));
@@ -281,13 +284,13 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, ampf->leech, 4*0.23*2.8);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, ampf->leech, leech_ratio);
 			printf("Setup with red added:\n\n");
-			printf("Total value:\t%d\n\n", value+6*gem_getvalue_O(ampf));
+			printf("Total value:\t%d\n\n", value+Namps*gem_getvalue_O(ampf));
 			printf("Managem\n");
 			printf("Value:\t%d\n", value);
 			gem_print(gemf);
-			printf("Amplifier\n");
+			printf("Amplifier (x%d)\n", Namps);
 			printf("Value:\t%d\n", gem_getvalue_O(ampf));
 			gem_print_O(ampf);
 			printf("Global power with red:\t%f\n\n", gem_amp_power(*gemf, *ampf));
