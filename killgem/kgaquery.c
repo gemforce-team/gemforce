@@ -277,8 +277,8 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		printf("\n");
 	}
 
-	gem*  gemf=gems+len+1;  // gem that will be displayed
-	gemY* ampf=amps+len+1;  // amp that will be displayed
+	gem*  gemf=gems+len-1;  // gem that will be displayed
+	gemY* ampf=amps+len-1;  // amp that will be displayed
 
 	if ((output_options & mask_upto) && !global_mode) {
 		double best_sc=0;

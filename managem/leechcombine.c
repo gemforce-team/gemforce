@@ -93,7 +93,7 @@ void worker(int len, int output_options)
 		gem_print(gems+len-1);
 	}
 
-	gem* gemf=gems+len+1;  // gem that will be displayed
+	gem* gemf=gems+len-1;  // gem that will be displayed
 
 	if (output_options & mask_upto) {
 		double best_growth=0;

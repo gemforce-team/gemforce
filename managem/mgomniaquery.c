@@ -277,10 +277,10 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Global power (resc. 1k):\t%f\n\n\n", powers[len-1]/1000);
 	}
 
-	gem*  gemf = gems+len+1;  // gem  that will be displayed
-	gemO* ampf = amps+len+1;  // amp  that will be displayed
-	gem*  gemfc=gemsc+len+1;  // gemc that will be displayed
-	gemO* ampfc=ampsc+len+1;  // ampc that will be displayed
+	gem*  gemf = gems+len-1;  // gem  that will be displayed
+	gemO* ampf = amps+len-1;  // amp  that will be displayed
+	gem*  gemfc=gemsc+len-1;  // gemc that will be displayed
+	gemO* ampfc=ampsc+len-1;  // ampc that will be displayed
 
 	if (output_options & mask_upto) {
 		double best_pow=0;
