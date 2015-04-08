@@ -14,7 +14,8 @@ Gem combining program for [Gemcraft 2: Chasing Shadows](http://gameinabottle.com
 * [HOWTO use our programs](#howto-use-our-programs)  
 * [Name conventions](#name-conventions)  
 * [What does each program do?](#what-does-each-program-do)  
-* [Miscellaneous](#miscellaneous)  
+* [Report bugs](#report-bugs)
+* [Credits](#credits)  
 
 
 ### Overview:
@@ -184,10 +185,18 @@ Not included in auto setup package:
 * mgsloppybuild : builds a fast managem combine table
 
 
+### Report bugs
+
+To report a bug with gemforce look at the
+[Issues page on Github](https://github.com/gemforce-team/gemforce/issues) if it was already reported.  
+If your bug isn't there open a [new issue](https://github.com/gemforce-team/gemforce/issues/new).
+Remember to include all the relevant information (OS, gemforce version, etc...) and to give a reliable way to reproduce the bug.
+
+
 ### Credits:
 
 gemforce authors are:
-* Andrea Stacchiotti aka AG user '12345ieee' 
+* Andrea Stacchiotti aka AG user '12345ieee'
 * Wojciech Jabłoński aka AG user 'psorek'
 
 Gemcraft 2: Chasing Shadows was developed by [gameinabottle](http://gameinabottle.com/)

@@ -20,17 +20,22 @@ numbers in the last part specify how many gems go into specific recipe:
              the optimized amps' cost is written only inside the file
              and both the combines require C copies of the main gem/amplifier
 
+All the amped recipes here are built with 6 amps for managems and 8 amps for killgems.
+
+
 ### Parenthesis convention
 
 In most parenthesis schemes you'll find gems written as "3o" or "4k", etc.  
 This simply mean that the gem is the basic gem upgraded the written number of times less one:
 4o = 3o+3o = (2o+2o)+(2o+2o) = ((o+o)+(o+o))+((o+o)+(o+o)) which is the base gem upgraded 3 times.
 
+
 ### Where do I put red?
 
 In every speccing recipe, simply replace the most deeply nested non black gem with a red g1.  
 The programs' `-r` flag for adding red has still some problems with the `*omniaquery` programs,
 so the recipes here are red-less until I have time to fix it.
+
 
 ### Assumptions on skill levels
 
@@ -40,6 +45,7 @@ When dealing with amps (`*omniaquery` and `*gaquery`) two values are needed:
 * Amplifiers: assumed at `45+15` - it matters quite a lot  
 * True Colors: assumed at `45+15` - it matters nearly nothing  
 If you want more precise output `*omniaquery` programs accept your True Colors level with the `-T` flag.
+
 
 ### So many choices, so little time
 
