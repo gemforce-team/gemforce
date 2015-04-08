@@ -14,7 +14,7 @@ typedef struct Gem_Y gemY;
 
 double gem_amp_power(gem gem1, gemY amp1)
 {
-	return (gem1.damage+6*0.28*(2.8/3.2)*amp1.damage)*gem1.bbound*(gem1.crit+4*0.23*2.8*amp1.crit)*gem1.bbound;		// yes, fraction and 4, due to 3.2 and 1.5 rescaling
+	return (gem1.damage+8*0.28*(2.8/3.2)*amp1.damage)*gem1.bbound*(gem1.crit+8*0.23*(2.8/1.5)*amp1.crit)*gem1.bbound;		// yes, fractions, due to 3.2 and 1.5 rescaling
 }
 
 int gem_amp_more_powerful(gem gem1, gemY amp1, gem gem2, gemY amp2)
@@ -58,7 +58,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			printf("Gem table stops at %d, not %d\n",prevmax+1,len);
 			exit(1);
 		}
-		else {												// behave as killgem_amps -> fill the remaining with false gems
+		else {										// behave as killgem_amps -> fill the remaining with false gems
 			for (i=prevmax+1; i<len; ++i) {
 				pool_length[i]=1;
 				pool[i]=malloc(sizeof(gem));
@@ -115,7 +115,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena;
-	if (global_mode) lena=len/6;				// killgem_amps -> len/6
+	if (global_mode) lena=len/8;				// killgem_amps -> len/8
 	else lena=2*len;								// kga_spec -> 2x kg value
 	gemY* poolY[lena];
 	int poolY_length[lena];
@@ -187,8 +187,8 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 					gems[i]=poolf[i][k];
 				}
 			}
-			for (j=1;j<=i/6;++j) {											// for every amount of amps we can fit in
-				int value = i-6*j;											// this is the amount of gems we have left
+			for (j=1;j<=i/8;++j) {											// for every amount of amps we can fit in
+				int value = i-8*j;											// this is the amount of gems we have left
 				for (k=0;k<poolf_length[value];++k)						// we search in that pool
 				if (poolf[value][k].crit!=0) {							// if the gem has crit we go on
 					for (h=0;h<poolYf_length[j-1];++h) {				// and we look in the amp pool
@@ -228,7 +228,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			double comb_coeff=pow(NS, -growth_comb);
 			spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
 																				// now with amps
-			for (j=0, NS+=6; j<2*i+2; ++j, NS+=6) {							// for every amp value from 1 to to 2*gem_value
+			for (j=0, NS+=8; j<2*i+2; ++j, NS+=8) {				// for every amp value from 1 to to 2*gem_value
 				double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
 				for (k=0;k<poolf_length[i];++k)						// then we search in the gem pool
 				if (poolf[i][k].crit!=0) {								// if the gem has crit we go on
@@ -236,8 +236,8 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 					double Pdg = poolf[i][k].damage;
 					double Pcg = poolf[i][k].crit  ;
 					for (h=0;h<poolYf_length[j];++h) {				// to the amp pool and compare
-						double Pdamage = Pdg + 1.47 * poolYf[j][h].damage ;
-						double Pcrit   = Pcg + 2.576* poolYf[j][h].crit   ;
+						double Pdamage = Pdg + 1.96    * poolYf[j][h].damage ;
+						double Pcrit   = Pcg + 3.434667* poolYf[j][h].crit   ;
 						double power   = Pb2 * Pdamage * Pcrit ;
 						double spec_coeff=power*comb_coeff;
 						if (spec_coeff>spec_coeffs[i]) {
@@ -249,7 +249,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 				}
 			}
 			if (!(output_options & mask_quiet)) {
-				printf("Total value:\t%d\n\n", i+1+6*gem_getvalue_Y(amps+i));
+				printf("Total value:\t%d\n\n", i+1+8*gem_getvalue_Y(amps+i));
 				printf("Killgem\n");
 				printf("Value:\t%d\n",i+1);
 				if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
@@ -265,7 +265,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	}
 	
 	if (output_options & mask_quiet) {		// outputs last if we never seen any
-		printf("Total value:\t%d\n\n", gem_getvalue(gems+len-1)+6*gem_getvalue_Y(amps+len-1));
+		printf("Total value:\t%d\n\n", gem_getvalue(gems+len-1)+8*gem_getvalue_Y(amps+len-1));
 		printf("Killagem\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+len-1));
 		gem_print(gems+len-1);
@@ -290,7 +290,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			}
 		}
 		printf("Best setup up to %d:\n\n", len);
-		printf("Total value:\t%d\n\n", gem_getvalue(gems+best_index)+6*gem_getvalue_Y(amps+best_index));
+		printf("Total value:\t%d\n\n", gem_getvalue(gems+best_index)+8*gem_getvalue_Y(amps+best_index));
 		printf("Killgem\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
 		gem_print(gems+best_index);
@@ -309,9 +309,9 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, ampf->damage, ampf->crit, 1.47, 2.576);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, ampf->damage, ampf->crit, 1.96, 3.434667);
 			printf("Setup with red added:\n\n");
-			printf("Total value:\t%d\n\n", value+6*gem_getvalue_Y(ampf));
+			printf("Total value:\t%d\n\n", value+8*gem_getvalue_Y(ampf));
 			printf("Killgem\n");
 			printf("Value:\t%d\n", value);
 			gem_print(gemf);
@@ -404,7 +404,7 @@ int main(int argc, char** argv)
 				char* p=optarg;
 				while (*p != ',' && *p != '\0') p++;
 				if (*p==',') *p='\0';			// ok, it's "f,fA"
-				else p--;									// not ok, it's "f" -> empty string
+				else p--;							// not ok, it's "f" -> empty string
 				strcpy(filename,optarg);
 				strcpy(filenameA,p+1);
 				break;

@@ -247,7 +247,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		double c0 = log((double)NT/(i+1))*iloglenc;						// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
 																						// now we compare the whole setup
-		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {									// for every amp value from 1 to to gem_value
+		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {					// for every amp value from 1 to to gem_value
 			double c = log((double)NT/NS)*iloglenc;						// we compute the combination number
 			for (l=0; l<poolcf_length; ++l) {								// then we search in the NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
@@ -446,7 +446,7 @@ int main(int argc, char** argv)
 	int lenc;
 	char opt;
 	int TC=60;
-	int Namps=6;
+	int Namps=8;  // killgem in tower
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 	char filenamec[256]="";		// it should be enough
