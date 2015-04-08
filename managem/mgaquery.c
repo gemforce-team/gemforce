@@ -113,7 +113,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena;
 	if (global_mode) lena=len/6;				// managem_amps -> len/6
-	else lena=2*len;								// mga_spec -> 2x mg value
+	else lena=len;									// mga_spec -> mg value
 	gemO* poolO[lena];
 	int poolO_length[lena];
 	poolO[0]=malloc(sizeof(gemO));
@@ -204,7 +204,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			double comb_coeff=pow(NS, -growth_comb);
 			spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
 																				// now with amps
-			for (j=0, NS+=6; j<2*i+2; ++j, NS+=6) {										// for every amp value from 1 to to 2*gem_value
+			for (j=0, NS+=6; j<i+1; ++j, NS+=6) {					// for every amp value from 1 to to gem_value
 				double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
 				double Pa= 2.576 * bestO[j].leech;					// <- this is ok only for mg
 				for (k=0;k<poolf_length[i];++k) {					// then we search in the reduced gem pool

@@ -116,7 +116,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena;
 	if (global_mode) lena=len/8;				// killgem_amps -> len/8
-	else lena=2*len;								// kga_spec -> 2x kg value
+	else lena=len;									// kga_spec -> kg value
 	gemY* poolY[lena];
 	int poolY_length[lena];
 	poolY[0]=malloc(sizeof(gemY));
@@ -228,7 +228,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			double comb_coeff=pow(NS, -growth_comb);
 			spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
 																				// now with amps
-			for (j=0, NS+=8; j<2*i+2; ++j, NS+=8) {				// for every amp value from 1 to to 2*gem_value
+			for (j=0, NS+=8; j<i+1; ++j, NS+=8) {				// for every amp value from 1 to to gem_value
 				double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
 				for (k=0;k<poolf_length[i];++k)						// then we search in the gem pool
 				if (poolf[i][k].crit!=0) {								// if the gem has crit we go on
