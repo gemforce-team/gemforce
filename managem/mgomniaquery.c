@@ -190,9 +190,9 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	double iloglenc=1/log(lenc);
 	double leech_ratio=Namps*0.46*(1+(double)TC*3/100)/(1+(double)TC/30);
 	if (!(output_options & mask_quiet)) {
-		printf("Managem:\n");
+		printf("Managem spec\n");
 		gem_print(gems);
-		printf("Amplifier:\n");
+		printf("Amplifier spec (x%d)\n", Namps);
 		gem_print_O(amps);
 	}
 

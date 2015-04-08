@@ -5,9 +5,9 @@
 #include <string.h>
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
-const int ACC=80;						// ACC is for z-axis sorting and for the length of the interval tree
-const int ACC_TR=750;				// ACC_TR is for bbound comparisons inside tree
-const int NT=1048576;				// 2^20 ~ 1m, it's still low, but there's no difference going on (even 10k gives the same results)
+const int ACC=80;					// ACC is for z-axis sorting and for the length of the interval tree
+const int ACC_TR=750;			// ACC_TR is for bbound comparisons inside tree
+const int NT=1048576;			// 2^20 ~ 1m, it's still low, but there's no difference going on (even 10k gives the same results)
 #include "killgem_utils.h"
 typedef struct Gem_Y gemY;
 #include "crit_utils.h"
@@ -49,7 +49,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem* poolf[len];
 	int poolf_length[len];
 	
-	for (i=0;i<len;++i) {												// killgem spec compression
+	for (i=0;i<len;++i) {								// killgem spec compression
 		int j;
 		float maxcrit=0;
 		gem* temp_pool=malloc(pool_length[i]*sizeof(gem));
@@ -57,7 +57,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			temp_pool[j]=pool[i][j];
 			maxcrit=max(maxcrit, (pool[i]+j)->crit);
 		}
-		gem_sort(temp_pool,pool_length[i]);							// work starts
+		gem_sort(temp_pool,pool_length[i]);			// work starts
 		int broken=0;
 		int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 		int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
@@ -153,7 +153,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (lenc > len) lena=lenc;					// see which is bigger between spec len and comb len
 	else lena=len;									// and we'll get the amp pool till there
 	gemY** poolY=malloc(lena*sizeof(gemY*));
-	int* poolY_length=malloc(lena*sizeof(int));;
+	int* poolY_length=malloc(lena*sizeof(int));
 	poolY[0]=malloc(sizeof(gemY));
 	poolY_length[0]=1;
 	gem_init_Y(poolY[0],1,1,1);
@@ -221,9 +221,9 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	double crit_ratio  =Namps*0.46*(1+(double)TC*3/100)/(1  +(double)TC/30);
 	double damage_ratio=Namps*0.28*(1+(double)TC*3/100)/(1.2+(double)TC/30);
 	if (!(output_options & mask_quiet)) {
-		printf("Killgem:\n");
+		printf("Killgem spec\n");
 		gem_print(gems);
-		printf("Amplifier:\n");
+		printf("Amplifier spec (%dx)\n", Namps);
 		gem_print_Y(amps);
 	}
 
