@@ -245,7 +245,6 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			gem_print(gems+i);
 			printf("Amplifier spec (x%d)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
-			if (output_options & mask_info) printf("Pool:\t1\n");
 			gem_print_O(amps+i);
 			printf("Managem combine\n");
 			printf("Comb:\t%d\n",lenc);
@@ -253,7 +252,6 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			gem_print(gemsc+i);
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
-			if (output_options & mask_info) printf("Pool:\t1\n");
 			gem_print_O(ampsc+i);
 			printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i], leech_ratio));
 			printf("Global power (resc. 1k):\t%f\n\n\n", powers[i]/1000);
