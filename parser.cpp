@@ -1,19 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <unistd.h>
-#include <string.h>
+#include <iostream>
+#include <getopt.h>
+#include <string>
+#include <cstring>
 
-typedef struct Gem_global {
+using namespace std;
+
+class gem
+{
+	public:
 	int uid;			// needed for eq. output
 	int grade;
-	double damage;				// reference: yellow damage=1
+	double damage;		// reference: yellow damage=1
 	double crit;
 	double leech;
 	double bbound;
-	struct Gem_global* father;
-	struct Gem_global* mother;
-} gem;
+	gem* father;
+	gem* mother;
+	
+	int value;
+	double mana_power;
+	double kill_power;
+	char color;
+};
 
 int int_max(int a, int b) 
 {
@@ -183,7 +191,7 @@ void gem_print(gem* p_gem) {
 	}
 }
 
-void print_tree(gem* gemf, char* prefix)
+void print_tree(gem* gemf, const char* prefix)
 {
 	if (gemf->father==NULL) {
 		printf("─ g1 %c\n",gem_color(gemf));
@@ -213,7 +221,7 @@ void print_tree(gem* gemf, char* prefix)
 	}
 }
 
-int gem_build(char* parens, int len, gem* gems, int place)
+int gem_build(const char* parens, int len, gem* gems, int place)
 {
 	if (len==1) {
 		gem_color_init(gems+place+1, parens[0]);
@@ -260,9 +268,9 @@ void print_equations(gem* gems, int len, int place_last)
 	for (i=0; i<len; ++i) (gems+i)->uid=-1;
 	int current_uid=0;
 	for (i=0; i<len; ++i) {
-		if ((gems+i)->uid == -1 ) {				// never marked
+		if ((gems+i)->uid == -1 ) {			// never marked
 			(gems+i)->uid=current_uid;			// mark current gem
-			for (j=i+1; j<len; ++j) {				// and look for her friends
+			for (j=i+1; j<len; ++j) {			// and look for her friends
 				if (gem_are_equal(gems[i], gems[j])) {
 					(gems+j)->uid=current_uid;	// mark her friend
 				}
@@ -275,15 +283,35 @@ void print_equations(gem* gems, int len, int place_last)
 	print_eq(gems+place_last, printed_uid);
 }
 
+string ieeePreParser(string recipe)
+{
+	for (int i = 20; i > 1; i--)
+	{
+		string grd_str = to_string(i);
+		size_t place = recipe.find(grd_str);
+		while (place != string::npos)
+		{
+			char color = recipe[place + grd_str.length()];
+			string weakerGem = to_string(i - 1) + color;
+			if (i == 2) weakerGem = color;
+			recipe = recipe.replace(place, grd_str.length()+1, "(" + weakerGem + "+" + weakerGem + ")");
+			place = recipe.find(grd_str);
+		}
+	}
+	return recipe;
+}
+
 int main(int argc, char** argv)
 {
 	char opt;
 	int output_tree=0;
 	int output_eq = 0;
-	char* parens_amps=NULL;
-	int len_amps=0;
-	while ((opt=getopt(argc,argv,"tea:"))!=-1) {
+	string parens_amps="";
+	while ((opt=getopt(argc,argv,"htea:"))!=-1) {
 		switch(opt) {
+			case 'h':
+				printf("htea:");
+			return 0;
 			case 't':
 				output_tree = 1;
 			break;
@@ -291,9 +319,7 @@ int main(int argc, char** argv)
 				output_eq = 1;
 			break;
 			case 'a':
-				while (optarg[len_amps] != '\0') len_amps++;
-				parens_amps=malloc((len_amps+1)*sizeof(char));
-				strcpy(parens_amps, optarg);
+				parens_amps = ieeePreParser(optarg);
 			break;
 			case '?':
 				return 1;
@@ -301,12 +327,9 @@ int main(int argc, char** argv)
 			break;
 		}
 	}
-	char* parens;
-	int len=0;
+	string parens;
 	if (optind+1==argc) {		// get input
-		while (argv[optind][len] != '\0') len++;
-		parens=malloc((len+1)*sizeof(char));
-		strcpy(parens, argv[optind]);
+		parens = ieeePreParser(argv[optind]);
 	}
 	else {
 		printf("Unknown arguments:\n");
@@ -316,11 +339,12 @@ int main(int argc, char** argv)
 		}
 		return 1;
 	}
+	int len = parens.length();
 	if (len<1) printf("Improper gem recipe\n");
 	else {
 		int value=(len+3)/4;			// gem
 		gem gems[2*value-1];
-		int place=gem_build(parens, len, gems, -1);
+		int place=gem_build(parens.c_str(), len, gems, -1);
 		printf("\nMain gem:\n");
 		gem_print(gems+place);
 		if (output_tree) {
@@ -333,10 +357,11 @@ int main(int argc, char** argv)
 			print_equations(gems, 2*value-1, place);
 			printf("\n");
 		}
+		int len_amps = parens_amps.length();
 		if (len_amps>0) {
 			value=(len_amps+3)/4;			// amps
 			gem amps[2*value-1];
-			int place_amps=gem_build(parens_amps, len_amps, amps, -1);
+			int place_amps=gem_build(parens_amps.c_str(), len_amps, amps, -1);
 			printf("Amplifier:\n");
 			gem_print(amps+place_amps);
 			if (output_tree) {
@@ -353,7 +378,5 @@ int main(int argc, char** argv)
 			printf("Global kill power (resc.):\t%f\n\n", gem_amp_global_kill_power(gems[place], amps[place_amps]));
 		}
 	}
-	free(parens);
-	if (len_amps > 0) free(parens_amps);
 	return 0;
 }
