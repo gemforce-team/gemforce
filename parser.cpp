@@ -14,6 +14,7 @@ class gem
 	double crit;
 	double leech;
 	double bbound;
+	bool red;
 	gem* father;
 	gem* mother;
 	
@@ -21,6 +22,60 @@ class gem
 	double mana_power;
 	double kill_power;
 	char color;
+	
+	gem(){}
+	
+	gem(int grd, double damage, double crit, double leech, double bbound, bool red=0, gem* father=nullptr, gem* mother=nullptr):
+	grade(grd), damage(damage), crit(crit), leech(leech), bbound(bbound), red(red), father(father), mother(mother) {}
+	
+	gem(const char color)
+	{
+		switch (color)
+		{                     // gr dmg       cr le bl r
+			case 'y': *this = gem(1, 1       , 1, 0, 0);
+			break;
+			case 'o': *this = gem(1, 0.727542, 0, 1, 0);
+			break;
+			case 'b': *this = gem(1, 1.186168, 0, 0, 1);
+			break;
+			case 'r': *this = gem(1, 0.909091, 0, 0, 0, 1);
+			break;
+			case 'm': *this = gem(1, 1       , 0, 1, 1);
+			break;
+			case 'k': *this = gem(1, 1       , 1, 0, 1);
+			break;
+			default:  *this = gem(0, 0       , 0, 0, 0);
+		}
+		this->color=color;
+	}
+	
+	bool operator==(const gem& gem2)
+	{
+		if (grade  != gem2.grade ) return 0;
+		if (damage != gem2.damage) return 0;
+		if (crit   != gem2.crit  ) return 0;
+		if (leech  != gem2.leech ) return 0;
+		if (bbound != gem2.bbound) return 0;
+		if (red    != gem2.red   ) return 0;
+		return 1;
+	}
+	
+	char get_color()
+	{
+		int info=0;
+		if (this->crit!=0) info+=4;
+		if (this->leech!=0) info+=2;
+		if (this->bbound!=0) info+=1;
+		switch (info) {
+			case  0: return this->red?'r':'0';
+			case  1: return 'b';
+			case  2: return 'o';
+			case  3: return 'm';
+			case  4: return 'y';
+			case  5: return 'k';
+			default: return 'x';
+		}
+	}
 };
 
 int int_max(int a, int b) 
@@ -99,51 +154,8 @@ void gem_combine (gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 	}
 	if (p_gem_combined->damage < p_gem1->damage) p_gem_combined->damage = p_gem1->damage;
 	if (p_gem_combined->damage < p_gem2->damage) p_gem_combined->damage = p_gem2->damage;
-}
-
-void gem_init(gem *p_gem, int grd, double damage, double crit, double leech, double bbound)
-{
-	p_gem->grade =grd;
-	p_gem->damage=damage;
-	p_gem->crit  =crit;
-	p_gem->leech =leech;
-	p_gem->bbound=bbound;
-	p_gem->father=NULL;
-	p_gem->mother=NULL;
-}
-
-void gem_color_init(gem* p_gem, char color)
-{
-	switch (color) {				//  gr dmg       cr le bl
-		case 'y': gem_init(p_gem, 1, 1       , 1, 0, 0);
-		break;
-		case 'o': gem_init(p_gem, 1, 0.727542, 0, 1, 0);
-		break;
-		case 'b': gem_init(p_gem, 1, 1.186168, 0, 0, 1);
-		break;
-		case 'm': gem_init(p_gem, 1, 1       , 0, 1, 1);
-		break;
-		case 'k': gem_init(p_gem, 1, 1       , 1, 0, 1);
-		break;
-		default:  gem_init(p_gem, 0, 0       , 0, 0, 0);
-	}
-}
-
-char gem_color(gem* p_gem)
-{
-	int info=0;
-	if (p_gem->crit!=0) info+=4;
-	if (p_gem->leech!=0) info+=2;
-	if (p_gem->bbound!=0) info+=1;
-	switch (info) {
-		case  0: return '0';
-		case  1: return 'b';
-		case  2: return 'o';
-		case  3: return 'm';
-		case  4: return 'y';
-		case  5: return 'k';
-		default: return 'x';
-	}
+	p_gem_combined->color = p_gem_combined->get_color();
+	p_gem_combined->red = p_gem1->red || p_gem2->red;
 }
 
 int gem_getvalue(gem* p_gem)
@@ -153,8 +165,72 @@ int gem_getvalue(gem* p_gem)
 	else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
 }
 
+
+void print_tree(gem* gemf, const char* prefix)
+{
+	if (gemf->father==NULL) {
+		printf("─ g1 %c\n", gemf->color);
+	}
+	else {
+		printf("─%d\n",gem_getvalue(gemf));
+		printf("%s ├",prefix);
+		char string1[strlen(prefix)+2];
+		strcpy(string1,prefix);
+		strcat(string1," │");
+		gem* gem1;
+		gem* gem2;
+		if (gem_getvalue(gemf->father)>gem_getvalue(gemf->mother)) {
+			gem1=gemf->father;
+			gem2=gemf->mother;
+		}
+		else {
+			gem2=gemf->father;
+			gem1=gemf->mother;
+		}
+		print_tree(gem1, string1);
+		printf("%s └",prefix);
+		char string2[strlen(prefix)+2];
+		strcpy(string2,prefix);
+		strcat(string2,"  ");
+		print_tree(gem2, string2);
+	}
+}
+
+void print_eq(gem* p_gem, int* printed_uid)
+{
+	if (printed_uid[p_gem->uid]==1) return;
+	if (gem_getvalue(p_gem)==1) printf("(val = 1)\t%2d = g1 %c\n", p_gem->uid, p_gem->color);
+	else {
+		print_eq(p_gem->father, printed_uid);
+		print_eq(p_gem->mother, printed_uid);
+		printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->uid, p_gem->mother->uid, p_gem->father->uid);
+	}
+	printed_uid[p_gem->uid]=1;
+}
+
+void print_equations(gem* gems, int len, int place_last)
+{
+	int i,j;
+	for (i=0; i<len; ++i) (gems+i)->uid=-1;
+	int current_uid=0;
+	for (i=0; i<len; ++i) {
+		if ((gems+i)->uid == -1 ) {			// never marked
+			(gems+i)->uid=current_uid;			// mark current gem
+			for (j=i+1; j<len; ++j) {			// and look for her friends
+				if (gems[i]==gems[j]) {
+					(gems+j)->uid=current_uid;	// mark her friend
+				}
+			}
+			current_uid++;
+		}
+	}		// all uid set
+	int printed_uid[len/4];
+	for (i=0; i<len/4; ++i) printed_uid[i]=0;
+	print_eq(gems+place_last, printed_uid);
+}
+
 void gem_print(gem* p_gem) {
-	switch (gem_color(p_gem)) {
+	switch (p_gem->color) {
 		case 'y':
 		printf("Yellow gem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
@@ -170,61 +246,39 @@ void gem_print(gem* p_gem) {
 		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
 		printf("Damage:\t%f\nBbound:\t%f\n\n", p_gem->damage, p_gem->bbound);
 		break;
+		case 'r':
+		printf("Red gem\n");
+		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
+		printf("Damage:\t%f\nRed:\t%d\n\n", p_gem->damage, p_gem->red);
+		break;
 		case 'm':
 		printf("Managem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
 		printf("Leech:\t%f\nBbound:\t%f\n", p_gem->leech, p_gem->bbound);
+		printf("Red:\t%d\n", p_gem->red);
 		printf("Mana power:\t%f\n\n", p_gem->leech*p_gem->bbound);
 		break;
 		case 'k':
 		printf("Killgem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
 		printf("Damage:\t%f\nCrit:\t%f\nBbound:\t%f\n", p_gem->damage, p_gem->crit, p_gem->bbound);
+		printf("Red:\t%d\n", p_gem->red);
 		printf("Kill power:\t%f\n\n", p_gem->damage*p_gem->bbound*p_gem->crit*p_gem->bbound);
 		break;
 		default:
 		printf("Strange gem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", gem_getvalue(p_gem), p_gem->grade);
 		printf("Damage:\t%f\nCrit:\t%f\nLeech:\t%f\nBbound:\t%f\n", p_gem->damage, p_gem->crit, p_gem->leech, p_gem->bbound);
+		printf("Red:\t%d\n", p_gem->red);
 		printf("Mana power:\t%f\n", p_gem->leech*p_gem->bbound);
 		printf("Kill power:\t%f\n\n", p_gem->damage*p_gem->bbound*p_gem->crit*p_gem->bbound);
-	}
-}
-
-void print_tree(gem* gemf, const char* prefix)
-{
-	if (gemf->father==NULL) {
-		printf("─ g1 %c\n",gem_color(gemf));
-	}
-	else {
-		printf("─%d\n",gem_getvalue(gemf));
-		printf("%s ├",prefix);
-		char string[strlen(prefix)+2];
-		strcpy(string,prefix);
-		strcat(string," │");
-		gem* gem1;
-		gem* gem2;
-		if (gem_getvalue(gemf->father)>gem_getvalue(gemf->mother)) {
-			gem1=gemf->father;
-			gem2=gemf->mother;
-		}
-		else {
-			gem2=gemf->father;
-			gem1=gemf->mother;
-		}
-		print_tree(gem1, string);
-		printf("%s └",prefix);
-		char string2[strlen(prefix)+2];
-		strcpy(string2,prefix);
-		strcat(string2,"  ");
-		print_tree(gem2, string2);
 	}
 }
 
 int gem_build(const char* parens, int len, gem* gems, int place)
 {
 	if (len==1) {
-		gem_color_init(gems+place+1, parens[0]);
+		gems[place+1] = gem(parens[0]);
 		return place+1;
 	}
 	int open_parens=0;
@@ -238,49 +292,6 @@ int gem_build(const char* parens, int len, gem* gems, int place)
 	int mother_chain=gem_build(parens+i+2, len-i-3, gems, father_chain);
 	gem_combine(gems+father_chain, gems+mother_chain, gems+mother_chain+1);
 	return mother_chain+1;
-}
-
-void print_eq(gem* p_gem, int* printed_uid)
-{
-	if (printed_uid[p_gem->uid]==1) return;
-	if (gem_getvalue(p_gem)==1) printf("(val = 1)\t%2d = g1 %c\n", p_gem->uid, gem_color(p_gem));
-	else {
-		print_eq(p_gem->father, printed_uid);
-		print_eq(p_gem->mother, printed_uid);
-		printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->uid, p_gem->mother->uid, p_gem->father->uid);
-	}
-	printed_uid[p_gem->uid]=1;
-}
-
-int gem_are_equal(gem gem1, gem gem2)
-{
-	if (gem1.grade  != gem2.grade ) return 0;
-	if (gem1.damage != gem2.damage) return 0;
-	if (gem1.crit   != gem2.crit  ) return 0;
-	if (gem1.leech  != gem2.leech ) return 0;
-	if (gem1.bbound != gem2.bbound) return 0;
-	return 1;
-}
-
-void print_equations(gem* gems, int len, int place_last)
-{
-	int i,j;
-	for (i=0; i<len; ++i) (gems+i)->uid=-1;
-	int current_uid=0;
-	for (i=0; i<len; ++i) {
-		if ((gems+i)->uid == -1 ) {			// never marked
-			(gems+i)->uid=current_uid;			// mark current gem
-			for (j=i+1; j<len; ++j) {			// and look for her friends
-				if (gem_are_equal(gems[i], gems[j])) {
-					(gems+j)->uid=current_uid;	// mark her friend
-				}
-			}
-			current_uid++;
-		}
-	}		// all uid setted
-	int printed_uid[len/4];
-	for (i=0; i<len/4; ++i) printed_uid[i]=0;
-	print_eq(gems+place_last, printed_uid);
 }
 
 string ieeePreParser(string recipe)
