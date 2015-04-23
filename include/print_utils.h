@@ -96,7 +96,7 @@ void print_equations(gem* gemf)
 	free(p_gems);
 }
 
-void print_tree(gem* gemf, char* prefix)
+void print_tree(gem* gemf, const char* prefix)
 {
 	if (gemf->father==NULL) {
 		printf("─ g1 %c\n",gem_color(gemf));

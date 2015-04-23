@@ -197,7 +197,7 @@ void print_equations_O(gemO* gemf)
 	free(p_gems);
 }
 
-void print_tree_O(gemO* gemf, char* prefix)
+void print_tree_O(gemO* gemf, const char* prefix)
 {
 	if (gemf->grade==0) printf("-\n");
 	else if (gemf->father==NULL) {

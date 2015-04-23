@@ -261,7 +261,7 @@ void print_equations_Y(gemY* gemf)
 	free(p_gems);
 }
 
-void print_tree_Y(gemY* gemf, char* prefix)
+void print_tree_Y(gemY* gemf, const char* prefix)
 {
 	if (gemf->grade==0) printf("-\n");
 	else if (gemf->father==NULL) {
