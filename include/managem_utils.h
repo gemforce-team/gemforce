@@ -147,6 +147,64 @@ void gem_sort (gem* gems, int len)
 	ins_sort (gems, len);      // finish the nearly sorted array
 }
 
+inline int gem_less_eq_exact(gem gem1, gem gem2)
+{
+	if (gem1.leech != gem2.leech)
+		return gem1.leech<gem2.leech;
+	return gem1.bbound<gem2.bbound;
+}
+
+void ins_sort_exact (gem* gems, int len)
+{
+	int i,j;
+	gem element;
+	for (i=1; i<len; i++) {
+		element=gems[i];
+		for (j=i; j>0 && gem_less_eq_exact(element, gems[j-1]); j--) {
+			gems[j]=gems[j-1];
+		}
+		gems[j]=element;
+	}
+}
+
+void quick_sort_exact (gem* gems, int len)
+{
+	if (len > 20)  {
+		gem pivot = gems[len/2];
+		gem* beg = gems;
+		gem* end = gems+len-1;
+		while (beg <= end) {
+			while (gem_less_eq_exact(*beg, pivot)) {
+				beg++;
+			}
+			while (gem_less_eq_exact(pivot,*end)) {
+				end--;
+			}
+			if (beg <= end) {
+				gem temp = *beg;
+				*beg = *end;
+				*end = temp;
+				beg++;
+				end--;
+			}
+		}
+		if (end-gems+1 < gems-beg+len) {		// sort smaller first
+			quick_sort_exact(gems, end-gems+1);
+			quick_sort_exact(beg, gems-beg+len);
+		}
+		else {
+			quick_sort_exact(beg, gems-beg+len);
+			quick_sort_exact(gems, end-gems+1);
+		}
+	}
+}
+
+void gem_sort_exact (gem* gems, int len)
+{
+	quick_sort_exact (gems, len);    // partially sort
+	ins_sort_exact (gems, len);      // finish the nearly sorted array
+}
+
 inline double gem_power(gem gem1)
 {
 	return gem1.leech*gem1.bbound;     // amp-less
