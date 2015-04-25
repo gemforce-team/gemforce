@@ -180,17 +180,18 @@ Not included in auto setup package:
 * leechcombine  : makes leech combines from scratch
 * managem_alone : makes managem combines and specces (alone) from scratch
 * managembuild  : builds managem tables
+* mgexactbuild  : builds the exact managem tables
 * mgfast1build  : builds a fast managem combine table
 * mgfast2build  : builds a fast managem combine table
 * mgsloppybuild : builds a fast managem combine table
 
 
-### Report bugs
+### Report bugs:
 
 To report a bug with gemforce look at the
 [Issues page on Github](https://github.com/gemforce-team/gemforce/issues) if it was already reported.  
 If your bug isn't there open a [new issue](https://github.com/gemforce-team/gemforce/issues/new).
-Remember to include all the relevant information (OS, gemforce version, etc...) and to give a reliable way to reproduce the bug.
+Be sure to include all the relevant information (OS, gemforce version, etc...) and give a reliable way to reproduce the bug.
 
 
 ### Credits:
