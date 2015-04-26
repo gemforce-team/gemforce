@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <getopt.h>
 #include <string>
 #include <cstring>
@@ -317,11 +318,12 @@ int main(int argc, char** argv)
 	char opt;
 	int output_tree=0;
 	int output_eq = 0;
+	string parens="";
 	string parens_amps="";
-	while ((opt=getopt(argc,argv,"htea:"))!=-1) {
+	while ((opt=getopt(argc,argv,"htef:a:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				printf("htea:");
+				printf("htef:a:");
 			return 0;
 			case 't':
 				output_tree = 1;
@@ -329,6 +331,13 @@ int main(int argc, char** argv)
 			case 'e':
 				output_eq = 1;
 			break;
+			case 'f': {
+				ifstream file;
+				file.open(optarg, fstream::out);
+				getline(file, parens);
+				file.close();
+				parens = ieeePreParser(parens);
+			} break;
 			case 'a':
 				parens_amps = ieeePreParser(optarg);
 			break;
@@ -338,11 +347,11 @@ int main(int argc, char** argv)
 			break;
 		}
 	}
-	string parens;
+	
 	if (optind+1==argc) {		// get input
 		parens = ieeePreParser(argv[optind]);
 	}
-	else {
+	if (parens=="") {
 		printf("Unknown arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
