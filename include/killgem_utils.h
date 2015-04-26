@@ -10,11 +10,7 @@ struct Gem_YB {
 	struct Gem_YB* mother;
 };
 
-inline int int_max(int a, int b)
-{
-	if (a > b) return a;
-	else return b;
-}
+#include "gem_utils.h"
 
 inline double gem_power(gem gem1)
 {

@@ -9,11 +9,7 @@ struct Gem_Y {
 	struct Gem_Y* mother;
 };
 
-inline int int_max(int a, int b)
-{
-	if (a > b) return a;
-	else return b;
-}
+#include "gem_utils.h"
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {

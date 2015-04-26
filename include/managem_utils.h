@@ -17,11 +17,7 @@ struct Gem_OB {
 	struct Gem_OB* mother;
 };
 
-inline int int_max(int a, int b)
-{
-	if (a > b) return a;
-	else return b;
-}
+#include "gem_utils.h"
 
 inline int gem_more_powerful(gem gem1, gem gem2)
 {

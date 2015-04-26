@@ -3,21 +3,6 @@
 
 #include <string.h>
 
-const int mask_info=1;
-const int mask_parens=2;
-const int mask_tree=4;
-const int mask_table=8;
-const int mask_equations=16;
-const int mask_quiet=32;
-const int mask_upto=64;
-const int mask_red=128;
-
-int gem_getvalue(gem* p_gem)
-{
-	if(p_gem->father==NULL) return 1;
-	else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
-}
-
 void print_parens(gem* gemf)
 {
 	if (gemf->father==NULL) printf("%c",gem_color(gemf));
@@ -41,7 +26,7 @@ int monocolor_ancestors(gem* gemf)
 void print_parens_compressed(gem* gemf)
 {
 	if (gemf->father==NULL) printf("%c",gem_color(gemf));
-	else if (monocolor_ancestors(gemf)									// if gem is uniform combination (g1 are already done)
+	else if (monocolor_ancestors(gemf)							// if gem is uniform combination (g1 are already done)
 	&& pow(2,gemf->grade-1)==gem_getvalue(gemf)) {			// and is standard combine
 		printf("%d%c",gemf->grade,gem_color(gemf));
 	}
@@ -88,7 +73,7 @@ void print_equations(gem* gemf)
 	int len=2*value-1;
 	gem** p_gems=malloc(len*sizeof(gem*));		// let's store all the gem pointers
 	int place=0;
-	fill_array(gemf, p_gems, &place);					// this array contains marked uniques only and is long "place"
+	fill_array(gemf, p_gems, &place);			// this array contains marked uniques only and is long "place"
 	int i;
 	int printed_uid[place];
 	for (i=0; i<place; ++i) printed_uid[i]=0;
