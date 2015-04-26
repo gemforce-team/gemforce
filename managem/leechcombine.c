@@ -78,8 +78,9 @@ void worker(int len, int output_options)
 		
 		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info) {
+			if (output_options & mask_info)
 				printf("Growth:\t%f\n", log(gems[i].leech)/log(i+1));
+			if (output_options & mask_debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n",pool_length[i]);
 			}
@@ -90,6 +91,8 @@ void worker(int len, int output_options)
 	if (output_options & mask_quiet) {    // outputs last if we never seen any
 		printf("Value:\t%d\n",len);
 		printf("Growth:\t%f\n", log(gems[len-1].leech)/log(len));
+		if (output_options & mask_debug)
+			printf("Pool:\t%d\n",pool_length[len-1]);
 		gem_print(gems+len-1);
 	}
 
@@ -156,52 +159,39 @@ int main(int argc, char** argv)
 	char opt;
 	int output_options=0;
 
-	while ((opt=getopt(argc,argv,"iptcequr"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecidqur"))!=-1) {
 		switch(opt) {
-			case 'i':
-				output_options |= mask_info;
-				break;
-			case 'p':
-				output_options |= mask_parens;
-				break;
-			case 't':
-				output_options |= mask_tree;
-				break;
-			case 'c':
-				output_options |= mask_table;
-				break;
-			case 'e':
-				output_options |= mask_equations;
-				break;
-			case 'q':
-				output_options |= mask_quiet;
-				break;
-			case 'u':
-				output_options |= mask_upto;
-				break;
-			case 'r':
-				output_options |= mask_red;
-				break;
+			case 'h':
+				print_help("hptecidqur");
+				return 0;
+			PTECIDCUR_OPTIONS_BLOCK
 			case '?':
 				return 1;
 			default:
 				break;
 		}
 	}
+	if (optind==argc) {
+		printf("No length specified\n");
+		return 1;
+	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
 	}
 	else {
-		if (optind==argc) printf("No length specified\n");
-		else printf("Unknown arguments:\n");
+		printf("Too many arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
 		}
+		printf("\n");
 		return 1;
 	}
-	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_options);
+	if (len<1) {
+		printf("Improper gem number\n");
+		return 1;
+	}
+	worker(len, output_options);
 	return 0;
 }
 
