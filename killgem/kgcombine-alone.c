@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <getopt.h>
-#include <string.h>
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
 int ACC;							// 80,60  ACC is for z-axis sorting and for the length of the interval tree

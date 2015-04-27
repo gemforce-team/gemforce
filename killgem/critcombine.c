@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <getopt.h>
-#include <string.h>
 typedef struct Gem_Y gem;
 #include "critg_utils.h"
 
