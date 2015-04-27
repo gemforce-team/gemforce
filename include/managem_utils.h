@@ -13,6 +13,11 @@ struct Gem_OB {
 
 #include "gem_utils.h"
 
+inline double gem_power(gem gem1)
+{
+	return gem1.leech*gem1.bbound;
+}
+
 inline int gem_more_powerful(gem gem1, gem gem2)
 {
 	return (gem1.leech*gem1.bbound > gem2.leech*gem2.bbound);		// optimization at infinity hits (hit lv infinity)
@@ -194,11 +199,6 @@ void gem_sort_exact (gem* gems, int len)
 {
 	quick_sort_exact (gems, len);    // partially sort
 	ins_sort_exact (gems, len);      // finish the nearly sorted array
-}
-
-inline double gem_power(gem gem1)
-{
-	return gem1.leech*gem1.bbound;
 }
 
 char gem_color(gem* p_gem)
