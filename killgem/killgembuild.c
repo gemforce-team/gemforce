@@ -5,7 +5,7 @@
 #include <string.h>
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
-int ACC;								// 80,60  ACC is for z-axis sorting and for the length of the interval tree
+int ACC;							// 80,60  ACC is for z-axis sorting and for the length of the interval tree
 const int ACC_TR=750;		//   750  ACC_TR is for bbound comparisons inside tree
 #include "killgem_utils.h"
 #include "gfon.h"
@@ -19,16 +19,16 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 	pool[0]=malloc(pool_zero*sizeof(gem));
 	pool_length[0]=pool_zero;
 
-	if (pool_zero==1) {							// combine
-		ACC=80;												// ACC is for z-axis sorting and for the length of the interval tree
+	if (pool_zero==1) {					// combine
+		ACC=80;								// ACC is for z-axis sorting and for the length of the interval tree
 		gem_init(pool[0],1,1,1,1);		// start gem does not matter
-		if (size==0) size=1000;				// reasonable comb sizing
+		if (size==0) size=1000;			// reasonable comb sizing
 	}
-	else {													// spec
-		ACC=60;												// ACC is for z-axis sorting and for the length of the interval tree
+	else {									// spec
+		ACC=60;								// ACC is for z-axis sorting and for the length of the interval tree
 		gem_init(pool[0]  ,1,1.000000,1,0);
 		gem_init(pool[0]+1,1,1.186168,0,1);		// BB has more dmg
-		if (size==0) size=20000;			// reasonable spec sizing
+		if (size==0) size=20000;		// reasonable spec sizing
 	}
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
@@ -72,7 +72,7 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 						int grd=temp.grade-2;
 						temp_pools[grd][temp_index[grd]]=temp;
 						temp_index[grd]++;
-						if (temp_index[grd]==size) {									// let's skim a pool
+						if (temp_index[grd]==size) {								// let's skim a pool
 							int length=size+subpools_length[grd];
 							gem* temp_array=malloc(length*sizeof(gem));
 							int index=0;
@@ -144,7 +144,7 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 				}
 				free(subpools[grd]);		// free
 				
-				gem_sort(temp_array,length);								// work starts
+				gem_sort(temp_array,length);						// work starts
 				int broken=0;
 				int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 				int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
@@ -193,7 +193,7 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 
 		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info) {
+			if (output_options & mask_debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
@@ -214,14 +214,12 @@ int main(int argc, char** argv)
 	int size=0;						// worker or user must initialize it
 	char filename[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iqs:f:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hdqs:f:"))!=-1) {
 		switch(opt) {
-			case 'i':
-				output_options |= mask_info;
-				break;
-			case 'q':
-				output_options |= mask_quiet;
-				break;
+			case 'h':
+				print_help("hdqs:f:");
+				return 0;
+			PTECIDCUR_OPTIONS_BLOCK
 			case 's':
 				size = atoi(optarg);
 				break;
@@ -234,6 +232,10 @@ int main(int argc, char** argv)
 				break;
 		}
 	}
+	if (optind==argc) {
+		printf("No length specified\n");
+		return 1;
+	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
 		char* p=argv[optind];
@@ -241,12 +243,12 @@ int main(int argc, char** argv)
 		if (*(p-1)=='c') pool_zero=1;
 	}
 	else {
-		if (optind==argc) printf("No length specified\n");
-		else printf("Unknown arguments:\n");
+		printf("Too many arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
 		}
+		printf("\n");
 		return 1;
 	}
 	if (len<1) {

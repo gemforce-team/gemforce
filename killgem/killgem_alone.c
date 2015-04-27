@@ -84,7 +84,7 @@ void worker(int len, int output_options, int pool_zero, int size)
 							}
 							free(subpools[grd]);		// free
 							
-							gem_sort(temp_array,length);								// work starts
+							gem_sort(temp_array,length);							// work starts
 							int broken=0;
 							int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 							int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
@@ -191,8 +191,9 @@ void worker(int len, int output_options, int pool_zero, int size)
 		
 		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info) {
+			if (output_options & mask_info)
 				printf("Growth:\t%f\n", log(gem_power(gems[i]))/log(i+1));
+			if (output_options & mask_debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n",pool_length[i]);
 			}
@@ -200,9 +201,11 @@ void worker(int len, int output_options, int pool_zero, int size)
 		}
 	}
 	
-	if (output_options & mask_quiet) {		// outputs last if we never seen any
+	if (output_options & mask_quiet) {     // outputs last if we never seen any
 		printf("Value:\t%d\n",len);
 		printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
+		if (output_options & mask_debug)
+			printf("Pool:\t%d\n",pool_length[len-1]);
 		gem_print(gems+len-1);
 	}
 
@@ -266,36 +269,16 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int pool_zero=2;			// speccing by default
+	int pool_zero=2;        // speccing by default
 	int output_options=0;
-	int size=0;					// worker or user must initialize it
+	int size=0;             // worker or user must initialize it
 	
-	while ((opt=getopt(argc,argv,"iptcequrs:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecidqurs:"))!=-1) {
 		switch(opt) {
-			case 'i':
-				output_options |= mask_info;
-				break;
-			case 'p':
-				output_options |= mask_parens;
-				break;
-			case 't':
-				output_options |= mask_tree;
-				break;
-			case 'c':
-				output_options |= mask_table;
-				break;
-			case 'e':
-				output_options |= mask_equations;
-				break;
-			case 'q':
-				output_options |= mask_quiet;
-				break;
-			case 'u':
-				output_options |= mask_upto;
-				break;
-			case 'r':
-				output_options |= mask_red;
-				break;
+			case 'h':
+				print_help("hptecidqurs:");
+				return 0;
+			PTECIDCUR_OPTIONS_BLOCK
 			case 's':
 				size = atoi(optarg);
 				break;
@@ -305,6 +288,10 @@ int main(int argc, char** argv)
 				break;
 		}
 	}
+	if (optind==argc) {
+		printf("No length specified\n");
+		return 1;
+	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
 		char* p=argv[optind];
@@ -312,16 +299,19 @@ int main(int argc, char** argv)
 		if (*(p-1)=='c') pool_zero=1;
 	}
 	else {
-		if (optind==argc) printf("No length specified\n");
-		else printf("Unknown arguments:\n");
+		printf("Too many arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
 		}
+		printf("\n");
 		return 1;
 	}
-	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_options, pool_zero, size);
+	if (len<1) {
+		printf("Improper gem number\n");
+		return 1;
+	}
+	worker(len, output_options, pool_zero, size);
 	return 0;
 }
 
