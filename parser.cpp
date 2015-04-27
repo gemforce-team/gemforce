@@ -35,7 +35,7 @@ class gem
 		{                     // gr dmg       cr le bl r
 			case 'y': *this = gem(1, 1       , 1, 0, 0);
 			break;
-			case 'o': *this = gem(1, 0.727542, 0, 1, 0);
+			case 'o': *this = gem(1, 0.727273, 0, 1, 0);
 			break;
 			case 'b': *this = gem(1, 1.186168, 0, 0, 1);
 			break;
@@ -87,12 +87,12 @@ int int_max(int a, int b)
 
 double gem_amp_global_mana_power(gem gem1, gem amp1)
 {
-	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;		// yes, 4, because of 1.5 rescaling
+	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;
 }
 
 double gem_amp_global_kill_power(gem gem1, gem amp1)
 {
-	return (gem1.damage+6*0.28*(2.8/3.2)*amp1.damage)*gem1.bbound*(gem1.crit+4*0.23*2.8*amp1.crit)*gem1.bbound;		// yes, fraction and 4, due to 3.2 and 1.5 rescaling
+	return (gem1.damage+6*0.28*(2.8/3.2)*amp1.damage)*gem1.bbound*(gem1.crit+4*0.23*2.8*amp1.crit)*gem1.bbound;
 }
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
@@ -323,7 +323,7 @@ int main(int argc, char** argv)
 	while ((opt=getopt(argc,argv,"htef:a:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				printf("htef:a:");
+				printf("htef:a:\n");
 			return 0;
 			case 't':
 				output_tree = 1;
@@ -394,8 +394,8 @@ int main(int argc, char** argv)
 				print_equations(amps, 2*value-1, place_amps);
 				printf("\n");
 			}
-			printf("Global mana power (resc.):\t%f\n", gem_amp_global_mana_power(gems[place], amps[place_amps]));
-			printf("Global kill power (resc.):\t%f\n\n", gem_amp_global_kill_power(gems[place], amps[place_amps]));
+			printf("Global mana power:\t%f\n", gem_amp_global_mana_power(gems[place], amps[place_amps]));
+			printf("Global kill power:\t%f\n\n", gem_amp_global_kill_power(gems[place], amps[place_amps]));
 		}
 	}
 	return 0;
