@@ -11,14 +11,9 @@ void gem_print(gem *p_gem) {
 		p_gem->grade, p_gem->damage, p_gem->crit, p_gem->damage*p_gem->crit);
 }
 
-char gem_color(gem* p_gem)
-{
-	return 'y';
-}
-
-double gem_power(gem gem1)
-{
-	return gem1.damage*gem1.crit;		// not really useful, but at least it puts out something
+char gem_color(gem* p_gem) {
+	if (p_gem->crit==0) return 'r';
+	else return 'y';
 }
 
 #include "print_utils.h"
@@ -174,8 +169,9 @@ void worker(int len, int output_options, int size)
 		
 		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info) {
+			if (output_options & mask_info)
 				printf("Growth:\t%f\n", log(gem_power(gems[i]))/log(i+1));
+			if (output_options & mask_debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n",pool_length[i]);
 			}
@@ -183,9 +179,11 @@ void worker(int len, int output_options, int size)
 		}
 	}
 	
-	if (output_options & mask_quiet) {		// outputs last if we never seen any
+	if (output_options & mask_quiet) {     // outputs last if we never seen any
 		printf("Value:\t%d\n",len);
 		printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
+		if (output_options & mask_debug)
+			printf("Pool:\t%d\n",pool_length[len-1]);
 		gem_print(gems+len-1);
 	}
 
@@ -207,6 +205,20 @@ void worker(int len, int output_options, int size)
 		gemf = gems+best_index;
 	}
 
+	gem* gem_array;
+	gem red;
+	if (output_options & mask_red) {
+		if (len < 2) printf("I could not add red!\n\n");
+		else {
+			int value=gem_getvalue(gemf);
+			gemf = gem_putred(pool[value-1], pool_length[value-1], value, &red, &gem_array);
+			printf("Gem with red added:\n\n");
+			printf("Value:\t%d\n", value);    // made to work well with -u
+			printf("Growth:\t%f\n", log(gem_power(*gemf))/log(value));
+			gem_print(gemf);
+		}
+	}
+
 	if (output_options & mask_parens) {
 		printf("Compressed combining scheme:\n");
 		print_parens_compressed(gemf);
@@ -225,7 +237,10 @@ void worker(int len, int output_options, int size)
 		printf("\n");
 	}
 	
-	for (i=0;i<len;++i) free(pool[i]);		// free
+	for (i=0;i<len;++i) free(pool[i]);    // free
+	if (output_options & mask_red && len > 1) {
+		free(gem_array);
+	}
 }
 
 int main(int argc, char** argv)
@@ -235,29 +250,12 @@ int main(int argc, char** argv)
 	int output_options=0;
 	int size=1000;
 	
-	while ((opt=getopt(argc,argv,"iptcequs:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecidqurs:"))!=-1) {
 		switch(opt) {
-			case 'i':
-				output_options |= mask_info;
-				break;
-			case 'p':
-				output_options |= mask_parens;
-				break;
-			case 't':
-				output_options |= mask_tree;
-				break;
-			case 'c':
-				output_options |= mask_table;
-				break;
-			case 'e':
-				output_options |= mask_equations;
-				break;
-			case 'q':
-				output_options |= mask_quiet;
-				break;
-			case 'u':
-				output_options |= mask_upto;
-				break;
+			case 'h':
+				print_help("hptecidqurs:");
+				return 0;
+			PTECIDCUR_OPTIONS_BLOCK
 			case 's':
 				size = atoi(optarg);
 				break;
@@ -267,19 +265,26 @@ int main(int argc, char** argv)
 				break;
 		}
 	}
+	if (optind==argc) {
+		printf("No length specified\n");
+		return 1;
+	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
 	}
 	else {
-		if (optind==argc) printf("No length specified\n");
-		else printf("Unknown arguments:\n");
+		printf("Too many arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
 		}
+		printf("\n");
 		return 1;
 	}
-	if (len<1) printf("Improper gem number\n");
-	else worker(len, output_options, size);
+	if (len<1) {
+		printf("Improper gem number\n");
+		return 1;
+	}
+	worker(len, output_options, size);
 	return 0;
 }

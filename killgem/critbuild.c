@@ -7,9 +7,6 @@ typedef struct Gem_Y gem;
 #include "critg_utils.h"
 #include "gfon.h"
 
-const int mask_info=1;
-const int mask_quiet=32;
-
 void worker(int len, int output_options, int size, char* filename)
 {
 	FILE* table=table_init(filename, 1);		// init yellow
@@ -61,11 +58,11 @@ void worker(int len, int output_options, int size, char* filename)
 						int grd=temp.grade-2;
 						temp_pools[grd][temp_index[grd]]=temp;
 						temp_index[grd]++;
-						if (temp_index[grd]==size) {									// let's skim a pool
+						if (temp_index[grd]==size) {							// let's skim a pool
 							int length=size+subpools_length[grd];
 							gem* temp_array=malloc(length*sizeof(gem));
 							int index=0;
-							for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
+							for (l=0; l<temp_index[grd]; ++l) {				// copy new gems
 								temp_array[index]=temp_pools[grd][l];
 								index++;
 							}
@@ -75,7 +72,7 @@ void worker(int len, int output_options, int size, char* filename)
 								index++;
 							}
 							free(subpools[grd]);			// free
-							gem_sort(temp_array,length);								// work starts
+							gem_sort(temp_array,length);						// work starts
 	
 							int broken=0;
 							float lim_crit=-1;
@@ -104,12 +101,12 @@ void worker(int len, int output_options, int size, char* filename)
 			}
 		}
 		int grd;
-		for (grd=0; grd<grade_max-1; ++grd) {						// let's put remaining gems on
+		for (grd=0; grd<grade_max-1; ++grd) {					// let's put remaining gems on
 			if (temp_index[grd] != 0) {
 				int length=temp_index[grd]+subpools_length[grd];
 				gem* temp_array=malloc(length*sizeof(gem));
 				int index=0;
-				for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
+				for (l=0; l<temp_index[grd]; ++l) {				// copy new gems
 					temp_array[index]=temp_pools[grd][l];
 					index++;
 				}
@@ -118,7 +115,7 @@ void worker(int len, int output_options, int size, char* filename)
 					index++;
 				}
 				free(subpools[grd]);		// free
-				gem_sort(temp_array,length);								// work starts
+				gem_sort(temp_array,length);						// work starts
 				int broken=0;
 				float lim_crit=-1;
 				for (l=length-1;l>=0;--l) {
@@ -157,12 +154,12 @@ void worker(int len, int output_options, int size, char* filename)
 		}
 		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info) {
+			if (output_options & mask_debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
 		}
-		table_write_iteration(pool, pool_length, i, table);			// write on file
+		table_write_iteration(pool, pool_length, i, table);         // write on file
 	}
 	fclose(table);
 	for (i=0;i<len;++i) free(pool[i]);		// free
@@ -174,16 +171,14 @@ int main(int argc, char** argv)
 	char opt;
 	int output_options=0;
 	int size=1000;
-	char filename[256]="";		// it should be enough
+	char filename[256]="";     // it should be enough
 
-	while ((opt=getopt(argc,argv,"iqs:f:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hdqs:f:"))!=-1) {
 		switch(opt) {
-			case 'i':
-				output_options |= mask_info;
-				break;
-			case 'q':
-				output_options |= mask_quiet;
-				break;
+			case 'h':
+				print_help("hdqs:f:");
+				return 0;
+			PTECIDCUR_OPTIONS_BLOCK
 			case 's':
 				size = atoi(optarg);
 				break;
@@ -196,16 +191,20 @@ int main(int argc, char** argv)
 				break;
 		}
 	}
+	if (optind==argc) {
+		printf("No length specified\n");
+		return 1;
+	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
 	}
 	else {
-		if (optind==argc) printf("No length specified\n");
-		else printf("Unknown arguments:\n");
+		printf("Too many arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
 		}
+		printf("\n");
 		return 1;
 	}
 	if (len<1) {
