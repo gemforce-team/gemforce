@@ -256,8 +256,8 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (filename[0]=='\0') {
-		if (pool_zero==2) strcpy(filename, "table_kgspec");
-		else strcpy(filename, "table_kgcomb");
+		if (pool_zero==2) strcpy(filename, "table_kgappr");
+		else strcpy(filename, "table_kgappr");
 	}
 	worker(len, output_options, pool_zero, size, filename);
 	return 0;
