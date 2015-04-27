@@ -10,15 +10,15 @@ typedef struct Gem_O gemO;
 #include "mga_utils.h"
 #include "gfon.h"
 
-void print_amps_table(gem* gems, gemO* amps, double* spec_coeffs, double leech_ratio, int len)
+void print_ngems_table(gem* gems, gemO* amps, double leech_ratio, int len)
 {
-	printf("Managem\tAmps\tPower\tSpec coeff\n");
+	printf("# Gems\tManagem\tAmps\tPower\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio), spec_coeffs[i]);
+	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio));
 	printf("\n");
 }
 
-void worker(int len, int output_options, double growth_comb, char* filename, char* filenameA, int TC, int Namps)
+void worker(int len, int output_options, char* filename, char* filenameA, int TC, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);						// if the file is not good we exit
@@ -32,10 +32,12 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// managem pool filling
 	fclose(table);
-	if (prevmax<len-1) {										// if the managems are not enough
-		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
-		if (prevmax>0) printf("Gem table stops at %d, not %d\n",prevmax+1,len);
-		exit(1);
+	if (prevmax<len-1) {						// if the managems are not enough
+		for (i=prevmax+1; i<len; ++i) {
+			pool_length[i]=1;
+			pool[i]=malloc(sizeof(gem));
+			pool[i][0]=(gem){0};			// null gems
+		}
 	}
 	
 	gem* poolf[len];
@@ -46,7 +48,7 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
-	int lena=len;
+	int lena=len/Namps;
 	gemO* poolO[lena];
 	int poolO_length[lena];
 	poolO[0]=malloc(sizeof(gemO));
@@ -69,10 +71,8 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 	int j,k;									// let's choose the right gem-amp combo
 	gem gems[len];
 	gemO amps[len];
-	double spec_coeffs[len];
 	gem_init(gems,1,1,0);
 	amps[0]=(gemO){0};
-	spec_coeffs[0]=0;
 	double leech_ratio=Namps*0.46*(1+(double)TC*3/100)/(1+(double)TC/30);
 	if (!(output_options & mask_quiet)) {
 		printf("Total value:\t1\n\n");
@@ -81,8 +81,8 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 		printf("Amplifier (x%d)\n", Namps);
 		gem_print_O(amps);
 	}
-
-	for (i=1;i<len;++i) {											// for every gem value
+	
+	for (i=1;i<len;++i) {											// for every total value
 		gems[i]=(gem){0};												// we init the gems
 		amps[i]=(gemO){0};											// to extremely weak ones
 		for (k=0;k<poolf_length[i];++k) {						// first we compare the gem alone
@@ -90,77 +90,44 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 				gems[i]=poolf[i][k];
 			}
 		}
-		int NS=i+1;
-		double comb_coeff=pow(NS, -growth_comb);
-		spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
-																			// now with amps
-		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {		// for every amp value from 1 to to gem_value
-			double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
-			double Pa= leech_ratio * bestO[j].leech;			// <- this is ok only for mg
-			for (k=0;k<poolf_length[i];++k) {					// then we search in the reduced gem pool
-				if (poolf[i][k].leech!=0) {						// if the gem has leech we go on
-					double Palone = gem_power(poolf[i][k]);
-					double power = Palone + poolf[i][k].bbound * Pa;
-					double spec_coeff=power*comb_coeff;
-					if (spec_coeff>spec_coeffs[i]) {
-						spec_coeffs[i]=spec_coeff;
-						gems[i]=poolf[i][k];
-						amps[i]=bestO[j];
-					}
-				}
+		for (j=1;j<=i/Namps;++j) {									// for every amount of amps we can fit in
+			int value = i-Namps*j;									// this is the amount of gems we have left
+			for (k=0;k<poolf_length[value];++k)					// we search in that pool
+			if (poolf[value][k].leech!=0							// if the gem has leech we go on and get the amp
+			&&  gem_amp_power(poolf[value][k], bestO[j-1], leech_ratio) > gem_amp_power(gems[i], amps[i], leech_ratio)
+			) {
+				gems[i]=poolf[value][k];
+				amps[i]=bestO[j-1];
 			}
 		}
 		if (!(output_options & mask_quiet)) {
-			printf("Total value:\t%d\n\n", i+1+Namps*gem_getvalue_O(amps+i));
+			printf("Total value:\t%d\n\n", i+1);
+			if (prevmax<len-1) printf("Managem limit:\t%d\n", prevmax+1);
 			printf("Managem\n");
-			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_debug) printf("Pool:\t%d\n",poolf_length[i]);
+			printf("Value:\t%d\n",gem_getvalue(gems+i));
+			if (output_options & mask_debug) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
 			gem_print(gems+i);
 			printf("Amplifier (x%d)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
 			gem_print_O(amps+i);
-			printf("Spec base power: \t%f\n", gem_amp_power(gems[i], amps[i], leech_ratio));
-			printf("Spec coefficient:\t%f\n\n", spec_coeffs[i]);
+			printf("Spec base power: \t%f\n\n", gem_amp_power(gems[i], amps[i], leech_ratio));
 		}
 	}
 	
 	if (output_options & mask_quiet) {		// outputs last if we never seen any
-		printf("Total value:\t%d\n\n", len+Namps*gem_getvalue_O(amps+len-1));
+		printf("Total value:\t%d\n\n", len);
+		if (prevmax<len-1) printf("Managem limit:\t%d\n", prevmax+1);
 		printf("Managem\n");
-		printf("Value:\t%d\n", len);
+		printf("Value:\t%d\n", gem_getvalue(gems+len-1));
 		gem_print(gems+len-1);
 		printf("Amplifier (x%d)\n", Namps);
 		printf("Value:\t%d\n", gem_getvalue_O(amps+len-1));
 		gem_print_O(amps+len-1);
-		printf("Spec base power: \t%f\n", gem_amp_power(gems[len-1], amps[len-1], leech_ratio));
-		printf("Spec coefficient:\t%f\n\n", spec_coeffs[len-1]);
+		printf("Spec base power: \t%f\n\n", gem_amp_power(gems[len-1], amps[len-1], leech_ratio));
 	}
 
 	gem*  gemf=gems+len-1;  // gem that will be displayed
 	gemO* ampf=amps+len-1;  // amp that will be displayed
-
-	if (output_options & mask_upto) {
-		double best_sc=0;
-		int best_index=0;
-		for (i=0; i<len; ++i) {
-			if (spec_coeffs[i] > best_sc) {
-				best_index=i;
-				best_sc=spec_coeffs[i];
-			}
-		}
-		printf("Best setup up to %d:\n\n", len);
-		printf("Total value:\t%d\n\n", gem_getvalue(gems+best_index)+Namps*gem_getvalue_O(amps+best_index));
-		printf("Managem\n");
-		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
-		gem_print(gems+best_index);
-		printf("Amplifier (x%d)\n", Namps);
-		printf("Value:\t%d\n", gem_getvalue_O(amps+best_index));
-		gem_print_O(amps+best_index);
-		printf("Spec base power: \t%f\n", gem_amp_power(gems[best_index], amps[best_index], leech_ratio));
-		printf("Spec coefficient:\t%f\n\n", best_sc);
-		gemf = gems+best_index;
-		ampf = amps+best_index;
-	}
 
 	gem* gem_array;
 	gem red;
@@ -197,7 +164,7 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 		print_tree_O(ampf, "");
 		printf("\n");
 	}
-	if (output_options & mask_table) print_amps_table(gems, amps, spec_coeffs, leech_ratio, len);
+	if (output_options & mask_table) print_ngems_table(gems, amps, leech_ratio, len);
 	
 	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Managem equations:\n");
@@ -223,15 +190,14 @@ int main(int argc, char** argv)
 	char opt;
 	int TC=60;
 	int Namps=6;
-	double growth_comb=0.627216;		// 16c
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"hptecdqurf:g:T:N:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecdqrf:T:N:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptecdqurf:g:T:N:");
+				print_help("hptecdqrf:T:N:");
 				return 0;
 			PTECIDCUR_OPTIONS_BLOCK
 			case 'f':			// can be "filename,filenameA", if missing default is used
@@ -242,9 +208,6 @@ int main(int argc, char** argv)
 				else p--;							// not ok, it's "f" -> empty string
 				strcpy(filename,optarg);
 				strcpy(filenameA,p+1);
-				break;
-			case 'g':
-				growth_comb = atof(optarg);
 				break;
 			case 'T':
 				TC=atoi(optarg);
@@ -280,7 +243,7 @@ int main(int argc, char** argv)
 	}
 	file_selection(filename, "table_mgspec");
 	file_selection(filenameA, "table_leech");
-	worker(len, output_options, growth_comb, filename, filenameA, TC, Namps);
+	worker(len, output_options, filename, filenameA, TC, Namps);
 	return 0;
 }
 
