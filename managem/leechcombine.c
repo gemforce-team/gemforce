@@ -79,7 +79,7 @@ void worker(int len, int output_options)
 		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
 			if (output_options & mask_info)
-				printf("Growth:\t%f\n", log(gems[i].leech)/log(i+1));
+				printf("Growth:\t%f\n", log(gem_power(gems[i]))/log(i+1));
 			if (output_options & mask_debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n",pool_length[i]);
@@ -90,7 +90,7 @@ void worker(int len, int output_options)
 	
 	if (output_options & mask_quiet) {    // outputs last if we never seen any
 		printf("Value:\t%d\n",len);
-		printf("Growth:\t%f\n", log(gems[len-1].leech)/log(len));
+		printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
 		if (output_options & mask_debug)
 			printf("Pool:\t%d\n",pool_length[len-1]);
 		gem_print(gems+len-1);
@@ -102,9 +102,9 @@ void worker(int len, int output_options)
 		double best_growth=0;
 		int best_index=0;
 		for (i=0; i<len; ++i) {
-			if (log(gems[i].leech)/log(i+1) > best_growth) {
+			if (log(gem_power(gems[i]))/log(i+1) > best_growth) {
 				best_index=i;
-				best_growth=log(gems[i].leech)/log(i+1);
+				best_growth=log(gem_power(gems[i]))/log(i+1);
 			}
 		}
 		printf("Best gem up to %d:\n\n", len);
