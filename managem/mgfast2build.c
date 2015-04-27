@@ -89,7 +89,7 @@ void worker(int len, int output_options, char* filename)
 		
 		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info) {
+			if (output_options & mask_debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
@@ -108,14 +108,12 @@ int main(int argc, char** argv)
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iqf:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hdqf:"))!=-1) {
 		switch(opt) {
-			case 'i':
-				output_options |= mask_info;
-				break;
-			case 'q':
-				output_options |= mask_quiet;
-				break;
+			case 'h':
+				print_help("hdqf:");
+				return 0;
+			PTECIDCUR_OPTIONS_BLOCK
 			case 'f':
 				strcpy(filename,optarg);
 				break;
@@ -125,23 +123,27 @@ int main(int argc, char** argv)
 				break;
 		}
 	}
+	if (optind==argc) {
+		printf("No length specified\n");
+		return 1;
+	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
 	}
 	else {
-		if (optind==argc) printf("No length specified\n");
-		else printf("Unknown arguments:\n");
+		printf("Too many arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
 		}
+		printf("\n");
 		return 1;
 	}
 	if (len<1) {
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (filename[0]=='\0') strcpy(filename, "table_mgfast2");
+	if (filename[0]=='\0') strcpy(filename, "table_mgc131131");
 	worker(len, output_options, filename);
 	return 0;
 }

@@ -41,7 +41,7 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 		const int j0 =(i+1)/(10+1);      // value ratio < 10
 		int comb_tot=0;
 
-		int grade_max=(int)(log2(i+1)+1);          // gems with max grade cannot be destroyed, so this is a max, not a sup
+		const int grade_max=(int)(log2(i+1)+1);    // gems with max grade cannot be destroyed, so this is a max, not a sup
 		gem* temp_pools[grade_max-1];              // get the temp pools for every grade
 		int  temp_index[grade_max-1];              // index of work point in temp pools
 		gem* subpools[grade_max-1];                // get subpools for every grade
@@ -163,7 +163,7 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 		}
 		if (!(output_options & mask_quiet)) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info) {
+			if (output_options & mask_debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
@@ -184,14 +184,12 @@ int main(int argc, char** argv)
 	int size=0;                // worker or user must initialize it
 	char filename[256]="";     // it should be enough
 
-	while ((opt=getopt(argc,argv,"iqs:f:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hdqs:f:"))!=-1) {
 		switch(opt) {
-			case 'i':
-				output_options |= mask_info;
-				break;
-			case 'q':
-				output_options |= mask_quiet;
-				break;
+			case 'h':
+				print_help("hdqs:f:");
+				return 0;
+			PTECIDCUR_OPTIONS_BLOCK
 			case 's':
 				size = atoi(optarg);
 				break;
@@ -204,6 +202,10 @@ int main(int argc, char** argv)
 				break;
 		}
 	}
+	if (optind==argc) {
+		printf("No length specified\n");
+		return 1;
+	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
 		char* p=argv[optind];
@@ -211,12 +213,12 @@ int main(int argc, char** argv)
 		if (*(p-1)=='c') pool_zero=1;
 	}
 	else {
-		if (optind==argc) printf("No length specified\n");
-		else printf("Unknown arguments:\n");
+		printf("Too many arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
 		}
+		printf("\n");
 		return 1;
 	}
 	if (len<1) {

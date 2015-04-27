@@ -3,12 +3,6 @@
 
 const int ACC=1000;			// accuracy for comparisons
 
-/* Info: to go from low to high accuracy: change gem_less_equal in an exact version, and
- * if ((int)(ACC*temp_array[l].bbound)<=(int)(ACC*lim_bbound)) {
- * in
- * if (temp_array[l].bbound<=lim_bbound) {
- */
-
 struct Gem_OB {
 	short grade;
 	float leech;
@@ -25,7 +19,8 @@ inline int gem_more_powerful(gem gem1, gem gem2)
 }
 
 void gem_print(gem *p_gem) {
-	printf("Grade:\t%d\nLeech:\t%f\nBbound:\t%f\nPower:\t%f\n\n", p_gem->grade, p_gem->leech, p_gem->bbound, p_gem->leech*p_gem->bbound);
+	printf("Grade:\t%d\nLeech:\t%f\nBbound:\t%f\nPower:\t%f\n\n",
+		p_gem->grade, p_gem->leech, p_gem->bbound, p_gem->leech*p_gem->bbound);
 }
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
@@ -203,7 +198,7 @@ void gem_sort_exact (gem* gems, int len)
 
 inline double gem_power(gem gem1)
 {
-	return gem1.leech*gem1.bbound;     // amp-less
+	return gem1.leech*gem1.bbound;
 }
 
 char gem_color(gem* p_gem)
