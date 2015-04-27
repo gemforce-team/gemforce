@@ -9,10 +9,11 @@ int ACC;							// 80,60  ACC is for z-axis sorting and for the length of the int
 const int ACC_TR=750;		//   750  ACC_TR is for bbound comparisons inside tree
 #include "killgem_utils.h"
 
-void worker(int len, int output_options, int pool_zero, int size)
+void worker(int len, int output_options, int pool_zero)
 {
 	printf("\n");
 	int i;
+	int size=1000;
 	gem gems[len];
 	gem* pool[len];
 	int pool_length[len];
@@ -23,14 +24,14 @@ void worker(int len, int output_options, int pool_zero, int size)
 		ACC=80;								// ACC is for z-axis sorting and for the length of the interval tree
 		gem_init(pool[0],1,1,1,1);		// start gem does not matter
 		gem_init(gems   ,1,1,1,1);		// grade damage crit bbound
-		if (size==0) size=1000;			// reasonable comb sizing
+		size=1000;							// reasonable comb sizing
 	}
 	else {									// spec
 		ACC=60;								// ACC is for z-axis sorting and for the length of the interval tree
 		gem_init(pool[0]  ,1,1.000000,1,0);
 		gem_init(pool[0]+1,1,1.186168,0,1);		// BB has more dmg
 		gem_init(gems     ,1,1.000000,1,0);		// grade damage crit bbound
-		if (size==0) size=20000;		// reasonable spec sizing
+		size=20000;							// reasonable spec sizing
 	}
 	if (!(output_options & mask_quiet)) gem_print(gems);
 
@@ -271,17 +272,13 @@ int main(int argc, char** argv)
 	char opt;
 	int pool_zero=2;        // speccing by default
 	int output_options=0;
-	int size=0;             // worker or user must initialize it
 	
-	while ((opt=getopt(argc,argv,"hptecidqurs:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecidqur"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptecidqurs:");
+				print_help("hptecidqur");
 				return 0;
 			PTECIDCUR_OPTIONS_BLOCK
-			case 's':
-				size = atoi(optarg);
-				break;
 			case '?':
 				return 1;
 			default:
@@ -311,7 +308,7 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	worker(len, output_options, pool_zero, size);
+	worker(len, output_options, pool_zero);
 	return 0;
 }
 

@@ -7,10 +7,11 @@ typedef struct Gem_Y gem;
 #include "critg_utils.h"
 #include "gfon.h"
 
-void worker(int len, int output_options, int size, char* filename)
+void worker(int len, int output_options, char* filename)
 {
 	FILE* table=table_init(filename, 1);		// init yellow
 	int i;
+	int size=1000;
 	gem* pool[len];
 	int pool_length[len];
 	pool[0]=malloc(sizeof(gem));
@@ -170,18 +171,14 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int output_options=0;
-	int size=1000;
 	char filename[256]="";     // it should be enough
 
-	while ((opt=getopt(argc,argv,"hdqs:f:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hdqf:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hdqs:f:");
+				print_help("hdqf:");
 				return 0;
 			PTECIDCUR_OPTIONS_BLOCK
-			case 's':
-				size = atoi(optarg);
-				break;
 			case 'f':
 				strcpy(filename,optarg);
 				break;
@@ -212,6 +209,6 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (filename[0]=='\0') strcpy(filename, "table_crit");
-	worker(len, output_options, size, filename);
+	worker(len, output_options, filename);
 	return 0;
 }

@@ -23,10 +23,11 @@ int gem_more_powerful(gem gem1, gem gem2)
 	return (gem1.damage*gem1.crit > gem2.damage*gem2.crit);		// not really useful, but at least it puts out something
 }
 
-void worker(int len, int output_options, int size)
+void worker(int len, int output_options)
 {
 	printf("\n");
 	int i;
+	int size=1000;
 	gem gems[len];
 	gem* pool[len];
 	int pool_length[len];
@@ -248,17 +249,13 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int output_options=0;
-	int size=1000;
 	
-	while ((opt=getopt(argc,argv,"hptecidqurs:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecidqur"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptecidqurs:");
+				print_help("hptecidqur");
 				return 0;
 			PTECIDCUR_OPTIONS_BLOCK
-			case 's':
-				size = atoi(optarg);
-				break;
 			case '?':
 				return 1;
 			default:
@@ -285,6 +282,6 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	worker(len, output_options, size);
+	worker(len, output_options);
 	return 0;
 }

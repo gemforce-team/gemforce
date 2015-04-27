@@ -7,10 +7,11 @@ typedef struct Gem_OB gem;    // the strange order is so that managem_utils know
 #include "managem_utils.h"
 #include "gfon.h"
 
-void worker(int len, int output_options, int pool_zero, int size, char* filename)
+void worker(int len, int output_options, int pool_zero, char* filename)
 {
 	FILE* table=table_init(filename, pool_zero);    // init managem
 	int i;
+	int size;
 	gem* pool[len];
 	int pool_length[len];
 	pool[0]=malloc(pool_zero*sizeof(gem));
@@ -18,12 +19,12 @@ void worker(int len, int output_options, int pool_zero, int size, char* filename
 	
 	if (pool_zero==1) {              // combine
 		gem_init(pool[0],1,1,1);
-		if (size==0) size=100;        // reasonable comb sizing
+		size=100;                     // reasonable comb sizing
 	}
 	else {                           // spec
 		gem_init(pool[0]  ,1,1,0);
 		gem_init(pool[0]+1,1,0,1);
-		if (size==0) size=2000;       // reasonable spec sizing
+		size=2000;                    // reasonable spec sizing
 	}
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);    // pool filling
@@ -181,18 +182,14 @@ int main(int argc, char** argv)
 	char opt;
 	int pool_zero=2;        // speccing by default
 	int output_options=0;
-	int size=0;                // worker or user must initialize it
-	char filename[256]="";     // it should be enough
+	char filename[256]="";  // it should be enough
 
-	while ((opt=getopt(argc,argv,"hdqs:f:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hdqf:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hdqs:f:");
+				print_help("hdqf:");
 				return 0;
 			PTECIDCUR_OPTIONS_BLOCK
-			case 's':
-				size = atoi(optarg);
-				break;
 			case 'f':
 				strcpy(filename,optarg);
 				break;
@@ -229,7 +226,7 @@ int main(int argc, char** argv)
 		if (pool_zero==2) strcpy(filename, "table_mgsappr");
 		else strcpy(filename, "table_mgcappr");
 	}
-	worker(len, output_options, pool_zero, size, filename);
+	worker(len, output_options, pool_zero, filename);
 	return 0;
 }
 
