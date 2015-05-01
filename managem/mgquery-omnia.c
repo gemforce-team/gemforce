@@ -52,11 +52,11 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		for (j=0; j<pool_length[i]; ++j) {			// copy gems
 			temp_pool[j]=pool[i][j];
 		}
-		gem_sort(temp_pool,pool_length[i]);			// work starts
+		gem_sort_exact(temp_pool,pool_length[i]);			// work starts
 		int broken=0;
 		float lim_bbound=-1;
 		for (j=pool_length[i]-1;j>=0;--j) {
-			if ((int)(ACC*temp_pool[j].bbound)<=(int)(ACC*lim_bbound)) {
+			if (temp_pool[j].bbound<=lim_bbound) {
 				temp_pool[j].grade=0;
 				broken++;
 			}
@@ -108,11 +108,11 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	int poolcf_length;
 	
 	{															// managem pool compression
-		gem_sort(poolc[lenc-1],poolc_length[lenc-1]);
+		gem_sort_exact(poolc[lenc-1],poolc_length[lenc-1]);
 		int broken=0;
 		float lim_bbound=-1;
 		for (i=poolc_length[lenc-1]-1;i>=0;--i) {
-			if ((int)(ACC*poolc[lenc-1][i].bbound)<=(int)(ACC*lim_bbound)) {
+			if (poolc[lenc-1][i].bbound<=lim_bbound) {
 				poolc[lenc-1][i].grade=0;
 				broken++;
 			}

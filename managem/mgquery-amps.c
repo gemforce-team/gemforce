@@ -76,11 +76,11 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		for (j=0; j<pool_length[i]; ++j) {			// copy gems
 			temp_pool[j]=pool[i][j];
 		}
-		gem_sort(temp_pool,pool_length[i]);			// work starts
+		gem_sort_exact(temp_pool,pool_length[i]);			// work starts
 		int broken=0;
 		float lim_bbound=-1;
 		for (j=pool_length[i]-1;j>=0;--j) {
-			if ((int)(ACC*temp_pool[j].bbound)<=(int)(ACC*lim_bbound)) {
+			if (temp_pool[j].bbound<=lim_bbound) {
 				temp_pool[j].grade=0;
 				broken++;
 			}
