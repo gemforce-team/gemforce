@@ -39,7 +39,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (prevmax<len-1) {										// if the managems are not enough
 		fclose(table);
 		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
-		printf("Gem table stops at %d, not %d\n",prevmax+1,len);
+		if (prevmax>0) printf("Gem table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
 
@@ -100,7 +100,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (prevmaxc<lenc-1) {												// if the managems are not enough
 		fclose(tablec);
 		for (i=0;i<=prevmaxc;++i) free(poolc[i]);		// free
-		printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);
+		if (prevmaxc>0) printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);
 		exit(1);
 	}
 
@@ -158,7 +158,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (prevmaxA<lena-1) {
 		fclose(tableA);
 		for (i=0;i<=prevmaxA;++i) free(poolO[i]);		// free
-		printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
+		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
 

@@ -38,7 +38,7 @@ void worker(int len, int output_options, char* filename)
 		free(pool);				// free
 		free(pool_length);	// free
 		free(gems);				// free
-		printf("Table stops at %d, not %d\n",prevmax+1,len);
+		if (prevmax>0) printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
 	if (!(output_options & mask_quiet)) gem_print(gems);

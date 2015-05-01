@@ -89,7 +89,7 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 	fscanf(table, "%d\n", &pool_zero);        // get pool_zero
 	if (pool_zero != pool_length[0]) {        // and check if it's right
 		printf("\nWrong table type, exiting...\n");
-		exit(1);
+		return -1;      // the program will then exit gracefully
 	}
 	for (i=0;i<pool_length[0];++i) {          // discard value 0 gems
 		fscanf(table, "%*[^\n]\n");

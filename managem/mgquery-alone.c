@@ -14,7 +14,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	int i;
 	gem* gems=malloc(len*sizeof(gem));     // if not malloc-ed 230k is the limit
 	gem** pool=malloc(len*sizeof(gem*));   // if not malloc-ed 200k is the limit (win)
-	int pool_length[len];
+	int* pool_length=malloc(len*sizeof(int));
 	pool[0]=malloc(pool_zero*sizeof(gem));
 	pool_length[0]=pool_zero;
 	
@@ -30,9 +30,12 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);    // pool filling
 	if (prevmax<len-1) {
-		fclose(table);
+		fclose(table);			// close
 		for (i=0;i<=prevmax;++i) free(pool[i]);      // free
-		printf("Table stops at %d, not %d\n",prevmax+1,len);
+		free(pool);				// free
+		free(pool_length);	// free
+		free(gems);				// free
+		if (prevmax>0) printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
 	if (!(output_options & mask_quiet)) gem_print(gems);
@@ -115,6 +118,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	fclose(table);
 	for (i=0;i<len;++i) free(pool[i]);     // free
 	free(pool);    // free
+	free(pool_length);
 	free(gems);
 	if (output_options & mask_red && len > 2 && pool_zero==2) {
 		free(gem_array);

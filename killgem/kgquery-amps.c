@@ -59,7 +59,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		if (global_mode==0) {					// behave as kga_spec -> quit if not enough killgems
 			fclose(table);
 			for (i=0;i<=prevmax;++i) free(pool[i]);		// free
-			printf("Gem table stops at %d, not %d\n",prevmax+1,len);
+			if (prevmax>0) printf("Gem table stops at %d, not %d\n",prevmax+1,len);
 			exit(1);
 		}
 		else {										// behave as killgem_amps -> fill the remaining with false gems
@@ -131,7 +131,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 	if (prevmaxA<lena-1) {
 		fclose(tableA);
 		for (i=0;i<=prevmaxA;++i) free(poolY[i]);		// free
-		printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
+		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
 
