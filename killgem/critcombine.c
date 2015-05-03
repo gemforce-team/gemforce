@@ -17,11 +17,6 @@ char gem_color(gem* p_gem) {
 
 #include "print_utils.h"
 
-int gem_more_powerful(gem gem1, gem gem2)
-{
-	return (gem1.damage*gem1.crit > gem2.damage*gem2.crit);		// not really useful, but at least it puts out something
-}
-
 void worker(int len, int output_options)
 {
 	printf("\n");

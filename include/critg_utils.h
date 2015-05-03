@@ -11,6 +11,16 @@ struct Gem_Y {
 
 #include "gem_utils.h"
 
+inline double gem_power(gem gem1)
+{
+	return gem1.damage*gem1.crit;		// not really useful, but at least it puts out something
+}
+
+inline int gem_more_powerful(gem gem1, gem gem2)
+{
+	return (gem_power(gem1) > gem_power(gem2));
+}
+
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
 	p_gem_combined->grade = p_gem1->grade+1;
@@ -159,11 +169,6 @@ gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem* new
 	gem* gemt=new_array+(*new_index);
 	gem_combine(g1, g2, gemt);
 	return gemt;
-}
-
-double gem_power(gem gem1)
-{
-	return gem1.damage*gem1.crit;		// not really useful, but at least it puts out something
 }
 
 gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array)
