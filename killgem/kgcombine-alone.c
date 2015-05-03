@@ -212,7 +212,7 @@ void worker(int len, int output_options, int pool_zero)
 	gem* gemf=gems+len-1;  // gem that will be displayed
 
 	if (output_options & mask_upto) {
-		double best_growth=0;
+		double best_growth=-INFINITY;
 		int best_index=0;
 		for (i=0; i<len; ++i) {
 			if (log(gem_power(gems[i]))/log(i+1) > best_growth) {
