@@ -14,7 +14,7 @@ void print_amps_table(gem* gems, gemO* amps, double* spec_coeffs, double leech_r
 {
 	printf("Managem\tAmps\tPower\tSpec coeff\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio), spec_coeffs[i]);
+	for (i=0;i<len;i++) printf("%d\t%d\t%f\t%f\n", i+1, gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio), spec_coeffs[i]);
 	printf("\n");
 }
 

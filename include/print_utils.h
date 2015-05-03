@@ -114,9 +114,9 @@ void print_tree(gem* gemf, const char* prefix)
 void print_table(gem* gems, int len)
 {
 	printf("# Gems\tPower\t\tGrowth\n");
-	printf("1\t%.6f\t0\n", gem_power(gems[0]));
+	printf("1\t%f\t0\n", gem_power(gems[0]));
 	int i;
-	for (i=1;i<len;i++) printf("%d\t%.6f\t%.6f\n", i+1, gem_power(gems[i]), log(gem_power(gems[i]))/log(i+1));
+	for (i=1;i<len;i++) printf("%d\t%f\t%f\n", i+1, gem_power(gems[i]), log(gem_power(gems[i]))/log(i+1));
 	printf("\n");
 }
 

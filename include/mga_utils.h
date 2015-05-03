@@ -10,7 +10,7 @@ void print_omnia_table(gem* gems, gemO* amps, double* powers, int len)
 {
 	printf("Managem\tAmps\tPower\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\n", i+1, gem_getvalue_O(amps+i), powers[i]);
+	for (i=0;i<len;i++) printf("%d\t%d\t%f\n", i+1, gem_getvalue_O(amps+i), powers[i]);
 	printf("\n");
 }
 

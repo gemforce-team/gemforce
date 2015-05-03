@@ -14,7 +14,7 @@ void print_ngems_table(gem* gems, gemO* amps, double leech_ratio, int len)
 {
 	printf("# Gems\tManagem\tAmps\tPower\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio));
+	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%f\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio));
 	printf("\n");
 }
 

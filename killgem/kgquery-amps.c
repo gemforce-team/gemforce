@@ -30,7 +30,7 @@ void print_global_table(gem* gems, gemY* amps, int len)
 {
 	printf("# Gems\tKillgem\tAmps\tPower (resc.)\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%.6lf\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), gem_amp_power(gems[i], amps[i]));
+	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%f\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), gem_amp_power(gems[i], amps[i]));
 	printf("\n");
 }
 
@@ -38,7 +38,7 @@ void print_spec_table(gem* gems, gemY* amps, double* spec_coeffs, int len)
 {
 	printf("Killgem\tAmps\tPower (resc.)\tSpec coeff\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%.6f\t%.6lf\n", i+1, gem_getvalue_Y(amps+i), gem_amp_power(gems[i], amps[i]), spec_coeffs[i]);
+	for (i=0;i<len;i++) printf("%d\t%d\t%f\t%f\n", i+1, gem_getvalue_Y(amps+i), gem_amp_power(gems[i], amps[i]), spec_coeffs[i]);
 	printf("\n");
 }
 
