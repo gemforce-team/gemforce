@@ -336,10 +336,10 @@ int main(int argc, char** argv)
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"hptecdqurf:T:N:G:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecdquf:T:N:G:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptecdqurf:T:N:G:");
+				print_help("hptecdquf:T:N:G:");
 				return 0;
 			PTECIDCUR_OPTIONS_BLOCK
 			case 'f':			// can be "filename,filenamec,filenameA", if missing default is used
