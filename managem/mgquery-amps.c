@@ -12,9 +12,10 @@ typedef struct Gem_O gemO;
 
 void print_amps_table(gem* gems, gemO* amps, double* spec_coeffs, double leech_ratio, int len)
 {
-	printf("Managem\tAmps\tPower\tSpec coeff\n");
+	printf("Managem\tAmps\t\tPower\tSpec coeff\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%f\t%f\n", i+1, gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio), spec_coeffs[i]);
+	for (i=0; i<len; i++)
+		printf("%d\t%d\t%#.7g\t%f\n", i+1, gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio), spec_coeffs[i]);
 	printf("\n");
 }
 
@@ -119,7 +120,7 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 			printf("Amplifier (x%d)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
 			gem_print_O(amps+i);
-			printf("Spec base power: \t%f\n", gem_amp_power(gems[i], amps[i], leech_ratio));
+			printf("Spec base power: \t%#.7g\n", gem_amp_power(gems[i], amps[i], leech_ratio));
 			printf("Spec coefficient:\t%f\n\n", spec_coeffs[i]);
 		}
 	}
@@ -132,7 +133,7 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 		printf("Amplifier (x%d)\n", Namps);
 		printf("Value:\t%d\n", gem_getvalue_O(amps+len-1));
 		gem_print_O(amps+len-1);
-		printf("Spec base power: \t%f\n", gem_amp_power(gems[len-1], amps[len-1], leech_ratio));
+		printf("Spec base power: \t%#.7g\n", gem_amp_power(gems[len-1], amps[len-1], leech_ratio));
 		printf("Spec coefficient:\t%f\n\n", spec_coeffs[len-1]);
 	}
 
@@ -156,7 +157,7 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 		printf("Amplifier (x%d)\n", Namps);
 		printf("Value:\t%d\n", gem_getvalue_O(amps+best_index));
 		gem_print_O(amps+best_index);
-		printf("Spec base power: \t%f\n", gem_amp_power(gems[best_index], amps[best_index], leech_ratio));
+		printf("Spec base power: \t%#.7g\n", gem_amp_power(gems[best_index], amps[best_index], leech_ratio));
 		printf("Spec coefficient:\t%f\n\n", best_sc);
 		gemf = gems+best_index;
 		ampf = amps+best_index;
@@ -177,7 +178,7 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 			printf("Amplifier (x%d)\n", Namps);
 			printf("Value:\t%d\n", gem_getvalue_O(ampf));
 			gem_print_O(ampf);
-			printf("Spec base power with red:\t%f\n\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
+			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
 		}
 	}
 

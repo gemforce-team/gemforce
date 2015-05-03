@@ -22,7 +22,8 @@ void print_omnia_table(gem* gems, gemY* amps, double* powers, int len)
 {
 	printf("Killgem\tAmps\tPower (resc. 10m)\n");			// we'll rescale again for 10m, no need to have 10 digits
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%f\n", i+1, gem_getvalue_Y(amps+i), powers[i]/1e7);
+	for (i=0; i<len; i++)
+		printf("%d\t%d\t%#.7g\n", i+1, gem_getvalue_Y(amps+i), powers[i]/1e7);
 	printf("\n");
 }
 
@@ -295,8 +296,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Comb:\t%d\n",lenc);
 			if (output_options & mask_info) printf("Pool:\t%d\n",poolYc_length);
 			gem_print_Y(ampsc+i);
-			printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
-			printf("Global power (resc. 10m):\t%f\n\n\n", powers[i]/1e7);
+			printf("Spec base power (resc.):\t%#.7g\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
+			printf("Global power (resc. 10m):\t%#.7g\n\n\n", powers[i]/1e7);
 		}
 	}
 	
@@ -313,8 +314,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
 		gem_print_Y(ampsc+len-1);
-		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
-		printf("Global power (resc. 10m):\t%f\n\n\n", powers[len-1]/1e7);
+		printf("Spec base power (resc.):\t%#.7g\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
+		printf("Global power (resc. 10m):\t%#.7g\n\n\n", powers[len-1]/1e7);
 	}
 
 	gem*  gemf = gems+len-1;  // gem  that will be displayed
@@ -344,8 +345,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
 		gem_print_Y(ampsc+best_index);
-		printf("Spec base power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index], damage_ratio, crit_ratio));
-		printf("Global power (resc. 10m):\t%f\n\n\n", powers[best_index]/1e7);
+		printf("Spec base power (resc.):\t%#.7g\n", gem_amp_power(gems[best_index], amps[best_index], damage_ratio, crit_ratio));
+		printf("Global power (resc. 10m):\t%#.7g\n\n\n", powers[best_index]/1e7);
 		gemf = gems+best_index;
 		ampf = amps+best_index;
 		gemfc = gemsc+best_index;
@@ -372,7 +373,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print_Y(ampfc);
-			printf("Spec base power with red:\t%f\n\n\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
+			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
 		}
 	}
 

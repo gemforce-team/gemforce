@@ -30,7 +30,8 @@ void print_global_table(gem* gems, gemY* amps, int len)
 {
 	printf("# Gems\tKillgem\tAmps\tPower (resc.)\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%f\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), gem_amp_power(gems[i], amps[i]));
+	for (i=0; i<len; i++)
+		printf("%d\t%d\t%d\t%#.7g\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), gem_amp_power(gems[i], amps[i]));
 	printf("\n");
 }
 
@@ -38,7 +39,8 @@ void print_spec_table(gem* gems, gemY* amps, double* spec_coeffs, int len)
 {
 	printf("Killgem\tAmps\tPower (resc.)\tSpec coeff\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%f\t%f\n", i+1, gem_getvalue_Y(amps+i), gem_amp_power(gems[i], amps[i]), spec_coeffs[i]);
+	for (i=0; i<len; i++)
+		printf("%d\t%d\t%#.7g\t%f\n", i+1, gem_getvalue_Y(amps+i), gem_amp_power(gems[i], amps[i]), spec_coeffs[i]);
 	printf("\n");
 }
 
@@ -214,7 +216,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 				printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
 				if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
 				gem_print_Y(amps+i);
-				printf("Global power (resc.):\t%f\n\n", gem_amp_power(gems[i], amps[i]));
+				printf("Global power (resc.):\t%#.7g\n\n", gem_amp_power(gems[i], amps[i]));
 			}
 		}
 	}
@@ -262,7 +264,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 				printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
 				if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
 				gem_print_Y(amps+i);
-				printf("Global power (resc.):\t%f\n", gem_amp_power(gems[i], amps[i]));
+				printf("Global power (resc.):\t%#.7g\n", gem_amp_power(gems[i], amps[i]));
 				printf("Spec coefficient:\t%f\n\n", spec_coeffs[i]);
 			}
 		}
@@ -276,7 +278,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		printf("Amplifier\n");
 		printf("Value:\t%d\n", gem_getvalue_Y(amps+len-1));
 		gem_print_Y(amps+len-1);
-		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[len-1], amps[len-1]));
+		printf("Global power (resc.):\t%#.7g\n", gem_amp_power(gems[len-1], amps[len-1]));
 		if (!global_mode) printf("Spec coefficient:\t%f\n", spec_coeffs[len-1]);
 		printf("\n");
 	}
@@ -301,7 +303,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 		printf("Amplifier\n");
 		printf("Value:\t%d\n", gem_getvalue_Y(amps+best_index));
 		gem_print_Y(amps+best_index);
-		printf("Global power (resc.):\t%f\n", gem_amp_power(gems[best_index], amps[best_index]));
+		printf("Global power (resc.):\t%#.7g\n", gem_amp_power(gems[best_index], amps[best_index]));
 		printf("Spec coefficient:\t%f\n\n", best_sc);
 		gemf = gems+best_index;
 		ampf = amps+best_index;
@@ -322,7 +324,7 @@ void worker(int len, int output_options, int global_mode, double growth_comb, ch
 			printf("Amplifier\n");
 			printf("Value:\t%d\n", gem_getvalue_Y(ampf));
 			gem_print_Y(ampf);
-			printf("Global power with red:\t%f\n\n", gem_amp_power(*gemf, *ampf));
+			printf("Global power with red:\t%#.7g\n\n", gem_amp_power(*gemf, *ampf));
 		}
 	}
 

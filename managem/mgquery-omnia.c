@@ -160,8 +160,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print_O(ampsc+i);
-			printf("Spec base power:    \t%f\n", gem_amp_power(gems[i], amps[i], leech_ratio));
-			printf("Global power at g%d:\t%f\n\n\n", GT, powers[i]);
+			printf("Spec base power:    \t%#.7g\n", gem_amp_power(gems[i], amps[i], leech_ratio));
+			printf("Global power at g%d:\t%#.7g\n\n\n", GT, powers[i]);
 		}
 	}
 	
@@ -178,8 +178,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
 		gem_print_O(ampsc+len-1);
-		printf("Spec base power:    \t%f\n", gem_amp_power(gems[len-1], amps[len-1], leech_ratio));
-		printf("Global power at g%d:\t%f\n\n\n", GT, powers[len-1]);
+		printf("Spec base power:    \t%#.7g\n", gem_amp_power(gems[len-1], amps[len-1], leech_ratio));
+		printf("Global power at g%d:\t%#.7g\n\n\n", GT, powers[len-1]);
 	}
 
 	gem*  gemf = gems+len-1;  // gem  that will be displayed
@@ -209,8 +209,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
 		gem_print_O(ampsc+best_index);
-		printf("Spec base power:    \t%f\n", gem_amp_power(gems[best_index], amps[best_index], leech_ratio));
-		printf("Global power at g%d:\t%f\n\n\n", GT, powers[best_index]);
+		printf("Spec base power:    \t%#.7g\n", gem_amp_power(gems[best_index], amps[best_index], leech_ratio));
+		printf("Global power at g%d:\t%#.7g\n\n\n", GT, powers[best_index]);
 		gemf = gems+best_index;
 		ampf = amps+best_index;
 		gemfc = gemsc+best_index;
@@ -237,7 +237,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print_O(ampfc);
-			printf("Spec base power with red:\t%f\n\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
+			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
 		}
 	}
 

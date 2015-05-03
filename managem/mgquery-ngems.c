@@ -14,7 +14,8 @@ void print_ngems_table(gem* gems, gemO* amps, double leech_ratio, int len)
 {
 	printf("# Gems\tManagem\tAmps\tPower\n");
 	int i;
-	for (i=0;i<len;i++) printf("%d\t%d\t%d\t%f\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio));
+	for (i=0; i<len; i++)
+		printf("%d\t%d\t%d\t%#.7g\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio));
 	printf("\n");
 }
 
@@ -110,7 +111,7 @@ void worker(int len, int output_options, char* filename, char* filenameA, int TC
 			printf("Amplifier (x%d)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
 			gem_print_O(amps+i);
-			printf("Spec base power: \t%f\n\n", gem_amp_power(gems[i], amps[i], leech_ratio));
+			printf("Spec base power: \t%#.7g\n\n", gem_amp_power(gems[i], amps[i], leech_ratio));
 		}
 	}
 	
@@ -123,7 +124,7 @@ void worker(int len, int output_options, char* filename, char* filenameA, int TC
 		printf("Amplifier (x%d)\n", Namps);
 		printf("Value:\t%d\n", gem_getvalue_O(amps+len-1));
 		gem_print_O(amps+len-1);
-		printf("Spec base power: \t%f\n\n", gem_amp_power(gems[len-1], amps[len-1], leech_ratio));
+		printf("Spec base power: \t%#.7g\n\n", gem_amp_power(gems[len-1], amps[len-1], leech_ratio));
 	}
 
 	gem*  gemf=gems+len-1;  // gem that will be displayed
@@ -144,7 +145,7 @@ void worker(int len, int output_options, char* filename, char* filenameA, int TC
 			printf("Amplifier (x%d)\n", Namps);
 			printf("Value:\t%d\n", gem_getvalue_O(ampf));
 			gem_print_O(ampf);
-			printf("Spec base power with red:\t%f\n\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
+			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
 		}
 	}
 
