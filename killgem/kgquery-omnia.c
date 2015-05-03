@@ -7,27 +7,13 @@
 typedef struct Gem_YB gem;
 const int ACC=80;					// ACC is for z-axis sorting and for the length of the interval tree
 const int ACC_TR=750;			// ACC_TR is for bbound comparisons inside tree
-const int NT=1048576;			// 2^20 ~ 1m, it's still low, but there's no difference going on (even 10k gives the same results)
 #include "killgem_utils.h"
 typedef struct Gem_Y gemY;
 #include "crit_utils.h"
+#include "kga_utils.h"
 #include "gfon.h"
 
-double gem_amp_power(gem gem1, gemY amp1, double damage_ratio, double crit_ratio)
-{
-	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+crit_ratio*amp1.crit)*gem1.bbound;
-}
-
-void print_omnia_table(gem* gems, gemY* amps, double* powers, int len)
-{
-	printf("Killgem\tAmps\tPower (resc. 10m)\n");			// we'll rescale again for 10m, no need to have 10 digits
-	int i;
-	for (i=0; i<len; i++)
-		printf("%d\t%d\t%#.7g\n", i+1, gem_getvalue_Y(amps+i), powers[i]/1e7);
-	printf("\n");
-}
-
-void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, int TC, int Namps)
+void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, int TC, int GT, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);						// if the file is not good we exit
@@ -40,9 +26,9 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init(pool[0]+1,1,1.186168,0,1);		// BB has more dmg
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// killgem spec pool filling
-	if (prevmax<len-1) {									// if the killgems are not enough
-		fclose(table);
-		for (i=0;i<=prevmax;++i) free(pool[i]);	// free
+	fclose(table);
+	if (prevmax<len-1) {										// if the killgems are not enough
+		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
 		if (prevmax>0) printf("Gem table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
@@ -50,46 +36,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem* poolf[len];
 	int poolf_length[len];
 	
-	for (i=0;i<len;++i) {								// killgem spec compression
-		int j;
-		float maxcrit=0;
-		gem* temp_pool=malloc(pool_length[i]*sizeof(gem));
-		for (j=0; j<pool_length[i]; ++j) {			// copy gems and get maxcrit
-			temp_pool[j]=pool[i][j];
-			maxcrit=max(maxcrit, (pool[i]+j)->crit);
-		}
-		gem_sort(temp_pool,pool_length[i]);			// work starts
-		int broken=0;
-		int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
-		int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
-		int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));									// memory improvement, 2* is not needed
-		for (j=0; j<tree_length+crit_cells+1; ++j) tree[j]=-1;										// init also tree[0], it's faster
-		int index;
-		for (j=pool_length[i]-1;j>=0;--j) {																		// start from large z
-			gem* p_gem=temp_pool+j;
-			index=(int)(p_gem->crit*ACC);																			// find its place in x
-			if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
-				tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
-			}
-			else {
-				p_gem->grade=0;
-				broken++;
-			}
-		}												// all unnecessary gems broken
-		free(tree);									// free
-		
-		poolf_length[i]=pool_length[i]-broken;
-		poolf[i]=malloc(poolf_length[i]*sizeof(gem));			// pool init via broken
-		index=0;
-		for (j=0; j<pool_length[i]; ++j) {							// copying to subpool
-			if (temp_pool[j].grade!=0) {
-				poolf[i][index]=temp_pool[j];
-				index++;
-			}
-		}
-		free(temp_pool);
-		if (output_options & mask_info) printf("Killgem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);
-	}
+	KGSPEC_COMPRESSION
 	printf("Gem speccing pool compression done!\n");
 
 	FILE* tablec=file_check(filenamec);		// file is open to read
@@ -101,8 +48,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init(poolc[0],1,1,1,1);
 	
 	int prevmaxc=pool_from_table(poolc, poolc_length, lenc, tablec);		// killgem comb pool filling
+	fclose(tablec);
 	if (prevmaxc<lenc-1) {												// if the killgems are not enough
-		fclose(tablec);
 		for (i=0;i<=prevmaxc;++i) free(poolc[i]);		// free
 		if (prevmaxc>0) printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);
 		exit(1);
@@ -111,48 +58,13 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem* poolcf;
 	int poolcf_length;
 	
-	{															// killgem comb compression
-		float maxcrit=0;
-		for (i=0; i<poolc_length[lenc-1]; ++i) {		// get maxcrit;
-			maxcrit=max(maxcrit, (poolc[lenc-1]+i)->crit);
-		}
-		gem_sort(poolc[lenc-1],poolc_length[lenc-1]);						// work starts
-		int broken=0;
-		int crit_cells=(int)(maxcrit*ACC)+1;			// this pool will be big from the beginning, but we avoid binary search
-		int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
-		int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));									// memory improvement, 2* is not needed
-		for (i=0; i<tree_length+crit_cells+1; ++i) tree[i]=-1;										// init also tree[0], it's faster
-		int index;
-		for (i=poolc_length[lenc-1]-1;i>=0;--i) {																// start from large z
-			gem* p_gem=poolc[lenc-1]+i;
-			index=(int)(p_gem->crit*ACC);																			// find its place in x
-			if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
-				tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
-			}
-			else {
-				p_gem->grade=0;
-				broken++;
-			}
-		}												// all unnecessary gems destroyed
-		free(tree);									// free
-		
-		poolcf_length=poolc_length[lenc-1]-broken;
-		poolcf=malloc(poolcf_length*sizeof(gem));			// pool init via broken
-		index=0;
-		for (i=0; i<poolc_length[lenc-1]; ++i) {			// copying to subpool
-			if (poolc[lenc-1][i].grade!=0) {
-				poolcf[index]=poolc[lenc-1][i];
-				index++;
-			}
-		}
-	}
+	KGCOMB_COMPRESSION
 	printf("Killgem comb compressed pool size:\t%d\n",poolcf_length);
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
-	int lena;
-	if (lenc > len) lena=lenc;					// see which is bigger between spec len and comb len
-	else lena=len;									// and we'll get the amp pool till there
+	int lena=len;									// see which is bigger between spec len and comb len
+	if (lenc > len) lena=lenc;					// and we'll get the amp pool till there
 	gemY** poolY=malloc(lena*sizeof(gemY*));
 	int* poolY_length=malloc(lena*sizeof(int));
 	poolY[0]=malloc(sizeof(gemY));
@@ -160,8 +72,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init_Y(poolY[0],1,1,1);
 	
 	int prevmaxA=pool_from_table_Y(poolY, poolY_length, lena, tableA);		// amps pool filling
+	fclose(tableA);
 	if (prevmaxA<lena-1) {
-		fclose(tableA);
 		for (i=0;i<=prevmaxA;++i) free(poolY[i]);		// free
 		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
@@ -169,36 +81,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 
 	gemY** poolYf=malloc(lena*sizeof(gemY*));		// if not malloc-ed 140k is the limit
 	int poolYf_length[lena];
-	
-	for (i=0; i<lena; ++i) {			// amps pool compression
-		int j;
-		gemY* temp_pool=malloc(poolY_length[i]*sizeof(gem));
-		for (j=0; j<poolY_length[i]; ++j) {			// copy gems
-			temp_pool[j]=poolY[i][j];
-		}
-		gem_sort_Y(temp_pool,poolY_length[i]);		// work starts
-		int broken=0;
-		float lim_crit=-1;
-		for (j=poolY_length[i]-1;j>=0;--j) {
-			if (temp_pool[j].crit<=lim_crit) {
-				temp_pool[j].grade=0;
-				broken++;
-			}
-			else lim_crit=temp_pool[j].crit;
-		}													// all unnecessary gems marked
-		poolYf_length[i]=poolY_length[i]-broken;
-		poolYf[i]=malloc(poolYf_length[i]*sizeof(gemY));		// pool init via broken
-		int index=0;
-		for (j=0; j<poolY_length[i]; ++j) {			// copying to pool
-			if (temp_pool[j].grade!=0) {
-				poolYf[i][index]=temp_pool[j];
-				index++;
-			}
-		}
-		free(temp_pool);
-		if (output_options & mask_info) printf("Amp value %d compressed pool size:\t%d\n", i+1, poolYf_length[i]);
-	}
 
+	AMPS_COMPRESSION
 	gemY poolYc[poolYf_length[lenc-1]];
 	int poolYc_length=poolYf_length[lenc-1];
 	
@@ -207,11 +91,11 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	}
 	printf("Amp combining pool compression done!\n\n");
 
-	int j,k,h,l,m;								// let's choose the right gem-amp combo
-	gem gems[len];								// for every speccing value
-	gemY amps[len];							// we'll choose the best amps
-	gem gemsc[len];							// and the best NC combine
-	gemY ampsc[len];							// for both
+	int j,k,h,l,m;							// let's choose the right gem-amp combo
+	gem gems[len];							// for every speccing value
+	gemY amps[len];						// we'll choose the best amps
+	gem gemsc[len];						// and the best NC combine
+	gemY ampsc[len];						// for both
 	double powers[len];
 	gem_init(gems,1,1,1,0);
 	gem_init_Y(amps,0,0,0);
@@ -221,10 +105,11 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	double iloglenc=1/log(lenc);
 	double crit_ratio  =Namps*0.46*(1+(double)TC*3/100)/(1  +(double)TC/30);
 	double damage_ratio=Namps*0.28*(1+(double)TC*3/100)/(1.2+(double)TC/30);
+	double NT=pow(2, GT-1);
 	if (!(output_options & mask_quiet)) {
 		printf("Killgem spec\n");
 		gem_print(gems);
-		printf("Amplifier spec (%dx)\n", Namps);
+		printf("Amplifier spec (x%d)\n", Namps);
 		gem_print_Y(amps);
 	}
 
@@ -245,11 +130,11 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			}
 		}
 		int NS=i+1;
-		double c0 = log((double)NT/(i+1))*iloglenc;						// last we compute the combination number
+		double c0 = log(NT/(i+1))*iloglenc;									// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
 																						// now we compare the whole setup
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {					// for every amp value from 1 to to gem_value
-			double c = log((double)NT/NS)*iloglenc;						// we compute the combination number
+			double c = log(NT/NS)*iloglenc;									// we compute the combination number
 			for (l=0; l<poolcf_length; ++l) {								// then we search in the NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cdg = pow(poolcf[l].damage,c);
@@ -282,22 +167,22 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		if (!(output_options & mask_quiet)) {
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info) printf("Pool:\t%d\n",poolf_length[i]);
+			if (output_options & mask_debug) printf("Pool:\t%d\n",poolf_length[i]);
 			gem_print(gems+i);
-			printf("Amplifier spec (%dx)\n", Namps);
+			printf("Amplifier spec (x%d)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
-			if (output_options & mask_info) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
+			if (output_options & mask_debug) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
 			gem_print_Y(amps+i);
 			printf("Killgem combine\n");
 			printf("Comb:\t%d\n",lenc);
-			if (output_options & mask_info) printf("Pool:\t%d\n",poolcf_length);
+			if (output_options & mask_debug) printf("Pool:\t%d\n",poolcf_length);
 			gem_print(gemsc+i);
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
-			if (output_options & mask_info) printf("Pool:\t%d\n",poolYc_length);
+			if (output_options & mask_debug) printf("Pool:\t%d\n",poolYc_length);
 			gem_print_Y(ampsc+i);
-			printf("Spec base power (resc.):\t%#.7g\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
-			printf("Global power (resc. 10m):\t%#.7g\n\n\n", powers[i]/1e7);
+			printf("Spec base power:    \t%#.7g\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
+			printf("Global power at g%d:\t%#.7g\n\n\n", GT, powers[i]);
 		}
 	}
 	
@@ -305,7 +190,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Killgem spec\n");
 		printf("Value:\t%d\n",len);
 		gem_print(gems+len-1);
-		printf("Amplifier spec (%dx)\n", Namps);
+		printf("Amplifier spec (x%d)\n", Namps);
 		printf("Value:\t%d\n",gem_getvalue_Y(amps+len-1));
 		gem_print_Y(amps+len-1);
 		printf("Killgem combine\n");
@@ -314,8 +199,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
 		gem_print_Y(ampsc+len-1);
-		printf("Spec base power (resc.):\t%#.7g\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
-		printf("Global power (resc. 10m):\t%#.7g\n\n\n", powers[len-1]/1e7);
+		printf("Spec base power:    \t%#.7g\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
+		printf("Global power at g%d:\t%#.7g\n\n\n", GT, powers[len-1]);
 	}
 
 	gem*  gemf = gems+len-1;  // gem  that will be displayed
@@ -336,7 +221,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Killgem spec\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
 		gem_print(gems+best_index);
-		printf("Amplifier spec (%dx)\n", Namps);
+		printf("Amplifier spec (x%d)\n", Namps);
 		printf("Value:\t%d\n", gem_getvalue_Y(amps+best_index));
 		gem_print_Y(amps+best_index);
 		printf("Killgem combine\n");
@@ -345,8 +230,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
 		gem_print_Y(ampsc+best_index);
-		printf("Spec base power (resc.):\t%#.7g\n", gem_amp_power(gems[best_index], amps[best_index], damage_ratio, crit_ratio));
-		printf("Global power (resc. 10m):\t%#.7g\n\n\n", powers[best_index]/1e7);
+		printf("Spec base power:    \t%#.7g\n", gem_amp_power(gems[best_index], amps[best_index], damage_ratio, crit_ratio));
+		printf("Global power at g%d:\t%#.7g\n\n\n", GT, powers[best_index]);
 		gemf = gems+best_index;
 		ampf = amps+best_index;
 		gemfc = gemsc+best_index;
@@ -364,7 +249,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
 			gem_print(gemf);
-			printf("Amplifier spec (%dx)\n", Namps);
+			printf("Amplifier spec (x%d)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_Y(ampf));
 			gem_print_Y(ampf);
 			printf("Managem combine\n");
@@ -422,9 +307,6 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		printf("\n");
 	}
 	
-	fclose(table);
-	fclose(tablec);
-	fclose(tableA);
 	for (i=0;i<len;++i) free(pool[i]);			// free gems
 	for (i=0;i<len;++i) free(poolf[i]);			// free gems compressed
 	for (i=0;i<lenc;++i) free(poolc[i]);		// free gems
@@ -447,38 +329,19 @@ int main(int argc, char** argv)
 	int lenc;
 	char opt;
 	int TC=60;
+	int GT=30;    // NT = pow(2, GT-1)
 	int Namps=8;  // killgem in tower
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"iptcequrf:T:N:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecdqurf:T:N:G:"))!=-1) {
 		switch(opt) {
-			case 'i':
-				output_options |= mask_info;
-				break;
-			case 'p':
-				output_options |= mask_parens;
-				break;
-			case 't':
-				output_options |= mask_tree;
-				break;
-			case 'c':
-				output_options |= mask_table;
-				break;
-			case 'e':
-				output_options |= mask_equations;
-				break;
-			case 'q':
-				output_options |= mask_quiet;
-				break;
-			case 'u':
-				output_options |= mask_upto;
-				break;
-			case 'r':
-				output_options |= mask_red;
-				break;
+			case 'h':
+				print_help("hptecdqurf:T:N:G:");
+				return 0;
+			PTECIDCUR_OPTIONS_BLOCK
 			case 'f':			// can be "filename,filenamec,filenameA", if missing default is used
 				;
 				char* p=optarg;
@@ -499,11 +362,18 @@ int main(int argc, char** argv)
 			case 'N':
 				Namps=atoi(optarg);
 				break;
+			case 'G':
+				GT=atoi(optarg);
+				break;
 			case '?':
 				return 1;
 			default:
 				break;
 		}
+	}
+	if (optind==argc) {
+		printf("No length specified\n");
+		return 1;
 	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
@@ -514,22 +384,21 @@ int main(int argc, char** argv)
 		lenc= atoi(argv[optind+1]);
 	}
 	else {
-		if (optind==argc) printf("No length specified\n");
-		else printf("Unknown arguments:\n");
+		printf("Too many arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
 			optind++;
 		}
+		printf("\n");
 		return 1;
 	}
 	if (len<1 || lenc<1) {
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (filename[0]=='\0') strcpy(filename, "table_kgspec");
-	if (filenamec[0]=='\0') strcpy(filenamec, "table_kgcomb");
-	if (filenameA[0]=='\0') strcpy(filenameA, "table_crit");
-	worker(len, lenc, output_options, filename, filenamec, filenameA, TC, Namps);
+	file_selection(filename, "table_kgspec");
+	file_selection(filenamec, "table_kgcomb");
+	file_selection(filenameA, "table_crit");
+	worker(len, lenc, output_options, filename, filenamec, filenameA, TC, GT, Namps);
 	return 0;
 }
-
