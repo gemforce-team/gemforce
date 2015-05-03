@@ -31,8 +31,8 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	}
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
+	fclose(table);				// close
 	if (prevmax<len-1) {
-		fclose(table);			// close
 		for (i=0;i<=prevmax;++i) free(pool[i]);      // free
 		free(pool);				// free
 		free(pool_length);	// free
@@ -117,7 +117,6 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 		printf("\n");
 	}
 	
-	fclose(table);
 	for (i=0;i<len;++i) free(pool[i]);		// free
 	free(pool);
 	free(gems);
