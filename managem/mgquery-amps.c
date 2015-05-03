@@ -12,7 +12,7 @@ typedef struct Gem_O gemO;
 
 void print_amps_table(gem* gems, gemO* amps, double* spec_coeffs, double leech_ratio, int len)
 {
-	printf("Managem\tAmps\t\tPower\tSpec coeff\n");
+	printf("Managem\tAmps\tPower\t\tSpec coeff\n");
 	int i;
 	for (i=0; i<len; i++)
 		printf("%d\t%d\t%#.7g\t%f\n", i+1, gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio), spec_coeffs[i]);

@@ -33,7 +33,7 @@ void worker(int len, int output_options, char* filename, char* filenameA, int TC
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// managem pool filling
 	fclose(table);
-	if (prevmax<len-1) {						// if the managems are not enough
+	if (prevmax<len-1) {					// if the managems are not enough
 		for (i=prevmax+1; i<len; ++i) {
 			pool_length[i]=1;
 			pool[i]=malloc(sizeof(gem));
