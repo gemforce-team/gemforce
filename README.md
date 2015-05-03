@@ -52,7 +52,7 @@ How to do this greatly depends on the operative system you are using:
     everything you typically need will be placed in `bin/`
     
   * **manual compilation:**  
-    `gcc -O2 -lm -I "include" file.c -o output`  
+    `gcc -O3 -lm -I "include" file.c -o output`  
     You'll then need to copy the gem tables to the directory you built the executables in.
 
 * **Windows (tested and working from XP to 8.1):**
@@ -65,7 +65,7 @@ How to do this greatly depends on the operative system you are using:
   * **manual compilation:**  
   Works on Windows too, but it's a bit more difficult to get hold of a compiler there.  
   Any modern C compiler is ok, remember to include the `include` directory, as the example below:  
-  `gcc -O2 -lm -I "include" file.c -o output`
+  `somecompiler -O3 -lm -I "include" file.c -o output`
 
 
 ### Precomputed gem tables:
@@ -93,6 +93,7 @@ Change the directory to the one you have the executables in and then run the pro
 
 where the flags are:
 
+* `h` - print an help text  
 * `p` - print best gem parenthesis formula  
 * `t` - print best gem tree formula  
 * `e` - print best gem equations formula  
@@ -105,30 +106,37 @@ where the flags are:
 
 `number` - value of the gem to be computed (mandatory)  
 
-To specify if you want a speccing or a combining recipe out of a general program (e.g. `managemquery`):  
+To specify if you want a speccing or a combining recipe out of a `*query-alone` program:  
 if `number` is `100`, then:
-* `./managemquery -[flags] 100s` or `./managemquery -[flags] 100` will give a speccing recipe
-* `./managemquery -[flags] 100c` will give a combining recipe.
+* `./mgquery-alone -[flags] 100s` or `./mgquery-alone -[flags] 100` will give a speccing recipe
+* `./mgquery-alone -[flags] 100c` will give a combining recipe.
 
-In addition the `managem_omnia` and `killgem_omnia` programs support some additional flags and a second number:
-`./somegem_omnia -[flags] number1 number2`
+The `query-ngems` and `query-amps` programs support some additional flags and an extended `-f` pattern:
+
+* `f "path_spec,path_amps"` - change table files, if any is empty it'll use the default path
+* `N number` - specify how many amps you want to use `[0-8]`  
+* `T number` - give your True Colors skill for better amps fitting `[0-999]`
+
+The `query-omnia` and `query-setup` programs support an extra flag and a second number:  
+`./*query-omnia -[flags] number1 number2`
 
 * `f "path_spec,path_comb,path_amps"` - change table files, if any is empty it'll use the default path
-* `N number` - specify how many amps you want to use `[0-8]`  
-* `T number` - give your True Colors skill for better amps fitting `[0-999]`  
+* `G number` - get the final power at a given equivalent grade (default is `30`) `[1-999]`  
 
 `number1` - speccing value (mandatory)  
 `number2` - combine value (can be omitted, default is `16`)
 
 Debug flags/options (you should not need these):
 
-* `s number` - change chunk size (build/force only) 
-* global mode in `(m/k)gaquery` is toggled via `(num)g`  
+* `d` - prints debug text, depending on program  
+* `g number` - for `query-amps` give custom growth value (default is `16c` for that gem)
 
 **examples:**  
 `./file -pet 32`  
-`./filequery -ipf "path/to/table" 128c`  
-`./file_omnia -pq 32 16`  
+`./filequery-alone -ipf "path/to/table" 128c`  
+`./filequery-omnia -pq 32 16`  
+
+When in doubt about which flags are supported check with `-h`.
 
 
 ### Name conventions:
@@ -170,20 +178,21 @@ Mana and kill suites are alike, so I'll just describe the mana one:
 Included in auto setup package:
 
 * leechquery    : gets leech combines from table
-* managemquery  : gets managem combines and specces (alone) from tables
-* mgaquery      : gets amped managem specces and their amps from tables
-* mgomniaquery  : gets a full package of amped spec and combine for both from tables
+* mgquery-alone : gets managem combines and specces (alone) from tables
+* mgquery-amps  : gets amped managem specces and their amps from tables - fixed spec number version
+* mgquery-setup : basically `alone (combines) + amps`,
+offers more info on the whole spec-combine than the two used separately
+* mgomniaquery  : gets amped managem specces, their amps and combines for both from tables
 
 Not included in auto setup package:
 
-* leechbuild    : builds leech table
-* leechcombine  : makes leech combines from scratch
-* managem_alone : makes managem combines and specces (alone) from scratch
-* managembuild  : builds managem tables
-* mgexactbuild  : builds the exact managem tables
-* mgfast1build  : builds a fast managem combine table
-* mgfast2build  : builds a fast managem combine table
-* mgsloppybuild : builds a fast managem combine table
+* leechbuild      : builds leech table
+* leechcombine    : makes leech combines from scratch
+* mgcombine-alone : makes managem combines and specces (alone) from scratch
+* mgbuild-appr    : builds managem tables
+* mgbuild-exact   : builds the exact managem tables
+* mgbuild-[...]   : builds a fast managem combine table in various versions
+* mgquery-ngems   : gets amped managem specces and their amps from tables - fixed total number version
 
 
 ### Report bugs:
@@ -197,8 +206,11 @@ Be sure to include all the relevant information (OS, gemforce version, etc...) a
 ### Credits:
 
 gemforce authors are:
-* Andrea Stacchiotti aka AG user '12345ieee'
+
+* Andrea Stacchiotti aka AG user '12345ieee'  
 * Wojciech Jabłoński aka AG user 'psorek'
+
+If this project helped you and you wish to help by contributing or donating, feel free to contact us, we'll be very happy.
 
 Gemcraft 2: Chasing Shadows was developed by [gameinabottle](http://gameinabottle.com/)
 
