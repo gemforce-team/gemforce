@@ -12,32 +12,29 @@
 
 ### Results naming convention
 
-The results are divided in folders for each gem type (leech/managem/killgem).  
-Leech gems are only used as amplifiers, the leech folder is needed for testing purpose.
+The results are divided in folders for each gem type (leech/managem/killgem) and then in subfolders for recipe kind.  
+Leech gems are only used as amplifiers, the leech folder is needed only for testing purpose.  
+Recipe names are composed by a gem type (as above), a recipe kind and number(s) for the recipe length.
 
-First part of the name describes what kind of recipe this is (leech/managem/killgem).
-  
-Second part is:
+The recipe kind can be:
 
-* `comb` - a combine which should be used with an already built gem  
-* `amps` - a pair of main gem spec and amps spec in optimal proportions,
-           though they don't take the combine into consideration  
-* `omnia` - a set of four recipes: a main gem spec and its amps spec in optimal proportions
-            and a pair of optimal combines for both, it's the pinnacle of gem "rocket science"  
+* `combine` - a combine which should be used with an already built gem  
+* `amps`    - a pair of main gem spec and amps spec in optimal proportions,
+              though they don't take the combine into consideration  
+* `omnia`   - a set of four recipes: a main gem spec and its amps spec in optimal proportions
+              and a pair of optimal combines for both, it's the pinnacle of gem "rocket science"  
 
-Third part - number(s):  
-number(s) in the last part specify how many gems go into specific recipe:  
+The number(s) in the last part specify how many base gems go into specific recipe:  
 
-* `combN` - the combine costs N gems, as easy as it gets  
-* `ampsG-A` - the main gem costs G gems while its amps costs A each  
-* `omniaS-C` - the main gem costs S gems,
-               the optimized amps' cost is written only inside the file
-               and both the combines require C copies of the main gem/amplifier
+* combine:    `N` - the combine costs `N` base gems, as easy as it gets  
+* amps:     `G-A` - the main gem costs `G` gems while its amps cost `A` each  
+* omnia: `G-A--C` - the main gem costs `G` gems, the optimized amps cost `A` each
+                    and both the combines require `C` copies of the main gem/amplifier
 
 All the amped recipes here are built with 6 amps for managems and 8 amps for killgems.
 
 I try to have here all the `2^n` recipes and the best between every `2^n`and `2^(n+1)`
-for the `amps` and `comb` kinds.  
+for the `amps` and `comb` sections.  
 There are then selected ones from the `omnia` kind, as having all the combinations would be impossible.
 
 
