@@ -129,6 +129,7 @@ The `query-omnia` and `query-setup` programs support an extra flag and a second 
 Debug flags/options (you should not need these):
 
 * `d` - prints debug text, depending on program  
+* `l number` - for `query-ngems` give custom hard gem limit (default is minimum between len and table len)
 * `g number` - for `query-amps` give custom growth value (default is `16c` for that gem)
 
 **examples:**  
@@ -207,8 +208,8 @@ Be sure to include all the relevant information (OS, gemforce version, etc...) a
 
 gemforce authors are:
 
-* Andrea Stacchiotti aka AG user '12345ieee'  
-* Wojciech Jabłoński aka AG user 'psorek'
+* Andrea Stacchiotti aka Steam user '12345ieee' aka AG user '12345ieee'  
+* Wojciech Jabłoński aka Steam user 'psorek139' aka AG user 'psorek'
 
 If this project helped you and you wish to help by contributing or donating, feel free to contact us, we'll be very happy.
 
