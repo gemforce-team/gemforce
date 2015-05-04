@@ -121,8 +121,8 @@ You can find it here: [wGemCombiner repo](https://github.com/gemforce-team/wGemC
 
 ### Other stuff
 
-If you need a particular recipe you don't find here you can build it yourself using the programs.
-Check the [main README of the repository](#readme) for a comprehensive HOWTO.
+If you need a particular recipe you don't find here you can build it yourself using the programs.  
+Check the [main README of the repository](/#readme) for a comprehensive HOWTO.
 
 If this project helped you and you wish to help by contributing or donating, feel free to contact us, we'll be very happy.
 For anything else, leave a [Github issue](https://github.com/gemforce-team/gemforce/issues/new).
