@@ -22,7 +22,7 @@ void print_ngems_table(gem* gems, gemY* amps, double damage_ratio, double crit_r
 	printf("\n");
 }
 
-void worker(int len, int output_options, char* filename, char* filenameA, int TC, int Namps)
+void worker(int len, int output_options, int gem_limit, char* filename, char* filenameA, int TC, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);						// if the file is not good we exit
@@ -34,13 +34,12 @@ void worker(int len, int output_options, char* filename, char* filenameA, int TC
 	gem_init(pool[0]  ,1,1.000000,1,0);		// grade damage crit bbound
 	gem_init(pool[0]+1,1,1.186168,0,1);		// BB has more dmg
 	
-	int prevmax=pool_from_table(pool, pool_length, len, table);		// killgem pool filling
+	int prevmax=pool_from_table(pool, pool_length, gem_limit, table);		// killgem pool filling
 	fclose(table);
 	if (prevmax<len-1) {					// if the killgems are not enough
 		for (i=prevmax+1; i<len; ++i) {
-			pool_length[i]=1;
-			pool[i]=malloc(sizeof(gem));
-			pool[i][0]=(gem){0};			// null gems
+			pool_length[i]=0;
+			pool[i]=NULL;
 		}
 	}
 
@@ -202,17 +201,21 @@ int main(int argc, char** argv)
 	char opt;
 	int TC=60;
 	int Namps=8;
+	int gem_limit=0;
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
 
-	while ((opt=getopt(argc,argv,"hptecdqrf:T:N:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecdqrl:f:T:N:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptecdqrf:T:N:");
+				print_help("hptecdqrl:f:T:N:");
 				return 0;
 			PTECIDCUR_OPTIONS_BLOCK
+			case 'l':
+				gem_limit = atoi(optarg);
+				break;
 			case 'f':			// can be "filename,filenameA", if missing default is used
 				;
 				char* p=optarg;
@@ -240,6 +243,7 @@ int main(int argc, char** argv)
 	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
+		if (gem_limit==0) gem_limit=len;
 	}
 	else {
 		printf("Too many arguments:\n");
@@ -256,7 +260,7 @@ int main(int argc, char** argv)
 	}
 	file_selection(filename, "table_kgspec");
 	file_selection(filenameA, "table_crit");
-	worker(len, output_options, filename, filenameA, TC, Namps);
+	worker(len, output_options, gem_limit, filename, filenameA, TC, Namps);
 	return 0;
 }
 
