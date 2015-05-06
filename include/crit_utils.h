@@ -270,25 +270,16 @@ void print_tree_Y(gemY* gemf, const char* prefix)
 	else {
 		printf("─%d\n",gem_getvalue_Y(gemf));
 		printf("%s ├",prefix);
-		char string[strlen(prefix)+2];
+		char string[strlen(prefix)+5];   // 1 space, 1 unicode bar and and the null term are 5 extra chars
 		strcpy(string,prefix);
 		strcat(string," │");
-		gemY* gem1;
-		gemY* gem2;
-		if (gem_getvalue_Y(gemf->father)>gem_getvalue_Y(gemf->mother)) {
-			gem1=gemf->father;
-			gem2=gemf->mother;
-		}
-		else {
-			gem2=gemf->father;
-			gem1=gemf->mother;
-		}
-		print_tree_Y(gem1, string);
+		print_tree_Y(gemf->mother, string);
+		
 		printf("%s └",prefix);
-		char string2[strlen(prefix)+2];
+		char string2[strlen(prefix)+3];  // 2 spaces and the null term are 3 extra chars
 		strcpy(string2,prefix);
 		strcat(string2,"  ");
-		print_tree_Y(gem2, string2);
+		print_tree_Y(gemf->father, string2);
 	}
 }
 

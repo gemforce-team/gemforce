@@ -89,25 +89,16 @@ void print_tree(gem* gemf, const char* prefix)
 	else {
 		printf("─%d\n",gem_getvalue(gemf));
 		printf("%s ├",prefix);
-		char string[strlen(prefix)+2];
+		char string[strlen(prefix)+5];   // 1 space, 1 unicode bar and and the null term are 5 extra chars
 		strcpy(string,prefix);
 		strcat(string," │");
-		gem* gem1;
-		gem* gem2;
-		if (gem_getvalue(gemf->father)>gem_getvalue(gemf->mother)) {
-			gem1=gemf->father;
-			gem2=gemf->mother;
-		}
-		else {
-			gem2=gemf->father;
-			gem1=gemf->mother;
-		}
-		print_tree(gem1, string);
+		print_tree(gemf->mother, string);
+		
 		printf("%s └",prefix);
-		char string2[strlen(prefix)+2];
+		char string2[strlen(prefix)+3];  // 2 spaces and the null term are 3 extra chars
 		strcpy(string2,prefix);
 		strcat(string2,"  ");
-		print_tree(gem2, string2);
+		print_tree(gemf->father, string2);
 	}
 }
 
