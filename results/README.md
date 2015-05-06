@@ -24,12 +24,14 @@ The recipe kind can be:
 * `omnia`   - a set of four recipes: a main gem spec and its amps spec in optimal proportions
               and a pair of optimal combines for both, it's the pinnacle of gem "rocket science"  
 
-The number(s) in the last part specify how many base gems go into specific recipe:  
+The number(s) in the specify how many base gems go into specific recipe:  
 
 * combine:    `N` - the combine costs `N` base gems, as easy as it gets  
 * amps:     `G-A` - the main gem costs `G` gems while its amps cost `A` each  
 * omnia: `G-A--C` - the main gem costs `G` gems, the optimized amps cost `A` each
                     and both the combines require `C` copies of the main gem/amplifier
+
+Lastly an `u` at the end of the name means that that recipe is the best up to the written number and it's likely shorter than indicated.
 
 All the amped recipes here are built with 6 amps for managems and 8 amps for killgems.
 
