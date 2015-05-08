@@ -51,7 +51,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
-	int lena=len/Namps;
+	int lena = Namps ? len/Namps : 1;		// if Namps==0 let lena=1
 	gemY* poolY[lena];
 	int poolY_length[lena];
 	poolY[0]=malloc(sizeof(gemY));
@@ -95,6 +95,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 				gems[i]=poolf[i][k];
 			}
 		}
+		if (Namps!=0)
 		for (j=1;j<=i/Namps;++j) {										// for every amount of amps we can fit in
 			int value = i-Namps*j;										// this is the amount of gems we have left
 			for (k=0;k<poolf_length[value];++k)						// we search in that pool
