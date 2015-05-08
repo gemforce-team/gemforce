@@ -45,10 +45,10 @@ void worker(int len, int output_options, char* filename)
 				int g1=(dad_array+k)->grade;
 				for (h=0; h< pool_length[i-1-j]; ++h) {
 					int delta=g1 - (mom_array+h)->grade;
-					if (abs(delta)<=2) {     // grade difference <= 2
+					if (abs(delta)<=2) {        // grade difference <= 2
 						comb_tot++;
 						gem temp;
-						gem_combine(dad_array+k, mom_array+h, &temp);
+						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
 						int grd=temp.grade-2;
 						if (gem_better(temp, temp_array[grd])) {
 							temp_array[grd]=temp;
