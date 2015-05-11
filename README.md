@@ -7,6 +7,7 @@ Gem combining program for [Gemcraft 2: Chasing Shadows](http://gameinabottle.com
 ### Table of contents:
 
 * **[If you just want recipes click here](results/#readme)**
+* **[The combiner bot (wGemCombiner) has moved here](https://github.com/gemforce-team/wGemCombiner/#readme)**
 * [Overview](#overview)  
 * [Prebuilt recipes](#prebuilt-recipes)  
 * [Get gemforce](#get-gemforce)  
