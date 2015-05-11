@@ -211,7 +211,14 @@ gemforce authors are:
 * Andrea Stacchiotti aka Steam user '12345ieee' aka AG user '12345ieee'  
 * Wojciech Jabłoński aka Steam user 'psorek139' aka AG user 'psorek'
 
-If this project helped you and you wish to help by contributing or donating, feel free to contact us, we'll be very happy.
+Current manteiner:
+
+* Andrea Stacchiotti aka Steam user '12345ieee' aka AG user '12345ieee' 
+
+If this project helped you and you wish to help by contributing, please contact us, leaving a
+[new issue](https://github.com/gemforce-team/gemforce/issues/new) or opening a new pull request.
+You can also help by donating some money for our time:  
+[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LY6RG34S5UCTW "Donate to this project using Paypal")
 
 Gemcraft 2: Chasing Shadows was developed by [gameinabottle](http://gameinabottle.com/)
 
