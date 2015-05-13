@@ -407,6 +407,8 @@ int main(int argc, char** argv)
 		}
 		printf("Global mana power:\t%f\n", gem_amp_global_mana_power(*gemf, *ampf));
 		printf("Global kill power:\t%f\n\n", gem_amp_global_kill_power(*gemf, *ampf));
+		delete[] amps;
 	}
+	delete[] gems;
 	return 0;
 }
