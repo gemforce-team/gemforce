@@ -242,13 +242,13 @@ gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem* new
 	return gemt;
 }
 
-inline double gem_cfr_power(gem gem1, double amp_leech, double leech_ratio)
+inline double gem_cfr_power(gem gem1, double amp_leech_scaled)
 {
 	if (gem1.leech==0) return 0;
-	return (gem1.leech+leech_ratio*amp_leech)*gem1.bbound;
+	return (gem1.leech+amp_leech_scaled)*gem1.bbound;
 }
 
-gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_leech, double leech_ratio)
+gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_leech_scaled)
 {
 	int isRed;
 	int last;
@@ -268,7 +268,7 @@ gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array
 			new_array=malloc(value*sizeof(gem));
 			new_index=0;
 			gem* gp=gem_explore(gemf, &isRed, red, last, &curr, new_array, &new_index);
-			double new_pow=gem_cfr_power(*gp, amp_leech, leech_ratio);
+			double new_pow=gem_cfr_power(*gp, amp_leech_scaled);
 			if (new_pow > best_pow) {
 				best_pow=new_pow;
 				if (best_gem!=NULL) free(best_array);

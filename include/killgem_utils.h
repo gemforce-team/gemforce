@@ -194,13 +194,13 @@ gem* gem_explore(gem* gemf, int* isRed, gem* pred, int last, int* curr, gem* new
 	return gemt;
 }
 
-inline double gem_cfr_power(gem gem1, double amp_damage, double amp_crit, double damage_ratio, double crit_ratio)
+inline double gem_cfr_power(gem gem1, double amp_damage_scaled, double amp_crit_scaled)
 {
 	if (gem1.crit==0) return 0;
-	return (gem1.damage+damage_ratio*amp_damage)*gem1.bbound*(gem1.crit+crit_ratio*amp_crit)*gem1.bbound;
+	return (gem1.damage+amp_damage_scaled)*gem1.bbound*(gem1.crit+amp_crit_scaled)*gem1.bbound;
 }
 
-gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_damage, double amp_crit, double dr, double cr)
+gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_damage_scaled, double amp_crit_scaled)
 {
 	int isRed;
 	int last;
@@ -220,7 +220,7 @@ gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array
 			new_array=malloc(value*sizeof(gem));
 			new_index=0;
 			gem* gp=gem_explore(gemf, &isRed, red, last, &curr, new_array, &new_index);
-			double new_pow=gem_cfr_power(*gp, amp_damage, amp_crit, dr, cr);
+			double new_pow=gem_cfr_power(*gp, amp_damage_scaled, amp_crit_scaled);
 			if (new_pow > best_pow) {
 				best_pow=new_pow;
 				if (best_gem!=NULL) free(best_array);

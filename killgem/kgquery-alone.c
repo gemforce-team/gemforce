@@ -91,7 +91,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 		if (len < 3 || pool_zero!=2) printf("I could not add red!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
-			gemf = gem_putred(pool[value-1], pool_length[value-1], value, &red, &gem_array, 0, 0, 0, 0);
+			gemf = gem_putred(pool[value-1], pool_length[value-1], value, &red, &gem_array, 0, 0);
 			printf("Gem with red added:\n\n");
 			printf("Value:\t%d\n", value);    // made to work well with -u
 			printf("Growth:\t%f\n", log(gem_power(*gemf))/log(value));

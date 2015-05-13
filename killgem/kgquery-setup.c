@@ -207,7 +207,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, ampf->damage, ampf->crit, damage_ratio, crit_ratio);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, damage_ratio*ampf->damage, crit_ratio*ampf->crit);
 			printf("Setup with red added:\n\n");
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
