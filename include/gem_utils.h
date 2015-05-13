@@ -43,7 +43,7 @@
 
 #include <stdio.h>
 
-void print_help(char* flags)
+void print_help(const char* flags)
 {
 	// can (and should) be improved
 	printf("%s\n", flags);

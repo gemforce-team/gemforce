@@ -27,7 +27,7 @@ void print_parens_compressed(gem* gemf)
 {
 	if (gemf->father==NULL) printf("%c",gem_color(gemf));
 	else if (monocolor_ancestors(gemf)							// if gem is uniform combination (g1 are already done)
-	&& pow(2,gemf->grade-1)==gem_getvalue(gemf)) {			// and is standard combine
+	&& 1 << (gemf->grade-1) == gem_getvalue(gemf)) {		// and is standard combine
 		printf("%d%c",gemf->grade,gem_color(gemf));
 	}
 	else {
@@ -71,7 +71,7 @@ void print_equations(gem* gemf)
 {
 	int value=gem_getvalue(gemf);
 	int len=2*value-1;
-	gem** p_gems=malloc(len*sizeof(gem*));		// let's store all the gem pointers
+	gem** p_gems = (gem**)malloc(len*sizeof(gem*));		// let's store all the gem pointers
 	int place=0;
 	fill_array(gemf, p_gems, &place);			// this array contains marked uniques only and is long "place"
 	int i;
