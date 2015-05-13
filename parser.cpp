@@ -255,21 +255,21 @@ void gem_print(gem* p_gem) {
 		printf("Managem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", p_gem->getvalue(), p_gem->grade);
 		printf("Leech:\t%f\nBbound:\t%f\n", p_gem->leech, p_gem->bbound);
-		printf("Red:\t%d\n", p_gem->red);
+		cout << "Red:\t" << boolalpha << p_gem->red << '\n';
 		printf("Mana power:\t%f\n\n", p_gem->leech*p_gem->bbound);
 		break;
 		case 'k':
 		printf("Killgem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", p_gem->getvalue(), p_gem->grade);
 		printf("Damage:\t%f\nCrit:\t%f\nBbound:\t%f\n", p_gem->damage, p_gem->crit, p_gem->bbound);
-		printf("Red:\t%d\n", p_gem->red);
+		cout << "Red:\t" << boolalpha << p_gem->red << '\n';
 		printf("Kill power:\t%f\n\n", p_gem->damage*p_gem->bbound*p_gem->crit*p_gem->bbound);
 		break;
 		default:
 		printf("Strange gem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", p_gem->getvalue(), p_gem->grade);
 		printf("Damage:\t%f\nCrit:\t%f\nLeech:\t%f\nBbound:\t%f\n", p_gem->damage, p_gem->crit, p_gem->leech, p_gem->bbound);
-		printf("Red:\t%d\n", p_gem->red);
+		cout << "Red:\t" << boolalpha << p_gem->red << '\n';
 		printf("Mana power:\t%f\n", p_gem->leech*p_gem->bbound);
 		printf("Kill power:\t%f\n\n", p_gem->damage*p_gem->bbound*p_gem->crit*p_gem->bbound);
 	}
@@ -389,9 +389,10 @@ int main(int argc, char** argv)
 		printf("\n");
 	}
 	if (parens_amps.length() > 0) {
+		int index=0;
 		int value=(parens_amps.length()+3)/4;
 		gem* amps = new gem[2*value-1];
-		gem* ampf = gem_build(parens, amps, index);
+		gem* ampf = gem_build(parens_amps, amps, index);
 		printf("Amplifier:\n");
 		gem_print(ampf);
 		if (output_tree) {
