@@ -95,15 +95,16 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 				gems[i]=poolf[i][k];
 			}
 		}
+		double power = gem_power(gems[i]);
 		if (Namps!=0)
 		for (j=1;j<=i/Namps;++j) {										// for every amount of amps we can fit in
 			int value = i-Namps*j;										// this is the amount of gems we have left
 			for (k=0;k<poolf_length[value];++k)						// we search in that pool
 			if (poolf[value][k].crit!=0) {							// if the gem has crit we go on
 				for (h=0;h<poolYf_length[j-1];++h) {				// and we look in the amp pool
-					if (gem_amp_power(poolf[value][k], poolYf[j-1][h], damage_ratio, crit_ratio) >
-					    gem_amp_power(gems[i],         amps[i],        damage_ratio, crit_ratio)
-					) {
+					if (gem_amp_power(poolf[value][k], poolYf[j-1][h], damage_ratio, crit_ratio) > power)
+					{
+						power = gem_amp_power(poolf[value][k], poolYf[j-1][h], damage_ratio, crit_ratio);
 						gems[i]=poolf[value][k];
 						amps[i]=poolYf[j-1][h];
 					}
@@ -127,7 +128,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 	
 	if (output_options & mask_quiet) {		// outputs last if we never seen any
 		printf("Total value:\t%d\n\n", len);
-		if (prevmax<len-1) printf("Managem limit:\t%d\n", prevmax+1);
+		if (prevmax<len-1) printf("Killgem limit:\t%d\n", prevmax+1);
 		printf("Killgem\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+len-1));
 		gem_print(gems+len-1);

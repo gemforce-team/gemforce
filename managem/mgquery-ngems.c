@@ -90,13 +90,15 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 				gems[i]=poolf[i][k];
 			}
 		}
+		double power = gem_power(gems[i]);
 		if (Namps!=0)
 		for (j=1;j<=i/Namps;++j) {									// for every amount of amps we can fit in
 			int value = i-Namps*j;									// this is the amount of gems we have left
 			for (k=0;k<poolf_length[value];++k)					// we search in that pool
 			if (poolf[value][k].leech!=0							// if the gem has leech we go on and get the amp
-			&&  gem_amp_power(poolf[value][k], bestO[j-1], leech_ratio) > gem_amp_power(gems[i], amps[i], leech_ratio)
+			&&  gem_amp_power(poolf[value][k], bestO[j-1], leech_ratio) > power
 			) {
+				power = gem_amp_power(poolf[value][k], bestO[j-1], leech_ratio);
 				gems[i]=poolf[value][k];
 				amps[i]=bestO[j-1];
 			}
