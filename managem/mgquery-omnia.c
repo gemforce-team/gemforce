@@ -222,14 +222,18 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			int value=gem_getvalue(gemf);
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, leech_ratio*ampf->leech);
+			int value = gem_getvalue(gemf);
+			int valueA= gem_getvalue_O(ampf);
+			double NS = value + Namps*valueA;
+			double c = log(NT/NS)*iloglenc;
+			double amps_resc_coeff = pow((ampfc->leech/gemfc->leech), c);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, leech_ratio*amps_resc_coeff*ampf->leech);
 			printf("Setup with red added:\n\n");
 			printf("Managem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
 			gem_print(gemf);
 			printf("Amplifier spec (x%d)\n", Namps);
-			printf("Value:\t%d\n",gem_getvalue_O(ampf));
+			printf("Value:\t%d\n", valueA);
 			gem_print_O(ampf);
 			printf("Managem combine\n");
 			printf("Comb:\t%d\n",lenc);
@@ -237,6 +241,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print_O(ampfc);
+			if (output_options & mask_debug) printf("Amps rescaling coeff.:   \t%f\n", amps_resc_coeff);
 			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
 		}
 	}
@@ -313,7 +318,7 @@ int main(int argc, char** argv)
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"hptecdquf:T:N:G:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecdqurf:T:N:G:"))!=-1) {
 		switch(opt) {
 			case 'h':
 				print_help("hptecdquf:T:N:G:");
