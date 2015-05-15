@@ -51,12 +51,10 @@ void worker(int len, int output_options, char* filename)
 		for (j=0; j<temp_length; ++j) temp_array[j]=(gem){0};
 
 		for (j=j0; j<eoc; ++j) {          // combine gems and put them in temp array
-			gem* dad_array = pool[j];
-			gem* mom_array = pool[i-1-j];
 			for (k=0; k< pool_length[j]; ++k) {
-				int g1=(dad_array+k)->grade;
+				int g1=(pool[j]+k)->grade;
 				for (h=0; h< pool_length[i-1-j]; ++h) {
-					int delta=g1 - (mom_array+h)->grade;
+					int delta=g1 - (pool[i-1-j]+h)->grade;
 					if (abs(delta)<=2) {     // grade difference <= 2
 						comb_tot++;
 						gem temp;

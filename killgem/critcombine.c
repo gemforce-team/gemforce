@@ -50,12 +50,10 @@ void worker(int len, int output_options)
 		}
 
 		for (j=j0; j<eoc; ++j) {         // combine gems and put them in temp array
-			gem* dad_array = pool[j];
-			gem* mom_array = pool[i-1-j];
 			for (k=0; k< pool_length[j]; ++k) {
-				int g1=(dad_array+k)->grade;
+				int g1=(pool[j]+k)->grade;
 				for (h=0; h< pool_length[i-1-j]; ++h) {
-					int delta=g1 - (mom_array+h)->grade;
+					int delta=g1 - (pool[i-1-j]+h)->grade;
 					if (abs(delta)<=2) {        // grade difference <= 2
 						comb_tot++;
 						gem temp;
@@ -63,7 +61,7 @@ void worker(int len, int output_options)
 						int grd=temp.grade-2;
 						temp_pools[grd][temp_index[grd]]=temp;
 						temp_index[grd]++;
-						if (temp_index[grd]==size) {									// let's skim a pool
+						if (temp_index[grd]==size) {								// let's skim a pool
 							int length=size+subpools_length[grd];
 							gem* temp_array=malloc(length*sizeof(gem));
 							int index=0;
@@ -77,7 +75,7 @@ void worker(int len, int output_options)
 								index++;
 							}
 							free(subpools[grd]);		// free
-							gem_sort(temp_array,length);								// work starts
+							gem_sort(temp_array,length);							// work starts
 	
 							int broken=0;
 							float lim_crit=-1;
@@ -120,7 +118,7 @@ void worker(int len, int output_options)
 					index++;
 				}
 				free(subpools[grd]);		// free
-				gem_sort(temp_array,length);								// work starts
+				gem_sort(temp_array,length);							// work starts
 				int broken=0;
 				float lim_crit=-1;
 				for (l=length-1;l>=0;--l) {
