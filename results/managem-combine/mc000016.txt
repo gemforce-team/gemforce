@@ -1,11 +1,9 @@
 Value:	16
+Growth:	0.627216
 Grade:	4
 Leech:	3.902277
 Bbound:	1.458562
 Power:	5.691713
-
-Combining scheme:
-(((((((((m+m)+m)+m)+m)+m)+m)+m)+((m+m)+m))+(((m+m)+m)+(m+m)))
 
 Compressed combining scheme:
 ((((((((2m+m)+m)+m)+m)+m)+m)+(2m+m))+((2m+m)+2m))
@@ -55,3 +53,4 @@ Equations:
 (val = 8)	 8 =  7 +  0
 (val = 11)	 9 =  8 +  2
 (val = 16)	10 =  9 +  3
+
