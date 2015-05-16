@@ -195,8 +195,11 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			int value=gem_getvalue(gemf);
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, leech_ratio*ampf->leech);
+			int value = gem_getvalue(gemf);
+			int valueA= gem_getvalue_O(ampf);
+			double NS = value + Namps*valueA;
+			double amp_leech_scaled = leech_ratio * ampf->leech;
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, amp_leech_scaled);
 			printf("Setup with red added:\n\n");
 			printf("Managem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
@@ -207,7 +210,9 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Setup combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print(gemfc);
-			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
+			printf("Spec base power with red:\t%#.7g\n", gem_amp_power(*gemf, *ampf, leech_ratio));
+			double CgP = pow(NT/NS, bestc_growth);
+			printf("Global power w. red at g%d:\t%#.7g\n\n\n", GT, CgP*gem_cfr_power(*gemf, amp_leech_scaled));
 		}
 	}
 

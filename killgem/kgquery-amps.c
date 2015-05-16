@@ -178,17 +178,23 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
-			int value=gem_getvalue(gemf);
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, damage_ratio*ampf->damage, crit_ratio*ampf->crit);
+			int value = gem_getvalue(gemf);
+			int valueA= gem_getvalue_Y(ampf);
+			double NS = value + Namps*valueA;
+			double amp_damage_scaled = damage_ratio * ampf->damage;
+			double amp_crit_scaled = crit_ratio * ampf->crit;
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, amp_damage_scaled, amp_crit_scaled);
 			printf("Setup with red added:\n\n");
 			printf("Total value:\t%d\n\n", value+Namps*gem_getvalue_Y(ampf));
 			printf("Killgem\n");
 			printf("Value:\t%d\n", value);
 			gem_print(gemf);
 			printf("Amplifier (x%d)\n", Namps);
-			printf("Value:\t%d\n", gem_getvalue_Y(ampf));
+			printf("Value:\t%d\n", valueA);
 			gem_print_Y(ampf);
-			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
+			printf("Spec base power w. red:\t%#.7g\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
+			double CgP = pow(NS, -growth_comb);
+			printf("Spec coefficient:\t%f\n\n", CgP*gem_cfr_power(*gemf, amp_damage_scaled, amp_crit_scaled));
 		}
 	}
 
