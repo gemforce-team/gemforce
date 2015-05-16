@@ -71,12 +71,12 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 						int grd=temp.grade-2;
 						temp_pools[grd][temp_index[grd]]=temp;
 						temp_index[grd]++;
-						if (temp_index[grd]==size) {								// let's skim a pool
+						if (temp_index[grd]==size) {							// let's skim a pool
 							int length=size+subpools_length[grd];
 							gem* temp_array=malloc(length*sizeof(gem));
 							int index=0;
 							float maxcrit=0;				// this will help me create the minimum tree
-							for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
+							for (l=0; l<size; ++l) {					// copy new gems
 								temp_array[index]=temp_pools[grd][l];
 								maxcrit=max(maxcrit, (temp_array+index)->crit);
 								index++;
@@ -97,7 +97,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 							for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;			// init also tree[0], it's faster
 							for (l=length-1;l>=0;--l) {												// start from large z
 								gem* p_gem=temp_array+l;
-								index=(int)(p_gem->crit*ACC);											// find its place in x
+								int index=(int)(p_gem->crit*ACC);									// find its place in x
 								if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 									tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 								}
@@ -151,7 +151,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 				for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;			// init also tree[0], it's faster
 				for (l=length-1;l>=0;--l) {												// start from large z
 					gem* p_gem=temp_array+l;
-					index=(int)(p_gem->crit*ACC);											// find its place in x
+					int index=(int)(p_gem->crit*ACC);									// find its place in x
 					if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 						tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 					}
