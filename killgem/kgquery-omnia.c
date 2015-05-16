@@ -244,13 +244,20 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, damage_ratio*ampf->damage, crit_ratio*ampf->crit);
+			int valueA= gem_getvalue_Y(ampf);
+			double NS = value + Namps*valueA;
+			double c = log(NT/NS)*iloglenc;
+			double ampd_resc_coeff = pow((ampfc->damage/gemfc->damage), c);
+			double ampc_resc_coeff = pow((ampfc->crit/gemfc->crit), c);
+			double amp_damage_scaled = damage_ratio * ampd_resc_coeff * ampf->damage;
+			double amp_crit_scaled = crit_ratio * ampc_resc_coeff * ampf->crit;
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, amp_damage_scaled, amp_crit_scaled);
 			printf("Setup with red added:\n\n");
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
 			gem_print(gemf);
 			printf("Amplifier spec (x%d)\n", Namps);
-			printf("Value:\t%d\n",gem_getvalue_Y(ampf));
+			printf("Value:\t%d\n", valueA);
 			gem_print_Y(ampf);
 			printf("Killgem combine\n");
 			printf("Comb:\t%d\n",lenc);
@@ -258,6 +265,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print_Y(ampfc);
+			if (output_options & mask_debug) printf("Damage rescaling coeff.: \t%f\n", ampd_resc_coeff);
+			if (output_options & mask_debug) printf("Crit rescaling coeff.:   \t%f\n", ampc_resc_coeff);
 			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
 		}
 	}
@@ -336,10 +345,10 @@ int main(int argc, char** argv)
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"hptecdquf:T:N:G:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecdqurf:T:N:G:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptecdquf:T:N:G:");
+				print_help("hptecdqurf:T:N:G:");
 				return 0;
 			PTECIDCUR_OPTIONS_BLOCK
 			case 'f':			// can be "filename,filenamec,filenameA", if missing default is used
