@@ -14,6 +14,7 @@ Gem combining program for [Gemcraft 2: Chasing Shadows](http://gameinabottle.com
 * [Precomputed gem tables](#precomputed-gem-tables)  
 * [HOWTO use our programs](#howto-use-our-programs)  
 * [Name conventions](#name-conventions)  
+* [Why are those weird recipes better than 'U'?](#why-are-those-weird-recipes-better-than-u)  
 * [What does each program do?](#what-does-each-program-do)  
 * [Report bugs](#report-bugs)
 * [Credits](#credits)  
@@ -25,6 +26,8 @@ gemforce project's goal is to find the optimal recipes for gems used in endgame 
 To do so we developed a series of programs, each one computes some specific recipe type.
 
 For an explanation of some of the name conventions used see [Name conventions](#name-conventions) section below.  
+For a brief introduction of non-standard combining see
+[Why are those weird recipes better than 'U'?](#why-are-those-weird-recipes-better-than-u) section below  
 The full programs list can be found in the [What does each program do?](#what-does-each-program-do) section below.
 
 
@@ -130,8 +133,8 @@ The `query-omnia` and `query-setup` programs support an extra flag and a second 
 Debug flags/options (you should not need these):
 
 * `d` - prints debug text, depending on program  
+* `g number` - for `query-amps` give custom growth value (default is `16c` for that gem)  
 * `l number` - for `query-ngems` give custom hard gem limit (default is minimum between len and table len)
-* `g number` - for `query-amps` give custom growth value (default is `16c` for that gem)
 
 **examples:**  
 `./file -pet 32`  
@@ -148,6 +151,7 @@ When in doubt about which flags are supported check with `-h`.
   * Mana power : Displayed leech, that is leech*bloodbound
   * Kill power : Displayed damage * displayed crit, that is damage\*bloodbound\*crit\*bloodbound
   * Growth : log(Power)/log(recipe_length), an important quantity in recipe ranking
+  * Spec coeff : N_setup^(growth_spec-growth_comb), an important quantity in (amped) spec ranking
 
 * Gems:
   * Managem : Orange-Black-Red gem, optimized for mana gain
@@ -158,6 +162,8 @@ When in doubt about which flags are supported check with `-h`.
 * Recipes:
   * Spec: Initial recipe performed on the base pure gems to make a killgem or managem
   * Combine: Recipe used to upgrade an already built gem
+  * Weaving: Outdated method from GCL, abandoned in favor of spec/combine
+  * Supergemming: Blanket term, used to indicate all of non-standard combing
   
 * Colors:
   * `o` : Orange
@@ -172,6 +178,42 @@ When in doubt about which flags are supported check with `-h`.
   * `s` : Cyan (Suppressive)
   * `h` : Cyan/Black
 
+### Why are those weird recipes better than 'U'?
+
+There is nothing profound about those recipes (at least up to my understanding), they just happen to be better than the others.
+
+The reason we can do better recipes that 'U' is in the way the game computes stats for a combined gems:
+when two gems are combined the resulting gem stats are always in this form:  
+`Combined.Stat = c1 * max(Gem1.Stat, Gem2.Stat) + c2 * min(Gem1.Stat, Gem2.Stat)`  
+where `c1` and `c2` are coefficients that change between colors and with the difference in grade between the two combined gems.
+The complete list can be found in the [GC2_formulae gist](https://gist.github.com/12345ieee/4a81c78d4426a99c4bc3)  
+
+With this list it is possible to try all the combinations that give a, say, leech gem of value 8
+and find the one that has the best leech (an useful gem for amplifier).  
+Because of how these combining coefficients were chosen (by the game author) the best gem happens to be `(((((2o+o)+o)+o)+o)+2o)`
+instead of the standard `4o`.
+
+This reasoning can be extended to longer recipes and to ones with 2-3 different base g1.
+It's possible to find recipes that outperform standard 'U' upgrading by tens of times in the end.  
+This is usually done at the expense of other stats that we are not interested in:
+leech combines are usually terrible for firerate and range, but neither matters for a gem at the speed cap in an amplifier,
+which is the typical use case after a certain level.
+
+**For the math enthusiasts (yes, you may want to skip the rest):**  
+At the core everything is based on the fact that the growth of `2g+g` is usually higher than the one of `2g`.
+There are exceptions, like cyan, for which a better upgrade than 'U' has yet to be discovered, and likely does not exist.
+
+Another important point is the multiplicative property of gem combination, which assures us a given combine method
+always multiply the stats by some number dependent only on the method and not on the base stats, which allows us
+to find a method once and to apply it successfully lots of time on the same gem with the same increase.
+
+A last point is that the quantity we optimize for are usually products of native color powers (like kill_power=bb\*bb\*dmg\*crit),
+that coupled with the property above allows our combine method to remain optimal independently from the stats of the gem it's applied to.
+
+When this 2nd property fails (white, blue and red power aren't directly related to the base color power
+but there are logarithms in the mix) the problem becomes nearly impossible to solve with a certain generality,
+which is why I offer no white kill/managems combiner (aside the unstable one on the `white` branch).
+
 
 ### What does each program do?
 
@@ -184,7 +226,7 @@ Included in auto setup package:
 * mgquery-amps  : gets amped managem specces and their amps from tables - fixed spec number version
 * mgquery-setup : basically `alone (combines) + amps`,
 offers more info on the whole spec-combine than the two used separately
-* mgomniaquery  : gets amped managem specces, their amps and combines for both from tables
+* mgquery-omnia : gets amped managem specces, their amps and combines for both from tables
 
 Not included in auto setup package:
 
@@ -212,7 +254,7 @@ gemforce authors are:
 * Andrea Stacchiotti aka Steam user '12345ieee' aka AG user '12345ieee'  
 * Wojciech Jabłoński aka Steam user 'psorek139' aka AG user 'psorek'
 
-Current manteiner:
+Current maintainer:
 
 * Andrea Stacchiotti aka Steam user '12345ieee' aka AG user '12345ieee' 
 
