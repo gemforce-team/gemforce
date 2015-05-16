@@ -13,6 +13,7 @@
 
 The results are divided in folders for each gem type (leech/managem/killgem) and kind (combine/amps/omnia).  
 Leech gems are only used as amplifiers, the leech folder is needed only for testing purpose.  
+The `scripts` folder does not contain recipes, only scripts used to manage them.  
 Recipe names are composed by a gem type (as above), a recipe kind and number(s) for the recipe length.
 
 The recipe kind can be:
