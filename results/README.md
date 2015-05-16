@@ -4,7 +4,6 @@
 
 * [Results naming convention](#results-naming-convention)  
 * [Parenthesis convention](#parenthesis-convention)  
-* [What about red?](#what-about-red)  
 * [Assumptions on skill levels](#assumptions-on-skill-levels)  
 * **[What recipe should I use?](#what-recipe-should-i-use)**  
 * [Performing recipes manually is boring!](#performing-recipes-manually-is-boring)  
@@ -12,7 +11,7 @@
 
 ### Results naming convention
 
-The results are divided in folders for each gem type (leech/managem/killgem) and then in subfolders for recipe kind.  
+The results are divided in folders for each gem type (leech/managem/killgem) and kind (combine/amps/omnia).  
 Leech gems are only used as amplifiers, the leech folder is needed only for testing purpose.  
 Recipe names are composed by a gem type (as above), a recipe kind and number(s) for the recipe length.
 
@@ -47,14 +46,6 @@ This simply mean that the gem is the basic gem upgraded the written number of ti
 4o = 3o+3o = (2o+2o)+(2o+2o) = ((o+o)+(o+o))+((o+o)+(o+o)) which is the base gem upgraded 3 times.
 
 
-### What about red?
-
-All the main gem specces should have a red g1:  
-`amps` recipes have a red gem included in their main gem spec, in the optimal position.  
-`omnia` recipes are currently red-less, due to problems between the `omnia` programs
-and the red added function. I'll fix them when I have time.
-
-
 ### Assumptions on skill levels
 
 gemforce needs minimal knowledge of the user skill levels.  
@@ -62,7 +53,7 @@ The programs that deal with a gem alone give valid output regardless of skill le
 When dealing with amps (`query-ngems`, `query-amps`, `query-setup`,`query-omnia`) two values are needed:
 
 * Amplifiers: assumed at `45+15` - it matters quite a lot  
-* True Colors: assumed at `45+15` - it matters nearly nothing
+* True Colors: assumed at `120` - it matters nearly nothing
 
 If you want more precise output those programs accept your True Colors level with the `-T` flag.
 
@@ -123,5 +114,10 @@ You can find it here: [wGemCombiner repo](https://github.com/gemforce-team/wGemC
 If you need a particular recipe you don't find here you can build it yourself using the programs.  
 Check the [main README of the repository](https://github.com/gemforce-team/gemforce/#readme) for a comprehensive HOWTO.
 
-If this project helped you and you wish to help by contributing or donating, feel free to contact us, we'll be very happy.
-For anything else, leave a [Github issue](https://github.com/gemforce-team/gemforce/issues/new).
+If this project helped you and you wish to help by contributing, please contact us, leaving a
+[new issue](https://github.com/gemforce-team/gemforce/issues/new) or opening a new pull request.
+You can also help by donating some money for our time:  
+[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LY6RG34S5UCTW "Donate to this project using Paypal")
+
+For anything else, visit the [main README of the repository](https://github.com/gemforce-team/gemforce/#readme)
+or leave a [Github issue](https://github.com/gemforce-team/gemforce/issues/new).
