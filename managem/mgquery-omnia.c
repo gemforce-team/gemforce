@@ -227,7 +227,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			double NS = value + Namps*valueA;
 			double c = log(NT/NS)*iloglenc;
 			double amps_resc_coeff = pow((ampfc->leech/gemfc->leech), c);
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, leech_ratio*amps_resc_coeff*ampf->leech);
+			double amp_leech_scaled = leech_ratio*amps_resc_coeff*ampf->leech;
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, amp_leech_scaled);
 			printf("Setup with red added:\n\n");
 			printf("Managem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
@@ -241,8 +242,10 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print_O(ampfc);
-			if (output_options & mask_debug) printf("Amps rescaling coeff.:   \t%f\n", amps_resc_coeff);
-			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
+			if (output_options & mask_debug) printf("Leech rescaling coeff.:   \t%f\n", amps_resc_coeff);
+			printf("Spec base power with red:\t%#.7g\n", gem_amp_power(*gemf, *ampf, leech_ratio));
+			double CgP = pow(gem_power(*gemfc), c);
+			printf("Global power w. red at g%d:\t%#.7g\n\n\n", GT, CgP*gem_cfr_power(*gemf, amp_leech_scaled));
 		}
 	}
 

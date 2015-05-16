@@ -267,7 +267,9 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			gem_print_Y(ampfc);
 			if (output_options & mask_debug) printf("Damage rescaling coeff.: \t%f\n", ampd_resc_coeff);
 			if (output_options & mask_debug) printf("Crit rescaling coeff.:   \t%f\n", ampc_resc_coeff);
-			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
+			printf("Spec base power with red:\t%#.7g\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
+			double CgP = pow(gem_power(*gemfc), c);
+			printf("Global power w. red at g%d:\t%#.7g\n\n\n", GT, CgP*gem_cfr_power(*gemf, amp_damage_scaled, amp_crit_scaled));
 		}
 	}
 
