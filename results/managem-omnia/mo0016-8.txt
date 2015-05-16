@@ -1,11 +1,11 @@
 Managem spec
 Value:	16
 Grade:	4
-Leech:	2.476340
-Bbound:	1.249609
-Power:	3.094457
+Leech:	2.285645
+Bbound:	1.250319
+Power:	2.857786
 
-Amplifier spec
+Amplifier spec (x6)
 Value:	2
 Grade:	2
 Leech:	1.380000
@@ -22,12 +22,12 @@ Comb:	8
 Grade:	3
 Leech:	2.763415
 
-Spec base power (resc.):	7.536667
-Global power (resc. 1k):	5.425244
+Spec base power with red:	7.302521
+Global power w. red at g30:	259011.2
 
 
 Managem speccing scheme:
-((((((2o+o)+o)+o)+(o+b))+((o+b)+b))+(((o+b)+b)+(2b+b)))
+(((((2o+o)+o)+(o+b))+(((o+r)+b)+b))+((2b+b)+((o+b)+b)))
 
 Amplifier speccing scheme:
 2o
@@ -41,33 +41,33 @@ Amplifier combining scheme:
 Managem speccing tree:
 ─16
  ├─10
- │ ├─7
- │ │ ├─5
- │ │ │ ├─4
- │ │ │ │ ├─3
- │ │ │ │ │ ├─2
- │ │ │ │ │ │ ├─ g1 o
- │ │ │ │ │ │ └─ g1 o
+ │ ├─6
+ │ │ ├─4
+ │ │ │ ├─3
+ │ │ │ │ ├─2
+ │ │ │ │ │ ├─ g1 o
  │ │ │ │ │ └─ g1 o
  │ │ │ │ └─ g1 o
  │ │ │ └─ g1 o
  │ │ └─2
  │ │   ├─ g1 o
  │ │   └─ g1 b
- │ └─3
- │   ├─2
- │   │ ├─ g1 o
+ │ └─4
+ │   ├─3
+ │   │ ├─2
+ │   │ │ ├─ g1 o
+ │   │ │ └─ g1 r
  │   │ └─ g1 b
  │   └─ g1 b
  └─6
    ├─3
    │ ├─2
-   │ │ ├─ g1 o
+   │ │ ├─ g1 b
    │ │ └─ g1 b
    │ └─ g1 b
    └─3
      ├─2
-     │ ├─ g1 b
+     │ ├─ g1 o
      │ └─ g1 b
      └─ g1 b
 
@@ -112,19 +112,22 @@ Amplifier combining tree:
 
 Managem speccing equations:
 (val = 1)	 0 = g1 b
-(val = 2)	 1 =  0 +  0
-(val = 3)	 2 =  1 +  0
-(val = 1)	 3 = g1 o
-(val = 2)	 4 =  3 +  0
+(val = 1)	 1 = g1 o
+(val = 2)	 2 =  1 +  0
+(val = 3)	 3 =  2 +  0
+(val = 2)	 4 =  0 +  0
 (val = 3)	 5 =  4 +  0
-(val = 6)	 6 =  5 +  2
-(val = 2)	 7 =  3 +  3
-(val = 3)	 8 =  7 +  3
-(val = 4)	 9 =  8 +  3
-(val = 5)	10 =  9 +  3
-(val = 7)	11 = 10 +  4
-(val = 10)	12 = 11 +  5
-(val = 16)	13 = 12 +  6
+(val = 6)	 6 =  5 +  3
+(val = 1)	 7 = g1 r
+(val = 2)	 8 =  1 +  7
+(val = 3)	 9 =  8 +  0
+(val = 4)	10 =  9 +  0
+(val = 2)	11 =  1 +  1
+(val = 3)	12 = 11 +  1
+(val = 4)	13 = 12 +  1
+(val = 6)	14 = 13 +  2
+(val = 10)	15 = 14 + 10
+(val = 16)	16 = 15 +  6
 
 Amplifier speccing equations:
 (val = 1)	 0 = g1 o
@@ -147,3 +150,4 @@ Amplifier combining equations:
 (val = 5)	 4 =  3 +  0
 (val = 6)	 5 =  4 +  0
 (val = 8)	 6 =  5 +  1
+
