@@ -51,8 +51,8 @@ gemforce needs minimal knowledge of the user skill levels.
 The programs that deal with a gem alone give valid output regardless of skill levels.  
 When dealing with amps (`query-ngems`, `query-amps`, `query-setup`,`query-omnia`) two values are needed:
 
-* Amplifiers: assumed at `45+15` - it matters quite a lot  
-* True Colors: assumed at `120` - it matters nearly nothing
+* Amplifiers: assumed at `45+15 = 60` - it matters quite a lot  
+* True Colors: assumed at `105+15 = 120` - it matters nearly nothing
 
 If you want more precise output those programs accept your True Colors level with the `-T` flag.
 

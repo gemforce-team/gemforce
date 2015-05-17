@@ -118,23 +118,23 @@ if `number` is `100`, then:
 The `query-ngems` and `query-amps` programs support some additional flags and an extended `-f` pattern:
 
 * `f "path_spec,path_amps"` - change table files, if any is empty it'll use the default path
-* `N number` - specify how many amps you want to use `[0-8]`  
-* `T number` - give your True Colors skill for better amps fitting `[0-999]`
+* `N number` - specify how many amps you want to use (default: 6/8) `[0-8]`  
+* `T number` - give your True Colors skill for better amps fitting `(default: 120) [0-999]`
 
 The `query-omnia` and `query-setup` programs support an extra flag and a second number:  
 `./*query-omnia -[flags] number1 number2`
 
 * `f "path_spec,path_comb,path_amps"` - change table files, if any is empty it'll use the default path
-* `G number` - get the final power at a given equivalent grade (default is `30`) `[1-999]`  
+* `G number` - get the final power at a given equivalent grade (default: `30`) `[1-999]`  
 
 `number1` - speccing value (mandatory)  
-`number2` - combine value (can be omitted, default is `16`)
+`number2` - combine value (can be omitted, default: `16`)
 
 Debug flags/options (you should not need these):
 
 * `d` - prints debug text, depending on program  
-* `g number` - for `query-amps` give custom growth value (default is `16c` for that gem)  
-* `l number` - for `query-ngems` give custom hard gem limit (default is minimum between len and table len)
+* `g number` - for `query-amps` give custom growth value (default: `16c` for that gem)  
+* `l number` - for `query-ngems` give custom hard gem limit (default: minimum between len and table len)
 
 **examples:**  
 `./file -pet 32`  
