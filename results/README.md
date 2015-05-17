@@ -31,12 +31,10 @@ The number(s) in the specify how many base gems go into specific recipe:
 * omnia: `G-A--C` - the main gem costs `G` gems, the optimized amps cost `A` each
                     and both the combines require `C` copies of the main gem/amplifier
 
-Lastly an `u` at the end of the name means that that recipe is the best up to the written number and it's likely shorter than indicated.
-
 All the amped recipes here are built with 6 amps for managems and 8 amps for killgems.
 
-I try to have here all the `2^n` recipes and the best between every `2^n`and `2^(n+1)`
-for the `amps` and `comb` sections.  
+I try to have here all the `2^n` recipes and the best between every `2^n`and `2^(n+1)` 
+for the `amps` and `comb` sections, if there is none between a copule it means the `2^(n+1)` one was the best.  
 There are then selected ones from the `omnia` kind, as having all the combinations would be impossible.
 
 
