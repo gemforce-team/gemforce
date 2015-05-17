@@ -20,21 +20,21 @@ The recipe kind can be:
 
 * `combine` - a combine which should be used with an already built gem  
 * `amps`    - a pair of main gem spec and amps spec in optimal proportions,
-              though they don't take the combine into consideration  
+              made to be upgraded both with the same combine  
 * `omnia`   - a set of four recipes: a main gem spec and its amps spec in optimal proportions
-              and a pair of optimal combines for both, it's the pinnacle of gem "rocket science"  
+              and a pair of optimal combines for both, it's the pinnacle of *gem rocket science*  
 
 The number(s) in the specify how many base gems go into specific recipe:  
 
-* combine:    `N` - the combine costs `N` base gems, as easy as it gets  
-* amps:     `G-A` - the main gem costs `G` gems while its amps cost `A` each  
-* omnia: `G-A--C` - the main gem costs `G` gems, the optimized amps cost `A` each
-                    and both the combines require `C` copies of the main gem/amplifier
+* combine:   `N` - the combine costs `N` base gems, as easy as it gets  
+* amps:    `G-A` - the main gem costs `G` gems while its amps cost `A` each  
+* omnia:   `G-C` - the main gem costs `G` gems, the optimized amps cost is only inside the file
+                   and both the combines require `C` copies of the main gem/amplifier
 
 All the amped recipes here are built with 6 amps for managems and 8 amps for killgems.
 
 I try to have here all the `2^n` recipes and the best between every `2^n`and `2^(n+1)` 
-for the `amps` and `comb` sections, if there is none between a copule it means the `2^(n+1)` one was the best.  
+for the `amps` and `comb` sections, if there is none between a couple it means the `2^(n+1)` one was the best.  
 There are then selected ones from the `omnia` kind, as having all the combinations would be impossible.
 
 
@@ -69,7 +69,7 @@ Well, why are you reading this then? Good luck with your crappy specces and 'U' 
 **1. Beginner**  
 Combines give the most boost over time, more than specces, so the most effective way to boost your power
 with a small time investment is to use a small combine instead of 'U' for every upgrade.  
-Go to the managem and the killgem folders and find combines simple enough
+Go to the `managem-combine` and the `killgem-combine` folders and find combines simple enough
 (anything below `16c` should be good) to be doable fast.  
 To choose the ratio of gems to put in the main gem and the amps stick to the thumb rule:  
 
@@ -78,9 +78,9 @@ To choose the ratio of gems to put in the main gem and the amps stick to the thu
 
 **2. Intermediate**  
 It's time to look into specces to match the combines.
-Head to the managem and the killgem folders and choose a pair of small specces,
+Head to the `managem-amps` and the `killgem-amps` folders and choose a pair of small specces,
 around `16s` or `32s`.  
-Pair them with a combine from the same folder, to be used both with the main gem and its amps.
+Pair them with a combine from the relative `-combine` folder, to be used both with the main gem and its amps.
 When using a single combine on both gem and its amps it can be proved that
 the best choice is to use the one for the gem.
 Using different combines on both yield too little benefit for now.  
