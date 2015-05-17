@@ -6,11 +6,14 @@ file=$3
 for ((i=inf; i<=sup; i*=2))
 do
 	echo $i
+	filename="ma"$(printf "%0.4d" $i)
+	desc="$filename - N6 TC120 A60 - gemforce $(git describe --tags | cut -f1-2 -d "-") - $file"",table_leech"
 	if [ $i -le 256 ]
 	then
-		bin/mgquery-amps -rqpte  -f "$file" "$i"c | tail -n +29 > results/ma$(printf "%0.4d" $i).txt
-	elif [ $i -le 16384 ]
-	then
-		bin/mgquery-amps -rqpe  -f "$file" "$i"c | tail -n +29 > results/ma$(printf "%0.4d" $i).txt
+		bin/mgquery-amps -rqpte  -f "$file" "$i"c | tail -n +29 > results/$filename".txt"
+		echo "$desc" >> results/$filename".txt"
+	else
+		bin/mgquery-amps -rqpe  -f "$file" "$i"c | tail -n +29 > results/$filename".txt"
+		echo "$desc" >> results/$filename".txt"
 	fi
 done

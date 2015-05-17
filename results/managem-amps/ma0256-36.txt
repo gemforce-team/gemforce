@@ -12,8 +12,8 @@ Value:	36
 Grade:	5
 Leech:	5.880226
 
-Spec base power w. red:	50.02214
-Spec coefficient:	1.052018
+Spec base power w. red:	49.61511
+Spec coefficient:	1.043457
 
 Managem speccing scheme:
 (((((((((((((((((2o+o)+o)+o)+o)+o)+2o)+2o)+(2o+o))+((2o+o)+o))+(((2o+o)+o)+o))+((((2o+o)+o)+o)+o))+((((((2o+o)+o)+o)+o)+o)+2o))+(((((((2o+o)+o)+o)+o)+o)+2o)+((o+b)+2o)))+(((((((2o+o)+o)+o)+o)+2o)+(2o+b))+(((o+b)+2o)+b)))+(((((((((2o+o)+o)+o)+o)+o)+2o)+((o+b)+2o))+(((o+b)+2o)+b))+((((2o+o)+(o+r))+b)+(2b+(o+b)))))+((((((((((2o+o)+o)+o)+o)+o)+2o)+((o+b)+2o))+(((o+b)+2o)+b))+((((2o+o)+(o+b))+b)+(((o+b)+b)+2b)))+((((((2b+b)+b)+b)+2b)+(2b+(o+b)))+((((2o+o)+(o+b))+b)+(2b+(o+b))))))+((((((((((((2b+b)+b)+b)+b)+2b)+(2b+b))+((2b+b)+b))+(((2b+b)+b)+b))+((((2b+b)+b)+b)+2b))+(((((2b+b)+b)+b)+2b)+(((o+b)+b)+2b)))+((((((2b+b)+b)+b)+2b)+(((o+b)+b)+2b))+((((2o+o)+(o+b))+b)+(((o+b)+b)+2b))))+((((((((((2o+o)+o)+o)+o)+o)+2o)+((o+b)+2o))+(((o+b)+2o)+b))+((((2o+o)+(o+b))+b)+(2b+(o+b))))+((((((2b+b)+b)+b)+2b)+(2b+(o+b)))+((((2o+o)+(o+b))+b)+(2b+(o+b)))))))
@@ -691,3 +691,4 @@ Amplifier equations:
 (val = 25)	14 = 13 +  6
 (val = 36)	15 = 14 +  7
 
+ma0256 - N6 TC120 A60 - gemforce v1.7.0-38 - table_mgsexact,table_leech

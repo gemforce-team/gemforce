@@ -12,8 +12,8 @@ Value:	1
 Grade:	1
 Leech:	1.000000
 
-Spec base power w. red:	4.486433
-Spec coefficient:	0.857100
+Spec base power w. red:	4.446207
+Spec coefficient:	0.849415
 
 Managem speccing scheme:
 ((((2o+o)+(o+r))+b)+2b)
@@ -56,3 +56,4 @@ Managem equations:
 Amplifier equations:
 (val = 1)	 0 = g1 o
 
+ma0008 - N6 TC120 A60 - gemforce v1.7.0-38 - table_mgsexact,table_leech
