@@ -239,7 +239,7 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int TC=60;
+	int TC=120;
 	int Namps=8;
 	double growth_comb=1.414061;		// 16c
 	int output_options=0;

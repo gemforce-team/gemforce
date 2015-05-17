@@ -339,7 +339,7 @@ int main(int argc, char** argv)
 	int len;
 	int lenc;
 	char opt;
-	int TC=60;
+	int TC=120;
 	int GT=30;    // NT = pow(2, GT-1)
 	int Namps=8;  // killgem in tower
 	int output_options=0;

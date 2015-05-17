@@ -91,14 +91,19 @@ char gem_color(gem* gemf)
 
 #include "gem_utils.h"
 
+#define Namps 6
+#define TC 120
+#define specials_ratio (Namps*0.46*(1+(double)TC*3/100)/(1  +(double)TC/30))
+#define damage_ratio   (Namps*0.28*(1+(double)TC*3/100)/(1.2+(double)TC/30))
+
 double gem_amp_global_mana_power(gem gem1, gem amp1)
 {
-	return (gem1.leech+4*0.23*2.8*amp1.leech)*gem1.bbound;
+	return (gem1.leech+specials_ratio*amp1.leech)*gem1.bbound;
 }
 
 double gem_amp_global_kill_power(gem gem1, gem amp1)
 {
-	return (gem1.damage+6*0.28*(2.8/3.2)*amp1.damage)*gem1.bbound*(gem1.crit+4*0.23*2.8*amp1.crit)*gem1.bbound;
+	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+specials_ratio*amp1.crit)*gem1.bbound;
 }
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
@@ -216,10 +221,10 @@ void print_tree(gem* gemf, const char* prefix)
 	else {
 		printf("─%d\n",gemf->getvalue());
 		printf("%s ├",prefix);
-		char string[strlen(prefix)+5];   // 1 space, 1 unicode bar and and the null term are 5 extra chars
-		strcpy(string,prefix);
-		strcat(string," │");
-		print_tree(gemf->mother, string);
+		char string1[strlen(prefix)+5];   // 1 space, 1 unicode bar and and the null term are 5 extra chars
+		strcpy(string1,prefix);
+		strcat(string1," │");
+		print_tree(gemf->mother, string1);
 		
 		printf("%s └",prefix);
 		char string2[strlen(prefix)+3];  // 2 spaces and the null term are 3 extra chars

@@ -201,7 +201,7 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int TC=60;
+	int TC=120;
 	int Namps=8;
 	int gem_limit=0;
 	int output_options=0;
