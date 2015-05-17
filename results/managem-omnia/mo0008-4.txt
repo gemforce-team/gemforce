@@ -22,8 +22,8 @@ Comb:	4
 Grade:	2
 Leech:	1.924698
 
-Spec base power with red:	4.486433
-Global power w. red at g30:	169176.4
+Spec base power with red:	4.446207
+Global power w. red at g30:	167659.5
 
 
 Managem speccing scheme:
@@ -103,3 +103,4 @@ Amplifier combining equations:
 (val = 3)	 2 =  1 +  0
 (val = 4)	 3 =  2 +  0
 
+mo0008-4 - N6 TC120 A60 - gemforce v1.7.0-39 - table_mgsexact,table_mgcexact,table_leech
