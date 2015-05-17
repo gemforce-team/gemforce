@@ -50,3 +50,4 @@ Equations:
 (val = 259)	36 = 35 + 21
 (val = 367)	37 = 36 + 22
 
+mc000512u - gemforce v1.7.0-40 - table_mgcexact

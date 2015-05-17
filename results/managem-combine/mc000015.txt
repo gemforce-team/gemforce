@@ -53,3 +53,4 @@ Equations:
 (val = 10)	 8 =  7 +  2
 (val = 15)	 9 =  8 +  3
 
+mc000016u - gemforce v1.7.0-40 - table_mgcexact

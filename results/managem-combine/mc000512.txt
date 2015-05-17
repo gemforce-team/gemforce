@@ -65,3 +65,4 @@ Equations:
 (val = 368)	53 = 52 + 26
 (val = 512)	54 = 53 + 27
 
+mc000512 - gemforce v1.7.0-40 - table_mgcexact

@@ -54,3 +54,4 @@ Equations:
 (val = 11)	 9 =  8 +  2
 (val = 16)	10 =  9 +  3
 
+mc000016 - gemforce v1.7.0-40 - table_mgcexact

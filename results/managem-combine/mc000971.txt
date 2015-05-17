@@ -68,3 +68,4 @@ Equations:
 (val = 694)	54 = 53 + 33
 (val = 971)	55 = 54 + 34
 
+mc001024u - gemforce v1.7.0-40 - table_mgcexact

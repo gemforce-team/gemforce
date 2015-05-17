@@ -90,3 +90,4 @@ Equations:
 (val = 22)	13 = 12 +  5
 (val = 32)	14 = 13 +  6
 
+mc000032 - gemforce v1.7.0-40 - table_mgcexact

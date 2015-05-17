@@ -34,3 +34,4 @@ Equations:
 (val = 6)	 5 =  4 +  0
 (val = 8)	 6 =  5 +  1
 
+mc000008 - gemforce v1.7.0-40 - table_mgcexact
