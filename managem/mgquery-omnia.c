@@ -10,7 +10,7 @@ typedef struct Gem_O gemO;
 #include "mga_utils.h"
 #include "gfon.h"
 
-void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, int TC, int GT, int Namps)
+void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, int TC, int As, int GT, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);						// if the file is not good we exit
@@ -94,7 +94,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init_O(ampsc,0,0);
 	powers[0]=0;
 	double iloglenc=1/log(lenc);
-	double leech_ratio=Namps*0.46*(1+(double)TC*3/100)/(1+(double)TC/30);
+	double leech_ratio=Namps*(0.15+As/3*0.004)*2*(1+(double)TC*3/100)/(1+(double)TC/30);
 	double NT=pow(2, GT-1);
 	if (!(output_options & mask_quiet)) {
 		printf("Managem spec\n");
@@ -314,6 +314,7 @@ int main(int argc, char** argv)
 	int lenc;
 	char opt;
 	int TC=120;
+	int As=60;
 	int GT=30;    // NT = pow(2, GT-1)
 	int Namps=6;
 	int output_options=0;
@@ -321,10 +322,10 @@ int main(int argc, char** argv)
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"hptecdqurf:T:N:G:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecdqurf:T:A:N:G:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptecdquf:T:N:G:");
+				print_help("hptecdquf:T:A:N:G:");
 				return 0;
 			PTECIDCUR_OPTIONS_BLOCK
 			case 'f':			// can be "filename,filenamec,filenameA", if missing default is used
@@ -341,12 +342,7 @@ int main(int argc, char** argv)
 				strcpy(filenamec,p+1);
 				strcpy(filenameA,q+1);
 				break;
-			case 'T':
-				TC=atoi(optarg);
-				break;
-			case 'N':
-				Namps=atoi(optarg);
-				break;
+			TAN_OPTIONS_BLOCK
 			case 'G':
 				GT=atoi(optarg);
 				break;
@@ -384,6 +380,6 @@ int main(int argc, char** argv)
 	file_selection(filename, "table_mgspec");
 	file_selection(filenamec, "table_mgcomb");
 	file_selection(filenameA, "table_leech");
-	worker(len, lenc, output_options, filename, filenamec, filenameA, TC, GT, Namps);
+	worker(len, lenc, output_options, filename, filenamec, filenameA, TC, As, GT, Namps);
 	return 0;
 }

@@ -22,7 +22,7 @@ void print_amps_table(gem* gems, gemY* amps, double* spec_coeffs, double damage_
 	printf("\n");
 }
 
-void worker(int len, int output_options, double growth_comb, char* filename, char* filenameA, int TC, int Namps)
+void worker(int len, int output_options, double growth_comb, char* filename, char* filenameA, int TC, int As, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);						// if the file is not good we exit
@@ -78,8 +78,8 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 	gem_init(gems,1,1,1,0);
 	amps[0]=(gemY){0};
 	spec_coeffs[0]=0;
-	double crit_ratio  =Namps*0.46*(1+(double)TC*3/100)/(1  +(double)TC/30);
-	double damage_ratio=Namps*0.28*(1+(double)TC*3/100)/(1.2+(double)TC/30);
+	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+(double)TC*3/100)/(1.0+(double)TC/30);
+	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+(double)TC*3/100)/(1.2+(double)TC/30);
 	if (!(output_options & mask_quiet)) {
 		printf("Total value:\t1\n\n");
 		printf("Killgem\n");
@@ -240,16 +240,17 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int TC=120;
+	int As=60;
 	int Namps=8;
 	double growth_comb=1.414061;		// 16c
 	int output_options=0;
 	char filename[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"hptecdqurf:g:T:N:"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecdqurf:g:T:A:N:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptecdqurf:g:T:N:");
+				print_help("hptecdqurf:g:T:A:N:");
 				return 0;
 			PTECIDCUR_OPTIONS_BLOCK
 			case 'f':			// can be "filename,filenameA", if missing default is used
@@ -264,12 +265,7 @@ int main(int argc, char** argv)
 			case 'g':
 				growth_comb = atof(optarg);
 				break;
-			case 'T':
-				TC=atoi(optarg);
-				break;
-			case 'N':
-				Namps=atoi(optarg);
-				break;
+			TAN_OPTIONS_BLOCK
 			case '?':
 				return 1;
 			default:
@@ -298,7 +294,7 @@ int main(int argc, char** argv)
 	}
 	file_selection(filename, "table_kgspec");
 	file_selection(filenameA, "table_crit");
-	worker(len, output_options, growth_comb, filename, filenameA, TC, Namps);
+	worker(len, output_options, growth_comb, filename, filenameA, TC, As, Namps);
 	return 0;
 }
 

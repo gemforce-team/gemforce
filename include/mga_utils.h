@@ -15,6 +15,18 @@ void print_omnia_table(gem* gems, gemO* amps, double* powers, int len)
 	printf("\n");
 }
 
+/* Macro blob that is used for some flag options. Handle with care */
+#define TAN_OPTIONS_BLOCK\
+			case 'T': \
+				TC=atoi(optarg); \
+				break; \
+			case 'A': \
+				As=atoi(optarg); \
+				break; \
+			case 'N': \
+				Namps=atoi(optarg); \
+				break;
+
 /* Macro blobs used for compressions in various files. Handle with care */
 
 #define MGSPEC_COMPRESSION\
