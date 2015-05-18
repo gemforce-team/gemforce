@@ -8,7 +8,7 @@ do
 	j=$((i/2))
 	echo "$i - $j"
 	filename="mo"$(printf "%0.4d-%d" $i $j)
-	desc="$filename - N6 TC120 A60 - gemforce $(git describe --tags | cut -f1-2 -d "-") - $file"",table_leech"
+	desc="$filename - N6 TC120 A60 - gemforce $(git describe --tags | cut -f1 -d "-") - $file"",table_leech"
 	if [ $i -le 128 ]
 	then
 		bin/mgquery-omnia -rqpte  -f "$file" "$i" "$j" | tail -n +44 > results/$filename".txt"
