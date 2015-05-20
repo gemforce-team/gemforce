@@ -1,0 +1,85 @@
+Total value:	24
+
+Killgem
+Value:	16
+Grade:	4
+Damage:	6.962660
+Crit:	1.768011
+Bbound:	1.320951
+Power:	21.479948
+
+Amplifier (x8)
+Value:	1
+Grade:	1
+Damage:	1.000000
+Crit:	1.000000
+Power:	1.000000
+
+Spec base power w. red:	80.43150
+Spec coefficient:	0.898925
+
+Killgem speccing scheme:
+(((((2b+b)+b)+b)+(((y+r)+b)+b))+(((2y+y)+(y+b))+2b))
+
+Amplifier speccing scheme:
+y
+
+Killgem tree:
+─16
+ ├─9
+ │ ├─5
+ │ │ ├─4
+ │ │ │ ├─3
+ │ │ │ │ ├─2
+ │ │ │ │ │ ├─ g1 b
+ │ │ │ │ │ └─ g1 b
+ │ │ │ │ └─ g1 b
+ │ │ │ └─ g1 b
+ │ │ └─ g1 b
+ │ └─4
+ │   ├─3
+ │   │ ├─2
+ │   │ │ ├─ g1 y
+ │   │ │ └─ g1 r
+ │   │ └─ g1 b
+ │   └─ g1 b
+ └─7
+   ├─5
+   │ ├─3
+   │ │ ├─2
+   │ │ │ ├─ g1 y
+   │ │ │ └─ g1 y
+   │ │ └─ g1 y
+   │ └─2
+   │   ├─ g1 y
+   │   └─ g1 b
+   └─2
+     ├─ g1 b
+     └─ g1 b
+
+Amplifier tree:
+─ g1 y
+
+Killgem equations:
+(val = 1)	 0 = g1 b
+(val = 2)	 1 =  0 +  0
+(val = 1)	 2 = g1 y
+(val = 2)	 3 =  2 +  0
+(val = 2)	 4 =  2 +  2
+(val = 3)	 5 =  4 +  2
+(val = 5)	 6 =  5 +  3
+(val = 7)	 7 =  6 +  1
+(val = 1)	 8 = g1 r
+(val = 2)	 9 =  2 +  8
+(val = 3)	10 =  9 +  0
+(val = 4)	11 = 10 +  0
+(val = 3)	12 =  1 +  0
+(val = 4)	13 = 12 +  0
+(val = 5)	14 = 13 +  0
+(val = 9)	15 = 14 + 11
+(val = 16)	16 = 15 +  7
+
+Amplifier equations:
+(val = 1)	 0 = g1 y
+
+ka0016 - N8 TC120 A60 - gemforce v1.7.2 - table_kgsappr,table_crit
