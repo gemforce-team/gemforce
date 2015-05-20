@@ -78,8 +78,8 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 	gem_init(gems,1,1,1,0);
 	amps[0]=(gemY){0};
 	spec_coeffs[0]=0;
-	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+(double)TC*3/100)/(1.0+(double)TC/30);
-	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+(double)TC*3/100)/(1.2+(double)TC/30);
+	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
+	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
 	if (!(output_options & mask_quiet)) {
 		printf("Total value:\t1\n\n");
 		printf("Killgem\n");

@@ -103,8 +103,8 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gem_init_Y(ampsc,0,0,0);
 	powers[0]=0;
 	double iloglenc=1/log(lenc);
-	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+(double)TC*3/100)/(1.0+(double)TC/30);
-	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+(double)TC*3/100)/(1.2+(double)TC/30);
+	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
+	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
 	double NT=pow(2, GT-1);
 	if (!(output_options & mask_quiet)) {
 		printf("Killgem spec\n");

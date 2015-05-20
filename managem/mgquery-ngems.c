@@ -73,7 +73,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 	gemO amps[len];
 	gem_init(gems,1,1,0);
 	amps[0]=(gemO){0};
-	double leech_ratio=Namps*(0.15+As/3*0.004)*2*(1+(double)TC*3/100)/(1+(double)TC/30);
+	double leech_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1+TC/3*0.1);
 	if (!(output_options & mask_quiet)) {
 		printf("Total value:\t1\n\n");
 		printf("Managem\n");
