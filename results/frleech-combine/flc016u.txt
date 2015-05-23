@@ -1,0 +1,40 @@
+Best gem up to 16:
+
+Value:	9
+Growth:	0.704961
+Grade:	4
+Leech:	2.851254
+F.rate:	1.650698
+Power:	4.706561
+
+Compressed combining scheme:
+(((2o+o)+2o)+3o)
+
+Gem tree:
+─9
+ ├─5
+ │ ├─3
+ │ │ ├─2
+ │ │ │ ├─ g1 o
+ │ │ │ └─ g1 o
+ │ │ └─ g1 o
+ │ └─2
+ │   ├─ g1 o
+ │   └─ g1 o
+ └─4
+   ├─2
+   │ ├─ g1 o
+   │ └─ g1 o
+   └─2
+     ├─ g1 o
+     └─ g1 o
+
+Equations:
+(val = 1)	 0 = g1 o
+(val = 2)	 1 =  0 +  0
+(val = 4)	 2 =  1 +  1
+(val = 3)	 3 =  1 +  0
+(val = 5)	 4 =  3 +  1
+(val = 9)	 5 =  4 +  2
+
+flc016u - gemforce v1.7.2 - table_frleech
