@@ -22,7 +22,7 @@ int tree_check_after(int* tree, int N, int place, int val)
 	if (val <= tree[place]) return 0;
 	while (place!=1) {
 		if (place%2==0 && val <= tree[place+1]) return 0;
-		place >>= 1;		// place/=2 bitwise, it's a bit faster
+		place >>= 1;			// place/=2 bitwise, it's a bit faster
 	}
 	return 1;					// if we never found bigger return 1
 }
@@ -44,7 +44,7 @@ void ftree_add_element(float* tree, int N, int place, float val)
 		}
 		else return;			// no need to go on, they'll sure be even bigger
 	}
-	tree[1]=max(val,tree[1]);
+	if (val > tree[1]) tree[1]=val;
 }
 
 float ftree_read_max(float* tree, int N, int place)
@@ -53,7 +53,7 @@ float ftree_read_max(float* tree, int N, int place)
 	float result = tree[place];
 	while (place!=1) {
 		if (place%2==0) result=max(result,tree[place+1]);
-		place >>= 1;		// place/=2 bitwise, it's a bit faster
+		place >>= 1;			// place/=2 bitwise, it's a bit faster
 	}
 	return result;
 }
@@ -64,7 +64,7 @@ int ftree_check_after(float* tree, int N, int place, float val)
 	if (val <= tree[place]) return 0;
 	while (place!=1) {
 		if (place%2==0 && val <= tree[place+1]) return 0;
-		place >>= 1;		// place/=2 bitwise, it's a bit faster
+		place >>= 1;			// place/=2 bitwise, it's a bit faster
 	}
 	return 1;					// if we never found bigger return 1
 }
