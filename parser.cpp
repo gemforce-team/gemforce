@@ -91,19 +91,14 @@ char gem_color(gem* gemf)
 
 #include "gem_utils.h"
 
-#define Namps 6
-#define TC 120
-#define specials_ratio (Namps*0.46*(1+(double)TC*3/100)/(1  +(double)TC/30))
-#define damage_ratio   (Namps*0.28*(1+(double)TC*3/100)/(1.2+(double)TC/30))
-
-double gem_amp_global_mana_power(gem gem1, gem amp1)
+double gem_amp_mana_power(gem gem1, gem amp1, double leech_ratio)
 {
-	return (gem1.leech+specials_ratio*amp1.leech)*gem1.bbound;
+	return gem1.bbound*(gem1.leech+leech_ratio*amp1.leech);
 }
 
-double gem_amp_global_kill_power(gem gem1, gem amp1)
+double gem_amp_kill_power(gem gem1, gem amp1, double damage_ratio, double crit_ratio)
 {
-	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+specials_ratio*amp1.crit)*gem1.bbound;
+	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+crit_ratio*amp1.crit)*gem1.bbound;
 }
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
@@ -169,6 +164,29 @@ void gem_combine (gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 	p_gem_combined->red = p_gem1->red || p_gem2->red;
 	p_gem_combined->color = p_gem_combined->get_color();
 	p_gem_combined->value = p_gem1->getvalue() + p_gem2->getvalue();
+}
+
+int monocolor_ancestors(gem* gemf)
+{
+	if (gemf->father==NULL) return 1;
+	else if (gem_color(gemf->father)!=gem_color(gemf->mother)) return 0;
+	else return monocolor_ancestors(gemf->mother) & monocolor_ancestors(gemf->father);
+}
+
+void print_parens_compressed(gem* gemf)
+{
+	if (gemf->father==NULL) printf("%c",gem_color(gemf));
+	else if (monocolor_ancestors(gemf)							// if gem is uniform combination (g1 are already done)
+	&& 1 << (gemf->grade-1) == gem_getvalue(gemf)) {		// and is standard combine
+		printf("%d%c",gemf->grade,gem_color(gemf));
+	}
+	else {
+		printf("(");
+		print_parens_compressed(gemf->mother);
+		printf("+");
+		print_parens_compressed(gemf->father);
+		printf(")");
+	}
 }
 
 void fill_array(gem* gemf, gem** p_gems, int* place)
@@ -293,8 +311,16 @@ gem* gem_build(string parens, gem* gems, int& index)
 			if (parens[i]==')') open_parens--;
 			if (open_parens==0) break;
 		}
-		gem* mother_gemp = gem_build(parens.substr(  1,       i), gems, index);
-		gem* father_gemp = gem_build(parens.substr(i+2, len-i-3), gems, index);
+		gem* mother_gemp;
+		gem* father_gemp;
+		if (i > len-i-3) {
+			mother_gemp = gem_build(parens.substr(  1,       i), gems, index);
+			father_gemp = gem_build(parens.substr(i+2, len-i-3), gems, index);
+		}
+		else {
+			mother_gemp = gem_build(parens.substr(i+2, len-i-3), gems, index);
+			father_gemp = gem_build(parens.substr(  1,       i), gems, index);
+		}
 		gem_combine(father_gemp, mother_gemp, &newgem);
 	}
 	for (int i=0; i < index; ++i) {
@@ -322,24 +348,78 @@ string ieeePreParser(string recipe)
 	return recipe;
 }
 
+void worker(string parens, string parens_amps, int output_options, int TC, int As, int Namps)
+{
+	int index=0;
+	int value=(parens.length()+3)/4;
+	gem* gems = new gem[2*value-1];
+	gem* gemf = gem_build(parens, gems, index);
+	
+	printf("\nMain gem:\n");
+	gem_print(gemf);
+	if (output_options & mask_parens) {
+		printf("Compressed combining scheme:\n");
+		print_parens_compressed(gemf);
+		printf("\n\n");
+	}
+	if (output_options & mask_tree) {
+		printf("Gem tree:\n");
+		print_tree(gemf, "");
+		printf("\n");
+	}
+	if (output_options & mask_equations) {
+		printf("Equations:\n");
+		print_equations(gemf);
+		printf("\n");
+	}
+	
+	if (parens_amps.length() > 0) {
+		int index=0;
+		int value=(parens_amps.length()+3)/4;
+		gem* amps = new gem[2*value-1];
+		gem* ampf = gem_build(parens_amps, amps, index);
+		
+		printf("Amplifier (x%d)\n", Namps);
+		gem_print(ampf);
+		if (output_options & mask_parens) {
+			printf("Amplifier scheme:\n");
+			print_parens_compressed(ampf);
+			printf("\n\n");
+		}
+		if (output_options & mask_tree) {
+			printf("Amplifier tree:\n");
+			print_tree(ampf, "");
+			printf("\n");
+		}
+		if (output_options & mask_equations) {
+			printf("Amplifier equations:\n");
+			print_equations(ampf);
+			printf("\n");
+		}
+		double specials_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
+		double damage_ratio  =Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
+		printf("Global mana power:\t%#.7g\n",   gem_amp_mana_power(*gemf, *ampf, specials_ratio));
+		printf("Global kill power:\t%#.7g\n\n", gem_amp_kill_power(*gemf, *ampf, damage_ratio, specials_ratio));
+		delete[] amps;
+	}
+	delete[] gems;
+}
+
 int main(int argc, char** argv)
 {
-	char opt;
-	int output_tree=0;
-	int output_eq = 0;
 	string parens="";
 	string parens_amps="";
-	while ((opt=getopt(argc,argv,"htef:a:"))!=-1) {
+	char opt;
+	int TC=120;
+	int As=60;
+	int Namps=6;
+	int output_options=0;
+	while ((opt=getopt(argc,argv,"hptef:a:T:A:N:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("htef:a:\n");
+				print_help("hptef:a:T:A:N:\n");
 			return 0;
-			case 't':
-				output_tree = 1;
-			break;
-			case 'e':
-				output_eq = 1;
-			break;
+			PTECIDCUR_OPTIONS_BLOCK
 			case 'f': {
 				ifstream file;
 				file.open(optarg, fstream::out);
@@ -350,6 +430,16 @@ int main(int argc, char** argv)
 			case 'a':
 				parens_amps = ieeePreParser(optarg);
 			break;
+			//TAN_OPTIONS_BLOCK
+			case 'T':
+				TC=atoi(optarg);
+				break;
+			case 'A':
+				As=atoi(optarg);
+				break;
+			case 'N':
+				Namps=atoi(optarg);
+				break;
 			case '?':
 				return 1;
 			default:
@@ -376,44 +466,6 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	
-	int index=0;
-	int value=(parens.length()+3)/4;
-	gem* gems = new gem[2*value-1];
-	gem* gemf = gem_build(parens, gems, index);
-	printf("\nMain gem:\n");
-	gem_print(gemf);
-	if (output_tree) {
-		printf("Tree:\n");
-		print_tree(gemf, "");
-		printf("\n");
-	}
-	if (output_eq) {
-		printf("Equations:\n");
-		print_equations(gemf);
-		printf("\n");
-	}
-	if (parens_amps.length() > 0) {
-		int index=0;
-		int value=(parens_amps.length()+3)/4;
-		gem* amps = new gem[2*value-1];
-		gem* ampf = gem_build(parens_amps, amps, index);
-		printf("Amplifier:\n");
-		gem_print(ampf);
-		if (output_tree) {
-			printf("Tree:\n");
-			print_tree(ampf, "");
-			printf("\n");
-		}
-		if (output_eq) {
-			printf("Equations:\n");
-			print_equations(ampf);
-			printf("\n");
-		}
-		printf("Global mana power:\t%f\n", gem_amp_global_mana_power(*gemf, *ampf));
-		printf("Global kill power:\t%f\n\n", gem_amp_global_kill_power(*gemf, *ampf));
-		delete[] amps;
-	}
-	delete[] gems;
+	worker(parens, parens_amps, output_options, TC, As, Namps);
 	return 0;
 }
