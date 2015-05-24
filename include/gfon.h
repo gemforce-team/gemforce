@@ -24,6 +24,7 @@ void file_selection(char* filename, const char* table_name)
 		char buffer[256];
 		strcat(strcpy(buffer, "gem_tables/"), table_name);
 		if (file_exists(buffer)) strcpy(filename, buffer);
+		else strcpy(filename, table_name);
 	}
 }
 
