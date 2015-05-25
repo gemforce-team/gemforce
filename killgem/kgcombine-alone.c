@@ -12,7 +12,7 @@ void worker(int len, int output_options, int pool_zero)
 {
 	printf("\n");
 	int i;
-	int size=1000;
+	int size;
 	gem gems[len];
 	gem* pool[len];
 	int pool_length[len];
@@ -85,7 +85,7 @@ void worker(int len, int output_options, int pool_zero)
 							gem_sort(temp_array,length);						// work starts
 							int broken=0;
 							int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
-							int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
+							int tree_length= 1 << (int)ceil(log2(crit_cells));					// this is pow(2, ceil()) bitwise for speed improvement
 							int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));		// memory improvement, 2* is not needed
 							for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;			// init also tree[0], it's faster
 							for (l=length-1;l>=0;--l) {												// start from large z
@@ -139,7 +139,7 @@ void worker(int len, int output_options, int pool_zero)
 				gem_sort(temp_array,length);								// work starts
 				int broken=0;
 				int crit_cells=(int)(maxcrit*ACC)+1;					// this pool will be big from the beginning, but we avoid binary search
-				int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
+				int tree_length= 1 << (int)ceil(log2(crit_cells));					// this is pow(2, ceil()) bitwise for speed improvement
 				int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));		// memory improvement, 2* is not needed
 					for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;		// init also tree[0], it's faster
 					for (l=length-1;l>=0;--l) {											// start from large z
