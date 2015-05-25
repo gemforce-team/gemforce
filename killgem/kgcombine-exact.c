@@ -12,7 +12,7 @@ void worker(int len, int output_options, int pool_zero)
 {
 	printf("\n");
 	int i;
-	int size=1000;
+	int size;
 	gem gems[len];
 	gem* pool[len];
 	int pool_length[len];
@@ -22,7 +22,7 @@ void worker(int len, int output_options, int pool_zero)
 	if (pool_zero==1) {					// combine
 		gem_init(pool[0],1,1,1,1);		// start gem does not matter
 		gem_init(gems   ,1,1,1,1);		// grade damage crit bbound
-		size=2;							// reasonable comb sizing
+		size=1000;							// reasonable comb sizing
 	}
 	else {									// spec
 		gem_init(pool[0]  ,1,1.000000,1,0);
@@ -91,9 +91,9 @@ void worker(int len, int output_options, int pool_zero)
 							}
 							gem_sort_exact(temp_array,length);
 							int broken=0;
-							int tree_length= 1 << (int)ceil(log2(length)) ;					// this is pow(2, ceil()) bitwise for speed improvement
-							float* tree=malloc((tree_length+length)*sizeof(float));		// memory improvement, 2* is not needed
-							for (l=0; l<tree_length+length; ++l) tree[l]=-1;				// init also tree[0], it's faster
+							int tree_length= 1 << (int)ceil(log2(length));					// this is pow(2, ceil()) bitwise for speed improvement
+							float* tree=malloc((tree_length*2)*sizeof(float));
+							for (l=0; l<tree_length*2; ++l) tree[l]=-1;				// init also tree[0], it's faster
 							for (l=length-1;l>=0;--l) {											// start from large z
 								gem* p_gem=temp_array+l;
 								if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {
@@ -105,7 +105,6 @@ void worker(int len, int output_options, int pool_zero)
 								}
 							}												// all unnecessary gems destroyed
 							free(tree);									// free
-							
 							subpools_length[grd]=length-broken;
 							subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
 							
@@ -152,9 +151,9 @@ void worker(int len, int output_options, int pool_zero)
 				}
 				gem_sort_exact(temp_array,length);
 				int broken=0;
-				int tree_length= 1 << (int)ceil(log2(length)) ;					// this is pow(2, ceil()) bitwise for speed improvement
-				float* tree=malloc((tree_length+length)*sizeof(float));		// memory improvement, 2* is not needed
-				for (l=0; l<tree_length+length; ++l) tree[l]=-1;				// init also tree[0], it's faster
+				int tree_length= 1 << (int)ceil(log2(length));					// this is pow(2, ceil()) bitwise for speed improvement
+				float* tree=malloc((tree_length*2)*sizeof(float));
+				for (l=0; l<tree_length*2; ++l) tree[l]=-1;				// init also tree[0], it's faster
 				for (l=length-1;l>=0;--l) {											// start from large z
 					gem* p_gem=temp_array+l;
 					if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {
@@ -166,7 +165,6 @@ void worker(int len, int output_options, int pool_zero)
 					}
 				}												// all unnecessary gems destroyed
 				free(tree);									// free
-			
 				subpools_length[grd]=length-broken;
 				subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
 				index=0;
@@ -197,10 +195,6 @@ void worker(int len, int output_options, int pool_zero)
 		gems[i]=pool[i][0];						// choosing gem (criteria moved to more_power def)
 		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
-		}
-		
-		for (j=0;j<pool_length[i];++j) {
-			gem_print(pool[i]+j);
 		}
 		
 		if (!(output_options & mask_quiet)) {

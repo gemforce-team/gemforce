@@ -47,6 +47,17 @@ void ftree_add_element(float* tree, int N, int place, float val)
 	if (val > tree[1]) tree[1]=val;
 }
 
+int ftree_check_after(float* tree, int N, int place, float val)
+{
+	place+=N;
+	if (val <= tree[place]) return 0;
+	while (place!=1) {
+		if (place%2==0 && val <= tree[place+1]) return 0;
+		place >>= 1;			// place/=2 bitwise, it's a bit faster
+	}
+	return 1;					// if we never found bigger return 1
+}
+
 float ftree_read_max(float* tree, int N, int place)
 {
 	place+=N;
@@ -58,14 +69,28 @@ float ftree_read_max(float* tree, int N, int place)
 	return result;
 }
 
-int ftree_check_after(float* tree, int N, int place, float val)
+int ftree_check_after_debug(float* tree, int N, int place, float val)
 {
+	printf("\nTree state (baselength %d):\n", N);
+	for (int i=1; i<2*N; ++i) {
+		printf("%+.4f ", tree[i]);
+		if (!(i & (i+1))) printf("\n");
+	}
+	printf("Trying bb %f at place %d+%d\n", val, N, place);
 	place+=N;
-	if (val <= tree[place]) return 0;
+	if (val <= tree[place]) {
+		printf("Failed base check\n");
+		return 0;
+	}
 	while (place!=1) {
-		if (place%2==0 && val <= tree[place+1]) return 0;
+		if (place%2==0 && val <= tree[place+1]) {
+			printf ("Failed check against place %d\n", place);
+			return 0;
+		}
 		place >>= 1;			// place/=2 bitwise, it's a bit faster
 	}
+	printf("Success, adding\n");
 	return 1;					// if we never found bigger return 1
 }
+
 #endif // _INTERVAL_TREE_H
