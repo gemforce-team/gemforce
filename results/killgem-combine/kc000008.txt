@@ -1,0 +1,37 @@
+Value:	8
+Growth:	1.399942
+Grade:	3
+Damage:	3.919227
+Crit:	2.682563
+Bbound:	1.322092
+Power:	18.376972
+
+Compressed combining scheme:
+((((2k+k)+k)+2k)+2k)
+
+Gem tree:
+─8
+ ├─6
+ │ ├─4
+ │ │ ├─3
+ │ │ │ ├─2
+ │ │ │ │ ├─ g1 k
+ │ │ │ │ └─ g1 k
+ │ │ │ └─ g1 k
+ │ │ └─ g1 k
+ │ └─2
+ │   ├─ g1 k
+ │   └─ g1 k
+ └─2
+   ├─ g1 k
+   └─ g1 k
+
+Equations:
+(val = 1)	 0 = g1 k
+(val = 2)	 1 =  0 +  0
+(val = 3)	 2 =  1 +  0
+(val = 4)	 3 =  2 +  0
+(val = 6)	 4 =  3 +  1
+(val = 8)	 5 =  4 +  1
+
+kc000008 - gemforce v1.7.2 - table_kgcexact

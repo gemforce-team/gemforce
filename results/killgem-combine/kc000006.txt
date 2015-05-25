@@ -1,0 +1,34 @@
+Best gem up to 8:
+
+Value:	6
+Growth:	1.410077
+Grade:	3
+Damage:	3.271194
+Crit:	2.358367
+Bbound:	1.273408
+Power:	12.509872
+
+Compressed combining scheme:
+(((2k+k)+k)+2k)
+
+Gem tree:
+─6
+ ├─4
+ │ ├─3
+ │ │ ├─2
+ │ │ │ ├─ g1 k
+ │ │ │ └─ g1 k
+ │ │ └─ g1 k
+ │ └─ g1 k
+ └─2
+   ├─ g1 k
+   └─ g1 k
+
+Equations:
+(val = 1)	 0 = g1 k
+(val = 2)	 1 =  0 +  0
+(val = 3)	 2 =  1 +  0
+(val = 4)	 3 =  2 +  0
+(val = 6)	 4 =  3 +  1
+
+kc000008u - gemforce v1.7.2 - table_kgcexact

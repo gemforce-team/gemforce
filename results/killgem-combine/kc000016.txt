@@ -1,12 +1,10 @@
 Value:	16
+Growth:	1.414061
 Grade:	4
 Damage:	6.198262
 Crit:	3.812082
 Bbound:	1.460945
 Power:	50.431240
-
-Combining scheme:
-((((((((k+k)+k)+k)+k)+k)+(k+k))+((k+k)+k))+(((k+k)+k)+(k+k)))
 
 Compressed combining scheme:
 (((((((2k+k)+k)+k)+k)+2k)+(2k+k))+((2k+k)+2k))
@@ -55,3 +53,5 @@ Equations:
 (val = 8)	 7 =  6 +  1
 (val = 11)	 8 =  7 +  2
 (val = 16)	 9 =  8 +  3
+
+kc000016 - gemforce v1.7.2 - table_kgcexact
