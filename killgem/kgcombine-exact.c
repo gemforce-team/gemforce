@@ -66,16 +66,13 @@ void worker(int len, int output_options, int pool_zero)
 							int length=size+subpools_length[grd];
 							gem* temp_array=malloc(length*sizeof(gem));
 							int index=0;
-							float maxcrit=0;				// this will help me create the minimum tree
 							for (l=0; l<size; ++l) {					// copy new gems
 								temp_array[index]=temp_pools[grd][l];
-								maxcrit=max(maxcrit, (temp_array+index)->crit);
 								index++;
 							}
 							temp_index[grd]=0;			// temp index reset
 							for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
 								temp_array[index]=subpools[grd][l];
-								maxcrit=max(maxcrit, (temp_array+index)->crit);
 								index++;
 							}
 							free(subpools[grd]);		// free
@@ -127,15 +124,12 @@ void worker(int len, int output_options, int pool_zero)
 				int length=temp_index[grd]+subpools_length[grd];
 				gem* temp_array=malloc(length*sizeof(gem));
 				int index=0;
-				float maxcrit=0;				// this will help me create the minimum tree
 				for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
 					temp_array[index]=temp_pools[grd][l];
-					maxcrit=max(maxcrit, (temp_array+index)->crit);
 					index++;
 				}
 				for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
 					temp_array[index]=subpools[grd][l];
-					maxcrit=max(maxcrit, (temp_array+index)->crit);
 					index++;
 				}
 				free(subpools[grd]);		// free
