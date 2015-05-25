@@ -66,7 +66,7 @@ void worker(int len, int output_options, int pool_zero)
 							int length=size+subpools_length[grd];
 							gem* temp_array=malloc(length*sizeof(gem));
 							int index=0;
-							for (l=0; l<size; ++l) {					// copy new gems
+							for (l=0; l<size; ++l) {							// copy new gems
 								temp_array[index]=temp_pools[grd][l];
 								index++;
 							}
@@ -77,21 +77,22 @@ void worker(int len, int output_options, int pool_zero)
 							}
 							free(subpools[grd]);		// free
 							
-							gem_sort_crit(temp_array,length);						// work starts
+							gem_sort_crit(temp_array,length);				// work starts
 							float lastcrit=-1;
-							for (int l=0, index=0; l<length; ++l) {
-								if (temp_array[l].crit == lastcrit) temp_array[l].place=index-1;
+							int tree_cell=0;
+							for (int l=0; l<length; ++l) {
+								if (temp_array[l].crit == lastcrit) temp_array[l].place=tree_cell-1;
 								else {
-									temp_array[l].place=index++;
+									temp_array[l].place=tree_cell++;
 									lastcrit = temp_array[l].crit;
 								}
 							}
 							gem_sort_exact(temp_array,length);
 							int broken=0;
-							int tree_length= 1 << (int)ceil(log2(length));					// this is pow(2, ceil()) bitwise for speed improvement
+							int tree_length= 1 << (int)ceil(log2(tree_cell));			// this is pow(2, ceil()) bitwise for speed improvement
 							float* tree=malloc((tree_length*2)*sizeof(float));
-							for (l=0; l<tree_length*2; ++l) tree[l]=-1;				// init also tree[0], it's faster
-							for (l=length-1;l>=0;--l) {											// start from large z
+							for (l=0; l<tree_length*2; ++l) tree[l]=-1;					// init also tree[0], it's faster
+							for (l=length-1;l>=0;--l) {										// start from large z
 								gem* p_gem=temp_array+l;
 								if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {
 									ftree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);
@@ -103,7 +104,7 @@ void worker(int len, int output_options, int pool_zero)
 							}												// all unnecessary gems destroyed
 							free(tree);									// free
 							subpools_length[grd]=length-broken;
-							subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
+							subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));	// pool init via broken
 							
 							index=0;
 							for (l=0; l<length; ++l) {			// copying to subpool
@@ -113,18 +114,18 @@ void worker(int len, int output_options, int pool_zero)
 								}   
 							}
 							free(temp_array);			// free
-						}												// rebuilt subpool[grd], work restarts
+						}									// rebuilt subpool[grd], work restarts
 					}
 				}
 			}
 		}
 		int grd;
-		for (grd=0; grd<grade_max-1; ++grd) {						// let's put remaining gems on
+		for (grd=0; grd<grade_max-1; ++grd) {					// let's put remaining gems on
 			if (temp_index[grd] != 0) {
 				int length=temp_index[grd]+subpools_length[grd];
 				gem* temp_array=malloc(length*sizeof(gem));
 				int index=0;
-				for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
+				for (l=0; l<temp_index[grd]; ++l) {				// copy new gems
 					temp_array[index]=temp_pools[grd][l];
 					index++;
 				}
@@ -134,21 +135,22 @@ void worker(int len, int output_options, int pool_zero)
 				}
 				free(subpools[grd]);		// free
 				
-				gem_sort_crit(temp_array,length);						// work starts
+				gem_sort_crit(temp_array,length);				// work starts
 				float lastcrit=-1;
-				for (int l=0, index=0; l<length; ++l) {
-					if (temp_array[l].crit == lastcrit) temp_array[l].place=index-1;
+				int tree_cell=0;
+				for (int l=0; l<length; ++l) {
+					if (temp_array[l].crit == lastcrit) temp_array[l].place=tree_cell-1;
 					else {
-						temp_array[l].place=index++;
+						temp_array[l].place=tree_cell++;
 						lastcrit = temp_array[l].crit;
 					}
 				}
 				gem_sort_exact(temp_array,length);
 				int broken=0;
-				int tree_length= 1 << (int)ceil(log2(length));					// this is pow(2, ceil()) bitwise for speed improvement
+				int tree_length= 1 << (int)ceil(log2(tree_cell));			// this is pow(2, ceil()) bitwise for speed improvement
 				float* tree=malloc((tree_length*2)*sizeof(float));
-				for (l=0; l<tree_length*2; ++l) tree[l]=-1;				// init also tree[0], it's faster
-				for (l=length-1;l>=0;--l) {											// start from large z
+				for (l=0; l<tree_length*2; ++l) tree[l]=-1;					// init also tree[0], it's faster
+				for (l=length-1;l>=0;--l) {										// start from large z
 					gem* p_gem=temp_array+l;
 					if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {
 						ftree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);
