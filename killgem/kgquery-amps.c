@@ -6,7 +6,6 @@
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
 const int ACC=80;					// ACC is for z-axis sorting and for the length of the interval tree
-const int ACC_TR=750;			// ACC_TR is for bbound comparisons inside tree
 #include "killgem_utils.h"
 typedef struct Gem_Y gemY;
 #include "crit_utils.h"

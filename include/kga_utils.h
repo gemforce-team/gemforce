@@ -42,14 +42,14 @@ void print_omnia_table(gem* gems, gemY* amps, double* powers, int len)
 		int broken=0; \
 		int crit_cells=(int)(maxcrit*ACC)+1; \
 		int tree_length= 1 << (int)ceil(log2(crit_cells)) ; \
-		int* tree=malloc((tree_length+crit_cells+1)*sizeof(int)); \
+		float* tree=malloc((tree_length+crit_cells+1)*sizeof(float)); \
 		for (j=0; j<tree_length+crit_cells+1; ++j) tree[j]=-1; \
 		int index; \
 		for (j=pool_length[i]-1;j>=0;--j) { \
 			gem* p_gem=temp_pool+j; \
 			index=(int)(p_gem->crit*ACC); \
-			if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) { \
-				tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR)); \
+			if (ftree_check_after(tree, tree_length, index, p_gem->bbound)) { \
+				ftree_add_element(tree, tree_length, index, p_gem->bbound); \
 			} \
 			else { \
 				p_gem->grade=0; \
@@ -81,14 +81,14 @@ void print_omnia_table(gem* gems, gemY* amps, double* powers, int len)
 		int broken=0; \
 		int crit_cells=(int)(maxcrit*ACC)+1; \
 		int tree_length= 1 << (int)ceil(log2(crit_cells)) ; \
-		int* tree=malloc((tree_length+crit_cells+1)*sizeof(int)); \
+		float* tree=malloc((tree_length+crit_cells+1)*sizeof(float)); \
 		for (i=0; i<tree_length+crit_cells+1; ++i) tree[i]=-1; \
 		int index; \
 		for (i=poolc_length[lenc-1]-1;i>=0;--i) { \
 			gem* p_gem=poolc[lenc-1]+i; \
 			index=(int)(p_gem->crit*ACC); \
-			if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) { \
-				tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR)); \
+			if (ftree_check_after(tree, tree_length, index, p_gem->bbound)) { \
+				ftree_add_element(tree, tree_length, index, p_gem->bbound); \
 			} \
 			else { \
 				p_gem->grade=0; \
