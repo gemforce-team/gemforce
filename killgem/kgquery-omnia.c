@@ -38,28 +38,6 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	KGSPEC_COMPRESSION
 	printf("Gem speccing pool compression done!\n");
 
-	FILE* tablec=file_check(filenamec);		// file is open to read
-	if (tablec==NULL) exit(1);					// if the file is not good we exit
-	gem** poolc=malloc(lenc*sizeof(gem*));
-	int* poolc_length=malloc(lenc*sizeof(int));
-	poolc[0]=malloc(sizeof(gem));
-	poolc_length[0]=1;
-	gem_init(poolc[0],1,1,1,1);
-	
-	int prevmaxc=pool_from_table(poolc, poolc_length, lenc, tablec);		// killgem comb pool filling
-	fclose(tablec);
-	if (prevmaxc<lenc-1) {									// if the killgems are not enough
-		for (i=0;i<=prevmaxc;++i) free(poolc[i]);		// free
-		if (prevmaxc>0) printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);
-		exit(1);
-	}
-
-	gem* poolcf;
-	int poolcf_length;
-	
-	KGCOMB_COMPRESSION
-	printf("Killgem comb compressed pool size:\t%d\n",poolcf_length);
-
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena=len;									// see which is bigger between spec len and comb len
@@ -77,10 +55,10 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
-
+	
 	gemY** poolYf=malloc(lena*sizeof(gemY*));		// if not malloc-ed 140k is the limit
 	int poolYf_length[lena];
-
+	
 	AMPS_COMPRESSION
 	gemY poolYc[poolYf_length[lenc-1]];
 	int poolYc_length=poolYf_length[lenc-1];
@@ -88,7 +66,29 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	for (i=0; i<poolYf_length[lenc-1]; ++i) {		// amps fast access combining pool
 		poolYc[i]=poolYf[lenc-1][i];
 	}
-	printf("Amp combining pool compression done!\n\n");
+	printf("Amp combining pool compression done!\n");
+
+	FILE* tablec=file_check(filenamec);		// file is open to read
+	if (tablec==NULL) exit(1);					// if the file is not good we exit
+	gem** poolc=malloc(lenc*sizeof(gem*));
+	int* poolc_length=malloc(lenc*sizeof(int));
+	poolc[0]=malloc(sizeof(gem));
+	poolc_length[0]=1;
+	gem_init(poolc[0],1,1,1,1);
+	
+	int prevmaxc=pool_from_table(poolc, poolc_length, lenc, tablec);		// killgem comb pool filling
+	fclose(tablec);
+	if (prevmaxc<lenc-1) {									// if the killgems are not enough
+		for (i=0;i<=prevmaxc;++i) free(poolc[i]);		// free
+		if (prevmaxc>0) printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);
+		exit(1);
+	}
+	
+	gem* poolcf;
+	int poolcf_length;
+	
+	KGCOMB_COMPRESSION
+	printf("Killgem comb compressed pool size:\t%d\n\n",poolcf_length);
 
 	int j,k,h,l,m;							// let's choose the right gem-amp combo
 	gem gems[len];							// for every speccing value

@@ -38,33 +38,6 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	KGSPEC_COMPRESSION
 	printf("Gem speccing pool compression done!\n");
 
-	FILE* tablec=file_check(filenamec);		// file is open to read
-	if (tablec==NULL) exit(1);					// if the file is not good we exit
-	gem** poolc=malloc(lenc*sizeof(gem*));
-	int* poolc_length=malloc(lenc*sizeof(int));
-	poolc[0]=malloc(sizeof(gem));
-	poolc_length[0]=1;
-	gem_init(poolc[0],1,1,1,1);
-	
-	int prevmaxc=pool_from_table(poolc, poolc_length, lenc, tablec);		// killgem comb pool filling
-	fclose(tablec);
-	if (prevmaxc<lenc-1) {									// if the killgems are not enough
-		for (i=0;i<=prevmaxc;++i) free(poolc[i]);		// free
-		if (prevmaxc>0) printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);
-		exit(1);
-	}
-
-	gem bestc=(gem){0};				// choosing best combine
-	
-	for (i=0;i<poolc_length[lenc-1];++i) {
-		if (gem_more_powerful(poolc[lenc-1][i], bestc)) {
-			bestc=poolc[lenc-1][i];
-		}
-	}
-	double bestc_growth=log(gem_power(bestc))/log(lenc);
-	
-	printf("Combining pool compression done!\n");
-
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena=len;									// as long as the spec length
@@ -81,12 +54,39 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
-
+	
 	gemY** poolYf=malloc(lena*sizeof(gemY*));		// if not malloc-ed 140k is the limit
 	int poolYf_length[lena];
-
+	
 	AMPS_COMPRESSION
-	printf("Amp pool compression done!\n\n");
+	printf("Amp pool compression done!\n");
+
+	FILE* tablec=file_check(filenamec);		// file is open to read
+	if (tablec==NULL) exit(1);					// if the file is not good we exit
+	gem** poolc=malloc(lenc*sizeof(gem*));
+	int* poolc_length=malloc(lenc*sizeof(int));
+	poolc[0]=malloc(sizeof(gem));
+	poolc_length[0]=1;
+	gem_init(poolc[0],1,1,1,1);
+	
+	int prevmaxc=pool_from_table(poolc, poolc_length, lenc, tablec);		// killgem comb pool filling
+	fclose(tablec);
+	if (prevmaxc<lenc-1) {									// if the killgems are not enough
+		for (i=0;i<=prevmaxc;++i) free(poolc[i]);		// free
+		if (prevmaxc>0) printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);
+		exit(1);
+	}
+	
+	gem bestc=(gem){0};				// choosing best combine
+	
+	for (i=0;i<poolc_length[lenc-1];++i) {
+		if (gem_more_powerful(poolc[lenc-1][i], bestc)) {
+			bestc=poolc[lenc-1][i];
+		}
+	}
+	double bestc_growth=log(gem_power(bestc))/log(lenc);
+	
+	printf("Combining pool compression done!\n\n");
 
 	int j,k,h;								// let's choose the right gem-amp combo
 	gem gems[len];							// for every speccing value
