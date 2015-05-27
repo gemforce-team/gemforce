@@ -3,9 +3,10 @@
 #include <math.h>
 #include <getopt.h>
 #include "interval_tree.h"
+typedef struct Gem_YBp gemP;
+#include "kgexact_utils.h"
 typedef struct Gem_YBp gem;
 int ACC;
-#include "kgexact_utils.h"
 #include "killgem_utils.h"
 
 void worker(int len, int output_options, int pool_zero)

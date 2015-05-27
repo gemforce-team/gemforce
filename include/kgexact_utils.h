@@ -11,9 +11,7 @@ struct Gem_YBp {
 	int place;
 };
 
-#include "gem_utils.h"
-
-inline int gem_less_eq_exact(gem gem1, gem gem2)
+inline int gem_less_eq_exact(gemP gem1, gemP gem2)
 {
 	if (gem1.damage != gem2.damage)
 		return gem1.damage<gem2.damage;
@@ -22,10 +20,10 @@ inline int gem_less_eq_exact(gem gem1, gem gem2)
 	return gem1.crit<gem2.crit;
 }
 
-void ins_sort_exact (gem* gems, int len)
+void ins_sort_exact (gemP* gems, int len)
 {
 	int i,j;
-	gem element;
+	gemP element;
 	for (i=1; i<len; i++) {
 		element=gems[i];
 		for (j=i; j>0 && gem_less_eq_exact(element, gems[j-1]); j--) {
@@ -35,12 +33,12 @@ void ins_sort_exact (gem* gems, int len)
 	}
 }
 
-void quick_sort_exact (gem* gems, int len)
+void quick_sort_exact (gemP* gems, int len)
 {
 	if (len > 10)  {
-		gem pivot = gems[len/2];
-		gem* beg = gems;
-		gem* end = gems+len-1;
+		gemP pivot = gems[len/2];
+		gemP* beg = gems;
+		gemP* end = gems+len-1;
 		while (beg <= end) {
 			while (gem_less_eq_exact(*beg, pivot)) {
 				beg++;
@@ -49,7 +47,7 @@ void quick_sort_exact (gem* gems, int len)
 				end--;
 			}
 			if (beg <= end) {
-				gem temp = *beg;
+				gemP temp = *beg;
 				*beg = *end;
 				*end = temp;
 				beg++;
@@ -67,21 +65,21 @@ void quick_sort_exact (gem* gems, int len)
 	}
 }
 
-void gem_sort_exact (gem* gems, int len)
+void gem_sort_exact (gemP* gems, int len)
 {
 	quick_sort_exact (gems, len);    // partially sort
 	ins_sort_exact (gems, len);      // finish the nearly sorted array
 }
 
-inline int gem_less_crit(gem gem1, gem gem2)
+inline int gem_less_crit(gemP gem1, gemP gem2)
 {
 	return gem1.crit<gem2.crit;
 }
 
-void ins_sort_crit (gem* gems, int len)
+void ins_sort_crit (gemP* gems, int len)
 {
 	int i,j;
-	gem element;
+	gemP element;
 	for (i=1; i<len; i++) {
 		element=gems[i];
 		for (j=i; j>0 && gem_less_crit(element, gems[j-1]); j--) {
@@ -91,12 +89,12 @@ void ins_sort_crit (gem* gems, int len)
 	}
 }
 
-void quick_sort_crit (gem* gems, int len)
+void quick_sort_crit (gemP* gems, int len)
 {
 	if (len > 10)  {
-		gem pivot = gems[len/2];
-		gem* beg = gems;
-		gem* end = gems+len-1;
+		gemP pivot = gems[len/2];
+		gemP* beg = gems;
+		gemP* end = gems+len-1;
 		while (beg <= end) {
 			while (gem_less_crit(*beg, pivot)) {
 				beg++;
@@ -105,7 +103,7 @@ void quick_sort_crit (gem* gems, int len)
 				end--;
 			}
 			if (beg <= end) {
-				gem temp = *beg;
+				gemP temp = *beg;
 				*beg = *end;
 				*end = temp;
 				beg++;
@@ -123,7 +121,7 @@ void quick_sort_crit (gem* gems, int len)
 	}
 }
 
-void gem_sort_crit (gem* gems, int len)
+void gem_sort_crit (gemP* gems, int len)
 {
 	quick_sort_crit (gems, len);    // partially sort
 	ins_sort_crit (gems, len);      // finish the nearly sorted array

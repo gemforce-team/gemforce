@@ -4,9 +4,10 @@
 #include <getopt.h>
 #include <string.h>
 #include "interval_tree.h"
+typedef struct Gem_YBp gemP;
+#include "kgexact_utils.h"
 typedef struct Gem_YBp gem;
 int ACC;
-#include "kgexact_utils.h"
 #include "killgem_utils.h"
 #include "gfon.h"
 
