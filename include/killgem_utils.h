@@ -192,7 +192,7 @@ gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array
 			double new_pow=gem_cfr_power(*gp, amp_damage_scaled, amp_crit_scaled);
 			if (new_pow > best_pow) {
 				best_pow=new_pow;
-				if (best_gem!=NULL) free(best_array);
+				free(best_array);
 				best_gem=gp;
 				best_array=new_array;
 			}
