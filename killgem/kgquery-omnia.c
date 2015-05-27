@@ -145,7 +145,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	}
 	printf("Combine pairs pool size:\t%d\n\n",cpairs_length);
 
-	int j,k,h,l,m;							// let's choose the right gem-amp combo
+	int j,k,h,l;							// let's choose the right gem-amp combo
 	gem gems[len];							// for every speccing value
 	gemY amps[len];						// we'll choose the best amps
 	gem gemsc[len];						// and the best NC combine
@@ -189,29 +189,24 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 																						// now we compare the whole setup
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {					// for every amp value from 1 to to gem_value
 			double c = log(NT/NS)*iloglenc;									// we compute the combination number
-			for (l=0; l<poolcf_length; ++l) {								// then we search in the NC gem comb pool
-				double Cbg = pow(poolcf[l].bbound,c);
-				double Cdg = pow(poolcf[l].damage,c);
-				double Ccg = pow(poolcf[l].crit  ,c);
-				for (m=0;m<poolYc_length;++m) {								// and in the amp NC pool
-					double Cda = damage_ratio* pow(poolYc[m].damage,c);
-					double Cca = crit_ratio  * pow(poolYc[m].crit  ,c);
-					for (k=0;k<poolf_length[i];++k) {						// then in the gem pool
-						if (poolf[i][k].crit!=0) {								// if the gem has crit we go on
-							double Pb2 = Cbg * poolf[i][k].bbound * Cbg * poolf[i][k].bbound;
-							double Pdg = Cdg * poolf[i][k].damage;
-							double Pcg = Ccg * poolf[i][k].crit  ;
-							for (h=0;h<poolYf_length[j];++h) {				// and in the reduced amp pool
-								double Pdamage = Pdg + Cda * poolYf[j][h].damage ;
-								double Pcrit   = Pcg + Cca * poolYf[j][h].crit   ;
-								double power   = Pb2 * Pdamage * Pcrit ;
-								if (power>powers[i]) {
-									powers[i]=power;
-									gems[i]=poolf[i][k];
-									amps[i]=poolYf[j][h];
-									gemsc[i]=poolcf[l];
-									ampsc[i]=poolYc[m];
-								}
+			for (l=0; l<cpairs_length; ++l) {								// then we search in the comb pair pool
+				double Cg = pow(cpairs[l].power,c);
+				double Rd = damage_ratio*pow(cpairs[l].rdmg, c);
+				double Rc = crit_ratio * pow(cpairs[l].rcrit,c);
+				for (k=0;k<poolf_length[i];++k) {							// then in the gem pool
+					if (poolf[i][k].crit!=0) {									// if the gem has crit we go on
+						double Pb2 = poolf[i][k].bbound * poolf[i][k].bbound;
+						double Pext = Cg * Pb2;
+						for (h=0;h<poolYf_length[j];++h) {					// and in the reduced amp pool
+							double Pdamage = poolf[i][k].damage + Rd * poolYf[j][h].damage ;
+							double Pcrit   = poolf[i][k].crit   + Rc * poolYf[j][h].crit   ;
+							double power   = Pext * Pdamage * Pcrit ;
+							if (power>powers[i]) {
+								powers[i]=power;
+								gems[i]=poolf[i][k];
+								amps[i]=poolYf[j][h];
+								gemsc[i]=*(cpairs[l].combg);
+								ampsc[i]=*(cpairs[l].comba);
 							}
 						}
 					}
