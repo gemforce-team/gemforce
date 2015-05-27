@@ -93,7 +93,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	int cpairs_length;
 	cpair* cpairs;
 	
-	{
+	{				// cpair compression
 		int length = poolcf_length*poolYc_length;
 		cpair* temp_array=malloc(length*sizeof(cpair));
 		int index=0;
@@ -193,13 +193,14 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 				double Cg = pow(cpairs[l].power,c);
 				double Rd = damage_ratio*pow(cpairs[l].rdmg, c);
 				double Rc = crit_ratio * pow(cpairs[l].rcrit,c);
-				for (k=0;k<poolf_length[i];++k) {							// then in the gem pool
-					if (poolf[i][k].crit!=0) {									// if the gem has crit we go on
-						double Pb2 = poolf[i][k].bbound * poolf[i][k].bbound;
-						double Pext = Cg * Pb2;
-						for (h=0;h<poolYf_length[j];++h) {					// and in the reduced amp pool
-							double Pdamage = poolf[i][k].damage + Rd * poolYf[j][h].damage ;
-							double Pcrit   = poolf[i][k].crit   + Rc * poolYf[j][h].crit   ;
+				for (h=0; h<poolYf_length[j]; ++h) {						// then in the reduced amp pool
+					double Pad = Rd * poolYf[j][h].damage;
+					double Pac = Rc * poolYf[j][h].crit  ;
+					for (k=0; k<poolf_length[i]; ++k) {						// and in the gem pool
+						if (poolf[i][k].crit!=0) {								// if the gem has crit we go on
+							double Pext = Cg * poolf[i][k].bbound * poolf[i][k].bbound;
+							double Pdamage = poolf[i][k].damage + Pad;
+							double Pcrit   = poolf[i][k].crit   + Pac;
 							double power   = Pext * Pdamage * Pcrit ;
 							if (power>powers[i]) {
 								powers[i]=power;
@@ -224,11 +225,10 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			gem_print_Y(amps+i);
 			printf("Killgem combine\n");
 			printf("Comb:\t%d\n",lenc);
-			if (output_options & mask_debug) printf("Pool:\t%d\n",poolcf_length);
+			if (output_options & mask_debug) printf("P.pool:\t%d\n", cpairs_length);
 			gem_print(gemsc+i);
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
-			if (output_options & mask_debug) printf("Pool:\t%d\n",poolYc_length);
 			gem_print_Y(ampsc+i);
 			printf("Spec base power:    \t%#.7g\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
 			printf("Global power at g%d:\t%#.7g\n\n\n", GT, powers[i]);
@@ -244,6 +244,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		gem_print_Y(amps+len-1);
 		printf("Killgem combine\n");
 		printf("Comb:\t%d\n",lenc);
+		if (output_options & mask_debug) printf("P.pool:\t%d\n", cpairs_length);
 		gem_print(gemsc+len-1);
 		printf("Amplifier combine\n");
 		printf("Comb:\t%d\n",lenc);
