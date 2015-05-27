@@ -4,7 +4,6 @@
 #include <getopt.h>
 #include <string.h>
 typedef struct Gem_YB gem;		// the strange order is so that killgem_utils knows which gem type are we defining as "gem"
-const int ACC=0;					// I don't really use it here
 #include "killgem_utils.h"
 #include "gfon.h"
 

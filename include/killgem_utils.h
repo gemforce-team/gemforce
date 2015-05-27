@@ -1,6 +1,8 @@
 #ifndef _KILLGEM_UTILS_H
 #define _KILLGEM_UTILS_H
 
+int ACC;							// 80,60  ACC is for z-axis sorting and for the length of the interval tree
+
 struct Gem_YB {
 	int grade;              // short does NOT help
 	float damage;           // this is MAX damage, with the rand() part neglected

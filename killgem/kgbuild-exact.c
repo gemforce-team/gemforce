@@ -7,7 +7,6 @@
 typedef struct Gem_YBp gemP;
 #include "kgexact_utils.h"
 typedef struct Gem_YBp gem;
-int ACC;
 #include "killgem_utils.h"
 #include "gfon.h"
 

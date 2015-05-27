@@ -4,7 +4,6 @@
 #include <getopt.h>
 #include <string.h>
 typedef struct Gem_YB gem;
-const int ACC=0;					// I don't really use it here
 #include "killgem_utils.h"
 #include "gfon.h"
 

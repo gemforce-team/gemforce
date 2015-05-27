@@ -5,8 +5,6 @@
 #include <string.h>
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
-int ACC;							// 80,60  ACC is for z-axis sorting and for the length of the interval tree
-const int ACC_TR=750;		//   750  ACC_TR is for bbound comparisons inside tree
 #include "killgem_utils.h"
 #include "gfon.h"
 
@@ -15,6 +13,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	FILE* table=table_init(filename, pool_zero);		// init killgem
 	int i;
 	int size;
+	const int ACC_TR=750;				//   750  ACC_TR is for bbound comparisons inside tree
 	gem* pool[len];
 	int pool_length[len];
 	pool[0]=malloc(pool_zero*sizeof(gem));
