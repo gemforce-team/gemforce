@@ -93,4 +93,30 @@ int ftree_check_after_debug(float* tree, int N, int place, float val)
 	return 1;					// if we never found bigger return 1
 }
 
+/* And also a double one */
+
+void dtree_add_element(double* tree, int N, int place, double val)
+{
+	place+=N;
+	while (place!=1) {
+		if (val > tree[place]) {
+			tree[place]=val;
+			place >>= 1;		// place/=2 bitwise, it's a bit faster
+		}
+		else return;			// no need to go on, they'll sure be even bigger
+	}
+	if (val > tree[1]) tree[1]=val;
+}
+
+int dtree_check_after(double* tree, int N, int place, double val)
+{
+	place+=N;
+	if (val <= tree[place]) return 0;
+	while (place!=1) {
+		if (place%2==0 && val <= tree[place+1]) return 0;
+		place >>= 1;			// place/=2 bitwise, it's a bit faster
+	}
+	return 1;					// if we never found bigger return 1
+}
+
 #endif // _INTERVAL_TREE_H

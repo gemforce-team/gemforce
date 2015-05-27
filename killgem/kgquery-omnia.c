@@ -9,6 +9,7 @@ typedef struct Gem_YB gem;
 typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 #include "kga_utils.h"
+#include "cpair.h"
 #include "gfon.h"
 
 void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, int TC, int As, int GT, int Namps)
@@ -87,7 +88,62 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	int poolcf_length;
 	
 	KGCOMB_COMPRESSION
-	printf("Killgem comb compressed pool size:\t%d\n\n",poolcf_length);
+	printf("Killgem comb compressed pool size:\t%d\n",poolcf_length);
+
+	int cpairs_length;
+	cpair* cpairs;
+	
+	{
+		int length = poolcf_length*poolYc_length;
+		cpair* temp_array=malloc(length*sizeof(cpair));
+		int index=0;
+		for (int l=0; l<poolcf_length; ++l) {
+			for (int m=0; m<poolYc_length; ++m) {
+				double power = gem_power(poolcf[l]);
+				double rdmg  = poolYc[m].damage/poolcf[l].damage;
+				double rcrit = poolYc[m].crit / poolcf[l].crit;
+				temp_array[index++] = (cpair){power, rdmg, rcrit, poolcf+l, poolYc+m, 0};
+			}
+		}
+		cpair_sort_rcrit(temp_array,length);				/* work starts */
+		double lastrcrit=-1;
+		int tree_cell=0;
+		for (int l=0; l<length; ++l) {
+			if (temp_array[l].rcrit == lastrcrit) temp_array[l].place=tree_cell-1;
+			else {
+				temp_array[l].place=tree_cell++;
+				lastrcrit = temp_array[l].rcrit;
+			}
+		}
+		cpair_sort_xyz(temp_array,length);
+		int broken=0;
+		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */
+		double* tree=malloc((tree_length*2)*sizeof(double));
+		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* init also tree[0], it's faster */
+		for (int l=length-1;l>=0;--l) {								/* start from large z */
+			cpair* p_cpair=temp_array+l;
+			if (dtree_check_after(tree, tree_length, p_cpair->place, p_cpair->rdmg)) {
+				dtree_add_element(tree, tree_length, p_cpair->place, p_cpair->rdmg);
+			}
+			else {
+				p_cpair->combg=NULL;
+				broken++;
+			}
+		}
+		free(tree);
+		
+		cpairs_length=length-broken;
+		cpairs=malloc(cpairs_length*sizeof(cpair));
+		index=0;
+		for (int j=0; j<length; ++j) {
+			if (temp_array[j].combg!=NULL) {
+				cpairs[index] = temp_array[j];
+				index++;
+			}
+		}
+		free(temp_array);
+	}
+	printf("Combine pairs pool size:\t%d\n\n",cpairs_length);
 
 	int j,k,h,l,m;							// let's choose the right gem-amp combo
 	gem gems[len];							// for every speccing value
