@@ -147,7 +147,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 			printf("Amplifier (x%d)\n", Namps);
 			printf("Value:\t%d\n", gem_getvalue_O(ampf));
 			gem_print_O(ampf);
-			printf("Spec base power with red:\t%#.7g\n\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
+			printf("Spec base power with red:\t%#.7g\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
 		}
 	}
 
