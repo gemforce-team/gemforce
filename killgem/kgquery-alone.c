@@ -118,6 +118,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	
 	for (i=0;i<len;++i) free(pool[i]);		// free
 	free(pool);
+	free(pool_length);
 	free(gems);
 	if (output_options & mask_red && len > 2 && pool_zero==2) {
 		free(gem_array);
