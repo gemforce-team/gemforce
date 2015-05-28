@@ -379,6 +379,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	free(poolY);
 	free(poolY_length);
 	free(poolYf);
+	free(cpairs);
 	if (output_options & mask_red && len > 2) {
 		free(gem_array);
 	}
