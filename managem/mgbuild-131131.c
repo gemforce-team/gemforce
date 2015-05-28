@@ -111,7 +111,7 @@ int main(int argc, char** argv)
 			case 'h':
 				print_help("hdqf:");
 				return 0;
-			PTECIDCUR_OPTIONS_BLOCK
+			DQ_OPTIONS_BLOCK
 			case 'f':
 				strcpy(filename,optarg);
 				break;

@@ -204,7 +204,7 @@ int main(int argc, char** argv)
 			case 'h':
 				print_help("hptecdqrl:f:T:A:N:");
 				return 0;
-			PTECIDCUR_OPTIONS_BLOCK
+			PTECIDQUR_OPTIONS_BLOCK
 			case 'l':
 				gem_limit = atoi(optarg);
 				break;

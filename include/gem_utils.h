@@ -12,7 +12,7 @@
 #define mask_red 256
 
 /* Macro blob that is used for all flag options. Handle with care */
-#define PTECIDCUR_OPTIONS_BLOCK\
+#define PTECIDQUR_OPTIONS_BLOCK\
 			case 'p':\
 				output_options |= mask_parens;\
 				break;\
@@ -40,6 +40,14 @@
 			case 'r':\
 				output_options |= mask_red;\
 				break;\
+
+#define DQ_OPTIONS_BLOCK\
+			case 'd':                          \
+				output_options |= mask_debug;   \
+				break;                          \
+			case 'q':                          \
+				output_options |= mask_quiet;   \
+				break;
 
 #include <stdio.h>
 

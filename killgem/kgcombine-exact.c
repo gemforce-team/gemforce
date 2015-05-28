@@ -281,7 +281,7 @@ int main(int argc, char** argv)
 			case 'h':
 				print_help("hptecidqur");
 				return 0;
-			PTECIDCUR_OPTIONS_BLOCK
+			PTECIDQUR_OPTIONS_BLOCK
 			case '?':
 				return 1;
 			default:

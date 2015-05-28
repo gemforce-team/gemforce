@@ -240,7 +240,7 @@ int main(int argc, char** argv)
 			case 'h':
 				print_help("hptecdqurf:g:T:A:N:");
 				return 0;
-			PTECIDCUR_OPTIONS_BLOCK
+			PTECIDQUR_OPTIONS_BLOCK
 			case 'f':			// can be "filename,filenameA", if missing default is used
 				;
 				char* p=optarg;
