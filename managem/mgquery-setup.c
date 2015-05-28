@@ -99,6 +99,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		gem_print(gems);
 		printf("Amplifier spec (x%d)\n", Namps);
 		gem_print_O(amps);
+		printf("Spec base power:    \t0\n\n\n");
 	}
 
 	for (i=1;i<len;++i) {													// for every gem value
