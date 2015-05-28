@@ -118,16 +118,14 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {				// for every amp value from 1 up to gem_value
 			double Cg = pow(NT/NS, bestc_growth);						// we compute the combination number
 			double Pa = leech_ratio * bestO[j].leech;					// we already know the best amps
-			for (k=0;k<poolf_length[i];++k) {							// we look in the reduced gem pool
-				if (poolf[i][k].leech!=0) {								// if the gem has leech we go on
-					double Palone = gem_power(poolf[i][k]);
-					double Pbase = Palone + Pa * poolf[i][k].bbound; 
-					double power = Cg * Pbase;
-					if (power>powers[i]) {
-						powers[i]=power;
-						gems[i]=poolf[i][k];
-						amps[i]=bestO[j];
-					}
+			for (k=0; k<poolf_length[i]; ++k) {							// we look in the reduced gem pool
+				double Palone = gem_power(poolf[i][k]);
+				double Pbase = Palone + Pa * poolf[i][k].bbound; 
+				double power = Cg * Pbase;
+				if (power>powers[i]) {
+					powers[i]=power;
+					gems[i]=poolf[i][k];
+					amps[i]=bestO[j];
 				}
 			}
 		}

@@ -131,17 +131,15 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 			for (l=0; l<poolcf_length; ++l) {							// then we search in NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cg  = pow(gem_power(poolcf[l]),c);
-				for (k=0;k<poolf_length[i];++k) {						// and in the reduced gem pool
-					if (poolf[i][k].leech!=0) {							// if the gem has leech we go on
-						double Palone = Cg * gem_power(poolf[i][k]);
-						double Pbg = Cbg * poolf[i][k].bbound;
-						double power = Palone + Pbg * Pa;  
-						if (power>powers[i]) {
-							powers[i]=power;
-							gems[i]=poolf[i][k];
-							amps[i]=bestO[j];
-							gemsc[i]=poolcf[l];
-						}
+				for (k=0; k<poolf_length[i]; ++k) {						// and in the reduced gem pool
+					double Palone = Cg * gem_power(poolf[i][k]);
+					double Pbg = Cbg * poolf[i][k].bbound;
+					double power = Palone + Pbg * Pa;  
+					if (power>powers[i]) {
+						powers[i]=power;
+						gems[i]=poolf[i][k];
+						amps[i]=bestO[j];
+						gemsc[i]=poolcf[l];
 					}
 				}
 			}

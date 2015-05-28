@@ -98,16 +98,14 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {		// for every amp value from 1 to to gem_value
 			double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
 			double Pa= leech_ratio * bestO[j].leech;			// <- this is ok only for mg
-			for (k=0;k<poolf_length[i];++k) {					// then we search in the reduced gem pool
-				if (poolf[i][k].leech!=0) {						// if the gem has leech we go on
-					double Palone = gem_power(poolf[i][k]);
-					double power = Palone + poolf[i][k].bbound * Pa;
-					double spec_coeff=power*comb_coeff;
-					if (spec_coeff>spec_coeffs[i]) {
-						spec_coeffs[i]=spec_coeff;
-						gems[i]=poolf[i][k];
-						amps[i]=bestO[j];
-					}
+			for (k=0; k<poolf_length[i]; ++k) {					// then we search in the reduced gem pool
+				double Palone = gem_power(poolf[i][k]);
+				double power = Palone + poolf[i][k].bbound * Pa;
+				double spec_coeff=power*comb_coeff;
+				if (spec_coeff>spec_coeffs[i]) {
+					spec_coeffs[i]=spec_coeff;
+					gems[i]=poolf[i][k];
+					amps[i]=bestO[j];
 				}
 			}
 		}
