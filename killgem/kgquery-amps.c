@@ -100,8 +100,7 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 																			// now with amps
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {		// for every amp value from 1 to to gem_value
 			double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
-			for (k=0;k<poolf_length[i];++k)						// then we search in the gem pool
-			if (poolf[i][k].crit!=0) {								// if the gem has crit we go on
+			for (k=0;k<poolf_length[i];++k) {					// then we search in the gem pool
 				double Pb2 = poolf[i][k].bbound * poolf[i][k].bbound;
 				double Pdg = poolf[i][k].damage;
 				double Pcg = poolf[i][k].crit  ;

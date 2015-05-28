@@ -121,20 +121,18 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {				// for every amp value from 1 to to gem_value
 			double Cg = pow(NT/NS, bestc_growth);						// we compute the combination number
 			for (k=0;k<poolf_length[i];++k) {							// then in the gem pool
-				if (poolf[i][k].crit!=0) {									// if the gem has crit we go on
-					double Pb2 = poolf[i][k].bbound * poolf[i][k].bbound;
-					double Pdg = poolf[i][k].damage;
-					double Pcg = poolf[i][k].crit  ;
-					for (h=0;h<poolYf_length[j];++h) {					// and in the reduced amp pool
-						double Pdamage = Pdg + damage_ratio* poolYf[j][h].damage ;
-						double Pcrit   = Pcg + crit_ratio  * poolYf[j][h].crit   ;
-						double Pbase   = Pb2 * Pdamage * Pcrit ;
-						double power   = Cg * Pbase;
-						if (power>powers[i]) {
-							powers[i]=power;
-							gems[i]=poolf[i][k];
-							amps[i]=poolYf[j][h];
-						}
+				double Pb2 = poolf[i][k].bbound * poolf[i][k].bbound;
+				double Pdg = poolf[i][k].damage;
+				double Pcg = poolf[i][k].crit  ;
+				for (h=0;h<poolYf_length[j];++h) {					// and in the reduced amp pool
+					double Pdamage = Pdg + damage_ratio* poolYf[j][h].damage ;
+					double Pcrit   = Pcg + crit_ratio  * poolYf[j][h].crit   ;
+					double Pbase   = Pb2 * Pdamage * Pcrit ;
+					double power   = Cg * Pbase;
+					if (power>powers[i]) {
+						powers[i]=power;
+						gems[i]=poolf[i][k];
+						amps[i]=poolYf[j][h];
 					}
 				}
 			}

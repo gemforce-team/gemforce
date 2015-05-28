@@ -104,10 +104,11 @@ inline gem gemP2gem(gemP g)
 		int broken=0;                                                                              \
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */ \
 		float* tree=malloc((tree_length*2)*sizeof(float));                                         \
-		for (int l=0; l<tree_length*2; ++l) tree[l]=-1;			/* init also tree[0], it's faster */ \
+		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* delete gems with bb=0 */          \
 		for (int l=length-1;l>=0;--l) {								/* start from large z */             \
 			gemP* p_gem=temp_array+l;                                                               \
-			if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {                \
+			if (p_gem->crit!=0											/* delete gems with crit=0 */        \
+			&&  ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {                \
 				ftree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);                   \
 			}                                                                                       \
 			else {                                                                                  \
@@ -152,7 +153,7 @@ inline gem gemP2gem(gemP g)
 		int broken=0;                                                                              \
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */ \
 		float* tree=malloc((tree_length*2)*sizeof(float));                                         \
-		for (int l=0; l<tree_length*2; ++l) tree[l]=-1;			/* init also tree[0], it's faster */ \
+		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* combines have no gem with bb=0 */ \
 		for (int l=length-1;l>=0;--l) {								/* start from large z */             \
 			gemP* p_gem=temp_array+l;                                                               \
 			if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {                \

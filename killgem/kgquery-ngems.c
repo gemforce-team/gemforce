@@ -97,8 +97,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 		if (Namps!=0)
 		for (j=1;j<=i/Namps;++j) {										// for every amount of amps we can fit in
 			int value = i-Namps*j;										// this is the amount of gems we have left
-			for (k=0;k<poolf_length[value];++k)						// we search in that pool
-			if (poolf[value][k].crit!=0) {							// if the gem has crit we go on
+			for (k=0;k<poolf_length[value];++k) {					// we search in that pool
 				for (h=0;h<poolYf_length[j-1];++h) {				// and we look in the amp pool
 					if (gem_amp_power(poolf[value][k], poolYf[j-1][h], damage_ratio, crit_ratio) > power)
 					{

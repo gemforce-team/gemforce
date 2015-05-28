@@ -198,18 +198,16 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 					double Pad = Rd * poolYf[j][h].damage;
 					double Pac = Rc * poolYf[j][h].crit  ;
 					for (k=0; k<poolf_length[i]; ++k) {						// and in the gem pool
-						if (poolf[i][k].crit!=0) {								// if the gem has crit we go on
-							double Pext = Cg * poolf[i][k].bbound * poolf[i][k].bbound;
-							double Pdamage = poolf[i][k].damage + Pad;
-							double Pcrit   = poolf[i][k].crit   + Pac;
-							double power   = Pext * Pdamage * Pcrit ;
-							if (power>powers[i]) {
-								powers[i]=power;
-								gems[i]=poolf[i][k];
-								amps[i]=poolYf[j][h];
-								gemsc[i]=*(cpairs[l].combg);
-								ampsc[i]=*(cpairs[l].comba);
-							}
+						double Pext = Cg * poolf[i][k].bbound * poolf[i][k].bbound;
+						double Pdamage = poolf[i][k].damage + Pad;
+						double Pcrit   = poolf[i][k].crit   + Pac;
+						double power   = Pext * Pdamage * Pcrit ;
+						if (power>powers[i]) {
+							powers[i]=power;
+							gems[i]=poolf[i][k];
+							amps[i]=poolYf[j][h];
+							gemsc[i]=*(cpairs[l].combg);
+							ampsc[i]=*(cpairs[l].comba);
 						}
 					}
 				}
