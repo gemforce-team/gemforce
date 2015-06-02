@@ -46,18 +46,15 @@ void print_omnia_table(gem* gems, gemO* amps, double* powers, int len)
 			}                                                                                        \
 			else lim_bbound=temp_pool[j].bbound;                                                     \
 		}                                                                                           \
-		gem best=(gem){0};							/* choosing best i-spec */                           \
-		for (j=0;j<pool_length[i];++j)                                                              \
-		if (gem_more_powerful(temp_pool[j], best)) {                                                \
-			best=temp_pool[j];                                                                       \
-		}                                                                                           \
-		for (j=0;j<pool_length[i];++j) {					/* comparison compression (only for mg): */    \
-			if ((temp_pool[j].bbound < best.bbound || temp_pool[j].leech == 0)                       \
-			&&  temp_pool[j].grade!=0)						/* a mg makes sense only if */                 \
-			{														/* its bbound is bigger than */                \
-				temp_pool[j].grade=0;						/* the bbound of the best one */               \
-				broken++;										/* and its leech is > 0 */                     \
-			}														/* all the unnecessary gems broken */          \
+		double lim_power=0;							/* power-ileech compression */                       \
+		for (j=0; j<pool_length[i]; ++j) {		/* leech min->max equals ileech max->min */          \
+			if (temp_pool[j].grade!=0) {			/* gems with leech=0 have power=0 and are broken */  \
+				if (gem_power(temp_pool[j])<=lim_power) {                                             \
+					temp_pool[j].grade=0;                                                              \
+					broken++;                                                                          \
+				}                                                                                     \
+				else lim_power=gem_power(temp_pool[j]);                                               \
+			}                                                                                        \
 		}                                                                                           \
 		poolf_length[i]=pool_length[i]-broken;                                                      \
 		poolf[i]=malloc(poolf_length[i]*sizeof(gem));		/* pool init via broken */               \
@@ -85,19 +82,15 @@ void print_omnia_table(gem* gems, gemO* amps, double* powers, int len)
 			}                                                                                        \
 			else lim_bbound=poolc[lenc-1][i].bbound;                                                 \
 		}                                                                                           \
-		                                                                                            \
-		gem best=(gem){0};				/* choosing best combine */                                   \
-		for (i=0;i<poolc_length[lenc-1];++i)                                                        \
-		if (gem_more_powerful(poolc[lenc-1][i], best)) {                                            \
-			best=poolc[lenc-1][i];                                                                   \
-		}                                                                                           \
-		for (i=0;i<poolc_length[lenc-1];++i) {			/* comparison compression (only for mg): */    \
-			if (poolc[lenc-1][i].bbound < best.bbound                                                \
-			&&  poolc[lenc-1][i].grade!=0)				/* a mg makes sense only if */                 \
-			{														/* its bbound is bigger than */                \
-				poolc[lenc-1][i].grade=0;					/* the bbound of the best one */               \
-				broken++;                                                                             \
-			}														/* all the unnecessary gems destroyed */       \
+		double lim_power=0;									/* power-ileech compression */                 \
+		for (i=0; i<poolc_length[lenc-1]; ++i) {		/* leech min->max equals ileech max->min */    \
+			if (poolc[lenc-1][i].grade!=0) {                                                         \
+				if (gem_power(poolc[lenc-1][i])<=lim_power) {                                         \
+					poolc[lenc-1][i].grade=0;                                                          \
+					broken++;                                                                          \
+				}                                                                                     \
+				else lim_power=gem_power(poolc[lenc-1][i]);                                           \
+			}                                                                                        \
 		}                                                                                           \
 		poolcf_length=poolc_length[lenc-1]-broken;                                                  \
 		poolcf=malloc(poolcf_length*sizeof(gem));		/* pool init via broken */                     \
