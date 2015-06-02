@@ -11,6 +11,16 @@ struct Gem_YBp {
 	int place;
 };
 
+inline double gemP_power(gemP gem1)
+{
+	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound;
+}
+
+inline int gemP_more_powerful(gemP gem1, gemP gem2)
+{
+	return (gemP_power(gem1) > gemP_power(gem2));
+}
+
 inline int gem_less_eq_exact(gemP gem1, gemP gem2)
 {
 	if (gem1.damage != gem2.damage)

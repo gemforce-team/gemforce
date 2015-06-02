@@ -117,7 +117,20 @@ inline gem gemP2gem(gemP g)
 			}                                                                                       \
 		}                                                                                          \
 		free(tree);                                                                                \
-		                                                                                           \
+		gemP best=(gemP){0};							/* choosing best i-spec */                          \
+		for (int j=0; j<pool_length[i]; ++j)                                                       \
+		if (gemP_more_powerful(temp_array[j], best)) {                                             \
+			best=temp_array[j];                                                                     \
+		}                                                                                          \
+		for (int j=0; j<pool_length[i]; ++j) {			/* comparison compression (only for kg): */   \
+			if (temp_array[j].damage > best.damage		/* to be useful a kg needs to have */         \
+			&&  temp_array[j].crit > best.crit			/* more inverse dmg or more inverse crit */   \
+			&&  temp_array[j].grade!=0)					/* than the most powerful one */              \
+			{                                                                                       \
+				temp_array[j].grade=0;                                                               \
+				broken++;                                                                            \
+			}														/* all the unnecessary gems broken */         \
+		}                                                                                          \
 		poolf_length[i]=length-broken;                                                             \
 		poolf[i]=malloc(poolf_length[i]*sizeof(gem));                                              \
 		int index=0;                                                                               \
@@ -165,7 +178,20 @@ inline gem gemP2gem(gemP g)
 			}                                                                                       \
 		}                                                                                          \
 		free(tree);                                                                                \
-		                                                                                           \
+		gemP best=(gemP){0};							/* choosing best combine */                         \
+		for (int j=0; j<length; ++j)                                                               \
+		if (gemP_more_powerful(temp_array[j], best)) {                                             \
+			best=temp_array[j];                                                                     \
+		}                                                                                          \
+		for (int j=0; j<length; ++j) {					/* comparison compression (only for kg): */   \
+			if (temp_array[j].damage > best.damage		/* to be useful a kg needs to have */         \
+			&&  temp_array[j].crit > best.crit			/* more inverse dmg or more inverse crit */   \
+			&&  temp_array[j].grade!=0)					/* than the most powerful one */              \
+			{                                                                                       \
+				temp_array[j].grade=0;                                                               \
+				broken++;                                                                            \
+			}														/* all the unnecessary gems broken */         \
+		}                                                                                          \
 		poolcf_length=length-broken;                                                               \
 		poolcf=malloc(poolcf_length*sizeof(gem));                                                  \
 		int index=0;                                                                               \
