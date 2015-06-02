@@ -107,8 +107,7 @@ inline gem gemP2gem(gemP g)
 		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* delete gems with bb=0 */          \
 		for (int l=length-1;l>=0;--l) {								/* start from large z */             \
 			gemP* p_gem=temp_array+l;                                                               \
-			if (p_gem->crit!=0											/* delete gems with crit=0 */        \
-			&&  ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {                \
+			if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {                \
 				ftree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);                   \
 			}                                                                                       \
 			else {                                                                                  \
@@ -117,20 +116,21 @@ inline gem gemP2gem(gemP g)
 			}                                                                                       \
 		}                                                                                          \
 		free(tree);                                                                                \
-		gemP best=(gemP){0};							/* choosing best i-spec */                          \
-		for (int j=0; j<pool_length[i]; ++j)                                                       \
-		if (gemP_more_powerful(temp_array[j], best)) {                                             \
-			best=temp_array[j];                                                                     \
-		}                                                                                          \
-		for (int j=0; j<pool_length[i]; ++j) {			/* comparison compression (only for kg): */   \
-			if (temp_array[j].damage > best.damage		/* to be useful a kg needs to have */         \
-			&&  temp_array[j].crit > best.crit			/* more inverse dmg or more inverse crit */   \
-			&&  temp_array[j].grade!=0)					/* than the most powerful one */              \
-			{                                                                                       \
-				temp_array[j].grade=0;                                                               \
+		double* dtree=malloc((tree_length*2)*sizeof(double));                                      \
+		for (int l=0; l<tree_length*2; ++l) dtree[l]=0;			/* delete gems with power=0 */       \
+		for (int l=0; l<length; ++l) {								/* start from low dmg = high idmg */ \
+			gemP* p_gem=temp_array+l;                                                               \
+			if (p_gem->grade==0) continue;                                                          \
+			int place = tree_length -1 - p_gem->place;			/* reverse crit order */             \
+			if (dtree_check_after(dtree, tree_length, place, gemP_power(*p_gem))) {                 \
+				dtree_add_element(dtree, tree_length, place, gemP_power(*p_gem));                    \
+			}                                                                                       \
+			else {                                                                                  \
+				p_gem->grade=0;                                                                      \
 				broken++;                                                                            \
-			}														/* all the unnecessary gems broken */         \
+			}                                                                                       \
 		}                                                                                          \
+		free(dtree);                                                                               \
 		poolf_length[i]=length-broken;                                                             \
 		poolf[i]=malloc(poolf_length[i]*sizeof(gem));                                              \
 		int index=0;                                                                               \
@@ -178,20 +178,21 @@ inline gem gemP2gem(gemP g)
 			}                                                                                       \
 		}                                                                                          \
 		free(tree);                                                                                \
-		gemP best=(gemP){0};							/* choosing best combine */                         \
-		for (int j=0; j<length; ++j)                                                               \
-		if (gemP_more_powerful(temp_array[j], best)) {                                             \
-			best=temp_array[j];                                                                     \
-		}                                                                                          \
-		for (int j=0; j<length; ++j) {					/* comparison compression (only for kg): */   \
-			if (temp_array[j].damage > best.damage		/* to be useful a kg needs to have */         \
-			&&  temp_array[j].crit > best.crit			/* more inverse dmg or more inverse crit */   \
-			&&  temp_array[j].grade!=0)					/* than the most powerful one */              \
-			{                                                                                       \
-				temp_array[j].grade=0;                                                               \
+		double* dtree=malloc((tree_length*2)*sizeof(double));                                      \
+		for (int l=0; l<tree_length*2; ++l) dtree[l]=0;			/* delete gems with power=0 */       \
+		for (int l=0; l<length; ++l) {								/* start from low dmg = high idmg */ \
+			gemP* p_gem=temp_array+l;                                                               \
+			if (p_gem->grade==0) continue;                                                          \
+			int place = tree_length -1 - p_gem->place;			/* reverse crit order */             \
+			if (dtree_check_after(dtree, tree_length, place, gemP_power(*p_gem))) {                 \
+				dtree_add_element(dtree, tree_length, place, gemP_power(*p_gem));                    \
+			}                                                                                       \
+			else {                                                                                  \
+				p_gem->grade=0;                                                                      \
 				broken++;                                                                            \
-			}														/* all the unnecessary gems broken */         \
+			}                                                                                       \
 		}                                                                                          \
+		free(dtree);                                                                               \
 		poolcf_length=length-broken;                                                               \
 		poolcf=malloc(poolcf_length*sizeof(gem));                                                  \
 		int index=0;                                                                               \
