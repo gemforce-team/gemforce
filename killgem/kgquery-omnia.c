@@ -120,10 +120,49 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */
 		double* tree=malloc((tree_length*2)*sizeof(double));
 		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* init also tree[0], it's faster */
-		for (int l=length-1;l>=0;--l) {								/* start from large rdmg */
+		for (int l=length-1; l>=0; --l) {							/* start from large rdmg */
 			cpair* p_cpair=temp_array+l;
 			if (dtree_check_after(tree, tree_length, p_cpair->place, p_cpair->power)) {
 				dtree_add_element(tree, tree_length, p_cpair->place, p_cpair->power);
+			}
+			else {
+				p_cpair->combg=NULL;
+				broken++;
+			}
+		}
+		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* BgDaCa - iDa - iCa  compression */
+		for (int l=0; l<length; ++l) {								/* start from low rdmg */
+			cpair* p_cpair=temp_array+l;
+			if (p_cpair->combg==NULL) continue;
+			int place = tree_length -1 - p_cpair->place;			/* reverse crit order */
+			if (dtree_check_after(tree, tree_length, place, cpair_BgDaCa(*p_cpair))) {
+				dtree_add_element(tree, tree_length, place, cpair_BgDaCa(*p_cpair));
+			}
+			else {
+				p_cpair->combg=NULL;
+				broken++;
+			}
+		}
+		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* BgDaCg - iDa - Ca  compression */
+		for (int l=0; l<length; ++l) {								/* start from low rdmg */
+			cpair* p_cpair=temp_array+l;
+			if (p_cpair->combg==NULL) continue;
+			int place = p_cpair->place;								/* regular crit order */
+			if (dtree_check_after(tree, tree_length, place, cpair_BgDaCg(*p_cpair))) {
+				dtree_add_element(tree, tree_length, place, cpair_BgDaCg(*p_cpair));
+			}
+			else {
+				p_cpair->combg=NULL;
+				broken++;
+			}
+		}
+		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* BgDgCa - Da - iCa  compression */
+		for (int l=length-1; l>=0; --l) {							/* start from large rdmg */
+			cpair* p_cpair=temp_array+l;
+			if (p_cpair->combg==NULL) continue;
+			int place = tree_length -1 - p_cpair->place;			/* reverse crit order */
+			if (dtree_check_after(tree, tree_length, place, cpair_BgDgCa(*p_cpair))) {
+				dtree_add_element(tree, tree_length, place, cpair_BgDgCa(*p_cpair));
 			}
 			else {
 				p_cpair->combg=NULL;

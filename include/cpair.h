@@ -10,6 +10,21 @@ typedef struct Cpair {
 	int    place;
 } cpair;
 
+inline double cpair_BgDaCa(cpair cp)
+{
+	return cp.power*cp.rdmg*cp.rcrit;
+}
+
+inline double cpair_BgDgCa(cpair cp)
+{
+	return cp.power*cp.rcrit;
+}
+
+inline double cpair_BgDaCg(cpair cp)
+{
+	return cp.power*cp.rdmg;
+}
+
 inline int cpair_less_xyz(cpair cpair1, cpair cpair2)
 {
 	if (cpair1.rdmg != cpair2.rdmg)
