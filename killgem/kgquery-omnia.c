@@ -120,10 +120,10 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */
 		double* tree=malloc((tree_length*2)*sizeof(double));
 		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* init also tree[0], it's faster */
-		for (int l=length-1;l>=0;--l) {								/* start from large z */
+		for (int l=length-1;l>=0;--l) {								/* start from large rdmg */
 			cpair* p_cpair=temp_array+l;
-			if (dtree_check_after(tree, tree_length, p_cpair->place, p_cpair->rdmg)) {
-				dtree_add_element(tree, tree_length, p_cpair->place, p_cpair->rdmg);
+			if (dtree_check_after(tree, tree_length, p_cpair->place, p_cpair->power)) {
+				dtree_add_element(tree, tree_length, p_cpair->place, p_cpair->power);
 			}
 			else {
 				p_cpair->combg=NULL;

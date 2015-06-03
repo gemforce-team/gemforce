@@ -12,10 +12,10 @@ typedef struct Cpair {
 
 inline int cpair_less_xyz(cpair cpair1, cpair cpair2)
 {
-	if (cpair1.power != cpair2.power)
-		return cpair1.power<cpair2.power;
 	if (cpair1.rdmg != cpair2.rdmg)
 		return cpair1.rdmg<cpair2.rdmg;
+	if (cpair1.power != cpair2.power)
+		return cpair1.power<cpair2.power;
 	return cpair1.rcrit<cpair2.rcrit;
 }
 
