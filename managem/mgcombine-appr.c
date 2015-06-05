@@ -276,7 +276,7 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	else worker(len, output_options, pool_zero);
+	worker(len, output_options, pool_zero);
 	return 0;
 }
 
