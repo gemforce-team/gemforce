@@ -54,6 +54,8 @@ void gem_combine_O (gemO *p_gem1, gemO *p_gem2, gemO *p_gem_combined)
 	}
 }
 
+#include "gfon.h"
+
 int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
 {
 	printf("\nBuilding pool...");
@@ -68,29 +70,28 @@ int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
 	for (i=0;i<pool_length[0];++i) {				// discard value 0 gems
 		fscanf(table, "%*[^\n]\n");
 	}
-	fscanf(table, "%*d\n\n");								// discard iteration number
+	fscanf(table, "%d\n\n", &i);              // check iteration number
+	if (i!=0) exit_on_corruption(ftell(table));
 	int prevmax=0;
 	for (i=1;i<len;++i) {
-		int eof_check=fscanf(table, "%d\n", pool_length+i);				// get pool length
+		int eof_check=fscanf(table, "%d\n", pool_length+i);      // get pool length
 		if (eof_check==-1) break;
 		else {
-			pool[i]=malloc(pool_length[i]*sizeof(gemO));
+			pool[i]=malloc(pool_length[i]*sizeof(gem));
 			int j;
 			for (j=0; j<pool_length[i]; ++j) {
 				int value_father, offset_father;
 				int value_mother, offset_mother;
 				int integrity_check=fscanf(table, "%x %x %x\n", &value_father, &offset_father, &offset_mother);
-				if (integrity_check!=3) {
-					printf("\nERROR: integrity check failed at byte %ld\n", ftell(table));
-					printf("Your table may be corrupt, brutally exiting...\n");
-					exit(1);
-				}
+				if (integrity_check!=3) exit_on_corruption(ftell(table));
 				else {
 					value_mother=i-1-value_father;
 					gem_combine_O(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
 				}
 			}
-			fscanf(table, "%*d\n\n");						// discard iteration number
+			int iteration_check;
+			fscanf(table, "%d\n\n", &iteration_check);    // check iteration number
+			if (iteration_check!=i) exit_on_corruption(ftell(table));
 			prevmax++;
 		}
 	}

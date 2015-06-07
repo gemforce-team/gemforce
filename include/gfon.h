@@ -81,6 +81,13 @@ FILE* file_check(char* filename)
 	return table;
 }
 
+void exit_on_corruption(long int position)
+{
+	printf("\nERROR: integrity check failed at byte %ld\n", position);
+	printf("Your table may be corrupt, brutally exiting...\n");
+	exit(1);
+}
+
 int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 {
 	printf("\nBuilding pool...");
@@ -95,7 +102,8 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 	for (i=0;i<pool_length[0];++i) {          // discard value 0 gems
 		fscanf(table, "%*[^\n]\n");
 	}
-	fscanf(table, "%*d\n\n");                 // discard iteration number
+	fscanf(table, "%d\n\n", &i);              // check iteration number
+	if (i!=0) exit_on_corruption(ftell(table));
 	int prevmax=0;
 	for (i=1;i<len;++i) {
 		int eof_check=fscanf(table, "%d\n", pool_length+i);      // get pool length
@@ -107,17 +115,15 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 				int value_father, offset_father;
 				int value_mother, offset_mother;
 				int integrity_check=fscanf(table, "%x %x %x\n", &value_father, &offset_father, &offset_mother);
-				if (integrity_check!=3) {
-					printf("\nERROR: integrity check failed at byte %ld\n", ftell(table));
-					printf("Your table may be corrupt, brutally exiting...\n");
-					exit(1);
-				}
+				if (integrity_check!=3) exit_on_corruption(ftell(table));
 				else {
 					value_mother=i-1-value_father;
 					gem_combine(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
 				}
 			}
-			fscanf(table, "%*d\n\n");          // discard iteration number
+			int iteration_check;
+			fscanf(table, "%d\n\n", &iteration_check);    // check iteration number
+			if (iteration_check!=i) exit_on_corruption(ftell(table));
 			prevmax++;
 		}
 	}
