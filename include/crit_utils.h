@@ -90,10 +90,15 @@ int pool_from_table_Y(gemY** pool, int* pool_length, int len, FILE* table)
 			pool[i]=malloc(pool_length[i]*sizeof(gem));
 			int j;
 			for (j=0; j<pool_length[i]; ++j) {
+				char b1[8], b2[8], b3[8];
+				fscanf(table, "%s %s %s\n", b1, b2, b3);
 				int value_father, offset_father;
 				int value_mother, offset_mother;
-				int integrity_check=fscanf(table, "%x %x %x\n", &value_father, &offset_father, &offset_mother);
-				if (integrity_check!=3) exit_on_corruption(ftell(table));
+				int check;
+				check =fscan64(b1, &value_father);
+				check&=fscan64(b2, &offset_father);
+				check&=fscan64(b3, &offset_mother);
+				if (!check) exit_on_corruption(ftell(table));
 				else {
 					value_mother=i-1-value_father;
 					gem_combine_Y(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);

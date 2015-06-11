@@ -88,6 +88,17 @@ void exit_on_corruption(long int position)
 	exit(1);
 }
 
+int fscan64(char* s, int* n)
+{
+	*n=0;
+	if (s==NULL || s[0]=='\0') return 0;
+	for (int m=0; *s; m+=6) {
+		(*n) += (((int)(*s)-48) << m);
+		s++;
+	}
+	return 1;
+}
+
 int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 {
 	printf("\nBuilding pool...");
@@ -112,10 +123,15 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 			pool[i]=malloc(pool_length[i]*sizeof(gem));
 			int j;
 			for (j=0; j<pool_length[i]; ++j) {
+				char b1[8], b2[8], b3[8];
+				fscanf(table, "%s %s %s\n", b1, b2, b3);
 				int value_father, offset_father;
 				int value_mother, offset_mother;
-				int integrity_check=fscanf(table, "%x %x %x\n", &value_father, &offset_father, &offset_mother);
-				if (integrity_check!=3) exit_on_corruption(ftell(table));
+				int check;
+				check =fscan64(b1, &value_father);
+				check&=fscan64(b2, &offset_father);
+				check&=fscan64(b3, &offset_mother);
+				if (!check) exit_on_corruption(ftell(table));
 				else {
 					value_mother=i-1-value_father;
 					gem_combine(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
@@ -131,6 +147,15 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 	return prevmax;
 }
 
+void fprint64(int n, FILE* steam)
+{
+	if (n) while (n) {
+		fputc((n & 63)+48, steam);
+		n>>=6;
+	}
+	else fputc('0', steam);
+}
+
 void table_write_iteration(gem** pool, int* pool_length, int iteration, FILE* table)
 {
 	int i=iteration;
@@ -141,10 +166,14 @@ void table_write_iteration(gem** pool, int* pool_length, int iteration, FILE* ta
 		for (k=0; ; k++) {                   // find and print parents
 			int place=pool[i][j].father - pool[k];
 			if (place < pool_length[k] && place >=0) {
-				fprintf(table, "%x %x", k, place);
+				fprint64(k, table);
+				fputc(' ', table);
+				fprint64(place, table);
 				int mom_pool=i-1-k;
 				place=pool[i][j].mother - pool[mom_pool];
-				fprintf(table, " %x\n", place);
+				fputc(' ', table);
+				fprint64(place, table);
+				fputc('\n', table);
 				break;
 			}
 		}
