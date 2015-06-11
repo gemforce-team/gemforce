@@ -165,7 +165,7 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (filename[0]=='\0') strcpy(filename, "table_kgc6");
+	if (filename[0]=='\0') strcpy(filename, "table_kgcomb");
 	worker(len, output_options, filename);
 	return 0;
 }
