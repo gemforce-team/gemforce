@@ -232,10 +232,10 @@ Not included in auto setup package:
 
 * leechbuild      : builds leech table
 * leechcombine    : makes leech combines from scratch
-* mgcombine-alone : makes managem combines and specces (alone) from scratch
+* mgcombine-appr  : makes managem combines and specces (alone) from scratch
 * mgbuild-appr    : builds managem tables
 * mgbuild-exact   : builds the exact managem tables
-* mgbuild-[...]   : builds a fast managem combine table in various versions
+* mgbuild-c6      : builds the fast managem combine table
 * mgquery-ngems   : gets amped managem specces and their amps from tables - fixed total number version
 
 
