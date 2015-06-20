@@ -3,7 +3,6 @@
 #include <getopt.h>
 #include <string>
 #include <cstring>
-#include <vector>
 
 using namespace std;
 
@@ -446,14 +445,14 @@ int main(int argc, char** argv)
 			break;
 		}
 	}
-	if (optind==argc) {
+	if (optind==argc && parens=="") {
 		printf("No recipe specified\n");
 		return 1;
 	}
-	if (optind+1==argc) {
+	else if (optind+1==argc) {
 		parens = ieeePreParser(argv[optind]);
 	}
-	else {
+	else if (parens=="") {
 		printf("Too many arguments:\n");
 		while (argv[optind]!=NULL) {
 			printf("%s ", argv[optind]);
@@ -463,7 +462,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (parens.length() < 1) {
-		printf("Improper gem number\n");
+		printf("Improper recipe\n");
 		return 1;
 	}
 	worker(parens, parens_amps, output_options, TC, As, Namps);
