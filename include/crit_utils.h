@@ -110,7 +110,7 @@ int pool_from_table_Y(gemY** pool, int* pool_length, int len, FILE* table)
 			prevmax++;
 		}
 	}
-	printf(" Done\n\n");
+	printf(" %d blocks read\n\n", prevmax+1);
 	return prevmax;
 }
 

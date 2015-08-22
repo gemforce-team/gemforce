@@ -143,7 +143,7 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 			prevmax++;
 		}
 	}
-	printf(" Done\n\n");
+	printf(" %d blocks read\n\n", prevmax+1);
 	return prevmax;
 }
 
