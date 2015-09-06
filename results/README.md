@@ -24,7 +24,7 @@ The recipe kind can be:
 * `omnia`   - a set of four recipes: a main gem spec and its amps spec in optimal proportions
               and a pair of optimal combines for both, it's the pinnacle of *gem rocket science*  
 
-The number(s) in the specify how many base gems go into specific recipe:  
+The number(s) specify how many base gems go into specific recipe:  
 
 * combine:   `N` - the combine costs `N` base gems, as easy as it gets  
 * amps:    `G-A` - the main gem costs `G` gems while its amps cost `A` each  
