@@ -8,6 +8,7 @@ typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows 
 typedef struct Gem_O gemO;
 #include "leech_utils.h"
 #include "mga_utils.h"
+#include "query_utils.h"
 #include "gfon.h"
 
 void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, int TC, int As, int GT, int Namps)
@@ -283,19 +284,8 @@ int main(int argc, char** argv)
 				print_help("hptecdqurf:T:A:N:G:");
 				return 0;
 			PTECIDQUR_OPTIONS_BLOCK
-			case 'f':			// can be "filename,filenamec,filenameA", if missing default is used
-				;
-				char* p=optarg;
-				while (*p != ',' && *p != '\0') p++;
-				if (*p==',') *p='\0';			// ok, it's "f,..."
-				else p--;							// not ok, it's "f" -> empty string
-				char* q=p+1;
-				while (*q != ',' && *q != '\0') q++;
-				if (*q==',') *q='\0';			// ok, it's "...,fc,fA"
-				else q--;							// not ok, it's "...,fc" -> empty string
-				strcpy(filename,optarg);
-				strcpy(filenamec,p+1);
-				strcpy(filenameA,q+1);
+			case 'f':		// can be "filename,filenamec,filenameA", if missing default is used
+				table_selection3(optarg, filename, filenamec, filenameA);
 				break;
 			TAN_OPTIONS_BLOCK
 			case 'G':

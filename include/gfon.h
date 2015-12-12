@@ -4,30 +4,6 @@
 /* GemForce Object Notation */
 /* Remember to redeclare pool_from_table in the amplifier_utils */
 
-inline int file_exists (const char* name)
-{
-	FILE* file;
-	if ((file = fopen(name, "r"))) {
-		fclose(file);
-		return 1;
-	}
-	else return 0;
-}
-
-void file_selection(char* filename, const char* table_name)
-{
-	if (filename[0]!='\0') return;
-	else if (file_exists(table_name)) {
-		strcpy(filename, table_name);
-	}
-	else {
-		char buffer[256];
-		strcat(strcpy(buffer, "gem_tables/"), table_name);
-		if (file_exists(buffer)) strcpy(filename, buffer);
-		else strcpy(filename, table_name);
-	}
-}
-
 void line_init(FILE* table, int pool_zero)
 {
 	switch (pool_zero) {

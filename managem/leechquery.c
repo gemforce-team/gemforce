@@ -5,6 +5,7 @@
 #include <string.h>
 typedef struct Gem_O gem;
 #include "leechg_utils.h"
+#include "query_utils.h"
 #include "gfon.h"
 
 void gem_print(gem *p_gem) {

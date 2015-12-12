@@ -6,6 +6,7 @@
 #include "interval_tree.h"
 typedef struct Gem_YB gem;
 #include "killgem_utils.h"
+#include "query_utils.h"
 #include "gfon.h"
 
 void worker(int len, int output_options, int pool_zero, char* filename)

@@ -5,6 +5,7 @@
 #include <string.h>
 typedef struct Gem_Y gem;
 #include "critg_utils.h"
+#include "query_utils.h"
 #include "gfon.h"
 
 void gem_print(gem *p_gem) {

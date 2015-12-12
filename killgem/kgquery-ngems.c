@@ -9,6 +9,7 @@ typedef struct Gem_YB gem;
 typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 #include "kga_utils.h"
+#include "query_utils.h"
 #include "gfon.h"
 
 void print_ngems_table(gem* gems, gemY* amps, double damage_ratio, double crit_ratio, int len)
@@ -215,14 +216,8 @@ int main(int argc, char** argv)
 			case 'l':
 				gem_limit = atoi(optarg);
 				break;
-			case 'f':			// can be "filename,filenameA", if missing default is used
-				;
-				char* p=optarg;
-				while (*p != ',' && *p != '\0') p++;
-				if (*p==',') *p='\0';			// ok, it's "f,fA"
-				else p--;							// not ok, it's "f" -> empty string
-				strcpy(filename,optarg);
-				strcpy(filenameA,p+1);
+			case 'f':		// can be "filename,filenameA", if missing default is used
+				table_selection2(optarg, filename, filenameA);
 				break;
 			TAN_OPTIONS_BLOCK
 			case '?':

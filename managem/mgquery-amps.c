@@ -8,6 +8,7 @@ typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows 
 typedef struct Gem_O gemO;
 #include "leech_utils.h"
 #include "mga_utils.h"
+#include "query_utils.h"
 #include "gfon.h"
 
 void print_amps_table(gem* gems, gemO* amps, double* spec_coeffs, double leech_ratio, int len)
@@ -239,14 +240,8 @@ int main(int argc, char** argv)
 				print_help("hptecdqurf:g:T:A:N:");
 				return 0;
 			PTECIDQUR_OPTIONS_BLOCK
-			case 'f':			// can be "filename,filenameA", if missing default is used
-				;
-				char* p=optarg;
-				while (*p != ',' && *p != '\0') p++;
-				if (*p==',') *p='\0';			// ok, it's "f,fA"
-				else p--;							// not ok, it's "f" -> empty string
-				strcpy(filename,optarg);
-				strcpy(filenameA,p+1);
+			case 'f':		// can be "filename,filenameA", if missing default is used
+				table_selection2(optarg, filename, filenameA);
 				break;
 			case 'g':
 				growth_comb = atof(optarg);
