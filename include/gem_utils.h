@@ -11,43 +11,38 @@
 #define mask_upto 128
 #define mask_red 256
 
-/* Macro blob that is used for all flag options. Handle with care */
-#define PTECIDQUR_OPTIONS_BLOCK\
-			case 'p':\
-				output_options |= mask_parens;\
-				break;\
-			case 't':\
-				output_options |= mask_tree;\
-				break;\
-			case 'e':\
-				output_options |= mask_equations;\
-				break;\
-			case 'c':\
-				output_options |= mask_table;\
-				break;\
-			case 'i':\
-				output_options |= mask_info;\
-				break;\
-			case 'd':\
-				output_options |= mask_debug;\
-				break;\
-			case 'q':\
-				output_options |= mask_quiet;\
-				break;\
-			case 'u':\
-				output_options |= mask_upto;\
-				break;\
-			case 'r':\
-				output_options |= mask_red;\
-				break;\
-
+/* Macro blobs used for all flag options. Handle with care */
 #define DQ_OPTIONS_BLOCK\
-			case 'd':                          \
-				output_options |= mask_debug;   \
-				break;                          \
-			case 'q':                          \
-				output_options |= mask_quiet;   \
-				break;
+	case 'd':								\
+		output_options |= mask_debug;		\
+		break;								\
+	case 'q':								\
+		output_options |= mask_quiet;		\
+		break;
+
+#define PTECIDQUR_OPTIONS_BLOCK\
+	case 'p':								\
+		output_options |= mask_parens;		\
+		break;								\
+	case 't':								\
+		output_options |= mask_tree;		\
+		break;								\
+	case 'e':								\
+		output_options |= mask_equations;	\
+		break;								\
+	case 'c':								\
+		output_options |= mask_table;		\
+		break;								\
+	case 'i':								\
+		output_options |= mask_info;		\
+		break;								\
+	DQ_OPTIONS_BLOCK						\
+	case 'u':								\
+		output_options |= mask_upto;		\
+		break;								\
+	case 'r':								\
+		output_options |= mask_red;			\
+		break;
 
 #include <stdio.h>
 
