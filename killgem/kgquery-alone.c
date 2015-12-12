@@ -26,7 +26,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 	}
 	else {												// spec
 		gem_init(pool[0]  ,1,1.000000,1,0);
-		gem_init(pool[0]+1,1,1.186168,0,1);		// BB has more dmg
+		gem_init(pool[0]+1,1,1.181818,0,1);		// BB has more dmg
 		gem_init(gems     ,1,1.000000,1,0);		// grade damage crit bbound
 	}
 	

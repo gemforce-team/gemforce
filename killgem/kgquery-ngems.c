@@ -31,7 +31,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 	pool[0]=malloc(2*sizeof(gem));
 	pool_length[0]=2;
 	gem_init(pool[0]  ,1,1.000000,1,0);		// grade damage crit bbound
-	gem_init(pool[0]+1,1,1.186168,0,1);		// BB has more dmg
+	gem_init(pool[0]+1,1,1.181818,0,1);		// BB has more dmg
 	
 	int prevmax=pool_from_table(pool, pool_length, gem_limit, table);		// killgem pool filling
 	fclose(table);

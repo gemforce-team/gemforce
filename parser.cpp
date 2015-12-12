@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <getopt.h>
-#include <string>
 #include <cstring>
 
 using namespace std;
@@ -32,16 +31,16 @@ class gem
 	gem(const char color)
 	{
 		switch (color)
-		{                     // gr dmg       cr le bl r
+		{                      // gr dmg       cr le bl r
 			case 'y': *this = gem(1, 1       , 1, 0, 0, 0);
 			break;
 			case 'o': *this = gem(1, 0.727273, 0, 1, 0, 0);
 			break;
-			case 'b': *this = gem(1, 1.186168, 0, 0, 1, 0);
+			case 'b': *this = gem(1, 1.181818, 0, 0, 1, 0);
 			break;
 			case 'r': *this = gem(1, 0.909091, 0, 0, 0, 1);
 			break;
-			case 'm': *this = gem(1, 1       , 0, 1, 1, 0);
+			case 'm': *this = gem(1, 0       , 0, 1, 1, 0);
 			break;
 			case 'k': *this = gem(1, 1       , 1, 0, 1, 0);
 			break;
@@ -65,9 +64,9 @@ class gem
 	char get_color()
 	{
 		int info=0;
-		if (this->crit!=0) info+=4;
-		if (this->leech!=0) info+=2;
-		if (this->bbound!=0) info+=1;
+		if (this->crit  !=0) info|=4;
+		if (this->leech !=0) info|=2;
+		if (this->bbound!=0) info|=1;
 		switch (info) {
 			case  0: return this->red?'r':'0';
 			case  1: return 'b';
