@@ -200,44 +200,39 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
 	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
 	double NT=pow(2, GT-1);
-	if (!(output_options & mask_quiet)) {
-		printf("Killgem spec\n");
-		gem_print(gems);
-		printf("Amplifier spec (x%d)\n", Namps);
-		gem_print_Y(amps);
-		printf("Spec base power:    \t0\n\n\n");
-	}
-
-	for (i=1;i<len;++i) {														// for every gem value
-		gems[i]=(gem){0};															// we init the gems
-		amps[i]=(gemY){0};														// to extremely weak ones
+	
+	int skip_computations = (output_options & mask_quiet) && !((output_options & mask_table) || (output_options & mask_upto));
+	int first = skip_computations ? len-1 : 0;
+	for (i=first; i<len; ++i) {										// for every gem value
+		gems[i]=(gem){0};											// we init the gems
+		amps[i]=(gemY){0};											// to extremely weak ones
 		gemsc[i]=(gem){0};
 		ampsc[i]=(gemY){0};
-																						// first we compare the gem alone
-		for (l=0; l<poolcf_length; ++l) {									// first search in the NC gem comb pool
+																	// first we compare the gem alone
+		for (l=0; l<poolcf_length; ++l) {							// first search in the NC gem comb pool
 			if (gem_power(poolcf[l]) > gem_power(gemsc[i])) {
 				gemsc[i]=poolcf[l];
 			}
 		}
-		for (k=0;k<poolf_length[i];++k) {									// and then in the compressed gem pool
+		for (k=0;k<poolf_length[i];++k) {							// and then in the compressed gem pool
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
 		}
 		int NS=i+1;
-		double c0 = log(NT/(i+1))*iloglenc;									// last we compute the combination number
+		double c0 = log(NT/(i+1))*iloglenc;							// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
-																						// now we compare the whole setup
-		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {					// for every amp value from 1 to to gem_value
-			double c = log(NT/NS)*iloglenc;									// we compute the combination number
-			for (l=0; l<cpairs_length; ++l) {								// then we search in the comb pair pool
+																	// now we compare the whole setup
+		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {				// for every amp value from 1 to to gem_value
+			double c = log(NT/NS)*iloglenc;							// we compute the combination number
+			for (l=0; l<cpairs_length; ++l) {						// then we search in the comb pair pool
 				double Cg = pow(cpairs[l].power,c);
 				double Rd = damage_ratio*pow(cpairs[l].rdmg, c);
 				double Rc = crit_ratio * pow(cpairs[l].rcrit,c);
-				for (h=0; h<poolYf_length[j]; ++h) {						// then in the reduced amp pool
+				for (h=0; h<poolYf_length[j]; ++h) {				// then in the reduced amp pool
 					double Pad = Rd * poolYf[j][h].damage;
 					double Pac = Rc * poolYf[j][h].crit  ;
-					for (k=0; k<poolf_length[i]; ++k) {						// and in the gem pool
+					for (k=0; k<poolf_length[i]; ++k) {				// and in the gem pool
 						double Pext = Cg * poolf[i][k].bbound * poolf[i][k].bbound;
 						double Pdamage = poolf[i][k].damage + Pad;
 						double Pcrit   = poolf[i][k].crit   + Pac;

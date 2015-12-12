@@ -97,42 +97,37 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	double iloglenc=1/log(lenc);
 	double leech_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1+TC/3*0.1);
 	double NT=pow(2, GT-1);
-	if (!(output_options & mask_quiet)) {
-		printf("Managem spec\n");
-		gem_print(gems);
-		printf("Amplifier spec (x%d)\n", Namps);
-		gem_print_O(amps);
-		printf("Spec base power:    \t0\n\n\n");
-	}
-
-	for (i=1;i<len;++i) {													// for every gem value
-		gems[i]=(gem){0};														// we init the gems
-		amps[i]=(gemO){0};													// to extremely weak ones
+	
+	int skip_computations = (output_options & mask_quiet) && !((output_options & mask_table) || (output_options & mask_upto));
+	int first = skip_computations ? len-1 : 0;
+	for (i=first; i<len; ++i) {										// for every gem value
+		gems[i]=(gem){0};											// we init the gems
+		amps[i]=(gemO){0};											// to extremely weak ones
 		gemsc[i]=(gem){0};
-		ampsc[i]=combO;														// <- this is ok only for mg
-																					// first we compare the gem alone
-		for (l=0; l<poolcf_length; ++l) {								// first search in the NC gem comb pool
+		ampsc[i]=combO;												// <- this is ok only for mg
+																	// first we compare the gem alone
+		for (l=0; l<poolcf_length; ++l) {							// first search in the NC gem comb pool
 			if (gem_power(poolcf[l]) > gem_power(gemsc[i])) {
 				gemsc[i]=poolcf[l];
 			}
 		}
-		for (k=0;k<poolf_length[i];++k) {								// and then in the the gem pool
+		for (k=0;k<poolf_length[i];++k) {							// and then in the the gem pool
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
 		}
 		int NS=i+1;
-		double c0 = log(NT/(i+1))*iloglenc;								// last we compute the combination number
+		double c0 = log(NT/(i+1))*iloglenc;							// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
-																					// now we compare the whole setup
+																	// now we compare the whole setup
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {				// for every amp value from 1 up to gem_value
-			double c = log(NT/NS)*iloglenc;								// we compute the combination number
-			double Ca= leech_ratio * pow(combO.leech,c);				// <- this is ok only for mg
-			double Pa= Ca * bestO[j].leech;								// <- because we already know the best amps
-			for (l=0; l<poolcf_length; ++l) {							// then we search in NC gem comb pool
+			double c = log(NT/NS)*iloglenc;							// we compute the combination number
+			double Ca= leech_ratio * pow(combO.leech,c);			// <- this is ok only for mg
+			double Pa= Ca * bestO[j].leech;							// <- because we already know the best amps
+			for (l=0; l<poolcf_length; ++l) {						// then we search in NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cg  = pow(gem_power(poolcf[l]),c);
-				for (k=0; k<poolf_length[i]; ++k) {						// and in the reduced gem pool
+				for (k=0; k<poolf_length[i]; ++k) {					// and in the reduced gem pool
 					double Palone = Cg * gem_power(poolf[i][k]);
 					double Pbg = Cbg * poolf[i][k].bbound;
 					double power = Palone + Pbg * Pa;  

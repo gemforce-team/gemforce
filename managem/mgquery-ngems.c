@@ -75,26 +75,21 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 	gem_init(gems,1,1,0);
 	amps[0]=(gemO){0};
 	double leech_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1+TC/3*0.1);
-	if (!(output_options & mask_quiet)) {
-		printf("Total value:\t1\n\n");
-		printf("Managem\n");
-		gem_print(gems);
-		printf("Amplifier (x%d)\n", Namps);
-		gem_print_O(amps);
-	}
 	
-	for (i=1;i<len;++i) {											// for every total value
-		gems[i]=(gem){0};												// we init the gems
-		amps[i]=(gemO){0};											// to extremely weak ones
-		for (k=0;k<poolf_length[i];++k) {						// first we compare the gem alone
+	int skip_computations = (output_options & mask_quiet) && !((output_options & mask_table) || (output_options & mask_upto));
+	int first = skip_computations ? len-1 : 0;
+	for (i=first; i<len; ++i) {								// for every total value
+		gems[i]=(gem){0};									// we init the gems
+		amps[i]=(gemO){0};									// to extremely weak ones
+		for (k=0;k<poolf_length[i];++k) {					// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
 		}
 		double power = gem_power(gems[i]);
 		if (Namps!=0)
-		for (j=1;j<=i/Namps;++j) {									// for every amount of amps we can fit in
-			int value = i-Namps*j;									// this is the amount of gems we have left
+		for (j=1;j<=i/Namps;++j) {							// for every amount of amps we can fit in
+			int value = i-Namps*j;							// this is the amount of gems we have left
 			for (k=0; k<poolf_length[value]; ++k) {			// we search in that pool
 				if (gem_amp_power(poolf[value][k], bestO[j-1], leech_ratio) > power)
 				{

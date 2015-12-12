@@ -79,18 +79,13 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 	spec_coeffs[0]=0;
 	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
 	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
-	if (!(output_options & mask_quiet)) {
-		printf("Total value:\t1\n\n");
-		printf("Killgem\n");
-		gem_print(gems);
-		printf("Amplifier (x%d)\n", Namps);
-		gem_print_Y(amps);
-	}
-
-	for (i=1;i<len;++i) {											// for every gem value
-		gems[i]=(gem){0};												// we init the gems
-		amps[i]=(gemY){0};											// to extremely weak ones
-		for (k=0;k<poolf_length[i];++k) {						// first we compare the gem alone
+	
+	int skip_computations = (output_options & mask_quiet) && !((output_options & mask_table) || (output_options & mask_upto));
+	int first = skip_computations ? len-1 : 0;
+	for (i=first; i<len; ++i) {								// for every gem value
+		gems[i]=(gem){0};									// we init the gems
+		amps[i]=(gemY){0};									// to extremely weak ones
+		for (k=0;k<poolf_length[i];++k) {					// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
@@ -98,14 +93,14 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 		int NS=i+1;
 		double comb_coeff=pow(NS, -growth_comb);
 		spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
-																			// now with amps
+															// now with amps
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {		// for every amp value from 1 to to gem_value
-			double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
-			for (k=0;k<poolf_length[i];++k) {					// then we search in the gem pool
+			double comb_coeff=pow(NS, -growth_comb);		// we compute comb_coeff
+			for (k=0;k<poolf_length[i];++k) {				// then we search in the gem pool
 				double Pb2 = poolf[i][k].bbound * poolf[i][k].bbound;
 				double Pdg = poolf[i][k].damage;
 				double Pcg = poolf[i][k].crit  ;
-				for (h=0;h<poolYf_length[j];++h) {				// to the amp pool and compare
+				for (h=0;h<poolYf_length[j];++h) {			// to the amp pool and compare
 					double Pdamage = Pdg + damage_ratio* poolYf[j][h].damage ;
 					double Pcrit   = Pcg + crit_ratio  * poolYf[j][h].crit   ;
 					double power   = Pb2 * Pdamage * Pcrit ;

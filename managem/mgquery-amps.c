@@ -76,18 +76,13 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 	amps[0]=(gemO){0};
 	spec_coeffs[0]=0;
 	double leech_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1+TC/3*0.1);
-	if (!(output_options & mask_quiet)) {
-		printf("Total value:\t1\n\n");
-		printf("Managem\n");
-		gem_print(gems);
-		printf("Amplifier (x%d)\n", Namps);
-		gem_print_O(amps);
-	}
-
-	for (i=1;i<len;++i) {											// for every gem value
-		gems[i]=(gem){0};												// we init the gems
-		amps[i]=(gemO){0};											// to extremely weak ones
-		for (k=0;k<poolf_length[i];++k) {						// first we compare the gem alone
+	
+	int skip_computations = (output_options & mask_quiet) && !((output_options & mask_table) || (output_options & mask_upto));
+	int first = skip_computations ? len-1 : 0;
+	for (i=first; i<len; ++i) {								// for every gem value
+		gems[i]=(gem){0};									// we init the gems
+		amps[i]=(gemO){0};									// to extremely weak ones
+		for (k=0;k<poolf_length[i];++k) {					// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
@@ -95,11 +90,11 @@ void worker(int len, int output_options, double growth_comb, char* filename, cha
 		int NS=i+1;
 		double comb_coeff=pow(NS, -growth_comb);
 		spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
-																			// now with amps
+															// now with amps
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {		// for every amp value from 1 to to gem_value
-			double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
-			double Pa= leech_ratio * bestO[j].leech;			// <- this is ok only for mg
-			for (k=0; k<poolf_length[i]; ++k) {					// then we search in the reduced gem pool
+			double comb_coeff=pow(NS, -growth_comb);		// we compute comb_coeff
+			double Pa= leech_ratio * bestO[j].leech;		// <- this is ok only for mg
+			for (k=0; k<poolf_length[i]; ++k) {				// then we search in the reduced gem pool
 				double Palone = gem_power(poolf[i][k]);
 				double power = Palone + poolf[i][k].bbound * Pa;
 				double spec_coeff=power*comb_coeff;

@@ -98,30 +98,25 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
 	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
 	double NT=pow(2, GT-1);
-	if (!(output_options & mask_quiet)) {
-		printf("Killgem spec\n");
-		gem_print(gems);
-		printf("Amplifier spec (x%d)\n", Namps);
-		gem_print_Y(amps);
-		printf("Spec base power:    \t0\n\n\n");
-	}
-
-	for (i=1;i<len;++i) {													// for every gem value
-		gems[i]=(gem){0};														// we init the gems
-		amps[i]=(gemY){0};													// to extremely weak ones
+	
+	int skip_computations = (output_options & mask_quiet) && !((output_options & mask_table) || (output_options & mask_upto));
+	int first = skip_computations ? len-1 : 0;
+	for (i=first; i<len; ++i) {										// for every gem value
+		gems[i]=(gem){0};											// we init the gems
+		amps[i]=(gemY){0};											// to extremely weak ones
 		
-		for (k=0;k<poolf_length[i];++k) {								// first we compare the gem alone
+		for (k=0;k<poolf_length[i];++k) {							// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
 		}
 		int NS=i+1;
-		double C0 = pow(NT/(i+1), bestc_growth);						// last we compute the combination number
+		double C0 = pow(NT/(i+1), bestc_growth);					// last we compute the combination number
 		powers[i] = C0 * gem_power(gems[i]);
-																					// now we compare the whole setup
+																	// now we compare the whole setup
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {				// for every amp value from 1 to to gem_value
-			double Cg = pow(NT/NS, bestc_growth);						// we compute the combination number
-			for (k=0;k<poolf_length[i];++k) {							// then in the gem pool
+			double Cg = pow(NT/NS, bestc_growth);					// we compute the combination number
+			for (k=0;k<poolf_length[i];++k) {						// then in the gem pool
 				double Pb2 = poolf[i][k].bbound * poolf[i][k].bbound;
 				double Pdg = poolf[i][k].damage;
 				double Pcg = poolf[i][k].crit  ;

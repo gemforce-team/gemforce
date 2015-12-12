@@ -103,7 +103,7 @@ where the flags are:
 * `e` - print best gem equations formula  
 * `c` - print best gems table (for each value best gem power)  
 * `i` - info  
-* `q` - quiet, print only final gem  
+* `q` - quiet & fast, compute only necessary combinations and print only final gem  
 * `u` - upto, at the end consider the best gem up to N, not the Nth  
 * `r` - adds red to the best gem, then consider the new gem  
 * `f "path/to/file"` - change table file (build/query only)
@@ -199,7 +199,7 @@ This is usually done at the expense of other stats that we are not interested in
 leech combines are usually terrible for firerate and range, but neither matters for a gem at the speed cap in an amplifier,
 which is the typical use case after a certain level.
 
-**For the math enthusiasts (yes, you may want to skip the rest):**  
+**For the math enthusiasts (yes, you may want to skip the rest of the paragraph):**  
 At the core everything is based on the fact that the growth of `2g+g` is usually higher than the one of `2g`.
 There are exceptions, like cyan, for which a better upgrade than 'U' has yet to be discovered, and likely does not exist.
 

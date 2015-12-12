@@ -40,13 +40,15 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 		if (prevmax>0) printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
-	if (!(output_options & mask_quiet)) gem_print(gems);
-
-	for (i=1; i<len; ++i) {
-		int j;
-		gems[i]=pool[i][0];						// choosing gem (criteria moved to more_power def)
-		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
-			gems[i]=pool[i][j];
+	
+	int skip_computations = (output_options & mask_quiet) && !((output_options & mask_table) || (output_options & mask_upto));
+	int first = skip_computations ? len-1 : 0;
+	for (i=first; i<len; ++i) {
+		gems[i]=pool[i][0];
+		for (int j=1; j<pool_length[i]; ++j) {
+			if (gem_more_powerful(pool[i][j],gems[i])) {
+				gems[i]=pool[i][j];
+			}
 		}
 		
 		if (!(output_options & mask_quiet)) {

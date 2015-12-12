@@ -78,28 +78,23 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 	amps[0]=(gemY){0};
 	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
 	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
-	if (!(output_options & mask_quiet)) {
-		printf("Total value:\t1\n\n");
-		printf("Killgem\n");
-		gem_print(gems);
-		printf("Amplifier (x%d)\n", Namps);
-		gem_print_Y(amps);
-	}
 	
-	for (i=1;i<len;++i) {												// for every total value
-		gems[i]=(gem){0};													// we init the gems
-		amps[i]=(gemY){0};												// to extremely weak ones
-		for (k=0;k<poolf_length[i];++k) {							// first we compare the gem alone
+	int skip_computations = (output_options & mask_quiet) && !((output_options & mask_table) || (output_options & mask_upto));
+	int first = skip_computations ? len-1 : 0;
+	for (i=first; i<len; ++i) {								// for every gem value
+		gems[i]=(gem){0};									// we init the gems
+		amps[i]=(gemY){0};									// to extremely weak ones
+		for (k=0;k<poolf_length[i];++k) {					// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
 		}
 		double power = gem_power(gems[i]);
 		if (Namps!=0)
-		for (j=1;j<=i/Namps;++j) {										// for every amount of amps we can fit in
-			int value = i-Namps*j;										// this is the amount of gems we have left
-			for (k=0;k<poolf_length[value];++k) {					// we search in that pool
-				for (h=0;h<poolYf_length[j-1];++h) {				// and we look in the amp pool
+		for (j=1;j<=i/Namps;++j) {							// for every amount of amps we can fit in
+			int value = i-Namps*j;							// this is the amount of gems we have left
+			for (k=0;k<poolf_length[value];++k) {			// we search in that pool
+				for (h=0;h<poolYf_length[j-1];++h) {		// and we look in the amp pool
 					if (gem_amp_power(poolf[value][k], poolYf[j-1][h], damage_ratio, crit_ratio) > power)
 					{
 						power = gem_amp_power(poolf[value][k], poolYf[j-1][h], damage_ratio, crit_ratio);
