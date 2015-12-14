@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <getopt.h>
+#include <cmath>
 #include <cstring>
 
 using namespace std;
@@ -396,8 +397,18 @@ void worker(string parens, string parens_amps, int output_options, int TC, int A
 		}
 		double specials_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
 		double damage_ratio  =Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
-		printf("Global mana power:\t%#.7g\n",   gem_amp_mana_power(*gemf, *ampf, specials_ratio));
-		printf("Global kill power:\t%#.7g\n\n", gem_amp_kill_power(*gemf, *ampf, damage_ratio, specials_ratio));
+		if (gemf->color=='m' || gemf->color=='x') {
+			double power = gem_amp_mana_power(*gemf, *ampf, specials_ratio);
+			printf("Global mana power:\t%#.7g\n", power);
+			int tvalue = gemf->getvalue() + Namps*ampf->getvalue();
+			printf("Spec coefficient:\t%f\n\n", pow(tvalue, -0.627216)*power);
+		}
+		if (gemf->color=='k' || gemf->color=='x') {
+			double power = gem_amp_kill_power(*gemf, *ampf, damage_ratio, specials_ratio);
+			printf("Global kill power:\t%#.7g\n", power);
+			int tvalue = gemf->getvalue() + Namps*ampf->getvalue();
+			printf("Spec coefficient:\t%f\n\n", pow(tvalue, -1.414061)*power);
+		}
 		delete[] amps;
 	}
 	delete[] gems;
