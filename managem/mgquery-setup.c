@@ -35,7 +35,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	int poolf_length[len];
 	
 	MGSPEC_COMPRESSION
-	printf("Gem speccing pool compression done!\n");
+	if (!(output_options & mask_quiet)) printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
@@ -57,7 +57,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	gemO* bestO=malloc(lena*sizeof(gem));		// if not malloc-ed 140k is the limit
 	
 	AMPS_COMPRESSION
-	printf("Amp pool compression done!\n");
+	if (!(output_options & mask_quiet)) printf("Amp pool compression done!\n");
 
 	FILE* tablec=file_check(filenamec);		// file is open to read
 	if (tablec==NULL) exit(1);					// if the file is not good we exit
@@ -84,7 +84,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	}
 	double bestc_growth=log(gem_power(bestc))/log(lenc);
 	
-	printf("Combining pool compression done!\n\n");
+	if (!(output_options & mask_quiet)) printf("Combining pool compression done!\n\n");
 
 	int j,k;									// let's choose the right gem-amp combo
 	gem gems[len];							// for every speccing value

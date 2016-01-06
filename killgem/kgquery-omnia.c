@@ -37,7 +37,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	int poolf_length[len];
 	
 	KGSPEC_COMPRESSION
-	printf("Gem speccing pool compression done!\n");
+	if (!(output_options & mask_quiet)) printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
@@ -67,7 +67,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	for (i=0; i<poolYf_length[lenc-1]; ++i) {		// amps fast access combining pool
 		poolYc[i]=poolYf[lenc-1][i];
 	}
-	printf("Amp combining pool compression done!\n");
+	if (!(output_options & mask_quiet)) printf("Amp combining pool compression done!\n");
 
 	FILE* tablec=file_check(filenamec);		// file is open to read
 	if (tablec==NULL) exit(1);					// if the file is not good we exit
@@ -89,7 +89,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	int poolcf_length;
 	
 	KGCOMB_COMPRESSION
-	printf("Killgem comb compressed pool size:\t%d\n",poolcf_length);
+	if (!(output_options & mask_quiet)) printf("Gem combine compressed pool size:\t%d\n",poolcf_length);
 
 	int cpairs_length;
 	cpair* cpairs;
@@ -183,7 +183,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		}
 		free(temp_array);
 	}
-	printf("Combine pairs pool size:\t%d\n\n",cpairs_length);
+	if (!(output_options & mask_quiet)) printf("Combine pairs pool size:\t%d\n\n",cpairs_length);
 
 	int j,k,h,l;							// let's choose the right gem-amp combo
 	gem gems[len];							// for every speccing value

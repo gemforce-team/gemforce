@@ -35,7 +35,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	int poolf_length[len];
 	
 	MGSPEC_COMPRESSION
-	printf("Gem speccing pool compression done!\n");
+	if (!(output_options & mask_quiet)) printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
@@ -59,7 +59,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	
 	AMPS_COMPRESSION
 	gemO combO=bestO[lenc-1];			// amps fast access combine
-	printf("Amp pool compression done!\n");
+	if (!(output_options & mask_quiet)) printf("Amp pool compression done!\n");
 
 	FILE* tablec=file_check(filenamec);		// file is open to read
 	if (tablec==NULL) exit(1);					// if the file is not good we exit
@@ -81,7 +81,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 	int poolcf_length;
 	
 	MGCOMB_COMPRESSION
-	printf("Managem comb compressed pool size:\t%d\n\n",poolcf_length);
+	if (!(output_options & mask_quiet)) printf("Gem combine compressed pool size:\t%d\n\n",poolcf_length);
 
 	int j,k,l;								// let's choose the right gem-amp combo
 	gem gems[len];							// for every speccing value
