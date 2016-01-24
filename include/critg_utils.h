@@ -142,34 +142,31 @@ void gem_sort (gem* gems, int len)
 
 gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array)
 {
-	int isRed;
-	int last;
-	int curr;
-	double best_pow=0;
 	gem_init(red,1,0,0);
-	gem* best_gem=NULL;
-	gem* new_array;
-	gem* best_array=NULL;
-	int new_index;
-	int i;
-	for (i=0; i<pool_length; ++i) {
+	double best_pow = 0;
+	gem* best_gem = NULL;
+	gem* new_array = malloc(value*sizeof(gem));
+	gem* best_array = malloc(value*sizeof(gem));
+	
+	for (int i=0; i<pool_length; ++i) {
 		gem* gemf=pool+i;
-		for (last=0; last<value; last++) {
-			isRed=0;
-			curr=0;
-			new_array=malloc(value*sizeof(gem));
-			new_index=0;
+		for (int last=0; last<value; last++) {
+			int isRed=0;
+			int curr=0;
+			int new_index=0;
 			gem* gp=gem_explore(gemf, &isRed, red, last, &curr, new_array, &new_index);
 			double new_pow=gem_power(*gp);
 			if (new_pow > best_pow) {
 				best_pow=new_pow;
-				free(best_array);
 				best_gem=gp;
-				best_array=new_array;
+				// swap memory areas
+				gem* temp = best_array;
+				best_array = new_array;
+				new_array = temp;
 			}
-			else free(new_array);
 		}
 	}
+	free(new_array);
 	(*gem_array)=best_array;
 	return best_gem;
 }
