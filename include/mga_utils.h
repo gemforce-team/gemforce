@@ -6,11 +6,10 @@ double gem_amp_power(gem gem1, gemO amp1, double leech_ratio)
 	return gem1.bbound*(gem1.leech+leech_ratio*amp1.leech);
 }
 
-void print_omnia_table(gem* gems, gemO* amps, double* powers, int len)
+void print_omnia_table(gemO* amps, double* powers, int len)
 {
 	printf("Managem\tAmps\tPower\n");
-	int i;
-	for (i=0; i<len; i++)
+	for (int i=0; i<len; i++)
 		printf("%d\t%d\t%#.7g\n", i+1, gem_getvalue_O(amps+i), powers[i]);
 	printf("\n");
 }

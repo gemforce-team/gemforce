@@ -233,7 +233,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		print_tree(gemfc, "");
 		printf("\n");
 	}
-	if (output_options & mask_table) print_omnia_table(gems, amps, powers, len);
+	if (output_options & mask_table) print_omnia_table(amps, powers, len);
 	
 	if (output_options & mask_equations) {		// it ruins gems, must be last
 		printf("Managem speccing equations:\n");

@@ -6,11 +6,10 @@ double gem_amp_power(gem gem1, gemY amp1, double damage_ratio, double crit_ratio
 	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+crit_ratio*amp1.crit)*gem1.bbound;
 }
 
-void print_omnia_table(gem* gems, gemY* amps, double* powers, int len)
+void print_omnia_table(gemY* amps, double* powers, int len)
 {
 	printf("Killgem\tAmps\tPower\n");
-	int i;
-	for (i=0; i<len; i++)
+	for (int i=0; i<len; i++)
 		printf("%d\t%d\t%#.7g\n", i+1, gem_getvalue_Y(amps+i), powers[i]);
 	printf("\n");
 }
