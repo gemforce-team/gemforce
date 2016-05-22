@@ -1,12 +1,12 @@
 ### Gem tables
 
-Here you can find the tables to be used with the *query programs.  
+Here you can find the tables to be used with the \*query programs.  
 They need to be in the `gem_tables` folder or in the same path as the executable that uses them, unless specified with `-f`.
 
-This tables have been computed with the respective *build program and then reduced so that their size was approx. 1 MB.  
+This tables have been computed with the respective \*build program and then reduced so that their size was approx. 1 MB.  
 The length of every table is below, they should be more than enough for the most common recipes.
 
-Full tables with the highest values we could compute can be retrived from the sister repository:
+Full tables with the highest values we could compute can be retrieved from the sister repository:
 [gemforce-tables](https://github.com/gemforce-team/gemforce-tables).
 There you'll find additional tables and lots of information about them.  
 From those full tables are extracted the results you see in the [results folder](results).
