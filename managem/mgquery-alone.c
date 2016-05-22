@@ -86,7 +86,7 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 		gemf = gems+best_index;
 	}
 
-	gem* gem_array;
+	gem* gem_array = NULL;
 	gem red;
 	if (output_options & mask_red) {
 		if (len < 3 || pool_zero!=2) printf("I could not add red!\n\n");

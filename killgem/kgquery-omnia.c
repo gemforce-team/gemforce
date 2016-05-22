@@ -322,7 +322,7 @@ void worker(int len, int lenc, int output_options, char* filename, char* filenam
 		ampfc = ampsc+best_index;
 	}
 
-	gem* gem_array;
+	gem* gem_array = NULL;
 	gem red;
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");

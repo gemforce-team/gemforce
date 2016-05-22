@@ -134,7 +134,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 	gem*  gemf=gems+len-1;  // gem that will be displayed
 	gemY* ampf=amps+len-1;  // amp that will be displayed
 
-	gem* gem_array;
+	gem* gem_array = NULL;
 	gem red;
 	if (output_options & mask_red) {
 		if (len < 3) printf("I could not add red!\n\n");

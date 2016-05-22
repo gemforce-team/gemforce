@@ -198,7 +198,7 @@ void worker(int len, int output_options)
 		gemf = gems+best_index;
 	}
 
-	gem* gem_array;
+	gem* gem_array = NULL;
 	gem red;
 	if (output_options & mask_red) {
 		if (len < 2) printf("I could not add red!\n\n");
