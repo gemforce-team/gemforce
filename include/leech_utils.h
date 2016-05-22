@@ -80,8 +80,8 @@ int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
 			pool[i]=malloc(pool_length[i]*sizeof(gem));
 			int j;
 			for (j=0; j<pool_length[i]; ++j) {
-				char b1[8], b2[8], b3[8];
-				fscanf(table, "%s %s %s\n", b1, b2, b3);
+				char b1[9], b2[9], b3[9];
+				fscanf(table, "%8s %8s %8s\n", b1, b2, b3);
 				int value_father, offset_father;
 				int value_mother, offset_mother;
 				int check;
