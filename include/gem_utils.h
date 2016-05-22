@@ -1,15 +1,17 @@
 #ifndef _GEM_UTILS_H
 #define _GEM_UTILS_H
 
-#define mask_parens    (1 <<  0)
-#define mask_tree      (1 <<  1)
-#define mask_equations (1 <<  2)
-#define mask_table     (1 <<  3)
-#define mask_info      (1 <<  4)
-#define mask_debug     (1 <<  5)
-#define mask_quiet     (1 <<  6)
-#define mask_upto      (1 <<  7)
-#define mask_red       (1 <<  8)
+enum options_mask {
+	mask_parens    = 1 <<  0,
+	mask_tree      = 1 <<  1,
+	mask_equations = 1 <<  2,
+	mask_table     = 1 <<  3,
+	mask_info      = 1 <<  4,
+	mask_debug     = 1 <<  5,
+	mask_quiet     = 1 <<  6,
+	mask_upto      = 1 <<  7,
+	mask_red       = 1 <<  8,
+};
 
 /* Macro blobs used for all flag options. Handle with care */
 #define DQ_OPTIONS_BLOCK\
