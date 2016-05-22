@@ -167,14 +167,14 @@ void gem_combine (gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 
 int monocolor_ancestors(gem* gemf)
 {
-	if (gemf->father==NULL) return 1;
+	if (gemf->father==nullptr) return 1;
 	else if (gem_color(gemf->father)!=gem_color(gemf->mother)) return 0;
 	else return monocolor_ancestors(gemf->mother) & monocolor_ancestors(gemf->father);
 }
 
 void print_parens_compressed(gem* gemf)
 {
-	if (gemf->father==NULL) printf("%c",gem_color(gemf));
+	if (gemf->father==nullptr) printf("%c",gem_color(gemf));
 	else if (monocolor_ancestors(gemf)							// if gem is uniform combination (g1 are already done)
 	&& 1 << (gemf->grade-1) == gem_getvalue(gemf)) {		// and is standard combine
 		printf("%d%c",gemf->grade,gem_color(gemf));
@@ -190,7 +190,7 @@ void print_parens_compressed(gem* gemf)
 
 void fill_array(gem* gemf, gem** p_gems, int* place)
 {
-	if (gemf-> father != NULL) {
+	if (gemf-> father != nullptr) {
 		fill_array(gemf->father, p_gems, place);
 		fill_array(gemf->mother, p_gems, place);
 	}
@@ -232,7 +232,7 @@ void print_equations(gem* gemf)
 
 void print_tree(gem* gemf, const char* prefix)
 {
-	if (gemf->father==NULL) {
+	if (gemf->father==nullptr) {
 		printf("─ g1 %c\n",gem_color(gemf));
 	}
 	else {
@@ -464,7 +464,7 @@ int main(int argc, char** argv)
 	}
 	else if (parens=="") {
 		printf("Too many arguments:\n");
-		while (argv[optind]!=NULL) {
+		while (argv[optind]!=nullptr) {
 			printf("%s ", argv[optind]);
 			optind++;
 		}
