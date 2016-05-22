@@ -51,7 +51,7 @@ How to do this greatly depends on the operative system you are using:
   Download the source code (either by cloning the repository or using the ZIP download function)
   and then use one of the options below:
 
-  * **compile everything with `make` (`make` package required):**  
+  * **compile everything with** `make` **(**`make` **package required):**  
     In the repo root run `make dist`  
     everything you typically need will be placed in `bin/`
     
@@ -74,7 +74,7 @@ How to do this greatly depends on the operative system you are using:
 
 ### Precomputed gem tables:
 The tables allow you to retrieve results already computed without having the programs recompute them every time you need them.  
-They are a necessity for the *query programs and must be placed in the same directory as them.
+They are a necessity for the \*query programs and must be placed in the same directory as them.
 
 Precomputed tables up to 1 MB are placed in the [gem_tables folder](gem_tables).  
 Those tables are big enough to have the recipes up to decent length
@@ -148,8 +148,8 @@ When in doubt about which flags are supported check with `-h`.
 
 * Variables:
   * Value : Mana cost of a recipe, expressed in base gems needed
-  * Mana power : Displayed leech, that is leech*bloodbound
-  * Kill power : Displayed damage * displayed crit, that is damage\*bloodbound\*crit\*bloodbound
+  * Mana power : Displayed leech, that is leech\*bloodbound
+  * Kill power : Displayed damage \* displayed crit, that is damage\*bloodbound\*crit\*bloodbound
   * Growth : log(Power)/log(recipe_length), an important quantity in recipe ranking
   * Spec coeff : N_setup^(growth_spec-growth_comb), an important quantity in (amped) spec ranking
 
@@ -219,7 +219,7 @@ which is why I offer no white kill/managems combiner (aside the unstable one on 
 
 Mana and kill suites are alike, so I'll just describe the mana one:
 
-Included in auto setup package:
+Included in `make dist` and windows release:
 
 * leechquery    : gets leech combines from table
 * mgquery-alone : gets managem combines and specs (alone) from tables
@@ -228,7 +228,7 @@ Included in auto setup package:
 offers more info on the whole spec-combine than the two used separately
 * mgquery-omnia : gets amped managem specs, their amps and combines for both from tables
 
-Not included in auto setup package:
+Not included in windows release (can be built with `make all`):
 
 * leechbuild      : builds leech table
 * leechcombine    : makes leech combines from scratch
