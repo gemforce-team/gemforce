@@ -51,12 +51,12 @@ How to do this greatly depends on the operative system you are using:
   Download the source code (either by cloning the repository or using the ZIP download function)
   and then use one of the options below:
 
-  * **automatic setup (*NIX shell required):**  
-    In the repo root run `./auto_setup.sh`  
+  * **compile everything with `make` (`make` package required):**  
+    In the repo root run `make dist`  
     everything you typically need will be placed in `bin/`
     
   * **manual compilation:**  
-    `gcc -O3 -lm -I "include" file.c -o output`  
+    `gcc -std=gnu11 -O3 -flto -fwhole-program -I "include" -lm file.c -o output`  
     You'll then need to copy the gem tables to the directory you built the executables in.
 
 * **Windows (tested and working from XP to 8.1):**
@@ -69,7 +69,7 @@ How to do this greatly depends on the operative system you are using:
   * **manual compilation:**  
   Works on Windows too, but it's a bit more difficult to get hold of a compiler there.  
   Any modern C compiler is ok, remember to include the `include` directory, as the example below:  
-  `somecompiler -O3 -lm -I "include" file.c -o output`
+  `somecompiler -O3 -I "include" -lm file.c -o output`
 
 
 ### Precomputed gem tables:
@@ -199,7 +199,7 @@ This is usually done at the expense of other stats that we are not interested in
 leech combines are usually terrible for firerate and range, but neither matters for a gem at the speed cap in an amplifier,
 which is the typical use case after a certain level.
 
-**For the math enthusiasts (yes, you may want to skip the rest of the paragraph):**  
+**For the math enthusiasts (you may want to skip the rest of the section):**  
 At the core everything is based on the fact that the growth of `2g+g` is usually higher than the one of `2g`.
 There are exceptions, like cyan, for which a better upgrade than 'U' has yet to be discovered, and likely does not exist.
 
