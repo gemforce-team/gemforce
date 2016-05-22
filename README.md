@@ -222,21 +222,21 @@ Mana and kill suites are alike, so I'll just describe the mana one:
 Included in auto setup package:
 
 * leechquery    : gets leech combines from table
-* mgquery-alone : gets managem combines and specces (alone) from tables
-* mgquery-amps  : gets amped managem specces and their amps from tables - fixed spec number version
+* mgquery-alone : gets managem combines and specs (alone) from tables
+* mgquery-amps  : gets amped managem specs and their amps from tables - fixed spec number version
 * mgquery-setup : basically `alone (combines) + amps`,
 offers more info on the whole spec-combine than the two used separately
-* mgquery-omnia : gets amped managem specces, their amps and combines for both from tables
+* mgquery-omnia : gets amped managem specs, their amps and combines for both from tables
 
 Not included in auto setup package:
 
 * leechbuild      : builds leech table
 * leechcombine    : makes leech combines from scratch
-* mgcombine-appr  : makes managem combines and specces (alone) from scratch
+* mgcombine-appr  : makes managem combines and specs (alone) from scratch
 * mgbuild-appr    : builds managem tables
 * mgbuild-exact   : builds the exact managem tables
 * mgbuild-c6      : builds the fast managem combine table
-* mgquery-ngems   : gets amped managem specces and their amps from tables - fixed total number version
+* mgquery-ngems   : gets amped managem specs and their amps from tables - fixed total number version
 
 
 ### Report bugs:

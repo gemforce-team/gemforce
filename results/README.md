@@ -65,10 +65,10 @@ keep in mind a spec has to be done just one time, while a combine might need to 
 I'll outline 5 different choices here, from the easiest to the most time consuming:
 
 **0. No supergemming**  
-Well, why are you reading this then? Good luck with your crappy specces and 'U' upgrade
+Well, why are you reading this then? Good luck with your crappy specs and 'U' upgrade
 
 **1. Beginner**  
-Combines give the most boost over time, more than specces, so the most effective way to boost your power
+Combines give the most boost over time, more than specs, so the most effective way to boost your power
 with a small time investment is to use a small combine instead of 'U' for every upgrade.  
 Go to the `managem-combine` and the `killgem-combine` folders and find combines simple enough
 (anything below `16c` should be good) to be doable fast.  
@@ -78,8 +78,8 @@ To choose the ratio of gems to put in the main gem and the amps stick to the thu
 * killgems: amps 4 grades lower
 
 **2. Intermediate**  
-It's time to look into specces to match the combines.
-Head to the `managem-amps` and the `killgem-amps` folders and choose a pair of small specces,
+It's time to look into specs to match the combines.
+Head to the `managem-amps` and the `killgem-amps` folders and choose a pair of small specs,
 around `16s` or `32s`.  
 Pair them with a combine from the relative `-combine` folder, to be used both with the main gem and its amps.
 When using a single combine on both gem and its amps it can be proved that
@@ -90,7 +90,7 @@ The initial omnia recipes are good here, since they usually have the same combin
 **3. Advanced**  
 Keep on with the intermediate way by improving the lengths of the spec/combine.
 `32s` - `128s` and `64c`-`4096c` are the usual choices of people in this range.  
-A little more power can be gained by "squeezing" the red out of the specces,
+A little more power can be gained by "squeezing" the red out of the specs,
 done by combining a specced gem with red with other copies without red on the first combine cycle.  
 To get a red-less recipe from a red one change the red gem with a orange/yellow one.
 

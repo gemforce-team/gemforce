@@ -10,7 +10,7 @@ void line_init(FILE* table, int pool_zero)
 		case 1:       // combines
 			fprintf(table, "1\n-1 0 0\n");
 		break;
-		case 2:       // specces
+		case 2:       // specs
 			fprintf(table, "2\n-1 1 0\n");
 			fprintf(table, "-1 0 1\n");
 		break;
