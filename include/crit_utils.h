@@ -1,6 +1,9 @@
 #ifndef _CRIT_UTILS_H
 #define _CRIT_UTILS_H
 
+#include "gem_stats.h"
+
+
 struct Gem_Y {
 	int grade;				//using short does NOT improve time/memory usage
 	float damage;
@@ -17,28 +20,28 @@ void gem_print_Y(gemY *p_gem) {
 void gem_comb_eq_Y(gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
 {
 	p_gem_combined->grade = p_gem1->grade+1;
-	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = 0.87*p_gem1->damage + 0.71*p_gem2->damage;
-	else p_gem_combined->damage = 0.87*p_gem2->damage + 0.71*p_gem1->damage;
-	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.5*p_gem2->crit;
-	else p_gem_combined->crit = 0.88*p_gem2->crit + 0.5*p_gem1->crit;
+	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_EQ_1*p_gem1->damage + DAMAGE_EQ_2*p_gem2->damage;
+	else p_gem_combined->damage = DAMAGE_EQ_1*p_gem2->damage + DAMAGE_EQ_2*p_gem1->damage;
+	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = CRIT_EQ_1*p_gem1->crit + CRIT_EQ_2*p_gem2->crit;
+	else p_gem_combined->crit = CRIT_EQ_1*p_gem2->crit + CRIT_EQ_2*p_gem1->crit;
 }
 
 void gem_comb_d1_Y(gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)     //bigger is always gem1
 {
 	p_gem_combined->grade = p_gem1->grade;
-	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = 0.86*p_gem1->damage + 0.7*p_gem2->damage;
-	else p_gem_combined->damage = 0.86*p_gem2->damage + 0.7*p_gem1->damage;
-	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
-	else p_gem_combined->crit = 0.88*p_gem2->crit + 0.44*p_gem1->crit;
+	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_D1_1*p_gem1->damage + DAMAGE_D1_2*p_gem2->damage;
+	else p_gem_combined->damage = DAMAGE_D1_1*p_gem2->damage + DAMAGE_D1_2*p_gem1->damage;
+	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = CRIT_D1_1*p_gem1->crit + CRIT_D1_2*p_gem2->crit;
+	else p_gem_combined->crit = CRIT_D1_1*p_gem2->crit + CRIT_D1_2*p_gem1->crit;
 }
 
 void gem_comb_gn_Y(gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
 {
 	p_gem_combined->grade = int_max(p_gem1->grade, p_gem2->grade);
-	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = 0.85*p_gem1->damage + 0.69*p_gem2->damage;
-	else p_gem_combined->damage = 0.85*p_gem2->damage + 0.69*p_gem1->damage;
-	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = 0.88*p_gem1->crit + 0.44*p_gem2->crit;
-	else p_gem_combined->crit = 0.88*p_gem2->crit + 0.44*p_gem1->crit;
+	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_GN_1*p_gem1->damage + DAMAGE_GN_2*p_gem2->damage;
+	else p_gem_combined->damage = DAMAGE_GN_1*p_gem2->damage + DAMAGE_GN_2*p_gem1->damage;
+	if (p_gem1->crit > p_gem2->crit) p_gem_combined->crit = CRIT_GN_1*p_gem1->crit + CRIT_GN_2*p_gem2->crit;
+	else p_gem_combined->crit = CRIT_GN_1*p_gem2->crit + CRIT_GN_2*p_gem1->crit;
 }
 
 void gem_combine_Y (gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)

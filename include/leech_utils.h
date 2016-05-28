@@ -1,6 +1,9 @@
 #ifndef _LEECH_UTILS_H
 #define _LEECH_UTILS_H
 
+#include "gem_stats.h"
+
+
 struct Gem_O {
 	int grade;			//using short does NOT improve time/memory usage
 	double leech;
@@ -15,22 +18,22 @@ void gem_print_O(gemO *p_gem) {
 void gem_comb_eq_O(gemO *p_gem1, gemO *p_gem2, gemO *p_gem_combined)
 {
 	p_gem_combined->grade = p_gem1->grade+1;
-	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = 0.88*p_gem1->leech + 0.5*p_gem2->leech;
-	else p_gem_combined->leech = 0.88*p_gem2->leech + 0.5*p_gem1->leech;
+	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_EQ_1*p_gem1->leech + LEECH_EQ_2*p_gem2->leech;
+	else p_gem_combined->leech = LEECH_EQ_1*p_gem2->leech + LEECH_EQ_2*p_gem1->leech;
 }
 
 void gem_comb_d1_O(gemO *p_gem1, gemO *p_gem2, gemO *p_gem_combined)		//bigger is always gem1
 {
 	p_gem_combined->grade = p_gem1->grade;
-	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = 0.89*p_gem1->leech + 0.44*p_gem2->leech;
-	else p_gem_combined->leech = 0.89*p_gem2->leech + 0.44*p_gem1->leech;
+	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_D1_1*p_gem1->leech + LEECH_D1_2*p_gem2->leech;
+	else p_gem_combined->leech = LEECH_D1_1*p_gem2->leech + LEECH_D1_2*p_gem1->leech;
 }
 
 void gem_comb_gn_O(gemO *p_gem1, gemO *p_gem2, gemO *p_gem_combined)
 {
 	p_gem_combined->grade = int_max(p_gem1->grade, p_gem2->grade);
-	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = 0.9*p_gem1->leech + 0.38*p_gem2->leech;
-	else p_gem_combined->leech = 0.9*p_gem2->leech + 0.38*p_gem1->leech;
+	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_GN_1*p_gem1->leech + LEECH_GN_2*p_gem2->leech;
+	else p_gem_combined->leech = LEECH_GN_1*p_gem2->leech + LEECH_GN_2*p_gem1->leech;
 }
 
 void gem_combine_O (gemO *p_gem1, gemO *p_gem2, gemO *p_gem_combined)
