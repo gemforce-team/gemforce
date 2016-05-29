@@ -11,10 +11,10 @@ do
 	desc="$filename - N6 TC120 A60 - gemforce $(git describe --tags | cut -f1 -d "-") - $file"",table_leech"
 	if [ $i -le 128 ]
 	then
-		bin/mgquery-omnia -rqpte  -f "$file" "$i" "$j" | tail -n +44 > results/$filename".txt"
+		bin/mgquery-omnia -rqpte  -f "$file" "$i" "$j" | tail -n +40 > results/$filename".txt"
 		echo "$desc" >> results/$filename".txt"
 	else
-		bin/mgquery-omnia -rqpe  -f "$file" "$i" "$j" | tail -n +44 > results/$filename".txt"
+		bin/mgquery-omnia -rqpe  -f "$file" "$i" "$j" | tail -n +40 > results/$filename".txt"
 		echo "$desc" >> results/$filename".txt"
 	fi
 done
