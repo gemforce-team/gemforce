@@ -25,8 +25,8 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 		size=1000;							// reasonable comb sizing
 	}
 	else {									// spec
-		gem_init(pool[0]  ,1,1.000000,1,0);
-		gem_init(pool[0]+1,1,1.181818,0,1);		// BB has more dmg
+		gem_init(pool[0]  ,1,DAMAGE_CRIT  ,1,0);	// grade damage crit bbound
+		gem_init(pool[0]+1,1,DAMAGE_BBOUND,0,1);	// BB has more dmg
 		size=20000;							// reasonable spec sizing
 	}
 	

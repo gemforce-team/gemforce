@@ -4,6 +4,8 @@
 #include <cmath>
 #include <cstring>
 
+#include "gem_stats.h"
+
 using namespace std;
 
 class gem
@@ -32,20 +34,20 @@ class gem
 	gem(const char color)
 	{
 		switch (color)
-		{                      // gr dmg       cr le bl r
-			case 'y': *this = gem(1, 1       , 1, 0, 0, 0);
+		{                      // gr dmg            cr le bl r
+			case 'y': *this = gem(1, DAMAGE_CRIT  , 1, 0, 0, 0);
 			break;
-			case 'o': *this = gem(1, 0.727273, 0, 1, 0, 0);
+			case 'o': *this = gem(1, DAMAGE_LEECH , 0, 1, 0, 0);
 			break;
-			case 'b': *this = gem(1, 1.181818, 0, 0, 1, 0);
+			case 'b': *this = gem(1, DAMAGE_BBOUND, 0, 0, 1, 0);
 			break;
-			case 'r': *this = gem(1, 0.909091, 0, 0, 0, 1);
+			case 'r': *this = gem(1, DAMAGE_CHHIT , 0, 0, 0, 1);
 			break;
-			case 'm': *this = gem(1, 0       , 0, 1, 1, 0);
+			case 'm': *this = gem(1, 0            , 0, 1, 1, 0);
 			break;
-			case 'k': *this = gem(1, 1       , 1, 0, 1, 0);
+			case 'k': *this = gem(1, 1            , 1, 0, 1, 0);
 			break;
-			default:  *this = gem(0, 0       , 0, 0, 0, 0);
+			default:  *this = gem(0, 0            , 0, 0, 0, 0);
 		}
 		this->color=color;
 		this->value=1;
