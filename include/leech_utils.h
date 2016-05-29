@@ -85,7 +85,7 @@ void gem_init_O(gemO *p_gem, int grd, float leech)
 
 int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
 {
-	printf("\nBuilding pool...");
+	printf("\nBuilding pool..."); fflush(stdout);
 	rewind(table);
 	int i;
 	int pool_zero;

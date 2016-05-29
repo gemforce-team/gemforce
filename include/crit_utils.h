@@ -91,7 +91,7 @@ void gem_init_Y(gemY *p_gem, int grd, float damage, float crit)
 
 int pool_from_table_Y(gemY** pool, int* pool_length, int len, FILE* table)
 {
-	printf("\nBuilding pool...");
+	printf("\nBuilding pool..."); fflush(stdout);
 	rewind(table);
 	int i;
 	int pool_zero;

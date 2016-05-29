@@ -80,7 +80,7 @@ int fscan64(char* s, int* n)
 
 int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 {
-	printf("\nBuilding pool...");
+	printf("\nBuilding pool..."); fflush(stdout);
 	rewind(table);
 	int i;
 	int pool_zero;
