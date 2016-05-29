@@ -1,8 +1,6 @@
 #ifndef _MANAGEM_UTILS_H
 #define _MANAGEM_UTILS_H
 
-#include "gem_stats.h"
-
 const int ACC=1000;			// accuracy for comparisons
 
 struct Gem_OB {
@@ -13,7 +11,12 @@ struct Gem_OB {
 	struct Gem_OB* mother;
 };
 
+// --------------------
+// Common gem interface
+// --------------------
+
 #include "gem_utils.h"
+#include "gem_stats.h"
 
 inline double gem_power(gem gem1)
 {
@@ -29,6 +32,18 @@ void gem_print(gem *p_gem) {
 	printf("Grade:\t%d\nLeech:\t%f\nBbound:\t%f\nPower:\t%f\n\n",
 		p_gem->grade, p_gem->leech, p_gem->bbound, p_gem->leech*p_gem->bbound);
 }
+
+char gem_color(gem* p_gem)
+{
+	if (p_gem->leech==0 && p_gem->bbound==0) return 'r';
+	if (p_gem->leech==0) return 'b';
+	if (p_gem->bbound==0) return 'o';
+	else return 'm';
+}
+
+// -----------------
+// Combining section
+// -----------------
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
@@ -86,6 +101,10 @@ void gem_init(gem *p_gem, int grd, double leech, double bbound)
 	p_gem->father=NULL;
 	p_gem->mother=NULL;
 }
+
+// ---------------
+// Sorting section
+// ---------------
 
 inline int gem_less_equal(gem gem1, gem gem2)
 {
@@ -203,13 +222,9 @@ void gem_sort_exact (gem* gems, int len)
 	ins_sort_exact (gems, len);      // finish the nearly sorted array
 }
 
-char gem_color(gem* p_gem)
-{
-	if (p_gem->leech==0 && p_gem->bbound==0) return 'r';
-	if (p_gem->leech==0) return 'b';
-	if (p_gem->bbound==0) return 'o';
-	else return 'm';
-}
+// -----------------
+// Red adder section
+// -----------------
 
 #include "red_adder.h"
 
@@ -249,7 +264,5 @@ gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array
 	(*gem_array)=best_array;
 	return best_gem;
 }
-
-#include "print_utils.h"
 
 #endif // _MANAGEM_UTILS_H

@@ -10,6 +10,7 @@ typedef struct Gem_O gemO;
 #include "mga_utils.h"
 #include "query_utils.h"
 #include "gfon.h"
+#include "print_utils.h"
 
 void print_amps_table(gem* gems, gemO* amps, double* spec_coeffs, double leech_ratio, int len)
 {

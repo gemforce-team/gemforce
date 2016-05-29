@@ -4,6 +4,9 @@
 /* GemForce Object Notation */
 /* Remember to redeclare pool_from_table in the amplifier_utils */
 
+#include <stdio.h>
+#include <stdlib.h>
+
 void line_init(FILE* table, int pool_zero)
 {
 	switch (pool_zero) {

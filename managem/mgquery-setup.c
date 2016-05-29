@@ -10,6 +10,7 @@ typedef struct Gem_O gemO;
 #include "mga_utils.h"
 #include "query_utils.h"
 #include "gfon.h"
+#include "print_utils.h"
 
 void worker(int len, int lenc, int output_options, char* filename, char* filenamec, char* filenameA, int TC, int As, int GT, int Namps)
 {

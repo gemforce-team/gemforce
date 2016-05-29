@@ -7,6 +7,7 @@ typedef struct Gem_OB gem;    // the strange order is so that managem_utils know
 #include "managem_utils.h"
 #include "query_utils.h"
 #include "gfon.h"
+#include "print_utils.h"
 
 void worker(int len, int output_options, int pool_zero, char* filename)
 {

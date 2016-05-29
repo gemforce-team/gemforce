@@ -4,6 +4,7 @@
 #include <getopt.h>
 typedef struct Gem_OB gem;    // the strange order is so that managem_utils knows which gem type are we defining as "gem"
 #include "managem_utils.h"
+#include "print_utils.h"
 
 void worker(int len, int output_options, int pool_zero)
 {

@@ -1,9 +1,6 @@
 #ifndef _LEECH_UTILS_H
 #define _LEECH_UTILS_H
 
-#include "gem_stats.h"
-
-
 struct Gem_O {
 	int grade;			//using short does NOT improve time/memory usage
 	double leech;
@@ -11,9 +8,24 @@ struct Gem_O {
 	struct Gem_O* mother;
 };
 
+// --------------------
+// Common gem interface
+// --------------------
+
+#include "gem_stats.h"
+
+inline int gem_better(gemO gem1, gemO gem2)
+{
+	return gem1.leech>gem2.leech;
+}
+
 void gem_print_O(gemO *p_gem) {
 	printf("Grade:\t%d\nLeech:\t%f\n\n", p_gem->grade, p_gem->leech);
 }
+
+// -----------------
+// Combining section
+// -----------------
 
 void gem_comb_eq_O(gemO *p_gem1, gemO *p_gem2, gemO *p_gem_combined)
 {
@@ -56,6 +68,18 @@ void gem_combine_O (gemO *p_gem1, gemO *p_gem2, gemO *p_gem_combined)
 			break;
 	}
 }
+
+void gem_init_O(gemO *p_gem, int grd, float leech)
+{
+	p_gem->grade=grd;
+	p_gem->leech=leech;
+	p_gem->father=NULL;
+	p_gem->mother=NULL;
+}
+
+// ------------------------
+// Redefine pool_from_table
+// ------------------------
 
 #include "gfon.h"
 
@@ -107,18 +131,9 @@ int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
 	return prevmax;
 }
 
-void gem_init_O(gemO *p_gem, int grd, float leech)
-{
-	p_gem->grade=grd;
-	p_gem->leech=leech;
-	p_gem->father=NULL;
-	p_gem->mother=NULL;
-}
-
-inline int gem_better(gemO gem1, gemO gem2)
-{
-	return gem1.leech>gem2.leech;
-}
+// ---------------------------
+// Redefine printing functions
+// ---------------------------
 
 void print_parens_O(gemO* gemf)
 {

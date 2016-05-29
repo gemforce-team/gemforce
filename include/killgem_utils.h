@@ -1,9 +1,6 @@
 #ifndef _KILLGEM_UTILS_H
 #define _KILLGEM_UTILS_H
 
-#include "gem_stats.h"
-
-
 int ACC;							// 80,60  ACC is for z-axis sorting and for the length of the interval tree
 
 struct Gem_YB {
@@ -15,7 +12,12 @@ struct Gem_YB {
 	struct Gem_YB* mother;
 };
 
+// --------------------
+// Common gem interface
+// --------------------
+
 #include "gem_utils.h"
+#include "gem_stats.h"
 
 inline double gem_power(gem gem1)
 {
@@ -31,6 +33,18 @@ void gem_print(gem* p_gem) {
 	printf("Grade:\t%d\nDamage:\t%f\nCrit:\t%f\nBbound:\t%f\nPower:\t%f\n\n", 
 		p_gem->grade, p_gem->damage, p_gem->crit, p_gem->bbound, gem_power(*p_gem));
 }
+
+char gem_color(gem* p_gem)
+{
+	if (p_gem->crit==0 && p_gem->bbound==0) return 'r';
+	if (p_gem->crit==0) return 'b';
+	if (p_gem->bbound==0) return 'y';
+	else return 'k';
+}
+
+// -----------------
+// Combining section
+// -----------------
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
@@ -98,6 +112,10 @@ void gem_init(gem *p_gem, int grd, double damage, double crit, double bbound)
 	p_gem->mother=NULL;
 }
 
+// ---------------
+// Sorting section
+// ---------------
+
 inline int gem_less_equal(gem gem1, gem gem2)
 {
 	if ((int)(gem1.damage*ACC) != (int)(gem2.damage*ACC))
@@ -158,13 +176,9 @@ void gem_sort (gem* gems, int len)
 	ins_sort (gems, len);      // finish the nearly sorted array
 }
 
-char gem_color(gem* p_gem)
-{
-	if (p_gem->crit==0 && p_gem->bbound==0) return 'r';
-	if (p_gem->crit==0) return 'b';
-	if (p_gem->bbound==0) return 'y';
-	else return 'k';
-}
+// -----------------
+// Red adder section
+// -----------------
 
 #include "red_adder.h"
 
@@ -204,7 +218,5 @@ gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array
 	(*gem_array)=best_array;
 	return best_gem;
 }
-
-#include "print_utils.h"
 
 #endif // _KILLGEM_UTILS_H

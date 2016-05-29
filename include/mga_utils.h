@@ -1,6 +1,8 @@
 #ifndef _MGA_UTILS_H
 #define _MGA_UTILS_H
 
+#include <stdio.h>
+
 double gem_amp_power(gem gem1, gemO amp1, double leech_ratio)
 {
 	return gem1.bbound*(gem1.leech+leech_ratio*amp1.leech);

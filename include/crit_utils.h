@@ -1,9 +1,6 @@
 #ifndef _CRIT_UTILS_H
 #define _CRIT_UTILS_H
 
-#include "gem_stats.h"
-
-
 struct Gem_Y {
 	int grade;				//using short does NOT improve time/memory usage
 	float damage;
@@ -12,10 +9,20 @@ struct Gem_Y {
 	struct Gem_Y* mother;
 };
 
+// --------------------
+// Common gem interface
+// --------------------
+
+#include "gem_stats.h"
+
 void gem_print_Y(gemY *p_gem) {
 	printf("Grade:\t%d\nDamage:\t%f\nCrit:\t%f\nPower:\t%f\n\n",
 		p_gem->grade, p_gem->damage, p_gem->crit, p_gem->damage*p_gem->crit);
 }
+
+// -----------------
+// Combining section
+// -----------------
 
 void gem_comb_eq_Y(gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
 {
@@ -67,6 +74,19 @@ void gem_combine_Y (gemY *p_gem1, gemY *p_gem2, gemY *p_gem_combined)
 	if (p_gem_combined->damage < p_gem2->damage) p_gem_combined->damage = p_gem2->damage;
 }
 
+void gem_init_Y(gemY *p_gem, int grd, float damage, float crit)
+{
+	p_gem->grade =grd;
+	p_gem->damage=damage;
+	p_gem->crit  =crit;
+	p_gem->father=NULL;
+	p_gem->mother=NULL;
+}
+
+// ------------------------
+// Redefine pool_from_table
+// ------------------------
+
 #include "gfon.h"
 
 int pool_from_table_Y(gemY** pool, int* pool_length, int len, FILE* table)
@@ -117,14 +137,9 @@ int pool_from_table_Y(gemY** pool, int* pool_length, int len, FILE* table)
 	return prevmax;
 }
 
-void gem_init_Y(gemY *p_gem, int grd, float damage, float crit)
-{
-	p_gem->grade =grd;
-	p_gem->damage=damage;
-	p_gem->crit  =crit;
-	p_gem->father=NULL;
-	p_gem->mother=NULL;
-}
+// ---------------
+// Sorting section
+// ---------------
 
 inline int gem_has_less_damage_crit(gemY gem1, gemY gem2)
 {
@@ -183,6 +198,10 @@ void gem_sort_Y (gemY* gems, int len)
 	quick_sort_Y (gems, len);		// partially sort
 	ins_sort_Y (gems, len);			// finish the nearly sorted array
 }
+
+// ---------------------------
+// Redefine printing functions
+// ---------------------------
 
 void print_parens_Y(gemY* gemf)
 {

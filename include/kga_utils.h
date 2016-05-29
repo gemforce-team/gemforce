@@ -1,6 +1,8 @@
 #ifndef _KGA_UTILS_H
 #define _KGA_UTILS_H
 
+#include <stdio.h>
+
 double gem_amp_power(gem gem1, gemY amp1, double damage_ratio, double crit_ratio)
 {
 	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+crit_ratio*amp1.crit)*gem1.bbound;

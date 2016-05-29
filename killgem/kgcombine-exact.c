@@ -7,6 +7,7 @@ typedef struct Gem_YBp gemP;
 #include "kgexact_utils.h"
 typedef struct Gem_YBp gem;
 #include "killgem_utils.h"
+#include "print_utils.h"
 
 void worker(int len, int output_options, int pool_zero)
 {

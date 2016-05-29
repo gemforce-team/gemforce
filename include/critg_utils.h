@@ -1,9 +1,6 @@
 #ifndef _CRITG_UTILS_H
 #define _CRITG_UTILS_H
 
-#include "gem_stats.h"
-
-
 struct Gem_Y {
 	int grade;			//using short does NOT improve time/memory usage
 	float damage;
@@ -12,7 +9,12 @@ struct Gem_Y {
 	struct Gem_Y* mother;
 };
 
+// --------------------
+// Common gem interface
+// --------------------
+
 #include "gem_utils.h"
+#include "gem_stats.h"
 
 inline double gem_power(gem gem1)
 {
@@ -23,6 +25,10 @@ inline int gem_more_powerful(gem gem1, gem gem2)
 {
 	return (gem_power(gem1) > gem_power(gem2));
 }
+
+// -----------------
+// Combining section
+// -----------------
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
@@ -83,6 +89,10 @@ void gem_init(gem *p_gem, int grd, double damage, double crit)
 	p_gem->mother=NULL;
 }
 
+// ---------------
+// Sorting section
+// ---------------
+
 inline int gem_less_equal(gem gem1, gem gem2)
 {
 	if (gem1.damage < gem2.damage) return 1;
@@ -140,6 +150,10 @@ void gem_sort (gem* gems, int len)
 	quick_sort (gems, len);		// partially sort
 	ins_sort (gems, len);		// finish the nearly sorted array
 }
+
+// -----------------
+// Red adder section
+// -----------------
 
 #include "red_adder.h"
 

@@ -1,7 +1,11 @@
 #ifndef _PRINT_UTILS_H
 #define _PRINT_UTILS_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #include <string.h>
+#include "gem_utils.h"
 
 void print_parens(gem* gemf)
 {

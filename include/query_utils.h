@@ -3,6 +3,7 @@
 
 /* Query utils (table file selection, filename handling) */
 
+#include <stdio.h>
 #include <string.h>
 
 inline void table_selection2(char* input, char* filename, char* filenameA)

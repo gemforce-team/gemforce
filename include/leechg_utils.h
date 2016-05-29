@@ -1,8 +1,6 @@
 #ifndef _LEECHG_UTILS_H
 #define _LEECHG_UTILS_H
 
-#include "gem_stats.h"
-
 struct Gem_O {
 	int grade;			//using short does NOT improve time/memory usage
 	double leech;		//using float does NOT improve time/memory usage
@@ -10,12 +8,25 @@ struct Gem_O {
 	struct Gem_O* mother;
 };
 
+// --------------------
+// Common gem interface
+// --------------------
+
 #include "gem_utils.h"
+#include "gem_stats.h"
+
+inline double gem_power(gem gem1) {
+	return gem1.leech;
+}
 
 inline int gem_better(gem gem1, gem gem2)
 {
 	return gem1.leech>gem2.leech;
 }
+
+// -----------------
+// Combining section
+// -----------------
 
 void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 {
@@ -67,11 +78,11 @@ void gem_init(gem *p_gem, int grd, double leech)
 	p_gem->mother=NULL;
 }
 
-#include "red_adder.h"
+// -----------------
+// Red adder section
+// -----------------
 
-inline double gem_power(gem gem1) {
-	return gem1.leech;
-}
+#include "red_adder.h"
 
 gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array)
 {

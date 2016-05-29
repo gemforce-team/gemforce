@@ -11,6 +11,7 @@ typedef struct Gem_Y gemY;
 #include "kga_utils.h"
 #include "query_utils.h"
 #include "gfon.h"
+#include "print_utils.h"
 
 void print_ngems_table(gem* gems, gemY* amps, double damage_ratio, double crit_ratio, int len)
 {
