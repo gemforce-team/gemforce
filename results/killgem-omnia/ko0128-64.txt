@@ -1,10 +1,10 @@
 Killgem spec
 Value:	128
 Grade:	7
-Damage:	28.496981
+Damage:	28.419674
 Crit:	5.764657
 Bbound:	1.816181
-Power:	541.864197
+Power:	540.394287
 
 Amplifier spec (x8)
 Value:	6
@@ -28,8 +28,8 @@ Damage:	15.572311
 Crit:	7.655109
 Power:	119.207748
 
-Spec base power with red:	1586.357
-Global power w. red at g30:	2.871788e+12
+Spec base power with red:	1582.851
+Global power w. red at g30:	2.865386e+12
 
 
 Killgem speccing scheme:
@@ -672,4 +672,4 @@ Amplifier combining equations:
 (val = 44)	20 = 19 + 12
 (val = 64)	21 = 20 + 10
 
-ko0128-64 - N6 TC120 A60 - gemforce v1.7.3a - table_kgsappr,table_kgcexact,table_crit
+ko0128-64 - N6 TC120 A60 - gemforce v1.8.1 - table_kgsappr,table_kgcexact,table_crit

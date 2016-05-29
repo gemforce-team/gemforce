@@ -1,10 +1,10 @@
 Killgem spec
 Value:	2048
 Grade:	11
-Damage:	177.853058
+Damage:	177.389664
 Crit:	26.431881
 Bbound:	2.730001
-Power:	35036.046875
+Power:	34944.757812
 
 Amplifier spec (x8)
 Value:	107
@@ -28,8 +28,8 @@ Damage:	254.555435
 Crit:	60.754700
 Power:	15465.439453
 
-Spec base power with red:	98856.03
-Global power w. red at g30:	3.773796e+12
+Spec base power with red:	98649.83
+Global power w. red at g30:	3.765919e+12
 
 
 Killgem speccing scheme:
@@ -406,4 +406,4 @@ Amplifier combining equations:
 (val = 2648)	99 = 98 + 76
 (val = 4096)	100 = 99 + 64
 
-ko2048-4096 - N6 TC120 A60 - gemforce v1.8.0 - table_mgsappr,table_kgcomb,table_kgcomb
+ko2048-004096 - N6 TC120 A60 - gemforce v1.8.1 - table_mgsappr,table_kgcomb,table_kgcomb
