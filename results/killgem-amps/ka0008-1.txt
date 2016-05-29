@@ -1,0 +1,62 @@
+Total value:	16
+
+Killgem
+Value:	8
+Grade:	3
+Damage:	4.428479
+Crit:	0.599695
+Bbound:	1.251429
+Power:	4.159083
+
+Amplifier (x8)
+Value:	1
+Grade:	1
+Damage:	1.000000
+Crit:	1.000000
+Power:	1.000000
+
+Spec base power w. red:	40.00664
+Spec coefficient:	0.793292
+
+Killgem speccing scheme:
+(((2b+b)+b)+(((y+r)+b)+b))
+
+Amplifier speccing scheme:
+y
+
+Killgem tree:
+─8
+ ├─4
+ │ ├─3
+ │ │ ├─2
+ │ │ │ ├─ g1 b
+ │ │ │ └─ g1 b
+ │ │ └─ g1 b
+ │ └─ g1 b
+ └─4
+   ├─3
+   │ ├─2
+   │ │ ├─ g1 y
+   │ │ └─ g1 r
+   │ └─ g1 b
+   └─ g1 b
+
+Amplifier tree:
+─ g1 y
+
+Killgem equations:
+(val = 1)	 0 = g1 b
+(val = 1)	 1 = g1 r
+(val = 1)	 2 = g1 y
+(val = 2)	 3 =  2 +  1
+(val = 3)	 4 =  3 +  0
+(val = 4)	 5 =  4 +  0
+(val = 2)	 6 =  0 +  0
+(val = 3)	 7 =  6 +  0
+(val = 4)	 8 =  7 +  0
+(val = 8)	 9 =  8 +  5
+
+Amplifier equations:
+(val = 1)	 0 = g1 y
+
+ka0008 - N8 TC120 A60 - gemforce v1.8.1 - table_kgsexact,table_crit
