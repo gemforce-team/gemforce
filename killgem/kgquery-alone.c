@@ -13,7 +13,7 @@ typedef struct Gem_YB gem;
 void worker(int len, int output_options, int pool_zero, char* filename)
 {
 	FILE* table=file_check(filename);		// file is open to read
-	if (table==NULL) exit(1);					// if the file is not good we exit
+	if (table==NULL) exit(1);				// if the file is not good we exit
 	int i;
 	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
 	gem** pool=malloc(len*sizeof(gem*));
@@ -25,10 +25,10 @@ void worker(int len, int output_options, int pool_zero, char* filename)
 		gem_init(pool[0],1,1,1,1);		// start gem does not matter
 		gem_init(gems   ,1,1,1,1);		// grade damage crit bbound
 	}
-	else {												// spec
-		gem_init(pool[0]  ,1,1.000000,1,0);
-		gem_init(pool[0]+1,1,1.181818,0,1);		// BB has more dmg
-		gem_init(gems     ,1,1.000000,1,0);		// grade damage crit bbound
+	else {											// spec
+		gem_init(pool[0]  ,1,DAMAGE_CRIT  ,1,0);
+		gem_init(pool[0]+1,1,DAMAGE_BBOUND,0,1);	// BB has more dmg
+		gem_init(gems     ,1,DAMAGE_CRIT  ,1,0);	// grade damage crit bbound
 	}
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling

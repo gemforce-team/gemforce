@@ -27,9 +27,9 @@ void worker(int len, int output_options, int pool_zero)
 	}
 	else {									// spec
 		ACC=60;								// ACC is for z-axis sorting and for the length of the interval tree
-		gem_init(pool[0]  ,1,1.000000,1,0);
-		gem_init(pool[0]+1,1,1.181818,0,1);		// BB has more dmg
-		gem_init(gems     ,1,1.000000,1,0);		// grade damage crit bbound
+		gem_init(pool[0]  ,1,DAMAGE_CRIT  ,1,0);
+		gem_init(pool[0]+1,1,DAMAGE_BBOUND,0,1);	// BB has more dmg
+		gem_init(gems     ,1,DAMAGE_CRIT  ,1,0);	// grade damage crit bbound
 		size=20000;							// reasonable spec sizing
 	}
 	if (!(output_options & mask_quiet)) gem_print(gems);

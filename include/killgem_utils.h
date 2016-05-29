@@ -190,7 +190,7 @@ inline double gem_cfr_power(gem gem1, double amp_damage_scaled, double amp_crit_
 
 gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_damage_scaled, double amp_crit_scaled)
 {
-	gem_init(red,1,0.909091,0,0);
+	gem_init(red,1,DAMAGE_CHHIT,0,0);
 	double best_pow = 0;
 	gem* best_gem = NULL;
 	gem* new_array = malloc(value*sizeof(gem));
