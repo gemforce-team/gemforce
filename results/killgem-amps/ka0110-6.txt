@@ -3,10 +3,10 @@ Total value:	158
 Killgem
 Value:	110
 Grade:	7
-Damage:	25.651859
+Damage:	25.583324
 Crit:	5.453875
 Bbound:	1.776084
-Power:	441.317169
+Power:	440.138092
 
 Amplifier (x8)
 Value:	6
@@ -15,8 +15,8 @@ Damage:	3.271194
 Crit:	2.358367
 Power:	7.714678
 
-Spec base power w. red:	1362.185
-Spec coefficient:	1.059744
+Spec base power w. red:	1359.280
+Spec coefficient:	1.057483
 
 Killgem speccing scheme:
 (((((((((((2b+b)+b)+b)+2b)+(2b+b))+((2b+b)+b))+(((2b+b)+b)+b))+((((2b+b)+b)+b)+2b))+(((((2b+b)+b)+b)+2b)+(((y+b)+b)+2b)))+((((((2b+b)+b)+2b)+2b)+(((y+b)+b)+2b))+((((2y+y)+y)+(y+b))+((y+b)+2b))))+(((((((((2y+y)+y)+y)+2y)+2y)+((2y+y)+(y+b)))+(((y+r)+2y)+b))+((((2y+y)+y)+(y+b))+((y+b)+2b)))+((((((2b+b)+b)+b)+2b)+((y+b)+2b))+(((2y+y)+(y+b))+((y+b)+2b)))))
@@ -310,4 +310,4 @@ Amplifier equations:
 (val = 4)	 3 =  2 +  0
 (val = 6)	 4 =  3 +  1
 
-ka0128u - N8 TC120 A60 - gemforce v1.7.2 - table_kgsappr,table_crit
+ka0128u - N8 TC120 A60 - gemforce v1.8.1 - table_kgsappr,table_crit

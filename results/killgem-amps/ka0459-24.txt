@@ -3,10 +3,10 @@ Total value:	651
 Killgem
 Value:	459
 Grade:	9
-Damage:	65.886742
+Damage:	65.717201
 Crit:	12.473463
 Bbound:	2.176652
-Power:	3893.706055
+Power:	3883.686523
 
 Amplifier (x8)
 Value:	24
@@ -15,8 +15,8 @@ Damage:	8.196574
 Crit:	4.681417
 Power:	38.371586
 
-Spec base power w. red:	11020.71
-Spec coefficient:	1.157802
+Spec base power w. red:	10997.96
+Spec coefficient:	1.155412
 
 Killgem speccing scheme:
 (((((((((((((((((2b+b)+b)+b)+b)+2b)+(2b+b))+((2b+b)+b))+((2b+b)+b))+(((2b+b)+b)+b))+(((((2b+b)+b)+b)+b)+2b))+(((((2b+b)+b)+b)+b)+(2b+b)))+((((((2b+b)+b)+b)+b)+(2b+b))+(2b+b)))+((((((((2b+b)+b)+b)+b)+2b)+(2b+b))+((2b+b)+b))+(((2b+b)+b)+2b)))+(((((((((2b+b)+b)+b)+b)+2b)+(2b+b))+((2b+b)+b))+(((2b+b)+b)+2b))+((((2b+b)+b)+2b)+(2b+(y+b)))))+((((((((((2b+b)+b)+b)+b)+2b)+(2b+b))+((2b+b)+b))+(((2b+b)+b)+2b))+((((2b+b)+b)+2b)+(2b+(y+b))))+(((((2b+b)+b)+2b)+(2b+(y+b)))+(((2y+y)+(y+b))+(2b+(y+b))))))+(((((((((((2b+b)+b)+b)+b)+2b)+(2b+b))+((2b+b)+b))+(((2b+b)+b)+2b))+((((2b+b)+b)+2b)+(2b+(y+b))))+(((((2b+b)+b)+2b)+(2b+(y+b)))+(((2y+y)+(y+b))+(2b+(y+b)))))+((((((((((2y+y)+y)+y)+y)+y)+y)+(2y+y))+((2y+y)+(y+b)))+(((2y+y)+(y+b))+(2b+(y+b))))+(((((2b+b)+b)+2b)+(2b+(y+b)))+(((2y+y)+(y+b))+(2b+(y+b)))))))+(((((((((((((((2y+y)+y)+y)+y)+2y)+2y)+(2y+y))+((2y+y)+y))+(((2y+y)+y)+y))+(((((2y+y)+y)+y)+y)+2y))+(((((2y+y)+y)+y)+y)+2y))+(((((((2y+y)+y)+y)+y)+2y)+2y)+((2y+y)+(y+b))))+((((((((2y+y)+y)+y)+y)+2y)+2y)+((2y+y)+(y+b)))+(((2y+y)+(y+b))+(2b+(y+b)))))+(((((((((2y+y)+y)+y)+y)+2y)+(2y+b))+((2y+y)+(y+r)))+(((2y+y)+(y+b))+(2b+(y+b))))+(((((2b+b)+b)+2b)+(2b+(y+b)))+(((2y+y)+(y+b))+(2b+(y+b))))))+(((((((((((2b+b)+b)+b)+b)+b)+(2b+b))+(2b+b))+(((2b+b)+b)+2b))+((((2b+b)+b)+2b)+(2b+(y+b))))+(((((2b+b)+b)+2b)+(2b+(y+b)))+(((2y+y)+(y+b))+(2b+(y+b)))))+(((((((((2y+y)+y)+y)+y)+2y)+2y)+((2y+y)+(y+b)))+((2b+(y+b))+((y+b)+2y)))+(((((2b+b)+b)+2b)+(2b+(y+b)))+((2b+(y+b))+((y+b)+2y)))))))
@@ -118,4 +118,4 @@ Amplifier equations:
 (val = 15)	11 = 10 +  4
 (val = 24)	12 = 11 +  5
 
-ka0512u - N8 TC120 A60 - gemforce v1.8.0 - table_kgssemi,table_crit
+ka0512u - N8 TC120 A60 - gemforce v1.8.1 - table_kgssemi,table_crit
