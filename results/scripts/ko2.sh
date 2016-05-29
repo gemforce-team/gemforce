@@ -4,7 +4,7 @@ c=$2
 file=$3
 
 echo "$s - $c"
-filename="ko"$(printf "%0.4d-%d" $s $c)
+filename="ko"$(printf "%0.4d-%0.6d" $s $c)
 desc="$filename - N6 TC120 A60 - gemforce $(git describe --tags | cut -f1 -d "-") - $file"
 if [ $s -le 128 ] && [ $c -le 128 ]
 then
