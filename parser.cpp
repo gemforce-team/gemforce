@@ -3,6 +3,7 @@
 #include <getopt.h>
 #include <cmath>
 #include <cstring>
+#include <cctype>
 
 #include "gem_stats.h"
 
@@ -333,18 +334,16 @@ gem* gem_build(string parens, gem* gems, int& index)
 
 string ieeePreParser(string recipe)
 {
-	for (int i = 20; i > 1; i--)
-	{
-		string grd_str = to_string(i);
-		size_t place = recipe.find(grd_str);
-		while (place != string::npos)
-		{
-			char color = recipe[place + grd_str.length()];
-			string weakerGem = to_string(i - 1) + color;
-			if (i == 2) weakerGem = color;
-			recipe = recipe.replace(place, grd_str.length()+1, "(" + weakerGem + "+" + weakerGem + ")");
-			place = recipe.find(grd_str);
-		}
+	char* p_color = (char*)0x1;
+	char gem_buffer[64];
+	for (uint pos = 0; pos < recipe.length(); pos++) {
+		if (!isdigit(recipe[pos])) continue;
+		char* p_grade = &(recipe[pos]);
+		int grade = strtol(p_grade, &p_color, 10);
+		char color = *p_color;
+		if (grade == 2) sprintf(gem_buffer, "(%c+%c)", color, color);
+		else sprintf(gem_buffer, "(%d%c+%d%c)", grade-1, color, grade-1, color);
+		recipe = recipe.replace(pos, p_color-p_grade + 1, gem_buffer);
 	}
 	return recipe;
 }
