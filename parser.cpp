@@ -11,7 +11,7 @@ using namespace std;
 
 class gem
 {
-	public:
+public:
 	int uid;			// needed for eq. output
 	int grade;
 	double damage;		// reference: yellow damage=1
@@ -28,11 +28,13 @@ class gem
 	char color;
 	
 	gem(){}
-	
+
+private:
 	gem(int grd, double damage, double crit, double leech, double bbound, bool red=0, gem* father=nullptr, gem* mother=nullptr):
 	grade(grd), damage(damage), crit(crit), leech(leech), bbound(bbound), red(red), father(father), mother(mother) {}
-	
-	gem(const char color)
+
+public:
+	explicit gem(const char color)
 	{
 		switch (color)
 		{                      // gr dmg            cr le bl r
@@ -334,7 +336,7 @@ gem* gem_build(string parens, gem* gems, int& index)
 
 string ieeePreParser(string recipe)
 {
-	char* p_color = (char*)0x1;
+	char* p_color;
 	char gem_buffer[64];
 	for (uint pos = 0; pos < recipe.length(); pos++) {
 		if (!isdigit(recipe[pos])) continue;
@@ -427,7 +429,7 @@ int main(int argc, char** argv)
 	while ((opt=getopt(argc,argv,"hptef:a:T:A:N:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptef:a:T:A:N:\n");
+				print_help("hptef:a:T:A:N:");
 			return 0;
 			PTECIDQUR_OPTIONS_BLOCK
 			case 'f': {
