@@ -175,8 +175,7 @@ When in doubt about which flags are supported check with `-h`.
   ` `
   * `w` : White
   * `g` : Generic gem
-  * `s` : Cyan (Suppressive)
-  * `h` : Cyan/Black
+  * The other uncommon color names can be found in the [`gem_stats.h`](include/gem_stats.h) file
 
 ### Why are those weird recipes better than 'U'?
 
