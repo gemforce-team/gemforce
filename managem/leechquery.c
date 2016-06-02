@@ -13,8 +13,8 @@ void gem_print(gem *p_gem) {
 }
 
 char gem_color(gem* p_gem) {
-	if (p_gem->leech==0) return 'r';
-	else return 'o';
+	if (p_gem->leech==0) return COLOR_CHHIT;
+	else return COLOR_LEECH;
 }
 
 #include "print_utils.h"

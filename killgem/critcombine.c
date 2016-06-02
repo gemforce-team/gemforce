@@ -11,8 +11,8 @@ void gem_print(gem *p_gem) {
 }
 
 char gem_color(gem* p_gem) {
-	if (p_gem->crit==0) return 'r';
-	else return 'y';
+	if (p_gem->crit==0) return COLOR_CHHIT;
+	else return COLOR_CRIT;
 }
 
 #include "print_utils.h"

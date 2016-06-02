@@ -138,4 +138,25 @@ const double DAMAGE_ARMOR  = 11./11.;
 const double DAMAGE_SUPPR  = 12./11.;
 const double DAMAGE_PBOUND = 12./11.;
 
+// -------------------------
+// Colors (single char)
+// -------------------------
+
+const char COLOR_POISON = 'G';
+const char COLOR_CRIT   = 'y';
+const char COLOR_BBOUND = 'b';
+const char COLOR_SLOW   = 'B';
+const char COLOR_CHHIT  = 'r';
+const char COLOR_LEECH  = 'o';
+const char COLOR_ARMOR  = 'p';
+const char COLOR_SUPPR  = 'c';
+const char COLOR_PBOUND = 'w';
+
+const char COLOR_MANAGEM = 'm';
+const char COLOR_KILLGEM = 'k';
+const char COLOR_SBGEM   = 'h';
+
+const char COLOR_GENERIC = 'g';
+const char COLOR_UNKNOWN = 'x';
+
 #endif // _GEM_STATS_H

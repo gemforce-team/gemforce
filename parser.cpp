@@ -37,20 +37,20 @@ public:
 	explicit gem(const char color)
 	{
 		switch (color)
-		{                      // gr dmg            cr le bl r
-			case 'y': *this = gem(1, DAMAGE_CRIT  , 1, 0, 0, 0);
+		{                                // gr dmg            cr le bl r
+			case COLOR_CRIT:    *this = gem(1, DAMAGE_CRIT  , 1, 0, 0, 0);
 			break;
-			case 'o': *this = gem(1, DAMAGE_LEECH , 0, 1, 0, 0);
+			case COLOR_LEECH:   *this = gem(1, DAMAGE_LEECH , 0, 1, 0, 0);
 			break;
-			case 'b': *this = gem(1, DAMAGE_BBOUND, 0, 0, 1, 0);
+			case COLOR_BBOUND:  *this = gem(1, DAMAGE_BBOUND, 0, 0, 1, 0);
 			break;
-			case 'r': *this = gem(1, DAMAGE_CHHIT , 0, 0, 0, 1);
+			case COLOR_CHHIT:   *this = gem(1, DAMAGE_CHHIT , 0, 0, 0, 1);
 			break;
-			case 'm': *this = gem(1, 0            , 0, 1, 1, 0);
+			case COLOR_MANAGEM: *this = gem(1, 0            , 0, 1, 1, 0);
 			break;
-			case 'k': *this = gem(1, 1            , 1, 0, 1, 0);
+			case COLOR_KILLGEM: *this = gem(1, 1            , 1, 0, 1, 0);
 			break;
-			default:  *this = gem(0, 0            , 0, 0, 0, 0);
+			default:            *this = gem(0, 0            , 0, 0, 0, 0);
 		}
 		this->color=color;
 		this->value=1;
@@ -69,18 +69,18 @@ public:
 	
 	char get_color()
 	{
+		if (this->red) return COLOR_CHHIT;
 		int info=0;
 		if (this->crit  !=0) info|=4;
 		if (this->leech !=0) info|=2;
 		if (this->bbound!=0) info|=1;
 		switch (info) {
-			case  0: return this->red?'r':'0';
-			case  1: return 'b';
-			case  2: return 'o';
-			case  3: return 'm';
-			case  4: return 'y';
-			case  5: return 'k';
-			default: return 'x';
+			case  1: return COLOR_BBOUND;
+			case  2: return COLOR_LEECH;
+			case  3: return COLOR_MANAGEM;
+			case  4: return COLOR_CRIT;
+			case  5: return COLOR_KILLGEM;
+			default: return COLOR_UNKNOWN;
 		}
 	}
 	int getvalue() {
@@ -258,34 +258,34 @@ void print_tree(gem* gemf, const char* prefix)
 
 void gem_print(gem* p_gem) {
 	switch (p_gem->color) {
-		case 'y':
+		case COLOR_CRIT:
 		printf("Yellow gem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", p_gem->getvalue(), p_gem->grade);
 		printf("Damage:\t%f\nCrit:\t%f\n\n", p_gem->damage, p_gem->crit);
 		break;
-		case 'o':
+		case COLOR_LEECH:
 		printf("Orange gem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", p_gem->getvalue(), p_gem->grade);
 		printf("Leech:\t%f\n\n", p_gem->leech);
 		break;
-		case 'b':
+		case COLOR_BBOUND:
 		printf("Black gem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", p_gem->getvalue(), p_gem->grade);
 		printf("Damage:\t%f\nBbound:\t%f\n\n", p_gem->damage, p_gem->bbound);
 		break;
-		case 'r':
+		case COLOR_CHHIT:
 		printf("Red gem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", p_gem->getvalue(), p_gem->grade);
 		printf("Damage:\t%f\nRed:\t%d\n\n", p_gem->damage, p_gem->red);
 		break;
-		case 'm':
+		case COLOR_MANAGEM:
 		printf("Managem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", p_gem->getvalue(), p_gem->grade);
 		printf("Leech:\t%f\nBbound:\t%f\n", p_gem->leech, p_gem->bbound);
 		cout << "Red:\t" << boolalpha << p_gem->red << '\n';
 		printf("Mana power:\t%f\n\n", p_gem->leech*p_gem->bbound);
 		break;
-		case 'k':
+		case COLOR_KILLGEM:
 		printf("Killgem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", p_gem->getvalue(), p_gem->grade);
 		printf("Damage:\t%f\nCrit:\t%f\nBbound:\t%f\n", p_gem->damage, p_gem->crit, p_gem->bbound);
@@ -293,7 +293,7 @@ void gem_print(gem* p_gem) {
 		printf("Kill power:\t%f\n\n", p_gem->damage*p_gem->bbound*p_gem->crit*p_gem->bbound);
 		break;
 		default:
-		printf("Strange gem\n");
+		printf("Unknown gem\n");
 		printf("Value:\t%d\nGrade:\t%d\n", p_gem->getvalue(), p_gem->grade);
 		printf("Damage:\t%f\nCrit:\t%f\nLeech:\t%f\nBbound:\t%f\n", p_gem->damage, p_gem->crit, p_gem->leech, p_gem->bbound);
 		cout << "Red:\t" << boolalpha << p_gem->red << '\n';
@@ -400,13 +400,13 @@ void worker(string parens, string parens_amps, int output_options, int TC, int A
 		}
 		double specials_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
 		double damage_ratio  =Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
-		if (gemf->color=='m' || gemf->color=='x') {
+		if (gemf->color==COLOR_MANAGEM || gemf->color==COLOR_UNKNOWN) {
 			double power = gem_amp_mana_power(*gemf, *ampf, specials_ratio);
 			printf("Global mana power:\t%#.7g\n", power);
 			int tvalue = gemf->getvalue() + Namps*ampf->getvalue();
 			printf("Spec coefficient:\t%f\n\n", pow(tvalue, -0.627216)*power);
 		}
-		if (gemf->color=='k' || gemf->color=='x') {
+		if (gemf->color==COLOR_KILLGEM || gemf->color==COLOR_UNKNOWN) {
 			double power = gem_amp_kill_power(*gemf, *ampf, damage_ratio, specials_ratio);
 			printf("Global kill power:\t%#.7g\n", power);
 			int tvalue = gemf->getvalue() + Namps*ampf->getvalue();

@@ -36,10 +36,10 @@ void gem_print(gem* p_gem) {
 
 char gem_color(gem* p_gem)
 {
-	if (p_gem->crit==0 && p_gem->bbound==0) return 'r';
-	if (p_gem->crit==0) return 'b';
-	if (p_gem->bbound==0) return 'y';
-	else return 'k';
+	if (p_gem->crit==0 && p_gem->bbound==0) return COLOR_CHHIT;
+	if (p_gem->crit==0) return COLOR_BBOUND;
+	if (p_gem->bbound==0) return COLOR_CRIT;
+	else return COLOR_KILLGEM;
 }
 
 // -----------------

@@ -35,10 +35,10 @@ void gem_print(gem *p_gem) {
 
 char gem_color(gem* p_gem)
 {
-	if (p_gem->leech==0 && p_gem->bbound==0) return 'r';
-	if (p_gem->leech==0) return 'b';
-	if (p_gem->bbound==0) return 'o';
-	else return 'm';
+	if (p_gem->leech==0 && p_gem->bbound==0) return COLOR_CHHIT;
+	if (p_gem->leech==0) return COLOR_BBOUND;
+	if (p_gem->bbound==0) return COLOR_LEECH;
+	else return COLOR_MANAGEM;
 }
 
 // -----------------
