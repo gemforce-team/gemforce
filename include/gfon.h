@@ -7,14 +7,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+static const char base64encode[64] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<',  '=', '>', '?',
+                                      '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',  'M', 'N', 'O',
+                                      'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_',
+                                      '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',  'm', 'n', 'o'};
+
+static const char base64decode[64] = { 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15,
+                                      16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+                                      32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
+                                      48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63};
+
 void line_init(FILE* table, int pool_zero)
 {
 	switch (pool_zero) {
 		case 1:       // combines
-			fprintf(table, "1\n-1 0 0\n");
+			fprintf(table, "1\n");
+			fprintf(table, "-1 0 0\n");
 		break;
 		case 2:       // specs
-			fprintf(table, "2\n-1 1 0\n");
+			fprintf(table, "2\n");
+			fprintf(table, "-1 0 0\n");
 			fprintf(table, "-1 0 1\n");
 		break;
 		default:
@@ -67,12 +79,12 @@ void exit_on_corruption(long int position)
 	exit(1);
 }
 
-int fscan64(char* s, int* n)
+static int fscan64(char* s, int* n)
 {
 	*n=0;
 	if (s==NULL || s[0]=='\0') return 0;
 	for (int m=0; *s; m+=6) {
-		(*n) += (((int)(*s)-48) << m);
+		(*n) += (base64decode[*s-'0'] << m);
 		s++;
 	}
 	return 1;
@@ -126,10 +138,10 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 	return prevmax;
 }
 
-void fprint64(int n, FILE* steam)
+static void fprint64(int n, FILE* steam)
 {
 	if (n) while (n) {
-		fputc((n & 63)+48, steam);
+		fputc(base64encode[n & 63], steam);
 		n>>=6;
 	}
 	else fputc('0', steam);
