@@ -69,12 +69,12 @@ public:
 	
 	char get_color()
 	{
-		if (this->red) return COLOR_CHHIT;
 		int info=0;
 		if (this->crit  !=0) info|=4;
 		if (this->leech !=0) info|=2;
 		if (this->bbound!=0) info|=1;
 		switch (info) {
+			case  0: return this->red ? COLOR_CHHIT : COLOR_UNKNOWN;
 			case  1: return COLOR_BBOUND;
 			case  2: return COLOR_LEECH;
 			case  3: return COLOR_MANAGEM;
@@ -355,7 +355,14 @@ void worker(string parens, string parens_amps, int output_options, int TC, int A
 	int index=0;
 	int value=(parens.length()+3)/4;
 	gem* gems = new gem[2*value-1];
-	gem* gemf = gem_build(parens, gems, index);
+	gem* gemf;
+	try {
+		gemf = gem_build(parens, gems, index);
+	}
+	catch (out_of_range) {
+		cout << "Error: Malformed gem recipe" << endl;
+		exit(1);
+	}
 	
 	printf("\nMain gem:\n");
 	gem_print(gemf);
@@ -379,7 +386,14 @@ void worker(string parens, string parens_amps, int output_options, int TC, int A
 		int index=0;
 		int value=(parens_amps.length()+3)/4;
 		gem* amps = new gem[2*value-1];
-		gem* ampf = gem_build(parens_amps, amps, index);
+		gem* ampf;
+		try {
+			ampf = gem_build(parens, gems, index);
+		}
+		catch (out_of_range) {
+			cout << "Error: Malformed amp recipe" << endl;
+			exit(1);
+		}
 		
 		printf("Amplifier (x%d)\n", Namps);
 		gem_print(ampf);
