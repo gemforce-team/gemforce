@@ -119,8 +119,10 @@ void worker(int len, int output_options, char* filename)
 		table_write_iteration(pool, pool_length, i, table);			// write on file
 	}
 	
-	fclose(table);			// close
-	for (i=0;i<len;++i) free(pool[i]);		// free
+	fclose(table);      // close
+	for (i=0;i<len;++i) free(pool[i]);   // free
+	free(pool);         // free
+	free(pool_length);  // free
 }
 
 int main(int argc, char** argv)
