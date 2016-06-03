@@ -104,7 +104,7 @@ int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
 		int eof_check=fscanf(table, "%d\n", pool_length+i);      // get pool length
 		if (eof_check==-1) break;
 		else {
-			pool[i]=malloc(pool_length[i]*sizeof(gem));
+			pool[i]=malloc(pool_length[i]*sizeof(gemO));
 			int j;
 			for (j=0; j<pool_length[i]; ++j) {
 				char b1[9], b2[9], b3[9];

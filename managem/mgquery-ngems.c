@@ -65,7 +65,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 		exit(1);
 	}
 
-	gemO* bestO=malloc(lena*sizeof(gem));		// if not malloc-ed 140k is the limit
+	gemO* bestO=malloc(lena*sizeof(gemO));		// if not malloc-ed 140k is the limit
 	
 	AMPS_COMPRESSION
 	if (!(output_options & mask_quiet)) printf("Amp pool compression done!\n\n");
