@@ -69,7 +69,10 @@ dist: $(QUERY_DIST) tables
 	$(MAKE) move
 	@echo "Setup completed, the programs can be found in the \"$(BINDIR)/\" folder"
 
-.PHONY: dev dev-move all all-move dist
+analyze:
+	scan-build -V -analyze-headers $(MAKE)
+
+.PHONY: dev dev-move all all-move dist analyze
 
 # Aggregates
 set-query: $(QUERY_ALL)
