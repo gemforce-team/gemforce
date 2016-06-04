@@ -26,8 +26,8 @@ void worker(int len, int output_options, char* filename)
 	if (table==NULL) exit(1);              // if the file is not good we exit
 	int i;
 	gem* gems=malloc(len*sizeof(gem));     // if not malloc-ed 230k is the limit
-	gem* pool[len];
-	int pool_length[len];
+	gem** pool=malloc(len*sizeof(gem*));   // if not malloc-ed 690k is the limit
+	int* pool_length=malloc(len*sizeof(int));    // if not malloc-ed 2M is the limit
 	pool[0]=malloc(sizeof(gem));
 	gem_init(gems,1,1,1);
 	gem_init(pool[0],1,1,1);
@@ -121,6 +121,8 @@ void worker(int len, int output_options, char* filename)
 	}
 	
 	for (i=0;i<len;++i) free(pool[i]);		// free
+	free(pool);		// free
+	free(pool_length);
 	free(gems);		// free
 	if (output_options & mask_red && len > 1) {
 		free(gem_array);
