@@ -93,43 +93,52 @@ int pool_from_table_Y(gemY** pool, int* pool_length, int len, FILE* table)
 {
 	printf("\nBuilding pool..."); fflush(stdout);
 	rewind(table);
-	int i;
+
 	int pool_zero;
-	fscanf(table, "%d\n", &pool_zero);			// get pool_zero
-	if (pool_zero != pool_length[0]) {			// and check if it's right
+	int check;
+	check = fscanf(table, "%d\n", &pool_zero);   // get pool_zero
+	if (check!=1) exit_on_corruption(ftell(table));
+	if (pool_zero != pool_length[0]) {               // and check if it's right
 		printf("\nWrong table type, exiting...\n");
-		exit(1);
+		return -1;      // the program will then exit gracefully
 	}
-	for (i=0;i<pool_length[0];++i) {				// discard value 0 gems
-		fscanf(table, "%*[^\n]\n");
+
+	for (int i=0;i<pool_length[0];++i) {             // discard value 0 gems
+		int check = fscanf(table, "%*[^\n]\n");
+		if (check!=0) exit_on_corruption(ftell(table));
 	}
-	fscanf(table, "%d\n\n", &i);              // check iteration number
-	if (i!=0) exit_on_corruption(ftell(table));
+
+	int iter;
+	check = fscanf(table, "%d\n\n", &iter);      // check iteration number
+	if (check!=1) exit_on_corruption(ftell(table));
+	if (iter!=0) exit_on_corruption(ftell(table));
+
 	int prevmax=0;
-	for (i=1;i<len;++i) {
+	for (int i=1;i<len;++i) {
 		int eof_check=fscanf(table, "%d\n", pool_length+i);      // get pool length
-		if (eof_check==-1) break;
+		if (eof_check==EOF) break;
 		else {
 			pool[i]=malloc(pool_length[i]*sizeof(gemY));
 			int j;
 			for (j=0; j<pool_length[i]; ++j) {
 				char b1[9], b2[9], b3[9];
-				fscanf(table, "%8s %8s %8s\n", b1, b2, b3);
-				int value_father, offset_father;
-				int value_mother, offset_mother;
-				int check;
-				check =fscan64(b1, &value_father);
-				check&=fscan64(b2, &offset_father);
-				check&=fscan64(b3, &offset_mother);
+				int nscan = fscanf(table, "%8s %8s %8s\n", b1, b2, b3);
+				int value_father;
+				int offset_father;
+				int offset_mother;
+				int check = (nscan == 3);
+				check &= fscan64(b1, &value_father);
+				check &= fscan64(b2, &offset_father);
+				check &= fscan64(b3, &offset_mother);
 				if (!check) exit_on_corruption(ftell(table));
 				else {
-					value_mother=i-1-value_father;
+					int value_mother=i-1-value_father;
 					gem_combine_Y(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
 				}
 			}
 			int iteration_check;
-			fscanf(table, "%d\n\n", &iteration_check);    // check iteration number
-			if (iteration_check!=i) exit_on_corruption(ftell(table));
+			int check = fscanf(table, "%d\n\n", &iteration_check);    // check iteration number
+			if (check!=1 || iteration_check!=i) exit_on_corruption(ftell(table));
 			prevmax++;
 		}
 	}
