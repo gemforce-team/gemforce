@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <stdexcept>
 #include <getopt.h>
 #include <cmath>
 #include <cstring>
