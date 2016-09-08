@@ -10,9 +10,9 @@ CXXSTD:=-std=gnu++11
 WFLAGS:=-Wall -Wextra
 OFLAGS:=-O3 -flto -fwhole-program
 IFLAGS:=-I "include/"
-LFLAGS:=-lm
-CFLAGS:=$(CSTD) $(WFLAGS) $(OFLAGS) $(IFLAGS) $(LFLAGS)
-CXXFLAGS:=$(CXXSTD) $(WFLAGS) $(OFLAGS) $(IFLAGS) $(LFLAGS)
+CFLAGS:=$(CSTD) $(WFLAGS) $(OFLAGS) $(IFLAGS)
+CXXFLAGS:=$(CXXSTD) $(WFLAGS) $(OFLAGS) $(IFLAGS)
+LIBFLAGS:=-lm
 
 # Query
 QUERY_LEECH=managem/leechquery
@@ -124,65 +124,65 @@ $(BINDIR):
 
 # Leech
 managem/leechbuild: managem/leechbuild.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 managem/leechcombine: managem/leechcombine.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 managem/leechquery: managem/leechquery.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 
 # Managem
 managem/mgbuild-appr: managem/mgbuild-appr.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 managem/mgbuild-c6: managem/mgbuild-c6.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 managem/mgbuild-exact: managem/mgbuild-exact.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 managem/mgcombine-appr: managem/mgcombine-appr.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 managem/mgquery-alone: managem/mgquery-alone.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 managem/mgquery-amps: managem/mgquery-amps.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 managem/mgquery-ngems: managem/mgquery-ngems.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 managem/mgquery-omnia: managem/mgquery-omnia.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 managem/mgquery-setup: managem/mgquery-setup.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 
 # Crit
 killgem/critbuild: killgem/critbuild.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/critcombine: killgem/critcombine.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/critquery: killgem/critquery.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 
 # Killgem
 killgem/kgbuild-appr: killgem/kgbuild-appr.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/kgbuild-c6: killgem/kgbuild-c6.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/kgbuild-exact: killgem/kgbuild-exact.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/kgcombine-appr: killgem/kgcombine-appr.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/kgcombine-exact: killgem/kgcombine-exact.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/kgquery-alone: killgem/kgquery-alone.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/kgquery-amps: killgem/kgquery-amps.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/kgquery-ngems: killgem/kgquery-ngems.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/kgquery-omnia: killgem/kgquery-omnia.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 killgem/kgquery-setup: killgem/kgquery-setup.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
 
 # Parser
 parser: parser.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< -o $@
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
 
 # Tables
 tables: $(TABLES_DIR)/table_* | $(TABLES_DIR) $(BINDIR)
