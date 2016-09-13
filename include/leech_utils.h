@@ -147,7 +147,7 @@ int pool_from_table_O(gemO** pool, int* pool_length, int len, FILE* table)
 void print_parens_O(gemO* gemf)
 {
 	if (gemf->grade==0) printf("-");
-	else if (gemf->father==NULL) printf("o");
+	else if (gemf->father==NULL) printf("%c", COLOR_LEECH);
 	else {
 		printf("(");
 		print_parens_O(gemf->mother);
@@ -169,10 +169,10 @@ void print_parens_compressed_O(gemO* gemf)
 {
 	if (gemf->grade==0) printf("-");
 	else if (gemf->father==NULL) {
-		printf("o");
+		printf("%c", COLOR_LEECH);
 	}
 	else if (pow(2,gemf->grade-1)==gem_getvalue_O(gemf)) {				// if gem is standard combine
-		printf("%do",gemf->grade);
+		printf("%d%c", gemf->grade, COLOR_LEECH);
 	}
 	else {
 		printf("(");
@@ -201,7 +201,7 @@ void fill_array_O(gemO* gemf, gemO** p_gems, int* place)
 void print_eq_O(gemO* p_gem, int* printed_uid)
 {
 	if (printed_uid[p_gem->grade/1000]==1) return;
-	if (gem_getvalue_O(p_gem)==1) printf("(val = 1)\t%2d = g1 o\n", p_gem->grade/1000);
+	if (gem_getvalue_O(p_gem)==1) printf("(val = 1)\t%2d = g1 %c\n", p_gem->grade/1000, COLOR_LEECH);
 	else {
 		print_eq_O(p_gem->father, printed_uid);		// mother is always bigger
 		print_eq_O(p_gem->mother, printed_uid);
@@ -231,7 +231,7 @@ void print_tree_O(gemO* gemf, const char* prefix)
 {
 	if (gemf->grade==0) printf("-\n");
 	else if (gemf->father==NULL) {
-		printf("─ g1 o\n");
+		printf("─ g1 %c\n", COLOR_LEECH);
 	}
 	else {
 		printf("─%d\n",gem_getvalue_O(gemf));

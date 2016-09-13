@@ -215,7 +215,7 @@ void gem_sort_Y (gemY* gems, int len)
 void print_parens_Y(gemY* gemf)
 {
 	if (gemf->grade==0) printf("-");
-	else if (gemf->father==NULL) printf("y");
+	else if (gemf->father==NULL) printf("%c", COLOR_CRIT);
 	else {
 		printf("(");
 		print_parens_Y(gemf->mother);
@@ -237,10 +237,10 @@ void print_parens_compressed_Y(gemY* gemf)
 {
 	if (gemf->grade==0) printf("-");
 	else if (gemf->father==NULL) {
-		printf("y");
+		printf("%c", COLOR_CRIT);
 	}
 	else if (pow(2,gemf->grade-1)==gem_getvalue_Y(gemf)) {				// if gem is standard combine
-		printf("%dy",gemf->grade);
+		printf("%d%c", gemf->grade, COLOR_CRIT);
 	}
 	else {
 		printf("(");
@@ -269,7 +269,7 @@ void fill_array_Y(gemY* gemf, gemY** p_gems, int* place)
 void print_eq_Y(gemY* p_gem, int* printed_uid)
 {
 	if (printed_uid[p_gem->grade/1000]==1) return;
-	if (gem_getvalue_Y(p_gem)==1) printf("(val = 1)\t%2d = g1 y\n", p_gem->grade/1000);
+	if (gem_getvalue_Y(p_gem)==1) printf("(val = 1)\t%2d = g1 %c\n", p_gem->grade/1000, COLOR_CRIT);
 	else {
 		print_eq_Y(p_gem->father, printed_uid);		// mother is always bigger
 		print_eq_Y(p_gem->mother, printed_uid);
@@ -299,7 +299,7 @@ void print_tree_Y(gemY* gemf, const char* prefix)
 {
 	if (gemf->grade==0) printf("-\n");
 	else if (gemf->father==NULL) {
-		printf("─ g1 y\n");
+		printf("─ g1 %c\n", COLOR_CRIT);
 	}
 	else {
 		printf("─%d\n",gem_getvalue_Y(gemf));
