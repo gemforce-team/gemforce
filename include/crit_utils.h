@@ -304,15 +304,13 @@ void print_tree_Y(gemY* gemf, const char* prefix)
 	else {
 		printf("─%d\n",gem_getvalue_Y(gemf));
 		printf("%s ├",prefix);
-		char string[strlen(prefix)+5];   // 1 space, 1 unicode bar and and the null term are 5 extra chars
-		strcpy(string,prefix);
-		strcat(string," │");
-		print_tree_Y(gemf->mother, string);
+		char string1[strlen(prefix)+5];  // 1 space, 1 unicode bar and and the null term are 5 extra chars
+		sprintf(string1, "%s │", prefix);
+		print_tree_Y(gemf->mother, string1);
 		
 		printf("%s └",prefix);
 		char string2[strlen(prefix)+3];  // 2 spaces and the null term are 3 extra chars
-		strcpy(string2,prefix);
-		strcat(string2,"  ");
+		sprintf(string2, "%s  ", prefix);
 		print_tree_Y(gemf->father, string2);
 	}
 }
