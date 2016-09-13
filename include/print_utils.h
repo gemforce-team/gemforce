@@ -49,14 +49,12 @@ void fill_array(gem* gemf, gem** p_gems, int* place)
 		fill_array(gemf->father, p_gems, place);
 		fill_array(gemf->mother, p_gems, place);
 	}
-	int i;
-	int uniq=1;
-	for (i=0; i<*place; ++i) if (gemf==p_gems[i]) uniq=0;
-	if (uniq) {
-		gemf->grade=*place;			// mark
-		p_gems[*place]=gemf;
-		(*place)++;
-	}
+	
+	for (int i=0; i<*place; ++i) if (gemf==p_gems[i]) return;
+	
+	gemf->grade=*place;			// mark
+	p_gems[*place]=gemf;
+	(*place)++;
 }
 
 void print_eq(gem* p_gem, int* printed_uid)
@@ -78,9 +76,8 @@ void print_equations(gem* gemf)
 	gem** p_gems = (gem**)malloc(len*sizeof(gem*));		// let's store all the gem pointers
 	int place=0;
 	fill_array(gemf, p_gems, &place);			// this array contains marked uniques only and is long "place"
-	int i;
 	int printed_uid[place];
-	for (i=0; i<place; ++i) printed_uid[i]=0;
+	for (int i=0; i<place; ++i) printed_uid[i]=0;
 	print_eq(gemf, printed_uid);
 	free(p_gems);
 }
