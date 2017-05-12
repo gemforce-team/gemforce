@@ -244,11 +244,11 @@ gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array
 	
 	for (int i=0; i<pool_length; ++i) {
 		gem* gemf=pool+i;
-		for (int last=0; last<value; last++) {
+		for (int target=0; target<value; target++) {
 			int isRed=0;
-			int curr=0;
-			int new_index=0;
-			gem* gp=gem_explore(gemf, &isRed, red, last, &curr, new_array, &new_index);
+			int gems_left=target;
+			gem* new_slot=new_array;
+			gem* gp=gem_explore(gemf, &isRed, red, &gems_left, &new_slot);
 			double new_pow=gem_cfr_power(*gp, amp_leech_scaled);
 			if (new_pow > best_pow) {
 				best_pow=new_pow;
