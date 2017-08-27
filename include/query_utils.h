@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-inline void table_selection2(char* input, char* filename, char* filenameA)
+void table_selection2(char* input, char* filename, char* filenameA)
 {
 	char* p=input;
 	while (*p != ',' && *p != '\0') p++;
@@ -16,7 +16,7 @@ inline void table_selection2(char* input, char* filename, char* filenameA)
 	strcpy(filenameA, p+1);
 }
 
-inline void table_selection3(char* input, char* filename, char* filenamec, char* filenameA)
+void table_selection3(char* input, char* filename, char* filenamec, char* filenameA)
 {
 	char* p=input;
 	while (*p != ',' && *p != '\0') p++;
@@ -31,7 +31,7 @@ inline void table_selection3(char* input, char* filename, char* filenamec, char*
 	strcpy(filenameA, q+1);
 }
 
-inline int file_exists (const char* name)
+int file_exists (const char* name)
 {
 	FILE* file;
 	if ((file = fopen(name, "r"))) {
@@ -41,7 +41,7 @@ inline int file_exists (const char* name)
 	else return 0;
 }
 
-inline void file_selection(char* filename, const char* table_name)
+void file_selection(char* filename, const char* table_name)
 {
 	if (filename[0]!='\0') return;
 	else if (file_exists(table_name)) {
