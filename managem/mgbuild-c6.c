@@ -29,7 +29,7 @@ inline double gem_rk31(gem gem1)
 	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.leech;
 }
 
-void worker(int len, int output_options, char* filename)
+void worker(int len, options output_options, char* filename)
 {
 	FILE* table=table_init(filename, 1);    // init managem
 	int i;
@@ -114,9 +114,9 @@ void worker(int len, int output_options, char* filename)
 			}
 		}
 		
-		if (!(output_options & mask_quiet)) {
+		if (!output_options.quiet) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_debug) {
+			if (output_options.debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
@@ -134,7 +134,7 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int output_options=0;
+	options output_options = (options){0};
 	char filename[256]="";		// it should be enough
 
 	while ((opt=getopt(argc,argv,"hdqf:"))!=-1) {

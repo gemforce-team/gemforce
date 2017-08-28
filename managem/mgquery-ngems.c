@@ -21,7 +21,7 @@ void print_ngems_table(gem* gems, gemO* amps, double leech_ratio, int len)
 	printf("\n");
 }
 
-void worker(int len, int output_options, int gem_limit, char* filename, char* filenameA, int TC, int As, int Namps)
+void worker(int len, options output_options, int gem_limit, char* filename, char* filenameA, int TC, int As, int Namps)
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);						// if the file is not good we exit
@@ -46,7 +46,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 	int poolf_length[len];
 	
 	MGSPEC_COMPRESSION
-	if (!(output_options & mask_quiet)) printf("Gem speccing pool compression done!\n");
+	if (!output_options.quiet) printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
@@ -68,7 +68,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 	gemO* bestO=malloc(lena*sizeof(gemO));		// if not malloc-ed 140k is the limit
 	
 	AMPS_COMPRESSION
-	if (!(output_options & mask_quiet)) printf("Amp pool compression done!\n\n");
+	if (!output_options.quiet) printf("Amp pool compression done!\n\n");
 
 	int j,k;									// let's choose the right gem-amp combo
 	gem gems[len];
@@ -77,7 +77,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 	amps[0]=(gemO){0};
 	double leech_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1+TC/3*0.1);
 	
-	int skip_computations = (output_options & mask_quiet) && !((output_options & mask_table) || (output_options & mask_upto));
+	int skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
 	for (i=first; i<len; ++i) {								// for every total value
 		gems[i]=(gem){0};									// we init the gems
@@ -100,12 +100,12 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 				}
 			}
 		}
-		if (!(output_options & mask_quiet)) {
+		if (!output_options.quiet) {
 			printf("Total value:\t%d\n\n", i+1);
 			if (prevmax<len-1) printf("Managem limit:\t%d\n", prevmax+1);
 			printf("Managem\n");
 			printf("Value:\t%d\n",gem_getvalue(gems+i));
-			if (output_options & mask_debug) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
+			if (output_options.debug) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
 			gem_print(gems+i);
 			printf("Amplifier (x%d)\n", Namps);
 			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
@@ -114,7 +114,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 		}
 	}
 	
-	if (output_options & mask_quiet) {		// outputs last if we never seen any
+	if (output_options.quiet) {		// outputs last if we never seen any
 		printf("Total value:\t%d\n\n", len);
 		if (prevmax<len-1) printf("Managem limit:\t%d\n", prevmax+1);
 		printf("Managem\n");
@@ -131,7 +131,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 
 	gem* gem_array = NULL;
 	gem red;
-	if (output_options & mask_red) {
+	if (output_options.red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
@@ -148,7 +148,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 		}
 	}
 
-	if (output_options & mask_parens) {
+	if (output_options.parens) {
 		printf("Managem speccing scheme:\n");
 		print_parens_compressed(gemf);
 		printf("\n\n");
@@ -156,7 +156,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 		print_parens_compressed_O(ampf);
 		printf("\n\n");
 	}
-	if (output_options & mask_tree) {
+	if (output_options.tree) {
 		printf("Managem tree:\n");
 		print_tree(gemf, "");
 		printf("\n");
@@ -164,9 +164,9 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 		print_tree_O(ampf, "");
 		printf("\n");
 	}
-	if (output_options & mask_table) print_ngems_table(gems, amps, leech_ratio, len);
+	if (output_options.table) print_ngems_table(gems, amps, leech_ratio, len);
 	
-	if (output_options & mask_equations) {		// it ruins gems, must be last
+	if (output_options.equations) {		// it ruins gems, must be last
 		printf("Managem equations:\n");
 		print_equations(gemf);
 		printf("\n");
@@ -179,7 +179,7 @@ void worker(int len, int output_options, int gem_limit, char* filename, char* fi
 	for (i=0;i<len;++i) free(poolf[i]);			// free gems compressed
 	for (i=0;i<lena;++i) free(poolO[i]);		// free amps
 	free(bestO);										// free amps compressed
-	if (output_options & mask_red && len > 2) {
+	if (output_options.red && len > 2) {
 		free(gem_array);
 	}
 }
@@ -192,7 +192,7 @@ int main(int argc, char** argv)
 	int As=60;
 	int Namps=6;
 	int gem_limit=0;
-	int output_options=0;
+	options output_options = (options){0};
 	char filename[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 

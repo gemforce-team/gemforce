@@ -9,7 +9,7 @@ typedef struct Gem_YBp gem;
 #include "killgem_utils.h"
 #include "print_utils.h"
 
-void worker(int len, int output_options, int pool_zero)
+void worker(int len, options output_options, int pool_zero)
 {
 	printf("\n");
 	int i;
@@ -31,7 +31,7 @@ void worker(int len, int output_options, int pool_zero)
 		gem_init(gems     ,1,DAMAGE_CRIT  ,1,0);	// grade damage crit bbound
 		size=20000;							// reasonable spec sizing
 	}
-	if (!(output_options & mask_quiet)) gem_print(gems);
+	if (!output_options.quiet) gem_print(gems);
 
 	for (i=1; i<len; ++i) {
 		int j,k,h,l;
@@ -194,11 +194,11 @@ void worker(int len, int output_options, int pool_zero)
 			gems[i]=pool[i][j];
 		}
 		
-		if (!(output_options & mask_quiet)) {
+		if (!output_options.quiet) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info)
+			if (output_options.info)
 				printf("Growth:\t%f\n", log(gem_power(gems[i]))/log(i+1));
-			if (output_options & mask_debug) {
+			if (output_options.debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n",pool_length[i]);
 			}
@@ -206,17 +206,17 @@ void worker(int len, int output_options, int pool_zero)
 		}
 	}
 	
-	if (output_options & mask_quiet) {     // outputs last if we never seen any
+	if (output_options.quiet) {     // outputs last if we never seen any
 		printf("Value:\t%d\n",len);
 		printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
-		if (output_options & mask_debug)
+		if (output_options.debug)
 			printf("Pool:\t%d\n",pool_length[len-1]);
 		gem_print(gems+len-1);
 	}
 
 	gem* gemf=gems+len-1;  // gem that will be displayed
 
-	if (output_options & mask_upto) {
+	if (output_options.upto) {
 		double best_growth=-INFINITY;
 		int best_index=0;
 		for (i=0; i<len; ++i) {
@@ -234,7 +234,7 @@ void worker(int len, int output_options, int pool_zero)
 
 	gem* gem_array = NULL;
 	gem red;
-	if (output_options & mask_red) {
+	if (output_options.red) {
 		if (len < 3 || pool_zero!=2) printf("I could not add red!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
@@ -246,26 +246,26 @@ void worker(int len, int output_options, int pool_zero)
 		}
 	}
 
-	if (output_options & mask_parens) {
+	if (output_options.parens) {
 		printf("Compressed combining scheme:\n");
 		print_parens_compressed(gemf);
 		printf("\n\n");
 	}
-	if (output_options & mask_tree) {
+	if (output_options.tree) {
 		printf("Gem tree:\n");
 		print_tree(gemf, "");
 		printf("\n");
 	}
-	if (output_options & mask_table) print_table(gems, len);
+	if (output_options.table) print_table(gems, len);
 	
-	if (output_options & mask_equations) {   // it ruins gems, must be last
+	if (output_options.equations) {   // it ruins gems, must be last
 		printf("Equations:\n");
 		print_equations(gemf);
 		printf("\n");
 	}
 	
 	for (i=0;i<len;++i) free(pool[i]);		// free
-	if (output_options & mask_red && len > 2 && pool_zero==2) {
+	if (output_options.red && len > 2 && pool_zero==2) {
 		free(gem_array);
 	}
 }
@@ -275,7 +275,7 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int pool_zero=2;        // speccing by default
-	int output_options=0;
+	options output_options = (options){0};
 	
 	while ((opt=getopt(argc,argv,"hptecidqur"))!=-1) {
 		switch(opt) {

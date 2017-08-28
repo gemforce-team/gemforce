@@ -19,7 +19,7 @@ char gem_color(gem* p_gem) {
 
 #include "print_utils.h"
 
-void worker(int len, int output_options, char* filename)
+void worker(int len, options output_options, char* filename)
 {
 	FILE* table=file_check(filename);      // file is open to read
 	if (table==NULL) exit(1);              // if the file is not good we exit
@@ -43,7 +43,7 @@ void worker(int len, int output_options, char* filename)
 		exit(1);
 	}
 	
-	int skip_computations = (output_options & mask_quiet) && !((output_options & mask_table) || (output_options & mask_upto));
+	int skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
 	for (i=first; i<len; ++i) {
 		gems[i]=pool[i][0];
@@ -53,27 +53,27 @@ void worker(int len, int output_options, char* filename)
 			}
 		}
 		
-		if (!(output_options & mask_quiet)) {
+		if (!output_options.quiet) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_info)
+			if (output_options.info)
 				printf("Growth:\t%f\n", log(gem_power(gems[i]))/log(i+1));
-			if (output_options & mask_debug)
+			if (output_options.debug)
 				printf("Pool:\t%d\n",pool_length[i]);
 			gem_print(gems+i);
 		}
 	}
 	
-	if (output_options & mask_quiet) {    // outputs last if we never seen any
+	if (output_options.quiet) {    // outputs last if we never seen any
 		printf("Value:\t%d\n",len);
 		printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
-		if (output_options & mask_debug)
+		if (output_options.debug)
 			printf("Pool:\t%d\n",pool_length[len-1]);
 		gem_print(gems+len-1);
 	}
 
 	gem* gemf=gems+len-1;  // gem that will be displayed
 
-	if (output_options & mask_upto) {
+	if (output_options.upto) {
 		double best_growth=-INFINITY;
 		int best_index=0;
 		for (i=0; i<len; ++i) {
@@ -91,7 +91,7 @@ void worker(int len, int output_options, char* filename)
 
 	gem* gem_array = NULL;
 	gem red;
-	if (output_options & mask_red) {
+	if (output_options.red) {
 		if (len < 2) printf("I could not add red!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
@@ -103,19 +103,19 @@ void worker(int len, int output_options, char* filename)
 		}
 	}
 
-	if (output_options & mask_parens) {
+	if (output_options.parens) {
 		printf("Compressed combining scheme:\n");
 		print_parens_compressed(gemf);
 		printf("\n\n");
 	}
-	if (output_options & mask_tree) {
+	if (output_options.tree) {
 		printf("Gem tree:\n");
 		print_tree(gemf, "");
 		printf("\n");
 	}
-	if (output_options & mask_table) print_table(gems, len);
+	if (output_options.table) print_table(gems, len);
 	
-	if (output_options & mask_equations) {   // it ruins gems, must be last
+	if (output_options.equations) {   // it ruins gems, must be last
 		printf("Equations:\n");
 		print_equations(gemf);
 		printf("\n");
@@ -125,7 +125,7 @@ void worker(int len, int output_options, char* filename)
 	free(pool);		// free
 	free(pool_length);
 	free(gems);		// free
-	if (output_options & mask_red && len > 1) {
+	if (output_options.red && len > 1) {
 		free(gem_array);
 	}
 }
@@ -134,7 +134,7 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int output_options=0;
+	options output_options = (options){0};
 	char filename[256]="";		// it should be enough
 
 	while ((opt=getopt(argc,argv,"hptecidqurf:"))!=-1) {

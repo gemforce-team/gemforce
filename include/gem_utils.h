@@ -1,49 +1,49 @@
 #ifndef _GEM_UTILS_H
 #define _GEM_UTILS_H
 
-enum options_mask {
-	mask_parens    = 1 <<  0,
-	mask_tree      = 1 <<  1,
-	mask_equations = 1 <<  2,
-	mask_table     = 1 <<  3,
-	mask_info      = 1 <<  4,
-	mask_debug     = 1 <<  5,
-	mask_quiet     = 1 <<  6,
-	mask_upto      = 1 <<  7,
-	mask_red       = 1 <<  8,
-};
+typedef struct Options {
+	unsigned parens:1;
+	unsigned tree:1;
+	unsigned equations:1;
+	unsigned table:1;
+	unsigned info:1;
+	unsigned debug:1;
+	unsigned quiet:1;
+	unsigned upto:1;
+	unsigned red:1;
+} options;
 
 /* Macro blobs used for all flag options. Handle with care */
 #define DQ_OPTIONS_BLOCK\
 	case 'd':								\
-		output_options |= mask_debug;		\
+		output_options.debug = 1;			\
 		break;								\
 	case 'q':								\
-		output_options |= mask_quiet;		\
+		output_options.quiet = 1;			\
 		break;
 
 #define PTECIDQUR_OPTIONS_BLOCK\
 	case 'p':								\
-		output_options |= mask_parens;		\
+		output_options.parens = 1;			\
 		break;								\
 	case 't':								\
-		output_options |= mask_tree;		\
+		output_options.tree = 1;			\
 		break;								\
 	case 'e':								\
-		output_options |= mask_equations;	\
+		output_options.equations = 1;		\
 		break;								\
 	case 'c':								\
-		output_options |= mask_table;		\
+		output_options.table = 1;			\
 		break;								\
 	case 'i':								\
-		output_options |= mask_info;		\
+		output_options.info = 1;			\
 		break;								\
 	DQ_OPTIONS_BLOCK						\
 	case 'u':								\
-		output_options |= mask_upto;		\
+		output_options.upto = 1;			\
 		break;								\
 	case 'r':								\
-		output_options |= mask_red;			\
+		output_options.red = 1;				\
 		break;
 
 #include <stdio.h>

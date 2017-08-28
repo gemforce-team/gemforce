@@ -67,7 +67,7 @@ void print_omnia_table(gemO* amps, double* powers, int len)
 			}																						\
 		}																							\
 		free(temp_pool);																			\
-		if (output_options & mask_debug)															\
+		if (output_options.debug)															\
 			printf("Managem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);	\
 	}
 

@@ -351,7 +351,7 @@ string ieeePreParser(string recipe)
 	return recipe;
 }
 
-void worker(string parens, string parens_amps, int output_options, int TC, int As, int Namps)
+void worker(string parens, string parens_amps, options output_options, int TC, int As, int Namps)
 {
 	int index=0;
 	int value=(parens.length()+3)/4;
@@ -367,17 +367,17 @@ void worker(string parens, string parens_amps, int output_options, int TC, int A
 	
 	printf("\nMain gem:\n");
 	gem_print(gemf);
-	if (output_options & mask_parens) {
+	if (output_options.parens) {
 		printf("Compressed combining scheme:\n");
 		print_parens_compressed(gemf);
 		printf("\n\n");
 	}
-	if (output_options & mask_tree) {
+	if (output_options.tree) {
 		printf("Gem tree:\n");
 		print_tree(gemf, "");
 		printf("\n");
 	}
-	if (output_options & mask_equations) {
+	if (output_options.equations) {
 		printf("Equations:\n");
 		print_equations(gemf);
 		printf("\n");
@@ -398,17 +398,17 @@ void worker(string parens, string parens_amps, int output_options, int TC, int A
 		
 		printf("Amplifier (x%d)\n", Namps);
 		gem_print(ampf);
-		if (output_options & mask_parens) {
+		if (output_options.parens) {
 			printf("Amplifier scheme:\n");
 			print_parens_compressed(ampf);
 			printf("\n\n");
 		}
-		if (output_options & mask_tree) {
+		if (output_options.tree) {
 			printf("Amplifier tree:\n");
 			print_tree(ampf, "");
 			printf("\n");
 		}
-		if (output_options & mask_equations) {
+		if (output_options.equations) {
 			printf("Amplifier equations:\n");
 			print_equations(ampf);
 			printf("\n");
@@ -440,7 +440,7 @@ int main(int argc, char** argv)
 	int TC=120;
 	int As=60;
 	int Namps=6;
-	int output_options=0;
+	options output_options = {};
 	while ((opt=getopt(argc,argv,"hptef:a:T:A:N:"))!=-1) {
 		switch(opt) {
 			case 'h':

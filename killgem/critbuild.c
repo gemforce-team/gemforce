@@ -7,7 +7,7 @@ typedef struct Gem_Y gem;
 #include "critg_utils.h"
 #include "gfon.h"
 
-void worker(int len, int output_options, char* filename)
+void worker(int len, options output_options, char* filename)
 {
 	FILE* table=table_init(filename, 1);		// init yellow
 	int i;
@@ -151,9 +151,9 @@ void worker(int len, int output_options, char* filename)
 			free(temp_pools[grd]);
 			free(subpools[grd]);
 		}
-		if (!(output_options & mask_quiet)) {
+		if (!output_options.quiet) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options & mask_debug) {
+			if (output_options.debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
@@ -168,7 +168,7 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	int output_options=0;
+	options output_options = (options){0};
 	char filename[256]="";     // it should be enough
 
 	while ((opt=getopt(argc,argv,"hdqf:"))!=-1) {
