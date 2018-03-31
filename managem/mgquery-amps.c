@@ -159,7 +159,6 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 	}
 
 	gem* gem_array = NULL;
-	gem red;
 	if (output_options.red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
@@ -167,7 +166,7 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 			int valueA= gem_getvalue_O(ampf);
 			double NS = value + Namps*valueA;
 			double amp_leech_scaled = leech_ratio * ampf->leech;
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, amp_leech_scaled);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], &gem_array, amp_leech_scaled);
 			printf("Setup with red added:\n\n");
 			printf("Total value:\t%d\n\n", value+Namps*gem_getvalue_O(ampf));
 			printf("Managem\n");

@@ -187,7 +187,6 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	}
 
 	gem* gem_array = NULL;
-	gem red;
 	if (output_options.red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
@@ -195,7 +194,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			int valueA= gem_getvalue_O(ampf);
 			double NS = value + Namps*valueA;
 			double amp_leech_scaled = leech_ratio * ampf->leech;
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, amp_leech_scaled);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], &gem_array, amp_leech_scaled);
 			printf("Setup with red added:\n\n");
 			printf("Managem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u

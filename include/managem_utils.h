@@ -226,43 +226,15 @@ void gem_sort_exact (gem* gems, int len)
 // Red adder section
 // -----------------
 
-#include "red_adder.h"
-
 inline double gem_cfr_power(gem gem1, double amp_leech_scaled)
 {
 	if (gem1.leech==0) return 0;
 	return (gem1.leech+amp_leech_scaled)*gem1.bbound;
 }
 
-gem* gem_putred(gem* pool, int pool_length, int value, gem* red, gem** gem_array, double amp_leech_scaled)
-{
-	gem_init(red,1,0,0);
-	double best_pow = 0;
-	gem* best_gem = NULL;
-	gem* new_array = malloc(value*sizeof(gem));
-	gem* best_array = malloc(value*sizeof(gem));
-	
-	for (int i=0; i<pool_length; ++i) {
-		gem* gemf=pool+i;
-		for (int target=0; target<value; target++) {
-			int isRed=0;
-			int gems_left=target;
-			gem* new_slot=new_array;
-			gem* gp=gem_explore(gemf, &isRed, red, &gems_left, &new_slot);
-			double new_pow=gem_cfr_power(*gp, amp_leech_scaled);
-			if (new_pow > best_pow) {
-				best_pow=new_pow;
-				best_gem=gp;
-				// swap memory areas
-				gem* temp = best_array;
-				best_array = new_array;
-				new_array = temp;
-			}
-		}
-	}
-	free(new_array);
-	(*gem_array)=best_array;
-	return best_gem;
-}
+#define EXTRA_PARAMS   , double amp_leech_scaled
+#define RED_INIT_EXPR(ARG) gem_init(ARG, 1, 0, 0)
+#define CFR_EXPR(ARG)  gem_cfr_power(ARG, amp_leech_scaled)
+#include "red_adder.h"
 
 #endif // _MANAGEM_UTILS_H

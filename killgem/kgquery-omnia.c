@@ -324,7 +324,6 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	}
 
 	gem* gem_array = NULL;
-	gem red;
 	if (output_options.red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
@@ -336,7 +335,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			double ampc_resc_coeff = pow((ampfc->crit/gemfc->crit), c);
 			double amp_damage_scaled = damage_ratio * ampd_resc_coeff * ampf->damage;
 			double amp_crit_scaled = crit_ratio * ampc_resc_coeff * ampf->crit;
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, amp_damage_scaled, amp_crit_scaled);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], &gem_array, amp_damage_scaled, amp_crit_scaled);
 			printf("Setup with red added:\n\n");
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u

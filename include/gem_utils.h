@@ -54,7 +54,7 @@ void print_help(const char* flags)
 	printf("%s\n", flags);
 }
 
-inline int int_max(int a, int b)
+static inline int int_max(int a, int b)
 {
 	if (a > b) return a;
 	else return b;
@@ -66,5 +66,11 @@ int gem_getvalue(gem* p_gem)
 	else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
 }
 
+int gem_getdepth(gem* p_gem)
+{
+	if (p_gem->father==NULL)
+		return 1;
+	return int_max(gem_getdepth(p_gem->father), gem_getdepth(p_gem->mother)) + 1;
+}
 
 #endif // _GEM_UTILS_H

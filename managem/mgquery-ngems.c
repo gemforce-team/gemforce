@@ -130,12 +130,11 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	gemO* ampf=amps+len-1;  // amp that will be displayed
 
 	gem* gem_array = NULL;
-	gem red;
 	if (output_options.red) {
 		if (len < 3) printf("I could not add red!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], value, &red, &gem_array, leech_ratio*ampf->leech);
+			gemf = gem_putred(poolf[value-1], poolf_length[value-1], &gem_array, leech_ratio*ampf->leech);
 			printf("Setup with red added:\n\n");
 			printf("Total value:\t%d\n\n", value+Namps*gem_getvalue_O(ampf));
 			printf("Managem\n");
