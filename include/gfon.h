@@ -72,82 +72,7 @@ FILE* file_check(char* filename)
 	return table;
 }
 
-void exit_on_corruption(long int position)
-{
-	printf("\nERROR: integrity check failed at byte %ld\n", position);
-	printf("Your table may be corrupt, brutally exiting...\n");
-	exit(1);
-}
-
-static int fscan64(char* s, int* n)
-{
-	*n=0;
-	if (s==NULL || s[0]=='\0') return 0;
-	for (int m=0; *s; m+=6) {
-		(*n) += (base64decode[*s-'0'] << m);
-		s++;
-	}
-	return 1;
-}
-
-int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
-{
-	printf("\nBuilding pool..."); fflush(stdout);
-	rewind(table);
-
-	int pool_zero;
-	int check;
-	check = fscanf(table, "%d\n", &pool_zero);   // get pool_zero
-	if (check!=1) exit_on_corruption(ftell(table));
-	if (pool_zero != pool_length[0]) {               // and check if it's right
-		printf("\nWrong table type, exiting...\n");
-		return -1;      // the program will then exit gracefully
-	}
-
-	for (int i=0;i<pool_length[0];++i) {             // discard value 0 gems
-		int check = fscanf(table, "%*[^\n]\n");
-		if (check!=0) exit_on_corruption(ftell(table));
-	}
-
-	int iter;
-	check = fscanf(table, "%d\n\n", &iter);      // check iteration number
-	if (check!=1) exit_on_corruption(ftell(table));
-	if (iter!=0) exit_on_corruption(ftell(table));
-
-	int prevmax=0;
-	for (int i=1;i<len;++i) {
-		int eof_check=fscanf(table, "%d\n", pool_length+i);      // get pool length
-		if (eof_check==EOF) break;
-		else {
-			pool[i]=malloc(pool_length[i]*sizeof(gem));
-			int j;
-			for (j=0; j<pool_length[i]; ++j) {
-				char b1[9], b2[9], b3[9];
-				int nscan = fscanf(table, "%8s %8s %8s\n", b1, b2, b3);
-				int value_father;
-				int offset_father;
-				int offset_mother;
-				int check = (nscan == 3);
-				check &= fscan64(b1, &value_father);
-				check &= fscan64(b2, &offset_father);
-				check &= fscan64(b3, &offset_mother);
-				if (!check) exit_on_corruption(ftell(table));
-				else {
-					int value_mother=i-1-value_father;
-					gem_combine(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
-				}
-			}
-			int iteration_check;
-			int check = fscanf(table, "%d\n\n", &iteration_check);    // check iteration number
-			if (check!=1 || iteration_check!=i) exit_on_corruption(ftell(table));
-			prevmax++;
-		}
-	}
-	printf(" %d blocks read\n\n", prevmax+1);
-	return prevmax;
-}
-
-static void fprint64(int n, FILE* steam)
+static inline void fprint64(int n, FILE* steam)
 {
 	if (n) while (n) {
 		fputc(base64encode[n & 63], steam);
@@ -159,12 +84,10 @@ static void fprint64(int n, FILE* steam)
 void table_write_iteration(gem** pool, int* pool_length, int iteration, FILE* table)
 {
 	int i=iteration;
-	int j;
 	fprintf(table, "%d\n", pool_length[i]);
-	for (j=0;j<pool_length[i];++j) {
-		int k;
-		for (k=0; ; k++) {                   // find and print parents
-			int place=pool[i][j].father - pool[k];
+	for (int j=0;j<pool_length[i];++j) {
+		for (int k=0; ; k++) {                   // find and print parents
+			long place = pool[i][j].father - pool[k];
 			if (place < pool_length[k] && place >=0) {
 				fprint64(k, table);
 				fputc(' ', table);
@@ -182,5 +105,88 @@ void table_write_iteration(gem** pool, int* pool_length, int iteration, FILE* ta
 	fflush(table);
 }
 
+static inline void exit_on_corruption(FILE* table)
+{
+	printf("\nERROR: integrity check failed at byte %ld\n", ftell(table));
+	printf("Your table may be corrupt, brutally exiting...\n");
+	exit(1);
+}
+
+static inline int fgetb64(FILE* table)
+{
+	char c = fgetc(table);
+	if (c == EOF || c == ' ' || c == '\n') exit_on_corruption(table);
+	int n = 0;
+	for (int m = 0; c != EOF && c != ' ' && c != '\n'; c = fgetc(table), m += 6) {
+		n += (base64decode[c - '0'] << m);
+	}
+	return n;
+}
 
 #endif // _GFON_H
+
+/* `pool_from_table is outside the guards, as it's supposed to be redefined for
+ * each gem type we have to load */
+
+#define CONCAT_(a, b)  a##b
+#define CONCAT(a, b)  CONCAT_(a, b)
+
+#ifdef GEM_SUFFIX
+# define POOL_FROM_TABLE CONCAT(pool_from_table_, GEM_SUFFIX)
+# define GEM             CONCAT(gem, GEM_SUFFIX)
+# define GEM_COMBINE     CONCAT(gem_combine_, GEM_SUFFIX)
+#else
+# define POOL_FROM_TABLE pool_from_table
+# define GEM             gem
+# define GEM_COMBINE     gem_combine
+#endif
+
+int POOL_FROM_TABLE(GEM** pool, int* pool_length, int len, FILE* table)
+{
+	printf("\nBuilding pool..."); fflush(stdout);
+	rewind(table);
+
+	int pool_zero;
+	int check = fscanf(table, "%d\n", &pool_zero);   // get pool_zero
+	if (check != 1) exit_on_corruption(table);
+	if (pool_zero != pool_length[0]) {               // and check if it's right
+		printf("\nWrong table type, exiting...\n");
+		return -1;      // the program will then exit gracefully
+	}
+
+	for (int i=0;i<pool_length[0];++i) {             // discard value 0 gems
+		int check = fscanf(table, "%*[^\n]\n");
+		if (check != 0) exit_on_corruption(table);
+	}
+
+	int iteration_check;
+	check = fscanf(table, "%d\n\n", &iteration_check);      // check iteration number
+	if (check != 1 || iteration_check != 0) exit_on_corruption(table);
+
+	int prevmax=0;
+	for (int i=1; i < len; ++i) {
+		int eof_check=fscanf(table, "%d\n", pool_length+i);      // get pool length
+		if (eof_check==EOF) break;
+
+		pool[i] = malloc(pool_length[i]*sizeof(GEM));
+		for (int j = 0; j < pool_length[i]; ++j) {
+			int value_father = fgetb64(table);
+			int offset_father = fgetb64(table);
+			int offset_mother = fgetb64(table);
+
+			int value_mother = i-1-value_father;
+			GEM_COMBINE(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
+		}
+
+		int iteration_check;
+		int check = fscanf(table, "%d\n\n", &iteration_check);    // check iteration number
+		if (check != 1 || iteration_check != i) exit_on_corruption(table);
+		prevmax++;
+	}
+	printf(" %d blocks read\n\n", prevmax+1);
+	return prevmax;
+}
+
+#undef POOL_FROM_TABLE
+#undef GEM
+#undef GEM_COMBINE
