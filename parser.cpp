@@ -389,7 +389,7 @@ void worker(string parens, string parens_amps, options output_options, int TC, i
 		gem* amps = new gem[2*value-1];
 		gem* ampf;
 		try {
-			ampf = gem_build(parens, gems, index);
+			ampf = gem_build(parens_amps, gems, index);
 		}
 		catch (out_of_range) {
 			cout << "Error: Malformed amp recipe" << endl;
