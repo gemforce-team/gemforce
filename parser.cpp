@@ -194,45 +194,50 @@ void print_parens_compressed(gem* gemf)
 	}
 }
 
-void fill_array(gem* gemf, gem** p_gems, int* place)
+void fill_array(gem* gemf, gem** p_gems, int* uniques)
 {
-	if (gemf-> father != nullptr) {
-		fill_array(gemf->father, p_gems, place);
-		fill_array(gemf->mother, p_gems, place);
+	if (gemf->father != NULL) {
+		fill_array(gemf->father, p_gems, uniques);
+		fill_array(gemf->mother, p_gems, uniques);
 	}
-	int i;
-	int uniq=1;
-	for (i=0; i<*place; ++i) if (gemf==p_gems[i]) uniq=0;
-	if (uniq) {
-		gemf->uid=*place;			// mark
-		p_gems[*place]=gemf;
-		(*place)++;
-	}
-}
-
-void print_eq(gem* p_gem, int* printed_uid)
-{
-	if (printed_uid[p_gem->uid]==1) return;
-	if (p_gem->getvalue()==1) printf("(val = 1)\t%2d = g1 %c\n", p_gem->uid, gem_color(p_gem));
-	else {
-		print_eq(p_gem->father, printed_uid);		// mother is always bigger
-		print_eq(p_gem->mother, printed_uid);
-		printf("(val = %d)\t%2d = %2d + %2d\n", p_gem->getvalue(), p_gem->uid, p_gem->mother->uid, p_gem->father->uid);
-	}
-	printed_uid[p_gem->uid]=1;
+	
+	for (int i=0; i<*uniques; ++i)
+		if (gemf==p_gems[i]) return;
+	
+	p_gems[*uniques]=gemf;
+	(*uniques)++;
 }
 
 void print_equations(gem* gemf)
 {
+	// fill
 	int value=gemf->getvalue();
 	int len=2*value-1;
-	gem** p_gems = (gem**)malloc(len*sizeof(gem*));		// let's store all the gem pointers
-	int place=0;
-	fill_array(gemf, p_gems, &place);			// this array contains marked uniques only and is long "place"
-	int i;
-	int printed_uid[place];
-	for (i=0; i<place; ++i) printed_uid[i]=0;
-	print_eq(gemf, printed_uid);
+	gem** p_gems = (gem**)malloc(len*sizeof(gem*));		// stores all the gem pointers
+	int uniques = 0;
+	fill_array(gemf, p_gems, &uniques);			// this array contains marked uniques only and is long `uniques`
+	
+	// mark
+	int orig_grades[uniques];		// stores all the original gem grades
+	for (int i = 0; i < uniques; i++) {
+		gem* p_gem = p_gems[i];
+		orig_grades[i] = p_gem->grade;
+		p_gem->grade = i;
+	}
+	
+	// print
+	for (int i = 0; i < uniques; i++) {
+		gem* p_gem = p_gems[i];
+		if (p_gem->father == nullptr)
+			printf("(val = 1)\t%2d = g1 %c\n", p_gem->grade, gem_color(p_gem));
+		else
+			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->grade, p_gem->mother->grade, p_gem->father->grade);
+	}
+	
+	// clean
+	for (int i = 0; i < uniques; i++) {
+		p_gems[i]->grade = orig_grades[i];
+	}
 	free(p_gems);
 }
 

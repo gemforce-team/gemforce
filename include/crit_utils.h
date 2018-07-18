@@ -196,31 +196,18 @@ void print_parens_compressed_Y(gemY* gemf)
 	}
 }
 
-void fill_array_Y(gemY* gemf, gemY** p_gems, int* place)
+void fill_array_Y(gemY* gemf, gemY** p_gems, int* uniques)
 {
-	if (gemf-> father != NULL) {
-		fill_array_Y(gemf->father, p_gems, place);
-		fill_array_Y(gemf->mother, p_gems, place);
+	if (gemf->father != NULL) {
+		fill_array_Y(gemf->father, p_gems, uniques);
+		fill_array_Y(gemf->mother, p_gems, uniques);
 	}
 	
-	for (int i=0; i<*place; ++i) if (gemf==p_gems[i]) return;
+	for (int i=0; i<*uniques; ++i)
+		if (gemf==p_gems[i]) return;
 	
-	gemf->grade=gemf->grade%1000;
-	gemf->grade+=1000*(*place);			// mark
-	p_gems[*place]=gemf;
-	(*place)++;
-}
-
-void print_eq_Y(gemY* p_gem, int* printed_uid)
-{
-	if (printed_uid[p_gem->grade/1000]==1) return;
-	if (gem_getvalue_Y(p_gem)==1) printf("(val = 1)\t%2d = g1 %c\n", p_gem->grade/1000, COLOR_CRIT);
-	else {
-		print_eq_Y(p_gem->father, printed_uid);		// mother is always bigger
-		print_eq_Y(p_gem->mother, printed_uid);
-		printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue_Y(p_gem), p_gem->grade/1000, p_gem->mother->grade/1000, p_gem->father->grade/1000);
-	}
-	printed_uid[p_gem->grade/1000]=1;
+	p_gems[*uniques]=gemf;
+	(*uniques)++;
 }
 
 void print_equations_Y(gemY* gemf)
@@ -229,14 +216,34 @@ void print_equations_Y(gemY* gemf)
 		printf("-\n");
 		return;
 	}
+	// fill
 	int value=gem_getvalue_Y(gemf);
 	int len=2*value-1;
-	gemY** p_gems=malloc(len*sizeof(gemY*));		// let's store all the gem pointers
-	int place=0;
-	fill_array_Y(gemf, p_gems, &place);					// this array contains marked uniques only and is long "place"
-	int printed_uid[place];
-	for (int i=0; i<place; ++i) printed_uid[i]=0;
-	print_eq_Y(gemf, printed_uid);
+	gemY** p_gems = malloc(len*sizeof(gemY*));		// stores all the gem pointers
+	int uniques = 0;
+	fill_array_Y(gemf, p_gems, &uniques);			// this array contains marked uniques only and is long `uniques`
+	
+	// mark
+	int orig_grades[uniques];		// stores all the original gem grades
+	for (int i = 0; i < uniques; i++) {
+		gemY* p_gem = p_gems[i];
+		orig_grades[i] = p_gem->grade;
+		p_gem->grade = i + 1; // grade must not be 0
+	}
+	
+	// print
+	for (int i = 0; i < uniques; i++) {
+		gemY* p_gem = p_gems[i];
+		if (p_gem->father == NULL)
+			printf("(val = 1)\t%2d = g1 %c\n", p_gem->grade - 1, COLOR_CRIT);
+		else
+			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue_Y(p_gem), p_gem->grade - 1, p_gem->mother->grade - 1, p_gem->father->grade - 1);
+	}
+	
+	// clean
+	for (int i = 0; i < uniques; i++) {
+		p_gems[i]->grade = orig_grades[i];
+	}
 	free(p_gems);
 }
 
