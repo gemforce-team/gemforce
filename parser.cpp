@@ -365,7 +365,7 @@ void worker(string parens, string parens_amps, options output_options, int TC, i
 	try {
 		gemf = gem_build(parens, gems, index);
 	}
-	catch (out_of_range) {
+	catch (const out_of_range&) {
 		cout << "Error: Malformed gem recipe" << endl;
 		exit(1);
 	}
@@ -396,7 +396,7 @@ void worker(string parens, string parens_amps, options output_options, int TC, i
 		try {
 			ampf = gem_build(parens_amps, gems, index);
 		}
-		catch (out_of_range) {
+		catch (const out_of_range&) {
 			cout << "Error: Malformed amp recipe" << endl;
 			exit(1);
 		}
