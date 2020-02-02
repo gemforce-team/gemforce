@@ -12,7 +12,7 @@ void print_omnia_table(gemO* amps, double* powers, int len)
 {
 	printf("Managem\tAmps\tPower\n");
 	for (int i=0; i<len; i++)
-		printf("%d\t%d\t%#.7g\n", i+1, gem_getvalue_O(amps+i), powers[i]);
+		printf("%d\t%d\t%#.7g\n", i+1, gem_getvalue(amps+i), powers[i]);
 	printf("\n");
 }
 
@@ -33,7 +33,7 @@ void print_omnia_table(gemO* amps, double* powers, int len)
 #define MGSPEC_COMPRESSION																			\
 	for (i=0;i<len;++i) {																			\
 		int j;																						\
-		gem* temp_pool=malloc(pool_length[i]*sizeof(gem));											\
+		gem* temp_pool = (gem*)malloc(pool_length[i]*sizeof(gem));									\
 		for (j=0; j<pool_length[i]; ++j) {															\
 			temp_pool[j]=pool[i][j];																\
 		}																							\
@@ -58,7 +58,7 @@ void print_omnia_table(gemO* amps, double* powers, int len)
 			}																						\
 		}																							\
 		poolf_length[i]=pool_length[i]-broken;														\
-		poolf[i]=malloc(poolf_length[i]*sizeof(gem));		/* pool init via broken */				\
+		poolf[i] = (gem*)malloc(poolf_length[i]*sizeof(gem));	/* pool init via broken */			\
 		int index=0;																				\
 		for (j=0; j<pool_length[i]; ++j) {					/* copying to subpool */				\
 			if (temp_pool[j].grade!=0) {															\
@@ -67,7 +67,7 @@ void print_omnia_table(gemO* amps, double* powers, int len)
 			}																						\
 		}																							\
 		free(temp_pool);																			\
-		if (output_options.debug)															\
+		if (output_options.debug)																	\
 			printf("Managem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);	\
 	}
 
@@ -94,7 +94,7 @@ void print_omnia_table(gemO* amps, double* powers, int len)
 			}																						\
 		}																							\
 		poolcf_length=poolc_length[lenc-1]-broken;													\
-		poolcf=malloc(poolcf_length*sizeof(gem));		/* pool init via broken */					\
+		poolcf = (gem*)malloc(poolcf_length*sizeof(gem));	/* pool init via broken */				\
 		int index=0;																				\
 		for (i=0; i<poolc_length[lenc-1]; ++i) {		/* copying to subpool */					\
 			if (poolc[lenc-1][i].grade!=0) {														\
@@ -106,7 +106,7 @@ void print_omnia_table(gemO* amps, double* powers, int len)
 
 #define AMPS_COMPRESSION								\
 	for (i=0; i<lena; ++i) {							\
-		bestO[i]=(gemO){0};								\
+		bestO[i] = {};								\
 		for (int j=0; j<poolO_length[i]; ++j) {			\
 			if (gem_better(poolO[i][j], bestO[i])) {	\
 				bestO[i]=poolO[i][j];					\

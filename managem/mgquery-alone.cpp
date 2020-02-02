@@ -3,35 +3,34 @@
 #include <math.h>
 #include <getopt.h>
 #include <string.h>
-#include "interval_tree.h"
-typedef struct Gem_YB gem;
-#include "killgem_utils.h"
+typedef struct Gem_OB gem;    // the strange order is so that managem_utils knows which gem type are we defining as "gem"
+#include "managem_utils.h"
 #include "query_utils.h"
 #include "gfon.h"
 #include "print_utils.h"
 
 void worker(int len, options output_options, int pool_zero, char* filename)
 {
-	FILE* table=file_check(filename);		// file is open to read
-	if (table==NULL) exit(1);				// if the file is not good we exit
+	FILE* table=file_check(filename);      // file is open to read
+	if (table==NULL) exit(1);              // if the file is not good we exit
 	int i;
-	gem* gems=malloc(len*sizeof(gem));		// if not malloc-ed 230k is the limit
-	gem** pool=malloc(len*sizeof(gem*));
-	int* pool_length=malloc(len*sizeof(int));
-	pool[0]=malloc(pool_zero*sizeof(gem));
-	pool_length[0]=pool_zero;
-
-	if (pool_zero==1) {					// combine
-		gem_init(pool[0],1,1,1,1);		// start gem does not matter
-		gem_init(gems   ,1,1,1,1);		// grade damage crit bbound
+	gem* gems = (gem*)malloc(len * sizeof(gem)); // if not malloc-ed 230k is the limit
+	gem** pool = (gem**)malloc(len * sizeof(gem*)); // if not malloc-ed 200k is the limit (win)
+	int* pool_length = (int*)malloc(len * sizeof(int));
+	pool[0] = (gem*)malloc(pool_zero * sizeof(gem));
+	pool_length[0] = pool_zero;
+	
+	if (pool_zero==1) {                    // combine
+		gem_init(pool[0],1,1,1);
+		gem_init(gems   ,1,1,1);
 	}
-	else {											// spec
-		gem_init(pool[0]  ,1,DAMAGE_CRIT  ,1,0);
-		gem_init(pool[0]+1,1,DAMAGE_BBOUND,0,1);	// BB has more dmg
-		gem_init(gems     ,1,DAMAGE_CRIT  ,1,0);	// grade damage crit bbound
+	else {                                 // spec
+		gem_init(pool[0]  ,1,1,0);
+		gem_init(pool[0]+1,1,0,1);
+		gem_init(gems     ,1,1,0);
 	}
 	
-	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
+	int prevmax=pool_from_table(pool, pool_length, len, table);    // pool filling
 	fclose(table);				// close
 	if (prevmax<len-1) {
 		for (i=0;i<=prevmax;++i) free(pool[i]);      // free
@@ -41,7 +40,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 		if (prevmax>0) printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
-	
+
 	int skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
 	for (i=first; i<len; ++i) {
@@ -93,7 +92,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 		if (len < 3 || pool_zero!=2) printf("I could not add chain!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
-			gemf = gem_putchain(pool[value-1], pool_length[value-1], &gem_array, 0, 0);
+			gemf = gem_putchain(pool[value-1], pool_length[value-1], &gem_array, 0);
 			printf("Gem with chain added:\n\n");
 			printf("Value:\t%d\n", value);    // made to work well with -u
 			printf("Growth:\t%f\n", log(gem_power(*gemf))/log(value));
@@ -119,8 +118,8 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 		printf("\n");
 	}
 	
-	for (i=0;i<len;++i) free(pool[i]);		// free
-	free(pool);
+	for (i=0;i<len;++i) free(pool[i]);     // free
+	free(pool);    // free
 	free(pool_length);
 	free(gems);
 	if (output_options.chain && len > 2 && pool_zero==2) {
@@ -133,7 +132,7 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int pool_zero=2;     // speccing by default
-	options output_options = (options){0};
+	options output_options = {};
 	char filename[256]="";     // it should be enough
 
 	while ((opt=getopt(argc,argv,"hptecidqurf:"))!=-1) {
@@ -174,8 +173,8 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (pool_zero==2) file_selection(filename, "table_kgspec");
-	else file_selection(filename, "table_kgcomb");
+	if (pool_zero==2) file_selection(filename, "table_mgspec");
+	else file_selection(filename, "table_mgcomb");
 	worker(len, output_options, pool_zero, filename);
 	return 0;
 }

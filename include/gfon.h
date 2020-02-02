@@ -81,6 +81,7 @@ static inline void fprint64(int n, FILE* steam)
 	else fputc('0', steam);
 }
 
+template<class gem>
 void table_write_iteration(gem** pool, int* pool_length, int iteration, FILE* table)
 {
 	int i=iteration;
@@ -123,25 +124,8 @@ static inline int fgetb64(FILE* table)
 	return n;
 }
 
-#endif // _GFON_H
-
-/* `pool_from_table is outside the guards, as it's supposed to be redefined for
- * each gem type we have to load */
-
-#define CONCAT_(a, b)  a##b
-#define CONCAT(a, b)  CONCAT_(a, b)
-
-#ifdef GEM_SUFFIX
-# define POOL_FROM_TABLE CONCAT(pool_from_table_, GEM_SUFFIX)
-# define GEM             CONCAT(gem, GEM_SUFFIX)
-# define GEM_COMBINE     CONCAT(gem_combine_, GEM_SUFFIX)
-#else
-# define POOL_FROM_TABLE pool_from_table
-# define GEM             gem
-# define GEM_COMBINE     gem_combine
-#endif
-
-int POOL_FROM_TABLE(GEM** pool, int* pool_length, int len, FILE* table)
+template<class gem>
+int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 {
 	printf("\nBuilding pool..."); fflush(stdout);
 	rewind(table);
@@ -168,14 +152,14 @@ int POOL_FROM_TABLE(GEM** pool, int* pool_length, int len, FILE* table)
 		int eof_check=fscanf(table, "%d\n", pool_length+i);      // get pool length
 		if (eof_check==EOF) break;
 
-		pool[i] = malloc(pool_length[i]*sizeof(GEM));
+		pool[i] = (gem*)malloc(pool_length[i]*sizeof(gem));
 		for (int j = 0; j < pool_length[i]; ++j) {
 			int value_father = fgetb64(table);
 			int offset_father = fgetb64(table);
 			int offset_mother = fgetb64(table);
 
 			int value_mother = i-1-value_father;
-			GEM_COMBINE(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
+			gem_combine(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
 		}
 
 		int iteration_check;
@@ -187,6 +171,4 @@ int POOL_FROM_TABLE(GEM** pool, int* pool_length, int len, FILE* table)
 	return prevmax;
 }
 
-#undef POOL_FROM_TABLE
-#undef GEM
-#undef GEM_COMBINE
+#endif // _GFON_H

@@ -6,7 +6,7 @@ WINCXX:=x86_64-w64-mingw32-$(CXX)
 
 # Flags
 CSTD:=-std=gnu11
-CXXSTD:=-std=gnu++11
+CXXSTD:=-std=gnu++17
 WFLAGS:=-Wall -Wextra
 OFLAGS:=-O3 -flto -fwhole-program
 IFLAGS:=-I "include/"
@@ -87,7 +87,7 @@ set-killgem: $(KILLGEM_ALL)
 .PHONY: set-query set-build set-combine set-leech set-managem set-crit set-killgem
 
 # Windows
-windows: CC:=$(WINCC)
+windows: CXX:=$(WINCXX)
 windows: $(QUERY_DIST) windows-tables | $(WINDIR)
 	$(foreach file, $(QUERY_DIST), mv -v $(file) $(WINDIR)/$(shell basename $(file)).exe;)
 	cp LICENSE.txt $(WINDIR)/LICENSE.txt
@@ -123,62 +123,62 @@ $(BINDIR):
 .PHONY: move move-white
 
 # Leech
-managem/leechbuild: managem/leechbuild.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-managem/leechcombine: managem/leechcombine.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-managem/leechquery: managem/leechquery.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
+managem/leechbuild: managem/leechbuild.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+managem/leechcombine: managem/leechcombine.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+managem/leechquery: managem/leechquery.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
 
 # Managem
-managem/mgbuild-appr: managem/mgbuild-appr.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgbuild-c6: managem/mgbuild-c6.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgbuild-exact: managem/mgbuild-exact.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgcombine-appr: managem/mgcombine-appr.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgquery-alone: managem/mgquery-alone.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgquery-amps: managem/mgquery-amps.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgquery-ngems: managem/mgquery-ngems.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgquery-omnia: managem/mgquery-omnia.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgquery-setup: managem/mgquery-setup.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
+managem/mgbuild-appr: managem/mgbuild-appr.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+managem/mgbuild-c6: managem/mgbuild-c6.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+managem/mgbuild-exact: managem/mgbuild-exact.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+managem/mgcombine-appr: managem/mgcombine-appr.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+managem/mgquery-alone: managem/mgquery-alone.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+managem/mgquery-amps: managem/mgquery-amps.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+managem/mgquery-ngems: managem/mgquery-ngems.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+managem/mgquery-omnia: managem/mgquery-omnia.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+managem/mgquery-setup: managem/mgquery-setup.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
 
 # Crit
-killgem/critbuild: killgem/critbuild.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/critcombine: killgem/critcombine.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/critquery: killgem/critquery.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
+killgem/critbuild: killgem/critbuild.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/critcombine: killgem/critcombine.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/critquery: killgem/critquery.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
 
 # Killgem
-killgem/kgbuild-appr: killgem/kgbuild-appr.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgbuild-c6: killgem/kgbuild-c6.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgbuild-exact: killgem/kgbuild-exact.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgcombine-appr: killgem/kgcombine-appr.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgcombine-exact: killgem/kgcombine-exact.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgquery-alone: killgem/kgquery-alone.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgquery-amps: killgem/kgquery-amps.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgquery-ngems: killgem/kgquery-ngems.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgquery-omnia: killgem/kgquery-omnia.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgquery-setup: killgem/kgquery-setup.c $(INCLUDE_DIR)/*.h
-	$(CC) $(CFLAGS) $< $(LIBFLAGS) -o $@
+killgem/kgbuild-appr: killgem/kgbuild-appr.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/kgbuild-c6: killgem/kgbuild-c6.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/kgbuild-exact: killgem/kgbuild-exact.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/kgcombine-appr: killgem/kgcombine-appr.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/kgcombine-exact: killgem/kgcombine-exact.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/kgquery-alone: killgem/kgquery-alone.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/kgquery-amps: killgem/kgquery-amps.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/kgquery-ngems: killgem/kgquery-ngems.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/kgquery-omnia: killgem/kgquery-omnia.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+killgem/kgquery-setup: killgem/kgquery-setup.cpp $(INCLUDE_DIR)/*.h
+	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
 
 # Parser
 parser: parser.cpp $(INCLUDE_DIR)/*.h

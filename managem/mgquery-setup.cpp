@@ -19,7 +19,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	int i;
 	gem* pool[len];
 	int pool_length[len];
-	pool[0]=malloc(2*sizeof(gem));
+	pool[0] = (gem*)malloc(2*sizeof(gem));
 	pool_length[0]=2;
 	gem_init(pool[0]  ,1,1,0);
 	gem_init(pool[0]+1,1,0,1);
@@ -43,11 +43,11 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	int lena=len;									// as long as the spec length
 	gemO* poolO[lena];
 	int poolO_length[lena];
-	poolO[0]=malloc(sizeof(gemO));
+	poolO[0] = (gemO*)malloc(sizeof(gemO));
 	poolO_length[0]=1;
-	gem_init_O(poolO[0],1,1);
+	gem_init(poolO[0],1,1);
 	
-	int prevmaxA=pool_from_table_O(poolO, poolO_length, lena, tableA);		// amps pool filling
+	int prevmaxA=pool_from_table(poolO, poolO_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
 	if (prevmaxA<lena-1) {
 		for (i=0;i<=prevmaxA;++i) free(poolO[i]);		// free
@@ -55,16 +55,16 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		exit(1);
 	}
 	
-	gemO* bestO=malloc(lena*sizeof(gemO));		// if not malloc-ed 140k is the limit
+	gemO* bestO = (gemO*)malloc(lena*sizeof(gemO));		// if not malloc-ed 140k is the limit
 	
 	AMPS_COMPRESSION
 	if (!output_options.quiet) printf("Amp pool compression done!\n");
 
 	FILE* tablec=file_check(filenamec);		// file is open to read
 	if (tablec==NULL) exit(1);					// if the file is not good we exit
-	gem** poolc=malloc(lenc*sizeof(gem*));
-	int* poolc_length=malloc(lenc*sizeof(int));
-	poolc[0]=malloc(sizeof(gem));
+	gem** poolc = (gem**)malloc(lenc*sizeof(gem*));
+	int* poolc_length = (int*)malloc(lenc*sizeof(int));
+	poolc[0] = (gem*)malloc(sizeof(gem));
 	poolc_length[0]=1;
 	gem_init(poolc[0],1,1,1);
 	
@@ -76,7 +76,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		exit(1);
 	}
 	
-	gem bestc=(gem){0};				// choosing best combine
+	gem bestc = {};				// choosing best combine
 	
 	for (i=0;i<poolc_length[lenc-1];++i) {
 		if (gem_more_powerful(poolc[lenc-1][i], bestc)) {
@@ -92,7 +92,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	gemO amps[len];						// we'll choose the best amps
 	double powers[len];
 	gem_init(gems,1,1,0);
-	gem_init_O(amps,0,0);
+	gem_init(amps,0,0);
 	powers[0]=0;
 	double leech_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1+TC/3*0.1);
 	double NT=pow(2, GT-1);
@@ -100,8 +100,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	int skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
 	for (i=first; i<len; ++i) {										// for every gem value
-		gems[i]=(gem){0};											// we init the gems
-		amps[i]=(gemO){0};											// to extremely weak ones
+		gems[i] ={};												// we init the gems
+		amps[i] ={};												// to extremely weak ones
 		
 		for (k=0;k<poolf_length[i];++k) {							// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
@@ -132,8 +132,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			if (output_options.debug) printf("Pool:\t%d\n",poolf_length[i]);
 			gem_print(gems+i);
 			printf("Amplifier spec (x%d)\n", Namps);
-			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
-			gem_print_O(amps+i);
+			printf("Value:\t%d\n",gem_getvalue(amps+i));
+			gem_print(amps+i);
 			printf("Setup combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print(&bestc);
@@ -147,8 +147,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		printf("Value:\t%d\n",len);
 		gem_print(gems+len-1);
 		printf("Amplifier spec (x%d)\n", Namps);
-		printf("Value:\t%d\n",gem_getvalue_O(amps+len-1));
-		gem_print_O(amps+len-1);
+		printf("Value:\t%d\n",gem_getvalue(amps+len-1));
+		gem_print(amps+len-1);
 		printf("Setup combine\n");
 		printf("Comb:\t%d\n",lenc);
 		printf("Growth:\t%f\n", bestc_growth);
@@ -175,8 +175,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
 		gem_print(gems+best_index);
 		printf("Amplifier spec (x%d)\n", Namps);
-		printf("Value:\t%d\n", gem_getvalue_O(amps+best_index));
-		gem_print_O(amps+best_index);
+		printf("Value:\t%d\n", gem_getvalue(amps+best_index));
+		gem_print(amps+best_index);
 		printf("Setup combine\n");
 		printf("Comb:\t%d\n",lenc);
 		gem_print(gemfc);
@@ -191,7 +191,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		if (len < 3) printf("I could not add chain!\n\n");
 		else {
 			int value = gem_getvalue(gemf);
-			int valueA= gem_getvalue_O(ampf);
+			int valueA= gem_getvalue(ampf);
 			double NS = value + Namps*valueA;
 			double amp_leech_scaled = leech_ratio * ampf->leech;
 			gemf = gem_putchain(poolf[value-1], poolf_length[value-1], &gem_array, amp_leech_scaled);
@@ -200,8 +200,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			printf("Value:\t%d\n", value);		// made to work well with -u
 			gem_print(gemf);
 			printf("Amplifier spec (x%d)\n", Namps);
-			printf("Value:\t%d\n",gem_getvalue_O(ampf));
-			gem_print_O(ampf);
+			printf("Value:\t%d\n",gem_getvalue(ampf));
+			gem_print(ampf);
 			printf("Setup combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print(gemfc);
@@ -216,7 +216,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		print_parens_compressed(gemf);
 		printf("\n\n");
 		printf("Amplifier speccing scheme:\n");
-		print_parens_compressed_O(ampf);
+		print_parens_compressed(ampf);
 		printf("\n\n");
 		printf("Setup combining scheme:\n");
 		print_parens_compressed(gemfc);
@@ -227,7 +227,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		print_tree(gemf, "");
 		printf("\n");
 		printf("Amplifier speccing tree:\n");
-		print_tree_O(ampf, "");
+		print_tree(ampf, "");
 		printf("\n");
 		printf("Setup combining tree:\n");
 		print_tree(gemfc, "");
@@ -240,7 +240,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		print_equations(gemf);
 		printf("\n");
 		printf("Amplifier speccing equations:\n");
-		print_equations_O(ampf);
+		print_equations(ampf);
 		printf("\n");
 		printf("Setup combining equations:\n");
 		print_equations(gemfc);
@@ -268,7 +268,7 @@ int main(int argc, char** argv)
 	int As=60;
 	int GT=30;    // NT = pow(2, GT-1)
 	int Namps=6;
-	options output_options = (options){0};
+	options output_options = {};
 	char filename[256]="";		// it should be enough
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough

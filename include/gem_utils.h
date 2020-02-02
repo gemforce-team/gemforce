@@ -1,7 +1,7 @@
 #ifndef _GEM_UTILS_H
 #define _GEM_UTILS_H
 
-typedef struct Options {
+struct options {
 	unsigned parens:1;
 	unsigned tree:1;
 	unsigned equations:1;
@@ -11,7 +11,7 @@ typedef struct Options {
 	unsigned quiet:1;
 	unsigned upto:1;
 	unsigned chain:1;
-} options;
+};
 
 /* Macro blobs used for all flag options. Handle with care */
 #define DQ_OPTIONS_BLOCK\
@@ -60,12 +60,14 @@ static inline int int_max(int a, int b)
 	else return b;
 }
 
+template<class gem>
 int gem_getvalue(gem* p_gem)
 {
 	if(p_gem->father==NULL) return 1;
 	else return gem_getvalue(p_gem->father)+gem_getvalue(p_gem->mother);
 }
 
+template<class gem>
 int gem_getdepth(gem* p_gem)
 {
 	if (p_gem->father==NULL)

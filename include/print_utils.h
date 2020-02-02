@@ -7,6 +7,7 @@
 #include <string.h>
 #include "gem_utils.h"
 
+template<class gem>
 void print_parens(gem* gemf)
 {
 	if (gemf->father==NULL) printf("%c", gem_color(gemf));
@@ -20,6 +21,7 @@ void print_parens(gem* gemf)
 	return;
 }
 
+template<class gem>
 int monocolor_ancestors(gem* gemf)
 {
 	if (gemf->father==NULL) return 1;
@@ -27,6 +29,7 @@ int monocolor_ancestors(gem* gemf)
 	else return monocolor_ancestors(gemf->mother) & monocolor_ancestors(gemf->father);
 }
 
+template<class gem>
 void print_parens_compressed(gem* gemf)
 {
 	if (gemf->father==NULL) printf("%c", gem_color(gemf));
@@ -43,6 +46,7 @@ void print_parens_compressed(gem* gemf)
 	}
 }
 
+template<class gem>
 void fill_uniques_array(gem* gemf, gem** p_gems, int* uniques)
 {
 	for (int i=0; i<*uniques; ++i)
@@ -57,6 +61,7 @@ void fill_uniques_array(gem* gemf, gem** p_gems, int* uniques)
 	(*uniques)++;
 }
 
+template<class gem>
 void print_equations(gem* gemf)
 {
 	// fill
@@ -90,6 +95,7 @@ void print_equations(gem* gemf)
 	free(p_gems);
 }
 
+template<class gem>
 void print_tree(gem* gemf, const char* prefix)
 {
 	if (gemf->father==NULL) {
@@ -109,6 +115,7 @@ void print_tree(gem* gemf, const char* prefix)
 	}
 }
 
+template<class gem>
 void print_table(gem* gems, int len)
 {
 	printf("# Gems\tPower\t\tGrowth\n");

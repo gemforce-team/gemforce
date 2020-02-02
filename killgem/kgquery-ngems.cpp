@@ -18,7 +18,7 @@ void print_ngems_table(gem* gems, gemY* amps, double damage_ratio, double crit_r
 	printf("# Gems\tKillgem\tAmps\tPower\n");
 	int i;
 	for (i=0; i<len; i++)
-		printf("%d\t%d\t%d\t%#.7g\n", i+1, gem_getvalue(gems+i), gem_getvalue_Y(amps+i), gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
+		printf("%d\t%d\t%d\t%#.7g\n", i+1, gem_getvalue(gems+i), gem_getvalue(amps+i), gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
 	printf("\n");
 }
 
@@ -29,7 +29,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	int i;
 	gem* pool[len];
 	int pool_length[len];
-	pool[0]=malloc(2*sizeof(gem));
+	pool[0] = (gem*)malloc(2*sizeof(gem));
 	pool_length[0]=2;
 	gem_init(pool[0]  ,1,DAMAGE_CRIT  ,1,0);	// grade damage crit bbound
 	gem_init(pool[0]+1,1,DAMAGE_BBOUND,0,1);	// BB has more dmg
@@ -54,11 +54,11 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	int lena = Namps ? len/Namps : 1;		// if Namps==0 let lena=1
 	gemY* poolY[lena];
 	int poolY_length[lena];
-	poolY[0]=malloc(sizeof(gemY));
+	poolY[0] = (gemY*)malloc(sizeof(gemY));
 	poolY_length[0]=1;
-	gem_init_Y(poolY[0],1,1,1);
+	gem_init(poolY[0],1,1,1);
 	
-	int prevmaxA=pool_from_table_Y(poolY, poolY_length, lena, tableA);		// amps pool filling
+	int prevmaxA=pool_from_table(poolY, poolY_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
 	if (prevmaxA<lena-1) {
 		for (i=0;i<=prevmaxA;++i) free(poolY[i]);		// free
@@ -76,15 +76,15 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	gem gems[len];
 	gemY amps[len];
 	gem_init(gems,1,1,1,0);
-	amps[0]=(gemY){0};
+	amps[0] = {};
 	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
 	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
 	
 	int skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
 	for (i=first; i<len; ++i) {								// for every gem value
-		gems[i]=(gem){0};									// we init the gems
-		amps[i]=(gemY){0};									// to extremely weak ones
+		gems[i] = {};										// we init the gems
+		amps[i] = {};										// to extremely weak ones
 		for (k=0;k<poolf_length[i];++k) {					// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
@@ -113,9 +113,9 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 			if (output_options.debug) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
 			gem_print(gems+i);
 			printf("Amplifier (x%d)\n", Namps);
-			printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
-			if (output_options.debug) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
-			gem_print_Y(amps+i);
+			printf("Value:\t%d\n",gem_getvalue(amps+i));
+			if (output_options.debug) printf("Pool:\t%d\n",poolYf_length[gem_getvalue(amps+i)-1]);
+			gem_print(amps+i);
 			printf("Spec base power: \t%#.7g\n\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
 		}
 	}
@@ -127,8 +127,8 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 		printf("Value:\t%d\n", gem_getvalue(gems+len-1));
 		gem_print(gems+len-1);
 		printf("Amplifier (x%d)\n", Namps);
-		printf("Value:\t%d\n", gem_getvalue_Y(amps+len-1));
-		gem_print_Y(amps+len-1);
+		printf("Value:\t%d\n", gem_getvalue(amps+len-1));
+		gem_print(amps+len-1);
 		printf("Spec base power: \t%#.7g\n\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
 	}
 
@@ -142,13 +142,13 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 			int value=gem_getvalue(gemf);
 			gemf = gem_putchain(poolf[value-1], poolf_length[value-1], &gem_array, damage_ratio*ampf->damage, crit_ratio*ampf->crit);
 			printf("Setup with chain added:\n\n");
-			printf("Total value:\t%d\n\n", value+Namps*gem_getvalue_Y(ampf));
+			printf("Total value:\t%d\n\n", value+Namps*gem_getvalue(ampf));
 			printf("Killgem\n");
 			printf("Value:\t%d\n", value);
 			gem_print(gemf);
 			printf("Amplifier (x%d)\n", Namps);
-			printf("Value:\t%d\n", gem_getvalue_Y(ampf));
-			gem_print_Y(ampf);
+			printf("Value:\t%d\n", gem_getvalue(ampf));
+			gem_print(ampf);
 			printf("Spec base power with chain:\t%#.7g\n\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
 		}
 	}
@@ -158,7 +158,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 		print_parens_compressed(gemf);
 		printf("\n\n");
 		printf("Amplifier speccing scheme:\n");
-		print_parens_compressed_Y(ampf);
+		print_parens_compressed(ampf);
 		printf("\n\n");
 	}
 	if (output_options.tree) {
@@ -166,7 +166,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 		print_tree(gemf, "");
 		printf("\n");
 		printf("Amplifier tree:\n");
-		print_tree_Y(ampf, "");
+		print_tree(ampf, "");
 		printf("\n");
 	}
 	if (output_options.table) print_ngems_table(gems, amps, damage_ratio, crit_ratio, len);
@@ -177,7 +177,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 		print_equations(gemf);
 		printf("\n");
 		printf("Amplifier equations:\n");
-		print_equations_Y(ampf);
+		print_equations(ampf);
 		printf("\n");
 	}
 	
@@ -198,7 +198,7 @@ int main(int argc, char** argv)
 	int As=60;
 	int Namps=8;
 	int gem_limit=0;
-	options output_options = (options){0};
+	options output_options = {};
 	char filename[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 

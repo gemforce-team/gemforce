@@ -14,7 +14,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 	int size;
 	gem* pool[len];
 	int pool_length[len];
-	pool[0]=malloc(pool_zero*sizeof(gem));
+	pool[0] = (gem*)malloc(pool_zero*sizeof(gem));
 	pool_length[0]=pool_zero;
 	
 	if (pool_zero==1) {              // combine
@@ -48,7 +48,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 		gem* subpools[grade_max-1];                // get subpools for every grade
 		int  subpools_length[grade_max-1];
 		for (j=0; j<grade_max-1; ++j) {            // init everything
-			temp_pools[j]=malloc(size*sizeof(gem));
+			temp_pools[j] = (gem*)malloc(size*sizeof(gem));
 			temp_index[j]=0;
 			subpools[j]=NULL;                       // just to be able to free it
 			subpools_length[j]=0;
@@ -68,7 +68,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 						temp_index[grd]++;
 						if (temp_index[grd]==size) {                          // let's skim a pool
 							int length=size+subpools_length[grd];
-							gem* temp_array=malloc(length*sizeof(gem));
+							gem* temp_array = (gem*)malloc(length*sizeof(gem));
 							int index=0;
 							for (l=0; l<temp_index[grd]; ++l) {             // copy new gems
 								temp_array[index]=temp_pools[grd][l];
@@ -80,12 +80,12 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 								index++;
 							}
 							free(subpools[grd]);       // free
-							gem_sort_exact(temp_array,length);                       // work starts
+							gem_sort(temp_array,length);                       // work starts
 	
 							int broken=0;
 							float lim_bbound=-1;
 							for (l=length-1;l>=0;--l) {
-								if (temp_array[l].bbound<=lim_bbound) {
+								if ((int)(ACC*temp_array[l].bbound)<=(int)(ACC*lim_bbound)) {
 									temp_array[l].grade=0;
 									broken++;
 								}
@@ -93,7 +93,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 							}                                      // all unnecessary gems destroyed
 	
 							subpools_length[grd]=length-broken;
-							subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));     // pool init via broken
+							subpools[grd] = (gem*)malloc(subpools_length[grd]*sizeof(gem));     // pool init via broken
 	
 							index=0;
 							for (l=0; l<length; ++l) {       // copying to subpool
@@ -112,7 +112,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 		for (grd=0; grd<grade_max-1; ++grd) {                 // let's put remaining gems on
 			if (temp_index[grd] != 0) {
 				int length=temp_index[grd]+subpools_length[grd];
-				gem* temp_array=malloc(length*sizeof(gem));
+				gem* temp_array = (gem*)malloc(length*sizeof(gem));
 				int index=0;
 				for (l=0; l<temp_index[grd]; ++l) {             // copy new gems
 					temp_array[index]=temp_pools[grd][l];
@@ -123,20 +123,20 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 					index++;
 				}
 				free(subpools[grd]);    // free
-				gem_sort_exact(temp_array,length);                       // work starts
+				gem_sort(temp_array,length);                       // work starts
 				int broken=0;
 				float lim_bbound=-1;
 				for (l=length-1;l>=0;--l) {
-					if (temp_array[l].bbound<=lim_bbound) {
+					if ((int)(ACC*temp_array[l].bbound)<=(int)(ACC*lim_bbound)) {
 						temp_array[l].grade=0;
 						broken++;
 					}
 					else lim_bbound=temp_array[l].bbound;
 				}                                      // all unnecessary gems destroyed
 				subpools_length[grd]=length-broken;
-				subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));   // pool init via broken
+				subpools[grd] = (gem*)malloc(subpools_length[grd]*sizeof(gem));     // pool init via broken
 				index=0;
-				for (l=0; l<length; ++l) {       // copying to subpool
+				for (l=0; l<length; ++l) {      // copying to subpool
 					if (temp_array[l].grade!=0) {
 						subpools[grd][index]=temp_array[l];
 						index++;
@@ -147,7 +147,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 		}
 		pool_length[i]=0;
 		for (grd=0; grd<grade_max-1; ++grd) pool_length[i]+=subpools_length[grd];
-		pool[i]=malloc(pool_length[i]*sizeof(gem));
+		pool[i] = (gem*)malloc(pool_length[i]*sizeof(gem));
 
 		int place=0;
 		for (grd=0;grd<grade_max-1;++grd) {      // copying to pool
@@ -179,8 +179,8 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int pool_zero=2;        // speccing by default
-	options output_options = (options){0};
-	char filename[256]="";     // it should be enough
+	options output_options = {};
+	char filename[256]="";  // it should be enough
 
 	while ((opt=getopt(argc,argv,"hdqf:"))!=-1) {
 		switch(opt) {
@@ -221,8 +221,8 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	if (filename[0]=='\0') {
-		if (pool_zero==2) strcpy(filename, "table_mgsexact");
-		else strcpy(filename, "table_mgcexact");
+		if (pool_zero==2) strcpy(filename, "table_mgsappr");
+		else strcpy(filename, "table_mgcappr");
 	}
 	worker(len, output_options, pool_zero, filename);
 	return 0;

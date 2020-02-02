@@ -16,7 +16,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 	const int ACC_TR=750;				//   750  ACC_TR is for bbound comparisons inside tree
 	gem* pool[len];
 	int pool_length[len];
-	pool[0]=malloc(pool_zero*sizeof(gem));
+	pool[0] = (gem*)malloc(pool_zero*sizeof(gem));
 	pool_length[0]=pool_zero;
 
 	if (pool_zero==1) {					// combine
@@ -52,7 +52,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 		gem* subpools[grade_max-1];                // get subpools for every grade
 		int  subpools_length[grade_max-1];
 		for (j=0; j<grade_max-1; ++j) {            // init everything
-			temp_pools[j]=malloc(size*sizeof(gem));
+			temp_pools[j] = (gem*)malloc(size*sizeof(gem));
 			temp_index[j]=0;
 			subpools[j]=NULL;                       // just to be able to free it
 			subpools_length[j]=0;
@@ -72,7 +72,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 						temp_index[grd]++;
 						if (temp_index[grd]==size) {							// let's skim a pool
 							int length=size+subpools_length[grd];
-							gem* temp_array=malloc(length*sizeof(gem));
+							gem* temp_array = (gem*)malloc(length*sizeof(gem));
 							int index=0;
 							float maxcrit=0;				// this will help me create the minimum tree
 							for (l=0; l<size; ++l) {					// copy new gems
@@ -92,7 +92,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 							int broken=0;
 							int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 							int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
-							int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));		// memory improvement, 2* is not needed
+							int* tree = (int*)malloc((tree_length+crit_cells+1)*sizeof(int));	// memory improvement, 2* is not needed
 							for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;			// init also tree[0], it's faster
 							for (l=length-1;l>=0;--l) {												// start from large z
 								gem* p_gem=temp_array+l;
@@ -108,7 +108,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 							free(tree);									// free
 							
 							subpools_length[grd]=length-broken;
-							subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
+							subpools[grd] = (gem*)malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
 							
 							index=0;
 							for (l=0; l<length; ++l) {			// copying to subpool
@@ -127,7 +127,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 		for (grd=0; grd<grade_max-1; ++grd) {						// let's put remaining gems on
 			if (temp_index[grd] != 0) {
 				int length=temp_index[grd]+subpools_length[grd];
-				gem* temp_array=malloc(length*sizeof(gem));
+				gem* temp_array = (gem*)malloc(length*sizeof(gem));
 				int index=0;
 				float maxcrit=0;				// this will help me create the minimum tree
 				for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
@@ -146,7 +146,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 				int broken=0;
 				int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 				int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
-				int* tree=malloc((tree_length+crit_cells+1)*sizeof(int));		// memory improvement, 2* is not needed
+				int* tree = (int*)malloc((tree_length+crit_cells+1)*sizeof(int));	// memory improvement, 2* is not needed
 				for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;			// init also tree[0], it's faster
 				for (l=length-1;l>=0;--l) {												// start from large z
 					gem* p_gem=temp_array+l;
@@ -162,7 +162,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 				free(tree);								// free
 			
 				subpools_length[grd]=length-broken;
-				subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
+				subpools[grd] = (gem*)malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
 				index=0;
 				for (l=0; l<length; ++l) {			// copying to subpool
 					if (temp_array[l].grade!=0) {
@@ -175,7 +175,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 		}
 		pool_length[i]=0;
 		for (grd=0; grd<grade_max-1; ++grd) pool_length[i]+=subpools_length[grd];
-		pool[i]=malloc(pool_length[i]*sizeof(gem));
+		pool[i] = (gem*)malloc(pool_length[i]*sizeof(gem));
 		
 		int place=0;
 		for (grd=0;grd<grade_max-1;++grd) {			// copying to pool
@@ -208,7 +208,7 @@ int main(int argc, char** argv)
 	int len;
 	char opt;
 	int pool_zero=2;			// speccing by default
-	options output_options = (options){0};
+	options output_options = {};
 	char filename[256]="";		// it should be enough
 
 	while ((opt=getopt(argc,argv,"hdqf:"))!=-1) {

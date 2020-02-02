@@ -20,7 +20,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	int i;
 	gem* pool[len];
 	int pool_length[len];
-	pool[0]=malloc(2*sizeof(gem));
+	pool[0] = (gem*)malloc(2*sizeof(gem));
 	pool_length[0]=2;
 	gem_init(pool[0]  ,1,DAMAGE_CRIT  ,1,0);	// grade damage crit bbound
 	gem_init(pool[0]+1,1,DAMAGE_BBOUND,0,1);	// BB has more dmg
@@ -42,13 +42,13 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena=len;									// as long as the spec length
-	gemY** poolY=malloc(lena*sizeof(gemY*));
-	int* poolY_length=malloc(lena*sizeof(int));
-	poolY[0]=malloc(sizeof(gemY));
+	gemY** poolY = (gemY**)malloc(lena*sizeof(gemY*));
+	int* poolY_length = (int*)malloc(lena*sizeof(int));
+	poolY[0] = (gemY*)malloc(sizeof(gemY));
 	poolY_length[0]=1;
-	gem_init_Y(poolY[0],1,1,1);
+	gem_init(poolY[0],1,1,1);
 	
-	int prevmaxA=pool_from_table_Y(poolY, poolY_length, lena, tableA);		// amps pool filling
+	int prevmaxA=pool_from_table(poolY, poolY_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
 	if (prevmaxA<lena-1) {
 		for (i=0;i<=prevmaxA;++i) free(poolY[i]);		// free
@@ -56,7 +56,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		exit(1);
 	}
 	
-	gemY** poolYf=malloc(lena*sizeof(gemY*));		// if not malloc-ed 140k is the limit
+	gemY** poolYf = (gemY**)malloc(lena*sizeof(gemY*));		// if not malloc-ed 140k is the limit
 	int poolYf_length[lena];
 	
 	AMPS_COMPRESSION
@@ -64,9 +64,9 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 
 	FILE* tablec=file_check(filenamec);		// file is open to read
 	if (tablec==NULL) exit(1);					// if the file is not good we exit
-	gem** poolc=malloc(lenc*sizeof(gem*));
-	int* poolc_length=malloc(lenc*sizeof(int));
-	poolc[0]=malloc(sizeof(gem));
+	gem** poolc = (gem**)malloc(lenc*sizeof(gem*));
+	int* poolc_length = (int*)malloc(lenc*sizeof(int));
+	poolc[0] = (gem*)malloc(sizeof(gem));
 	poolc_length[0]=1;
 	gem_init(poolc[0],1,1,1,1);
 	
@@ -78,7 +78,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		exit(1);
 	}
 	
-	gem bestc=(gem){0};				// choosing best combine
+	gem bestc = {};				// choosing best combine
 	
 	for (i=0;i<poolc_length[lenc-1];++i) {
 		if (gem_more_powerful(poolc[lenc-1][i], bestc)) {
@@ -94,7 +94,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	gemY amps[len];						// we'll choose the best amps
 	double powers[len];
 	gem_init(gems,1,1,1,0);
-	gem_init_Y(amps,0,0,0);
+	gem_init(amps,0,0,0);
 	powers[0]=0;
 	double crit_ratio  =Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
 	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
@@ -103,8 +103,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	int skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
 	for (i=first; i<len; ++i) {										// for every gem value
-		gems[i]=(gem){0};											// we init the gems
-		amps[i]=(gemY){0};											// to extremely weak ones
+		gems[i] = {};												// we init the gems
+		amps[i] = {};												// to extremely weak ones
 		
 		for (k=0;k<poolf_length[i];++k) {							// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
@@ -140,9 +140,9 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			if (output_options.debug) printf("Pool:\t%d\n",poolf_length[i]);
 			gem_print(gems+i);
 			printf("Amplifier spec (x%d)\n", Namps);
-			printf("Value:\t%d\n",gem_getvalue_Y(amps+i));
-			if (output_options.debug) printf("Pool:\t%d\n",poolYf_length[gem_getvalue_Y(amps+i)-1]);
-			gem_print_Y(amps+i);
+			printf("Value:\t%d\n",gem_getvalue(amps+i));
+			if (output_options.debug) printf("Pool:\t%d\n",poolYf_length[gem_getvalue(amps+i)-1]);
+			gem_print(amps+i);
 			printf("Setup combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print(&bestc);
@@ -156,8 +156,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		printf("Value:\t%d\n",len);
 		gem_print(gems+len-1);
 		printf("Amplifier spec (x%d)\n", Namps);
-		printf("Value:\t%d\n",gem_getvalue_Y(amps+len-1));
-		gem_print_Y(amps+len-1);
+		printf("Value:\t%d\n",gem_getvalue(amps+len-1));
+		gem_print(amps+len-1);
 		printf("Setup combine\n");
 		printf("Comb:\t%d\n",lenc);
 		printf("Growth:\t%f\n", bestc_growth);
@@ -184,8 +184,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
 		gem_print(gems+best_index);
 		printf("Amplifier spec (x%d)\n", Namps);
-		printf("Value:\t%d\n", gem_getvalue_Y(amps+best_index));
-		gem_print_Y(amps+best_index);
+		printf("Value:\t%d\n", gem_getvalue(amps+best_index));
+		gem_print(amps+best_index);
 		printf("Setup combine\n");
 		printf("Comb:\t%d\n",lenc);
 		gem_print(gemfc);
@@ -200,7 +200,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		if (len < 3) printf("I could not add chain!\n\n");
 		else {
 			int value = gem_getvalue(gemf);
-			int valueA= gem_getvalue_Y(ampf);
+			int valueA= gem_getvalue(ampf);
 			double NS = value + Namps*valueA;
 			double amp_damage_scaled = damage_ratio * ampf->damage;
 			double amp_crit_scaled = crit_ratio * ampf->crit;
@@ -211,7 +211,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			gem_print(gemf);
 			printf("Amplifier spec (x%d)\n", Namps);
 			printf("Value:\t%d\n", valueA);
-			gem_print_Y(ampf);
+			gem_print(ampf);
 			printf("Setup combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print(gemfc);
@@ -226,7 +226,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		print_parens_compressed(gemf);
 		printf("\n\n");
 		printf("Amplifier speccing scheme:\n");
-		print_parens_compressed_Y(ampf);
+		print_parens_compressed(ampf);
 		printf("\n\n");
 		printf("Setup combining scheme:\n");
 		print_parens_compressed(gemfc);
@@ -237,7 +237,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		print_tree(gemf, "");
 		printf("\n");
 		printf("Amplifier speccing tree:\n");
-		print_tree_Y(ampf, "");
+		print_tree(ampf, "");
 		printf("\n");
 		printf("Setup combining tree:\n");
 		print_tree(gemfc, "");
@@ -250,7 +250,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		print_equations(gemf);
 		printf("\n");
 		printf("Amplifier speccing equations:\n");
-		print_equations_Y(ampf);
+		print_equations(ampf);
 		printf("\n");
 		printf("Setup combining equations:\n");
 		print_equations(gemfc);
@@ -281,7 +281,7 @@ int main(int argc, char** argv)
 	int As=60;
 	int GT=30;    // NT = pow(2, GT-1)
 	int Namps=8;  // killgem in tower
-	options output_options = (options){0};
+	options output_options = {};
 	char filename[256]="";		// it should be enough
 	char filenamec[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough

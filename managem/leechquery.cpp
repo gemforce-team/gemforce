@@ -2,8 +2,11 @@
 #include <stdlib.h>
 #include <math.h>
 #include <getopt.h>
+#include <string.h>
 typedef struct Gem_O gem;
 #include "leechg_utils.h"
+#include "query_utils.h"
+#include "gfon.h"
 
 void gem_print(gem *p_gem) {
 	printf("Grade:\t%d\nLeech:\t%f\n\n", p_gem->grade, p_gem->leech);
@@ -16,72 +19,46 @@ char gem_color(gem* p_gem) {
 
 #include "print_utils.h"
 
-void worker(int len, options output_options)
+void worker(int len, options output_options, char* filename)
 {
-	printf("\n");
+	FILE* table=file_check(filename);      // file is open to read
+	if (table==NULL) exit(1);              // if the file is not good we exit
 	int i;
-	gem* gems=malloc(len*sizeof(gem));      // if not malloc-ed 230k is the limit
-	gem* pool[len];
-	int pool_length[len];
-	pool[0]=malloc(sizeof(gem));
-	gem_init(gems,1,1);
-	gem_init(pool[0],1,1);
-	pool_length[0]=1;
-	if (!output_options.quiet) gem_print(gems);
-
-	for (i=1; i<len; ++i) {
-		int j,k,h;
-		const int eoc=(i+1)/ (1+1);      // end of combining
-		const int j0 =(i+1)/(10+1);      // value ratio < 10
-		int comb_tot=0;
-
-		const int grade_max=(int)(log2(i+1)+1);    // gems with max grade cannot be destroyed, so this is a max, not a sup
-		gem temp_array[grade_max-1];         // this will have all the grades
-		for (j=0; j<grade_max-1; ++j) temp_array[j]=(gem){0};
-
-		for (j=j0; j<eoc; ++j) {         // combine gems and put them in temp array
-			for (k=0; k< pool_length[j]; ++k) {
-				int g1=(pool[j]+k)->grade;
-				for (h=0; h< pool_length[i-1-j]; ++h) {
-					int delta=g1 - (pool[i-1-j]+h)->grade;
-					if (abs(delta)<=2) {        // grade difference <= 2
-						comb_tot++;
-						gem temp;
-						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
-						int grd=temp.grade-2;
-						if (gem_better(temp, temp_array[grd])) {
-							temp_array[grd]=temp;
-						}
-					}
-				}
-			}
-		}
-		int gemNum=0;
-		for (j=0; j<grade_max-1; ++j) if (temp_array[j].grade!=0) gemNum++;
-		pool_length[i]=gemNum;
-		pool[i]=malloc(pool_length[i]*sizeof(gem));
-		
-		int place=0;
-		for (j=0; j<grade_max-1; ++j) {      // copying to pool
-			if (temp_array[j].grade!=0) {
-				pool[i][place]=temp_array[j];
-				place++;
-			}
-		}
-		
+	gem* gems = (gem*)malloc(len * sizeof(gem)); // if not malloc-ed 230k is the limit
+	gem** pool = (gem**)malloc(len * sizeof(gem*)); // if not malloc-ed 690k is the limit
+	int* pool_length = (int*)malloc(len * sizeof(int)); // if not malloced 400k is the limit (win)
+	pool[0] = (gem*)malloc(sizeof(gem));
+	gem_init(gems, 1, 1);
+	gem_init(pool[0], 1, 1);
+	pool_length[0] = 1;
+	
+	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
+	fclose(table);				// close
+	if (prevmax<len-1) {
+		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
+		free(pool);				// free
+		free(pool_length);	// free
+		free(gems);				// free
+		if (prevmax>0) printf("Table stops at %d, not %d\n",prevmax+1,len);
+		exit(1);
+	}
+	
+	int skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
+	int first = skip_computations ? len-1 : 0;
+	for (i=first; i<len; ++i) {
 		gems[i]=pool[i][0];
-		for (j=1;j<pool_length[i];++j) if (gem_better(pool[i][j],gems[i])) {
-			gems[i]=pool[i][j];
+		for (int j=1; j<pool_length[i]; ++j) {
+			if (gem_better(pool[i][j],gems[i])) {
+				gems[i]=pool[i][j];
+			}
 		}
 		
 		if (!output_options.quiet) {
 			printf("Value:\t%d\n",i+1);
 			if (output_options.info)
 				printf("Growth:\t%f\n", log(gem_power(gems[i]))/log(i+1));
-			if (output_options.debug) {
-				printf("Raw:\t%d\n",comb_tot);
+			if (output_options.debug)
 				printf("Pool:\t%d\n",pool_length[i]);
-			}
 			gem_print(gems+i);
 		}
 	}
@@ -116,7 +93,7 @@ void worker(int len, options output_options)
 	if (output_options.chain) {
 		if (len < 2) printf("I could not add chain!\n\n");
 		else {
-			int value=gem_getvalue(gemf);
+			int value = gem_getvalue(gemf);
 			gemf = gem_putchain(pool[value-1], pool_length[value-1], &gem_array);
 			printf("Gem with chain added:\n\n");
 			printf("Value:\t%d\n", value);    // made to work well with -u
@@ -143,8 +120,10 @@ void worker(int len, options output_options)
 		printf("\n");
 	}
 	
-	for (i=0;i<len;++i) free(pool[i]);    // free
-	free(gems);
+	for (i=0;i<len;++i) free(pool[i]);		// free
+	free(pool);		// free
+	free(pool_length);
+	free(gems);		// free
 	if (output_options.chain && len > 1) {
 		free(gem_array);
 	}
@@ -154,14 +133,18 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	options output_options = (options){0};
+	options output_options = {};
+	char filename[256]="";		// it should be enough
 
-	while ((opt=getopt(argc,argv,"hptecidqur"))!=-1) {
+	while ((opt=getopt(argc,argv,"hptecidqurf:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptecidqur");
+				print_help("hptecidqurf:");
 				return 0;
 			PTECIDQUR_OPTIONS_BLOCK
+			case 'f':
+				strcpy(filename,optarg);
+				break;
 			case '?':
 				return 1;
 			default:
@@ -188,7 +171,8 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	worker(len, output_options);
+	file_selection(filename, "table_leech");
+	worker(len, output_options, filename);
 	return 0;
 }
 

@@ -3,45 +3,50 @@
 #include <math.h>
 #include <getopt.h>
 #include <string.h>
-typedef struct Gem_YB gem;
-#include "killgem_utils.h"
+typedef struct Gem_OB gem;
+#include "managem_utils.h"
 #include "gfon.h"
 
 const int nchecks=6;
 
-double gem_rk311(gem gem1)
+inline double gem_rk13(gem gem1)
 {
-	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.crit*gem1.damage;
+	return gem1.bbound*gem1.leech*gem1.leech*gem1.leech;
 }
 
-double gem_rk411(gem gem1)
+inline double gem_rk12(gem gem1)
 {
-	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.bbound*gem1.crit*gem1.damage;
+	return gem1.bbound*gem1.leech*gem1.leech;
 }
 
-double gem_rk511(gem gem1)
+inline double gem_rk21(gem gem1)
 {
-	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.bbound*gem1.bbound*gem1.crit*gem1.damage;
+	return gem1.bbound*gem1.bbound*gem1.leech;
+}
+
+inline double gem_rk31(gem gem1)
+{
+	return gem1.bbound*gem1.bbound*gem1.bbound*gem1.leech;
 }
 
 void worker(int len, options output_options, char* filename)
 {
-	FILE* table=table_init(filename, 1);		// init killgem
+	FILE* table=table_init(filename, 1);    // init managem
 	int i;
-	gem** pool=malloc(len*sizeof(gem*));		// win 262k
-	int* pool_length=malloc(len*sizeof(int));
-	pool[0]=malloc(sizeof(gem));
+	gem** pool = (gem**)malloc(len*sizeof(gem*));    // windows
+	int* pool_length = (int*)malloc(len*sizeof(int));
+	pool[0] = (gem*)malloc(sizeof(gem));
 	pool_length[0]=1;
-	gem_init(pool[0],1,1,1,1);		// grade damage crit bbound
+	gem_init(pool[0],1,1,1);
 	
-	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
+	int prevmax=pool_from_table(pool, pool_length, len, table);   // pool filling
 	if (prevmax+1==len) {
 		fclose(table);
-		for (i=0;i<len;++i) free(pool[i]);		// free
+		for (i=0;i<len;++i) free(pool[i]);    // free
 		printf("Table is longer than %d, no need to do anything\n\n",prevmax+1);
 		exit(1);
 	}
-	table=freopen(filename,"a", table);		// append -> updating possible
+	table=freopen(filename,"a", table);  // append -> updating possible
 
 	for (i=prevmax+1; i<len; ++i) {
 		int j,k,h;
@@ -52,7 +57,7 @@ void worker(int len, options output_options, char* filename)
 		const int ngrades=(int)log2(i+1);
 		const int temp_length=nchecks*ngrades;
 		gem temp_array[temp_length];      // this will have all the grades
-		for (j=0; j<temp_length; ++j) temp_array[j]=(gem){0};
+		for (j=0; j<temp_length; ++j) temp_array[j] = {};
 		double pow_array[temp_length];    // this will have all the powers
 		for (j=0; j<temp_length; ++j) pow_array[j]=0;
 
@@ -68,27 +73,27 @@ void worker(int len, options output_options, char* filename)
 						int grd=temp.grade-2;
 						int p0 = grd*nchecks;
 						
-						if      ( gem_rk511(temp) >= pow_array[p0] ) {			// rk511 check
-							pow_array[p0]=gem_rk511(temp);
+						if      ( gem_power(temp) > pow_array[p0] ) {			// rk11 check
+							pow_array[p0]=gem_power(temp);
 							temp_array[p0]=temp;
 						}
-						else if ( gem_power(temp) >= pow_array[p0+1] ) {		// rk211 check
-							pow_array[p0+1]=gem_power(temp);
+						else if ( gem_rk13(temp) > pow_array[p0+1] ) {			// rk13 check
+							pow_array[p0+1]=gem_rk13(temp);
 							temp_array[p0+1]=temp;
 						}
-						else if ( gem_rk411(temp) >= pow_array[p0+2] ) {		// rk411 check
-							pow_array[p0+2]=gem_rk411(temp);
+						else if ( gem_rk12(temp) > pow_array[p0+2] ) {			// rk12 check
+							pow_array[p0+2]=gem_rk12(temp);
 							temp_array[p0+2]=temp;
 						}
-						else if ( gem_rk311(temp) >= pow_array[p0+3] ) {		// rk311 check
-							pow_array[p0+3]=gem_rk311(temp);
+						else if ( gem_rk21(temp) > pow_array[p0+3] ) {			// rk21 check
+							pow_array[p0+3]=gem_rk21(temp);
 							temp_array[p0+3]=temp;
 						}
-						else if ( gem_power(temp) >= pow_array[p0+4] ) {		// rk211 check
-							pow_array[p0+4]=gem_power(temp);
+						else if ( gem_rk31(temp) > pow_array[p0+4] ) {			// rk31 check
+							pow_array[p0+4]=gem_rk31(temp);
 							temp_array[p0+4]=temp;
 						}
-						else if ( gem_power(temp) >= pow_array[p0+5] ) {		// rk211 check
+						else if ( gem_power(temp) > pow_array[p0+5] ) {			// rk11 check
 							pow_array[p0+5]=gem_power(temp);
 							temp_array[p0+5]=temp;
 						}
@@ -99,7 +104,7 @@ void worker(int len, options output_options, char* filename)
 		int gemNum=0;
 		for (j=0; j<temp_length; ++j) if (temp_array[j].grade!=0) gemNum++;
 		pool_length[i]=gemNum;
-		pool[i]=malloc(pool_length[i]*sizeof(gem));
+		pool[i] = (gem*)malloc(pool_length[i]*sizeof(gem));
 		
 		int place=0;
 		for (j=0; j<temp_length; ++j) {				// copying to pool
@@ -129,7 +134,7 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	options output_options = (options){0};
+	options output_options = {};
 	char filename[256]="";		// it should be enough
 
 	while ((opt=getopt(argc,argv,"hdqf:"))!=-1) {
@@ -167,7 +172,7 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	if (filename[0]=='\0') strcpy(filename, "table_kgcomb");
+	if (filename[0]=='\0') strcpy(filename, "table_mgcomb");
 	worker(len, output_options, filename);
 	return 0;
 }

@@ -13,6 +13,9 @@
 # error "CFR_EXPR is not defined, e.g.: 'gem_cfr_power(ARG, amp_leech_scaled)'"
 #endif
 
+#include <cstdlib>
+
+template<class gem>
 gem* gem_putchain(gem* pool, int pool_length, gem** gem_array EXTRA_PARAMS)
 {
 	double best_pow = 0;
@@ -21,10 +24,10 @@ gem* gem_putchain(gem* pool, int pool_length, gem** gem_array EXTRA_PARAMS)
 	
 	for (int i = 0; i < pool_length; ++i) {
 		int depth = gem_getdepth(pool + i);
-		gem* new_array = malloc(depth*sizeof(gem));
+		gem* new_array = (gem*)malloc(depth*sizeof(gem));
 		CHAIN_INIT_EXPR(new_array);
 		
-		gem** stack = malloc(depth*sizeof(gem*));
+		gem** stack = (gem**)malloc(depth*sizeof(gem*));
 		stack[0] = pool + i;
 		int stack_length = 1;
 		
@@ -55,7 +58,7 @@ gem* gem_putchain(gem* pool, int pool_length, gem** gem_array EXTRA_PARAMS)
 				
 				free(best_array);
 				best_array = new_array;
-				new_array = malloc(depth*sizeof(gem));
+				new_array = (gem*)malloc(depth*sizeof(gem));
 				CHAIN_INIT_EXPR(new_array);
 			}
 			

@@ -17,7 +17,7 @@ void print_ngems_table(gem* gems, gemO* amps, double leech_ratio, int len)
 	printf("# Gems\tManagem\tAmps\tPower\n");
 	int i;
 	for (i=0; i<len; i++)
-		printf("%d\t%d\t%d\t%#.7g\n", i+1, gem_getvalue(gems+i), gem_getvalue_O(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio));
+		printf("%d\t%d\t%d\t%#.7g\n", i+1, gem_getvalue(gems+i), gem_getvalue(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio));
 	printf("\n");
 }
 
@@ -28,7 +28,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	int i;
 	gem* pool[len];
 	int pool_length[len];
-	pool[0]=malloc(2*sizeof(gem));
+	pool[0] = (gem*)malloc(2*sizeof(gem));
 	pool_length[0]=2;
 	gem_init(pool[0]  ,1,1,0);
 	gem_init(pool[0]+1,1,0,1);
@@ -53,11 +53,11 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	int lena = Namps ? len/Namps : 1;		// if Namps==0 let lena=1
 	gemO* poolO[lena];
 	int poolO_length[lena];
-	poolO[0]=malloc(sizeof(gemO));
+	poolO[0] = (gemO*)malloc(sizeof(gemO));
 	poolO_length[0]=1;
-	gem_init_O(poolO[0],1,1);
+	gem_init(poolO[0],1,1);
 	
-	int prevmaxA=pool_from_table_O(poolO, poolO_length, lena, tableA);		// amps pool filling
+	int prevmaxA=pool_from_table(poolO, poolO_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
 	if (prevmaxA<lena-1) {
 		for (i=0;i<=prevmaxA;++i) free(poolO[i]);		// free
@@ -65,7 +65,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 		exit(1);
 	}
 
-	gemO* bestO=malloc(lena*sizeof(gemO));		// if not malloc-ed 140k is the limit
+	gemO* bestO = (gemO*)malloc(lena*sizeof(gemO));		// if not malloc-ed 140k is the limit
 	
 	AMPS_COMPRESSION
 	if (!output_options.quiet) printf("Amp pool compression done!\n\n");
@@ -74,14 +74,14 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	gem gems[len];
 	gemO amps[len];
 	gem_init(gems,1,1,0);
-	amps[0]=(gemO){0};
+	amps[0] = {};
 	double leech_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1+TC/3*0.1);
 	
 	int skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
 	for (i=first; i<len; ++i) {								// for every total value
-		gems[i]=(gem){0};									// we init the gems
-		amps[i]=(gemO){0};									// to extremely weak ones
+		gems[i] = {};										// we init the gems
+		amps[i] = {};										// to extremely weak ones
 		for (k=0;k<poolf_length[i];++k) {					// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
@@ -108,8 +108,8 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 			if (output_options.debug) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
 			gem_print(gems+i);
 			printf("Amplifier (x%d)\n", Namps);
-			printf("Value:\t%d\n",gem_getvalue_O(amps+i));
-			gem_print_O(amps+i);
+			printf("Value:\t%d\n",gem_getvalue(amps+i));
+			gem_print(amps+i);
 			printf("Spec base power: \t%#.7g\n\n", gem_amp_power(gems[i], amps[i], leech_ratio));
 		}
 	}
@@ -121,8 +121,8 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 		printf("Value:\t%d\n", gem_getvalue(gems+len-1));
 		gem_print(gems+len-1);
 		printf("Amplifier (x%d)\n", Namps);
-		printf("Value:\t%d\n", gem_getvalue_O(amps+len-1));
-		gem_print_O(amps+len-1);
+		printf("Value:\t%d\n", gem_getvalue(amps+len-1));
+		gem_print(amps+len-1);
 		printf("Spec base power: \t%#.7g\n\n", gem_amp_power(gems[len-1], amps[len-1], leech_ratio));
 	}
 
@@ -136,13 +136,13 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 			int value=gem_getvalue(gemf);
 			gemf = gem_putchain(poolf[value-1], poolf_length[value-1], &gem_array, leech_ratio*ampf->leech);
 			printf("Setup with chain added:\n\n");
-			printf("Total value:\t%d\n\n", value+Namps*gem_getvalue_O(ampf));
+			printf("Total value:\t%d\n\n", value+Namps*gem_getvalue(ampf));
 			printf("Managem\n");
 			printf("Value:\t%d\n", value);
 			gem_print(gemf);
 			printf("Amplifier (x%d)\n", Namps);
-			printf("Value:\t%d\n", gem_getvalue_O(ampf));
-			gem_print_O(ampf);
+			printf("Value:\t%d\n", gem_getvalue(ampf));
+			gem_print(ampf);
 			printf("Spec base power with chain:\t%#.7g\n\n", gem_amp_power(*gemf, *ampf, leech_ratio));
 		}
 	}
@@ -152,7 +152,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 		print_parens_compressed(gemf);
 		printf("\n\n");
 		printf("Amplifier speccing scheme:\n");
-		print_parens_compressed_O(ampf);
+		print_parens_compressed(ampf);
 		printf("\n\n");
 	}
 	if (output_options.tree) {
@@ -160,7 +160,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 		print_tree(gemf, "");
 		printf("\n");
 		printf("Amplifier tree:\n");
-		print_tree_O(ampf, "");
+		print_tree(ampf, "");
 		printf("\n");
 	}
 	if (output_options.table) print_ngems_table(gems, amps, leech_ratio, len);
@@ -170,7 +170,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 		print_equations(gemf);
 		printf("\n");
 		printf("Amplifier equations:\n");
-		print_equations_O(ampf);
+		print_equations(ampf);
 		printf("\n");
 	}
 	
@@ -191,7 +191,7 @@ int main(int argc, char** argv)
 	int As=60;
 	int Namps=6;
 	int gem_limit=0;
-	options output_options = (options){0};
+	options output_options = {};
 	char filename[256]="";		// it should be enough
 	char filenameA[256]="";		// it should be enough
 

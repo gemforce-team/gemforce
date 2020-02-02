@@ -1,14 +1,14 @@
 #ifndef _CPAIR_H
 #define _CPAIR_H
 
-typedef struct Cpair {
+struct cpair {
 	double power;
 	double rdmg;
 	double rcrit;
 	gem*   combg;
 	gemY*  comba;
 	int    place;
-} cpair;
+};
 
 inline double cpair_BgDaCa(cpair cp)
 {

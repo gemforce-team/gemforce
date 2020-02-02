@@ -12,7 +12,7 @@ void print_omnia_table(gemY* amps, double* powers, int len)
 {
 	printf("Killgem\tAmps\tPower\n");
 	for (int i=0; i<len; i++)
-		printf("%d\t%d\t%#.7g\n", i+1, gem_getvalue_Y(amps+i), powers[i]);
+		printf("%d\t%d\t%#.7g\n", i+1, gem_getvalue(amps+i), powers[i]);
 	printf("\n");
 }
 
@@ -33,7 +33,7 @@ void print_omnia_table(gemY* amps, double* powers, int len)
 #define AMPS_COMPRESSION																\
 	for (i=0; i<lena; ++i) {															\
 		int j;																			\
-		gemY* temp_pool=malloc(poolY_length[i]*sizeof(gemY));							\
+		gemY* temp_pool = (gemY*)malloc(poolY_length[i]*sizeof(gemY));					\
 		for (j=0; j<poolY_length[i]; ++j) {												\
 			temp_pool[j]=poolY[i][j];													\
 		}																				\
@@ -48,7 +48,7 @@ void print_omnia_table(gemY* amps, double* powers, int len)
 			else lim_crit=temp_pool[j].crit;											\
 		}																				\
 		poolYf_length[i]=poolY_length[i]-broken;										\
-		poolYf[i]=malloc(poolYf_length[i]*sizeof(gemY));								\
+		poolYf[i] = (gemY*)malloc(poolYf_length[i]*sizeof(gemY));						\
 		int index=0;																	\
 		for (j=0; j<poolY_length[i]; ++j) {												\
 			if (temp_pool[j].grade!=0) {												\
@@ -63,7 +63,7 @@ void print_omnia_table(gemY* amps, double* powers, int len)
 
 /* Exact macro blobs used for compressions in various files. Handle with more care */
 
-typedef struct Gem_YBs {
+struct gemP {
 	int   grade;
 	float damage;
 	float crit;
@@ -71,7 +71,7 @@ typedef struct Gem_YBs {
 	gem*  father;
 	gem*  mother;
 	int   place;
-} gemP;
+};
 
 #include "kgexact_utils.h"
 
@@ -88,7 +88,7 @@ inline gem gemP2gem(gemP g)
 #define KGSPEC_COMPRESSION																				\
 	for (i=0;i<len;++i) {																				\
 		int length = pool_length[i];																	\
-		gemP* temp_array=malloc(length*sizeof(gemP));													\
+		gemP* temp_array = (gemP*)malloc(length*sizeof(gemP));													\
 		for (int j=0; j<length; ++j) {																	\
 			temp_array[j]=gem2gemP(pool[i][j]);															\
 		}																								\
@@ -105,7 +105,7 @@ inline gem gemP2gem(gemP g)
 		gem_sort_exact(temp_array,length);																\
 		int broken=0;																					\
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */	\
-		float* tree=malloc((tree_length*2)*sizeof(float));		/* delete gems with bb=0 */				\
+		float* tree = (float*)malloc((tree_length*2)*sizeof(float));	/* delete gems with bb=0 */		\
 		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* init also tree[0], it's faster */	\
 		for (int l=length-1;l>=0;--l) {							/* start from large dmg */				\
 			gemP* p_gem=temp_array+l;																	\
@@ -118,7 +118,7 @@ inline gem gemP2gem(gemP g)
 			}																							\
 		}																								\
 		free(tree);																						\
-		double* dtree=malloc((tree_length*2)*sizeof(double));											\
+		double* dtree = (double*)malloc((tree_length*2)*sizeof(double));								\
 		for (int l=0; l<tree_length*2; ++l) dtree[l]=0;			/* delete gems with power=0 */			\
 		for (int l=0; l<length; ++l) {							/* start from low dmg = high idmg */	\
 			gemP* p_gem=temp_array+l;																	\
@@ -160,7 +160,7 @@ inline gem gemP2gem(gemP g)
 		}																								\
 		free(dtree);																					\
 		poolf_length[i]=length-broken;																	\
-		poolf[i]=malloc(poolf_length[i]*sizeof(gem));													\
+		poolf[i] = (gem*)malloc(poolf_length[i]*sizeof(gem));											\
 		int index=0;																					\
 		for (int j=0; j<length ; ++j) {																	\
 			if (temp_array[j].grade!=0) {																\
@@ -169,14 +169,14 @@ inline gem gemP2gem(gemP g)
 			}																							\
 		}																								\
 		free(temp_array);																				\
-		if (output_options.debug)																\
+		if (output_options.debug)																		\
 			printf("Killgem value %d speccing compressed pool size:\t%d\n",i+1,poolf_length[i]);		\
 	}
 
 #define KGCOMB_COMPRESSION																				\
 	{																									\
 		int length = poolc_length[lenc-1];																\
-		gemP* temp_array=malloc(length*sizeof(gemP));													\
+		gemP* temp_array = (gemP*)malloc(length*sizeof(gemP));											\
 		for (int j=0; j<length; ++j) {																	\
 			temp_array[j]=gem2gemP(poolc[lenc-1][j]);													\
 		}																								\
@@ -193,7 +193,7 @@ inline gem gemP2gem(gemP g)
 		gem_sort_exact(temp_array,length);																\
 		int broken=0;																					\
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */	\
-		float* tree=malloc((tree_length*2)*sizeof(float));												\
+		float* tree = (float*)malloc((tree_length*2)*sizeof(float));									\
 		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* combines have no gem with bb=0 */	\
 		for (int l=length-1;l>=0;--l) {							/* start from large dmg */				\
 			gemP* p_gem=temp_array+l;																	\
@@ -206,7 +206,7 @@ inline gem gemP2gem(gemP g)
 			}																							\
 		}																								\
 		free(tree);																						\
-		double* dtree=malloc((tree_length*2)*sizeof(double));											\
+		double* dtree = (double*)malloc((tree_length*2)*sizeof(double));								\
 		for (int l=0; l<tree_length*2; ++l) dtree[l]=0;			/* delete gems with power=0 */			\
 		for (int l=0; l<length; ++l) {							/* start from low dmg = high idmg */	\
 			gemP* p_gem=temp_array+l;																	\
@@ -248,7 +248,7 @@ inline gem gemP2gem(gemP g)
 		}																								\
 		free(dtree);																					\
 		poolcf_length=length-broken;																	\
-		poolcf=malloc(poolcf_length*sizeof(gem));														\
+		poolcf = (gem*)malloc(poolcf_length*sizeof(gem));												\
 		int index=0;																					\
 		for (int j=0; j<length; ++j) {																	\
 			if (temp_array[j].grade!=0) {																\

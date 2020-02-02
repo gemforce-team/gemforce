@@ -11,9 +11,9 @@ void worker(int len, options output_options, char* filename)
 {
 	FILE* table=table_init(filename, 1);    // init leech
 	int i;
-	gem** pool=malloc(len*sizeof(gem*));    // if not malloc-ed 690k is the limit
-	int* pool_length=malloc(len*sizeof(int));
-	pool[0]=malloc(sizeof(gem));
+	gem** pool = (gem**)malloc(len*sizeof(gem*));    // if not malloc-ed 690k is the limit
+	int* pool_length = (int*)malloc(len*sizeof(int));
+	pool[0] = (gem*)malloc(sizeof(gem));
 	gem_init(pool[0],1,1);
 	pool_length[0]=1;
 	
@@ -36,7 +36,7 @@ void worker(int len, options output_options, char* filename)
 
 		const int grade_max=(int)(log2(i+1)+1);  // gems with max grade cannot be destroyed, so this is a max, not a sup
 		gem temp_array[grade_max-1];             // this will have all the grades
-		for (j=0; j<grade_max-1; ++j) temp_array[j]=(gem){0};
+		for (j=0; j<grade_max-1; ++j) temp_array[j] = {};
 
 		for (j=j0; j<eoc; ++j) {          // combine gems and put them in temp array
 			for (k=0; k< pool_length[j]; ++k) {
@@ -58,7 +58,7 @@ void worker(int len, options output_options, char* filename)
 		int gemNum=0;
 		for (j=0; j<grade_max-1; ++j) if (temp_array[j].grade!=0) gemNum++;
 		pool_length[i]=gemNum;
-		pool[i]=malloc(pool_length[i]*sizeof(gem));
+		pool[i] = (gem*)malloc(pool_length[i]*sizeof(gem));
 		
 		int place=0;
 		for (j=0; j<grade_max-1; ++j) {     // copying to pool
@@ -88,7 +88,7 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	options output_options = (options){0};
+	options output_options = {};
 	char filename[256]="";    // it should be enough
 
 	while ((opt=getopt(argc,argv,"hdqf:"))!=-1) {

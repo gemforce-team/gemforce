@@ -2,33 +2,36 @@
 #include <stdlib.h>
 #include <math.h>
 #include <getopt.h>
-typedef struct Gem_Y gem;
-#include "critg_utils.h"
-
-void gem_print(gem *p_gem) {
-	printf("Grade:\t%d\nDamage:\t%f\nCrit:\t%f\nPower:\t%f\n\n",
-		p_gem->grade, p_gem->damage, p_gem->crit, p_gem->damage*p_gem->crit);
-}
-
-char gem_color(gem* p_gem) {
-	if (p_gem->crit==0) return COLOR_CHHIT;
-	else return COLOR_CRIT;
-}
-
+#include "interval_tree.h"
+typedef struct Gem_YB gem;
+#include "killgem_utils.h"
 #include "print_utils.h"
 
-void worker(int len, options output_options)
+void worker(int len, options output_options, int pool_zero)
 {
 	printf("\n");
 	int i;
-	int size=1000;
+	int size;
+	const int ACC_TR=750;				//   750  ACC_TR is for bbound comparisons inside tree
 	gem gems[len];
 	gem* pool[len];
 	int pool_length[len];
-	pool[0]=malloc(sizeof(gem));
-	gem_init(gems,1,1,1);
-	gem_init(pool[0],1,1,1);
-	pool_length[0]=1;
+	pool[0] = (gem*)malloc(pool_zero*sizeof(gem));
+	pool_length[0]=pool_zero;
+
+	if (pool_zero==1) {					// combine
+		ACC=80;								// ACC is for z-axis sorting and for the length of the interval tree
+		gem_init(pool[0],1,1,1,1);		// start gem does not matter
+		gem_init(gems   ,1,1,1,1);		// grade damage crit bbound
+		size=1000;							// reasonable comb sizing
+	}
+	else {									// spec
+		ACC=60;								// ACC is for z-axis sorting and for the length of the interval tree
+		gem_init(pool[0]  ,1,DAMAGE_CRIT  ,1,0);
+		gem_init(pool[0]+1,1,DAMAGE_BBOUND,0,1);	// BB has more dmg
+		gem_init(gems     ,1,DAMAGE_CRIT  ,1,0);	// grade damage crit bbound
+		size=20000;							// reasonable spec sizing
+	}
 	if (!output_options.quiet) gem_print(gems);
 
 	for (i=1; i<len; ++i) {
@@ -43,7 +46,7 @@ void worker(int len, options output_options)
 		gem* subpools[grade_max-1];                // get subpools for every grade
 		int  subpools_length[grade_max-1];
 		for (j=0; j<grade_max-1; ++j) {            // init everything
-			temp_pools[j]=malloc(size*sizeof(gem));
+			temp_pools[j] = (gem*)malloc(size*sizeof(gem));
 			temp_index[j]=0;
 			subpools[j]=NULL;                       // just to be able to free it
 			subpools_length[j]=0;
@@ -61,41 +64,52 @@ void worker(int len, options output_options)
 						int grd=temp.grade-2;
 						temp_pools[grd][temp_index[grd]]=temp;
 						temp_index[grd]++;
-						if (temp_index[grd]==size) {								// let's skim a pool
+						if (temp_index[grd]==size) {							// let's skim a pool
 							int length=size+subpools_length[grd];
-							gem* temp_array=malloc(length*sizeof(gem));
+							gem* temp_array = (gem*)malloc(length*sizeof(gem));
 							int index=0;
-							for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
+							float maxcrit=0;				// this will help me create the minimum tree
+							for (l=0; l<size; ++l) {					// copy new gems
 								temp_array[index]=temp_pools[grd][l];
+								maxcrit=max(maxcrit, (temp_array+index)->crit);
 								index++;
 							}
 							temp_index[grd]=0;			// temp index reset
 							for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
 								temp_array[index]=subpools[grd][l];
+								maxcrit=max(maxcrit, (temp_array+index)->crit);
 								index++;
 							}
 							free(subpools[grd]);		// free
-							gem_sort(temp_array,length);							// work starts
-	
+							
+							gem_sort(temp_array,length);						// work starts
 							int broken=0;
-							float lim_crit=-1;
-							for (l=length-1;l>=0;--l) {
-								if (temp_array[l].crit<=lim_crit) {
-									temp_array[l].grade=0;
+							int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
+							int tree_length= 1 << (int)ceil(log2(crit_cells));					// this is pow(2, ceil()) bitwise for speed improvement
+							int* tree = (int*)malloc((tree_length+crit_cells+1)*sizeof(int));		// memory improvement, 2* is not needed
+							for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;			// init also tree[0], it's faster
+							for (l=length-1;l>=0;--l) {												// start from large z
+								gem* p_gem=temp_array+l;
+								int index=(int)(p_gem->crit*ACC);									// find its place in x
+								if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
+									tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
+								}
+								else {
+									p_gem->grade=0;
 									broken++;
 								}
-								else lim_crit=temp_array[l].crit;
-							}													// all unnecessary gems destroyed
-	
+							}												// all unnecessary gems destroyed
+							free(tree);									// free
+							
 							subpools_length[grd]=length-broken;
-							subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
-	
+							subpools[grd] = (gem*)malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
+							
 							index=0;
-							for (l=0; l<length; ++l) {      // copying to subpool
+							for (l=0; l<length; ++l) {			// copying to subpool
 								if (temp_array[l].grade!=0) {
 									subpools[grd][index]=temp_array[l];
 									index++;
-								}
+								}   
 							}
 							free(temp_array);			// free
 						}												// rebuilt subpool[grd], work restarts
@@ -107,51 +121,64 @@ void worker(int len, options output_options)
 		for (grd=0; grd<grade_max-1; ++grd) {						// let's put remaining gems on
 			if (temp_index[grd] != 0) {
 				int length=temp_index[grd]+subpools_length[grd];
-				gem* temp_array=malloc(length*sizeof(gem));
+				gem* temp_array = (gem*)malloc(length*sizeof(gem));
 				int index=0;
+				float maxcrit=0;				// this will help me create the minimum tree
 				for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
 					temp_array[index]=temp_pools[grd][l];
+					maxcrit=max(maxcrit, (temp_array+index)->crit);
 					index++;
 				}
 				for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
 					temp_array[index]=subpools[grd][l];
+					maxcrit=max(maxcrit, (temp_array+index)->crit);
 					index++;
 				}
 				free(subpools[grd]);		// free
-				gem_sort(temp_array,length);							// work starts
+				
+				gem_sort(temp_array,length);								// work starts
 				int broken=0;
-				float lim_crit=-1;
-				for (l=length-1;l>=0;--l) {
-					if (temp_array[l].crit<=lim_crit) {
-						temp_array[l].grade=0;
+				int crit_cells=(int)(maxcrit*ACC)+1;					// this pool will be big from the beginning, but we avoid binary search
+				int tree_length= 1 << (int)ceil(log2(crit_cells));					// this is pow(2, ceil()) bitwise for speed improvement
+				int* tree = (int*)malloc((tree_length+crit_cells+1)*sizeof(int));		// memory improvement, 2* is not needed
+					for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;		// init also tree[0], it's faster
+					for (l=length-1;l>=0;--l) {											// start from large z
+						gem* p_gem=temp_array+l;
+						int index=(int)(p_gem->crit*ACC);								// find its place in x
+						if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
+							tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
+						}
+						else {
+						p_gem->grade=0;
 						broken++;
 					}
-					else lim_crit=temp_array[l].crit;
-				}													// all unnecessary gems destroyed
+				}												// all unnecessary gems destroyed
+				free(tree);									// free
+			
 				subpools_length[grd]=length-broken;
-				subpools[grd]=malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
+				subpools[grd] = (gem*)malloc(subpools_length[grd]*sizeof(gem));		// pool init via broken
 				index=0;
 				for (l=0; l<length; ++l) {			// copying to subpool
 					if (temp_array[l].grade!=0) {
 						subpools[grd][index]=temp_array[l];
 						index++;
-					}
+					}   
 				}
 				free(temp_array);			// free
-			}												// subpool[grd] is now full
+			}									// subpool[grd] is now full
 		}
 		pool_length[i]=0;
 		for (grd=0; grd<grade_max-1; ++grd) pool_length[i]+=subpools_length[grd];
-		pool[i]=malloc(pool_length[i]*sizeof(gem));
-
+		pool[i] = (gem*)malloc(pool_length[i]*sizeof(gem));
+		
 		int place=0;
-		for (grd=0;grd<grade_max-1;++grd) {      // copying to pool
+		for (grd=0;grd<grade_max-1;++grd) {			// copying to pool
 			for (j=0; j<subpools_length[grd]; ++j) {
 				pool[i][place]=subpools[grd][j];
 				place++;
-			}
+			}   
 		}
-		for (grd=0;grd<grade_max-1;++grd) {     // free
+		for (grd=0;grd<grade_max-1;++grd) {			// free
 			free(temp_pools[grd]);
 			free(subpools[grd]);
 		}
@@ -200,10 +227,10 @@ void worker(int len, options output_options)
 
 	gem* gem_array = NULL;
 	if (output_options.chain) {
-		if (len < 2) printf("I could not add chain!\n\n");
+		if (len < 3 || pool_zero!=2) printf("I could not add chain!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
-			gemf = gem_putchain(pool[value-1], pool_length[value-1], &gem_array);
+			gemf = gem_putchain(pool[value-1], pool_length[value-1], &gem_array, 0, 0);
 			printf("Gem with chain added:\n\n");
 			printf("Value:\t%d\n", value);    // made to work well with -u
 			printf("Growth:\t%f\n", log(gem_power(*gemf))/log(value));
@@ -223,14 +250,14 @@ void worker(int len, options output_options)
 	}
 	if (output_options.table) print_table(gems, len);
 	
-	if (output_options.equations) {		// it ruins gems, must be last
+	if (output_options.equations) {   // it ruins gems, must be last
 		printf("Equations:\n");
 		print_equations(gemf);
 		printf("\n");
 	}
 	
-	for (i=0;i<len;++i) free(pool[i]);    // free
-	if (output_options.chain && len > 1) {
+	for (i=0;i<len;++i) free(pool[i]);		// free
+	if (output_options.chain && len > 2 && pool_zero==2) {
 		free(gem_array);
 	}
 }
@@ -239,7 +266,8 @@ int main(int argc, char** argv)
 {
 	int len;
 	char opt;
-	options output_options = (options){0};
+	int pool_zero=2;        // speccing by default
+	options output_options = {};
 	
 	while ((opt=getopt(argc,argv,"hptecidqur"))!=-1) {
 		switch(opt) {
@@ -259,6 +287,9 @@ int main(int argc, char** argv)
 	}
 	if (optind+1==argc) {
 		len = atoi(argv[optind]);
+		char* p=argv[optind];
+		while (*p != '\0') p++;
+		if (*(p-1)=='c') pool_zero=1;
 	}
 	else {
 		printf("Too many arguments:\n");
@@ -273,6 +304,7 @@ int main(int argc, char** argv)
 		printf("Improper gem number\n");
 		return 1;
 	}
-	worker(len, output_options);
+	worker(len, output_options, pool_zero);
 	return 0;
 }
+
