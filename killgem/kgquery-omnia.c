@@ -324,8 +324,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	}
 
 	gem* gem_array = NULL;
-	if (output_options.red) {
-		if (len < 3) printf("I could not add red!\n\n");
+	if (output_options.chain) {
+		if (len < 3) printf("I could not add chain!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
 			int valueA= gem_getvalue_Y(ampf);
@@ -335,8 +335,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			double ampc_resc_coeff = pow((ampfc->crit/gemfc->crit), c);
 			double amp_damage_scaled = damage_ratio * ampd_resc_coeff * ampf->damage;
 			double amp_crit_scaled = crit_ratio * ampc_resc_coeff * ampf->crit;
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], &gem_array, amp_damage_scaled, amp_crit_scaled);
-			printf("Setup with red added:\n\n");
+			gemf = gem_putchain(poolf[value-1], poolf_length[value-1], &gem_array, amp_damage_scaled, amp_crit_scaled);
+			printf("Setup with chain added:\n\n");
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
 			gem_print(gemf);
@@ -351,9 +351,9 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			gem_print_Y(ampfc);
 			if (output_options.debug) printf("Damage rescaling coeff.: \t%f\n", ampd_resc_coeff);
 			if (output_options.debug) printf("Crit rescaling coeff.:   \t%f\n", ampc_resc_coeff);
-			printf("Spec base power with red:\t%#.7g\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
+			printf("Spec base power with chain:\t%#.7g\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
 			double CgP = pow(gem_power(*gemfc), c);
-			printf("Global power w. red at g%d:\t%#.7g\n\n\n", GT, CgP*gem_cfr_power(*gemf, amp_damage_scaled, amp_crit_scaled));
+			printf("Global power w. chain at g%d:\t%#.7g\n\n\n", GT, CgP*gem_cfr_power(*gemf, amp_damage_scaled, amp_crit_scaled));
 		}
 	}
 
@@ -414,7 +414,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	free(poolY_length);
 	free(poolYf);
 	free(cpairs);
-	if (output_options.red && len > 2) {
+	if (output_options.chain && len > 2) {
 		free(gem_array);
 	}
 }

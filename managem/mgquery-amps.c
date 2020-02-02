@@ -159,15 +159,15 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 	}
 
 	gem* gem_array = NULL;
-	if (output_options.red) {
-		if (len < 3) printf("I could not add red!\n\n");
+	if (output_options.chain) {
+		if (len < 3) printf("I could not add chain!\n\n");
 		else {
 			int value = gem_getvalue(gemf);
 			int valueA= gem_getvalue_O(ampf);
 			double NS = value + Namps*valueA;
 			double amp_leech_scaled = leech_ratio * ampf->leech;
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], &gem_array, amp_leech_scaled);
-			printf("Setup with red added:\n\n");
+			gemf = gem_putchain(poolf[value-1], poolf_length[value-1], &gem_array, amp_leech_scaled);
+			printf("Setup with chain added:\n\n");
 			printf("Total value:\t%d\n\n", value+Namps*gem_getvalue_O(ampf));
 			printf("Managem\n");
 			printf("Value:\t%d\n", value);
@@ -175,7 +175,7 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 			printf("Amplifier (x%d)\n", Namps);
 			printf("Value:\t%d\n", gem_getvalue_O(ampf));
 			gem_print_O(ampf);
-			printf("Spec base power w. red:\t%#.7g\n", gem_amp_power(*gemf, *ampf, leech_ratio));
+			printf("Spec base power w. chain:\t%#.7g\n", gem_amp_power(*gemf, *ampf, leech_ratio));
 			double CgP = pow(NS, -growth_comb);
 			printf("Spec coefficient:\t%f\n\n", CgP*gem_cfr_power(*gemf, amp_leech_scaled));
 		}
@@ -212,7 +212,7 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 	for (i=0;i<len;++i) free(poolf[i]);			// free gems compressed
 	for (i=0;i<lena;++i) free(poolO[i]);		// free amps
 	free(bestO);										// free amps compressed
-	if (output_options.red && len > 2) {
+	if (output_options.chain && len > 2) {
 		free(gem_array);
 	}
 }

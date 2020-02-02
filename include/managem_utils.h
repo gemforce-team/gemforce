@@ -222,9 +222,9 @@ void gem_sort_exact (gem* gems, int len)
 	ins_sort_exact (gems, len);      // finish the nearly sorted array
 }
 
-// -----------------
-// Red adder section
-// -----------------
+// -------------------
+// Chain adder section
+// -------------------
 
 inline double gem_cfr_power(gem gem1, double amp_leech_scaled)
 {
@@ -233,8 +233,8 @@ inline double gem_cfr_power(gem gem1, double amp_leech_scaled)
 }
 
 #define EXTRA_PARAMS   , double amp_leech_scaled
-#define RED_INIT_EXPR(ARG) gem_init(ARG, 1, 0, 0)
+#define CHAIN_INIT_EXPR(ARG) gem_init(ARG, 1, 0, 0)
 #define CFR_EXPR(ARG)  gem_cfr_power(ARG, amp_leech_scaled)
-#include "red_adder.h"
+#include "chain_adder.h"
 
 #endif // _MANAGEM_UTILS_H

@@ -151,13 +151,13 @@ void gem_sort (gem* gems, int len)
 	ins_sort (gems, len);		// finish the nearly sorted array
 }
 
-// -----------------
-// Red adder section
-// -----------------
+// -------------------
+// Chain adder section
+// -------------------
 
 #define EXTRA_PARAMS
-#define RED_INIT_EXPR(ARG) gem_init(ARG, 1, 0, 0);
+#define CHAIN_INIT_EXPR(ARG) gem_init(ARG, 1, 0, 0);
 #define CFR_EXPR(ARG)  gem_power(ARG)
-#include "red_adder.h"
+#include "chain_adder.h"
 
 #endif // _CRITG_UTILS_H

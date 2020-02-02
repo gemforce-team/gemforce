@@ -176,9 +176,9 @@ void gem_sort (gem* gems, int len)
 	ins_sort (gems, len);      // finish the nearly sorted array
 }
 
-// -----------------
-// Red adder section
-// -----------------
+// -------------------
+// Chain adder section
+// -------------------
 
 inline double gem_cfr_power(gem gem1, double amp_damage_scaled, double amp_crit_scaled)
 {
@@ -187,8 +187,8 @@ inline double gem_cfr_power(gem gem1, double amp_damage_scaled, double amp_crit_
 }
 
 #define EXTRA_PARAMS   , double amp_damage_scaled, double amp_crit_scaled
-#define RED_INIT_EXPR(ARG) gem_init(ARG, 1, DAMAGE_CHHIT, 0, 0);
+#define CHAIN_INIT_EXPR(ARG) gem_init(ARG, 1, DAMAGE_CHHIT, 0, 0);
 #define CFR_EXPR(ARG)  gem_cfr_power(ARG, amp_damage_scaled, amp_crit_scaled)
-#include "red_adder.h"
+#include "chain_adder.h"
 
 #endif // _KILLGEM_UTILS_H

@@ -88,12 +88,12 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 	}
 
 	gem* gem_array = NULL;
-	if (output_options.red) {
-		if (len < 3 || pool_zero!=2) printf("I could not add red!\n\n");
+	if (output_options.chain) {
+		if (len < 3 || pool_zero!=2) printf("I could not add chain!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
-			gemf = gem_putred(pool[value-1], pool_length[value-1], &gem_array, 0);
-			printf("Gem with red added:\n\n");
+			gemf = gem_putchain(pool[value-1], pool_length[value-1], &gem_array, 0);
+			printf("Gem with chain added:\n\n");
 			printf("Value:\t%d\n", value);    // made to work well with -u
 			printf("Growth:\t%f\n", log(gem_power(*gemf))/log(value));
 			gem_print(gemf);
@@ -122,7 +122,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 	free(pool);    // free
 	free(pool_length);
 	free(gems);
-	if (output_options.red && len > 2 && pool_zero==2) {
+	if (output_options.chain && len > 2 && pool_zero==2) {
 		free(gem_array);
 	}
 }

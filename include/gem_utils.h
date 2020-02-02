@@ -10,7 +10,7 @@ typedef struct Options {
 	unsigned debug:1;
 	unsigned quiet:1;
 	unsigned upto:1;
-	unsigned red:1;
+	unsigned chain:1;
 } options;
 
 /* Macro blobs used for all flag options. Handle with care */
@@ -43,7 +43,7 @@ typedef struct Options {
 		output_options.upto = 1;			\
 		break;								\
 	case 'r':								\
-		output_options.red = 1;				\
+		output_options.chain = 1;			\
 		break;
 
 #include <stdio.h>

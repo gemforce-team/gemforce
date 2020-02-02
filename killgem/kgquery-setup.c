@@ -196,16 +196,16 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	}
 
 	gem* gem_array = NULL;
-	if (output_options.red) {
-		if (len < 3) printf("I could not add red!\n\n");
+	if (output_options.chain) {
+		if (len < 3) printf("I could not add chain!\n\n");
 		else {
 			int value = gem_getvalue(gemf);
 			int valueA= gem_getvalue_Y(ampf);
 			double NS = value + Namps*valueA;
 			double amp_damage_scaled = damage_ratio * ampf->damage;
 			double amp_crit_scaled = crit_ratio * ampf->crit;
-			gemf = gem_putred(poolf[value-1], poolf_length[value-1], &gem_array, amp_damage_scaled, amp_crit_scaled);
-			printf("Setup with red added:\n\n");
+			gemf = gem_putchain(poolf[value-1], poolf_length[value-1], &gem_array, amp_damage_scaled, amp_crit_scaled);
+			printf("Setup with chain added:\n\n");
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
 			gem_print(gemf);
@@ -215,9 +215,9 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			printf("Setup combine\n");
 			printf("Comb:\t%d\n",lenc);
 			gem_print(gemfc);
-			printf("Spec base power with red:\t%#.7g\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
+			printf("Spec base power with chain:\t%#.7g\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));
 			double CgP = pow(NT/NS, bestc_growth);
-			printf("Global power w. red at g%d:\t%#.7g\n\n\n", GT, CgP*gem_cfr_power(*gemf, amp_damage_scaled, amp_crit_scaled));
+			printf("Global power w. chain at g%d:\t%#.7g\n\n\n", GT, CgP*gem_cfr_power(*gemf, amp_damage_scaled, amp_crit_scaled));
 		}
 	}
 
@@ -267,7 +267,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	free(poolY);
 	free(poolY_length);
 	free(poolYf);
-	if (output_options.red && len > 2) {
+	if (output_options.chain && len > 2) {
 		free(gem_array);
 	}
 }

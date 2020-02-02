@@ -9,7 +9,7 @@ typedef struct Gem_O gem;
 
 void worker(int len, options output_options, char* filename)
 {
-	FILE* table=table_init(filename, 1);    // init orange
+	FILE* table=table_init(filename, 1);    // init leech
 	int i;
 	gem** pool=malloc(len*sizeof(gem*));    // if not malloc-ed 690k is the limit
 	int* pool_length=malloc(len*sizeof(int));

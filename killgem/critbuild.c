@@ -9,7 +9,7 @@ typedef struct Gem_Y gem;
 
 void worker(int len, options output_options, char* filename)
 {
-	FILE* table=table_init(filename, 1);		// init yellow
+	FILE* table=table_init(filename, 1);		// init crit
 	int i;
 	int size=1000;
 	gem* pool[len];

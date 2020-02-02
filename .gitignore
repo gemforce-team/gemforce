@@ -1,2 +1,8 @@
+# Compilation results
 bin/
+
+# Tables to test with
 /table_*
+
+# The IDE really need to dirty the working dir
+.settings

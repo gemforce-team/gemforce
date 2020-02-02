@@ -78,13 +78,13 @@ void gem_init(gem *p_gem, int grd, double leech)
 	p_gem->mother=NULL;
 }
 
-// -----------------
-// Red adder section
-// -----------------
+// -------------------
+// Chain adder section
+// -------------------
 
 #define EXTRA_PARAMS
-#define RED_INIT_EXPR(ARG) gem_init(ARG, 1, 0);
+#define CHAIN_INIT_EXPR(ARG) gem_init(ARG, 1, 0);
 #define CFR_EXPR(ARG)  gem_power(ARG)
-#include "red_adder.h"
+#include "chain_adder.h"
 
 #endif // _LEECHG_UTILS_H
