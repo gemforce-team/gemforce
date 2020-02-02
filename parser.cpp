@@ -194,15 +194,15 @@ void print_parens_compressed(gem* gemf)
 	}
 }
 
-void fill_array(gem* gemf, gem** p_gems, int* uniques)
+void fill_uniques_array(gem* gemf, gem** p_gems, int* uniques)
 {
-	if (gemf->father != NULL) {
-		fill_array(gemf->father, p_gems, uniques);
-		fill_array(gemf->mother, p_gems, uniques);
-	}
-	
 	for (int i=0; i<*uniques; ++i)
 		if (gemf==p_gems[i]) return;
+	
+	if (gemf->father != nullptr) {
+		fill_uniques_array(gemf->father, p_gems, uniques);
+		fill_uniques_array(gemf->mother, p_gems, uniques);
+	}
 	
 	p_gems[*uniques]=gemf;
 	(*uniques)++;
@@ -215,7 +215,7 @@ void print_equations(gem* gemf)
 	int len=2*value-1;
 	gem** p_gems = (gem**)malloc(len*sizeof(gem*));		// stores all the gem pointers
 	int uniques = 0;
-	fill_array(gemf, p_gems, &uniques);			// this array contains marked uniques only and is long `uniques`
+	fill_uniques_array(gemf, p_gems, &uniques);			// this array contains uniques only and is long `uniques`
 	
 	// mark
 	int orig_grades[uniques];		// stores all the original gem grades
@@ -461,7 +461,7 @@ int main(int argc, char** argv)
 			} break;
 			case 'a':
 				parens_amps = ieeePreParser(optarg);
-			break;
+				break;
 			//TAN_OPTIONS_BLOCK
 			case 'T':
 				TC=atoi(optarg);

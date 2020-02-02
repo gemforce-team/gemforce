@@ -128,15 +128,15 @@ void print_parens_compressed_O(gemO* gemf)
 	}
 }
 
-void fill_array_O(gemO* gemf, gemO** p_gems, int* uniques)
+void fill_uniques_array_O(gemO* gemf, gemO** p_gems, int* uniques)
 {
-	if (gemf->father != NULL) {
-		fill_array_O(gemf->father, p_gems, uniques);
-		fill_array_O(gemf->mother, p_gems, uniques);
-	}
-	
 	for (int i=0; i<*uniques; ++i)
 		if (gemf==p_gems[i]) return;
+	
+	if (gemf->father != NULL) {
+		fill_uniques_array_O(gemf->father, p_gems, uniques);
+		fill_uniques_array_O(gemf->mother, p_gems, uniques);
+	}
 	
 	p_gems[*uniques]=gemf;
 	(*uniques)++;
@@ -153,7 +153,7 @@ void print_equations_O(gemO* gemf)
 	int len=2*value-1;
 	gemO** p_gems = malloc(len*sizeof(gemO*));		// stores all the gem pointers
 	int uniques = 0;
-	fill_array_O(gemf, p_gems, &uniques);			// this array contains marked uniques only and is long `uniques`
+	fill_uniques_array_O(gemf, p_gems, &uniques);	// this array contains uniques only and is long `uniques`
 	
 	// mark
 	int orig_grades[uniques];		// stores all the original gem grades

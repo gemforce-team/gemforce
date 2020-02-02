@@ -196,15 +196,15 @@ void print_parens_compressed_Y(gemY* gemf)
 	}
 }
 
-void fill_array_Y(gemY* gemf, gemY** p_gems, int* uniques)
+void fill_uniques_array_Y(gemY* gemf, gemY** p_gems, int* uniques)
 {
-	if (gemf->father != NULL) {
-		fill_array_Y(gemf->father, p_gems, uniques);
-		fill_array_Y(gemf->mother, p_gems, uniques);
-	}
-	
 	for (int i=0; i<*uniques; ++i)
 		if (gemf==p_gems[i]) return;
+	
+	if (gemf->father != NULL) {
+		fill_uniques_array_Y(gemf->father, p_gems, uniques);
+		fill_uniques_array_Y(gemf->mother, p_gems, uniques);
+	}
 	
 	p_gems[*uniques]=gemf;
 	(*uniques)++;
@@ -221,7 +221,7 @@ void print_equations_Y(gemY* gemf)
 	int len=2*value-1;
 	gemY** p_gems = malloc(len*sizeof(gemY*));		// stores all the gem pointers
 	int uniques = 0;
-	fill_array_Y(gemf, p_gems, &uniques);			// this array contains marked uniques only and is long `uniques`
+	fill_uniques_array_Y(gemf, p_gems, &uniques);	// this array contains uniques only and is long `uniques`
 	
 	// mark
 	int orig_grades[uniques];		// stores all the original gem grades
