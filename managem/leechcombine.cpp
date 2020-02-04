@@ -1,20 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-typedef struct Gem_O gem;
-#include "leechg_utils.h"
 
-void gem_print(gem *p_gem) {
-	printf("Grade:\t%d\nLeech:\t%f\n\n", p_gem->grade, p_gem->leech);
-}
-
-char gem_color(gem* p_gem) {
-	if (p_gem->leech==0) return COLOR_CHHIT;
-	else return COLOR_LEECH;
-}
-
+#include "leech_utils.h"
 #include "print_utils.h"
+#include "options_utils.h"
+
+using gem = gem_O;
 
 void worker(int len, options output_options)
 {
@@ -49,7 +42,7 @@ void worker(int len, options output_options)
 						gem temp;
 						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
 						int grd=temp.grade-2;
-						if (gem_better(temp, temp_array[grd])) {
+						if (gem_more_powerful(temp, temp_array[grd])) {
 							temp_array[grd]=temp;
 						}
 					}
@@ -70,7 +63,7 @@ void worker(int len, options output_options)
 		}
 		
 		gems[i]=pool[i][0];
-		for (j=1;j<pool_length[i];++j) if (gem_better(pool[i][j],gems[i])) {
+		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
 		

@@ -1,11 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
+
 #include "interval_tree.h"
-typedef struct Gem_YB gem;
+#include "gem_sort.h"
 #include "killgem_utils.h"
 #include "print_utils.h"
+#include "options_utils.h"
+
+using gem = gem_YB;
 
 void worker(int len, options output_options, int pool_zero)
 {
@@ -71,26 +75,26 @@ void worker(int len, options output_options, int pool_zero)
 							float maxcrit=0;				// this will help me create the minimum tree
 							for (l=0; l<size; ++l) {					// copy new gems
 								temp_array[index]=temp_pools[grd][l];
-								maxcrit=max(maxcrit, (temp_array+index)->crit);
+								maxcrit=std::max(maxcrit, (temp_array+index)->crit);
 								index++;
 							}
 							temp_index[grd]=0;			// temp index reset
 							for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
 								temp_array[index]=subpools[grd][l];
-								maxcrit=max(maxcrit, (temp_array+index)->crit);
+								maxcrit=std::max(maxcrit, (temp_array+index)->crit);
 								index++;
 							}
 							free(subpools[grd]);		// free
 							
-							gem_sort(temp_array,length);						// work starts
+							gem_sort(temp_array,length, gem_less_equal<gem>);					// work starts
 							int broken=0;
 							int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 							int tree_length= 1 << (int)ceil(log2(crit_cells));					// this is pow(2, ceil()) bitwise for speed improvement
-							int* tree = (int*)malloc((tree_length+crit_cells+1)*sizeof(int));		// memory improvement, 2* is not needed
+							int* tree = (int*)malloc((tree_length+crit_cells+1)*sizeof(int));	// memory improvement, 2* is not needed
 							for (l=0; l<tree_length+crit_cells+1; ++l) tree[l]=-1;			// init also tree[0], it's faster
-							for (l=length-1;l>=0;--l) {												// start from large z
+							for (l=length-1;l>=0;--l) {											// start from large z
 								gem* p_gem=temp_array+l;
-								int index=(int)(p_gem->crit*ACC);									// find its place in x
+								int index=(int)(p_gem->crit*ACC);								// find its place in x
 								if (tree_check_after(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR))) {		// look at y
 									tree_add_element(tree, tree_length, index, (int)(p_gem->bbound*ACC_TR));
 								}
@@ -109,7 +113,7 @@ void worker(int len, options output_options, int pool_zero)
 								if (temp_array[l].grade!=0) {
 									subpools[grd][index]=temp_array[l];
 									index++;
-								}   
+								}
 							}
 							free(temp_array);			// free
 						}												// rebuilt subpool[grd], work restarts
@@ -126,17 +130,17 @@ void worker(int len, options output_options, int pool_zero)
 				float maxcrit=0;				// this will help me create the minimum tree
 				for (l=0; l<temp_index[grd]; ++l) {					// copy new gems
 					temp_array[index]=temp_pools[grd][l];
-					maxcrit=max(maxcrit, (temp_array+index)->crit);
+					maxcrit=std::max(maxcrit, (temp_array+index)->crit);
 					index++;
 				}
 				for (l=0; l<subpools_length[grd]; ++l) {		// copy old gems
 					temp_array[index]=subpools[grd][l];
-					maxcrit=max(maxcrit, (temp_array+index)->crit);
+					maxcrit=std::max(maxcrit, (temp_array+index)->crit);
 					index++;
 				}
 				free(subpools[grd]);		// free
 				
-				gem_sort(temp_array,length);								// work starts
+				gem_sort(temp_array, length, gem_less_equal<gem>);						// work starts
 				int broken=0;
 				int crit_cells=(int)(maxcrit*ACC)+1;					// this pool will be big from the beginning, but we avoid binary search
 				int tree_length= 1 << (int)ceil(log2(crit_cells));					// this is pow(2, ceil()) bitwise for speed improvement

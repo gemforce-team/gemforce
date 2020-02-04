@@ -4,8 +4,8 @@
 /* GemForce Object Notation */
 /* Remember to redeclare pool_from_table in the amplifier_utils */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 static const char base64encode[64] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<',  '=', '>', '?',
                                       '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',  'M', 'N', 'O',
@@ -23,52 +23,50 @@ void line_init(FILE* table, int pool_zero)
 		case 1:       // combines
 			fprintf(table, "1\n");
 			fprintf(table, "-1 0 0\n");
-		break;
+			break;
 		case 2:       // specs
 			fprintf(table, "2\n");
 			fprintf(table, "-1 0 0\n");
 			fprintf(table, "-1 0 1\n");
-		break;
+			break;
 		default:
-		break;
+			break;
 	}
 	fprintf(table, "0\n\n");
 }
 
 FILE* table_init(char* filename, int pool_zero)
 {
-	FILE* table;
-	table=fopen(filename,"rb");         // binary to check size
-	if(table==NULL) {
-		table=fopen(filename,"w");       // creation
+	FILE* table = fopen(filename, "rb"); // binary to check size
+	if (table == NULL) {
+		table = fopen(filename, "w");    // creation
 		line_init(table, pool_zero);     // printed g1
 	}
 	else {
 		fseek(table, 0, SEEK_END);
-		if (ftell(table)==0) {
-			table=freopen(filename,"w", table);   // init
-			line_init(table, pool_zero);          // printed g1
+		if (ftell(table) == 0) {
+			table = freopen(filename, "w", table); // init
+			line_init(table, pool_zero);           // printed g1
 		}
-	}                                           // we now have the file with at least g1
-	table=freopen(filename,"r", table);         // read
+	}                                      // we now have the file with at least g1
+	table = freopen(filename, "r", table); // read
 	return table;
 }
 
 FILE* file_check(char* filename)
 {
-	FILE* table;
-	table=fopen(filename,"rb");         // binary to check size
-	if(table==NULL) {
-		printf("Unexistant table: %s\n",filename);
+	FILE* table = fopen(filename, "rb");         // binary to check size
+	if (table == NULL) {
+		printf("Unexistant table: %s\n", filename);
 		return NULL;
 	}
 	fseek(table, 0, SEEK_END);
-	if (ftell(table)==0) {
+	if (ftell(table) == 0) {
 		fclose(table);
-		printf("Empty table: %s\n",filename);
+		printf("Empty table: %s\n", filename);
 		return NULL;
 	}
-	table=freopen(filename,"r", table);    // read
+	table = freopen(filename, "r", table);    // read
 	return table;
 }
 

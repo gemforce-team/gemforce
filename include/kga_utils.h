@@ -1,14 +1,16 @@
 #ifndef _KGA_UTILS_H
 #define _KGA_UTILS_H
 
-#include <stdio.h>
+#include <cstdio>
 
-double gem_amp_power(gem gem1, gemY amp1, double damage_ratio, double crit_ratio)
+#include "gem_sort.h"
+
+inline double gem_amp_power(gem_YB gem1, gem_Y amp1, double damage_ratio, double crit_ratio)
 {
 	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+crit_ratio*amp1.crit)*gem1.bbound;
 }
 
-void print_omnia_table(gemY* amps, double* powers, int len)
+void print_omnia_table(gem_Y* amps, double* powers, int len)
 {
 	printf("Killgem\tAmps\tPower\n");
 	for (int i=0; i<len; i++)
@@ -37,7 +39,7 @@ void print_omnia_table(gemY* amps, double* powers, int len)
 		for (j=0; j<poolY_length[i]; ++j) {												\
 			temp_pool[j]=poolY[i][j];													\
 		}																				\
-		gem_sort_Y(temp_pool,poolY_length[i]);											\
+		gem_sort(temp_pool, poolY_length[i], AS_LAMBDA(gem_less_equal));				\
 		int broken=0;																	\
 		float lim_crit=-1;																\
 		for (j=poolY_length[i]-1;j>=0;--j) {											\
@@ -57,42 +59,50 @@ void print_omnia_table(gemY* amps, double* powers, int len)
 			}																			\
 		}																				\
 		free(temp_pool);																\
-		if (output_options.debug)												\
+		if (output_options.debug)														\
 			printf("Amp value %d compressed pool size:\t%d\n", i+1, poolYf_length[i]);	\
 	}
 
 /* Exact macro blobs used for compressions in various files. Handle with more care */
 
 struct gemP {
-	int   grade;
-	float damage;
-	float crit;
-	float bbound;
-	gem*  father;
-	gem*  mother;
-	int   place;
+	int     grade;
+	float   damage;
+	float   crit;
+	float   bbound;
+	gem_YB* father;
+	gem_YB* mother;
+	int     place;
 };
 
-#include "kgexact_utils.h"
-
-inline gemP gem2gemP(gem g)
+inline gemP gem2gemP(gem_YB g)
 {
-	return (gemP){g.grade, g.damage, g.crit, g.bbound, g.father, g.mother, 0};
+	return {g.grade, g.damage, g.crit, g.bbound, g.father, g.mother, 0};
 }
 
-inline gem gemP2gem(gemP g)
+inline gem_YB gemP2gem(gemP g)
 {
-	return (gem){g.grade, g.damage, g.crit, g.bbound, g.father, g.mother};
+	return {g.grade, g.damage, g.crit, g.bbound, g.father, g.mother};
+}
+
+inline double gem_bbd(gemP gem1)
+{
+	return gem1.bbound*gem1.bbound*gem1.damage;
+}
+
+inline double gem_bbc(gemP gem1)
+{
+	return gem1.bbound*gem1.bbound*gem1.crit;
 }
 
 #define KGSPEC_COMPRESSION																				\
 	for (i=0;i<len;++i) {																				\
 		int length = pool_length[i];																	\
-		gemP* temp_array = (gemP*)malloc(length*sizeof(gemP));													\
+		gemP* temp_array = (gemP*)malloc(length*sizeof(gemP));											\
 		for (int j=0; j<length; ++j) {																	\
 			temp_array[j]=gem2gemP(pool[i][j]);															\
 		}																								\
-		gem_sort_crit(temp_array,length);						/* work starts */						\
+		gem_sort(temp_array, length, gem_less_crit<gemP>);		/* work starts */						\
 		float lastcrit=-1;																				\
 		int tree_cell=0;																				\
 		for (int l=0; l<length; ++l) {																	\
@@ -102,15 +112,15 @@ inline gem gemP2gem(gemP g)
 				lastcrit = temp_array[l].crit;															\
 			}																							\
 		}																								\
-		gem_sort_exact(temp_array,length);																\
+		gem_sort(temp_array, length, gem_less_eq_exact<gemP>);											\
 		int broken=0;																					\
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */	\
 		float* tree = (float*)malloc((tree_length*2)*sizeof(float));	/* delete gems with bb=0 */		\
 		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* init also tree[0], it's faster */	\
 		for (int l=length-1;l>=0;--l) {							/* start from large dmg */				\
 			gemP* p_gem=temp_array+l;																	\
-			if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {					\
-				ftree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);						\
+			if (tree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {						\
+				tree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);						\
 			}																							\
 			else {																						\
 				p_gem->grade=0;																			\
@@ -124,8 +134,8 @@ inline gem gemP2gem(gemP g)
 			gemP* p_gem=temp_array+l;																	\
 			if (p_gem->grade==0) continue;																\
 			int place = tree_length -1 - p_gem->place;			/* reverse crit order */				\
-			if (dtree_check_after(dtree, tree_length, place, gemP_power(*p_gem))) {						\
-				dtree_add_element(dtree, tree_length, place, gemP_power(*p_gem));						\
+			if (tree_check_after(dtree, tree_length, place, gem_power(*p_gem))) {						\
+				tree_add_element(dtree, tree_length, place, gem_power(*p_gem));							\
 			}																							\
 			else {																						\
 				p_gem->grade=0;																			\
@@ -137,8 +147,8 @@ inline gem gemP2gem(gemP g)
 			gemP* p_gem=temp_array+l;																	\
 			if (p_gem->grade==0) continue;																\
 			int place = p_gem->place;							/* regular crit order */				\
-			if (dtree_check_after(dtree, tree_length, place, gemP_bbd(*p_gem))) {						\
-				dtree_add_element(dtree, tree_length, place, gemP_bbd(*p_gem));							\
+			if (tree_check_after(dtree, tree_length, place, gem_bbd(*p_gem))) {							\
+				tree_add_element(dtree, tree_length, place, gem_bbd(*p_gem));							\
 			}																							\
 			else {																						\
 				p_gem->grade=0;																			\
@@ -150,8 +160,8 @@ inline gem gemP2gem(gemP g)
 			gemP* p_gem=temp_array+l;																	\
 			if (p_gem->grade==0) continue;																\
 			int place = tree_length -1 - p_gem->place;			/* reverse crit order */				\
-			if (dtree_check_after(dtree, tree_length, place, gemP_bbc(*p_gem))) {						\
-				dtree_add_element(dtree, tree_length, place, gemP_bbc(*p_gem));							\
+			if (tree_check_after(dtree, tree_length, place, gem_bbc(*p_gem))) {							\
+				tree_add_element(dtree, tree_length, place, gem_bbc(*p_gem));							\
 			}																							\
 			else {																						\
 				p_gem->grade=0;																			\
@@ -180,7 +190,7 @@ inline gem gemP2gem(gemP g)
 		for (int j=0; j<length; ++j) {																	\
 			temp_array[j]=gem2gemP(poolc[lenc-1][j]);													\
 		}																								\
-		gem_sort_crit(temp_array,length);						/* work starts */						\
+		gem_sort(temp_array, length, gem_less_crit<gemP>);		/* work starts */						\
 		float lastcrit=-1;																				\
 		int tree_cell=0;																				\
 		for (int l=0; l<length; ++l) {																	\
@@ -190,15 +200,15 @@ inline gem gemP2gem(gemP g)
 				lastcrit = temp_array[l].crit;															\
 			}																							\
 		}																								\
-		gem_sort_exact(temp_array,length);																\
+		gem_sort(temp_array, length, gem_less_eq_exact<gemP>);											\
 		int broken=0;																					\
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */	\
 		float* tree = (float*)malloc((tree_length*2)*sizeof(float));									\
 		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* combines have no gem with bb=0 */	\
 		for (int l=length-1;l>=0;--l) {							/* start from large dmg */				\
 			gemP* p_gem=temp_array+l;																	\
-			if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {					\
-				ftree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);						\
+			if (tree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {						\
+				tree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);						\
 			}																							\
 			else {																						\
 				p_gem->grade=0;																			\
@@ -212,8 +222,8 @@ inline gem gemP2gem(gemP g)
 			gemP* p_gem=temp_array+l;																	\
 			if (p_gem->grade==0) continue;																\
 			int place = tree_length -1 - p_gem->place;			/* reverse crit order */				\
-			if (dtree_check_after(dtree, tree_length, place, gemP_power(*p_gem))) {						\
-				dtree_add_element(dtree, tree_length, place, gemP_power(*p_gem));						\
+			if (tree_check_after(dtree, tree_length, place, gem_power(*p_gem))) {						\
+				tree_add_element(dtree, tree_length, place, gem_power(*p_gem));							\
 			}																							\
 			else {																						\
 				p_gem->grade=0;																			\
@@ -225,8 +235,8 @@ inline gem gemP2gem(gemP g)
 			gemP* p_gem=temp_array+l;																	\
 			if (p_gem->grade==0) continue;																\
 			int place = p_gem->place;							/* regular crit order */				\
-			if (dtree_check_after(dtree, tree_length, place, gemP_bbd(*p_gem))) {						\
-				dtree_add_element(dtree, tree_length, place, gemP_bbd(*p_gem));							\
+			if (tree_check_after(dtree, tree_length, place, gem_bbd(*p_gem))) {							\
+				tree_add_element(dtree, tree_length, place, gem_bbd(*p_gem));							\
 			}																							\
 			else {																						\
 				p_gem->grade=0;																			\
@@ -238,8 +248,8 @@ inline gem gemP2gem(gemP g)
 			gemP* p_gem=temp_array+l;																	\
 			if (p_gem->grade==0) continue;																\
 			int place = tree_length -1 - p_gem->place;			/* reverse crit order */				\
-			if (dtree_check_after(dtree, tree_length, place, gemP_bbc(*p_gem))) {						\
-				dtree_add_element(dtree, tree_length, place, gemP_bbc(*p_gem));							\
+			if (tree_check_after(dtree, tree_length, place, gem_bbc(*p_gem))) {							\
+				tree_add_element(dtree, tree_length, place, gem_bbc(*p_gem));							\
 			}																							\
 			else {																						\
 				p_gem->grade=0;																			\

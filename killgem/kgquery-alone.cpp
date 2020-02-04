@@ -1,14 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-#include <string.h>
+#include <cstring>
+
 #include "interval_tree.h"
-typedef struct Gem_YB gem;
 #include "killgem_utils.h"
 #include "query_utils.h"
 #include "gfon.h"
 #include "print_utils.h"
+#include "options_utils.h"
+
+using gem = gem_YB;
 
 void worker(int len, options output_options, int pool_zero, char* filename)
 {

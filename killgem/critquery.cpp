@@ -1,24 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-#include <string.h>
-typedef struct Gem_Y gem;
-#include "critg_utils.h"
+#include <cstring>
+
+#include "crit_utils.h"
 #include "query_utils.h"
 #include "gfon.h"
-
-void gem_print(gem *p_gem) {
-	printf("Grade:\t%d\nDamage:\t%f\nCrit:\t%f\nPower:\t%f\n\n",
-		p_gem->grade, p_gem->damage, p_gem->crit, p_gem->damage*p_gem->crit);
-}
-
-char gem_color(gem* p_gem) {
-	if (p_gem->crit==0) return COLOR_CHHIT;
-	else return COLOR_CRIT;
-}
-
 #include "print_utils.h"
+#include "options_utils.h"
+
+using gem = gem_Y;
 
 void worker(int len, options output_options, char* filename)
 {

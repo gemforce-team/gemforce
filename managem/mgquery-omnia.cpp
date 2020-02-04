@@ -1,16 +1,19 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-#include <string.h>
-typedef struct Gem_OB gem;		// the strange order is so that managem_utils knows which gem type are we defining as "gem"
+#include <cstring>
+
 #include "managem_utils.h"
-typedef struct Gem_O gemO;
 #include "leech_utils.h"
 #include "mga_utils.h"
 #include "query_utils.h"
 #include "gfon.h"
 #include "print_utils.h"
+#include "options_utils.h"
+
+using gem = gem_OB;
+using gemO = gem_O;
 
 void worker(int len, int lenc, options output_options, char* filename, char* filenamec, char* filenameA, int TC, int As, int GT, int Namps)
 {

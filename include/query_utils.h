@@ -3,8 +3,8 @@
 
 /* Query utils (table file selection, filename handling) */
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 void table_selection2(char* input, char* filename, char* filenameA)
 {
@@ -31,14 +31,15 @@ void table_selection3(char* input, char* filename, char* filenamec, char* filena
 	strcpy(filenameA, q+1);
 }
 
-int file_exists (const char* name)
+bool file_exists (const char* name)
 {
 	FILE* file;
 	if ((file = fopen(name, "r"))) {
 		fclose(file);
-		return 1;
+		return true;
 	}
-	else return 0;
+	else
+		return false;
 }
 
 void file_selection(char* filename, const char* table_name)

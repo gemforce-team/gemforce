@@ -1,11 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-#include <string.h>
-typedef struct Gem_O gem;
-#include "leechg_utils.h"
+#include <cstring>
+
+#include "leech_utils.h"
 #include "gfon.h"
+#include "options_utils.h"
+
+using gem = gem_O;
 
 void worker(int len, options output_options, char* filename)
 {
@@ -48,7 +51,7 @@ void worker(int len, options output_options, char* filename)
 						gem temp;
 						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
 						int grd=temp.grade-2;
-						if (gem_better(temp, temp_array[grd])) {
+						if (gem_more_powerful(temp, temp_array[grd])) {
 							temp_array[grd]=temp;
 						}
 					}

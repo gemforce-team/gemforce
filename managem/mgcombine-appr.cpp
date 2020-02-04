@@ -1,10 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-typedef struct Gem_OB gem;    // the strange order is so that managem_utils knows which gem type are we defining as "gem"
+
 #include "managem_utils.h"
+#include "gem_sort.h"
 #include "print_utils.h"
+#include "options_utils.h"
+
+using gem = gem_OB;
 
 void worker(int len, options output_options, int pool_zero)
 {
@@ -74,7 +78,7 @@ void worker(int len, options output_options, int pool_zero)
 								index++;
 							}
 							free(subpools[grd]);          // free
-							gem_sort(temp_array,length);                  // work starts
+							gem_sort(temp_array, length, gem_less_equal); // work starts
 	
 							int broken=0;
 							float lim_bbound=-1;
@@ -117,7 +121,7 @@ void worker(int len, options output_options, int pool_zero)
 					index++;
 				}
 				free(subpools[grd]);    // free
-				gem_sort(temp_array,length);                    // work starts
+				gem_sort(temp_array, length, gem_less_equal);   // work starts
 				int broken=0;
 				float lim_bbound=-1;
 				for (l=length-1;l>=0;--l) {

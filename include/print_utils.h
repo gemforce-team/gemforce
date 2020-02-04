@@ -1,10 +1,10 @@
 #ifndef _PRINT_UTILS_H
 #define _PRINT_UTILS_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
 #include "gem_utils.h"
 
 template<class gem>
@@ -22,11 +22,11 @@ void print_parens(gem* gemf)
 }
 
 template<class gem>
-int monocolor_ancestors(gem* gemf)
+bool monocolor_ancestors(gem* gemf)
 {
-	if (gemf->father==NULL) return 1;
-	else if (gem_color(gemf->father)!=gem_color(gemf->mother)) return 0;
-	else return monocolor_ancestors(gemf->mother) & monocolor_ancestors(gemf->father);
+	if (gemf->father==NULL) return true;
+	else if (gem_color(gemf->father)!=gem_color(gemf->mother)) return false;
+	else return monocolor_ancestors(gemf->mother) && monocolor_ancestors(gemf->father);
 }
 
 template<class gem>
@@ -65,12 +65,12 @@ template<class gem>
 void print_equations(gem* gemf)
 {
 	// fill
-	int value=gem_getvalue(gemf);
-	int len=2*value-1;
-	gem** p_gems = (gem**)malloc(len*sizeof(gem*));		// stores all the gem pointers
+	int value = gem_getvalue(gemf);
+	int len = 2 * value - 1;
+	gem** p_gems = (gem**)malloc(len * sizeof(gem*));	// stores all the gem pointers
 	int uniques = 0;
 	fill_uniques_array(gemf, p_gems, &uniques);			// this array contains uniques only and is long `uniques`
-	
+
 	// mark
 	int orig_grades[uniques];		// stores all the original gem grades
 	for (int i = 0; i < uniques; i++) {
@@ -78,7 +78,7 @@ void print_equations(gem* gemf)
 		orig_grades[i] = p_gem->grade;
 		p_gem->grade = i;
 	}
-	
+
 	// print
 	for (int i = 0; i < uniques; i++) {
 		gem* p_gem = p_gems[i];
@@ -87,7 +87,7 @@ void print_equations(gem* gemf)
 		else
 			printf("(val = %d)\t%2d = %2d + %2d\n", gem_getvalue(p_gem), p_gem->grade, p_gem->mother->grade, p_gem->father->grade);
 	}
-	
+
 	// clean
 	for (int i = 0; i < uniques; i++) {
 		p_gems[i]->grade = orig_grades[i];
@@ -120,8 +120,7 @@ void print_table(gem* gems, int len)
 {
 	printf("# Gems\tPower\t\tGrowth\n");
 	printf("1\t%f\t%f\n", gem_power(gems[0]), log(gem_power(gems[0])));
-	int i;
-	for (i=1; i<len; i++)
+	for (int i=1; i<len; i++)
 		printf("%d\t%f\t%f\n", i+1, gem_power(gems[i]), log(gem_power(gems[i]))/log(i+1));
 	printf("\n");
 }

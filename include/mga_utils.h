@@ -1,14 +1,16 @@
 #ifndef _MGA_UTILS_H
 #define _MGA_UTILS_H
 
-#include <stdio.h>
+#include <cstdio>
 
-double gem_amp_power(gem gem1, gemO amp1, double leech_ratio)
+#include "gem_sort.h"
+
+inline double gem_amp_power(gem_OB gem1, gem_O amp1, double leech_ratio)
 {
 	return gem1.bbound*(gem1.leech+leech_ratio*amp1.leech);
 }
 
-void print_omnia_table(gemO* amps, double* powers, int len)
+void print_omnia_table(gem_O* amps, double* powers, int len)
 {
 	printf("Managem\tAmps\tPower\n");
 	for (int i=0; i<len; i++)
@@ -37,7 +39,7 @@ void print_omnia_table(gemO* amps, double* powers, int len)
 		for (j=0; j<pool_length[i]; ++j) {															\
 			temp_pool[j]=pool[i][j];																\
 		}																							\
-		gem_sort_exact(temp_pool,pool_length[i]);													\
+		gem_sort(temp_pool,pool_length[i], gem_less_eq_exact);										\
 		int broken=0;																				\
 		float lim_bbound=0;						/* delete gems with bb=0 */							\
 		for (j=pool_length[i]-1;j>=0;--j) {															\
@@ -73,7 +75,7 @@ void print_omnia_table(gemO* amps, double* powers, int len)
 
 #define MGCOMB_COMPRESSION																			\
 	{																								\
-		gem_sort_exact(poolc[lenc-1],poolc_length[lenc-1]);											\
+		gem_sort(poolc[lenc-1],poolc_length[lenc-1], gem_less_eq_exact);							\
 		int broken=0;																				\
 		float lim_bbound=0;				/* combines have no gem with bb=0 */						\
 		for (i=poolc_length[lenc-1]-1;i>=0;--i) {													\
@@ -104,14 +106,14 @@ void print_omnia_table(gemO* amps, double* powers, int len)
 		}																							\
 	}
 
-#define AMPS_COMPRESSION								\
-	for (i=0; i<lena; ++i) {							\
-		bestO[i] = {};								\
-		for (int j=0; j<poolO_length[i]; ++j) {			\
-			if (gem_better(poolO[i][j], bestO[i])) {	\
-				bestO[i]=poolO[i][j];					\
-			}											\
-		}												\
+#define AMPS_COMPRESSION									\
+	for (i=0; i<lena; ++i) {								\
+		bestO[i] = {};										\
+		for (int j=0; j<poolO_length[i]; ++j) {				\
+			if (gem_more_powerful(poolO[i][j], bestO[i])) {	\
+				bestO[i]=poolO[i][j];						\
+			}												\
+		}													\
 	}
 
 

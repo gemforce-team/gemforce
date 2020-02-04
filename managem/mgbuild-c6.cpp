@@ -1,13 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-#include <string.h>
-typedef struct Gem_OB gem;
+#include <cstring>
+
 #include "managem_utils.h"
 #include "gfon.h"
+#include "options_utils.h"
 
-const int nchecks=6;
+using gem = gem_OB;
+
+constexpr int nchecks=6;
 
 inline double gem_rk13(gem gem1)
 {

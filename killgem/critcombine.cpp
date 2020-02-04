@@ -1,21 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-typedef struct Gem_Y gem;
-#include "critg_utils.h"
 
-void gem_print(gem *p_gem) {
-	printf("Grade:\t%d\nDamage:\t%f\nCrit:\t%f\nPower:\t%f\n\n",
-		p_gem->grade, p_gem->damage, p_gem->crit, p_gem->damage*p_gem->crit);
-}
-
-char gem_color(gem* p_gem) {
-	if (p_gem->crit==0) return COLOR_CHHIT;
-	else return COLOR_CRIT;
-}
-
+#include "crit_utils.h"
+#include "gem_sort.h"
 #include "print_utils.h"
+#include "options_utils.h"
+
+using gem = gem_Y;
 
 void worker(int len, options output_options)
 {
@@ -75,7 +68,7 @@ void worker(int len, options output_options)
 								index++;
 							}
 							free(subpools[grd]);		// free
-							gem_sort(temp_array,length);							// work starts
+							gem_sort(temp_array, length, gem_less_equal);	// work starts
 	
 							int broken=0;
 							float lim_crit=-1;
@@ -118,7 +111,7 @@ void worker(int len, options output_options)
 					index++;
 				}
 				free(subpools[grd]);		// free
-				gem_sort(temp_array,length);							// work starts
+				gem_sort(temp_array, length, gem_less_equal);	// work starts
 				int broken=0;
 				float lim_crit=-1;
 				for (l=length-1;l>=0;--l) {

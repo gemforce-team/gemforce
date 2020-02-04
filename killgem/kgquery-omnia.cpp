@@ -1,18 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-#include <string.h>
+#include <cstring>
+
 #include "interval_tree.h"
-typedef struct Gem_YB gem;
 #include "killgem_utils.h"
-typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 #include "kga_utils.h"
 #include "cpair.h"
 #include "query_utils.h"
 #include "gfon.h"
 #include "print_utils.h"
+#include "options_utils.h"
+
+using gem = gem_YB;
+using gemY = gem_Y;
 
 void worker(int len, int lenc, options output_options, char* filename, char* filenamec, char* filenameA, int TC, int As, int GT, int Namps)
 {
@@ -107,7 +110,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 				temp_array[index++] = (cpair){power, rdmg, rcrit, poolcf+l, poolYc+m, 0};
 			}
 		}
-		cpair_sort_rcrit(temp_array,length);				/* work starts */
+		gem_sort(temp_array, length, cpair_less_rcrit);			/* work starts */
 		double lastrcrit=-1;
 		int tree_cell=0;
 		for (int l=0; l<length; ++l) {
@@ -117,15 +120,15 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 				lastrcrit = temp_array[l].rcrit;
 			}
 		}
-		cpair_sort_xyz(temp_array,length);
+		gem_sort(temp_array, length, cpair_less_xyz);
 		int broken=0;
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */
 		double* tree = (double*)malloc((tree_length*2)*sizeof(double));
 		for (int l=0; l<tree_length*2; ++l) tree[l]=0;			/* init also tree[0], it's faster */
 		for (int l=length-1; l>=0; --l) {						/* start from large rdmg */
 			cpair* p_cpair=temp_array+l;
-			if (dtree_check_after(tree, tree_length, p_cpair->place, p_cpair->power)) {
-				dtree_add_element(tree, tree_length, p_cpair->place, p_cpair->power);
+			if (tree_check_after(tree, tree_length, p_cpair->place, p_cpair->power)) {
+				tree_add_element(tree, tree_length, p_cpair->place, p_cpair->power);
 			}
 			else {
 				p_cpair->combg=NULL;
@@ -137,8 +140,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			cpair* p_cpair=temp_array+l;
 			if (p_cpair->combg==NULL) continue;
 			int place = tree_length -1 - p_cpair->place;		/* reverse crit order */
-			if (dtree_check_after(tree, tree_length, place, cpair_BgDaCa(*p_cpair))) {
-				dtree_add_element(tree, tree_length, place, cpair_BgDaCa(*p_cpair));
+			if (tree_check_after(tree, tree_length, place, cpair_BgDaCa(*p_cpair))) {
+				tree_add_element(tree, tree_length, place, cpair_BgDaCa(*p_cpair));
 			}
 			else {
 				p_cpair->combg=NULL;
@@ -150,8 +153,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			cpair* p_cpair=temp_array+l;
 			if (p_cpair->combg==NULL) continue;
 			int place = p_cpair->place;							/* regular crit order */
-			if (dtree_check_after(tree, tree_length, place, cpair_BgDaCg(*p_cpair))) {
-				dtree_add_element(tree, tree_length, place, cpair_BgDaCg(*p_cpair));
+			if (tree_check_after(tree, tree_length, place, cpair_BgDaCg(*p_cpair))) {
+				tree_add_element(tree, tree_length, place, cpair_BgDaCg(*p_cpair));
 			}
 			else {
 				p_cpair->combg=NULL;
@@ -163,8 +166,8 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			cpair* p_cpair=temp_array+l;
 			if (p_cpair->combg==NULL) continue;
 			int place = tree_length -1 - p_cpair->place;		/* reverse crit order */
-			if (dtree_check_after(tree, tree_length, place, cpair_BgDgCa(*p_cpair))) {
-				dtree_add_element(tree, tree_length, place, cpair_BgDgCa(*p_cpair));
+			if (tree_check_after(tree, tree_length, place, cpair_BgDgCa(*p_cpair))) {
+				tree_add_element(tree, tree_length, place, cpair_BgDgCa(*p_cpair));
 			}
 			else {
 				p_cpair->combg=NULL;

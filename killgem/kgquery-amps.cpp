@@ -1,23 +1,25 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-#include <string.h>
+#include <cstring>
+
 #include "interval_tree.h"
-typedef struct Gem_YB gem;
 #include "killgem_utils.h"
-typedef struct Gem_Y gemY;
 #include "crit_utils.h"
 #include "kga_utils.h"
 #include "query_utils.h"
 #include "gfon.h"
 #include "print_utils.h"
+#include "options_utils.h"
+
+using gem = gem_YB;
+using gemY = gem_Y;
 
 void print_amps_table(gem* gems, gemY* amps, double* spec_coeffs, double damage_ratio, double crit_ratio, int len)
 {
 	printf("Killgem\tAmps\tPower\t\tSpec coeff\n");
-	int i;
-	for (i=0; i<len; i++)
+	for (int i=0; i<len; i++)
 		printf("%d\t%d\t%#.7g\t%f\n", i+1, gem_getvalue(amps+i), gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio), spec_coeffs[i]);
 	printf("\n");
 }

@@ -1,11 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-#include <string.h>
-typedef struct Gem_Y gem;
-#include "critg_utils.h"
+#include <cstring>
+
+#include "crit_utils.h"
+#include "gem_sort.h"
 #include "gfon.h"
+#include "options_utils.h"
+
+using gem = gem_Y;
 
 void worker(int len, options output_options, char* filename)
 {
@@ -71,7 +75,7 @@ void worker(int len, options output_options, char* filename)
 								index++;
 							}
 							free(subpools[grd]);			// free
-							gem_sort(temp_array,length);						// work starts
+							gem_sort(temp_array,length, gem_less_equal);	// work starts
 	
 							int broken=0;
 							float lim_crit=-1;
@@ -114,7 +118,7 @@ void worker(int len, options output_options, char* filename)
 					index++;
 				}
 				free(subpools[grd]);		// free
-				gem_sort(temp_array,length);						// work starts
+				gem_sort(temp_array, length, gem_less_equal);		// work starts
 				int broken=0;
 				float lim_crit=-1;
 				for (l=length-1;l>=0;--l) {

@@ -1,13 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
+
 #include "interval_tree.h"
-typedef struct Gem_YBp gemP;
+#include "gem_sort.h"
 #include "kgexact_utils.h"
-typedef struct Gem_YBp gem;
-#include "killgem_utils.h"
 #include "print_utils.h"
+#include "options_utils.h"
+
+using gemP = gem_YBp;
+using gem = gem_YBp;
 
 void worker(int len, options output_options, int pool_zero)
 {
@@ -78,7 +81,7 @@ void worker(int len, options output_options, int pool_zero)
 							}
 							free(subpools[grd]);		// free
 							
-							gem_sort_crit(temp_array,length);				// work starts
+							gem_sort(temp_array, length, gem_less_crit<gem>);	// work starts
 							float lastcrit=-1;
 							int tree_cell=0;
 							for (int l=0; l<length; ++l) {
@@ -88,15 +91,15 @@ void worker(int len, options output_options, int pool_zero)
 									lastcrit = temp_array[l].crit;
 								}
 							}
-							gem_sort_exact(temp_array,length);
+							gem_sort(temp_array, length, gem_less_eq_exact<gem>);
 							int broken=0;
 							int tree_length= 1 << (int)ceil(log2(tree_cell));			// this is pow(2, ceil()) bitwise for speed improvement
 							float* tree = (float*)malloc((tree_length*2)*sizeof(float));
 							for (l=0; l<tree_length*2; ++l) tree[l]=-1;					// init also tree[0], it's faster
 							for (l=length-1;l>=0;--l) {										// start from large z
 								gem* p_gem=temp_array+l;
-								if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {
-									ftree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);
+								if (tree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {
+									tree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);
 								}
 								else {
 									p_gem->grade=0;
@@ -136,7 +139,7 @@ void worker(int len, options output_options, int pool_zero)
 				}
 				free(subpools[grd]);		// free
 				
-				gem_sort_crit(temp_array,length);				// work starts
+				gem_sort(temp_array, length, gem_less_crit<gem>);	// work starts
 				float lastcrit=-1;
 				int tree_cell=0;
 				for (int l=0; l<length; ++l) {
@@ -146,15 +149,15 @@ void worker(int len, options output_options, int pool_zero)
 						lastcrit = temp_array[l].crit;
 					}
 				}
-				gem_sort_exact(temp_array,length);
+				gem_sort(temp_array, length, gem_less_eq_exact<gem>);
 				int broken=0;
 				int tree_length= 1 << (int)ceil(log2(tree_cell));			// this is pow(2, ceil()) bitwise for speed improvement
 				float* tree = (float*)malloc((tree_length*2)*sizeof(float));
 				for (l=0; l<tree_length*2; ++l) tree[l]=-1;					// init also tree[0], it's faster
 				for (l=length-1;l>=0;--l) {										// start from large z
 					gem* p_gem=temp_array+l;
-					if (ftree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {
-						ftree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);
+					if (tree_check_after(tree, tree_length, p_gem->place, p_gem->bbound)) {
+						tree_add_element(tree, tree_length, p_gem->place, p_gem->bbound);
 					}
 					else {
 						p_gem->grade=0;

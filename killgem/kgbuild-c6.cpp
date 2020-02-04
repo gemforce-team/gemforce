@@ -1,13 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
 #include <getopt.h>
-#include <string.h>
-typedef struct Gem_YB gem;
+#include <cstring>
+
 #include "killgem_utils.h"
 #include "gfon.h"
+#include "options_utils.h"
 
-const int nchecks=6;
+using gem = gem_YB;
+
+constexpr int nchecks=6;
 
 double gem_rk311(gem gem1)
 {
