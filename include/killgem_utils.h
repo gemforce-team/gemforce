@@ -158,9 +158,14 @@ inline double gem_cfr_power(gemYB gem1, double amp_damage_scaled, double amp_cri
 	return (gem1.damage+amp_damage_scaled)*gem1.bbound*(gem1.crit+amp_crit_scaled)*gem1.bbound;
 }
 
-#define EXTRA_PARAMS   , double amp_damage_scaled, double amp_crit_scaled
-#define CHAIN_INIT_EXPR(ARG) gem_init(ARG, 1, DAMAGE_CHHIT, 0, 0);
-#define CFR_EXPR(ARG)  gem_cfr_power(ARG, amp_damage_scaled, amp_crit_scaled)
 #include "chain_adder.h"
+
+template<class gemYB>
+gemYB* gem_putchain(gemYB* pool, int pool_length, gemYB** gem_array, double amp_damage_scaled, double amp_crit_scaled)
+{
+	return gem_putchain_templ(pool, pool_length, gem_array,
+							  [](gemYB* arg) {gem_init(arg, 1, DAMAGE_CHHIT, 0, 0);},
+							  [=](gemYB arg) {return gem_cfr_power(arg, amp_damage_scaled, amp_crit_scaled);});
+}
 
 #endif // _KILLGEM_UTILS_H

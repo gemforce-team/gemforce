@@ -127,9 +127,14 @@ inline double gem_cfr_power(gem_OB gem1, double amp_leech_scaled)
 	return (gem1.leech+amp_leech_scaled)*gem1.bbound;
 }
 
-#define EXTRA_PARAMS   , double amp_leech_scaled
-#define CHAIN_INIT_EXPR(ARG) gem_init(ARG, 1, 0, 0)
-#define CFR_EXPR(ARG)  gem_cfr_power(ARG, amp_leech_scaled)
 #include "chain_adder.h"
+
+gem_OB* gem_putchain(gem_OB* pool, int pool_length, gem_OB** gem_array, double amp_leech_scaled)
+{
+	return gem_putchain_templ(pool, pool_length, gem_array,
+							  [](gem_OB* arg) {gem_init(arg, 1, 0, 0);},
+							  [=](gem_OB arg) {return gem_cfr_power(arg, amp_leech_scaled);});
+}
+
 
 #endif // _MANAGEM_UTILS_H

@@ -1,22 +1,10 @@
 #ifndef _CHAIN_ADDER_H
 #define _CHAIN_ADDER_H
 
-#ifndef EXTRA_PARAMS
-# error "EXTRA_PARAMS is not defined, e.g.: ', double amp_leech_scaled'"
-#endif
-
-#ifndef CHAIN_INIT_EXPR
-# error "CHAIN_INIT_EXPR is not defined, e.g.: 'gem_init(ARG, 1, 0, 0)'"
-#endif
-
-#ifndef CFR_EXPR
-# error "CFR_EXPR is not defined, e.g.: 'gem_cfr_power(ARG, amp_leech_scaled)'"
-#endif
-
 #include <cstdlib>
 
-template<class gem>
-gem* gem_putchain(gem* pool, int pool_length, gem** gem_array EXTRA_PARAMS)
+template<class gem, class chain_init_class, class cfr_class>
+gem* gem_putchain_templ(gem* pool, int pool_length, gem** gem_array, chain_init_class chain_init, cfr_class cfr_expr)
 {
 	double best_pow = 0;
 	gem* best_gem = NULL;
@@ -25,7 +13,7 @@ gem* gem_putchain(gem* pool, int pool_length, gem** gem_array EXTRA_PARAMS)
 	for (int i = 0; i < pool_length; ++i) {
 		int depth = gem_getdepth(pool + i);
 		gem* new_array = (gem*)malloc(depth*sizeof(gem));
-		CHAIN_INIT_EXPR(new_array);
+		chain_init(new_array);
 		
 		gem** stack = (gem**)malloc(depth*sizeof(gem*));
 		stack[0] = pool + i;
@@ -51,7 +39,7 @@ gem* gem_putchain(gem* pool, int pool_length, gem** gem_array EXTRA_PARAMS)
 					gem_combine(stack[level - 1]->father, curr_place, next_place);
 			}
 			
-			double new_pow = CFR_EXPR(*curr_place);
+			double new_pow = cfr_expr(*curr_place);
 			if (new_pow > best_pow) {
 				best_pow = new_pow;
 				best_gem = curr_place;
@@ -59,7 +47,7 @@ gem* gem_putchain(gem* pool, int pool_length, gem** gem_array EXTRA_PARAMS)
 				free(best_array);
 				best_array = new_array;
 				new_array = (gem*)malloc(depth*sizeof(gem));
-				CHAIN_INIT_EXPR(new_array);
+				chain_init(new_array);
 			}
 			
 			pop:

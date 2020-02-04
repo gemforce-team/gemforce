@@ -88,11 +88,13 @@ inline void gem_init(gem_O *p_gem, int grd, double leech)
 // Chain adder section
 // -------------------
 
-#ifndef _CHAIN_ADDER_H
-# define EXTRA_PARAMS
-# define CHAIN_INIT_EXPR(ARG) gem_init(ARG, 1, 0);
-# define CFR_EXPR(ARG)  gem_power(ARG)
-# include "chain_adder.h"
-#endif // _CHAIN_ADDER_H
+#include "chain_adder.h"
+
+gem_O* gem_putchain(gem_O* pool, int pool_length, gem_O** gem_array)
+{
+	return gem_putchain_templ(pool, pool_length, gem_array,
+							  [](gem_O* arg) {gem_init(arg, 1, 0);},
+							  [](gem_O arg) {return gem_power(arg);});
+}
 
 #endif // _LEECH_UTILS_H
