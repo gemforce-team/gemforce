@@ -34,7 +34,7 @@ void worker(int len, options output_options, char* filename)
 		exit(1);
 	}
 	
-	int skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
+	bool skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
 	for (i=first; i<len; ++i) {
 		gems[i]=pool[i][0];

@@ -39,7 +39,7 @@ void print_omnia_table(gem_Y* amps, double* powers, int len)
 		for (j=0; j<poolY_length[i]; ++j) {												\
 			temp_pool[j]=poolY[i][j];													\
 		}																				\
-		gem_sort(temp_pool, poolY_length[i], AS_LAMBDA(gem_less_equal));				\
+		gem_sort(temp_pool, poolY_length[i], AS_LAMBDA(gem_less));						\
 		int broken=0;																	\
 		float lim_crit=-1;																\
 		for (j=poolY_length[i]-1;j>=0;--j) {											\
@@ -112,7 +112,7 @@ inline double gem_bbc(gemP gem1)
 				lastcrit = temp_array[l].crit;															\
 			}																							\
 		}																								\
-		gem_sort(temp_array, length, gem_less_eq_exact<gemP>);											\
+		gem_sort(temp_array, length, gem_less_exact<gemP>);												\
 		int broken=0;																					\
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */	\
 		float* tree = (float*)malloc((tree_length*2)*sizeof(float));	/* delete gems with bb=0 */		\
@@ -200,7 +200,7 @@ inline double gem_bbc(gemP gem1)
 				lastcrit = temp_array[l].crit;															\
 			}																							\
 		}																								\
-		gem_sort(temp_array, length, gem_less_eq_exact<gemP>);											\
+		gem_sort(temp_array, length, gem_less_exact<gemP>);												\
 		int broken=0;																					\
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */	\
 		float* tree = (float*)malloc((tree_length*2)*sizeof(float));									\

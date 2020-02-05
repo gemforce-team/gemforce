@@ -38,8 +38,7 @@ void worker(int len, options output_options, char* filename)
 		int comb_tot=0;
 
 		const int grade_max=(int)(log2(i+1)+1);  // gems with max grade cannot be destroyed, so this is a max, not a sup
-		gem temp_array[grade_max-1];             // this will have all the grades
-		for (j=0; j<grade_max-1; ++j) temp_array[j] = {};
+		gem temp_array[grade_max-1] = {};        // this will have all the grades
 
 		for (j=j0; j<eoc; ++j) {          // combine gems and put them in temp array
 			for (k=0; k< pool_length[j]; ++k) {

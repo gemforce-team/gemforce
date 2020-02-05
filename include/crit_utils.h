@@ -104,7 +104,7 @@ inline void gem_init(gem_Y *p_gem, int grd, float damage, float crit)
 // Sorting section
 // ---------------
 
-inline bool gem_less_equal(gem_Y gem1, gem_Y gem2)
+inline bool gem_less(gem_Y gem1, gem_Y gem2)
 {
 	if (gem1.damage < gem2.damage) return 1;
 	else if (gem1.damage == gem2.damage && gem1.crit < gem2.crit) return 1;

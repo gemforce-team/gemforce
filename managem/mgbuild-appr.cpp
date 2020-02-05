@@ -84,7 +84,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 								index++;
 							}
 							free(subpools[grd]);       // free
-							gem_sort(temp_array, length, gem_less_equal);    // work starts
+							gem_sort(temp_array, length, gem_less);    // work starts
 	
 							int broken=0;
 							float lim_bbound=-1;
@@ -127,7 +127,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 					index++;
 				}
 				free(subpools[grd]);    // free
-				gem_sort(temp_array,length, gem_less_equal);             // work starts
+				gem_sort(temp_array,length, gem_less);             // work starts
 				int broken=0;
 				float lim_bbound=-1;
 				for (l=length-1;l>=0;--l) {

@@ -122,7 +122,7 @@ inline void gem_init(gemYB* p_gem, int grd, double damage, double crit, double b
 // ---------------
 
 template<class gemYB>
-inline bool gem_less_equal(gemYB gem1, gemYB gem2)
+inline bool gem_less(gemYB gem1, gemYB gem2)
 {
 	if ((int)(gem1.damage*ACC) != (int)(gem2.damage*ACC))
 		return gem1.damage<gem2.damage;
@@ -132,7 +132,7 @@ inline bool gem_less_equal(gemYB gem1, gemYB gem2)
 }
 
 template<class gemYB>
-inline bool gem_less_eq_exact(gemYB gem1, gemYB gem2)
+inline bool gem_less_exact(gemYB gem1, gemYB gem2)
 {
 	if (gem1.damage != gem2.damage)
 		return gem1.damage<gem2.damage;

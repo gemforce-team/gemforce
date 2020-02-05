@@ -103,14 +103,14 @@ inline void gem_init(gem_OB *p_gem, int grd, double leech, double bbound)
 // Sorting section
 // ---------------
 
-inline bool gem_less_equal(gem_OB gem1, gem_OB gem2)
+inline bool gem_less(gem_OB gem1, gem_OB gem2)
 {
 	if ((int)(gem1.leech*ACC) != (int)(gem2.leech*ACC))
 		return gem1.leech<gem2.leech;
 	return gem1.bbound<gem2.bbound;
 }
 
-inline bool gem_less_eq_exact(gem_OB gem1, gem_OB gem2)
+inline bool gem_less_exact(gem_OB gem1, gem_OB gem2)
 {
 	if (gem1.leech != gem2.leech)
 		return gem1.leech<gem2.leech;

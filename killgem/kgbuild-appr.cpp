@@ -92,7 +92,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 							}
 							free(subpools[grd]);		// free
 							
-							gem_sort(temp_array, length, gem_less_equal<gem>);				// work starts
+							gem_sort(temp_array, length, gem_less<gem>);				// work starts
 							int broken=0;
 							int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 							int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement
@@ -146,7 +146,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 				}
 				free(subpools[grd]);		// free
 				
-				gem_sort(temp_array,length, gem_less_equal<gem>);					// work starts
+				gem_sort(temp_array,length, gem_less<gem>);					// work starts
 				int broken=0;
 				int crit_cells=(int)(maxcrit*ACC)+1;		// this pool will be big from the beginning, but we avoid binary search
 				int tree_length= 1 << (int)ceil(log2(crit_cells)) ;				// this is pow(2, ceil()) bitwise for speed improvement

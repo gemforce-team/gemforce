@@ -103,7 +103,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	double damage_ratio=Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
 	double NT=pow(2, GT-1);
 	
-	int skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
+	bool skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
 	for (i=first; i<len; ++i) {										// for every gem value
 		gems[i] = {};												// we init the gems

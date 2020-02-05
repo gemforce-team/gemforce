@@ -91,7 +91,7 @@ void worker(int len, options output_options, int pool_zero)
 									lastcrit = temp_array[l].crit;
 								}
 							}
-							gem_sort(temp_array, length, gem_less_eq_exact<gem>);
+							gem_sort(temp_array, length, gem_less_exact<gem>);
 							int broken=0;
 							int tree_length= 1 << (int)ceil(log2(tree_cell));			// this is pow(2, ceil()) bitwise for speed improvement
 							float* tree = (float*)malloc((tree_length*2)*sizeof(float));
@@ -149,7 +149,7 @@ void worker(int len, options output_options, int pool_zero)
 						lastcrit = temp_array[l].crit;
 					}
 				}
-				gem_sort(temp_array, length, gem_less_eq_exact<gem>);
+				gem_sort(temp_array, length, gem_less_exact<gem>);
 				int broken=0;
 				int tree_length= 1 << (int)ceil(log2(tree_cell));			// this is pow(2, ceil()) bitwise for speed improvement
 				float* tree = (float*)malloc((tree_length*2)*sizeof(float));

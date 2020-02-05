@@ -8,13 +8,13 @@
 constexpr int switch_size = 20;
 
 template<class gem, class comparer>
-inline void ins_sort(gem* gems, int len, comparer gem_less_equal)
+inline void ins_sort(gem* gems, int len, comparer gem_less)
 {
 	int i,j;
 	gem element;
 	for (i=1; i<len; i++) {
 		element=gems[i];
-		for (j=i; j>0 && gem_less_equal(element, gems[j-1]); j--) {
+		for (j=i; j>0 && gem_less(element, gems[j-1]); j--) {
 			gems[j]=gems[j-1];
 		}
 		gems[j]=element;
@@ -22,17 +22,17 @@ inline void ins_sort(gem* gems, int len, comparer gem_less_equal)
 }
 
 template<class gem, class comparer>
-void quick_sort(gem* gems, int len, comparer gem_less_equal)
+void quick_sort(gem* gems, int len, comparer gem_less)
 {
 	if (len > switch_size)  {
 		gem pivot = gems[len/2];
 		gem* beg = gems;
 		gem* end = gems+len-1;
 		while (beg <= end) {
-			while (gem_less_equal(*beg, pivot)) {
+			while (gem_less(*beg, pivot)) {
 				beg++;
 			}
-			while (gem_less_equal(pivot,*end)) {
+			while (gem_less(pivot,*end)) {
 				end--;
 			}
 			if (beg <= end) {
@@ -44,21 +44,21 @@ void quick_sort(gem* gems, int len, comparer gem_less_equal)
 			}
 		}
 		if (end - gems + 1 < gems - beg + len) {		// sort smaller first
-			quick_sort(gems, end - gems + 1, gem_less_equal);
-			quick_sort(beg, gems - beg + len, gem_less_equal);
+			quick_sort(gems, end - gems + 1, gem_less);
+			quick_sort(beg, gems - beg + len, gem_less);
 		}
 		else {
-			quick_sort(beg, gems - beg + len, gem_less_equal);
-			quick_sort(gems, end - gems + 1, gem_less_equal);
+			quick_sort(beg, gems - beg + len, gem_less);
+			quick_sort(gems, end - gems + 1, gem_less);
 		}
 	}
 }
 
 template<class gem, class comparer>
-void gem_sort(gem* gems, int len, comparer gem_less_equal)
+void gem_sort(gem* gems, int len, comparer gem_less)
 {
-	quick_sort(gems, len, gem_less_equal);		// partially sort
-	ins_sort(gems, len, gem_less_equal);		// finish the nearly sorted array
+	quick_sort(gems, len, gem_less);	// partially sort
+	ins_sort(gems, len, gem_less);		// finish the nearly sorted array
 }
 
 #endif // _GEM_SORT_H
