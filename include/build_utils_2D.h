@@ -1,12 +1,12 @@
 #ifndef _BUILD_UTILS_2D_H
 #define _BUILD_UTILS_2D_H
 
+#include <sort_utils.h>
 #include <cstdlib>
 #include <cmath>
 #include <algorithm>
 #include <numeric>
 
-#include "gem_sort.h"
 
 template<unsigned int ACC, class gem>
 static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, gem* temp_pool, int temp_length)
@@ -19,7 +19,7 @@ static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, gem* te
 
 	free(*subpool_p);    // free old pool
 
-	gem_sort(full_array, full_length, AS_LAMBDA(gem_2D_less<ACC>));             // work starts
+	gem_sort(full_array, full_length, AS_LAMBDA(gem_12_less<ACC>));             // work starts
 	int broken = 0;
 	decltype(get_second(gem{})) lim_second = -1;
 	for (int l = full_length - 1; l >= 0; --l) {
@@ -45,8 +45,8 @@ static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, gem* te
 	free(full_array);     // free
 }
 
-template<unsigned int ACC, class gem>
-inline int fill_pool_2D(gem** pool, int* pool_length, int i, int size)
+template<unsigned int SIZE, unsigned int ACC, class gem>
+inline int fill_pool_2D(gem** pool, int* pool_length, int i)
 {
 	const int eoc=(i+1)/ (1+1);      // end of combining
 	const int j0 =(i+1)/(10+1);      // value ratio < 10
@@ -58,7 +58,7 @@ inline int fill_pool_2D(gem** pool, int* pool_length, int i, int size)
 	gem* subpools[grade_max - 1];                 // get subpools for every grade
 	int  subpools_length[grade_max - 1];
 	for (int j = 0; j < grade_max - 1; ++j) {     // init everything
-		temp_pools[j] = (gem*)malloc(size * sizeof(gem));
+		temp_pools[j] = (gem*)malloc(SIZE * sizeof(gem));
 		temp_index[j] = 0;
 		subpools[j] = NULL;                       // just to be able to free it
 		subpools_length[j] = 0;
@@ -76,8 +76,8 @@ inline int fill_pool_2D(gem** pool, int* pool_length, int i, int size)
 					int grd = temp.grade - 2;
 					temp_pools[grd][temp_index[grd]] = temp;
 					temp_index[grd]++;
-					if (temp_index[grd] == size) {		// let's skim a pool
-						merge_subpool<ACC>(subpools + grd, subpools_length + grd, temp_pools[grd], size);
+					if (temp_index[grd] == SIZE) {		// let's skim a pool
+						merge_subpool<ACC>(subpools + grd, subpools_length + grd, temp_pools[grd], SIZE);
 						temp_index[grd] = 0;            // temp index reset
 					}                                   // rebuilt subpool[grd], work restarts
 				}

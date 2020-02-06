@@ -1,5 +1,5 @@
-#ifndef _GEM_SORT_H
-#define _GEM_SORT_H
+#ifndef _SORT_UTILS_H
+#define _SORT_UTILS_H
 
 // black magic to have overloaded function pointers correctly resolved as template params in the sorting functions
 // from https://stackoverflow.com/a/36794145
@@ -65,14 +65,14 @@ void gem_sort(gem* gems, int len, comparer gem_less)
 // Comparison methods
 //-------------------
 
-template<class gem>
-inline bool gem_1D_less(const gem& gem1, const gem& gem2)
+template<class gem1D>
+inline bool gem_1_less(const gem1D& gem1, const gem1D& gem2)
 {
 	return get_first(gem1) < get_first(gem2);
 }
 
-template<unsigned int ACC = 0, class gem>
-inline bool gem_2D_less(const gem& gem1, const gem& gem2)
+template<unsigned int ACC = 0, class gem2D>
+inline bool gem_12_less(const gem2D& gem1, const gem2D& gem2)
 {
 	if constexpr (ACC == 0) {
 		if (get_first(gem1) != get_first(gem2))
@@ -85,4 +85,28 @@ inline bool gem_2D_less(const gem& gem1, const gem& gem2)
 	return get_second(gem1) < get_second(gem2);
 }
 
-#endif // _GEM_SORT_H
+template<unsigned int ACC = 0, class gem3D>
+inline bool gem_132_less(const gem3D& gem1, const gem3D& gem2)
+{
+	if constexpr (ACC == 0) {
+		if (get_first(gem1) != get_first(gem2))
+			return get_first(gem1) < get_first(gem2);
+		if (get_third(gem1) != get_third(gem2))
+			return get_third(gem1) < get_third(gem2);
+	}
+	else {
+		if ((int)(get_first(gem1) * ACC) != (int)(get_first(gem2) * ACC))
+			return get_first(gem1) < get_first(gem2);
+		if ((int)(get_third(gem1) * ACC) != (int)(get_third(gem2) * ACC))
+			return get_third(gem1) < get_third(gem2);
+	}
+	return get_second(gem1) < get_second(gem2);
+}
+
+template<class gem3D>
+inline bool gem_2_less(const gem3D& gem1, const gem3D& gem2)
+{
+	return get_second(gem1) < get_second(gem2);
+}
+
+#endif // _SORT_UTILS_H

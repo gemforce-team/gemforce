@@ -1,9 +1,9 @@
 #ifndef _KGA_UTILS_H
 #define _KGA_UTILS_H
 
+#include <sort_utils.h>
 #include <cstdio>
 
-#include "gem_sort.h"
 
 inline double gem_amp_power(gem_YB gem1, gem_Y amp1, double damage_ratio, double crit_ratio)
 {
@@ -39,7 +39,7 @@ void print_omnia_table(gem_Y* amps, double* powers, int len)
 		for (j=0; j<poolY_length[i]; ++j) {												\
 			temp_pool[j]=poolY[i][j];													\
 		}																				\
-		gem_sort(temp_pool, poolY_length[i], AS_LAMBDA(gem_2D_less));					\
+		gem_sort(temp_pool, poolY_length[i], AS_LAMBDA(gem_12_less));					\
 		int broken=0;																	\
 		float lim_crit=-1;																\
 		for (j=poolY_length[i]-1;j>=0;--j) {											\
@@ -102,7 +102,7 @@ inline double gem_bbc(gemP gem1)
 		for (int j=0; j<length; ++j) {																	\
 			temp_array[j]=gem2gemP(pool[i][j]);															\
 		}																								\
-		gem_sort(temp_array, length, gem_less_crit<gemP>);		/* work starts */						\
+		gem_sort(temp_array, length, AS_LAMBDA(gem_2_less<gemP>));	/* work starts */					\
 		float lastcrit=-1;																				\
 		int tree_cell=0;																				\
 		for (int l=0; l<length; ++l) {																	\
@@ -112,7 +112,7 @@ inline double gem_bbc(gemP gem1)
 				lastcrit = temp_array[l].crit;															\
 			}																							\
 		}																								\
-		gem_sort(temp_array, length, gem_less_exact<gemP>);												\
+		gem_sort(temp_array, length, AS_LAMBDA((gem_132_less<0, gemP>)));								\
 		int broken=0;																					\
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */	\
 		float* tree = (float*)malloc((tree_length*2)*sizeof(float));	/* delete gems with bb=0 */		\
@@ -190,7 +190,7 @@ inline double gem_bbc(gemP gem1)
 		for (int j=0; j<length; ++j) {																	\
 			temp_array[j]=gem2gemP(poolc[lenc-1][j]);													\
 		}																								\
-		gem_sort(temp_array, length, gem_less_crit<gemP>);		/* work starts */						\
+		gem_sort(temp_array, length, AS_LAMBDA(gem_2_less<gemP>));	/* work starts */					\
 		float lastcrit=-1;																				\
 		int tree_cell=0;																				\
 		for (int l=0; l<length; ++l) {																	\
@@ -200,7 +200,7 @@ inline double gem_bbc(gemP gem1)
 				lastcrit = temp_array[l].crit;															\
 			}																							\
 		}																								\
-		gem_sort(temp_array, length, gem_less_exact<gemP>);												\
+		gem_sort(temp_array, length, AS_LAMBDA((gem_132_less<0, gemP>)));								\
 		int broken=0;																					\
 		int tree_length= 1 << (int)ceil(log2(tree_cell));		/* this is pow(2, ceil()) bitwise */	\
 		float* tree = (float*)malloc((tree_length*2)*sizeof(float));									\

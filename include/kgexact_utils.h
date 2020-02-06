@@ -11,6 +11,20 @@ struct gem_YBp {
 	int place;
 };
 
+// ----------------
+// Place interface
+// ----------------
+
+inline int get_place(const gem_YBp& gem)
+{
+	return gem.place;
+}
+
+inline void set_place(gem_YBp& gem, int place)
+{
+	gem.place = place;
+}
+
 #include "killgem_utils.h"
 
 #endif // _KGEXACT_UTILS_H

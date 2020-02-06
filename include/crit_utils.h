@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+constexpr unsigned int SIZE = 1000;
+
 struct gem_Y {
 	int grade;				//using short does NOT improve time/memory usage
 	float damage;

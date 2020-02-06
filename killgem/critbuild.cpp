@@ -15,7 +15,6 @@ void worker(int len, options output_options, char* filename)
 {
 	FILE* table=table_init(filename, 1);		// init crit
 	int i;
-	int size=1000;
 	gem* pool[len];
 	int pool_length[len];
 	pool[0] = (gem*)malloc(sizeof(gem));
@@ -32,7 +31,7 @@ void worker(int len, options output_options, char* filename)
 	table=freopen(filename,"a", table);		// append -> updating possible
 
 	for (i=prevmax+1; i<len; ++i) {
-		int comb_tot = fill_pool_2D<0>(pool, pool_length, i, size);
+		int comb_tot = fill_pool_2D<SIZE, 0>(pool, pool_length, i);
 
 		if (!output_options.quiet) {
 			printf("Value:\t%d\n",i+1);

@@ -15,7 +15,6 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 {
 	FILE* table=table_init(filename, pool_zero);    // init managem
 	int i;
-	int size;
 	gem* pool[len];
 	int pool_length[len];
 	pool[0] = (gem*)malloc(pool_zero*sizeof(gem));
@@ -23,12 +22,10 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 	
 	if (pool_zero==1) {              // combine
 		gem_init(pool[0],1,1,1);
-		size=100;                     // reasonable comb sizing
 	}
 	else {                           // spec
 		gem_init(pool[0]  ,1,1,0);
 		gem_init(pool[0]+1,1,0,1);
-		size=2000;                    // reasonable spec sizing
 	}
 	
 	int prevmax=pool_from_table(pool, pool_length, len, table);    // pool filling
@@ -41,7 +38,11 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 	table=freopen(filename,"a", table);    // append -> updating possible
 
 	for (i=prevmax+1; i<len; ++i) {
-		int comb_tot = fill_pool_2D<ACC>(pool, pool_length, i, size);
+		int comb_tot;
+		if (pool_zero == 1)
+			comb_tot = fill_pool_2D<SIZES[1], ACC>(pool, pool_length, i);
+		else
+			comb_tot = fill_pool_2D<SIZES[2], ACC>(pool, pool_length, i);
 
 		if (!output_options.quiet) {
 			printf("Value:\t%d\n",i+1);

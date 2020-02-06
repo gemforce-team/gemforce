@@ -3,7 +3,10 @@
 
 #include <algorithm>
 
-int ACC;					// 80,60  ACC is for z-axis sorting and for the length of the interval tree
+// arrays indexed by pool_zero (1 = combine, 2 = spec)
+constexpr unsigned int ACCS[] = {0, 80, 60};	// ACC is for z-axis sorting and for the length of the interval tree
+constexpr unsigned int ACC_TR = 750;			// ACC_TR is for bbound comparisons inside tree
+constexpr unsigned int SIZES[] = {0, 1000, 20000};
 
 struct gem_YB {
 	int grade;
@@ -42,12 +45,45 @@ inline char gem_color(gemYB* p_gem)
 	else return COLOR_KILLGEM;
 }
 
+// ----------------
+// 3D gem interface
+// ----------------
+
+template<class gemYB>
+inline auto get_first(const gemYB& gem)
+{
+	return gem.damage;
+}
+
+template<class gemYB>
+inline auto get_second(const gemYB& gem)
+{
+	return gem.crit;
+}
+
+template<class gemYB>
+inline auto get_third(const gemYB& gem)
+{
+	return gem.bbound;
+}
+
+// ----------------
+// Place interface
+// ----------------
+
+inline int get_place(const gem_YB&)
+{
+	return 0;
+}
+
+inline void set_place(const gem_YB&, int) {}
+
 // -----------------
 // Combining section
 // -----------------
 
 template<class gemYB>
-void gem_comb_eq(gemYB* p_gem1, gemYB* p_gem2, gemYB* p_gem_combined)
+inline void gem_comb_eq(gemYB* p_gem1, gemYB* p_gem2, gemYB* p_gem_combined)
 {
 	p_gem_combined->grade = p_gem1->grade+1;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_EQ_1*p_gem1->damage + DAMAGE_EQ_2*p_gem2->damage;
@@ -59,7 +95,7 @@ void gem_comb_eq(gemYB* p_gem1, gemYB* p_gem2, gemYB* p_gem_combined)
 }
 
 template<class gemYB>
-void gem_comb_d1(gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)     //bigger is always gem1
+inline void gem_comb_d1(gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)     //bigger is always gem1
 {
 	p_gem_combined->grade = p_gem1->grade;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_D1_1*p_gem1->damage + DAMAGE_D1_2*p_gem2->damage;
@@ -71,7 +107,7 @@ void gem_comb_d1(gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)     //bigg
 }
 
 template<class gemYB>
-void gem_comb_gn(gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)
+inline void gem_comb_gn(gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)
 {
 	p_gem_combined->grade = std::max(p_gem1->grade, p_gem2->grade);
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_GN_1*p_gem1->damage + DAMAGE_GN_2*p_gem2->damage;
@@ -83,7 +119,7 @@ void gem_comb_gn(gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)
 }
 
 template<class gemYB>
-void gem_combine (gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)
+inline void gem_combine (gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)
 {
 	p_gem_combined->father=p_gem1;
 	p_gem_combined->mother=p_gem2;
@@ -115,36 +151,6 @@ inline void gem_init(gemYB* p_gem, int grd, double damage, double crit, double b
 	p_gem->bbound=bbound;
 	p_gem->father=NULL;
 	p_gem->mother=NULL;
-}
-
-// ---------------
-// Sorting section
-// ---------------
-
-template<class gemYB>
-inline bool gem_less(gemYB gem1, gemYB gem2)
-{
-	if ((int)(gem1.damage*ACC) != (int)(gem2.damage*ACC))
-		return gem1.damage<gem2.damage;
-	if ((int)(gem1.bbound*ACC) != (int)(gem2.bbound*ACC))
-		return gem1.bbound<gem2.bbound;
-	return gem1.crit<gem2.crit;
-}
-
-template<class gemYB>
-inline bool gem_less_exact(gemYB gem1, gemYB gem2)
-{
-	if (gem1.damage != gem2.damage)
-		return gem1.damage<gem2.damage;
-	if (gem1.bbound != gem2.bbound)
-		return gem1.bbound<gem2.bbound;
-	return gem1.crit<gem2.crit;
-}
-
-template<class gemYB>
-inline bool gem_less_crit(gemYB gem1, gemYB gem2)
-{
-	return gem1.crit<gem2.crit;
 }
 
 // -------------------

@@ -47,7 +47,6 @@ void worker(int len, options output_options, char* filename)
 	table=freopen(filename,"a", table);		// append -> updating possible
 
 	for (i=prevmax+1; i<len; ++i) {
-		int j,k,h;
 		const int eoc=(i+1)/ (1+1);       // end of combining
 		const int j0 =(i+1)/(10+1);       // value ratio < 10
 		int comb_tot=0;
@@ -57,10 +56,10 @@ void worker(int len, options output_options, char* filename)
 		gem temp_array[temp_length] = {};      // this will have all the grades
 		double pow_array[temp_length] = {};    // this will have all the powers
 
-		for (j=j0; j<eoc; ++j) {          // combine gems and put them in temp array
-			for (k=0; k< pool_length[j]; ++k) {
+		for (int j=j0; j<eoc; ++j) {          // combine gems and put them in temp array
+			for (int k=0; k< pool_length[j]; ++k) {
 				int g1=(pool[j]+k)->grade;
-				for (h=0; h< pool_length[i-1-j]; ++h) {
+				for (int h=0; h< pool_length[i-1-j]; ++h) {
 					int delta=g1 - (pool[i-1-j]+h)->grade;
 					if (abs(delta)<=2) {     // grade difference <= 2
 						comb_tot++;
@@ -98,12 +97,12 @@ void worker(int len, options output_options, char* filename)
 			}
 		}
 		int gemNum=0;
-		for (j=0; j<temp_length; ++j) if (temp_array[j].grade!=0) gemNum++;
+		for (int j=0; j<temp_length; ++j) if (temp_array[j].grade!=0) gemNum++;
 		pool_length[i]=gemNum;
 		pool[i] = (gem*)malloc(pool_length[i]*sizeof(gem));
 		
 		int place=0;
-		for (j=0; j<temp_length; ++j) {				// copying to pool
+		for (int j=0; j<temp_length; ++j) {				// copying to pool
 			if (temp_array[j].grade!=0) {
 				pool[i][place]=temp_array[j];
 				place++;

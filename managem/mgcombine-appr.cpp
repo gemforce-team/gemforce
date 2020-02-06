@@ -14,7 +14,6 @@ void worker(int len, options output_options, int pool_zero)
 {
 	printf("\n");
 	int i;
-	int size;
 	gem gems[len];
 	gem* pool[len];
 	int pool_length[len];
@@ -24,18 +23,20 @@ void worker(int len, options output_options, int pool_zero)
 	if (pool_zero==1) {             // combine
 		gem_init(pool[0],1,1,1);
 		gem_init(gems   ,1,1,1);
-		size=100;                    // reasonable comb sizing
 	}
 	else {                          // spec
 		gem_init(pool[0]  ,1,1,0);
 		gem_init(pool[0]+1,1,0,1);
 		gem_init(gems     ,1,1,0);
-		size=2000;                   // reasonable spec sizing
 	}
 	if (!output_options.quiet) gem_print(gems);
 
 	for (i=1; i<len; ++i) {
-		int comb_tot = fill_pool_2D<ACC>(pool, pool_length, i, size);
+		int comb_tot;
+		if (pool_zero == 1)
+			comb_tot = fill_pool_2D<SIZES[1], ACC>(pool, pool_length, i);
+		else
+			comb_tot = fill_pool_2D<SIZES[2], ACC>(pool, pool_length, i);
 
 		gems[i]=pool[i][0];                 // choosing gem (criteria moved to more_power def)
 		for (int j = 1; j < pool_length[i]; ++j) {
