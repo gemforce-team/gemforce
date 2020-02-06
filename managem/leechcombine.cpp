@@ -23,46 +23,10 @@ void worker(int len, options output_options)
 	if (!output_options.quiet) gem_print(gems);
 
 	for (i=1; i<len; ++i) {
-		int j,k,h;
-		const int eoc=(i+1)/ (1+1);      // end of combining
-		const int j0 =(i+1)/(10+1);      // value ratio < 10
-		int comb_tot=0;
-
-		const int grade_max=(int)(log2(i+1)+1);   // gems with max grade cannot be destroyed, so this is a max, not a sup
-		gem temp_array[grade_max-1] = {};         // this will have all the grades
-
-		for (j=j0; j<eoc; ++j) {         // combine gems and put them in temp array
-			for (k=0; k< pool_length[j]; ++k) {
-				int g1=(pool[j]+k)->grade;
-				for (h=0; h< pool_length[i-1-j]; ++h) {
-					int delta=g1 - (pool[i-1-j]+h)->grade;
-					if (abs(delta)<=2) {        // grade difference <= 2
-						comb_tot++;
-						gem temp;
-						gem_combine(pool[j]+k, pool[i-1-j]+h, &temp);
-						int grd=temp.grade-2;
-						if (gem_more_powerful(temp, temp_array[grd])) {
-							temp_array[grd]=temp;
-						}
-					}
-				}
-			}
-		}
-		int gemNum=0;
-		for (j=0; j<grade_max-1; ++j) if (temp_array[j].grade!=0) gemNum++;
-		pool_length[i]=gemNum;
-		pool[i] = (gem*)malloc(pool_length[i]*sizeof(gem));
-		
-		int place=0;
-		for (j=0; j<grade_max-1; ++j) {      // copying to pool
-			if (temp_array[j].grade!=0) {
-				pool[i][place]=temp_array[j];
-				place++;
-			}
-		}
+		int comb_tot = fill_pool_1D(pool, pool_length, i);
 		
 		gems[i]=pool[i][0];
-		for (j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
+		for (int j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
 			gems[i]=pool[i][j];
 		}
 		
