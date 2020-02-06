@@ -37,11 +37,25 @@ inline char gem_color(gem_Y* p_gem)
 	else return COLOR_CRIT;
 }
 
+// ----------------
+// 2D gem interface
+// ---------------.
+
+inline auto get_first(const gem_Y& gem)
+{
+	return gem.damage;
+}
+
+inline auto get_second(const gem_Y& gem)
+{
+	return gem.crit;
+}
+
 // -----------------
 // Combining section
 // -----------------
 
-void gem_comb_eq(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)
+inline void gem_comb_eq(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)
 {
 	p_gem_combined->grade = p_gem1->grade+1;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_EQ_1*p_gem1->damage + DAMAGE_EQ_2*p_gem2->damage;
@@ -50,7 +64,7 @@ void gem_comb_eq(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)
 	else p_gem_combined->crit = CRIT_EQ_1*p_gem2->crit + CRIT_EQ_2*p_gem1->crit;
 }
 
-void gem_comb_d1(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)     //bigger is always gem1
+inline void gem_comb_d1(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)     //bigger is always gem1
 {
 	p_gem_combined->grade = p_gem1->grade;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_D1_1*p_gem1->damage + DAMAGE_D1_2*p_gem2->damage;
@@ -59,7 +73,7 @@ void gem_comb_d1(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)     //bigg
 	else p_gem_combined->crit = CRIT_D1_1*p_gem2->crit + CRIT_D1_2*p_gem1->crit;
 }
 
-void gem_comb_gn(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)
+inline void gem_comb_gn(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)
 {
 	p_gem_combined->grade = std::max(p_gem1->grade, p_gem2->grade);
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_GN_1*p_gem1->damage + DAMAGE_GN_2*p_gem2->damage;
@@ -68,7 +82,7 @@ void gem_comb_gn(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)
 	else p_gem_combined->crit = CRIT_GN_1*p_gem2->crit + CRIT_GN_2*p_gem1->crit;
 }
 
-void gem_combine(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)
+inline void gem_combine(gem_Y *p_gem1, gem_Y *p_gem2, gem_Y *p_gem_combined)
 {
 	p_gem_combined->father=p_gem1;
 	p_gem_combined->mother=p_gem2;
@@ -98,17 +112,6 @@ inline void gem_init(gem_Y *p_gem, int grd, float damage, float crit)
 	p_gem->crit  =crit;
 	p_gem->father=NULL;
 	p_gem->mother=NULL;
-}
-
-// ---------------
-// Sorting section
-// ---------------
-
-inline bool gem_less(gem_Y gem1, gem_Y gem2)
-{
-	if (gem1.damage < gem2.damage) return 1;
-	else if (gem1.damage == gem2.damage && gem1.crit < gem2.crit) return 1;
-	else return 0;
 }
 
 // -------------------

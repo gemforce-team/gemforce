@@ -3,10 +3,10 @@
 
 #include <algorithm>
 
-const int ACC=1000;			// accuracy for comparisons
+constexpr unsigned int ACC = 1000;		// accuracy for comparisons
 
 struct gem_OB {
-	short grade;
+	int grade;
 	float leech;
 	float bbound;
 	gem_OB* father;
@@ -38,11 +38,25 @@ inline char gem_color(gem_OB* p_gem)
 	else return COLOR_MANAGEM;
 }
 
+// ----------------
+// 2D gem interface
+// ---------------.
+
+inline auto get_first(const gem_OB& gem)
+{
+	return gem.leech;
+}
+
+inline auto get_second(const gem_OB& gem)
+{
+	return gem.bbound;
+}
+
 // -----------------
 // Combining section
 // -----------------
 
-void gem_comb_eq(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
+inline void gem_comb_eq(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
 {
 	p_gem_combined->grade = p_gem1->grade+1;
 	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_EQ_1*p_gem1->leech + LEECH_EQ_2*p_gem2->leech;
@@ -51,7 +65,7 @@ void gem_comb_eq(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
 	else p_gem_combined->bbound = BBOUND_EQ_1*p_gem2->bbound + BBOUND_EQ_2*p_gem1->bbound;
 }
 
-void gem_comb_d1(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)     //bigger is always gem1
+inline void gem_comb_d1(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)     //bigger is always gem1
 {
 	p_gem_combined->grade = p_gem1->grade;
 	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_D1_1*p_gem1->leech + LEECH_D1_2*p_gem2->leech;
@@ -60,7 +74,7 @@ void gem_comb_d1(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)     //b
 	else p_gem_combined->bbound = BBOUND_D1_1*p_gem2->bbound + BBOUND_D1_2*p_gem1->bbound;
 }
 
-void gem_comb_gn(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
+inline void gem_comb_gn(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
 {
 	p_gem_combined->grade = std::max(p_gem1->grade, p_gem2->grade);
 	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_GN_1*p_gem1->leech + LEECH_GN_2*p_gem2->leech;
@@ -69,7 +83,7 @@ void gem_comb_gn(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
 	else p_gem_combined->bbound = BBOUND_GN_1*p_gem2->bbound + BBOUND_GN_2*p_gem1->bbound;
 }
 
-void gem_combine (gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
+inline void gem_combine (gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
 {
 	p_gem_combined->father=p_gem1;
 	p_gem_combined->mother=p_gem2;
@@ -97,24 +111,6 @@ inline void gem_init(gem_OB *p_gem, int grd, double leech, double bbound)
 	p_gem->bbound=bbound;
 	p_gem->father=NULL;
 	p_gem->mother=NULL;
-}
-
-// ---------------
-// Sorting section
-// ---------------
-
-inline bool gem_less(gem_OB gem1, gem_OB gem2)
-{
-	if ((int)(gem1.leech*ACC) != (int)(gem2.leech*ACC))
-		return gem1.leech<gem2.leech;
-	return gem1.bbound<gem2.bbound;
-}
-
-inline bool gem_less_exact(gem_OB gem1, gem_OB gem2)
-{
-	if (gem1.leech != gem2.leech)
-		return gem1.leech<gem2.leech;
-	return gem1.bbound<gem2.bbound;
 }
 
 // -------------------

@@ -61,4 +61,28 @@ void gem_sort(gem* gems, int len, comparer gem_less)
 	ins_sort(gems, len, gem_less);		// finish the nearly sorted array
 }
 
+//-------------------
+// Comparison methods
+//-------------------
+
+template<class gem>
+inline bool gem_1D_less(const gem& gem1, const gem& gem2)
+{
+	return get_first(gem1) < get_first(gem2);
+}
+
+template<unsigned int ACC = 0, class gem>
+inline bool gem_2D_less(const gem& gem1, const gem& gem2)
+{
+	if constexpr (ACC == 0) {
+		if (get_first(gem1) != get_first(gem2))
+			return get_first(gem1) < get_first(gem2);
+	}
+	else {
+		if ((int)(get_first(gem1) * ACC) != (int)(get_first(gem2) * ACC))
+			return get_first(gem1) < get_first(gem2);
+	}
+	return get_second(gem1) < get_second(gem2);
+}
+
 #endif // _GEM_SORT_H

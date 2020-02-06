@@ -39,7 +39,7 @@ void print_omnia_table(gem_Y* amps, double* powers, int len)
 		for (j=0; j<poolY_length[i]; ++j) {												\
 			temp_pool[j]=poolY[i][j];													\
 		}																				\
-		gem_sort(temp_pool, poolY_length[i], AS_LAMBDA(gem_less));						\
+		gem_sort(temp_pool, poolY_length[i], AS_LAMBDA(gem_2D_less));					\
 		int broken=0;																	\
 		float lim_crit=-1;																\
 		for (j=poolY_length[i]-1;j>=0;--j) {											\

@@ -39,7 +39,7 @@ void print_omnia_table(gem_O* amps, double* powers, int len)
 		for (j=0; j<pool_length[i]; ++j) {															\
 			temp_pool[j]=pool[i][j];																\
 		}																							\
-		gem_sort(temp_pool,pool_length[i], gem_less_exact);											\
+		gem_sort(temp_pool, pool_length[i], AS_LAMBDA(gem_2D_less));								\
 		int broken=0;																				\
 		float lim_bbound=0;						/* delete gems with bb=0 */							\
 		for (j=pool_length[i]-1;j>=0;--j) {															\
@@ -75,7 +75,7 @@ void print_omnia_table(gem_O* amps, double* powers, int len)
 
 #define MGCOMB_COMPRESSION																			\
 	{																								\
-		gem_sort(poolc[lenc-1],poolc_length[lenc-1], gem_less_exact);								\
+		gem_sort(poolc[lenc-1],poolc_length[lenc-1], AS_LAMBDA(gem_2D_less));						\
 		int broken=0;																				\
 		float lim_bbound=0;				/* combines have no gem with bb=0 */						\
 		for (i=poolc_length[lenc-1]-1;i>=0;--i) {													\
