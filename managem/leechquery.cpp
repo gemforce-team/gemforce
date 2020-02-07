@@ -16,7 +16,6 @@ void worker(int len, options output_options, char* filename)
 {
 	FILE* table=file_check(filename);      // file is open to read
 	if (table==NULL) exit(1);              // if the file is not good we exit
-	int i;
 	gem* gems = (gem*)malloc(len * sizeof(gem)); // if not malloc-ed 230k is the limit
 	gem** pool = (gem**)malloc(len * sizeof(gem*)); // if not malloc-ed 690k is the limit
 	int* pool_length = (int*)malloc(len * sizeof(int)); // if not malloced 400k is the limit (win)
@@ -28,7 +27,7 @@ void worker(int len, options output_options, char* filename)
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	fclose(table);				// close
 	if (prevmax<len-1) {
-		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
+		for (int i=0;i<=prevmax;++i) free(pool[i]);		// free
 		free(pool);				// free
 		free(pool_length);	// free
 		free(gems);				// free
@@ -38,13 +37,8 @@ void worker(int len, options output_options, char* filename)
 	
 	bool skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
-	for (i=first; i<len; ++i) {
-		gems[i]=pool[i][0];
-		for (int j=1; j<pool_length[i]; ++j) {
-			if (gem_more_powerful(pool[i][j], gems[i])) {
-				gems[i]=pool[i][j];
-			}
-		}
+	for (int i=first; i<len; ++i) {
+		compression_1D(gems + i, pool[i], pool_length[i]);
 		
 		if (!output_options.quiet) {
 			printf("Value:\t%d\n",i+1);
@@ -69,7 +63,7 @@ void worker(int len, options output_options, char* filename)
 	if (output_options.upto) {
 		double best_growth=-INFINITY;
 		int best_index=0;
-		for (i=0; i<len; ++i) {
+		for (int i=0; i<len; ++i) {
 			if (log(gem_power(gems[i]))/log(i+1) > best_growth) {
 				best_index=i;
 				best_growth=log(gem_power(gems[i]))/log(i+1);
@@ -113,7 +107,7 @@ void worker(int len, options output_options, char* filename)
 		printf("\n");
 	}
 	
-	for (i=0;i<len;++i) free(pool[i]);		// free
+	for (int i=0;i<len;++i) free(pool[i]);		// free
 	free(pool);		// free
 	free(pool_length);
 	free(gems);		// free

@@ -13,7 +13,6 @@ using gem = gem_O;
 void worker(int len, options output_options, char* filename)
 {
 	FILE* table=table_init(filename, 1);    // init leech
-	int i;
 	gem** pool = (gem**)malloc(len*sizeof(gem*));    // if not malloc-ed 690k is the limit
 	int* pool_length = (int*)malloc(len*sizeof(int));
 	pool[0] = (gem*)malloc(sizeof(gem));
@@ -23,7 +22,7 @@ void worker(int len, options output_options, char* filename)
 	int prevmax=pool_from_table(pool, pool_length, len, table);   // pool filling
 	if (prevmax+1==len) {
 		fclose(table);       // close
-		for (i=0;i<len;++i) free(pool[i]);   // free
+		for (int i=0;i<len;++i) free(pool[i]);   // free
 		free(pool);          // free
 		free(pool_length);   // free
 		printf("Table is longer than %d, no need to do anything\n\n",prevmax+1);
@@ -31,7 +30,7 @@ void worker(int len, options output_options, char* filename)
 	}
 	table=freopen(filename,"a", table);  // append -> updating possible
 
-	for (i=prevmax+1; i<len; ++i) {      // more building
+	for (int i=prevmax+1; i<len; ++i) {      // more building
 		int comb_tot = fill_pool_1D(pool, pool_length, i);
 
 		if (!output_options.quiet) {
@@ -45,7 +44,7 @@ void worker(int len, options output_options, char* filename)
 	}
 	
 	fclose(table);      // close
-	for (i=0;i<len;++i) free(pool[i]);   // free
+	for (int i=0;i<len;++i) free(pool[i]);   // free
 	free(pool);         // free
 	free(pool_length);  // free
 }

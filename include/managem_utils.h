@@ -22,17 +22,17 @@ struct gem_OB {
 #include "gem_utils.h"
 #include "gem_stats.h"
 
-inline double gem_power(gem_OB gem1)
+inline double gem_power(const gem_OB& gem1)
 {
 	return gem1.leech*gem1.bbound;
 }
 
-void gem_print(gem_OB* p_gem) {
+void gem_print(const gem_OB* p_gem) {
 	printf("Grade:\t%d\nLeech:\t%f\nBbound:\t%f\nPower:\t%f\n\n",
 		p_gem->grade, p_gem->leech, p_gem->bbound, p_gem->leech*p_gem->bbound);
 }
 
-inline char gem_color(gem_OB* p_gem)
+inline char gem_color(const gem_OB* p_gem)
 {
 	if (p_gem->leech==0 && p_gem->bbound==0) return COLOR_CHHIT;
 	if (p_gem->leech==0) return COLOR_BBOUND;
@@ -58,7 +58,7 @@ inline auto get_second(const gem_OB& gem)
 // Combining section
 // -----------------
 
-inline void gem_comb_eq(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
+inline void gem_comb_eq(const gem_OB *p_gem1, const gem_OB *p_gem2, gem_OB *p_gem_combined)
 {
 	p_gem_combined->grade = p_gem1->grade+1;
 	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_EQ_1*p_gem1->leech + LEECH_EQ_2*p_gem2->leech;
@@ -67,7 +67,7 @@ inline void gem_comb_eq(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
 	else p_gem_combined->bbound = BBOUND_EQ_1*p_gem2->bbound + BBOUND_EQ_2*p_gem1->bbound;
 }
 
-inline void gem_comb_d1(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)     //bigger is always gem1
+inline void gem_comb_d1(const gem_OB *p_gem1, const gem_OB *p_gem2, gem_OB *p_gem_combined)     //bigger is always gem1
 {
 	p_gem_combined->grade = p_gem1->grade;
 	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_D1_1*p_gem1->leech + LEECH_D1_2*p_gem2->leech;
@@ -76,7 +76,7 @@ inline void gem_comb_d1(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined) 
 	else p_gem_combined->bbound = BBOUND_D1_1*p_gem2->bbound + BBOUND_D1_2*p_gem1->bbound;
 }
 
-inline void gem_comb_gn(gem_OB *p_gem1, gem_OB *p_gem2, gem_OB *p_gem_combined)
+inline void gem_comb_gn(const gem_OB *p_gem1, const gem_OB *p_gem2, gem_OB *p_gem_combined)
 {
 	p_gem_combined->grade = std::max(p_gem1->grade, p_gem2->grade);
 	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_GN_1*p_gem1->leech + LEECH_GN_2*p_gem2->leech;
@@ -119,7 +119,7 @@ inline void gem_init(gem_OB *p_gem, int grd, double leech, double bbound)
 // Chain adder section
 // -------------------
 
-inline double gem_cfr_power(gem_OB gem1, double amp_leech_scaled)
+inline double gem_cfr_power(const gem_OB& gem1, double amp_leech_scaled)
 {
 	if (gem1.leech==0) return 0;
 	return (gem1.leech+amp_leech_scaled)*gem1.bbound;
@@ -127,7 +127,7 @@ inline double gem_cfr_power(gem_OB gem1, double amp_leech_scaled)
 
 #include "chain_adder.h"
 
-gem_OB* gem_putchain(gem_OB* pool, int pool_length, gem_OB** gem_array, double amp_leech_scaled)
+gem_OB* gem_putchain(const gem_OB* pool, int pool_length, gem_OB** gem_array, double amp_leech_scaled)
 {
 	return gem_putchain_templ(pool, pool_length, gem_array,
 							  [](gem_OB* arg) {gem_init(arg, 1, 0, 0);},

@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 template<class gem, class chain_init_class, class cfr_class>
-gem* gem_putchain_templ(gem* pool, int pool_length, gem** gem_array, chain_init_class chain_init, cfr_class cfr_expr)
+gem* gem_putchain_templ(const gem* pool, int pool_length, gem** gem_array, chain_init_class chain_init, cfr_class cfr_expr)
 {
 	double best_pow = 0;
 	gem* best_gem = NULL;
@@ -15,7 +15,7 @@ gem* gem_putchain_templ(gem* pool, int pool_length, gem** gem_array, chain_init_
 		gem* new_array = (gem*)malloc(depth*sizeof(gem));
 		chain_init(new_array);
 		
-		gem** stack = (gem**)malloc(depth*sizeof(gem*));
+		const gem** stack = (const gem**)malloc(depth*sizeof(gem*));
 		stack[0] = pool + i;
 		int stack_length = 1;
 		

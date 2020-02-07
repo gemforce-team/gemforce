@@ -16,11 +16,11 @@
 using gem = gem_YB;
 using gemY = gem_Y;
 
-void print_ngems_table(gem* gems, gemY* amps, double damage_ratio, double crit_ratio, int len)
+void print_ngems_table(const gem* gems, const gemY* amps, double damage_ratio, double crit_ratio, int len)
 {
 	printf("# Gems\tKillgem\tAmps\tPower\n");
-	int i;
-	for (i=0; i<len; i++)
+	
+	for (int i =0; i<len; i++)
 		printf("%d\t%d\t%d\t%#.7g\n", i+1, gem_getvalue(gems+i), gem_getvalue(amps+i), gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
 	printf("\n");
 }
@@ -29,7 +29,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);					// if the file is not good we exit
-	int i;
+	
 	gem* pool[len];
 	int pool_length[len];
 	pool[0] = (gem*)malloc(2*sizeof(gem));
@@ -40,7 +40,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	int prevmax=pool_from_table(pool, pool_length, gem_limit, table);		// killgem pool filling
 	fclose(table);
 	if (prevmax<len-1) {					// if the killgems are not enough
-		for (i=prevmax+1; i<len; ++i) {
+		for (int i =prevmax+1; i<len; ++i) {
 			pool_length[i]=0;
 			pool[i]=NULL;
 		}
@@ -49,7 +49,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	gem* poolf[len];
 	int poolf_length[len];
 	
-	KGSPEC_COMPRESSION
+	kgspec_compression(poolf, poolf_length, pool, pool_length, len, output_options);
 	if (!output_options.quiet) printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
@@ -64,7 +64,7 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	int prevmaxA=pool_from_table(poolY, poolY_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
 	if (prevmaxA<lena-1) {
-		for (i=0;i<=prevmaxA;++i) free(poolY[i]);		// free
+		for (int i =0;i<=prevmaxA;++i) free(poolY[i]);		// free
 		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
@@ -72,10 +72,10 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	gemY* poolYf[lena];
 	int poolYf_length[lena];
 	
-	AMPS_COMPRESSION
+	amps_compression(poolYf, poolYf_length, poolY, poolY_length, lena, output_options);
 	if (!output_options.quiet) printf("Amp pool compression done!\n\n");
 
-	int j,k,h;											// let's choose the right gem-amp combo
+	// let's choose the right gem-amp combo
 	gem gems[len];
 	gemY amps[len];
 	gem_init(gems,1,1,1,0);
@@ -85,20 +85,20 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 	
 	bool skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
-	for (i=first; i<len; ++i) {								// for every gem value
+	for (int i =first; i<len; ++i) {								// for every gem value
 		gems[i] = {};										// we init the gems
 		amps[i] = {};										// to extremely weak ones
-		for (k=0;k<poolf_length[i];++k) {					// first we compare the gem alone
+		for (int k=0;k<poolf_length[i];++k) {					// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
 		}
 		double power = gem_power(gems[i]);
 		if (Namps!=0)
-		for (j=1;j<=i/Namps;++j) {							// for every amount of amps we can fit in
+		for (int j=1;j<=i/Namps;++j) {							// for every amount of amps we can fit in
 			int value = i-Namps*j;							// this is the amount of gems we have left
-			for (k=0;k<poolf_length[value];++k) {			// we search in that pool
-				for (h=0;h<poolYf_length[j-1];++h) {		// and we look in the amp pool
+			for (int k=0;k<poolf_length[value];++k) {			// we search in that pool
+				for (int h=0;h<poolYf_length[j-1];++h) {		// and we look in the amp pool
 					if (gem_amp_power(poolf[value][k], poolYf[j-1][h], damage_ratio, crit_ratio) > power)
 					{
 						power = gem_amp_power(poolf[value][k], poolYf[j-1][h], damage_ratio, crit_ratio);
@@ -184,10 +184,10 @@ void worker(int len, options output_options, int gem_limit, char* filename, char
 		printf("\n");
 	}
 	
-	for (i=0;i<len;++i) free(pool[i]);			// free gems
-	for (i=0;i<len;++i) free(poolf[i]);			// free gems compressed
-	for (i=0;i<lena;++i) free(poolY[i]);		// free amps
-	for (i=0;i<lena;++i) free(poolYf[i]);		// free amps compressed
+	for (int i =0;i<len;++i) free(pool[i]);			// free gems
+	for (int i =0;i<len;++i) free(poolf[i]);			// free gems compressed
+	for (int i =0;i<lena;++i) free(poolY[i]);		// free amps
+	for (int i =0;i<lena;++i) free(poolYf[i]);		// free amps compressed
 	if (output_options.chain && len > 2) {
 		free(gem_array);
 	}

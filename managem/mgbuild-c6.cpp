@@ -35,7 +35,6 @@ inline double gem_rk31(gem gem1)
 void worker(int len, options output_options, char* filename)
 {
 	FILE* table=table_init(filename, 1);    // init managem
-	int i;
 	gem** pool = (gem**)malloc(len*sizeof(gem*));    // windows
 	int* pool_length = (int*)malloc(len*sizeof(int));
 	pool[0] = (gem*)malloc(sizeof(gem));
@@ -45,13 +44,13 @@ void worker(int len, options output_options, char* filename)
 	int prevmax=pool_from_table(pool, pool_length, len, table);   // pool filling
 	if (prevmax+1==len) {
 		fclose(table);
-		for (i=0;i<len;++i) free(pool[i]);    // free
+		for (int i =0;i<len;++i) free(pool[i]);    // free
 		printf("Table is longer than %d, no need to do anything\n\n",prevmax+1);
 		exit(1);
 	}
 	table=freopen(filename,"a", table);  // append -> updating possible
 
-	for (i=prevmax+1; i<len; ++i) {
+	for (int i =prevmax+1; i<len; ++i) {
 		const int eoc=(i+1)/ (1+1);       // end of combining
 		const int j0 =(i+1)/(10+1);       // value ratio < 10
 		int comb_tot=0;
@@ -125,7 +124,7 @@ void worker(int len, options output_options, char* filename)
 	}
 	
 	fclose(table);      // close
-	for (i=0;i<len;++i) free(pool[i]);   // free
+	for (int i =0;i<len;++i) free(pool[i]);   // free
 	free(pool);         // free
 	free(pool_length);  // free
 }

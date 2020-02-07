@@ -17,15 +17,15 @@ struct gem_O {
 #include "gem_utils.h"
 #include "gem_stats.h"
 
-inline double gem_power(gem_O gem1) {
+inline double gem_power(const gem_O& gem1) {
 	return gem1.leech;
 }
 
-inline void gem_print(gem_O *p_gem) {
+inline void gem_print(const gem_O* p_gem) {
 	printf("Grade:\t%d\nLeech:\t%f\n\n", p_gem->grade, p_gem->leech);
 }
 
-inline char gem_color(gem_O* p_gem) {
+inline char gem_color(const gem_O* p_gem) {
 	if (p_gem->leech==0) return COLOR_CHHIT;
 	else return COLOR_LEECH;
 }
@@ -34,21 +34,21 @@ inline char gem_color(gem_O* p_gem) {
 // Combining section
 // -----------------
 
-inline void gem_comb_eq(gem_O *p_gem1, gem_O *p_gem2, gem_O *p_gem_combined)
+inline void gem_comb_eq(const gem_O *p_gem1, const gem_O *p_gem2, gem_O *p_gem_combined)
 {
 	p_gem_combined->grade = p_gem1->grade+1;
 	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_EQ_1*p_gem1->leech + LEECH_EQ_2*p_gem2->leech;
 	else p_gem_combined->leech = LEECH_EQ_1*p_gem2->leech + LEECH_EQ_2*p_gem1->leech;
 }
 
-inline void gem_comb_d1(gem_O *p_gem1, gem_O *p_gem2, gem_O *p_gem_combined)		//bigger is always gem1
+inline void gem_comb_d1(const gem_O *p_gem1, const gem_O *p_gem2, gem_O *p_gem_combined)		//bigger is always gem1
 {
 	p_gem_combined->grade = p_gem1->grade;
 	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_D1_1*p_gem1->leech + LEECH_D1_2*p_gem2->leech;
 	else p_gem_combined->leech = LEECH_D1_1*p_gem2->leech + LEECH_D1_2*p_gem1->leech;
 }
 
-inline void gem_comb_gn(gem_O *p_gem1, gem_O *p_gem2, gem_O *p_gem_combined)
+inline void gem_comb_gn(const gem_O *p_gem1, const gem_O *p_gem2, gem_O *p_gem_combined)
 {
 	p_gem_combined->grade = std::max(p_gem1->grade, p_gem2->grade);
 	if (p_gem1->leech > p_gem2->leech) p_gem_combined->leech = LEECH_GN_1*p_gem1->leech + LEECH_GN_2*p_gem2->leech;
@@ -92,7 +92,7 @@ inline void gem_init(gem_O *p_gem, int grd, double leech)
 
 #include "chain_adder.h"
 
-gem_O* gem_putchain(gem_O* pool, int pool_length, gem_O** gem_array)
+gem_O* gem_putchain(const gem_O* pool, int pool_length, gem_O** gem_array)
 {
 	return gem_putchain_templ(pool, pool_length, gem_array,
 							  [](gem_O* arg) {gem_init(arg, 1, 0);},

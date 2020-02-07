@@ -35,7 +35,7 @@ void line_init(FILE* table, int pool_zero)
 	fprintf(table, "0\n\n");
 }
 
-FILE* table_init(char* filename, int pool_zero)
+FILE* table_init(const char* filename, int pool_zero)
 {
 	FILE* table = fopen(filename, "rb"); // binary to check size
 	if (table == NULL) {
@@ -53,7 +53,7 @@ FILE* table_init(char* filename, int pool_zero)
 	return table;
 }
 
-FILE* file_check(char* filename)
+FILE* file_check(const char* filename)
 {
 	FILE* table = fopen(filename, "rb");         // binary to check size
 	if (table == NULL) {
@@ -80,7 +80,7 @@ static inline void fprint64(int n, FILE* steam)
 }
 
 template<class gem>
-void table_write_iteration(gem** pool, int* pool_length, int iteration, FILE* table)
+void table_write_iteration(const gem*const* pool, const int* pool_length, int iteration, FILE* table)
 {
 	int i=iteration;
 	fprintf(table, "%d\n", pool_length[i]);

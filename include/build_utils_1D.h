@@ -44,4 +44,16 @@ inline int fill_pool_1D(gem** pool, int* pool_length, int i)
 	return comb_tot;
 }
 
+template<class gem>
+inline void compression_1D(gem* best_p, const gem* pool, int pool_length)
+{
+	const gem* curr_best = pool;
+	for (int j = 1; j < pool_length; ++j) {
+		if (gem_more_powerful(pool[j], *curr_best)) {
+			curr_best = pool + j;
+		}
+	}
+	*best_p = *curr_best;
+}
+
 #endif // _BUILD_UTILS_1D_H

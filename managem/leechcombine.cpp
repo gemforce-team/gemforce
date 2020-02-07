@@ -12,7 +12,6 @@ using gem = gem_O;
 void worker(int len, options output_options)
 {
 	printf("\n");
-	int i;
 	gem* gems = (gem*)malloc(len*sizeof(gem));      // if not malloc-ed 230k is the limit
 	gem* pool[len];
 	int pool_length[len];
@@ -22,13 +21,10 @@ void worker(int len, options output_options)
 	pool_length[0]=1;
 	if (!output_options.quiet) gem_print(gems);
 
-	for (i=1; i<len; ++i) {
+	for (int i=1; i<len; ++i) {
 		int comb_tot = fill_pool_1D(pool, pool_length, i);
 		
-		gems[i]=pool[i][0];
-		for (int j=1;j<pool_length[i];++j) if (gem_more_powerful(pool[i][j],gems[i])) {
-			gems[i]=pool[i][j];
-		}
+		compression_1D(gems + i, pool[i], pool_length[i]);
 		
 		if (!output_options.quiet) {
 			printf("Value:\t%d\n",i+1);
@@ -55,7 +51,7 @@ void worker(int len, options output_options)
 	if (output_options.upto) {
 		double best_growth=-INFINITY;
 		int best_index=0;
-		for (i=0; i<len; ++i) {
+		for (int i=0; i<len; ++i) {
 			if (log(gem_power(gems[i]))/log(i+1) > best_growth) {
 				best_index=i;
 				best_growth=log(gem_power(gems[i]))/log(i+1);
@@ -99,7 +95,7 @@ void worker(int len, options output_options)
 		printf("\n");
 	}
 	
-	for (i=0;i<len;++i) free(pool[i]);    // free
+	for (int i=0;i<len;++i) free(pool[i]);    // free
 	free(gems);
 	if (output_options.chain && len > 1) {
 		free(gem_array);

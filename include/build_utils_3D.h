@@ -10,7 +10,7 @@
 #include "interval_tree.h"
 
 template<unsigned int ACC, unsigned int ACC_TR, class gem>
-static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, gem* temp_pool, int temp_length)
+static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, const gem* temp_pool, int temp_length)
 {
 	int full_length = temp_length + *subpool_length_p;
 	gem* full_array = (gem*)malloc(full_length * sizeof(gem));

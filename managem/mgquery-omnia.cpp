@@ -19,7 +19,6 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);						// if the file is not good we exit
-	int i;
 	gem* pool[len];
 	int pool_length[len];
 	pool[0] = (gem*)malloc(2 * sizeof(gem));
@@ -30,7 +29,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// managem spec pool filling
 	fclose(table);
 	if (prevmax<len-1) {										// if the managems are not enough
-		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
+		for (int i =0;i<=prevmax;++i) free(pool[i]);		// free
 		if (prevmax>0) printf("Gem table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
@@ -38,7 +37,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	gem* poolf[len];
 	int poolf_length[len];
 	
-	MGSPEC_COMPRESSION
+	mgspec_compression(poolf, poolf_length, pool, pool_length, len, output_options);
 	if (!output_options.quiet) printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
@@ -54,14 +53,14 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	int prevmaxA = pool_from_table(poolO, poolO_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
 	if (prevmaxA<lena-1) {
-		for (i=0;i<=prevmaxA;++i) free(poolO[i]);		// free
+		for (int i =0;i<=prevmaxA;++i) free(poolO[i]);		// free
 		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
 	
 	gemO* bestO = (gemO*)malloc(lena*sizeof(gemO));		// if not malloc-ed 140k is the limit
 	
-	AMPS_COMPRESSION
+	amps_compression(bestO, poolO, poolO_length, lena);
 	gemO combO=bestO[lenc-1];			// amps fast access combine
 	if (!output_options.quiet) printf("Amp pool compression done!\n");
 
@@ -76,7 +75,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	int prevmaxc=pool_from_table(poolc, poolc_length, lenc, tablec);		// managem comb pool filling
 	fclose(tablec);
 	if (prevmaxc<lenc-1) {									// if the managems are not enough
-		for (i=0;i<=prevmaxc;++i) free(poolc[i]);		// free
+		for (int i =0;i<=prevmaxc;++i) free(poolc[i]);		// free
 		if (prevmaxc>0) printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);
 		exit(1);
 	}
@@ -84,14 +83,14 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	gem* poolcf;
 	int poolcf_length;
 	
-	MGCOMB_COMPRESSION
+	mgcomb_compression(&poolcf, &poolcf_length, poolc[lenc-1], poolc_length[lenc-1]);
 	if (!output_options.quiet) printf("Gem combine compressed pool size:\t%d\n\n",poolcf_length);
 
-	int j,k,l;								// let's choose the right gem-amp combo
-	gem gems[len];							// for every speccing value
+	// let's choose the right gem-amp combo
+	gem gems[len];						// for every speccing value
 	gemO amps[len];						// we'll choose the best amps
 	gem gemsc[len];						// and the best NC combine
-	gemO ampsc[len];						// for both
+	gemO ampsc[len];					// for both
 	double powers[len];
 	gem_init(gems,1,1,0);
 	gem_init(amps,0,0);
@@ -104,22 +103,23 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	
 	bool skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
-	for (i=first; i<len; ++i) {										// for every gem value
+	for (int i =first; i<len; ++i) {								// for every gem value
 		gems[i] = {};												// we init the gems
 		amps[i] = {};												// to extremely weak ones
 		gemsc[i] = {};
 		ampsc[i]=combO;												// <- this is ok only for mg
 																	// first we compare the gem alone
-		for (l=0; l<poolcf_length; ++l) {							// first search in the NC gem comb pool
+		for (int l=0; l<poolcf_length; ++l) {						// first search in the NC gem comb pool
 			if (gem_power(poolcf[l]) > gem_power(gemsc[i])) {
 				gemsc[i]=poolcf[l];
 			}
 		}
-		for (k=0;k<poolf_length[i];++k) {							// and then in the the gem pool
+		for (int k=0;k<poolf_length[i];++k) {							// and then in the the gem pool
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
 		}
+		int j;
 		int NS=i+1;
 		double c0 = log(NT/(i+1))*iloglenc;							// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
@@ -128,10 +128,10 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 			double c = log(NT/NS)*iloglenc;							// we compute the combination number
 			double Ca= leech_ratio * pow(combO.leech,c);			// <- this is ok only for mg
 			double Pa= Ca * bestO[j].leech;							// <- because we already know the best amps
-			for (l=0; l<poolcf_length; ++l) {						// then we search in NC gem comb pool
+			for (int l=0; l<poolcf_length; ++l) {					// then we search in NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cg  = pow(gem_power(poolcf[l]),c);
-				for (k=0; k<poolf_length[i]; ++k) {					// and in the reduced gem pool
+				for (int k=0; k<poolf_length[i]; ++k) {				// and in the reduced gem pool
 					double Palone = Cg * gem_power(poolf[i][k]);
 					double Pbg = Cbg * poolf[i][k].bbound;
 					double power = Palone + Pbg * Pa;  
@@ -189,7 +189,7 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 	if (output_options.upto) {
 		double best_pow=0;
 		int best_index=0;
-		for (i=0; i<len; ++i) {
+		for (int i =0; i<len; ++i) {
 			if (powers[i] > best_pow) {
 				best_index=i;
 				best_pow=powers[i];
@@ -292,13 +292,13 @@ void worker(int len, int lenc, options output_options, char* filename, char* fil
 		printf("\n");
 	}
 	
-	for (i=0;i<len;++i) free(pool[i]);     // free gems
-	for (i=0;i<len;++i) free(poolf[i]);    // free gems compressed
-	for (i=0;i<lenc;++i) free(poolc[i]);   // free gems
+	for (int i =0;i<len;++i) free(pool[i]);     // free gems
+	for (int i =0;i<len;++i) free(poolf[i]);    // free gems compressed
+	for (int i =0;i<lenc;++i) free(poolc[i]);   // free gems
 	free(poolc);
 	free(poolc_length);
 	free(poolcf);
-	for (i=0;i<lena;++i) free(poolO[i]);   // free amps
+	for (int i =0;i<lena;++i) free(poolO[i]);   // free amps
 	free(poolO);
 	free(bestO);                           // free amps compressed
 	if (output_options.chain && len > 2) {

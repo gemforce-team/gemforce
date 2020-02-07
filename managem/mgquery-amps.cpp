@@ -15,11 +15,11 @@
 using gem = gem_OB;
 using gemO = gem_O;
 
-void print_amps_table(gem* gems, gemO* amps, double* spec_coeffs, double leech_ratio, int len)
+void print_amps_table(const gem* gems, const gemO* amps, const double* spec_coeffs, double leech_ratio, int len)
 {
 	printf("Managem\tAmps\tPower\t\tSpec coeff\n");
-	int i;
-	for (i=0; i<len; i++)
+	
+	for (int i =0; i<len; i++)
 		printf("%d\t%d\t%#.7g\t%f\n", i+1, gem_getvalue(amps+i), gem_amp_power(gems[i], amps[i], leech_ratio), spec_coeffs[i]);
 	printf("\n");
 }
@@ -28,7 +28,6 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 {
 	FILE* table=file_check(filename);			// file is open to read
 	if (table==NULL) exit(1);						// if the file is not good we exit
-	int i;
 	gem* pool[len];
 	int pool_length[len];
 	pool[0] = (gem*)malloc(2 * sizeof(gem));
@@ -39,7 +38,7 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// managem pool filling
 	fclose(table);
 	if (prevmax<len-1) {										// if the managems are not enough
-		for (i=0;i<=prevmax;++i) free(pool[i]);		// free
+		for (int i =0;i<=prevmax;++i) free(pool[i]);		// free
 		if (prevmax>0) printf("Gem table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
@@ -47,7 +46,7 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 	gem* poolf[len];
 	int poolf_length[len];
 	
-	MGSPEC_COMPRESSION
+	mgspec_compression(poolf, poolf_length, pool, pool_length, len, output_options);
 	if (!output_options.quiet) printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(filenameA);		// fileA is open to read
@@ -62,17 +61,17 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 	int prevmaxA=pool_from_table(poolO, poolO_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
 	if (prevmaxA<lena-1) {
-		for (i=0;i<=prevmaxA;++i) free(poolO[i]);		// free
+		for (int i =0;i<=prevmaxA;++i) free(poolO[i]);		// free
 		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
 
 	gemO* bestO = (gemO*)malloc(lena*sizeof(gemO));		// if not malloc-ed 140k is the limit
 	
-	AMPS_COMPRESSION
+	amps_compression(bestO, poolO, poolO_length, lena);
 	if (!output_options.quiet) printf("Amp pool compression done!\n\n");
 
-	int j,k;									// let's choose the right gem-amp combo
+	// let's choose the right gem-amp combo
 	gem gems[len];
 	gemO amps[len];
 	double spec_coeffs[len];
@@ -83,14 +82,15 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 	
 	bool skip_computations = output_options.quiet && !(output_options.table || output_options.upto);
 	int first = skip_computations ? len-1 : 0;
-	for (i=first; i<len; ++i) {								// for every gem value
+	for (int i =first; i<len; ++i) {								// for every gem value
 		gems[i] = {};										// we init the gems
 		amps[i] = {};										// to extremely weak ones
-		for (k=0;k<poolf_length[i];++k) {					// first we compare the gem alone
+		for (int k=0;k<poolf_length[i];++k) {					// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
 		}
+		int j;
 		int NS=i+1;
 		double comb_coeff=pow(NS, -growth_comb);
 		spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
@@ -98,7 +98,7 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 		for (j=0, NS+=Namps; j<i+1; ++j, NS+=Namps) {		// for every amp value from 1 to to gem_value
 			double comb_coeff=pow(NS, -growth_comb);		// we compute comb_coeff
 			double Pa= leech_ratio * bestO[j].leech;		// <- this is ok only for mg
-			for (k=0; k<poolf_length[i]; ++k) {				// then we search in the reduced gem pool
+			for (int k=0; k<poolf_length[i]; ++k) {				// then we search in the reduced gem pool
 				double Palone = gem_power(poolf[i][k]);
 				double power = Palone + poolf[i][k].bbound * Pa;
 				double spec_coeff=power*comb_coeff;
@@ -141,7 +141,7 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 	if (output_options.upto) {
 		double best_sc=0;
 		int best_index=0;
-		for (i=0; i<len; ++i) {
+		for (int i =0; i<len; ++i) {
 			if (spec_coeffs[i] > best_sc) {
 				best_index=i;
 				best_sc=spec_coeffs[i];
@@ -211,9 +211,9 @@ void worker(int len, options output_options, double growth_comb, char* filename,
 		printf("\n");
 	}
 	
-	for (i=0;i<len;++i) free(pool[i]);			// free gems
-	for (i=0;i<len;++i) free(poolf[i]);			// free gems compressed
-	for (i=0;i<lena;++i) free(poolO[i]);		// free amps
+	for (int i =0;i<len;++i) free(pool[i]);			// free gems
+	for (int i =0;i<len;++i) free(poolf[i]);			// free gems compressed
+	for (int i =0;i<lena;++i) free(poolO[i]);		// free amps
 	free(bestO);										// free amps compressed
 	if (output_options.chain && len > 2) {
 		free(gem_array);

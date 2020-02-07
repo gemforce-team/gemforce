@@ -8,7 +8,7 @@
 #include "gem_utils.h"
 
 template<class gem>
-void print_parens(gem* gemf)
+void print_parens(const gem* gemf)
 {
 	if (gemf->father==NULL) printf("%c", gem_color(gemf));
 	else {
@@ -22,7 +22,7 @@ void print_parens(gem* gemf)
 }
 
 template<class gem>
-bool monocolor_ancestors(gem* gemf)
+bool monocolor_ancestors(const gem* gemf)
 {
 	if (gemf->father==NULL) return true;
 	else if (gem_color(gemf->father)!=gem_color(gemf->mother)) return false;
@@ -30,7 +30,7 @@ bool monocolor_ancestors(gem* gemf)
 }
 
 template<class gem>
-void print_parens_compressed(gem* gemf)
+void print_parens_compressed(const gem* gemf)
 {
 	if (gemf->father==NULL) printf("%c", gem_color(gemf));
 	else if (monocolor_ancestors(gemf)						// if gem is uniform combination (g1 are already done)
@@ -96,7 +96,7 @@ void print_equations(gem* gemf)
 }
 
 template<class gem>
-void print_tree(gem* gemf, const char* prefix)
+void print_tree(const gem* gemf, const char* prefix)
 {
 	if (gemf->father==NULL) {
 		printf("─ g1 %c\n",gem_color(gemf));
@@ -116,7 +116,7 @@ void print_tree(gem* gemf, const char* prefix)
 }
 
 template<class gem>
-void print_table(gem* gems, int len)
+void print_table(const gem* gems, int len)
 {
 	printf("# Gems\tPower\t\tGrowth\n");
 	printf("1\t%f\t%f\n", gem_power(gems[0]), log(gem_power(gems[0])));

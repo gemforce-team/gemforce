@@ -14,7 +14,6 @@ using gem = gem_YBp;
 void worker(int len, options output_options, int pool_zero, char* filename)
 {
 	FILE* table=table_init(filename, pool_zero);		// init killgem
-	int i;
 	gem* pool[len];
 	int pool_length[len];
 	pool[0] = (gem*)malloc(pool_zero*sizeof(gem));
@@ -31,13 +30,13 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 	int prevmax=pool_from_table(pool, pool_length, len, table);		// pool filling
 	if (prevmax+1==len) {
 		fclose(table);
-		for (i=0;i<len;++i) free(pool[i]);		// free
+		for (int i =0;i<len;++i) free(pool[i]);		// free
 		printf("Table is longer than %d, no need to do anything\n\n",prevmax+1);
 		exit(1);
 	}
 	table=freopen(filename,"a", table);		// append -> updating possible
 
-	for (i=prevmax+1; i<len; ++i) {
+	for (int i =prevmax+1; i<len; ++i) {
 		int comb_tot;
 		if (pool_zero == 1)
 			comb_tot = fill_pool_3D<SIZES[1], 0, 0>(pool, pool_length, i);
@@ -55,7 +54,7 @@ void worker(int len, options output_options, int pool_zero, char* filename)
 	}
 	
 	fclose(table);			// close
-	for (i=0;i<len;++i) free(pool[i]);		// free
+	for (int i =0;i<len;++i) free(pool[i]);		// free
 }
 
 int main(int argc, char** argv)

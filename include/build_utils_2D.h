@@ -7,9 +7,39 @@
 #include <algorithm>
 #include <numeric>
 
+template<unsigned int ACC, class gem>
+inline void compression_2D(gem** pool_out_p, int* pool_length_out_p, gem* temp_pool, int pool_length_in)
+{
+	gem_sort(temp_pool, pool_length_in, AS_LAMBDA(gem_12_less<ACC>));
+
+	int broken = 0;
+	decltype(get_second(gem {})) lim_second = -1; /* also remove gems with second = 0 */
+	/* Look at gems from high X to low, keep track of the
+	 * best Y seen till now, discard gems that don't beat that Y
+	 */
+	for (int l = pool_length_in - 1; l >= 0; --l) {
+		bool is_broken;
+		if constexpr (ACC == 0) {
+			is_broken = get_second(temp_pool[l]) <= lim_second;
+		}
+		else {
+			is_broken = (int)(ACC * get_second(temp_pool[l])) <= (int)(ACC * lim_second);
+		}
+		if (is_broken) {
+			temp_pool[l].grade = 0;
+			broken++;
+		}
+		else
+			lim_second = get_second(temp_pool[l]);
+	} // all unnecessary gems destroyed
+
+	*pool_length_out_p = pool_length_in - broken;
+	*pool_out_p = (gem*)malloc(*pool_length_out_p * sizeof(gem));
+	std::copy_if(temp_pool, temp_pool + pool_length_in, *pool_out_p, [](gem g) {return g.grade != 0;});
+}
 
 template<unsigned int ACC, class gem>
-static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, gem* temp_pool, int temp_length)
+static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, const gem* temp_pool, int temp_length)
 {
 	int full_length = temp_length + *subpool_length_p;
 	gem* full_array = (gem*)malloc(full_length * sizeof(gem));
@@ -19,28 +49,7 @@ static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, gem* te
 
 	free(*subpool_p);    // free old pool
 
-	gem_sort(full_array, full_length, AS_LAMBDA(gem_12_less<ACC>));             // work starts
-	int broken = 0;
-	decltype(get_second(gem{})) lim_second = -1;
-	for (int l = full_length - 1; l >= 0; --l) {
-		bool is_broken;
-		if constexpr (ACC == 0) {
-			is_broken = get_second(full_array[l]) <= lim_second;
-		}
-		else {
-			is_broken = (int)(ACC * get_second(full_array[l])) <= (int)(ACC * lim_second);
-		}
-		if (is_broken) {
-			full_array[l].grade = 0;
-			broken++;
-		}
-		else
-			lim_second = get_second(full_array[l]);
-	}                                      // all unnecessary gems destroyed
-
-	*subpool_length_p = full_length - broken;
-	*subpool_p = (gem*)malloc(*subpool_length_p * sizeof(gem));   // pool init via broken
-	std::copy_if(full_array, full_array + full_length, *subpool_p, [](gem g) {return g.grade != 0;});
+	compression_2D<ACC>(subpool_p, subpool_length_p, full_array, full_length);
 
 	free(full_array);     // free
 }

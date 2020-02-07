@@ -46,6 +46,18 @@ struct options {
 		output_options.chain = 1;			\
 		break;
 
+/* Macro blob that is used for amps flag options. Handle with care */
+#define TAN_OPTIONS_BLOCK			\
+			case 'T':				\
+				TC=atoi(optarg);	\
+				break;				\
+			case 'A':				\
+				As=atoi(optarg);	\
+				break;				\
+			case 'N':				\
+				Namps=atoi(optarg);	\
+				break;
+
 #include <cstdio>
 
 void print_help(const char* flags)

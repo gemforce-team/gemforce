@@ -60,7 +60,7 @@ public:
 		this->value=1;
 	}
 	
-	bool operator==(const gem& gem2)
+	bool operator==(const gem& gem2) const
 	{
 		if (grade  != gem2.grade ) return 0;
 		if (damage != gem2.damage) return 0;
@@ -71,7 +71,7 @@ public:
 		return 1;
 	}
 	
-	char get_color()
+	char get_color() const
 	{
 		int info=0;
 		if (this->crit  !=0) info|=4;
@@ -87,27 +87,28 @@ public:
 			default: return COLOR_UNKNOWN;
 		}
 	}
-	int getvalue() {
+	int getvalue() const
+	{
 		return this->value;
 	}
 };
 
-inline char gem_color(gem* gemf)
+inline char gem_color(const gem* gemf)
 {
 	return gemf->color;
 }
 
-double gem_amp_mana_power(gem gem1, gem amp1, double leech_ratio)
+double gem_amp_mana_power(const gem& gem1, const gem& amp1, double leech_ratio)
 {
 	return gem1.bbound*(gem1.leech+leech_ratio*amp1.leech);
 }
 
-double gem_amp_kill_power(gem gem1, gem amp1, double damage_ratio, double crit_ratio)
+double gem_amp_kill_power(const gem& gem1, const gem& amp1, double damage_ratio, double crit_ratio)
 {
 	return (gem1.damage+damage_ratio*amp1.damage)*gem1.bbound*(gem1.crit+crit_ratio*amp1.crit)*gem1.bbound;
 }
 
-void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
+void gem_comb_eq(const gem *p_gem1, const gem *p_gem2, gem *p_gem_combined)
 {
 	p_gem_combined->grade = p_gem1->grade+1;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_EQ_1*p_gem1->damage + DAMAGE_EQ_2*p_gem2->damage;
@@ -120,7 +121,7 @@ void gem_comb_eq(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 	else p_gem_combined->bbound = BBOUND_EQ_1*p_gem2->bbound + BBOUND_EQ_2*p_gem1->bbound;
 }
 
-void gem_comb_d1(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)     //bigger is always gem1
+void gem_comb_d1(const gem *p_gem1, const gem *p_gem2, gem *p_gem_combined)     //bigger is always gem1
 {
 	p_gem_combined->grade = p_gem1->grade;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_D1_1*p_gem1->damage + DAMAGE_D1_2*p_gem2->damage;
@@ -133,7 +134,7 @@ void gem_comb_d1(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)     //bigger is 
 	else p_gem_combined->bbound = BBOUND_D1_1*p_gem2->bbound + BBOUND_D1_2*p_gem1->bbound;
 }
 
-void gem_comb_gn(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
+void gem_comb_gn(const gem *p_gem1, const gem *p_gem2, gem *p_gem_combined)
 {
 	p_gem_combined->grade = std::max(p_gem1->grade, p_gem2->grade);
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_GN_1*p_gem1->damage + DAMAGE_GN_2*p_gem2->damage;
@@ -172,7 +173,7 @@ void gem_combine(gem *p_gem1, gem *p_gem2, gem *p_gem_combined)
 	p_gem_combined->value = p_gem1->getvalue() + p_gem2->getvalue();
 }
 
-void gem_print(gem *p_gem)
+void gem_print(const gem *p_gem)
 {
 	switch (p_gem->color) {
 		case COLOR_CRIT:
@@ -227,7 +228,7 @@ gem* gem_build(string parens, gem* gems, int& index)
 	else {
 		int open_parens=0;
 		int i;
-		for (i=1; i<len-1; ++i) {
+		for (i =1; i<len-1; ++i) {
 			if (parens[i]=='(') open_parens++;
 			if (parens[i]==')') open_parens--;
 			if (open_parens==0) break;

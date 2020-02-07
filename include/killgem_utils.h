@@ -25,19 +25,19 @@ struct gem_YB {
 #include "gem_stats.h"
 
 template<class gemYB>
-inline double gem_power(gemYB gem1)
+inline double gem_power(const gemYB& gem1)
 {
 	return gem1.damage*gem1.bbound*gem1.crit*gem1.bbound;
 }
 
 template<class gemYB>
-void gem_print(gemYB* p_gem) {
+void gem_print(const gemYB* p_gem) {
 	printf("Grade:\t%d\nDamage:\t%f\nCrit:\t%f\nBbound:\t%f\nPower:\t%f\n\n", 
 		p_gem->grade, p_gem->damage, p_gem->crit, p_gem->bbound, gem_power(*p_gem));
 }
 
 template<class gemYB>
-inline char gem_color(gemYB* p_gem)
+inline char gem_color(const gemYB* p_gem)
 {
 	if (p_gem->crit==0 && p_gem->bbound==0) return COLOR_CHHIT;
 	if (p_gem->crit==0) return COLOR_BBOUND;
@@ -83,7 +83,7 @@ inline void set_place(const gem_YB&, int) {}
 // -----------------
 
 template<class gemYB>
-inline void gem_comb_eq(gemYB* p_gem1, gemYB* p_gem2, gemYB* p_gem_combined)
+inline void gem_comb_eq(const gemYB* p_gem1, const gemYB* p_gem2, gemYB* p_gem_combined)
 {
 	p_gem_combined->grade = p_gem1->grade+1;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_EQ_1*p_gem1->damage + DAMAGE_EQ_2*p_gem2->damage;
@@ -95,7 +95,7 @@ inline void gem_comb_eq(gemYB* p_gem1, gemYB* p_gem2, gemYB* p_gem_combined)
 }
 
 template<class gemYB>
-inline void gem_comb_d1(gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)     //bigger is always gem1
+inline void gem_comb_d1(const gemYB *p_gem1, const gemYB *p_gem2, gemYB *p_gem_combined)     //bigger is always gem1
 {
 	p_gem_combined->grade = p_gem1->grade;
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_D1_1*p_gem1->damage + DAMAGE_D1_2*p_gem2->damage;
@@ -107,7 +107,7 @@ inline void gem_comb_d1(gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)    
 }
 
 template<class gemYB>
-inline void gem_comb_gn(gemYB *p_gem1, gemYB *p_gem2, gemYB *p_gem_combined)
+inline void gem_comb_gn(const gemYB *p_gem1, const gemYB *p_gem2, gemYB *p_gem_combined)
 {
 	p_gem_combined->grade = std::max(p_gem1->grade, p_gem2->grade);
 	if (p_gem1->damage > p_gem2->damage) p_gem_combined->damage = DAMAGE_GN_1*p_gem1->damage + DAMAGE_GN_2*p_gem2->damage;
@@ -158,7 +158,7 @@ inline void gem_init(gemYB* p_gem, int grd, double damage, double crit, double b
 // -------------------
 
 template<class gemYB>
-inline double gem_cfr_power(gemYB gem1, double amp_damage_scaled, double amp_crit_scaled)
+inline double gem_cfr_power(const gemYB& gem1, double amp_damage_scaled, double amp_crit_scaled)
 {
 	if (gem1.crit==0) return 0;
 	return (gem1.damage+amp_damage_scaled)*gem1.bbound*(gem1.crit+amp_crit_scaled)*gem1.bbound;
@@ -167,7 +167,7 @@ inline double gem_cfr_power(gemYB gem1, double amp_damage_scaled, double amp_cri
 #include "chain_adder.h"
 
 template<class gemYB>
-gemYB* gem_putchain(gemYB* pool, int pool_length, gemYB** gem_array, double amp_damage_scaled, double amp_crit_scaled)
+gemYB* gem_putchain(const gemYB* pool, int pool_length, gemYB** gem_array, double amp_damage_scaled, double amp_crit_scaled)
 {
 	return gem_putchain_templ(pool, pool_length, gem_array,
 							  [](gemYB* arg) {gem_init(arg, 1, DAMAGE_CHHIT, 0, 0);},

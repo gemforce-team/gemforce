@@ -5,26 +5,25 @@
 // from https://stackoverflow.com/a/36794145
 #define AS_LAMBDA(func) [&](auto&&... args) -> decltype(func(std::forward<decltype(args)>(args)...)) { return func(std::forward<decltype(args)>(args)...); }
 
-constexpr int switch_size = 20;
+constexpr int SWITCH_SIZE = 20;
 
 template<class gem, class comparer>
 inline void ins_sort(gem* gems, int len, comparer gem_less)
 {
-	int i,j;
-	gem element;
-	for (i=1; i<len; i++) {
-		element=gems[i];
-		for (j=i; j>0 && gem_less(element, gems[j-1]); j--) {
-			gems[j]=gems[j-1];
+	for (int i = 1; i < len; i++) {
+		int j;
+		gem element = gems[i];
+		for (j = i; j > 0 && gem_less(element, gems[j - 1]); j--) {
+			gems[j] = gems[j - 1];
 		}
-		gems[j]=element;
+		gems[j] = element;
 	}
 }
 
 template<class gem, class comparer>
 void quick_sort(gem* gems, int len, comparer gem_less)
 {
-	if (len > switch_size)  {
+	if (len > SWITCH_SIZE) {
 		gem pivot = gems[len/2];
 		gem* beg = gems;
 		gem* end = gems+len-1;
