@@ -1,12 +1,12 @@
 #ifndef _BUILD_UTILS_3D_H
 #define _BUILD_UTILS_3D_H
 
-#include <sort_utils.h>
 #include <cstdlib>
 #include <cmath>
 #include <algorithm>
 #include <numeric>
 
+#include "sort_utils.h"
 #include "interval_tree.h"
 
 template<int ACC, int ACC_TR, class gem>

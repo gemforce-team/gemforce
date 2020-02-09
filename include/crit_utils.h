@@ -120,13 +120,25 @@ inline void gem_init(gem_Y *p_gem, int grd, float damage, float crit)
 // Chain adder section
 // -------------------
 
+inline double gem_cfr_power(const gem_Y& gem1, double amp_damage_scaled, double amp_crit_scaled)
+{
+	return (gem1.damage + amp_damage_scaled) * (gem1.crit + amp_crit_scaled);
+}
+
 #include "chain_adder.h"
 
 gem_Y* gem_putchain(const gem_Y* pool, int pool_length, gem_Y** gem_array)
 {
 	return gem_putchain_templ(pool, pool_length, gem_array,
-							  [](gem_Y* arg) {gem_init(arg, 1, 0, 0);},
+							  [](gem_Y* arg) {gem_init(arg, 1, DAMAGE_CHHIT, 0);},
 							  [](gem_Y arg) {return gem_power(arg);});
+}
+
+gem_Y* gem_putchain(const gem_Y* pool, int pool_length, gem_Y** gem_array, double amp_damage_scaled, double amp_crit_scaled)
+{
+	return gem_putchain_templ(pool, pool_length, gem_array,
+							  [](gem_Y* arg) {gem_init(arg, 1, DAMAGE_CHHIT, 0);},
+							  [=](gem_Y arg) {return gem_cfr_power(arg, amp_damage_scaled, amp_crit_scaled);});
 }
 
 

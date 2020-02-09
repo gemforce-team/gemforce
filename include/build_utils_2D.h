@@ -1,11 +1,12 @@
 #ifndef _BUILD_UTILS_2D_H
 #define _BUILD_UTILS_2D_H
 
-#include <sort_utils.h>
 #include <cstdlib>
 #include <cmath>
 #include <algorithm>
 #include <numeric>
+
+#include "sort_utils.h"
 
 template<int ACC, class gem>
 inline void compression_2D(gem** pool_out_p, int* pool_length_out_p, gem* temp_pool, int pool_length_in)
@@ -13,7 +14,7 @@ inline void compression_2D(gem** pool_out_p, int* pool_length_out_p, gem* temp_p
 	gem_sort(temp_pool, pool_length_in, AS_LAMBDA(gem_12_less<ACC>));
 
 	int broken = 0;
-	decltype(get_second(gem {})) lim_second = -1; /* also remove gems with second = 0 */
+	decltype(get_second(gem {})) lim_second = -1; /* do not remove gems with second = 0 */
 	/* Look at gems from high X to low, keep track of the
 	 * best Y seen till now, discard gems that don't beat that Y
 	 */

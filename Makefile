@@ -17,7 +17,7 @@ LIBFLAGS:=-lm
 # Query
 QUERY_LEECH=leechgem/leechquery
 QUERY_MANAGEM=managem/mgquery-alone managem/mgquery-amps managem/mgquery-setup managem/mgquery-omnia
-QUERY_CRIT=critgem/critquery
+QUERY_CRIT=critgem/critquery critgem/critquery-amps
 QUERY_KILLGEM=killgem/kgquery-alone killgem/kgquery-amps killgem/kgquery-setup killgem/kgquery-omnia
 QUERY_MGNGEM=managem/mgquery-ngems
 QUERY_KGNGEM=killgem/kgquery-ngems
@@ -107,13 +107,10 @@ $(WINDIR):
 
 # Move
 move: | $(BINDIR)
-	@find "managem/" -type f -executable -exec mv -v {} "$(BINDIR)/" \;
-
-	@find "killgem/" -type f -executable -exec mv -v {} "$(BINDIR)/" \;
-
-	@if [ -e $(PARSER) ]; then \
-		mv -v $(PARSER) "$(BINDIR)/"; \
-	fi
+	@for exe in $(DEV_ALL); do \
+		[ -e "$${exe}" ] && mv -v $${exe} "$(BINDIR)/"; \
+	done; \
+	: # noop so make doesn't choke
 
 move-white: | $(BINDIR)
 	@if [ -d "white" ]; then \
