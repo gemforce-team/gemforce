@@ -1,13 +1,15 @@
 gemforce
 ========
 
-Gem combining program for [Gemcraft 2: Chasing Shadows](https://store.steampowered.com/app/296490/GemCraft__Chasing_Shadows/).
+Gem combining program for [Gemcraft 2: Chasing Shadows](https://store.steampowered.com/app/296490/GemCraft__Chasing_Shadows/) and
+[GemCraft: Frostborn Wrath](https://store.steampowered.com/app/1106530/GemCraft__Frostborn_Wrath/).
 
 
 ### Table of contents:
 
-* **[If you just want recipes click here](results/#readme)**
-* **[The combiner bot (wGemCombiner) has moved here](https://github.com/gemforce-team/wGemCombiner/#readme)**
+* **[Link to the recipes repository](https://github.com/gemforce-team/gem-recipes/#readme)**
+* **[Link to the GCCS combiner bot (wGemCombiner)](https://github.com/gemforce-team/wGemCombiner/#readme)**
+* **[Link to the GCFW combiner mod (Gemsmith)](https://github.com/gemforce-team/gemsmith/#readme)**
 * [Overview](#overview)  
 * [Prebuilt recipes](#prebuilt-recipes)  
 * [Get gemforce](#get-gemforce)  
@@ -22,7 +24,7 @@ Gem combining program for [Gemcraft 2: Chasing Shadows](https://store.steampower
 
 ### Overview:
 
-gemforce project's goal is to find the optimal recipes for gems used in endgame play of GC2.  
+gemforce project's goal is to find the optimal recipes for gems used in endgame play of GC2 and GCFW.  
 To do so we developed a series of programs, each one computes some specific recipe type.
 
 For an explanation of some of the name conventions used see [Name conventions](#name-conventions) section below.  
@@ -34,9 +36,9 @@ The full programs list can be found in the [What does each program do?](#what-do
 ### Prebuilt recipes:
 
 If you are not interested in running the programs yourself, but you just want to know what the best recipes are
-you can find lots of precomputed recipes in the [results folder](results).
+you can find lots of precomputed recipes in the [results repository](https://github.com/gemforce-team/gem-recipes).
 
-More info on them can be found in the [results folder's README](results/#readme).
+More info on them can be found in the [results repository's README](https://github.com/gemforce-team/gem-recipes/#readme).
 
 
 ### Get gemforce:
@@ -185,7 +187,7 @@ The reason we can do better recipes that 'U' is in the way the game computes sta
 when two gems are combined the resulting gem stats are always in this form:  
 `Combined.Stat = c1 * max(Gem1.Stat, Gem2.Stat) + c2 * min(Gem1.Stat, Gem2.Stat)`  
 where `c1` and `c2` are coefficients that change between colors and with the difference in grade between the two combined gems.
-The complete list can be found in the [GC2_formulae gist](https://gist.github.com/12345ieee/4a81c78d4426a99c4bc3)  
+The complete list can be found in the [`gem_stats.h`](include/gem_stats.h) file.
 
 With this list it is possible to try all the combinations that give a, say, leech gem of value 8
 and find the one that has the best leech (an useful gem for amplifier).  
@@ -262,5 +264,5 @@ If this project helped you and you wish to help by contributing, please contact 
 You can also help by donating some money for our time:  
 [![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LY6RG34S5UCTW "Donate to this project using Paypal")
 
-Gemcraft 2: Chasing Shadows was developed by [gameinabottle](http://gameinabottle.com/)
+The Gemcraft game series is developed by [gameinabottle](http://gameinabottle.com/)
 
