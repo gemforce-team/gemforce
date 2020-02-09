@@ -47,6 +47,9 @@ KILLGEM_ALL=$(QUERY_KILLGEM) $(QUERY_KGNGEM) $(BUILD_KILLGEM) $(COMBINE_KILLGEM)
 # Parser
 PARSER=parser
 
+# All
+DEV_ALL=$(QUERY_ALL) $(BUILD_ALL) $(COMBINE_ALL) $(PARSER)
+
 # Folders
 BINDIR:=bin
 WINDIR:=$(BINDIR)/win
@@ -57,7 +60,7 @@ INCLUDE_DIR:=include
 VERSION:=$(shell git describe --tags | rev | cut -d '-' -f2- | rev)
 
 # General targets
-dev: set-query set-build set-combine parser
+dev: $(DEV_ALL)
 dev-move: dev
 	$(MAKE) move
 
@@ -122,66 +125,8 @@ $(BINDIR):
 
 .PHONY: move move-white
 
-# Leech
-managem/leechbuild: managem/leechbuild.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-managem/leechcombine: managem/leechcombine.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-managem/leechquery: managem/leechquery.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-
-# Managem
-managem/mgbuild-appr: managem/mgbuild-appr.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgbuild-c6: managem/mgbuild-c6.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgbuild-exact: managem/mgbuild-exact.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgcombine-appr: managem/mgcombine-appr.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgquery-alone: managem/mgquery-alone.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgquery-amps: managem/mgquery-amps.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgquery-ngems: managem/mgquery-ngems.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgquery-omnia: managem/mgquery-omnia.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-managem/mgquery-setup: managem/mgquery-setup.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-
-# Crit
-killgem/critbuild: killgem/critbuild.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/critcombine: killgem/critcombine.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/critquery: killgem/critquery.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-
-# Killgem
-killgem/kgbuild-appr: killgem/kgbuild-appr.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgbuild-c6: killgem/kgbuild-c6.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgbuild-exact: killgem/kgbuild-exact.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgcombine-appr: killgem/kgcombine-appr.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgcombine-exact: killgem/kgcombine-exact.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgquery-alone: killgem/kgquery-alone.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgquery-amps: killgem/kgquery-amps.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgquery-ngems: killgem/kgquery-ngems.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgquery-omnia: killgem/kgquery-omnia.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-killgem/kgquery-setup: killgem/kgquery-setup.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
-
-# Parser
-parser: parser.cpp $(INCLUDE_DIR)/*.h
+# Compilation targets
+$(DEV_ALL): %: %.cpp $(INCLUDE_DIR)/*.h
 	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
 
 # Tables
@@ -195,10 +140,7 @@ $(TABLES_DIR):
 
 # Clean
 clean:
-	@rm -vf $(QUERY_ALL)
-	@rm -vf $(BUILD_ALL)
-	@rm -vf $(COMBINE_ALL)
-	@rm -vf $(PARSER)
+	@rm -vf $(DEV_ALL)
 
 clean-white:
 	@if [ -d "white" ]; then \
