@@ -4,7 +4,7 @@
 #include <algorithm>
 
 // arrays indexed by pool_zero (1 = combine, 2 = spec)
-constexpr unsigned int ACC = 1000;		// accuracy for comparisons
+constexpr int ACC = 1000;		// accuracy for comparisons
 constexpr unsigned int SIZES[] = {0, 100, 2000};
 
 struct gem_OB {

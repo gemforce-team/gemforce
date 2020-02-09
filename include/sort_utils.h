@@ -70,7 +70,7 @@ inline bool gem_1_less(const gem1D& gem1, const gem1D& gem2)
 	return get_first(gem1) < get_first(gem2);
 }
 
-template<unsigned int ACC = 0, class gem2D>
+template<int ACC = 0, class gem2D>
 inline bool gem_12_less(const gem2D& gem1, const gem2D& gem2)
 {
 	if constexpr (ACC == 0) {
@@ -84,7 +84,7 @@ inline bool gem_12_less(const gem2D& gem1, const gem2D& gem2)
 	return get_second(gem1) < get_second(gem2);
 }
 
-template<unsigned int ACC = 0, class gem3D>
+template<int ACC = 0, class gem3D>
 inline bool gem_132_less(const gem3D& gem1, const gem3D& gem2)
 {
 	if constexpr (ACC == 0) {

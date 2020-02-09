@@ -6,13 +6,15 @@
 
 #include "leech_utils.h"
 #include "gfon.h"
-#include "options_utils.h"
+#include "cmdline_options.h"
 
 using gem = gem_O;
 
-void worker(int len, options output_options, char* filename)
+void worker(const cmdline_options& options)
 {
-	FILE* table=table_init(filename, 1);    // init leech
+	FILE* table=table_init(options.tables[0], 1);    // init leech
+
+	int len = options.target.len;
 	gem** pool = (gem**)malloc(len*sizeof(gem*));    // if not malloc-ed 690k is the limit
 	int* pool_length = (int*)malloc(len*sizeof(int));
 	pool[0] = (gem*)malloc(sizeof(gem));
@@ -28,14 +30,14 @@ void worker(int len, options output_options, char* filename)
 		printf("Table is longer than %d, no need to do anything\n\n",prevmax+1);
 		exit(1);
 	}
-	table=freopen(filename,"a", table);  // append -> updating possible
+	table=freopen(options.tables[0].c_str(), "a", table);  // append -> updating possible
 
 	for (int i=prevmax+1; i<len; ++i) {      // more building
 		int comb_tot = fill_pool_1D(pool, pool_length, i);
 
-		if (!output_options.quiet) {
+		if (!options.output.quiet) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options.debug) {
+			if (options.output.debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n\n",pool_length[i]);
 			}
@@ -51,48 +53,16 @@ void worker(int len, options output_options, char* filename)
 
 int main(int argc, char** argv)
 {
-	int len;
-	char opt;
-	options output_options = {};
-	char filename[256]="";    // it should be enough
+	cmdline_options options = cmdline_options();
+	options.set_num_tables(1);
 
-	while ((opt=getopt(argc,argv,"hdqf:"))!=-1) {
-		switch(opt) {
-			case 'h':
-				print_help("hdqf:");
-				return 0;
-			DQ_OPTIONS_BLOCK
-			case 'f':
-				strcpy(filename,optarg);
-				break;
-			case '?':
-				return 1;
-			default:
-				break;
-		}
-	}
-	if (optind==argc) {
-		printf("No length specified\n");
+	if(!options.parse_args(argc, argv))
 		return 1;
+	if (options.tables[0].empty()) {
+		options.tables[0] = "table_leech";
 	}
-	if (optind+1==argc) {
-		len = atoi(argv[optind]);
-	}
-	else {
-		printf("Too many arguments:\n");
-		while (argv[optind]!=NULL) {
-			printf("%s ", argv[optind]);
-			optind++;
-		}
-		printf("\n");
-		return 1;
-	}
-	if (len<1) {
-		printf("Improper gem number\n");
-		return 1;
-	}
-	if (filename[0]=='\0') strcpy(filename, "table_leech");
-	worker(len, output_options, filename);
+
+	worker(options);
 	return 0;
 }
 

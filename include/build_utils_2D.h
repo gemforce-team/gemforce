@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <numeric>
 
-template<unsigned int ACC, class gem>
+template<int ACC, class gem>
 inline void compression_2D(gem** pool_out_p, int* pool_length_out_p, gem* temp_pool, int pool_length_in)
 {
 	gem_sort(temp_pool, pool_length_in, AS_LAMBDA(gem_12_less<ACC>));
@@ -38,7 +38,7 @@ inline void compression_2D(gem** pool_out_p, int* pool_length_out_p, gem* temp_p
 	std::copy_if(temp_pool, temp_pool + pool_length_in, *pool_out_p, [](gem g) {return g.grade != 0;});
 }
 
-template<unsigned int ACC, class gem>
+template<int ACC, class gem>
 static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, const gem* temp_pool, int temp_length)
 {
 	int full_length = temp_length + *subpool_length_p;
@@ -54,7 +54,7 @@ static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, const g
 	free(full_array);     // free
 }
 
-template<unsigned int SIZE, unsigned int ACC, class gem>
+template<int SIZE, int ACC, class gem>
 inline int fill_pool_2D(gem** pool, int* pool_length, int i)
 {
 	const int eoc=(i+1)/ (1+1);      // end of combining

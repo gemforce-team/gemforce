@@ -9,7 +9,7 @@
 
 #include "interval_tree.h"
 
-template<unsigned int ACC, unsigned int ACC_TR, class gem>
+template<int ACC, int ACC_TR, class gem>
 static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, const gem* temp_pool, int temp_length)
 {
 	int full_length = temp_length + *subpool_length_p;
@@ -38,12 +38,12 @@ static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, const g
 
 		gem_sort(full_array, full_length, AS_LAMBDA((gem_132_less<ACC, gem>)));
 
-		int tree_length = 1 << (int)ceil(log2(tree_cells));			// this is pow(2, ceil()) bitwise for speed improvement
+		int tree_length = 1u << (int)ceil(log2(tree_cells));		// this is pow(2, ceil()) bitwise for speed improvement
 
 		second_t* tree = (second_t*)malloc((tree_length + tree_cells + 1) * sizeof(second_t));
 		std::fill_n(tree, tree_length + tree_cells + 1, -1); // init also tree[0], it's faster
 
-		for (int l = full_length - 1; l >= 0; --l) {									// start from large z
+		for (int l = full_length - 1; l >= 0; --l) {				// start from large z
 			gem& r_gem = full_array[l];
 			if (tree_check_after(tree, tree_length, get_place(r_gem), get_third(r_gem))) {
 				tree_add_element(tree, tree_length, get_place(r_gem), get_third(r_gem));
@@ -92,7 +92,7 @@ static inline void merge_subpool(gem** subpool_p, int* subpool_length_p, const g
 	free(full_array);			// free
 }
 
-template<unsigned int SIZE, unsigned int ACC, unsigned int ACC_TR, class gem>
+template<unsigned int SIZE, int ACC, int ACC_TR, class gem>
 inline int fill_pool_3D(gem** pool, int* pool_length, int i)
 {
 	const int eoc = (i + 1) / (1 + 1);      // end of combining

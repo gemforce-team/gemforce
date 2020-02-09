@@ -6,7 +6,7 @@
 /* place is always 0..N-1 */
 
 template<class T>
-void tree_add_element(T* tree, unsigned int N, unsigned int place, T val)
+void tree_add_element(T* tree, int N, int place, T val)
 {
 	place += N;
 	while (place != 1) {
@@ -22,7 +22,7 @@ void tree_add_element(T* tree, unsigned int N, unsigned int place, T val)
 }
 
 template<class T>
-bool tree_check_after(const T* tree, unsigned int N, unsigned int place, T val)
+bool tree_check_after(const T* tree, int N, int place, T val)
 {
 	place += N;
 	if (val <= tree[place])
@@ -36,7 +36,7 @@ bool tree_check_after(const T* tree, unsigned int N, unsigned int place, T val)
 }
 
 template<class T>
-T tree_read_max(const T* tree, unsigned int N, unsigned int place)
+T tree_read_max(const T* tree, int N, int place)
 {
 	place += N;
 	T result = tree[place];
@@ -49,7 +49,7 @@ T tree_read_max(const T* tree, unsigned int N, unsigned int place)
 }
 
 template<class T>
-bool tree_check_after_debug(const T* tree, unsigned int N, unsigned int place, T val)
+bool tree_check_after_debug(const T* tree, int N, int place, T val)
 {
 	printf("\nTree state (baselength %d):\n", N);
 	for (int i = 1; i < 2 * N; ++i) {

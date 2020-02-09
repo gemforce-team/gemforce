@@ -4,8 +4,8 @@
 #include <algorithm>
 
 // arrays indexed by pool_zero (1 = combine, 2 = spec)
-constexpr unsigned int ACCS[] = {0, 80, 60};	// ACC is for z-axis sorting and for the length of the interval tree
-constexpr unsigned int ACC_TR = 750;			// ACC_TR is for bbound comparisons inside tree
+constexpr int ACCS[] = {0, 80, 60};	// ACC is for z-axis sorting and for the length of the interval tree
+constexpr int ACC_TR = 750;			// ACC_TR is for bbound comparisons inside tree
 constexpr unsigned int SIZES[] = {0, 1000, 20000};
 
 struct gem_YB {

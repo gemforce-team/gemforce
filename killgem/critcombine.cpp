@@ -7,13 +7,14 @@
 #include "build_utils_1D.h"
 #include "build_utils_2D.h"
 #include "print_utils.h"
-#include "options_utils.h"
+#include "cmdline_options.h"
 
 using gem = gem_Y;
 
-void worker(int len, options output_options)
+void worker(const cmdline_options& options)
 {
 	printf("\n");
+	int len = options.target.len;
 	gem gems[len];
 	gem* pool[len];
 	int pool_length[len];
@@ -21,18 +22,18 @@ void worker(int len, options output_options)
 	gem_init(gems,1,1,1);
 	gem_init(pool[0],1,1,1);
 	pool_length[0]=1;
-	if (!output_options.quiet) gem_print(gems);
+	if (!options.output.quiet) gem_print(gems);
 
 	for (int i=1; i<len; ++i) {
 		int comb_tot = fill_pool_2D<SIZE, 0>(pool, pool_length, i);
 
 		compression_1D(gems + i, pool[i], pool_length[i]);
 		
-		if (!output_options.quiet) {
+		if (!options.output.quiet) {
 			printf("Value:\t%d\n",i+1);
-			if (output_options.info)
+			if (options.output.info)
 				printf("Growth:\t%f\n", log(gem_power(gems[i]))/log(i+1));
-			if (output_options.debug) {
+			if (options.output.debug) {
 				printf("Raw:\t%d\n",comb_tot);
 				printf("Pool:\t%d\n",pool_length[i]);
 			}
@@ -40,17 +41,17 @@ void worker(int len, options output_options)
 		}
 	}
 	
-	if (output_options.quiet) {     // outputs last if we never seen any
+	if (options.output.quiet) {     // outputs last if we never seen any
 		printf("Value:\t%d\n",len);
 		printf("Growth:\t%f\n", log(gem_power(gems[len-1]))/log(len));
-		if (output_options.debug)
+		if (options.output.debug)
 			printf("Pool:\t%d\n",pool_length[len-1]);
 		gem_print(gems+len-1);
 	}
 
 	gem* gemf=gems+len-1;  // gem that will be displayed
 
-	if (output_options.upto) {
+	if (options.target.upto) {
 		double best_growth=-INFINITY;
 		int best_index=0;
 		for (int i=0; i<len; ++i) {
@@ -67,7 +68,7 @@ void worker(int len, options output_options)
 	}
 
 	gem* gem_array = NULL;
-	if (output_options.chain) {
+	if (options.target.chain) {
 		if (len < 2) printf("I could not add chain!\n\n");
 		else {
 			int value=gem_getvalue(gemf);
@@ -79,68 +80,39 @@ void worker(int len, options output_options)
 		}
 	}
 
-	if (output_options.parens) {
+	if (options.print.parens) {
 		printf("Compressed combining scheme:\n");
 		print_parens_compressed(gemf);
 		printf("\n\n");
 	}
-	if (output_options.tree) {
+	if (options.print.tree) {
 		printf("Gem tree:\n");
 		print_tree(gemf, "");
 		printf("\n");
 	}
-	if (output_options.table) print_table(gems, len);
+	if (options.print.table) print_table(gems, len);
 	
-	if (output_options.equations) {		// it ruins gems, must be last
+	if (options.print.equations) {		// it ruins gems, must be last
 		printf("Equations:\n");
 		print_equations(gemf);
 		printf("\n");
 	}
 	
 	for (int i=0;i<len;++i) free(pool[i]);    // free
-	if (output_options.chain && len > 1) {
+	if (options.target.chain && len > 1) {
 		free(gem_array);
 	}
 }
 
 int main(int argc, char** argv)
 {
-	int len;
-	char opt;
-	options output_options = {};
-	
-	while ((opt=getopt(argc,argv,"hptecidqur"))!=-1) {
-		switch(opt) {
-			case 'h':
-				print_help("hptecidqur");
-				return 0;
-			PTECIDQUR_OPTIONS_BLOCK
-			case '?':
-				return 1;
-			default:
-				break;
-		}
-	}
-	if (optind==argc) {
-		printf("No length specified\n");
+	cmdline_options options = cmdline_options();
+	options.has_printing();
+	options.has_extra_search();
+
+	if(!options.parse_args(argc, argv))
 		return 1;
-	}
-	if (optind+1==argc) {
-		len = atoi(argv[optind]);
-	}
-	else {
-		printf("Too many arguments:\n");
-		while (argv[optind]!=NULL) {
-			printf("%s ", argv[optind]);
-			optind++;
-		}
-		printf("\n");
-		return 1;
-	}
-	if (len<1) {
-		printf("Improper gem number\n");
-		return 1;
-	}
-	worker(len, output_options);
+
+	worker(options);
 	return 0;
 }

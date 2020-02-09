@@ -6,6 +6,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <string>
 
 static const char base64encode[64] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<',  '=', '>', '?',
                                       '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',  'M', 'N', 'O',
@@ -35,8 +36,9 @@ void line_init(FILE* table, int pool_zero)
 	fprintf(table, "0\n\n");
 }
 
-FILE* table_init(const char* filename, int pool_zero)
+FILE* table_init(const std::string& table_name, int pool_zero)
 {
+	const char* filename = table_name.c_str();
 	FILE* table = fopen(filename, "rb"); // binary to check size
 	if (table == NULL) {
 		table = fopen(filename, "w");    // creation
@@ -53,8 +55,9 @@ FILE* table_init(const char* filename, int pool_zero)
 	return table;
 }
 
-FILE* file_check(const char* filename)
+FILE* file_check(const std::string& table_name)
 {
+	const char* filename = table_name.c_str();
 	FILE* table = fopen(filename, "rb");         // binary to check size
 	if (table == NULL) {
 		printf("Unexistant table: %s\n", filename);

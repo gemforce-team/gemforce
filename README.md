@@ -1,7 +1,7 @@
 gemforce
 ========
 
-Gem combining program for [Gemcraft 2: Chasing Shadows](http://gameinabottle.com/).
+Gem combining program for [Gemcraft 2: Chasing Shadows](https://store.steampowered.com/app/296490/GemCraft__Chasing_Shadows/).
 
 
 ### Table of contents:
@@ -56,7 +56,7 @@ How to do this greatly depends on the operative system you are using:
     everything you typically need will be placed in `bin/`
     
   * **manual compilation:**  
-    `gcc -std=gnu11 -O3 -flto -fwhole-program -I "include" -lm file.c -o output`  
+    `gcc -std=gnu++17 -O3 -flto -fwhole-program -I "include" -lm file.c -o output`  
     You'll then need to copy the gem tables to the directory you built the executables in.
 
 * **Windows (tested and working from XP to 8.1):**
@@ -68,7 +68,7 @@ How to do this greatly depends on the operative system you are using:
   
   * **manual compilation:**  
   Works on Windows too, but it's a bit more difficult to get hold of a compiler there.  
-  Any modern C compiler is ok, remember to include the `include` directory, as the example below:  
+  A modern C++ compiler is required, remember to include the `include` directory, as the example below:  
   `somecompiler -O3 -I "include" -lm file.c -o output`
 
 
@@ -102,7 +102,7 @@ where the flags are:
 * `t` - print best gem tree formula  
 * `e` - print best gem equations formula  
 * `c` - print best gems table (for each value best gem power)  
-* `i` - info  
+* `v` - verbose, give it twice for more info  
 * `q` - quiet & fast, compute only necessary combinations and print only final gem  
 * `u` - upto, at the end consider the best gem up to N, not the Nth  
 * `r` - adds red to the best gem, then consider the new gem  
@@ -118,27 +118,27 @@ if `number` is `100`, then:
 The `query-ngems` and `query-amps` programs support some additional flags and an extended `-f` pattern:
 
 * `f "path_spec,path_amps"` - change table files, if any is empty it'll use the default path
-* `N number` - specify how many amps you want to use (default: 6/8) `[0-8]`  
+* `Q number` - specify how many amps per gem (default: 6/8) `[0-8]`
+* `G number` - specify how many gem are seen by each amps on average (default: 1) `[0-8]`  
 * `T number` - give your True Colors skill for better amps fitting `(default: 120) [0-999]`
 
 The `query-omnia` and `query-setup` programs support an extra flag and a second number:  
 `./*query-omnia -[flags] number1 number2`
 
 * `f "path_spec,path_comb,path_amps"` - change table files, if any is empty it'll use the default path
-* `G number` - get the final power at a given equivalent grade (default: `30`) `[1-999]`  
 
 `number1` - speccing value (mandatory)  
 `number2` - combine value (can be omitted, default: `16`)
 
-Debug flags/options (you should not need these):
+Tuning flags/options (you should not need these):
 
-* `d` - prints debug text, depending on program  
 * `g number` - for `query-amps` give custom growth value (default: `16c` for that gem)  
 * `l number` - for `query-ngems` give custom hard gem limit (default: minimum between len and table len)
+* `F number` - for `query-omnia` and `query-setup` get the final power at a given equivalent grade (default: `30`) `[1-999]`  
 
 **examples:**  
 `./file -pet 32`  
-`./filequery-alone -ipf "path/to/table" 128c`  
+`./filequery-alone -vpf "path/to/table" 128c`  
 `./filequery-omnia -pq 32 16`  
 
 When in doubt about which flags are supported check with `-h`.

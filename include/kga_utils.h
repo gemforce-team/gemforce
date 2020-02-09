@@ -5,7 +5,6 @@
 
 #include "sort_utils.h"
 #include "build_utils_2D.h"
-#include "options_utils.h"
 
 inline double gem_amp_power(const gem_YB& gem1, const gem_Y& amp1, double damage_ratio, double crit_ratio)
 {
@@ -21,7 +20,7 @@ void print_omnia_table(const gem_Y* amps, const double* powers, int len)
 }
 
 template<class gem>
-inline void amps_compression(gem** poolYf, int* poolYf_length, const gem*const* poolY, const int* poolY_length, int lena, options output_options)
+inline void amps_compression(gem** poolYf, int* poolYf_length, const gem*const* poolY, const int* poolY_length, int lena, bool debug)
 {
 	for (int i = 0; i < lena; ++i) {
 		gem* temp_pool = (gem*)malloc(poolY_length[i] * sizeof(gem));
@@ -30,7 +29,7 @@ inline void amps_compression(gem** poolYf, int* poolYf_length, const gem*const* 
 		compression_2D<0>(poolYf + i, poolYf_length + i, temp_pool, poolY_length[i]);
 		free(temp_pool);
 
-		if (output_options.debug)
+		if (debug)
 			printf("Amp value %d compressed pool size:\t%d\n", i+1, poolYf_length[i]);
 	}
 }
@@ -158,7 +157,7 @@ inline void compression_3D_full(gem_YB** pool_out_p, int* pool_length_out_p, gem
 }
 
 template<class gem>
-inline void kgspec_compression(gem** poolf, int* poolf_length, const gem*const* pool, const int* pool_length, int len, options output_options)
+inline void kgspec_compression(gem** poolf, int* poolf_length, const gem*const* pool, const int* pool_length, int len, bool debug)
 {
 	for (int i = 0; i < len; ++i) {
 		gemP* temp_array = (gemP*)malloc(pool_length[i] * sizeof(gemP));
@@ -169,7 +168,7 @@ inline void kgspec_compression(gem** poolf, int* poolf_length, const gem*const* 
 		compression_3D_full(poolf + i, poolf_length + i, temp_array, pool_length[i]);
 		free(temp_array);
 
-		if (output_options.debug)
+		if (debug)
 			printf("Killgem value %d speccing compressed pool size:\t%d\n", i + 1, poolf_length[i]);
 	}
 }

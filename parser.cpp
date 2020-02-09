@@ -10,7 +10,8 @@
 #include "gem_stats.h"
 #include "print_utils.h"
 #include "gem_utils.h"
-#include "options_utils.h"
+#include "effective_skills.h"
+#include "cmdline_options.h"
 
 using namespace std;
 
@@ -268,7 +269,7 @@ string ieeePreParser(string recipe)
 	return recipe;
 }
 
-void worker(string parens, string parens_amps, options output_options, int TC, int As, int Namps)
+void worker(string parens, string parens_amps, const cmdline_options& options)
 {
 	int index=0;
 	int value=(parens.length()+3)/4;
@@ -284,17 +285,17 @@ void worker(string parens, string parens_amps, options output_options, int TC, i
 	
 	printf("\nMain gem:\n");
 	gem_print(gemf);
-	if (output_options.parens) {
+	if (options.print.parens) {
 		printf("Compressed combining scheme:\n");
 		print_parens_compressed(gemf);
 		printf("\n\n");
 	}
-	if (output_options.tree) {
+	if (options.print.tree) {
 		printf("Gem tree:\n");
 		print_tree(gemf, "");
 		printf("\n");
 	}
-	if (output_options.equations) {
+	if (options.print.equations) {
 		printf("Equations:\n");
 		print_equations(gemf);
 		printf("\n");
@@ -313,36 +314,38 @@ void worker(string parens, string parens_amps, options output_options, int TC, i
 			exit(1);
 		}
 		
-		printf("Amplifier (x%d)\n", Namps);
+		printf("Amplifier (x%d)\n", options.amps.number_per_gem);
 		gem_print(ampf);
-		if (output_options.parens) {
+		if (options.print.parens) {
 			printf("Amplifier scheme:\n");
 			print_parens_compressed(ampf);
 			printf("\n\n");
 		}
-		if (output_options.tree) {
+		if (options.print.tree) {
 			printf("Amplifier tree:\n");
 			print_tree(ampf, "");
 			printf("\n");
 		}
-		if (output_options.equations) {
+		if (options.print.equations) {
 			printf("Amplifier equations:\n");
 			print_equations(ampf);
 			printf("\n");
 		}
-		double specials_ratio=Namps*(0.15+As/3*0.004)*2*(1+0.03*TC)/(1.0+TC/3*0.1);
-		double damage_ratio  =Namps*(0.20+As/3*0.004) * (1+0.03*TC)/(1.2+TC/3*0.1);
+		double specials_ratio = special_ratio_gccs(options);
+		double damage_ratio = damage_ratio_gccs(options);
 		if (gemf->color==COLOR_MANAGEM || gemf->color==COLOR_UNKNOWN) {
 			double power = gem_amp_mana_power(*gemf, *ampf, specials_ratio);
 			printf("Global mana power:\t%#.7g\n", power);
-			int tvalue = gemf->getvalue() + Namps*ampf->getvalue();
-			printf("Spec coefficient:\t%f\n\n", pow(tvalue, -0.627216)*power);
+			int tvalue = gemf->getvalue() + options.amps.number_per_gem*ampf->getvalue();
+			double combine_growth = options.tuning.combine_growth != 0 ? options.tuning.combine_growth : 0.627216;
+			printf("Spec coefficient:\t%f\n\n", pow(tvalue, -combine_growth)*power);
 		}
 		if (gemf->color==COLOR_KILLGEM || gemf->color==COLOR_UNKNOWN) {
 			double power = gem_amp_kill_power(*gemf, *ampf, damage_ratio, specials_ratio);
 			printf("Global kill power:\t%#.7g\n", power);
-			int tvalue = gemf->getvalue() + Namps*ampf->getvalue();
-			printf("Spec coefficient:\t%f\n\n", pow(tvalue, -1.414061)*power);
+			int tvalue = gemf->getvalue() + options.amps.number_per_gem*ampf->getvalue();
+			double combine_growth = options.tuning.combine_growth != 0 ? options.tuning.combine_growth : 1.414061;
+			printf("Spec coefficient:\t%f\n\n", pow(tvalue, -combine_growth)*power);
 		}
 		delete[] amps;
 	}
@@ -351,19 +354,35 @@ void worker(string parens, string parens_amps, options output_options, int TC, i
 
 int main(int argc, char** argv)
 {
+	cmdline_options options = cmdline_options();
+	options.has_printing();
+	options.has_amps();
+	options.has_nonpures();
+	options.has_combine_growth();
+
+	options.skills.TC = 120;
+	options.skills.amps = 60;
+	options.amps.number_per_gem = 6;
+
 	string parens="";
 	string parens_amps="";
-	char opt;
-	int TC=120;
-	int As=60;
-	int Namps=6;
-	options output_options = {};
-	while ((opt=getopt(argc,argv,"hptef:a:T:A:N:"))!=-1) {
+	int opt;
+	while ((opt=getopt(argc,argv,"hpteT:A:Q:G:g:f:a:"))!=-1) {
 		switch(opt) {
 			case 'h':
-				print_help("hptef:a:T:A:N:");
-			return 0;
-			PTECIDQUR_OPTIONS_BLOCK
+				options.print_help();
+				printf("f:a:\n");
+				return 0;
+			case 'p':
+			case 't':
+			case 'e':
+			case 'T':
+			case 'A':
+			case 'Q':
+			case 'G':
+			case 'g':
+				options.read_cmdline_opt(opt, optarg);
+				break;
 			case 'f': {
 				ifstream file;
 				file.open(optarg, fstream::out);
@@ -373,16 +392,6 @@ int main(int argc, char** argv)
 			} break;
 			case 'a':
 				parens_amps = ieeePreParser(optarg);
-				break;
-			//TAN_OPTIONS_BLOCK
-			case 'T':
-				TC=atoi(optarg);
-				break;
-			case 'A':
-				As=atoi(optarg);
-				break;
-			case 'N':
-				Namps=atoi(optarg);
 				break;
 			case '?':
 				return 1;
@@ -410,6 +419,6 @@ int main(int argc, char** argv)
 		printf("Improper recipe\n");
 		return 1;
 	}
-	worker(parens, parens_amps, output_options, TC, As, Namps);
+	worker(parens, parens_amps, options);
 	return 0;
 }

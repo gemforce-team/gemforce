@@ -5,7 +5,6 @@
 #include <cstdlib>
 
 #include "sort_utils.h"
-#include "options_utils.h"
 
 inline double gem_amp_power(const gem_OB& gem1, const gem_O& amp1, double leech_ratio)
 {
@@ -61,7 +60,7 @@ inline void compression_2D_full(gem** pool_out_p, int* pool_length_out_p, gem* t
 }
 
 template<class gem>
-inline void mgspec_compression(gem** poolf, int* poolf_length, const gem*const* pool, const int* pool_length, int len, options output_options)
+inline void mgspec_compression(gem** poolf, int* poolf_length, const gem*const* pool, const int* pool_length, int len, bool debug)
 {
 	for (int i = 0; i < len; ++i) {
 		gem* temp_pool = (gem*)malloc(pool_length[i] * sizeof(gem));
@@ -70,7 +69,7 @@ inline void mgspec_compression(gem** poolf, int* poolf_length, const gem*const* 
 		compression_2D_full(poolf + i, poolf_length + i, temp_pool, pool_length[i]);
 		free(temp_pool);
 
-		if (output_options.debug)
+		if (debug)
 			printf("Managem value %d speccing compressed pool size:\t%d\n", i + 1, poolf_length[i]);
 	}
 }
