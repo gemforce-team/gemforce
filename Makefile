@@ -15,9 +15,9 @@ CXXFLAGS:=$(CXXSTD) $(WFLAGS) $(OFLAGS) $(IFLAGS)
 LIBFLAGS:=-lm
 
 # Query
-QUERY_LEECH=managem/leechquery
+QUERY_LEECH=leechgem/leechquery
 QUERY_MANAGEM=managem/mgquery-alone managem/mgquery-amps managem/mgquery-setup managem/mgquery-omnia
-QUERY_CRIT=killgem/critquery
+QUERY_CRIT=critgem/critquery
 QUERY_KILLGEM=killgem/kgquery-alone killgem/kgquery-amps killgem/kgquery-setup killgem/kgquery-omnia
 QUERY_MGNGEM=managem/mgquery-ngems
 QUERY_KGNGEM=killgem/kgquery-ngems
@@ -25,16 +25,16 @@ QUERY_DIST=$(QUERY_LEECH) $(QUERY_MANAGEM) $(QUERY_KILLGEM)
 QUERY_ALL=$(QUERY_DIST) $(QUERY_CRIT) $(QUERY_MGNGEM) $(QUERY_KGNGEM)
 
 # Build
-BUILD_LEECH=managem/leechbuild
+BUILD_LEECH=leechgem/leechbuild
 BUILD_MANAGEM=managem/mgbuild-appr managem/mgbuild-exact managem/mgbuild-c6
-BUILD_CRIT=killgem/critbuild
+BUILD_CRIT=critgem/critbuild
 BUILD_KILLGEM=killgem/kgbuild-appr killgem/kgbuild-exact killgem/kgbuild-c6
 BUILD_ALL=$(BUILD_LEECH) $(BUILD_MANAGEM) $(BUILD_CRIT) $(BUILD_KILLGEM)
 
 # Combine
-COMBINE_LEECH=managem/leechcombine
+COMBINE_LEECH=leechgem/leechcombine
 COMBINE_MANAGEM=managem/mgcombine-appr
-COMBINE_CRIT=killgem/critcombine
+COMBINE_CRIT=critgem/critcombine
 COMBINE_KILLGEM=killgem/kgcombine-appr killgem/kgcombine-exact
 COMBINE_ALL=$(COMBINE_LEECH) $(COMBINE_MANAGEM) $(COMBINE_CRIT) $(COMBINE_KILLGEM)
 
