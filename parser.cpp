@@ -314,7 +314,7 @@ void worker(string parens, string parens_amps, const cmdline_options& options)
 			exit(1);
 		}
 		
-		printf("Amplifier (x%d)\n", options.amps.number_per_gem);
+		printf("Amplifier (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 		gem_print(ampf);
 		if (options.print.parens) {
 			printf("Amplifier scheme:\n");

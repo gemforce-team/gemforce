@@ -116,7 +116,7 @@ void worker(const cmdline_options& options)
 			printf("Value:\t%d\n",gem_getvalue(gems+i));
 			if (options.output.debug) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
 			gem_print(gems+i);
-			printf("Amplifier (x%d)\n", options.amps.number_per_gem);
+			printf("Amplifier (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 			printf("Value:\t%d\n",gem_getvalue(amps+i));
 			if (options.output.debug) printf("Pool:\t%d\n",poolYf_length[gem_getvalue(amps+i)-1]);
 			gem_print(amps+i);
@@ -130,7 +130,7 @@ void worker(const cmdline_options& options)
 		printf("Killgem\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+len-1));
 		gem_print(gems+len-1);
-		printf("Amplifier (x%d)\n", options.amps.number_per_gem);
+		printf("Amplifier (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 		printf("Value:\t%d\n", gem_getvalue(amps+len-1));
 		gem_print(amps+len-1);
 		printf("Spec base power: \t%#.7g\n\n", gem_amp_power(gems[len-1], amps[len-1], damage_ratio, crit_ratio));
@@ -150,7 +150,7 @@ void worker(const cmdline_options& options)
 			printf("Killgem\n");
 			printf("Value:\t%d\n", value);
 			gem_print(gemf);
-			printf("Amplifier (x%d)\n", options.amps.number_per_gem);
+			printf("Amplifier (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 			printf("Value:\t%d\n", gem_getvalue(ampf));
 			gem_print(ampf);
 			printf("Spec base power with chain:\t%#.7g\n\n", gem_amp_power(*gemf, *ampf, damage_ratio, crit_ratio));

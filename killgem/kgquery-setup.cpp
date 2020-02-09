@@ -145,7 +145,7 @@ void worker(const cmdline_options& options)
 			printf("Value:\t%d\n",i+1);
 			if (options.output.debug) printf("Pool:\t%d\n",poolf_length[i]);
 			gem_print(gems+i);
-			printf("Amplifier spec (x%d)\n", options.amps.number_per_gem);
+			printf("Amplifier spec (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 			printf("Value:\t%d\n",gem_getvalue(amps+i));
 			if (options.output.debug) printf("Pool:\t%d\n",poolYf_length[gem_getvalue(amps+i)-1]);
 			gem_print(amps+i);
@@ -161,7 +161,7 @@ void worker(const cmdline_options& options)
 		printf("Killgem spec\n");
 		printf("Value:\t%d\n",len);
 		gem_print(gems+len-1);
-		printf("Amplifier spec (x%d)\n", options.amps.number_per_gem);
+		printf("Amplifier spec (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 		printf("Value:\t%d\n",gem_getvalue(amps+len-1));
 		gem_print(amps+len-1);
 		printf("Setup combine\n");
@@ -189,7 +189,7 @@ void worker(const cmdline_options& options)
 		printf("Killgem spec\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+best_index));
 		gem_print(gems+best_index);
-		printf("Amplifier spec (x%d)\n", options.amps.number_per_gem);
+		printf("Amplifier spec (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 		printf("Value:\t%d\n", gem_getvalue(amps+best_index));
 		gem_print(amps+best_index);
 		printf("Setup combine\n");
@@ -215,7 +215,7 @@ void worker(const cmdline_options& options)
 			printf("Killgem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
 			gem_print(gemf);
-			printf("Amplifier spec (x%d)\n", options.amps.number_per_gem);
+			printf("Amplifier spec (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 			printf("Value:\t%d\n", valueA);
 			gem_print(ampf);
 			printf("Setup combine\n");
