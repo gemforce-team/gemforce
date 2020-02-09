@@ -15,7 +15,7 @@
 #include "cmdline_options.h"
 
 using gem = gem_YB;
-using gemY = gem_Y;
+using gemA = gem_Y;
 
 void worker(const cmdline_options& options)
 {
@@ -42,35 +42,35 @@ void worker(const cmdline_options& options)
 	gem* poolf[len];
 	int poolf_length[len];
 	
-	kgspec_compression(poolf, poolf_length, pool, pool_length, len, options.output.debug);
+	specs_compression(poolf, poolf_length, pool, pool_length, len, options.output.debug);
 	if (!options.output.quiet) printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(options.tables[1]);	// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena=std::max(len, lenc);
-	gemY** poolY = (gemY**)malloc(lena*sizeof(gemY*));
-	int* poolY_length = (int*)malloc(lena*sizeof(int));
-	poolY[0] = (gemY*)malloc(sizeof(gemY));
-	poolY_length[0]=1;
-	gem_init(poolY[0],1,1,1);
+	gemA** poolA = (gemA**)malloc(lena*sizeof(gemA*));
+	int* poolA_length = (int*)malloc(lena*sizeof(int));
+	poolA[0] = (gemA*)malloc(sizeof(gemA));
+	poolA_length[0]=1;
+	gem_init(poolA[0],1,1,1);
 	
-	int prevmaxA=pool_from_table(poolY, poolY_length, lena, tableA);		// amps pool filling
+	int prevmaxA=pool_from_table(poolA, poolA_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
 	if (prevmaxA<lena-1) {
-		for (int i =0;i<=prevmaxA;++i) free(poolY[i]);		// free
+		for (int i =0;i<=prevmaxA;++i) free(poolA[i]);		// free
 		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
 	
-	gemY** poolYf = (gemY**)malloc(lena*sizeof(gemY*));		// if not malloc-ed 140k is the limit
-	int poolYf_length[lena];
+	gemA** poolAf = (gemA**)malloc(lena*sizeof(gemA*));		// if not malloc-ed 140k is the limit
+	int poolAf_length[lena];
 	
-	amps_compression(poolYf, poolYf_length, poolY, poolY_length, lena, options.output.debug);
-	gemY poolYc[poolYf_length[lenc-1]];
-	int poolYc_length=poolYf_length[lenc-1];
+	amps_compression(poolAf, poolAf_length, poolA, poolA_length, lena, options.output.debug);
+	gemA poolAc[poolAf_length[lenc-1]];
+	int poolAc_length=poolAf_length[lenc-1];
 	
-	for (int i =0; i<poolYf_length[lenc-1]; ++i) {		// amps fast access combining pool
-		poolYc[i]=poolYf[lenc-1][i];
+	for (int i =0; i<poolAf_length[lenc-1]; ++i) {		// amps fast access combining pool
+		poolAc[i]=poolAf[lenc-1][i];
 	}
 	if (!options.output.quiet) printf("Amp combining pool compression done!\n");
 
@@ -93,22 +93,22 @@ void worker(const cmdline_options& options)
 	gem* poolcf;
 	int poolcf_length;
 	
-	kgcomb_compression(&poolcf, &poolcf_length, poolc[lenc - 1], poolc_length[lenc - 1]);
+	combs_compression(&poolcf, &poolcf_length, poolc[lenc - 1], poolc_length[lenc - 1]);
 	if (!options.output.quiet) printf("Gem combine compressed pool size:\t%d\n",poolcf_length);
 
 	int cpairs_length;
 	cpair* cpairs;
 	
 	{				// cpair compression
-		int length = poolcf_length*poolYc_length;
+		int length = poolcf_length*poolAc_length;
 		cpair* temp_array = (cpair*)malloc(length*sizeof(cpair));
 		int index=0;
 		for (int l=0; l<poolcf_length; ++l) {
-			for (int m=0; m<poolYc_length; ++m) {
+			for (int m=0; m<poolAc_length; ++m) {
 				double power = gem_power(poolcf[l]);
-				double rdmg  = poolYc[m].damage/poolcf[l].damage;
-				double rcrit = poolYc[m].crit / poolcf[l].crit;
-				temp_array[index++] = (cpair){power, rdmg, rcrit, poolcf+l, poolYc+m, 0};
+				double rdmg  = poolAc[m].damage/poolcf[l].damage;
+				double rcrit = poolAc[m].crit / poolcf[l].crit;
+				temp_array[index++] = (cpair){power, rdmg, rcrit, poolcf+l, poolAc+m, 0};
 			}
 		}
 		gem_sort(temp_array, length, cpair_less_rcrit);			/* work starts */
@@ -192,9 +192,9 @@ void worker(const cmdline_options& options)
 
 	// let's choose the right gem-amp combo
 	gem gems[len];						// for every speccing value
-	gemY amps[len];						// we'll choose the best amps
+	gemA amps[len];						// we'll choose the best amps
 	gem gemsc[len];						// and the best NC combine
-	gemY ampsc[len];					// for both
+	gemA ampsc[len];					// for both
 	double powers[len];
 	gem_init(gems,1,1,1,0);
 	gem_init(amps,0,0,0);
@@ -235,9 +235,9 @@ void worker(const cmdline_options& options)
 				double Cg = pow(cpairs[l].power,c);
 				double Rd = damage_ratio*pow(cpairs[l].rdmg, c);
 				double Rc = crit_ratio * pow(cpairs[l].rcrit,c);
-				for (int h=0; h<poolYf_length[j]; ++h) {				// then in the reduced amp pool
-					double Pad = Rd * poolYf[j][h].damage;
-					double Pac = Rc * poolYf[j][h].crit  ;
+				for (int h=0; h<poolAf_length[j]; ++h) {				// then in the reduced amp pool
+					double Pad = Rd * poolAf[j][h].damage;
+					double Pac = Rc * poolAf[j][h].crit  ;
 					for (int k=0; k<poolf_length[i]; ++k) {				// and in the gem pool
 						double Pext = Cg * poolf[i][k].bbound * poolf[i][k].bbound;
 						double Pdamage = poolf[i][k].damage + Pad;
@@ -246,7 +246,7 @@ void worker(const cmdline_options& options)
 						if (power>powers[i]) {
 							powers[i]=power;
 							gems[i]=poolf[i][k];
-							amps[i]=poolYf[j][h];
+							amps[i]=poolAf[j][h];
 							gemsc[i]=*(cpairs[l].combg);
 							ampsc[i]=*(cpairs[l].comba);
 						}
@@ -261,7 +261,7 @@ void worker(const cmdline_options& options)
 			gem_print(gems+i);
 			printf("Amplifier spec (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 			printf("Value:\t%d\n",gem_getvalue(amps+i));
-			if (options.output.debug) printf("Pool:\t%d\n",poolYf_length[gem_getvalue(amps+i)-1]);
+			if (options.output.debug) printf("Pool:\t%d\n",poolAf_length[gem_getvalue(amps+i)-1]);
 			gem_print(amps+i);
 			printf("Killgem combine\n");
 			printf("Comb:\t%d\n",lenc);
@@ -294,9 +294,9 @@ void worker(const cmdline_options& options)
 	}
 
 	gem*  gemf = gems+len-1;  // gem  that will be displayed
-	gemY* ampf = amps+len-1;  // amp  that will be displayed
+	gemA* ampf = amps+len-1;  // amp  that will be displayed
 	gem*  gemfc=gemsc+len-1;  // gemc that will be displayed
-	gemY* ampfc=ampsc+len-1;  // ampc that will be displayed
+	gemA* ampfc=ampsc+len-1;  // ampc that will be displayed
 
 	if (options.target.upto) {
 		double best_pow=0;
@@ -413,11 +413,11 @@ void worker(const cmdline_options& options)
 	free(poolc);
 	free(poolc_length);
 	free(poolcf);
-	for (int i =0;i<lena;++i) free(poolY[i]);		// free amps
-	for (int i =0;i<lena;++i) free(poolYf[i]);		// free amps compressed
-	free(poolY);
-	free(poolY_length);
-	free(poolYf);
+	for (int i =0;i<lena;++i) free(poolA[i]);		// free amps
+	for (int i =0;i<lena;++i) free(poolAf[i]);		// free amps compressed
+	free(poolA);
+	free(poolA_length);
+	free(poolAf);
 	free(cpairs);
 	if (options.target.chain && len > 2) {
 		free(gem_array);

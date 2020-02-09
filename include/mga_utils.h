@@ -60,7 +60,7 @@ inline void compression_2D_full(gem** pool_out_p, int* pool_length_out_p, gem* t
 }
 
 template<class gem>
-inline void mgspec_compression(gem** poolf, int* poolf_length, const gem*const* pool, const int* pool_length, int len, bool debug)
+inline void specs_compression(gem** poolf, int* poolf_length, const gem*const* pool, const int* pool_length, int len, bool debug)
 {
 	for (int i = 0; i < len; ++i) {
 		gem* temp_pool = (gem*)malloc(pool_length[i] * sizeof(gem));
@@ -75,16 +75,16 @@ inline void mgspec_compression(gem** poolf, int* poolf_length, const gem*const* 
 }
 
 template<class gem>
-inline void mgcomb_compression(gem** poolcf_p, int* poolcf_length_p, gem* poolc, int poolc_length)
+inline void combs_compression(gem** poolcf_p, int* poolcf_length_p, gem* poolc, int poolc_length)
 {
 	compression_2D_full(poolcf_p, poolcf_length_p, poolc, poolc_length);
 }
 
 template<class gem>
-inline void amps_compression(gem* bestO, const gem*const* poolO, const int* poolO_length, int lena)
+inline void amps_compression(gem* bestA, const gem*const* poolA, const int* poolA_length, int lena)
 {
 	for (int i = 0; i < lena; ++i) {
-		compression_1D(bestO + i, poolO[i], poolO_length[i]);
+		compression_1D(bestA + i, poolA[i], poolA_length[i]);
 	}
 }
 

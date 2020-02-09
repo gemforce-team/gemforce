@@ -13,9 +13,9 @@
 #include "cmdline_options.h"
 
 using gem = gem_OB;
-using gemO = gem_O;
+using gemA = gem_O;
 
-void print_ngems_table(const gem* gems, const gemO* amps, double leech_ratio, int len)
+void print_ngems_table(const gem* gems, const gemA* amps, double leech_ratio, int len)
 {
 	printf("# Gems\tManagem\tAmps\tPower\n");
 	
@@ -49,34 +49,34 @@ void worker(const cmdline_options& options)
 	gem* poolf[len];
 	int poolf_length[len];
 	
-	mgspec_compression(poolf, poolf_length, pool, pool_length, len, options.output.debug);
+	specs_compression(poolf, poolf_length, pool, pool_length, len, options.output.debug);
 	if (!options.output.quiet) printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(options.tables[1]);	// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena = options.amps.number_per_gem ? len/options.amps.number_per_gem : 1;		// if options.amps.number_per_gem==0 let lena=1
-	gemO* poolO[lena];
-	int poolO_length[lena];
-	poolO[0] = (gemO*)malloc(sizeof(gemO));
-	poolO_length[0]=1;
-	gem_init(poolO[0],1,1);
+	gemA* poolA[lena];
+	int poolA_length[lena];
+	poolA[0] = (gemA*)malloc(sizeof(gemA));
+	poolA_length[0]=1;
+	gem_init(poolA[0],1,1);
 	
-	int prevmaxA=pool_from_table(poolO, poolO_length, lena, tableA);		// amps pool filling
+	int prevmaxA=pool_from_table(poolA, poolA_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
 	if (prevmaxA<lena-1) {
-		for (int i =0;i<=prevmaxA;++i) free(poolO[i]);		// free
+		for (int i =0;i<=prevmaxA;++i) free(poolA[i]);		// free
 		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
 
-	gemO* bestO = (gemO*)malloc(lena*sizeof(gemO));		// if not malloc-ed 140k is the limit
+	gemA* bestA = (gemA*)malloc(lena*sizeof(gemA));		// if not malloc-ed 140k is the limit
 	
-	amps_compression(bestO, poolO, poolO_length, lena);
+	amps_compression(bestA, poolA, poolA_length, lena);
 	if (!options.output.quiet) printf("Amp pool compression done!\n\n");
 
 	// let's choose the right gem-amp combo
 	gem gems[len];
-	gemO amps[len];
+	gemA amps[len];
 	gem_init(gems,1,1,0);
 	amps[0] = {};
 	double leech_ratio = special_ratio_gccs(options);
@@ -96,11 +96,11 @@ void worker(const cmdline_options& options)
 		for (int j=1;j<=i/options.amps.number_per_gem;++j) {		// for every amount of amps we can fit in
 			int value = i-options.amps.number_per_gem*j;			// this is the amount of gems we have left
 			for (int k=0; k<poolf_length[value]; ++k) {			// we search in that pool
-				if (gem_amp_power(poolf[value][k], bestO[j-1], leech_ratio) > power)
+				if (gem_amp_power(poolf[value][k], bestA[j-1], leech_ratio) > power)
 				{
-					power = gem_amp_power(poolf[value][k], bestO[j-1], leech_ratio);
+					power = gem_amp_power(poolf[value][k], bestA[j-1], leech_ratio);
 					gems[i]=poolf[value][k];
-					amps[i]=bestO[j-1];
+					amps[i]=bestA[j-1];
 				}
 			}
 		}
@@ -131,7 +131,7 @@ void worker(const cmdline_options& options)
 	}
 
 	gem*  gemf=gems+len-1;  // gem that will be displayed
-	gemO* ampf=amps+len-1;  // amp that will be displayed
+	gemA* ampf=amps+len-1;  // amp that will be displayed
 
 	gem* gem_array = NULL;
 	if (options.target.chain) {
@@ -180,8 +180,8 @@ void worker(const cmdline_options& options)
 	
 	for (int i =0;i<len;++i) free(pool[i]);			// free gems
 	for (int i =0;i<len;++i) free(poolf[i]);			// free gems compressed
-	for (int i =0;i<lena;++i) free(poolO[i]);		// free amps
-	free(bestO);										// free amps compressed
+	for (int i =0;i<lena;++i) free(poolA[i]);		// free amps
+	free(bestA);										// free amps compressed
 	if (options.target.chain && len > 2) {
 		free(gem_array);
 	}
