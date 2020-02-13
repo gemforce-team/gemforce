@@ -1,5 +1,6 @@
 # Compilation results
 bin/
+.deps/
 
 # Tables to test with
 /table_*

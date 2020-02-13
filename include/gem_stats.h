@@ -123,6 +123,13 @@ constexpr double SUPPR_D1_2 = 1.13;
 constexpr double SUPPR_GN_1 = 0.92;
 constexpr double SUPPR_GN_2 = 0.73;
 
+// Bleed
+constexpr double BLEED_EQ_1 = 0.81;
+constexpr double BLEED_EQ_2 = 0.35;
+constexpr double BLEED_D1_1 = 0.80;
+constexpr double BLEED_D1_2 = 0.28;
+constexpr double BLEED_GN_1 = 0.79;
+constexpr double BLEED_GN_2 = 0.26;
 
 // -------------------------
 // Damage (relative to Crit)
@@ -137,6 +144,9 @@ constexpr double DAMAGE_LEECH  =  8./11.;
 constexpr double DAMAGE_ARMOR  = 11./11.;
 constexpr double DAMAGE_SUPPR  = 12./11.;
 constexpr double DAMAGE_PBOUND = 12./11.;
+
+constexpr double DAMAGE_LEECH_GCFW =  9./11.;
+constexpr double DAMAGE_BLEED      = 12./11.;
 
 // -------------------------
 // Colors (single char)
@@ -155,6 +165,8 @@ constexpr char COLOR_PBOUND = 'w';
 constexpr char COLOR_MANAGEM = 'm';
 constexpr char COLOR_KILLGEM = 'k';
 constexpr char COLOR_SBGEM   = 'h';
+
+constexpr char COLOR_BLEED   = 'r';
 
 constexpr char COLOR_GENERIC = 'g';
 constexpr char COLOR_UNKNOWN = 'x';

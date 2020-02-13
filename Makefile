@@ -21,28 +21,32 @@ QUERY_CRIT=critgem/critquery critgem/critquery-amps
 QUERY_KILLGEM=killgem/kgquery-alone killgem/kgquery-amps killgem/kgquery-setup killgem/kgquery-omnia
 QUERY_MGNGEM=managem/mgquery-ngems
 QUERY_KGNGEM=killgem/kgquery-ngems
-QUERY_DIST=$(QUERY_LEECH) $(QUERY_MANAGEM) $(QUERY_KILLGEM)
-QUERY_ALL=$(QUERY_DIST) $(QUERY_CRIT) $(QUERY_MGNGEM) $(QUERY_KGNGEM)
+QUERY_BLEED=bleedgem/bleedquery
+QUERY_DIST=$(QUERY_LEECH) $(QUERY_MANAGEM) $(QUERY_CRIT) $(QUERY_KILLGEM) $(QUERY_BLEED)
+QUERY_ALL=$(QUERY_DIST) $(QUERY_MGNGEM) $(QUERY_KGNGEM)
 
 # Build
 BUILD_LEECH=leechgem/leechbuild
 BUILD_MANAGEM=managem/mgbuild-appr managem/mgbuild-exact managem/mgbuild-c6
 BUILD_CRIT=critgem/critbuild
 BUILD_KILLGEM=killgem/kgbuild-appr killgem/kgbuild-exact killgem/kgbuild-c6
-BUILD_ALL=$(BUILD_LEECH) $(BUILD_MANAGEM) $(BUILD_CRIT) $(BUILD_KILLGEM)
+BUILD_BLEED=bleedgem/bleedbuild
+BUILD_ALL=$(BUILD_LEECH) $(BUILD_MANAGEM) $(BUILD_CRIT) $(BUILD_KILLGEM) $(BUILD_BLEED)
 
 # Combine
 COMBINE_LEECH=leechgem/leechcombine
 COMBINE_MANAGEM=managem/mgcombine-appr
 COMBINE_CRIT=critgem/critcombine
 COMBINE_KILLGEM=killgem/kgcombine-appr killgem/kgcombine-exact
-COMBINE_ALL=$(COMBINE_LEECH) $(COMBINE_MANAGEM) $(COMBINE_CRIT) $(COMBINE_KILLGEM)
+COMBINE_BLEED=bleedgem/bleedcombine
+COMBINE_ALL=$(COMBINE_LEECH) $(COMBINE_MANAGEM) $(COMBINE_CRIT) $(COMBINE_KILLGEM) $(COMBINE_BLEED)
 
 # Type aggregates
 LEECH_ALL=$(QUERY_LEECH) $(BUILD_LEECH) $(COMBINE_LEECH)
 MANAGEM_ALL=$(QUERY_MANAGEM) $(QUERY_MGNGEM) $(BUILD_MANAGEM) $(COMBINE_MANAGEM)
 CRIT_ALL=$(QUERY_CRIT) $(BUILD_CRIT) $(COMBINE_CRIT)
 KILLGEM_ALL=$(QUERY_KILLGEM) $(QUERY_KGNGEM) $(BUILD_KILLGEM) $(COMBINE_KILLGEM)
+BLEED_ALL=$(QUERY_BLEED) $(BUILD_BLEED) $(COMBINE_BLEED)
 
 # Parser
 PARSER=parser
@@ -55,6 +59,7 @@ BINDIR:=bin
 WINDIR:=$(BINDIR)/win
 TABLES_DIR:=gem_tables
 INCLUDE_DIR:=include
+DEPS_DIR:=.deps
 
 # Version
 VERSION:=$(shell git describe --tags | rev | cut -d '-' -f2- | rev)
@@ -86,6 +91,7 @@ set-leech: $(LEECH_ALL)
 set-managem: $(MANAGEM_ALL)
 set-crit: $(CRIT_ALL)
 set-killgem: $(KILLGEM_ALL)
+set-bleed: $(BLEED_ALL)
 
 .PHONY: set-query set-build set-combine set-leech set-managem set-crit set-killgem
 
@@ -122,9 +128,15 @@ $(BINDIR):
 
 .PHONY: move move-white
 
+# Include deps folder
+-include $(wildcard $(DEPS_DIR)/*.d)
+
 # Compilation targets
-$(DEV_ALL): %: %.cpp $(INCLUDE_DIR)/*.h
-	$(CXX) $(CXXFLAGS) $< $(LIBFLAGS) -o $@
+$(DEV_ALL): %: %.cpp | $(DEPS_DIR)
+	$(CXX) $(CXXFLAGS) -MMD -MF $(DEPS_DIR)/$(<F).d -MT $@ $< $(LIBFLAGS) -o $@
+
+$(DEPS_DIR):
+	mkdir -p $(DEPS_DIR)
 
 # Tables
 tables: $(TABLES_DIR)/table_* | $(TABLES_DIR) $(BINDIR)
@@ -138,6 +150,7 @@ $(TABLES_DIR):
 # Clean
 clean:
 	@rm -vf $(DEV_ALL)
+	@rm $(DEPS_DIR)/*
 
 clean-white:
 	@if [ -d "white" ]; then \
