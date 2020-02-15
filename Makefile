@@ -28,7 +28,7 @@ QUERY_ALL=$(QUERY_DIST) $(QUERY_MGNGEM) $(QUERY_KGNGEM)
 # Build
 BUILD_LEECH=leechgem/leechbuild
 BUILD_MANAGEM=managem/mgbuild-appr managem/mgbuild-exact managem/mgbuild-c6
-BUILD_CRIT=critgem/critbuild
+BUILD_CRIT=critgem/critbuild critgem/critbuild-c6
 BUILD_KILLGEM=killgem/kgbuild-appr killgem/kgbuild-exact killgem/kgbuild-c6
 BUILD_BLEED=bleedgem/bleedbuild
 BUILD_ALL=$(BUILD_LEECH) $(BUILD_MANAGEM) $(BUILD_CRIT) $(BUILD_KILLGEM) $(BUILD_BLEED)
