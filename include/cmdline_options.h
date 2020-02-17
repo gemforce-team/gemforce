@@ -253,7 +253,7 @@ public:
 		// fill up to desired size with empty strings
 		this->tables.resize(this->num_tables_);
 
-		if (this->output.debug) {
+		if (this->output.debug && this->num_tables_ > 0) {
 			printf("Selected table(s):");
 			for (auto& s : this->tables)
 				printf(" %s", s.c_str());
