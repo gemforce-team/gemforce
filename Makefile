@@ -49,7 +49,7 @@ KILLGEM_ALL=$(QUERY_KILLGEM) $(QUERY_KGNGEM) $(BUILD_KILLGEM) $(COMBINE_KILLGEM)
 BLEED_ALL=$(QUERY_BLEED) $(BUILD_BLEED) $(COMBINE_BLEED)
 
 # Utilities
-UTILITIES=utilities/parser utilities/explore-table
+UTILITIES=$(basename $(wildcard utilities/*.cpp))
 
 # All
 DEV_ALL=$(QUERY_ALL) $(BUILD_ALL) $(COMBINE_ALL) $(UTILITIES)
