@@ -288,6 +288,7 @@ int main(int argc, char** argv)
 	options.has_nonpures();
 	options.has_final_eq_grade();
 	options.set_num_tables(3);
+	options.has_lenc();
 
 	options.skills.TC = 120;
 	options.skills.amps = 60;
