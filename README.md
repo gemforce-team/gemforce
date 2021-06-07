@@ -120,9 +120,10 @@ if `number` is `100`, then:
 The `query-ngems` and `query-amps` programs support some additional flags and an extended `-f` pattern:
 
 * `f "path_spec,path_amps"` - change table files, if any is empty it'll use the default path
-* `Q number` - specify how many amps per gem (default: 6/8) `[0-8]`
-* `G number` - specify how many gem are seen by each amps on average (default: 1) `[0-8]`  
-* `T number` - give your True Colors skill for better amps fitting `(default: 120) [0-999]`
+* `Q number` - specify how many amps per gem (default: `6/8`) `[0-8]`
+* `G number` - specify how many gem are seen by each amps on average (default: `1`) `[0-8]`
+* `T number` - give your True Colors skill for better amps fitting (default: `120`) `[0-999]`
+* `A number` - give your Amplifiers skill for better amps fitting (default: `60/200`) `[0-999]`
 
 The `query-omnia` and `query-setup` programs support an extra flag and a second number:  
 `./*query-omnia -[flags] number1 number2`
