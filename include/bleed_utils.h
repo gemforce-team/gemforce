@@ -96,7 +96,7 @@ gem_R* gem_putchain(const gem_R* pool, int pool_length, gem_R** gem_array)
 {
 	return gem_putchain_templ(pool, pool_length, gem_array,
 							  [](gem_R* arg) {gem_init(arg, 1, 0);},
-							  [](gem_R arg) {return gem_power(arg);});
+							  [](const gem_R& arg) {return gem_power(arg);});
 }
 
 #endif // _BLEED_UTILS_H

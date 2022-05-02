@@ -117,9 +117,9 @@ static inline void exit_on_corruption(FILE* table)
 static inline int fgetb64(FILE* table)
 {
 	char c = fgetc(table);
-	if (c == EOF || c == ' ' || c == '\n') exit_on_corruption(table);
+	if (c == (char)EOF || c == ' ' || c == '\n') exit_on_corruption(table);
 	int n = 0;
-	for (int m = 0; c != EOF && c != ' ' && c != '\n'; c = fgetc(table), m += 6) {
+	for (int m = 0; c != (char)EOF && c != ' ' && c != '\n'; c = fgetc(table), m += 6) {
 		n += (base64decode[c - '0'] << m);
 	}
 	return n;

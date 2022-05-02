@@ -101,7 +101,7 @@ void worker(const cmdline_options& options)
 		spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
 															// now with amps
 		for (j=0, NS+=options.amps.number_per_gem; j<i+1; ++j, NS+=options.amps.number_per_gem) {		// for every amp value from 1 to to gem_value
-			double comb_coeff=pow(NS, -growth_comb);		// we compute comb_coeff
+			comb_coeff=pow(NS, -growth_comb);				// we compute comb_coeff
 			for (int k=0;k<poolf_length[i];++k) {				// then we search in the gem pool
 				double Pb2 = poolf[i][k].bbound * poolf[i][k].bbound;
 				double Pdg = poolf[i][k].damage;

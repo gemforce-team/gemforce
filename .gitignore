@@ -6,4 +6,4 @@ bin/
 /table_*
 
 # The IDE really need to dirty the working dir
-.settings
+.vscode

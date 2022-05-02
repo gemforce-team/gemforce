@@ -6,6 +6,8 @@
 #include <vector>
 #include <getopt.h>
 
+using namespace std::string_literals;
+
 class cmdline_options
 {
 public:
@@ -28,7 +30,7 @@ public:
 	struct {
 		int TC;
 		int amps;
-	} skills= {0, 0};
+	} skills = {0, 0};
 
 	// amps
 	struct {
@@ -66,62 +68,63 @@ private:
 		std::vector<struct option> long_options;
 	} getopt;
 
+	std::string help_text;
 	uint num_tables_ = 0;
 	bool has_lenc_ = false;
 
 public:
 	cmdline_options()
 	{
-		this->add_option({"help",      no_argument, NULL, 'h'});
-		this->add_option({"log-quiet", no_argument, NULL, 'q'});
-		this->add_option({"verbose",   no_argument, NULL, 'v'});
+		this->add_option({"help",      no_argument, NULL, 'h'}, "show this help message and exit");
+		this->add_option({"log-quiet", no_argument, NULL, 'q'}, "log less, skip unneded computation");
+		this->add_option({"verbose",   no_argument, NULL, 'v'}, "log a lot more");
 	}
 
 	void has_printing()
 	{
-		this->add_option({"print-parens",    no_argument, NULL, 'p'});
-		this->add_option({"print-tree",      no_argument, NULL, 't'});
-		this->add_option({"print-equations", no_argument, NULL, 'e'});
-		this->add_option({"print-table",     no_argument, NULL, 'c'});
+		this->add_option({"print-parens",    no_argument, NULL, 'p'}, "print parens representations");
+		this->add_option({"print-tree",      no_argument, NULL, 't'}, "print tree representations");
+		this->add_option({"print-equations", no_argument, NULL, 'e'}, "print equations representations");
+		this->add_option({"print-table",     no_argument, NULL, 'c'}, "print table of values");
 	}
 
 	void has_extra_search()
 	{
-		this->add_option({"upto",    no_argument, NULL, 'u'});
-		this->add_option({"add-red", no_argument, NULL, 'r'});
+		this->add_option({"upto",    no_argument, NULL, 'u'}, "return best result up to bound");
+		this->add_option({"add-red", no_argument, NULL, 'r'}, "add a single \"red\" gem to the result");
 	}
 
 	void has_amps()
 	{
-		this->add_option({"skill-amps",    required_argument, NULL, 'A'});
-		this->add_option({"amps-per-gem",  required_argument, NULL, 'Q'});
-		this->add_option({"avg-gems-seen", required_argument, NULL, 'G'});
+		this->add_option({"skill-amps",    required_argument, NULL, 'A'}, "value of the amp skill");
+		this->add_option({"amps-per-gem",  required_argument, NULL, 'Q'}, "number of amps per gem");
+		this->add_option({"avg-gems-seen", required_argument, NULL, 'G'}, "average gems seens by each amp");
 	}
 
 	void has_nonpures()
 	{
-		this->add_option({"skill-TC", required_argument, NULL, 'T'});
+		this->add_option({"skill-TC", required_argument, NULL, 'T'}, "value of the TC skill");
 	}
 
 	void has_combine_growth()
 	{
-		this->add_option({"combine-growth", required_argument, NULL, 'g'});
+		this->add_option({"combine-growth", required_argument, NULL, 'g'}, "value of the combine growth");
 	}
 
 	void has_spec_limit()
 	{
-		this->add_option({"limit-spec", required_argument, NULL, 'l'});
+		this->add_option({"limit-spec", required_argument, NULL, 'l'}, "max spec size");
 	}
 
 	void has_final_eq_grade()
 	{
-		this->add_option({"final-eq-grade", required_argument, NULL, 'F'});
+		this->add_option({"final-eq-grade", required_argument, NULL, 'F'}, "final equivalent grade");
 	}
 
 	void set_num_tables(int num_tables)
 	{
 		this->num_tables_ = num_tables;
-		this->add_option({"table-file", required_argument, NULL, 'f'});
+		this->add_option({"table-file", required_argument, NULL, 'f'}, "table1[,table2][,table3]");
 	}
 
 	void has_lenc()
@@ -266,10 +269,12 @@ public:
 	void print_help() const
 	{
 		// can (and should) be improved
-		printf("%s\n", this->getopt.short_options.c_str());
+		printf("len\t\tlength of result\n");
+		if (this->has_lenc_) printf("lenc\t\tlength of combine\n");
+		printf("%s\n", this->help_text.c_str());
 	}
 
-	void table_selection(int num, std::string default_name)
+	void table_selection(int num, const std::string& default_name)
 	{
 		std::string& filename = this->tables[num];
 
@@ -300,14 +305,15 @@ private:
 			return false;
 	}
 
-	void add_option(struct option&& option)
+	void add_option(struct option&& option, const std::string& help_text)
 	{
 		this->getopt.short_options += (char)option.val;
 		this->getopt.short_options += std::string(option.has_arg, ':');
 
 		this->getopt.long_options.push_back(option);
+		this->help_text += "-"s + (char)option.val + " --" + option.name + (option.has_arg ? " X" : "") +
+						   " \t" + help_text + '\n';
 	}
-
 };
 
 #endif /* ARGPARSER_ARGPARSER_H_ */

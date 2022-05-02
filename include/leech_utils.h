@@ -96,7 +96,7 @@ gem_O* gem_putchain(const gem_O* pool, int pool_length, gem_O** gem_array)
 {
 	return gem_putchain_templ(pool, pool_length, gem_array,
 							  [](gem_O* arg) {gem_init(arg, 1, 0);},
-							  [](gem_O arg) {return gem_power(arg);});
+							  [](const gem_O& arg) {return gem_power(arg);});
 }
 
 #endif // _LEECH_UTILS_H

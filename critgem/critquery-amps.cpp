@@ -84,7 +84,7 @@ void worker(const cmdline_options& options)
 		spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
 		int amps_bound = std::min(2 * (i + 1), lena);		// now with amps
 		for (j=0, NS+=options.amps.number_per_gem; j<amps_bound; ++j, NS+=options.amps.number_per_gem) {	// for every amp value from 1 to to bound
-			double comb_coeff=pow(NS, -growth_comb);			// we compute comb_coeff
+			comb_coeff=pow(NS, -growth_comb);				// we compute comb_coeff
 			for (int h=0;h<poolAf_length[j];++h) {				// then we search in the amp pool
 				double Pda = damage_ratio * poolAf[j][h].damage;
 				double Pca = crit_ratio   * poolAf[j][h].crit  ;

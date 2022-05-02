@@ -131,7 +131,7 @@ gem_OB* gem_putchain(const gem_OB* pool, int pool_length, gem_OB** gem_array, do
 {
 	return gem_putchain_templ(pool, pool_length, gem_array,
 							  [](gem_OB* arg) {gem_init(arg, 1, 0, 0);},
-							  [=](gem_OB arg) {return gem_cfr_power(arg, amp_leech_scaled);});
+							  [=](const gem_OB& arg) {return gem_cfr_power(arg, amp_leech_scaled);});
 }
 
 

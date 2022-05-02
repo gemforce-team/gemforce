@@ -171,7 +171,7 @@ gemYB* gem_putchain(const gemYB* pool, int pool_length, gemYB** gem_array, doubl
 {
 	return gem_putchain_templ(pool, pool_length, gem_array,
 							  [](gemYB* arg) {gem_init(arg, 1, DAMAGE_CHHIT, 0, 0);},
-							  [=](gemYB arg) {return gem_cfr_power(arg, amp_damage_scaled, amp_crit_scaled);});
+							  [=](const gemYB& arg) {return gem_cfr_power(arg, amp_damage_scaled, amp_crit_scaled);});
 }
 
 #endif // _KILLGEM_UTILS_H
