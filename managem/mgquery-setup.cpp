@@ -275,7 +275,8 @@ int main(int argc, char** argv)
 
 	options.skills.TC = 120;
 	options.skills.amps = 60;
-	options.amps.number_per_gem = 6;
+	options.amps.number_per_gem = 2;      // multiple gems in trap
+	options.amps.average_gems_seen = 2.5; // with amps on the side
 
 	if(!options.parse_args(argc, argv))
 		return 1;

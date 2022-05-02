@@ -235,7 +235,8 @@ int main(int argc, char** argv)
 
 	options.skills.TC = 120;
 	options.skills.amps = 60;
-	options.amps.number_per_gem = 6;
+	options.amps.number_per_gem = 2;      // multiple gems in trap
+	options.amps.average_gems_seen = 2.5; // with amps on the side
 	options.tuning.combine_growth = 0.627216;	// 16c
 
 	if(!options.parse_args(argc, argv))
