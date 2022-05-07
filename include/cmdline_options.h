@@ -1,6 +1,7 @@
-#ifndef ARGPARSER_ARGPARSER_H_
-#define ARGPARSER_ARGPARSER_H_
+#ifndef CMDLINE_OPTIONS_H_
+#define CMDLINE_OPTIONS_H_
 
+#include <filesystem>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -42,8 +43,9 @@ public:
 	struct {
 		double combine_growth;
 		int spec_limit;
+		int max_ag_cost_ratio;
 		int final_eq_grade;
-	} tuning = {0, 0, 30};
+	} tuning = {0, 0, 1, 30};
 
 	// gem tables paths
 	std::vector<std::string> tables;
@@ -69,7 +71,7 @@ private:
 	} getopt;
 
 	std::string help_text;
-	uint num_tables_ = 0;
+	unsigned int num_tables_ = 0;
 	bool has_lenc_ = false;
 
 public:
@@ -96,9 +98,10 @@ public:
 
 	void has_amps()
 	{
-		this->add_option({"skill-amps",    required_argument, NULL, 'A'}, "value of the amp skill");
-		this->add_option({"amps-per-gem",  required_argument, NULL, 'Q'}, "number of amps per gem");
-		this->add_option({"avg-gems-seen", required_argument, NULL, 'G'}, "average gems seens by each amp");
+		this->add_option({"skill-amps",     required_argument, NULL, 'A'}, "value of the amp skill");
+		this->add_option({"amps-per-gem",   required_argument, NULL, 'Q'}, "number of amps per gem");
+		this->add_option({"avg-gems-seen",  required_argument, NULL, 'G'}, "average gems seens by each amp");
+		this->add_option({"max-cost-ratio", required_argument, NULL, 'R'}, "max cost ratio amp/gem");
 	}
 
 	void has_nonpures()
@@ -139,7 +142,7 @@ public:
 				this->print_help();
 				return false;
 			case 'q':
-					this->output.quiet = true;
+				this->output.quiet = true;
 				break;
 			case 'v':
 				if (this->output.info)
@@ -177,6 +180,9 @@ public:
 			case 'G':
 				this->amps.average_gems_seen = atof(optarg);
 				break;
+			case 'R':
+				this->tuning.max_ag_cost_ratio = atoi(optarg);
+				break;
 
 			case 'T':
 				this->skills.TC = atoi(optarg);
@@ -199,7 +205,7 @@ public:
 					this->tables.push_back(s);
 				}
 				if (this->tables.size() > this->num_tables_) {
-					printf("Too many table names, expected %d\n", this->num_tables_);
+					printf("Too many table names, expected %u\n", this->num_tables_);
 					return false;
 				}
 				break;
@@ -280,12 +286,12 @@ public:
 
 		if (!filename.empty())
 			return;
-		else if (file_exists(default_name)) {
+		else if (std::filesystem::exists(default_name)) {
 			filename = default_name;
 		}
 		else {
 			std::string other_path = "gem_tables/" + default_name;
-			if (file_exists(other_path))
+			if (std::filesystem::exists(other_path))
 				filename = other_path;
 			else
 				// we know it'll fail, but at least the error message will make sense
@@ -294,16 +300,6 @@ public:
 	}
 
 private:
-	static inline bool file_exists (const std::string& name)
-	{
-		FILE* file;
-		if ((file = fopen(name.c_str(), "r"))) {
-			fclose(file);
-			return true;
-		}
-		else
-			return false;
-	}
 
 	void add_option(struct option&& option, const std::string& help_text)
 	{
@@ -316,4 +312,4 @@ private:
 	}
 };
 
-#endif /* ARGPARSER_ARGPARSER_H_ */
+#endif /* CMDLINE_OPTIONS_H_ */

@@ -46,7 +46,7 @@ void worker(const cmdline_options& options)
 
 	FILE* tableA=file_check(options.tables[1]);	// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
-	int lena=len;								// as long as the spec length
+	int lena = options.tuning.max_ag_cost_ratio * len;
 	gemA** poolA = (gemA**)malloc(lena*sizeof(gemA*));
 	int* poolA_length = (int*)malloc(lena*sizeof(int));
 	poolA[0] = (gemA*)malloc(sizeof(gemA));
@@ -120,8 +120,8 @@ void worker(const cmdline_options& options)
 		int NS=i+1;
 		double C0 = pow(NT/(i+1), bestc_growth);					// last we compute the combination number
 		powers[i] = C0 * gem_power(gems[i]);
-																	// now we compare the whole setup
-		for (j=0, NS+=options.amps.number_per_gem; j<i+1; ++j, NS+=options.amps.number_per_gem) {	// for every amp value from 1 to to gem_value
+		int amps_bound = options.tuning.max_ag_cost_ratio * (i + 1);	// now we compare the whole setup
+		for (j=0, NS+=options.amps.number_per_gem; j<amps_bound; ++j, NS+=options.amps.number_per_gem) {
 			double Cg = pow(NT/NS, bestc_growth);					// we compute the combination number
 			for (int k=0;k<poolf_length[i];++k) {						// then in the gem pool
 				double Pb2 = poolf[i][k].bbound * poolf[i][k].bbound;

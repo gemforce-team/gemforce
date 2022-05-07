@@ -29,7 +29,7 @@ void worker(const cmdline_options& options)
 	if (table==NULL) exit(1);					// if the file is not good we exit
 
 	int len = options.target.len;
-	int lena = 2 * len; // temporary till I find a better way
+	int lena = options.tuning.max_ag_cost_ratio * len;
 	int max_len = std::max(len, lena);
 	gem* pool[max_len];
 	int pool_length[max_len];
@@ -82,7 +82,7 @@ void worker(const cmdline_options& options)
 		int NS=i+1;
 		double comb_coeff=pow(NS, -growth_comb);
 		spec_coeffs[i]=comb_coeff*gem_power(gems[i]);
-		int amps_bound = std::min(2 * (i + 1), lena);		// now with amps
+		int amps_bound = options.tuning.max_ag_cost_ratio * (i + 1);	// now with amps
 		for (j=0, NS+=options.amps.number_per_gem; j<amps_bound; ++j, NS+=options.amps.number_per_gem) {	// for every amp value from 1 to to bound
 			comb_coeff=pow(NS, -growth_comb);				// we compute comb_coeff
 			for (int h=0;h<poolAf_length[j];++h) {				// then we search in the amp pool
@@ -226,6 +226,7 @@ int main(int argc, char** argv)
 	options.amps.number_per_gem = 2;      // multiple gems in trap
 	options.amps.average_gems_seen = 2.5; // with amps on the side
 	options.tuning.combine_growth = 1.145648;	// 13c
+	options.tuning.max_ag_cost_ratio = 2; // temporary till I find a better way
 
 	if(!options.parse_args(argc, argv))
 		return 1;

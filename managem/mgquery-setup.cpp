@@ -44,7 +44,7 @@ void worker(const cmdline_options& options)
 
 	FILE* tableA=file_check(options.tables[1]);	// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
-	int lena=len;								// as long as the spec length
+	int lena = options.tuning.max_ag_cost_ratio * len;
 	gemA* poolA[lena];
 	int poolA_length[lena];
 	poolA[0] = (gemA*)malloc(sizeof(gemA));
@@ -115,7 +115,8 @@ void worker(const cmdline_options& options)
 		double C0 = pow(NT/(i+1), bestc_growth);					// last we compute the combination number
 		powers[i] = C0 * gem_power(gems[i]);
 																	// now we compare the whole setup
-		for (j=0, NS+=options.amps.number_per_gem; j<i+1; ++j, NS+=options.amps.number_per_gem) {	// for every amp value from 1 up to gem_value
+		int amps_bound = options.tuning.max_ag_cost_ratio * (i + 1);
+		for (j = 0, NS += options.amps.number_per_gem; j < amps_bound; ++j, NS += options.amps.number_per_gem) {
 			double Cg = pow(NT/NS, bestc_growth);					// we compute the combination number
 			double Pa = leech_ratio * bestA[j].leech;				// we already know the best amps
 			for (int k=0; k<poolf_length[i]; ++k) {					// we look in the reduced gem pool
@@ -283,6 +284,8 @@ int main(int argc, char** argv)
 	options.table_selection(0, "table_mgspec");
 	options.table_selection(1, "table_mgcomb");
 	options.table_selection(2, "table_leech");
+	options.tuning.max_ag_cost_ratio = std::max(options.tuning.max_ag_cost_ratio,
+		1 + (special_ratio_gccs(options) > 2.5)); // A100 = 2 with defaults
 
 	worker(options);
 	return 0;

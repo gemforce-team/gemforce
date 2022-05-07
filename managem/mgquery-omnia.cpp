@@ -45,7 +45,7 @@ void worker(const cmdline_options& options)
 
 	FILE* tableA=file_check(options.tables[1]);	// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
-	int lena = std::max(len, lenc);
+	int lena = std::max(options.tuning.max_ag_cost_ratio * len, lenc);
 	gemA** poolA = (gemA**)malloc(lena*sizeof(gemA*));
 	int poolA_length[lena];
 	poolA[0] = (gemA*)malloc(sizeof(gemA));
@@ -126,7 +126,8 @@ void worker(const cmdline_options& options)
 		double c0 = log(NT/(i+1))*iloglenc;							// last we compute the combination number
 		powers[i] = pow(gem_power(gemsc[i]),c0) * gem_power(gems[i]);
 																	// now we compare the whole setup
-		for (j=0, NS+=options.amps.number_per_gem; j<i+1; ++j, NS+=options.amps.number_per_gem) {	// for every amp value from 1 up to gem_value
+		int amps_bound = options.tuning.max_ag_cost_ratio * (i + 1);
+		for (j=0, NS+=options.amps.number_per_gem; j<amps_bound; ++j, NS+=options.amps.number_per_gem) {
 			double c = log(NT/NS)*iloglenc;							// we compute the combination number
 			double Ca= leech_ratio * pow(combA.leech,c);			// <- this is ok only for mg
 			double Pa= Ca * bestA[j].leech;							// <- because we already know the best amps
