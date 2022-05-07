@@ -47,7 +47,7 @@ void worker(const cmdline_options& options)
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
 	int lena = std::max(options.tuning.max_ag_cost_ratio * len, lenc);
 	gemA** poolA = (gemA**)malloc(lena*sizeof(gemA*));
-	int poolA_length[lena];
+	int* poolA_length = (int*)malloc(lena*sizeof(int));
 	poolA[0] = (gemA*)malloc(sizeof(gemA));
 	poolA_length[0]=1;
 	gem_init(poolA[0],1,1);
@@ -303,6 +303,7 @@ void worker(const cmdline_options& options)
 	free(poolcf);
 	for (int i =0;i<lena;++i) free(poolA[i]);   // free amps
 	free(poolA);
+	free(poolA_length);
 	free(bestA);                           // free amps compressed
 	if (options.target.chain && len > 2) {
 		free(gem_array);
