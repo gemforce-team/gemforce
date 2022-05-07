@@ -443,8 +443,8 @@ int main(int argc, char** argv)
 	if(!options.parse_args(argc, argv))
 		return 1;
 	options.table_selection(0, "table_kgspec");
-	options.table_selection(1, "table_kgcomb");
-	options.table_selection(2, "table_crit");
+	options.table_selection(1, "table_crit");
+	options.table_selection(2, "table_kgcomb");
 
 	worker(options);
 	return 0;

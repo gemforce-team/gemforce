@@ -127,7 +127,7 @@ public:
 	void set_num_tables(int num_tables)
 	{
 		this->num_tables_ = num_tables;
-		this->add_option({"table-file", required_argument, NULL, 'f'}, "table1[,table2][,table3]");
+		this->add_option({"table-file", required_argument, NULL, 'f'}, "table[,tableA][,tableC]");
 	}
 
 	void has_lenc()
@@ -262,13 +262,6 @@ public:
 		// fill up to desired size with empty strings
 		this->tables.resize(this->num_tables_);
 
-		if (this->output.debug && this->num_tables_ > 0) {
-			printf("Selected table(s):");
-			for (auto& s : this->tables)
-				printf(" %s", s.c_str());
-			printf("\n");
-		}
-
 		return true;
 	}
 
@@ -280,7 +273,7 @@ public:
 		printf("%s\n", this->help_text.c_str());
 	}
 
-	void table_selection(int num, const std::string& default_name)
+	void table_selection(unsigned int num, const std::string& default_name)
 	{
 		std::string& filename = this->tables[num];
 
@@ -296,6 +289,14 @@ public:
 			else
 				// we know it'll fail, but at least the error message will make sense
 				filename = default_name;
+		}
+
+		// print table list at last iteration, when all are known
+		if (this->output.debug && num == this->num_tables_ - 1) {
+			printf("Selected table(s):");
+			for (auto& s : this->tables)
+				printf(" %s", s.c_str());
+			printf("\n");
 		}
 	}
 

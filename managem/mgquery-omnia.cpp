@@ -329,8 +329,8 @@ int main(int argc, char** argv)
 	if(!options.parse_args(argc, argv))
 		return 1;
 	options.table_selection(0, "table_mgspec");
-	options.table_selection(1, "table_mgcomb");
-	options.table_selection(2, "table_leech");
+	options.table_selection(1, "table_leech");
+	options.table_selection(2, "table_mgcomb");
 
 	worker(options);
 	return 0;

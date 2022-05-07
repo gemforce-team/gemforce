@@ -128,7 +128,7 @@ The `query-ngems` and `query-amps` programs support some additional flags and an
 The `query-omnia` and `query-setup` programs support an extra flag and a second number:  
 `./*query-omnia -[flags] number1 number2`
 
-* `f "path_spec,path_comb,path_amps"` - change table files, if any is empty it'll use the default path
+* `f "path_spec,path_amps,path_comb"` - change table files, if any is empty it'll use the default path
 
 `number1` - speccing value (mandatory)  
 `number2` - combine value (can be omitted, default: `16`)
@@ -266,4 +266,3 @@ You can also help by donating some money for our time:
 [![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LY6RG34S5UCTW "Donate to this project using Paypal")
 
 The Gemcraft game series is developed by [gameinabottle](http://gameinabottle.com/)
-

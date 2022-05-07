@@ -282,8 +282,8 @@ int main(int argc, char** argv)
 	if(!options.parse_args(argc, argv))
 		return 1;
 	options.table_selection(0, "table_mgspec");
-	options.table_selection(1, "table_mgcomb");
-	options.table_selection(2, "table_leech");
+	options.table_selection(1, "table_leech");
+	options.table_selection(2, "table_mgcomb");
 	options.tuning.max_ag_cost_ratio = std::max(options.tuning.max_ag_cost_ratio,
 		1 + (special_ratio_gccs(options) > 2.5)); // A100 = 2 with defaults
 
