@@ -98,7 +98,7 @@ set-bleed: $(BLEED_ALL)
 # Windows
 windows: CXX:=$(WINCXX)
 windows: $(QUERY_DIST) windows-tables | $(WINDIR)
-	$(foreach file, $(QUERY_DIST), mv -v $(file) $(WINDIR)/$(shell basename $(file)).exe;)
+	$(foreach file, $(QUERY_DIST), mv -v $(file).exe $(WINDIR);)
 	cp LICENSE.txt $(WINDIR)/LICENSE.txt
 	cp README.md   $(WINDIR)/README.txt
 	zip -FSrT "gemforce-win-$(VERSION).zip" "$(WINDIR)"

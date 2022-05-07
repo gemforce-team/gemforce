@@ -1,6 +1,7 @@
 #ifndef _MGA_UTILS_H
 #define _MGA_UTILS_H
 
+#include <algorithm>
 #include <cstdio>
 #include <cstdlib>
 

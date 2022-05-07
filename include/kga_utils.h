@@ -3,6 +3,7 @@
 
 #include <cstdio>
 
+#include "interval_tree.h"
 #include "sort_utils.h"
 #include "build_utils_2D.h"
 

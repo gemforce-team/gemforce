@@ -269,7 +269,7 @@ string ieeePreParser(string recipe)
 	return recipe;
 }
 
-void worker(string parens, string parens_amps, const cmdline_options& options)
+void worker(const string& parens, const string& parens_amps, const cmdline_options& options)
 {
 	int index=0;
 	int value=(parens.length()+3)/4;
