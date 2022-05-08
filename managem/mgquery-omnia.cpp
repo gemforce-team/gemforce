@@ -45,7 +45,7 @@ void worker(const cmdline_options& options)
 
 	FILE* tableA=file_check(options.tables[1]);	// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
-	int lena = std::max(options.tuning.max_ag_cost_ratio * len, lenc);
+	int lena = std::max(int(options.tuning.max_ag_cost_ratio * len), lenc);
 	gemA** poolA = (gemA**)malloc(lena*sizeof(gemA*));
 	int* poolA_length = (int*)malloc(lena*sizeof(int));
 	poolA[0] = (gemA*)malloc(sizeof(gemA));
@@ -331,6 +331,8 @@ int main(int argc, char** argv)
 	options.table_selection(0, "table_mgspec");
 	options.table_selection(1, "table_leech");
 	options.table_selection(2, "table_mgcomb");
+	options.tuning.max_ag_cost_ratio = std::max(options.tuning.max_ag_cost_ratio,
+		1. + (special_ratio_gccs(options) > 2.5)); // A100 = 2 with defaults
 
 	worker(options);
 	return 0;

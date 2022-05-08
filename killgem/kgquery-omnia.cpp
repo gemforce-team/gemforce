@@ -47,7 +47,7 @@ void worker(const cmdline_options& options)
 
 	FILE* tableA=file_check(options.tables[1]);	// fileA is open to read
 	if (tableA==NULL) exit(1);					// if the file is not good we exit
-	int lena=std::max(options.tuning.max_ag_cost_ratio * len, lenc);
+	int lena=std::max(int(options.tuning.max_ag_cost_ratio * len), lenc);
 	gemA** poolA = (gemA**)malloc(lena*sizeof(gemA*));
 	int* poolA_length = (int*)malloc(lena*sizeof(int));
 	poolA[0] = (gemA*)malloc(sizeof(gemA));

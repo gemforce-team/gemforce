@@ -43,7 +43,7 @@ public:
 	struct {
 		double combine_growth;
 		int spec_limit;
-		int max_ag_cost_ratio;
+		double max_ag_cost_ratio;
 		int final_eq_grade;
 	} tuning = {0, 0, 1, 30};
 
@@ -181,7 +181,7 @@ public:
 				this->amps.average_gems_seen = atof(optarg);
 				break;
 			case 'R':
-				this->tuning.max_ag_cost_ratio = atoi(optarg);
+				this->tuning.max_ag_cost_ratio = atof(optarg);
 				break;
 
 			case 'T':
@@ -278,7 +278,7 @@ public:
 		std::string& filename = this->tables[num];
 
 		if (!filename.empty())
-			return;
+			;
 		else if (std::filesystem::exists(default_name)) {
 			filename = default_name;
 		}
