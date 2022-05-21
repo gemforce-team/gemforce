@@ -7,6 +7,7 @@
 #include <cstring>
 #include <cctype>
 
+#include "0D_utils.h"
 #include "print_utils.h"
 #include "gfon.h"
 #include "cmdline_options.h"
@@ -24,6 +25,7 @@ public:
 	char color;
 
 public:
+	gem() {}
 	explicit gem(char color) : grade(1), father(nullptr), mother(nullptr), value(1), color(color) {}
 };
 
@@ -77,50 +79,44 @@ void print_stuff(gem* gemf, const cmdline_options& options)
 void worker(const cmdline_options& options)
 {
 	FILE* table=file_check(options.tables[0]);      // file is open to read
-	if (table==NULL) exit(1);              // if the file is not good we exit
+	if (table == NULL) exit(1);              // if the file is not good we exit
 
 	int len = options.target.len;
 	int pool_zero = options.target.pool_zero;
-	gem** pool = (gem**)malloc(len * sizeof(gem*)); // if not malloc-ed 200k is the limit (win)
-	int* pool_length = (int*)malloc(len * sizeof(int));
-	pool[0] = (gem*)malloc(pool_zero * sizeof(gem));
-	pool_length[0] = pool_zero;
+	vector pool = vector<pool_t<gem>>(len);
+	vector pool_length = init_pool_length(len, pool_zero);
+	pool[0] = make_uninitialized_pool<gem>(pool_zero);
 
 	if (pool_zero==1) {                    // combine
-		gem_init(pool[0], 'g');
+		gem_init(pool[0]+0, 'g');
 	}
 	else {                                 // spec
-		gem_init(pool[0]  , 'x');
+		gem_init(pool[0]+0, 'x');
 		gem_init(pool[0]+1, 'y');
 	}
 
-	int prevmax=pool_from_table(pool, pool_length, len, table);    // pool filling
+	int prevmax = pool_from_table(pool, pool_length, len, table);    // pool filling
 	fclose(table);				// close
-	if (prevmax<len-1) {
-		for (int i =0;i<=prevmax;++i) free(pool[i]);      // free
-		free(pool);				// free
-		free(pool_length);	// free
-		if (prevmax>0) printf("Table stops at %d, not %d\n",prevmax+1,len);
+	if (prevmax < len-1) {
+		pool.~vector();
+		pool_length.~vector();
+		if (prevmax != -1) printf("Table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
 	
-	gem* poolf = pool[len - 1];
-	int poolf_length = pool_length[len - 1];
+	pool_t<gem>& poolf = pool[len - 1];
+	size_t poolf_length = pool_length[len - 1];
 
 	int pos = options.target.lenc;
 
 	if (pos == -1) {
-		for (int i = 0; i < poolf_length; i++) {
+		for (size_t i = 0; i < poolf_length; i++) {
 			print_stuff(poolf + i, options);
 		}
 	}
 	else {
 		print_stuff(poolf + pos, options);
 	}
-
-	for (int i =0;i<=prevmax;++i) free(pool[i]);      // free
-	free(pool);				// free
-	free(pool_length);	// free
 }
 
 int main(int argc, char** argv)
@@ -128,11 +124,10 @@ int main(int argc, char** argv)
 	cmdline_options options = cmdline_options();
 	options.has_printing();
 	options.set_num_tables(1);
-	options.has_lenc();
+	options.has_lenc(-1);
+	options.has_pool_zero(2);
 
 	options.print.parens = true;
-	options.target.lenc = -1;
-	options.target.pool_zero = 2;
 
 	if(!options.parse_args(argc, argv))
 		return 1;

@@ -5,8 +5,8 @@ CXX:=g++
 WINCXX:=x86_64-w64-mingw32-$(CXX)
 
 # Flags
-CSTD:=-std=gnu11
-CXXSTD:=-std=gnu++17
+CSTD:=-std=gnu17
+CXXSTD:=-std=gnu++20
 WFLAGS:=-Wall -Wextra
 OFLAGS:=-O3 -flto -fwhole-program
 IFLAGS:=-I "include/"
@@ -17,7 +17,7 @@ LIBFLAGS:=-lm
 # Query
 QUERY_LEECH=leechgem/leechquery
 QUERY_MANAGEM=managem/mgquery-alone managem/mgquery-amps managem/mgquery-setup managem/mgquery-omnia
-QUERY_CRIT=critgem/critquery critgem/critquery-amps
+QUERY_CRIT=$(basename $(wildcard critgem/critquery*.cpp))
 QUERY_KILLGEM=killgem/kgquery-alone killgem/kgquery-amps killgem/kgquery-setup killgem/kgquery-omnia
 QUERY_MGNGEM=managem/mgquery-ngems
 QUERY_KGNGEM=killgem/kgquery-ngems
@@ -27,17 +27,17 @@ QUERY_ALL=$(QUERY_DIST) $(QUERY_MGNGEM) $(QUERY_KGNGEM)
 
 # Build
 BUILD_LEECH=leechgem/leechbuild
-BUILD_MANAGEM=managem/mgbuild-appr managem/mgbuild-exact managem/mgbuild-c6
-BUILD_CRIT=critgem/critbuild critgem/critbuild-c6
-BUILD_KILLGEM=killgem/kgbuild-appr killgem/kgbuild-exact killgem/kgbuild-c6
+BUILD_MANAGEM=$(basename $(wildcard managem/mgbuild-*.cpp))
+BUILD_CRIT=$(basename $(wildcard critgem/critbuild*.cpp))
+BUILD_KILLGEM=$(basename $(wildcard killgem/kgbuild-*.cpp))
 BUILD_BLEED=bleedgem/bleedbuild
 BUILD_ALL=$(BUILD_LEECH) $(BUILD_MANAGEM) $(BUILD_CRIT) $(BUILD_KILLGEM) $(BUILD_BLEED)
 
 # Combine
 COMBINE_LEECH=leechgem/leechcombine
-COMBINE_MANAGEM=managem/mgcombine-appr
+COMBINE_MANAGEM=$(basename $(wildcard managem/mgcombine-*.cpp))
 COMBINE_CRIT=critgem/critcombine
-COMBINE_KILLGEM=killgem/kgcombine-appr killgem/kgcombine-exact
+COMBINE_KILLGEM=$(basename $(wildcard killgem/kgcombine-*.cpp))
 COMBINE_BLEED=bleedgem/bleedcombine
 COMBINE_ALL=$(COMBINE_LEECH) $(COMBINE_MANAGEM) $(COMBINE_CRIT) $(COMBINE_KILLGEM) $(COMBINE_BLEED)
 
@@ -92,6 +92,8 @@ set-managem: $(MANAGEM_ALL)
 set-crit: $(CRIT_ALL)
 set-killgem: $(KILLGEM_ALL)
 set-bleed: $(BLEED_ALL)
+
+utilities: $(UTILITIES)
 
 .PHONY: set-query set-build set-combine set-leech set-managem set-crit set-killgem
 
@@ -150,7 +152,7 @@ $(TABLES_DIR):
 # Clean
 clean:
 	@rm -vf $(DEV_ALL)
-	@rm $(DEPS_DIR)/*
+	@rm -f $(DEPS_DIR)/*
 
 clean-white:
 	@if [ -d "white" ]; then \

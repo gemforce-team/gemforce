@@ -1,10 +1,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
-#include <getopt.h>
 #include <cstring>
 
-#include "interval_tree.h"
 #include "killgem_utils.h"
 #include "crit_utils.h"
 #include "kga_utils.h"
@@ -19,8 +17,7 @@ using gemA = gem_Y;
 void print_ngems_table(const gem* gems, const gemA* amps, double damage_ratio, double crit_ratio, int len)
 {
 	printf("# Gems\tKillgem\tAmps\tPower\n");
-	
-	for (int i =0; i<len; i++)
+	for (int i =0; i < len; i++)
 		printf("%d\t%d\t%d\t%#.7g\n", i+1, gem_getvalue(gems+i), gem_getvalue(amps+i), gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
 	printf("\n");
 }
@@ -28,50 +25,46 @@ void print_ngems_table(const gem* gems, const gemA* amps, double damage_ratio, d
 void worker(const cmdline_options& options)
 {
 	FILE* table = file_check(options.tables[0]);	// file is open to read
-	if (table==NULL) exit(1);					// if the file is not good we exit
-	
+	if (table == NULL) exit(1);						// if the file is not good we exit
+
 	int len = options.target.len;
-	gem* pool[len];
-	int pool_length[len];
-	pool[0] = (gem*)malloc(2*sizeof(gem));
-	pool_length[0]=2;
-	gem_init(pool[0]  ,1,DAMAGE_CRIT  ,1,0);	// grade damage crit bbound
-	gem_init(pool[0]+1,1,DAMAGE_BBOUND,0,1);	// BB has more dmg
+	vector pool = init_pool<gem>(len, 2);
+	vector pool_length = init_pool_length(len, 2);
 	
 	int prevmax = pool_from_table(pool, pool_length, options.tuning.spec_limit ? options.tuning.spec_limit : len, table);	// killgem pool filling
 	fclose(table);
-	if (prevmax<len-1) {					// if the killgems are not enough
-		for (int i =prevmax+1; i<len; ++i) {
+	if (prevmax < len-1) {					// if the killgems are not enough
+		if (prevmax == -1) exit(1);
+		for (int i = prevmax+1; i < len; ++i) {
 			pool_length[i]=0;
 			pool[i]=NULL;
 		}
 	}
 
-	gem* poolf[len];
-	int poolf_length[len];
+	vector poolf = vector<pool_t<gem>>(len);
+	vector poolf_length = vector<size_t>(len);
 	
 	specs_compression(poolf, poolf_length, pool, pool_length, len, options.output.debug);
 	if (!options.output.quiet) printf("Gem speccing pool compression done!\n");
 
-	FILE* tableA=file_check(options.tables[1]);		// fileA is open to read
-	if (tableA==NULL) exit(1);					// if the file is not good we exit
-	int lena = options.amps.number_per_gem ? len/options.amps.number_per_gem : 1;		// if options.amps.number_per_gem==0 let lena=1
-	gemA* poolA[lena];
-	int poolA_length[lena];
-	poolA[0] = (gemA*)malloc(sizeof(gemA));
-	poolA_length[0]=1;
-	gem_init(poolA[0],1,1,1);
+	FILE* tableA=file_check(options.tables[1]);	// fileA is open to read
+	if (tableA == NULL) exit(1);				// if the file is not good we exit
 	
-	int prevmaxA=pool_from_table(poolA, poolA_length, lena, tableA);		// amps pool filling
+	int lena = options.amps.number_per_gem ? len/options.amps.number_per_gem : 1;		// if options.amps.number_per_gem==0 let lena=1
+	vector poolA = init_pool<gemA>(lena);
+	vector poolA_length = init_pool_length(lena);
+	
+	int prevmaxA = pool_from_table(poolA, poolA_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
-	if (prevmaxA<lena-1) {
-		for (int i =0;i<=prevmaxA;++i) free(poolA[i]);		// free
-		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
+	if (prevmaxA < lena-1) {
+		poolA.~vector();
+		poolA_length.~vector();
+		if (prevmaxA != -1) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
 
-	gemA* poolAf[lena];
-	int poolAf_length[lena];
+	vector poolAf = vector<pool_t<gemA>>(len);
+	vector poolAf_length = vector<size_t>(len);
 	
 	amps_compression(poolAf, poolAf_length, poolA, poolA_length, lena, options.output.debug);
 	if (!options.output.quiet) printf("Amp pool compression done!\n\n");
@@ -86,20 +79,20 @@ void worker(const cmdline_options& options)
 	
 	bool skip_computations = options.output.quiet && !(options.print.table || options.target.upto);
 	int first = skip_computations ? len-1 : 0;
-	for (int i =first; i<len; ++i) {						// for every gem value
+	for (int i = first; i < len; ++i) {						// for every total value
 		gems[i] = {};										// we init the gems
 		amps[i] = {};										// to extremely weak ones
-		for (int k=0;k<poolf_length[i];++k) {				// first we compare the gem alone
+		for (size_t k=0;k<poolf_length[i];++k) {			// first we compare the gem alone
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
 		}
 		double power = gem_power(gems[i]);
 		if (options.amps.number_per_gem!=0)
-		for (int j=1;j<=i/options.amps.number_per_gem;++j) {						// for every amount of amps we can fit in
-			int value = i-options.amps.number_per_gem*j;							// this is the amount of gems we have left
-			for (int k=0;k<poolf_length[value];++k) {			// we search in that pool
-				for (int h=0;h<poolAf_length[j-1];++h) {		// and we look in the amp pool
+		for (int j=1;j<=i/options.amps.number_per_gem;++j) {	// for every amount of amps we can fit in
+			int value = i-options.amps.number_per_gem*j;		// this is the amount of gems we have left
+			for (size_t k=0; k<poolf_length[value]; ++k) {		// we search in that pool
+				for (size_t h=0;h<poolAf_length[j-1];++h) {		// and we look in the amp pool
 					if (gem_amp_power(poolf[value][k], poolAf[j-1][h], damage_ratio, crit_ratio) > power)
 					{
 						power = gem_amp_power(poolf[value][k], poolAf[j-1][h], damage_ratio, crit_ratio);
@@ -111,14 +104,14 @@ void worker(const cmdline_options& options)
 		}
 		if (!options.output.quiet) {
 			printf("Total value:\t%d\n\n", i+1);
-			if (prevmax<len-1) printf("Killgem limit:\t%d\n", prevmax+1);
+			if (prevmax < len-1) printf("Killgem limit:\t%d\n", prevmax+1);
 			printf("Killgem\n");
 			printf("Value:\t%d\n",gem_getvalue(gems+i));
-			if (options.output.debug) printf("Pool:\t%d\n",poolf_length[gem_getvalue(gems+i)-1]);
+			if (options.output.debug) printf("Pool:\t%zu\n", poolf_length[gem_getvalue(gems+i)-1]);
 			gem_print(gems+i);
 			printf("Amplifier (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 			printf("Value:\t%d\n",gem_getvalue(amps+i));
-			if (options.output.debug) printf("Pool:\t%d\n",poolAf_length[gem_getvalue(amps+i)-1]);
+			if (options.output.debug) printf("Pool:\t%zu\n", poolAf_length[gem_getvalue(amps+i)-1]);
 			gem_print(amps+i);
 			printf("Spec base power: \t%#.7g\n\n", gem_amp_power(gems[i], amps[i], damage_ratio, crit_ratio));
 		}
@@ -126,7 +119,7 @@ void worker(const cmdline_options& options)
 	
 	if (options.output.quiet) {		// outputs last if we never seen any
 		printf("Total value:\t%d\n\n", len);
-		if (prevmax<len-1) printf("Killgem limit:\t%d\n", prevmax+1);
+		if (prevmax < len-1) printf("Killgem limit:\t%d\n", prevmax+1);
 		printf("Killgem\n");
 		printf("Value:\t%d\n", gem_getvalue(gems+len-1));
 		gem_print(gems+len-1);
@@ -139,12 +132,12 @@ void worker(const cmdline_options& options)
 	gem*  gemf=gems+len-1;  // gem that will be displayed
 	gemA* ampf=amps+len-1;  // amp that will be displayed
 
-	gem* gem_array = NULL;
+	vector<gem> chain_gems;
 	if (options.target.chain) {
 		if (len < 3) printf("I could not add chain!\n\n");
 		else {
-			int value=gem_getvalue(gemf);
-			gemf = gem_putchain(poolf[value-1], poolf_length[value-1], &gem_array, damage_ratio*ampf->damage, crit_ratio*ampf->crit);
+			int value = gem_getvalue(gemf);
+			gemf = gem_putchain(poolf[value-1], poolf_length[value-1], chain_gems, damage_ratio*ampf->damage, crit_ratio*ampf->crit);
 			printf("Setup with chain added:\n\n");
 			printf("Total value:\t%d\n\n", value+options.amps.number_per_gem*gem_getvalue(ampf));
 			printf("Killgem\n");
@@ -184,14 +177,6 @@ void worker(const cmdline_options& options)
 		print_equations(ampf);
 		printf("\n");
 	}
-	
-	for (int i =0;i<len;++i) free(pool[i]);			// free gems
-	for (int i =0;i<len;++i) free(poolf[i]);			// free gems compressed
-	for (int i =0;i<lena;++i) free(poolA[i]);		// free amps
-	for (int i =0;i<lena;++i) free(poolAf[i]);		// free amps compressed
-	if (options.target.chain && len > 2) {
-		free(gem_array);
-	}
 }
 
 int main(int argc, char** argv)
@@ -216,4 +201,3 @@ int main(int argc, char** argv)
 	worker(options);
 	return 0;
 }
-

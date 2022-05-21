@@ -56,12 +56,16 @@ public:
 		unsigned upto:1;
 		unsigned chain:1;
 
+		// extra args parsing
+		unsigned read_pool_zero:1;
+		unsigned read_lenc:1;
+
 		// gem sizes (positional args)
 		int len;
 		int lenc;
 
-		int pool_zero;
-	} target = {0, 0, 0, 16, 1};
+		uint pool_zero;
+	} target = {0, 0, 0, 0, 0, 16, 1};
 
 private:
 
@@ -72,7 +76,6 @@ private:
 
 	std::string help_text;
 	unsigned int num_tables_ = 0;
-	bool has_lenc_ = false;
 
 public:
 	cmdline_options()
@@ -124,15 +127,22 @@ public:
 		this->add_option({"final-eq-grade", required_argument, NULL, 'F'}, "final equivalent grade");
 	}
 
-	void set_num_tables(int num_tables)
+	void set_num_tables(uint num_tables)
 	{
 		this->num_tables_ = num_tables;
 		this->add_option({"table-file", required_argument, NULL, 'f'}, "table[,tableA][,tableC]");
 	}
 
-	void has_lenc()
+	void has_lenc(uint default_ = 16)
 	{
-		this->has_lenc_ = true;
+		this->target.read_lenc = true;
+		this->target.lenc = default_;
+	}
+
+	void has_pool_zero(uint default_ = 1)
+	{
+		this->target.read_pool_zero = true;
+		this->target.pool_zero = default_;
 	}
 
 	inline bool read_cmdline_opt(int opt, const char* optarg)
@@ -219,6 +229,17 @@ public:
 		return true;
 	}
 
+	inline void parse_len(const char* arg) {
+		char* p;
+		this->target.len = strtol(arg, &p, 10);
+		if (this->target.read_pool_zero) {
+			if (*p == 'c')
+				this->target.pool_zero = 1;
+			else if (*p == 's')
+				this->target.pool_zero = 2;
+		}
+	}
+
 	// I assume defaults have been set before calling this
 	bool parse_args(int argc, char*const* argv)
 	{
@@ -233,15 +254,10 @@ public:
 			return false;
 		}
 		if (optind + 1 == argc) {
-			this->target.len = atoi(argv[optind]);
-			char* p = argv[optind];
-			while (*p != '\0')
-				p++;
-			if (*(p - 1) == 'c')
-				this->target.pool_zero = 1;
+			parse_len(argv[optind]);
 		}
-		else if (optind + 2 == argc && has_lenc_) {
-			this->target.len = atoi(argv[optind]);
+		else if (optind + 2 == argc && target.read_lenc) {
+			parse_len(argv[optind]);
 			this->target.lenc = atoi(argv[optind + 1]);
 		}
 		else {
@@ -254,7 +270,7 @@ public:
 			return false;
 		}
 
-		if (this->target.len == 0 || (has_lenc_ && this->target.lenc == 0)) {
+		if (this->target.len == 0 || (target.read_lenc && this->target.lenc == 0)) {
 			printf("Improper gem number\n");
 			return false;
 		}
@@ -268,8 +284,12 @@ public:
 	void print_help() const
 	{
 		// can (and should) be improved
-		printf("len\t\tlength of result\n");
-		if (this->has_lenc_) printf("lenc\t\tlength of combine\n");
+		if (!target.read_pool_zero)
+			printf("len\t\tlength of result\n");
+		else
+			printf("len[cs]\t\tlength of result, the c/s prefix selects between specs and combines\n");
+		if (target.read_lenc)
+			printf("lenc\t\tlength of combine\n");
 		printf("%s\n", this->help_text.c_str());
 	}
 

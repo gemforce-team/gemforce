@@ -2,12 +2,13 @@
 #define _LEECH_UTILS_H
 
 #include <algorithm>
+#include <cstdio>
 
 struct gem_O {
-	int grade;			//using short does NOT improve time/memory usage
-	double leech;
 	gem_O* father;
 	gem_O* mother;
+	int grade;			//using short does NOT improve time/memory usage
+	double leech;
 };
 
 // --------------------
@@ -84,19 +85,15 @@ inline void gem_init(gem_O *p_gem, int grd, double leech)
 	p_gem->mother=NULL;
 }
 
-#include "build_utils_1D.h"
+// -----------------
+// Pool init section
+// -----------------
 
-// -------------------
-// Chain adder section
-// -------------------
+#include "1D_utils.h"
 
-#include "chain_adder.h"
-
-gem_O* gem_putchain(const gem_O* pool, int pool_length, gem_O** gem_array)
-{
-	return gem_putchain_templ(pool, pool_length, gem_array,
-							  [](gem_O* arg) {gem_init(arg, 1, 0);},
-							  [](const gem_O& arg) {return gem_power(arg);});
+template<>
+inline vector<pool_t<gem_O>> init_pool(int len, uint) {
+	return init_pool_1D<gem_O>(len);
 }
 
 #endif // _LEECH_UTILS_H

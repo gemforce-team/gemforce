@@ -5,12 +5,14 @@
 #include <cstdlib>
 #include <cmath>
 #include <cstring>
+
 #include "gem_utils.h"
+#include "container_utils.h"
 
 template<class gem>
 void print_parens(const gem* gemf)
 {
-	if (gemf->father==NULL) printf("%c", gem_color(gemf));
+	if (gemf->father==NULL) printf("%c", gem_color(*gemf));
 	else {
 		printf("(");
 		print_parens(gemf->mother);
@@ -47,7 +49,7 @@ void print_parens_compressed(const gem* gemf)
 }
 
 template<class gem>
-void fill_uniques_array(gem* gemf, gem** p_gems, int* uniques)
+void fill_uniques_array(gem* gemf, pool_t<gem*>& p_gems, int* uniques)
 {
 	for (int i=0; i<*uniques; ++i)
 		if (gemf==p_gems[i]) return;
@@ -67,7 +69,7 @@ void print_equations(gem* gemf)
 	// fill
 	int value = gem_getvalue(gemf);
 	int len = 2 * value - 1;
-	gem** p_gems = (gem**)malloc(len * sizeof(gem*));	// stores all the gem pointers
+	pool_t<gem*> p_gems = make_uninitialized_pool<gem*>(len);	// stores all the gem pointers
 	int uniques = 0;
 	fill_uniques_array(gemf, p_gems, &uniques);			// this array contains uniques only and is long `uniques`
 
@@ -92,7 +94,6 @@ void print_equations(gem* gemf)
 	for (int i = 0; i < uniques; i++) {
 		p_gems[i]->grade = orig_grades[i];
 	}
-	free(p_gems);
 }
 
 template<class gem>
@@ -116,12 +117,12 @@ void print_tree(const gem* gemf, const char* prefix)
 }
 
 template<class gem>
-void print_table(const gem* gems, int len)
+void print_table(const vector<gem>& gems)
 {
 	printf("# Gems\tPower\t\tGrowth\n");
 	printf("1\t%f\t%f\n", gem_power(gems[0]), log(gem_power(gems[0])));
-	for (int i=1; i<len; i++)
-		printf("%d\t%f\t%f\n", i+1, gem_power(gems[i]), log(gem_power(gems[i]))/log(i+1));
+	for (size_t i = 1; i < gems.size(); i++)
+		printf("%zu\t%f\t%f\n", i + 1, gem_power(gems[i]), log(gem_power(gems[i])) / log(i + 1));
 	printf("\n");
 }
 

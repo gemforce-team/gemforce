@@ -2,15 +2,17 @@
 #define _CRIT_UTILS_H
 
 #include <algorithm>
+#include <cassert>
+#include <cstdio>
 
-constexpr unsigned int SIZE = 1000;
+constexpr size_t SIZE = 1000;
 
 struct gem_Y {
+	gem_Y* father;
+	gem_Y* mother;
 	int grade;				//using short does NOT improve time/memory usage
 	float damage;
 	float crit;
-	gem_Y* father;
-	gem_Y* mother;
 };
 
 // --------------------
@@ -116,6 +118,20 @@ inline void gem_init(gem_Y *p_gem, int grd, float damage, float crit)
 	p_gem->mother=NULL;
 }
 
+// -----------------
+// Pool init section
+// -----------------
+
+#include "0D_utils.h"
+
+template<>
+inline vector<pool_t<gem_Y>> init_pool(int len, uint) {
+	vector pool = vector<pool_t<gem_Y>>(len);
+	pool[0] = make_uninitialized_pool<gem_Y>(1);
+	gem_init(pool[0]+0,1,1,1);
+	return pool;
+}
+
 // -------------------
 // Chain adder section
 // -------------------
@@ -127,16 +143,17 @@ inline double gem_cfr_power(const gem_Y& gem1, double amp_damage_scaled, double 
 
 #include "chain_adder.h"
 
-gem_Y* gem_putchain(const gem_Y* pool, int pool_length, gem_Y** gem_array)
+gem_Y* gem_putchain(const pool_t<gem_Y>& pool, size_t pool_length, vector<gem_Y>& chain_gems)
 {
-	return gem_putchain_templ(pool, pool_length, gem_array,
+	return gem_putchain_templ(pool, pool_length, chain_gems,
 							  [](gem_Y* arg) {gem_init(arg, 1, DAMAGE_CHHIT, 0);},
 							  [](const gem_Y& arg) {return gem_power(arg);});
 }
 
-gem_Y* gem_putchain(const gem_Y* pool, int pool_length, gem_Y** gem_array, double amp_damage_scaled, double amp_crit_scaled)
+gem_Y* gem_putchain(const pool_t<gem_Y>& pool, size_t pool_length, vector<gem_Y>& chain_gems,
+                    double amp_damage_scaled, double amp_crit_scaled)
 {
-	return gem_putchain_templ(pool, pool_length, gem_array,
+	return gem_putchain_templ(pool, pool_length, chain_gems,
 							  [](gem_Y* arg) {gem_init(arg, 1, DAMAGE_CHHIT, 0);},
 							  [=](const gem_Y& arg) {return gem_cfr_power(arg, amp_damage_scaled, amp_crit_scaled);});
 }

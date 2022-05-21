@@ -2,11 +2,15 @@
 #define _GFON_H
 
 /* GemForce Object Notation */
-/* Remember to redeclare pool_from_table in the amplifier_utils */
 
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include <memory>
+#include <vector>
+
+#include "container_utils.h"
+#include "print_utils.h"
 
 static const char base64encode[64] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<',  '=', '>', '?',
                                       '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',  'M', 'N', 'O',
@@ -18,20 +22,20 @@ static const char base64decode[64] = { 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10
                                       32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
                                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63};
 
-void line_init(FILE* table, int pool_zero)
+static void line_init(FILE* table, size_t pool_zero)
 {
 	switch (pool_zero) {
 		case 1:       // combines
-			fprintf(table, "1\n");
-			fprintf(table, "-1 0 0\n");
+			fprintf(table, "1\n"
+			               "-1 0 0\n");
 			break;
 		case 2:       // specs
-			fprintf(table, "2\n");
-			fprintf(table, "-1 0 0\n");
-			fprintf(table, "-1 0 1\n");
+			fprintf(table, "2\n"
+			               "-1 0 0\n"
+			               "-1 0 1\n");
 			break;
 		default:
-			break;
+			exit(1);
 	}
 	fprintf(table, "0\n\n");
 }
@@ -47,11 +51,11 @@ FILE* table_init(const std::string& table_name, int pool_zero)
 	else {
 		fseek(table, 0, SEEK_END);
 		if (ftell(table) == 0) {
-			table = freopen(filename, "w", table); // init
-			line_init(table, pool_zero);           // printed g1
+			table = freopen(NULL, "w", table); // init
+			line_init(table, pool_zero);       // printed g1
 		}
 	}                                      // we now have the file with at least g1
-	table = freopen(filename, "r", table); // read
+	table = freopen(NULL, "r", table); // read
 	return table;
 }
 
@@ -69,7 +73,7 @@ FILE* file_check(const std::string& table_name)
 		printf("Empty table: %s\n", filename);
 		return NULL;
 	}
-	table = freopen(filename, "r", table);    // read
+	table = freopen(NULL, "r", table);    // read
 	return table;
 }
 
@@ -83,19 +87,20 @@ static inline void fprint64(int n, FILE* steam)
 }
 
 template<class gem>
-void table_write_iteration(const gem*const* pool, const int* pool_length, int iteration, FILE* table)
+void table_write_iteration(const vector<pool_t<gem>>& pool, const vector<size_t>& pool_length,
+                           int iteration, FILE* table)
 {
 	int i=iteration;
-	fprintf(table, "%d\n", pool_length[i]);
-	for (int j=0;j<pool_length[i];++j) {
+	fprintf(table, "%zu\n", pool_length[i]);
+	for (size_t j=0;j<pool_length[i];++j) {
 		for (int k=0; ; k++) {                   // find and print parents
-			long place = pool[i][j].father - pool[k];
-			if (place < pool_length[k] && place >=0) {
+			uintptr_t place = pool[i][j].father - pool[k].get();
+			if (place < pool_length[k]) {
 				fprint64(k, table);
 				fputc(' ', table);
 				fprint64(place, table);
 				int mom_pool=i-1-k;
-				place=pool[i][j].mother - pool[mom_pool];
+				place=pool[i][j].mother - pool[mom_pool].get();
 				fputc(' ', table);
 				fprint64(place, table);
 				fputc('\n', table);
@@ -107,6 +112,7 @@ void table_write_iteration(const gem*const* pool, const int* pool_length, int it
 	fflush(table);
 }
 
+[[noreturn]]
 static inline void exit_on_corruption(FILE* table)
 {
 	printf("\nERROR: integrity check failed at byte %ld\n", ftell(table));
@@ -125,36 +131,40 @@ static inline int fgetb64(FILE* table)
 	return n;
 }
 
+/**
+ * @return -1 if wrong table type, table length otherwise
+ */
 template<class gem>
-int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
+int pool_from_table(vector<pool_t<gem>>& pool, vector<size_t>& pool_length,
+                    size_t len, FILE* table)
 {
 	printf("\nBuilding pool..."); fflush(stdout);
 	rewind(table);
 
-	int pool_zero;
-	int check = fscanf(table, "%d\n", &pool_zero);   // get pool_zero
+	size_t pool_zero;
+	int check = fscanf(table, "%zu\n", &pool_zero);   // get pool_zero
 	if (check != 1) exit_on_corruption(table);
 	if (pool_zero != pool_length[0]) {               // and check if it's right
 		printf("\nWrong table type, exiting...\n");
 		return -1;      // the program will then exit gracefully
 	}
 
-	for (int i=0;i<pool_length[0];++i) {             // discard value 0 gems
+	for (size_t i=0;i<pool_length[0];++i) {             // discard value 0 gems
 		int check = fscanf(table, "%*[^\n]\n");
 		if (check != 0) exit_on_corruption(table);
 	}
 
-	int iteration_check;
-	check = fscanf(table, "%d\n\n", &iteration_check);      // check iteration number
+	size_t iteration_check;
+	check = fscanf(table, "%zu\n\n", &iteration_check);      // check iteration number
 	if (check != 1 || iteration_check != 0) exit_on_corruption(table);
 
 	int prevmax=0;
-	for (int i=1; i < len; ++i) {
-		int eof_check=fscanf(table, "%d\n", pool_length+i);      // get pool length
+	for (size_t i=1; i < len; ++i) {
+		int eof_check=fscanf(table, "%zu\n", pool_length+i);      // get pool length
 		if (eof_check==EOF) break;
 
-		pool[i] = (gem*)malloc(pool_length[i]*sizeof(gem));
-		for (int j = 0; j < pool_length[i]; ++j) {
+		pool[i] = make_uninitialized_pool<gem>(pool_length[i]);
+		for (size_t j = 0; j < pool_length[i]; ++j) {
 			int value_father = fgetb64(table);
 			int offset_father = fgetb64(table);
 			int offset_mother = fgetb64(table);
@@ -163,8 +173,8 @@ int pool_from_table(gem** pool, int* pool_length, int len, FILE* table)
 			gem_combine(pool[value_father]+offset_father, pool[value_mother]+offset_mother, pool[i]+j);
 		}
 
-		int iteration_check;
-		int check = fscanf(table, "%d\n\n", &iteration_check);    // check iteration number
+		size_t iteration_check;
+		int check = fscanf(table, "%zu\n\n", &iteration_check);    // check iteration number
 		if (check != 1 || iteration_check != i) exit_on_corruption(table);
 		prevmax++;
 	}

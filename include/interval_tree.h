@@ -2,6 +2,7 @@
 #define _INTERVAL_TREE_H
 
 #include <algorithm>
+#include <cstdio>
 
 /* place is always 0..N-1 */
 

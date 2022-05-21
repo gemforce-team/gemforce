@@ -12,6 +12,7 @@
 #include "gem_utils.h"
 #include "effective_skills.h"
 #include "cmdline_options.h"
+#include "container_utils.h"
 
 using namespace std;
 
@@ -26,17 +27,17 @@ public:
 	bool chain;
 	gem* father;
 	gem* mother;
-	
+
 	int value;
-	double mana_power;
-	double kill_power;
 	char color;
 	
 	gem(){}
 
 private:
-	gem(int grd, double damage, double crit, double leech, double bbound, bool chain=false, gem* father=nullptr, gem* mother=nullptr):
-	grade(grd), damage(damage), crit(crit), leech(leech), bbound(bbound), chain(chain), father(father), mother(mother) {}
+	gem(int grd, double damage, double crit, double leech, double bbound, bool chain=false,
+	    gem* father=nullptr, gem* mother=nullptr):
+	grade(grd), damage(damage), crit(crit), leech(leech), bbound(bbound), chain(chain),
+	father(father), mother(mother) {}
 
 public:
 	explicit gem(const char color)
@@ -229,7 +230,7 @@ gem* gem_build(string parens, gem* gems, int& index)
 	else {
 		int open_parens=0;
 		int i;
-		for (i =1; i<len-1; ++i) {
+		for (i =1; i < len-1; ++i) {
 			if (parens[i]=='(') open_parens++;
 			if (parens[i]==')') open_parens--;
 			if (open_parens==0) break;
@@ -257,7 +258,7 @@ string ieeePreParser(string recipe)
 {
 	char* p_color;
 	char gem_buffer[64];
-	for (uint pos = 0; pos < recipe.length(); pos++) {
+	for (size_t pos = 0; pos < recipe.length(); pos++) {
 		if (!isdigit(recipe[pos])) continue;
 		char* p_grade = &(recipe[pos]);
 		int grade = strtol(p_grade, &p_color, 10);
@@ -271,12 +272,12 @@ string ieeePreParser(string recipe)
 
 void worker(const string& parens, const string& parens_amps, const cmdline_options& options)
 {
-	int index=0;
-	int value=(parens.length()+3)/4;
-	gem* gems = new gem[2*value-1];
+	int value = (parens.length()+3)/4;
+	pool_t<gem> gems = make_uninitialized_pool<gem>(2*value-1);
 	gem* gemf;
 	try {
-		gemf = gem_build(parens, gems, index);
+		int index=0;
+		gemf = gem_build(parens, gems.get(), index);
 	}
 	catch (const out_of_range&) {
 		cout << "Error: Malformed gem recipe" << endl;
@@ -302,12 +303,12 @@ void worker(const string& parens, const string& parens_amps, const cmdline_optio
 	}
 	
 	if (parens_amps.length() > 0) {
-		int index=0;
 		int value=(parens_amps.length()+3)/4;
-		gem* amps = new gem[2*value-1];
+		pool_t<gem> amps = make_uninitialized_pool<gem>(2*value-1);
 		gem* ampf;
 		try {
-			ampf = gem_build(parens_amps, gems, index);
+			int index=0;
+			ampf = gem_build(parens_amps, amps.get(), index);
 		}
 		catch (const out_of_range&) {
 			cout << "Error: Malformed amp recipe" << endl;
@@ -347,9 +348,7 @@ void worker(const string& parens, const string& parens_amps, const cmdline_optio
 			double combine_growth = options.tuning.combine_growth != 0 ? options.tuning.combine_growth : 1.414061;
 			printf("Spec coefficient:\t%f\n\n", pow(tvalue, -combine_growth)*power);
 		}
-		delete[] amps;
 	}
-	delete[] gems;
 }
 
 int main(int argc, char** argv)

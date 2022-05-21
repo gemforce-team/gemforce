@@ -2,12 +2,13 @@
 #define _BLEED_UTILS_H
 
 #include <algorithm>
+#include <cstdio>
 
 struct gem_R {
-	int grade;			//using short does NOT improve time/memory usage
-	double bleed;
 	gem_R* father;
 	gem_R* mother;
+	int grade;			//using short does NOT improve time/memory usage
+	double bleed;
 };
 
 // --------------------
@@ -84,19 +85,15 @@ inline void gem_init(gem_R *p_gem, int grd, double bleed)
 	p_gem->mother=NULL;
 }
 
-#include "build_utils_1D.h"
+// -----------------
+// Pool init section
+// -----------------
 
-// -------------------
-// Chain adder section
-// -------------------
+#include "1D_utils.h"
 
-#include "chain_adder.h"
-
-gem_R* gem_putchain(const gem_R* pool, int pool_length, gem_R** gem_array)
-{
-	return gem_putchain_templ(pool, pool_length, gem_array,
-							  [](gem_R* arg) {gem_init(arg, 1, 0);},
-							  [](const gem_R& arg) {return gem_power(arg);});
+template<>
+inline vector<pool_t<gem_R>> init_pool(int len, uint) {
+	return init_pool_1D<gem_R>(len);
 }
 
 #endif // _BLEED_UTILS_H

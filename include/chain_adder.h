@@ -1,27 +1,28 @@
 #ifndef _CHAIN_ADDER_H
 #define _CHAIN_ADDER_H
 
-#include <cstdlib>
+#include "container_utils.h"
 
 template<class gem, class chain_init_class, class cfr_class>
-gem* gem_putchain_templ(const gem* pool, int pool_length, gem** gem_array, chain_init_class chain_init, cfr_class cfr_expr)
+gem* gem_putchain_templ(const pool_t<gem>& pool, size_t pool_length, vector<gem>& chain_gems,
+                        chain_init_class chain_init, cfr_class cfr_expr)
 {
 	double best_pow = 0;
 	gem* best_gem = NULL;
-	gem* best_array = NULL;
+	vector<gem>& best_array = chain_gems;
 	
-	for (int i = 0; i < pool_length; ++i) {
+	for (size_t i = 0; i < pool_length; ++i) {
 		int depth = gem_getdepth(pool + i);
-		gem* new_array = (gem*)malloc(depth*sizeof(gem));
-		chain_init(new_array);
+		vector<gem> new_array = vector<gem>(depth);
+		chain_init(new_array + 0);
 		
-		const gem** stack = (const gem**)malloc(depth*sizeof(gem*));
+		vector<const gem*> stack = vector<const gem*>(depth);
 		stack[0] = pool + i;
 		int stack_length = 1;
 		
 		while (1) { // loop over subgems
 			
-			gem* curr_place = new_array;
+			gem* curr_place = new_array + 0;
 			gem* next_place = new_array + 1;
 			
 			// the stack contains only parents up to root, so that we can recombine them up
@@ -43,11 +44,10 @@ gem* gem_putchain_templ(const gem* pool, int pool_length, gem** gem_array, chain
 			if (new_pow > best_pow) {
 				best_pow = new_pow;
 				best_gem = curr_place;
-				
-				free(best_array);
-				best_array = new_array;
-				new_array = (gem*)malloc(depth*sizeof(gem));
-				chain_init(new_array);
+
+				std::swap(best_array, new_array);
+				new_array.resize(depth);
+				chain_init(new_array + 0);
 			}
 			
 			pop:
@@ -68,10 +68,7 @@ gem* gem_putchain_templ(const gem* pool, int pool_length, gem** gem_array, chain
 				stack[stack_length - 1] = stack[stack_length - 2]->mother;
 			}
 		}
-		free(new_array);
-		free(stack);
 	}
-	(*gem_array) = best_array;
 	return best_gem;
 }
 

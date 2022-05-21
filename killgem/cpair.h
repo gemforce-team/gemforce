@@ -1,6 +1,9 @@
 #ifndef _CPAIR_H
 #define _CPAIR_H
 
+#include "crit_utils.h"
+#include "killgem_utils.h"
+
 struct cpair {
 	double  power;
 	double  rdmg;

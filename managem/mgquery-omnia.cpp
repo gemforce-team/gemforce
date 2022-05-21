@@ -1,16 +1,18 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
-#include <getopt.h>
 #include <cstring>
 
 #include "managem_utils.h"
 #include "leech_utils.h"
 #include "mga_utils.h"
 #include "gfon.h"
-#include "print_utils.h"
 #include "effective_skills.h"
+#include "print_utils.h"
 #include "cmdline_options.h"
+#include "1D_utils.h"
+#include "2D_utils.h"
+#include "ampscomb_utils.h"
 
 using gem = gem_OB;
 using gemA = gem_O;
@@ -18,75 +20,70 @@ using gemA = gem_O;
 void worker(const cmdline_options& options)
 {
 	FILE* table = file_check(options.tables[0]);	// file is open to read
-	if (table==NULL) exit(1);						// if the file is not good we exit
+	if (table == NULL) exit(1);						// if the file is not good we exit
 
 	int len = options.target.len;
 	int lenc = options.target.lenc;
-	gem* pool[len];
-	int pool_length[len];
-	pool[0] = (gem*)malloc(2 * sizeof(gem));
-	pool_length[0] = 2;
-	gem_init(pool[0]  ,1,1,0);
-	gem_init(pool[0]+1,1,0,1);
+	vector pool = init_pool<gem>(len, 2);
+	vector pool_length = init_pool_length(len, 2);
 	
 	int prevmax = pool_from_table(pool, pool_length, len, table);		// managem spec pool filling
 	fclose(table);
-	if (prevmax<len-1) {										// if the managems are not enough
-		for (int i =0;i<=prevmax;++i) free(pool[i]);		// free
-		if (prevmax>0) printf("Gem table stops at %d, not %d\n",prevmax+1,len);
+	if (prevmax < len-1) {										// if the managems are not enough
+		pool.~vector();
+		pool_length.~vector();
+		if (prevmax != -1) printf("Gem table stops at %d, not %d\n",prevmax+1,len);
 		exit(1);
 	}
-	
-	gem* poolf[len];
-	int poolf_length[len];
+
+	vector poolf = vector<pool_t<gem>>(len);
+	vector poolf_length = vector<size_t>(len);
 	
 	specs_compression(poolf, poolf_length, pool, pool_length, len, options.output.debug);
 	if (!options.output.quiet) printf("Gem speccing pool compression done!\n");
 
 	FILE* tableA=file_check(options.tables[1]);	// fileA is open to read
-	if (tableA==NULL) exit(1);					// if the file is not good we exit
-	int lena = std::max(int(options.tuning.max_ag_cost_ratio * len), lenc);
-	gemA** poolA = (gemA**)malloc(lena*sizeof(gemA*));
-	int* poolA_length = (int*)malloc(lena*sizeof(int));
-	poolA[0] = (gemA*)malloc(sizeof(gemA));
-	poolA_length[0]=1;
-	gem_init(poolA[0],1,1);
+	if (tableA == NULL) exit(1);					// if the file is not good we exit
+	
+	int lena = options.tuning.max_ag_cost_ratio * len;
+	vector poolA = init_pool<gemA>(lena);
+	vector poolA_length = init_pool_length(lena);
 	
 	int prevmaxA = pool_from_table(poolA, poolA_length, lena, tableA);		// amps pool filling
 	fclose(tableA);
-	if (prevmaxA<lena-1) {
-		for (int i =0;i<=prevmaxA;++i) free(poolA[i]);		// free
-		if (prevmaxA>0) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
+	if (prevmaxA < lena-1) {
+		poolA.~vector();
+		poolA_length.~vector();
+		if (prevmaxA != -1) printf("Amp table stops at %d, not %d\n",prevmaxA+1,lena);
 		exit(1);
 	}
 	
-	gemA* bestA = (gemA*)malloc(lena*sizeof(gemA));		// if not malloc-ed 140k is the limit
-	
+	vector bestA = vector<gemA>(lena);
+
 	amps_compression(bestA, poolA, poolA_length, lena);
-	gemA combA=bestA[lenc-1];			// amps fast access combine
+	gemA combA = bestA[lenc-1];			// amps fast access combine
 	if (!options.output.quiet) printf("Amp pool compression done!\n");
 
-	FILE* tablec=file_check(options.tables[2]);		// file is open to read
-	if (tablec==NULL) exit(1);					// if the file is not good we exit
-	gem** poolc = (gem**)malloc(lenc*sizeof(gem*));
-	int* poolc_length = (int*)malloc(lenc*sizeof(int));
-	poolc[0] = (gem*)malloc(sizeof(gem));
-	poolc_length[0]=1;
-	gem_init(poolc[0],1,1,1);
+	FILE* tablec = file_check(options.tables[2]);	// file is open to read
+	if (tablec==NULL) exit(1);						// if the file is not good we exit
+
+	vector poolc = init_pool<gem>(len, 1);
+	vector poolc_length = init_pool_length(len, 1);
 	
-	int prevmaxc=pool_from_table(poolc, poolc_length, lenc, tablec);		// managem comb pool filling
+	int prevmaxc=pool_from_table(poolc, poolc_length, lenc, tablec);	// managem comb pool filling
 	fclose(tablec);
-	if (prevmaxc<lenc-1) {									// if the managems are not enough
-		for (int i =0;i<=prevmaxc;++i) free(poolc[i]);		// free
-		if (prevmaxc>0) printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);
+	if (prevmaxc<lenc-1) {												// if the managems are not enough
+		poolc.~vector();
+		poolc_length.~vector();
+		if (prevmaxc != -1) printf("Gem table stops at %d, not %d\n",prevmaxc+1,lenc);
 		exit(1);
 	}
 	
-	gem* poolcf;
-	int poolcf_length;
+	pool_t<gem> poolcf;
+	size_t poolcf_length;
 	
-	combs_compression(&poolcf, &poolcf_length, poolc[lenc-1], poolc_length[lenc-1]);
-	if (!options.output.quiet) printf("Gem combine compressed pool size:\t%d\n\n",poolcf_length);
+	combs_compression(poolcf, poolcf_length, poolc[lenc-1], poolc_length[lenc-1]);
+	if (!options.output.quiet) printf("Gem combine compressed pool size:\t%zu\n\n", poolcf_length);
 
 	// let's choose the right gem-amp combo
 	gem gems[len];						// for every speccing value
@@ -105,18 +102,18 @@ void worker(const cmdline_options& options)
 	
 	bool skip_computations = options.output.quiet && !(options.print.table || options.target.upto);
 	int first = skip_computations ? len-1 : 0;
-	for (int i =first; i<len; ++i) {						// for every gem value
+	for (int i = first; i < len; ++i) {						// for every gem value
 		gems[i] = {};												// we init the gems
 		amps[i] = {};												// to extremely weak ones
 		gemsc[i] = {};
-		ampsc[i]=combA;												// <- this is ok only for mg
+		ampsc[i] = combA;											// <- this is ok only for mg
 																	// first we compare the gem alone
-		for (int l=0; l<poolcf_length; ++l) {						// first search in the NC gem comb pool
+		for (size_t l=0; l<poolcf_length; ++l) {					// first search in the NC gem comb pool
 			if (gem_power(poolcf[l]) > gem_power(gemsc[i])) {
 				gemsc[i]=poolcf[l];
 			}
 		}
-		for (int k=0;k<poolf_length[i];++k) {						// and then in the the gem pool
+		for (size_t k=0;k<poolf_length[i];++k) {					// and then in the compressed gem pool
 			if (gem_power(poolf[i][k]) > gem_power(gems[i])) {
 				gems[i]=poolf[i][k];
 			}
@@ -131,10 +128,10 @@ void worker(const cmdline_options& options)
 			double c = log(NT/NS)*iloglenc;							// we compute the combination number
 			double Ca= leech_ratio * pow(combA.leech,c);			// <- this is ok only for mg
 			double Pa= Ca * bestA[j].leech;							// <- because we already know the best amps
-			for (int l=0; l<poolcf_length; ++l) {					// then we search in NC gem comb pool
+			for (size_t l=0; l<poolcf_length; ++l) {				// then we search in NC gem comb pool
 				double Cbg = pow(poolcf[l].bbound,c);
 				double Cg  = pow(gem_power(poolcf[l]),c);
-				for (int k=0; k<poolf_length[i]; ++k) {			// and in the reduced gem pool
+				for (size_t k=0; k<poolf_length[i]; ++k) {			// and in the reduced gem pool
 					double Palone = Cg * gem_power(poolf[i][k]);
 					double Pbg = Cbg * poolf[i][k].bbound;
 					double power = Palone + Pbg * Pa;  
@@ -150,14 +147,14 @@ void worker(const cmdline_options& options)
 		if (!options.output.quiet) {
 			printf("Managem spec\n");
 			printf("Value:\t%d\n",i+1);
-			if (options.output.debug) printf("Pool:\t%d\n",poolf_length[i]);
+			if (options.output.debug) printf("Pool:\t%zu\n",poolf_length[i]);
 			gem_print(gems+i);
 			printf("Amplifier spec (x%d@%.1f)\n", options.amps.number_per_gem, options.amps.average_gems_seen);
 			printf("Value:\t%d\n",gem_getvalue(amps+i));
 			gem_print(amps+i);
 			printf("Managem combine\n");
 			printf("Comb:\t%d\n",lenc);
-			if (options.output.debug) printf("Pool:\t%d\n",poolcf_length);
+			if (options.output.debug) printf("Pool:\t%zu\n", poolcf_length);
 			gem_print(gemsc+i);
 			printf("Amplifier combine\n");
 			printf("Comb:\t%d\n",lenc);
@@ -192,7 +189,7 @@ void worker(const cmdline_options& options)
 	if (options.target.upto) {
 		double best_pow=0;
 		int best_index=0;
-		for (int i =0; i<len; ++i) {
+		for (int i =0; i < len; ++i) {
 			if (powers[i] > best_pow) {
 				best_index=i;
 				best_pow=powers[i];
@@ -219,7 +216,7 @@ void worker(const cmdline_options& options)
 		ampfc = ampsc+best_index;
 	}
 
-	gem* gem_array = NULL;
+	vector<gem> chain_gems;
 	if (options.target.chain) {
 		if (len < 3) printf("I could not add chain!\n\n");
 		else {
@@ -229,7 +226,7 @@ void worker(const cmdline_options& options)
 			double c = log(NT/NS)*iloglenc;
 			double amps_resc_coeff = pow((ampfc->leech/gemfc->leech), c);
 			double amp_leech_scaled = leech_ratio*amps_resc_coeff*ampf->leech;
-			gemf = gem_putchain(poolf[value-1], poolf_length[value-1], &gem_array, amp_leech_scaled);
+			gemf = gem_putchain(poolf[value-1], poolf_length[value-1], chain_gems, amp_leech_scaled);
 			printf("Setup with chain added:\n\n");
 			printf("Managem spec\n");
 			printf("Value:\t%d\n", value);		// made to work well with -u
@@ -278,7 +275,7 @@ void worker(const cmdline_options& options)
 		print_tree(ampfc, "");
 		printf("\n");
 	}
-	if (options.print.table) print_omnia_table(amps, powers, len);
+	if (options.print.table) print_omnia_table("Managem", amps, powers, len);
 	
 	if (options.print.equations) {		// it ruins gems, must be last
 		printf("Managem speccing equations:\n");
@@ -293,20 +290,6 @@ void worker(const cmdline_options& options)
 		printf("Amplifier combining equations:\n");
 		print_equations(ampfc);
 		printf("\n");
-	}
-	
-	for (int i =0;i<len;++i) free(pool[i]);     // free gems
-	for (int i =0;i<len;++i) free(poolf[i]);    // free gems compressed
-	for (int i =0;i<lenc;++i) free(poolc[i]);   // free gems
-	free(poolc);
-	free(poolc_length);
-	free(poolcf);
-	for (int i =0;i<lena;++i) free(poolA[i]);   // free amps
-	free(poolA);
-	free(poolA_length);
-	free(bestA);                           // free amps compressed
-	if (options.target.chain && len > 2) {
-		free(gem_array);
 	}
 }
 

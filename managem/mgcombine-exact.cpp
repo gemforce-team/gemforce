@@ -1,9 +1,8 @@
 #include <cstdio>
 #include <cstdlib>
-#include <cmath>
 
-#include "killgem_utils.h"
-#include "3D_utils.h"
+#include "managem_utils.h"
+#include "2D_utils.h"
 #include "cmdline_options.h"
 #include "workers.h"
 
@@ -17,7 +16,7 @@ int main(int argc, char** argv)
 	if(!options.parse_args(argc, argv))
 		return 1;
 
-	auto fill_pool = fill_pool_3D_selector<SIZES, ACCS, ACC_TR, gem_YB>(options.target.pool_zero);
-	worker_combine<gem_YB>(options, fill_pool);
+	auto fill_pool = fill_pool_2D_selector<SIZES, 0, gem_OB>(options.target.pool_zero);
+	worker_combine<gem_OB>(options, fill_pool);
 	return 0;
 }

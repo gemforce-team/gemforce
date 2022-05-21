@@ -2,17 +2,18 @@
 #define _MANAGEM_UTILS_H
 
 #include <algorithm>
+#include <cstdio>
 
 // arrays indexed by pool_zero (1 = combine, 2 = spec)
 constexpr int ACC = 1000;		// accuracy for comparisons
-constexpr unsigned int SIZES[] = {0, 100, 2000};
+constexpr size_t SIZES[] = {0, 100, 2000};
 
 struct gem_OB {
+	gem_OB* father;
+	gem_OB* mother;
 	int grade;
 	float leech;
 	float bbound;
-	gem_OB* father;
-	gem_OB* mother;
 };
 
 // --------------------
@@ -27,9 +28,12 @@ inline double gem_power(const gem_OB& gem1)
 	return gem1.leech*gem1.bbound;
 }
 
-void gem_print(const gem_OB* p_gem) {
-	printf("Grade:\t%d\nLeech:\t%f\nBbound:\t%f\nPower:\t%f\n\n",
-		p_gem->grade, p_gem->leech, p_gem->bbound, p_gem->leech*p_gem->bbound);
+inline void gem_print(const gem_OB* p_gem) {
+	printf("Grade:\t%d\n"
+	       "Leech:\t%f\n"
+		   "Bbound:\t%f\n"
+		   "Power:\t%f\n\n",
+		   p_gem->grade, p_gem->leech, p_gem->bbound, p_gem->leech*p_gem->bbound);
 }
 
 inline char gem_color(const gem_OB* p_gem)
@@ -115,6 +119,26 @@ inline void gem_init(gem_OB *p_gem, int grd, double leech, double bbound)
 	p_gem->mother=NULL;
 }
 
+// -----------------
+// Pool init section
+// -----------------
+
+#include "0D_utils.h"
+
+template<>
+inline vector<pool_t<gem_OB>> init_pool(int len, uint pool_zero) {
+	vector pool = vector<pool_t<gem_OB>>(len);
+	pool[0] = make_uninitialized_pool<gem_OB>(pool_zero);
+	if (pool_zero==1) {             // combine
+		gem_init(pool[0]+0,1,1,1);
+	}
+	else {                          // spec
+		gem_init(pool[0]+0,1,1,0);
+		gem_init(pool[0]+1,1,0,1);
+	}
+	return pool;
+}
+
 // -------------------
 // Chain adder section
 // -------------------
@@ -127,9 +151,10 @@ inline double gem_cfr_power(const gem_OB& gem1, double amp_leech_scaled)
 
 #include "chain_adder.h"
 
-gem_OB* gem_putchain(const gem_OB* pool, int pool_length, gem_OB** gem_array, double amp_leech_scaled)
+gem_OB* gem_putchain(const pool_t<gem_OB>& pool, size_t pool_length,
+                     vector<gem_OB>& chain_gems, double amp_leech_scaled = 0)
 {
-	return gem_putchain_templ(pool, pool_length, gem_array,
+	return gem_putchain_templ(pool, pool_length, chain_gems,
 							  [](gem_OB* arg) {gem_init(arg, 1, 0, 0);},
 							  [=](const gem_OB& arg) {return gem_cfr_power(arg, amp_leech_scaled);});
 }
