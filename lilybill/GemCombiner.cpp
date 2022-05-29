@@ -129,12 +129,12 @@ struct GemTypeData {
 };
 
 GemTypeData gemTypeData[GemType::LENGTH] = {
-	{'l', 'o', &Gem::getLeechPower, (1 << GemComponent::LEECH )},
-	{'c', 'y', &Gem::getCritPower , (1 << GemComponent::DAMAGE) | (1 << GemComponent::CRIT  )},
-	{'b', 'r', &Gem::getBleedPower, (1 << GemComponent::BLEED )},
-	{'B', 'b', &Gem::getBleedPower, (1 << GemComponent::BBOUND )},
-	{'m', 'm', &Gem::getManaPower , (1 << GemComponent::LEECH ) | (1 << GemComponent::BBOUND)},
-	{'k', 'k', &Gem::getKillPower , (1 << GemComponent::DAMAGE) | (1 << GemComponent::CRIT  ) | (1 << GemComponent::BBOUND)},
+	{'l', 'o', &Gem::getLeechPower , (1 << GemComponent::LEECH )},
+	{'c', 'y', &Gem::getCritPower  , (1 << GemComponent::DAMAGE) | (1 << GemComponent::CRIT  )},
+	{'b', 'r', &Gem::getBleedPower , (1 << GemComponent::BLEED )},
+	{'B', 'b', &Gem::getBboundPower, (1 << GemComponent::BBOUND)},
+	{'m', 'm', &Gem::getManaPower  , (1 << GemComponent::LEECH ) | (1 << GemComponent::BBOUND)},
+	{'k', 'k', &Gem::getKillPower  , (1 << GemComponent::DAMAGE) | (1 << GemComponent::CRIT  ) | (1 << GemComponent::BBOUND)},
 };
 
 struct GemConstructionData {
