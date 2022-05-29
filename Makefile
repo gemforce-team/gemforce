@@ -48,6 +48,9 @@ CRIT_ALL=$(QUERY_CRIT) $(BUILD_CRIT) $(COMBINE_CRIT)
 KILLGEM_ALL=$(QUERY_KILLGEM) $(QUERY_KGNGEM) $(BUILD_KILLGEM) $(COMBINE_KILLGEM)
 BLEED_ALL=$(QUERY_BLEED) $(BUILD_BLEED) $(COMBINE_BLEED)
 
+# Lilybill
+LILYBILL=$(basename $(wildcard lilybill/*.cpp))
+
 # Utilities
 UTILITIES=$(basename $(wildcard utilities/*.cpp))
 
@@ -94,6 +97,8 @@ set-killgem: $(KILLGEM_ALL)
 set-bleed: $(BLEED_ALL)
 
 utilities: $(UTILITIES)
+
+lilybill: $(LILYBILL)
 
 .PHONY: set-query set-build set-combine set-leech set-managem set-crit set-killgem
 
