@@ -60,7 +60,6 @@ struct Gem {
 	int grade = 0;
 	double value = 1;
 	double components[GemComponent::LENGTH];
-	int interval, phase1Length, phase2Length;
 
 	Gem() {
 		for (int i = 0; i < GemComponent::LENGTH; i++) {
@@ -79,10 +78,8 @@ struct Gem {
 			else if (delta == 1) components[i] = componentData[i].a1 * component1 + componentData[i].b1 * component2;
 			else                 components[i] = componentData[i].a2 * component1 + componentData[i].b2 * component2;
 		}
+		components[GemComponent::DAMAGE] = max(components[GemComponent::DAMAGE], max(a.components[GemComponent::DAMAGE], b.components[GemComponent::DAMAGE]));
 	}
-
-	void output(int, ostream &);
-	void outputToFile(int);
 
 	double getGrowth(double (Gem:: *getPower)()) {
 		return log((this->*getPower)()) / log(value);
@@ -134,63 +131,65 @@ GemTypeData gemTypeData[] = {
 	{'k', 'k', &Gem::getKillPower , (1 << GemComponent::DAMAGE) | (1 << GemComponent::CRIT  ) | (1 << GemComponent::BBOUND)},
 };
 
-void Gem::output(int gemType, ostream &stream = cout) {
-	stream << "Value:	" << value << '\n';
-	stream << "Growth:	" << getGrowth(gemTypeData[gemType].getPower) << '\n';
-	stream << "Grade:	+" << grade << '\n';
-	int componentsUsed = 0;
-	for (int i = 0; i < GemComponent::LENGTH; i++) {
-		if (gemTypeData[gemType].components & (1 << i)) {
-			stream << componentData[i].name << ":	" << components[i] << '\n';
-			componentsUsed++;
-		}
-	}
-	if (componentsUsed > 1) {
-		stream << "Power:	" << (this->*gemTypeData[gemType].getPower)() << '\n';
-	}
-	stream << '\n';
-	stream << "Equations:\n";
-	stream << "0=g1" << gemTypeData[gemType].gemCharacter << '\n';
-	outputEquations(interval, phase1Length, phase2Length, stream);
-}
+struct GemConstructionData {
+	Gem gem;
+	int interval, phase1Length, phase2Length;
 
-void Gem::outputToFile(int gemType) {
-	ostringstream stream{};
-	stream << value;
-	string filename = string{ "Output\\" } + gemTypeData[gemType].filePrefix + 'c' + to_string(grade) + '-' + stream.str() + ".txt";
-	ofstream file{ filename, ios::trunc };
-	output(gemType, file);
-	file.close();
-}
+	void output(int gemType, ostream &stream = cout) {
+		stream << "Value:	"  << gem.value << '\n';
+		stream << "Growth:	"  << gem.getGrowth(gemTypeData[gemType].getPower) << '\n';
+		stream << "Grade:	+" << gem.grade << '\n';
+		int componentsUsed = 0;
+		for (int i = 0; i < GemComponent::LENGTH; i++) {
+			if (gemTypeData[gemType].components & (1 << i)) {
+				stream << componentData[i].name << ":	" << gem.components[i] << '\n';
+				componentsUsed++;
+			}
+		}
+		if (componentsUsed > 1) {
+			stream << "Power:	" << (gem.*gemTypeData[gemType].getPower)() << '\n';
+		}
+		stream << '\n';
+		stream << "Equations:\n";
+		stream << "0=g1" << gemTypeData[gemType].gemCharacter << '\n';
+		outputEquations(interval, phase1Length, phase2Length, stream);
+	}
+
+	void outputToFile(int gemType) {
+		ostringstream stream{};
+		stream << gem.value;
+		string filename = string{ "Output/" } + gemTypeData[gemType].filePrefix + 'c' + to_string(gem.grade) + '-' + stream.str() + ".txt";
+		ofstream file{ filename, ios::trunc };
+		output(gemType, file);
+		file.close();
+	}
+};
 
 int main() {
 	int maxGrade = 199;
 	vector<Gem> phase1GemsByInterval[3];
-	vector<Gem> bestGems[GemType::LENGTH];
-	vector<Gem> phase2Gems;
+	vector<GemConstructionData> bestGems[GemType::LENGTH];
 	for (int i = 0; i < 3; i++) {
 		phase1GemsByInterval[i].push_back(Gem{});
 	}
 	for (int i = 0; i < GemType::LENGTH; i++) {
-		bestGems[i].push_back(Gem{});
+		bestGems[i].push_back(GemConstructionData{});
 	}
+	vector<Gem> phase2Gems;
 	for (int phase1Grade = 1; phase1Grade <= maxGrade; phase1Grade++) {
 		for (int interval = 4; interval <= 6; interval++) {
 			vector<Gem> &phase1Gems = phase1GemsByInterval[interval - 4];
 			for (int i = 0; i < interval; i++) {
-				phase1Gems.push_back(Gem{phase1Gems.back(), phase1Gems[phase1Grade == 1 ? 0 : (i == 0 ? phase1Gems.size() - interval : phase1Gems.size() - 1 - interval)]});
+				phase1Gems.push_back(Gem{ phase1Gems.back(), phase1Gems[phase1Grade == 1 ? 0 : (i == 0 ? phase1Gems.size() - interval : phase1Gems.size() - 1 - interval)] });
 				Gem gem = phase1Gems.back();
-				gem.interval = interval;
-				gem.phase1Length = phase1Gems.size();
-				gem.phase2Length = 0;
 				double previousGrowths[GemType::LENGTH];
 				for (int j = 0; j < GemType::LENGTH; j++) {
 					double growth = gem.getGrowth(gemTypeData[j].getPower);
 					previousGrowths[j] = growth;
 					if (phase1Grade >= bestGems[j].size()) {
-						bestGems[j].push_back(gem);
-					} else if (bestGems[j][phase1Grade].getGrowth(gemTypeData[j].getPower) < growth) {
-						bestGems[j][phase1Grade] = gem;
+						bestGems[j].push_back(GemConstructionData{ gem, interval, (int)phase1Gems.size(), 0 });
+					} else if (bestGems[j][phase1Grade].gem.getGrowth(gemTypeData[j].getPower) < growth) {
+						bestGems[j][phase1Grade] = GemConstructionData{ gem, interval, (int)phase1Gems.size(), 0 };
 					}
 				}
 				if (i != interval - 1) {
@@ -205,9 +204,6 @@ int main() {
 							phase2Gems[j] = Gem{ phase2Gems[j], phase2Gems[j - 1] };
 						}
 						gem = phase2Gems.back();
-						gem.interval = interval;
-						gem.phase1Length = phase1Gems.size();
-						gem.phase2Length = phase2Grade - phase1Grade;
 						bool useful = false;
 						for (int j = 0; j < GemType::LENGTH; j++) {
 							double growth = gem.getGrowth(gemTypeData[j].getPower);
@@ -216,9 +212,9 @@ int main() {
 							}
 							previousGrowths[j] = growth;
 							if (phase2Grade >= bestGems[j].size()) {
-								bestGems[j].push_back(gem);
-							} else if (bestGems[j][phase2Grade].getGrowth(gemTypeData[j].getPower) < growth) {
-								bestGems[j][phase2Grade] = gem;
+								bestGems[j].push_back(GemConstructionData{ gem, interval, (int)phase1Gems.size(), phase2Grade - phase1Grade });
+							} else if (bestGems[j][phase2Grade].gem.getGrowth(gemTypeData[j].getPower) < growth) {
+								bestGems[j][phase2Grade] = GemConstructionData{ gem, interval, (int)phase1Gems.size(), phase2Grade - phase1Grade };
 							}
 						}
 						if (!useful) {
