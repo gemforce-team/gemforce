@@ -177,6 +177,7 @@ int main() {
 	int maxGrade = 199;
 	string outputFolder = "Output";
 
+	// persistent
 	vector<Gem> phase1GemsByInterval[MAX_INTERVAL - MIN_INTERVAL + 1];
 	vector<GemConstructionData> bestGemsData[GemType::LENGTH];
 	for (int i = 0; i < MAX_INTERVAL - MIN_INTERVAL + 1; i++) {
@@ -185,7 +186,10 @@ int main() {
 	for (int i = 0; i < GemType::LENGTH; i++) {
 		bestGemsData[i].push_back(GemConstructionData{});
 	}
+
+	// allocate once, clean each round
 	vector<Gem> phase2Gems;
+	
 	for (int phase1Grade = 1; phase1Grade <= maxGrade; phase1Grade++) {
 		for (int interval = MIN_INTERVAL; interval <= MAX_INTERVAL; interval++) {
 			vector<Gem> &phase1Gems = phase1GemsByInterval[interval - MIN_INTERVAL];
@@ -193,41 +197,53 @@ int main() {
 				size_t idx = phase1Grade == 1 ? 0 : (i == 0 ? phase1Gems.size() - interval : phase1Gems.size() - 1 - interval);
 				phase1Gems.push_back(Gem{ phase1Gems.back(), phase1Gems[idx] });
 				Gem gem = phase1Gems.back();
+				
 				double previousGrowths[GemType::LENGTH];
-				for (int j = 0; j < GemType::LENGTH; j++) {
-					double growth = gem.getGrowth(gemTypeData[j].getPower);
-					previousGrowths[j] = growth;
-					if (phase1Grade >= (int)bestGemsData[j].size()) {
-						bestGemsData[j].push_back(GemConstructionData{ gem, interval, (int)phase1Gems.size(), 0 });
-					} else if (bestGemsData[j][phase1Grade].gem.getGrowth(gemTypeData[j].getPower) < growth) {
-						bestGemsData[j][phase1Grade] = GemConstructionData{ gem, interval, (int)phase1Gems.size(), 0 };
+				for (int gemType = 0; gemType < GemType::LENGTH; gemType++) {
+					double growth = gem.getGrowth(gemTypeData[gemType].getPower);
+					previousGrowths[gemType] = growth;
+					if (phase1Grade >= (int)bestGemsData[gemType].size()) {
+						// only happens if interval is MIN_INTERVAL, i is 0 and phase1Grade is 1
+						bestGemsData[gemType].push_back(GemConstructionData{ gem, interval, (int)phase1Gems.size(), 0 });
+					} else if (bestGemsData[gemType][phase1Grade].gem.getGrowth(gemTypeData[gemType].getPower) < growth) {
+						bestGemsData[gemType][phase1Grade] = GemConstructionData{ gem, interval, (int)phase1Gems.size(), 0 };
 					}
 				}
+				
+				// no need to enter now, the equivalent phase 2 will be done at the start of the next phase 1
 				if (i != interval - 1) {
+					// Phase 2 starts by making a list of gems to be used in it,
+					// which is the base gem and then every gem congruent
+					// to the index of the last gem of phase 1 mod interval
 					phase2Gems.clear();
 					phase2Gems.push_back(phase1Gems[0]);
 					for (int j = i + 1; j < (int)phase1Gems.size(); j += interval) {
 						phase2Gems.push_back(phase1Gems[j]);
 					}
+
 					for (int phase2Grade = phase1Grade + 1; phase2Grade <= maxGrade; phase2Grade++) {
+						// raise grade of the whole array by 1
 						phase2Gems[0] = Gem{ phase2Gems[0], phase2Gems[0] };
 						for (int j = 1; j < (int)phase2Gems.size(); j++) {
 							phase2Gems[j] = Gem{ phase2Gems[j], phase2Gems[j - 1] };
 						}
+
 						gem = phase2Gems.back();
 						bool useful = false;
-						for (int j = 0; j < GemType::LENGTH; j++) {
-							double growth = gem.getGrowth(gemTypeData[j].getPower);
-							if (growth > previousGrowths[j]) {
+						for (int gemType = 0; gemType < GemType::LENGTH; gemType++) {
+							double growth = gem.getGrowth(gemTypeData[gemType].getPower);
+							if (growth > previousGrowths[gemType]) {
 								useful = true;
 							}
-							previousGrowths[j] = growth;
-							if (phase2Grade >= (int)bestGemsData[j].size()) {
-								bestGemsData[j].push_back(GemConstructionData{ gem, interval, (int)phase1Gems.size(), phase2Grade - phase1Grade });
-							} else if (bestGemsData[j][phase2Grade].gem.getGrowth(gemTypeData[j].getPower) < growth) {
-								bestGemsData[j][phase2Grade] = GemConstructionData{ gem, interval, (int)phase1Gems.size(), phase2Grade - phase1Grade };
+							previousGrowths[gemType] = growth;
+							if (phase2Grade >= (int)bestGemsData[gemType].size()) {
+								bestGemsData[gemType].push_back(GemConstructionData{ gem, interval, (int)phase1Gems.size(), phase2Grade - phase1Grade });
+							} else if (bestGemsData[gemType][phase2Grade].gem.getGrowth(gemTypeData[gemType].getPower) < growth) {
+								bestGemsData[gemType][phase2Grade] = GemConstructionData{ gem, interval, (int)phase1Gems.size(), phase2Grade - phase1Grade };
 							}
 						}
+
+						// once the growths stop inproving give up on this phase 2, as things would only get worse
 						if (!useful) {
 							break;
 						}
@@ -235,8 +251,8 @@ int main() {
 				}
 			}
 		}
-		for (int i = 0; i < GemType::LENGTH; i++) {
-			bestGemsData[i][phase1Grade].outputToFile(i, outputFolder);
+		for (int gemType = 0; gemType < GemType::LENGTH; gemType++) {
+			bestGemsData[gemType][phase1Grade].outputToFile(gemType, outputFolder);
 		}
 	}
 	return 0;
